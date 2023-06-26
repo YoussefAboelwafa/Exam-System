@@ -12,12 +12,14 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { VerificationComponent } from './verification/verification.component';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignUpComponent,
     VerificationComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
