@@ -9,6 +9,7 @@ div {
     position: fixed;
     left: 0px;
     top: 0px;
+    padding: 0px;
   }
   
   .form {
@@ -29,6 +30,7 @@ div {
     background-repeat: no-repeat;
     background-position: center;
     order: 1;
+   
   }
   .logo {
     display: flex;
@@ -76,11 +78,12 @@ div {
   color: #000;
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
-  margin-left: 2px;
+  margin-left: 5px;
   margin-top: 6px;
   margin-bottom: 70px;
   text-align: center;
   font-weight: 500;
+  font-size: 30px;
 
 }
   #btn {
@@ -130,7 +133,7 @@ div {
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
     line-height: 150%;
-    margin-top: 0px ;
+    margin-top: 10px ;
     margin-left:-3px;
     display: inline;
   }

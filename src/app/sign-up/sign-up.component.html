@@ -108,12 +108,12 @@
           (input)="power_password(password.value)"
           class="form-control"
           [class.is-invalid]="password.invalid && password.touched"
-          minlength="7"
+          minlength="8"
           />
                   <!-- handle errors -->
           <div *ngIf="password.invalid && password.touched" class="error" >
             <div *ngIf="password.errors?.['required']">this field is required</div> 
-            <div *ngIf="password.errors?.['minlength']">Min Length is 7</div> 
+            <div *ngIf="password.errors?.['minlength']">Min Length is 8</div> 
           </div>
                   <!-- handle errors -->
           <div *ngIf="password.touched" class="error" >
@@ -137,12 +137,12 @@
           ngModel 
           class="form-control"
           [class.is-invalid]="password2.invalid && password2.touched"
-          minlength="7" placeholder="Confrim your password" 
+          minlength="8" placeholder="Confrim your password" 
           />         
         <!-- handle errors -->
           <div *ngIf="password2.invalid && password2.touched" class="error" >
             <div *ngIf="password2.errors?.['required']">this field is required</div> 
-            <div *ngIf="password2.errors?.['minlength']">Min Length is 7</div> 
+            <div *ngIf="password2.errors?.['minlength']">Min Length is 8</div> 
           </div>
           
           <div class="error" *ngIf="password.value!=password2.value&&password2.touched">Password Must Equal Confirm Password</div>

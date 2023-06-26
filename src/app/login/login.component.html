@@ -42,13 +42,13 @@
           required
           class="form-control"
           [class.is-invalid]="password.invalid && password.touched"
-          minlength="7"
+          minlength="8"
         />
       </div>
               <!-- handle errors -->
       <div *ngIf="password.invalid && password.touched" class="error" >
         <div *ngIf="password.errors?.['required']">This Field Is Required</div> 
-        <div *ngIf="password.errors?.['minlength']">Min Length is 7</div> 
+        <div *ngIf="password.errors?.['minlength']">Min Length is 8</div> 
       </div>
       
              <!-- not_active -->
