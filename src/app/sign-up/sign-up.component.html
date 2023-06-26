@@ -1,1 +1,86 @@
-<p>sign-up works!</p>
+<div class="container">
+  <div class="image"></div>
+
+  <div class="form">
+    
+    <table class="box">
+      <h3>Sign up to exam system</h3>
+      <tr>
+        <td>
+          <label for="fname">First name</label>
+          <input type="text" id="fname" name="fname" placeholder="First name" />
+        </td>
+
+        <td>
+          <label for="lname">Last name</label>
+          <input type="text" id="lname" name="lname" placeholder="Last name" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="country">Country</label>
+          <select id="country" name="country">
+            <option value="egypt">Egypt</option>
+            <option value="usa">USA</option>
+            <option value="canada">Canada</option>
+            <option value="australia">Australia</option>
+            <option value="new zealand">New Zealand</option>
+          </select>
+        </td>
+        <td>
+          <label for="city">City</label>
+          <select id="city" name="city">
+            <option value="cairo">Cairo</option>
+            <option value="alex">Alexandria</option>
+            <option value="giza">Giza</option>
+            <option value="mansoura">Mansoura</option>
+            <option value="tanta">Tanta</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Email" />
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" name="phone" placeholder="Phone number" />
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Password" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <label for="password2">Confirm your password</label>
+          <input type="password" id="password2" name="password2" placeholder="Confrim your password" />
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <button id="btn" type="submit">Sign up</button>
+          <p id="signup">
+            Already a member?
+            <a routerLink="/login">Sign in now</a>
+          </p>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+  <div class="logo">
+    <img id="logo1" src="../../assets/images/logo1.svg" alt="" />
+    <img id="logo2" src="../../assets/images/logo2.svg" alt="" />
+  </div>
+</div>

@@ -10,6 +10,6 @@ export class AppComponent {
   title = 'Exam-System';
   
   constructor(private router: Router) {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/signup']);
   }
 }
