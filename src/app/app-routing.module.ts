@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { VerificationComponent } from './verification/verification.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'verify',
     component: VerificationComponent,
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
   },
   // {
   //   path: 'home/:name',

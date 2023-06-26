@@ -9,21 +9,31 @@
       <form class="box" #input_form="ngForm" (ngSubmit)="submit()">
         <h3>Verify your phone number</h3>
         <div class="field">
-            <input
-            [(ngModel)]="digits[0]"
-            name="d1"
-            id="d1"
-            #d1="ngModel"
-            required
-            class="form-control"
-            [class.is-invalid]="d1.invalid && d1.touched"
-            type="text" digits  maxlength="1"  >
-
-            <input  name="d2" id="d2" #d2="ngModel" required
-            [(ngModel)]="digits[1]"
-            class="form-control"
-            [class.is-invalid]="d2.invalid && d2.touched"
-            type="text"  digits  maxlength="1"   >
+          <input
+          [(ngModel)]="digits[0]"
+          name="d1"
+          id="d1"
+          #d1="ngModel"
+          required
+          class="form-control"
+          [class.is-invalid]="d1.invalid && d1.touched"
+          type="text"
+          maxlength="1"
+          (input)="moveToNext($event.target, 'd2')"
+        >
+        
+        <input
+          [(ngModel)]="digits[1]"
+          name="d2"
+          id="d2"
+          #d2="ngModel"
+          required
+          class="form-control"
+          [class.is-invalid]="d2.invalid && d2.touched"
+          (input)="moveToNext($event.target, 'd3')" 
+          type="text"
+          maxlength="1"
+        >
 
             <input  name="d3" id="d3"
             [(ngModel)]="digits[2]"
@@ -31,7 +41,8 @@
             required
             class="form-control"
             [class.is-invalid]="d3.invalid && d3.touched"
-            type="text" digits  maxlength="1"  >
+            (input)="moveToNext($event.target, 'd4')" 
+            type="text" digits  maxlength="1" >
 
             <input  name="d4" id="d4"
             [(ngModel)]="digits[3]"
@@ -39,7 +50,8 @@
             required
             class="form-control"
             [class.is-invalid]="d4.invalid && d4.touched"
-            type="text" digits   maxlength="1"   >
+            type="text" digits   maxlength="1" (input)="moveToNext($event.target, 'd5')" >
+            
 
             <input  name="d5" id="d5"
             [(ngModel)]="digits[4]"
@@ -47,7 +59,7 @@
             required
             class="form-control"
             [class.is-invalid]="d5.invalid && d5.touched"
-            type="text" digits   maxlength="1"   >
+            type="text" digits   maxlength="1" (input)="moveToNext($event.target, 'd6')"  >
 
             <input  name="d6" id="d6"
             [(ngModel)]="digits[5]"

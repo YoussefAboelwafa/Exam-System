@@ -1,0 +1,27 @@
+.container{
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    flex-wrap: wrap;
+}
+.section{
+    border: 2px solid red;
+    box-sizing: border-box;
+    margin: 5px;
+}
+.section1{
+    width: 30%;
+    height: 20%;
+    order: 1;
+}
+.section2{
+    width: 30%;
+    height: 80%;
+    order: 2;
+}
+.section3{
+    width: 70%;
+    height: 100%;
+    order: 3;
+}
