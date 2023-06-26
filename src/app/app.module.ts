@@ -11,6 +11,7 @@ import { users } from './objects/users';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { VerificationComponent } from './verification/verification.component';
 import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +25,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     CommonModule,
     FormsModule,
+    CustomFormsModule,
     
   ],
   providers: [ServicService,users],

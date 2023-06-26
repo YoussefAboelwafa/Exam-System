@@ -109,3 +109,10 @@ a {
   color: #008081;
   text-decoration: none;
 }
+
+.error{
+  font-size: small;
+  margin-top: -25px;
+  margin-bottom: 10px;
+  color: red;
+}

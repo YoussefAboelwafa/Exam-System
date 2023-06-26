@@ -6,7 +6,9 @@
       <img id="logo1" src="../../assets/images/logo1.svg" alt="" />
       <img id="logo2" src="../../assets/images/logo2.svg" alt="" />
     </div>
-    <form class="box">
+
+    {{user_login|json}}
+    <form class="box" #input_form="ngForm">
       <h3>Sign in to exam system</h3>
       <div class="field">
         <label for="email">Email or phone number</label>
@@ -15,22 +17,51 @@
           id="email"
           name="email"
           placeholder="Email / Phone number"
+          [(ngModel)]="user_login.email"
+          #email="ngModel"
+          required=""
+          class="form-control"
+          [class.is-invalid]="email.invalid && email.touched"
+          email
+          phone="CN"
         />
+        <div *ngIf="email.invalid && email.touched" class="error" >
+          <div *ngIf="email.errors?.['email']&&(email.errors?.['phone'])">Email Or Phone Is Required</div>
+          <div *ngIf="email.errors?.['required']">This Field Is Required</div>
+        </div>
       </div>
-      <div class="field">
+      <div class="field" >
         <label for="password">Password</label>
         <input
           type="password"
           id="password"
           name="password"
           placeholder="Password"
+          [(ngModel)]="user_login.password"
+          #password="ngModel"
+          required
+          class="form-control"
+          [class.is-invalid]="password.invalid && password.touched"
         />
       </div>
+      <div *ngIf="password.invalid && password.touched" class="error" >
+        <div *ngIf="password.errors?.['required']">this field is required</div> 
+      </div>
+      <!-- <div *ngIf="password.valid && password.touched" class="error" >
+        <div *ngIf="password.errors?.['required']">this field is required</div> 
+        <div *ngIf="power==0" class="error" style="color: red;">Can't BE A Password</div>
+        <div *ngIf="power==1" class="error" style="color: rgb(255, 140, 0);">weak password</div>
+        <div *ngIf="power==2" class="error" style="color: yellow;">Midum password</div>
+        <div *ngIf="power==3" class="error" style="color: green;">Strong password </div>
+
+      </div> -->
+     
       <button class="field" id="btn" type="submit">Sign in</button>
       <label id="signup"
         >Not a member?
         <a routerLink="/signup">Sign up now</a>
       </label>
     </form>
+    
   </div>
 </div>
