@@ -24,6 +24,7 @@
           email
           phone="CN"
         />
+                <!-- handle errors -->
         <div *ngIf="email.invalid && email.touched" class="error" >
           <div *ngIf="email.errors?.['email']&&(email.errors?.['phone'])">Email Or Phone Is Required</div>
           <div *ngIf="email.errors?.['required']">This Field Is Required</div>
@@ -44,14 +45,20 @@
           minlength="7"
         />
       </div>
+              <!-- handle errors -->
       <div *ngIf="password.invalid && password.touched" class="error" >
-        <div *ngIf="password.errors?.['required']">this field is required</div> 
+        <div *ngIf="password.errors?.['required']">This Field Is Required</div> 
         <div *ngIf="password.errors?.['minlength']">Min Length is 7</div> 
       </div>
       
-     
-      <button class="field" [disabled]="email.errors?.['required']||email.errors?.['email']||password.errors?.['required']||password.errors?.['minlength']"   *ngIf="email.errors?.['required']||password.errors?.['required']||password.errors?.['minlength']||email.errors?.['email']" style="background-color: gray;" id="btn" type="submit">Sign in</button>
-      <button class="field" [hidden]="(email.errors?.['required']||password.errors?.['required'])||email.errors?.['email']||password.errors?.['minlength']" id="btn" type="submit">Sign in</button>
+             <!-- not_active -->
+      <button class="field" [disabled]="email.errors?.['required']||email.errors?.['email']||password.errors?.['required']||password.errors?.['minlength']"   *ngIf="email.errors?.['required']
+      ||password.errors?.['required']||password.errors?.['minlength']||email.errors?.['email']"
+       style="background-color: gray;" id="btn" type="submit">Sign in</button>
+
+               <!-- active -->
+      <button class="field" [hidden]="(email.errors?.['required']||password.errors?.['required'])
+      ||email.errors?.['email']||password.errors?.['minlength']" id="btn" type="submit">Sign in</button>
 
       <label id="signup"
         >Not a member?

@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerificationComponent implements OnInit {
 
+  digits:any[] = [];
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  submit(){}
 }

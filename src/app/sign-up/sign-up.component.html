@@ -17,6 +17,7 @@
           [class.is-invalid]="first.invalid && first.touched"
           minlength="3"
           />
+                  <!-- handle errors -->
           <div *ngIf="first.invalid && first.touched" class="error" >
             <div *ngIf="first.errors?.['required']">this field is required</div> 
             <div *ngIf="first.errors?.['minlength']">Min Length is 3</div> 
@@ -34,6 +35,7 @@
              minlength="3"
 
            />
+                   <!-- handle errors -->
            <div *ngIf="last.invalid && last.touched" class="error" >
             <div *ngIf="last.errors?.['required']">this field is required</div> 
             <div *ngIf="last.errors?.['minlength']">Min Length is 3</div> 
@@ -69,6 +71,7 @@
           [class.is-invalid]="email.invalid && email.touched"
           email />
 
+        <!-- handle errors -->
           <div *ngIf="email.invalid && email.touched" class="error" >
             <div *ngIf="email.errors?.['email']">Email Or Phone Is Required</div>
             <div *ngIf="email.errors?.['required']">This Field Is Required</div>
@@ -86,6 +89,7 @@
           class="form-control"
           [class.is-invalid]="phone.invalid && phone.touched"
           />
+                  <!-- handle errors -->
             <div class="error" *ngIf="phone.errors?.['required'] && phone.touched">this field is required</div> 
         </td>
       </tr>
@@ -106,11 +110,12 @@
           [class.is-invalid]="password.invalid && password.touched"
           minlength="7"
           />
+                  <!-- handle errors -->
           <div *ngIf="password.invalid && password.touched" class="error" >
             <div *ngIf="password.errors?.['required']">this field is required</div> 
             <div *ngIf="password.errors?.['minlength']">Min Length is 7</div> 
           </div>
-          
+                  <!-- handle errors -->
           <div *ngIf="password.touched" class="error" >
             <div *ngIf="pow_password===1"  style="color: rgb(255, 140, 0);">weak password</div>
             <div *ngIf="pow_password===2"  style="color: yellow;">Midum password</div>
@@ -134,7 +139,7 @@
           [class.is-invalid]="password2.invalid && password2.touched"
           minlength="7" placeholder="Confrim your password" 
           />         
-
+        <!-- handle errors -->
           <div *ngIf="password2.invalid && password2.touched" class="error" >
             <div *ngIf="password2.errors?.['required']">this field is required</div> 
             <div *ngIf="password2.errors?.['minlength']">Min Length is 7</div> 
@@ -149,7 +154,7 @@
 
       <tr>
         <td colspan="2">
-          <!-- non_active -->
+          <!-- not_active -->
           <button class="field" [disabled]="email.errors?.['required']||email.errors?.['email']
           ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
           ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
@@ -159,7 +164,7 @@
           ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
           ||phone.errors?.['required']||flag_choose_city==false||flag_choose_country==false" style="background-color: gray;" id="btn" type="submit">Sign in</button>
          
-          <!-- //active btn -->
+          <!-- active btn -->
           <button class="field" [hidden]="email.errors?.['required']||email.errors?.['email']
           ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
           ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
