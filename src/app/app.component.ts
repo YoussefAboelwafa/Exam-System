@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Exam-System';
-  
+
   constructor(private router: Router) {
     this.router.navigate(['/signup']);
   }

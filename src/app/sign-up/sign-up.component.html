@@ -1,76 +1,170 @@
 <div class="container">
   <div class="image"></div>
 
-  <div class="form">
+  <div class="form" >
     
+    <form #input_form="ngForm" (ngSubmit)="submit()">
     <table class="box">
       <h3>Sign up to exam system</h3>
       <tr>
         <td>
           <label for="fname">First name</label>
-          <input type="text" id="fname" name="fname" placeholder="First name" />
+          <input type="text" id="fname" name="fname" placeholder="First name"
+          [(ngModel)]="signup_user.first_name"
+          #first="ngModel"
+          required
+          class="form-control"
+          [class.is-invalid]="first.invalid && first.touched"
+          minlength="3"
+          />
+          <div *ngIf="first.invalid && first.touched" class="error" >
+            <div *ngIf="first.errors?.['required']">this field is required</div> 
+            <div *ngIf="first.errors?.['minlength']">Min Length is 3</div> 
+          </div>
         </td>
 
         <td>
           <label for="lname">Last name</label>
-          <input type="text" id="lname" name="lname" placeholder="Last name" />
+          <input type="text" id="lname" name="lname" placeholder="Last name"
+             [(ngModel)]="signup_user.last_name"
+             #last="ngModel"
+             required
+             class="form-control"
+             [class.is-invalid]="last.invalid && last.touched"
+             minlength="3"
+
+           />
+           <div *ngIf="last.invalid && last.touched" class="error" >
+            <div *ngIf="last.errors?.['required']">this field is required</div> 
+            <div *ngIf="last.errors?.['minlength']">Min Length is 3</div> 
+          </div>
         </td>
       </tr>
 
       <tr>
         <td>
           <label for="country">Country</label>
-          <select id="country" name="country">
-            <option value="egypt">Egypt</option>
-            <option value="usa">USA</option>
-            <option value="canada">Canada</option>
-            <option value="australia">Australia</option>
-            <option value="new zealand">New Zealand</option>
+          <select required #country id="country" name="country" (change)="select_country(country.value)">
+            <option>Select</option>
+            <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+
           </select>
         </td>
         <td>
           <label for="city">City</label>
-          <select id="city" name="city">
-            <option value="cairo">Cairo</option>
-            <option value="alex">Alexandria</option>
-            <option value="giza">Giza</option>
-            <option value="mansoura">Mansoura</option>
-            <option value="tanta">Tanta</option>
+          <select required #city id="city" name="city" (change)="select_city(city.value)">
+            <option >Select</option>
+             <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
           </select>
         </td>
       </tr>
-
       <tr>
         <td colspan="2">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Email" />
+          <input type="email" id="email" name="email" placeholder="Email"
+          [(ngModel)]="signup_user.email"
+          #email="ngModel"
+          required
+          class="form-control"
+          [class.is-invalid]="email.invalid && email.touched"
+          email />
+
+          <div *ngIf="email.invalid && email.touched" class="error" >
+            <div *ngIf="email.errors?.['email']">Email Or Phone Is Required</div>
+            <div *ngIf="email.errors?.['required']">This Field Is Required</div>
+          </div>
         </td>
       </tr>
 
       <tr>
         <td colspan="2">
           <label for="phone">Phone number</label>
-          <input type="tel" id="phone" name="phone" placeholder="Phone number" />
+          <input type="tel" id="phone" name="phone" placeholder="Phone number"
+          [(ngModel)]="signup_user.phone"
+          #phone="ngModel"
+          required
+          class="form-control"
+          [class.is-invalid]="phone.invalid && phone.touched"
+          />
+            <div class="error" *ngIf="phone.errors?.['required'] && phone.touched">this field is required</div> 
         </td>
       </tr>
 
       <tr>
         <td colspan="2">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="Password" />
+          <input 
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          [(ngModel)]="signup_user.password"
+          #password="ngModel"
+          required
+          (input)="power_password(password.value)"
+          class="form-control"
+          [class.is-invalid]="password.invalid && password.touched"
+          minlength="7"
+          />
+          <div *ngIf="password.invalid && password.touched" class="error" >
+            <div *ngIf="password.errors?.['required']">this field is required</div> 
+            <div *ngIf="password.errors?.['minlength']">Min Length is 7</div> 
+          </div>
+          
+          <div *ngIf="password.touched" class="error" >
+            <div *ngIf="pow_password===1"  style="color: rgb(255, 140, 0);">weak password</div>
+            <div *ngIf="pow_password===2"  style="color: yellow;">Midum password</div>
+            <div *ngIf="pow_password===3"  style="color: green;">Strong password </div>
+          </div>
+
         </td>
-      </tr>
+      </tr>        
       <tr>
         <td colspan="2">
           <label for="password2">Confirm your password</label>
-          <input type="password" id="password2" name="password2" placeholder="Confrim your password" />
-        </td>
+          <input 
+          type="password"
+          id="password2"
+          name="password2"
+          placeholder="Password"
+          #password2="ngModel"
+          required
+          ngModel 
+          class="form-control"
+          [class.is-invalid]="password2.invalid && password2.touched"
+          minlength="7" placeholder="Confrim your password" 
+          />         
+
+          <div *ngIf="password2.invalid && password2.touched" class="error" >
+            <div *ngIf="password2.errors?.['required']">this field is required</div> 
+            <div *ngIf="password2.errors?.['minlength']">Min Length is 7</div> 
+          </div>
+          
+          <div class="error" *ngIf="password.value!=password2.value&&password2.touched">Password Must Equal Confirm Password</div>
+
+        </td> 
+
       </tr>
+
 
       <tr>
         <td colspan="2">
-          <button id="btn" type="submit">Sign up</button>
-          <p id="signup">
+          <!-- non_active -->
+          <button class="field" [disabled]="email.errors?.['required']||email.errors?.['email']
+          ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
+          ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
+          ||phone.errors?.['required']||flag_choose_city==false||flag_choose_country==false"
+          *ngIf="email.errors?.['required']||email.errors?.['email']
+          ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
+          ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
+          ||phone.errors?.['required']||flag_choose_city==false||flag_choose_country==false" style="background-color: gray;" id="btn" type="submit">Sign in</button>
+         
+          <!-- //active btn -->
+          <button class="field" [hidden]="email.errors?.['required']||email.errors?.['email']
+          ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
+          ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
+          ||phone.errors?.['required']||flag_choose_city==false||flag_choose_country==false" id="btn" type="submit">Sign in</button>
+             <p id="signup">
             Already a member?
             <a routerLink="/login">Sign in now</a>
           </p>
@@ -78,6 +172,7 @@
       </tr>
 
     </table>
+  </form>
   </div>
   <div class="logo">
     <img id="logo1" src="../../assets/images/logo1.svg" alt="" />
