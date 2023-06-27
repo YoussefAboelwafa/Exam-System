@@ -4,10 +4,17 @@ const authRoutes = require('./routes/authRoutes');
 const {requireAuth} = require('./middleware/authMiddleware')
 const cors = require('cors');
 const User = require('./models/User')
+const jwt = require('jsonwebtoken');
+const cookieParser = require("cookie-parser");
+
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:4200',
+    credentials: true
+}));
 app.use(express.json());
+app.use(cookieParser());
 
 const dbURI = 'mongodb+srv://admin:7RUA6rN0a8FkISWy@cluster0.nbw43uf.mongodb.net/mydb'
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -17,25 +24,31 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
 
 
 app.get('/is_signedin', (req, res) => {
-    const token = req.cookies.jwt;
-    if(token){
-        jwt.verify(token, 'example secret', async (err, decodedToken)=>{
-            if(err){
-                console.log(err.message);
-                res.json({signed_in: false});
-            }else{
-                console.log(decodedToken);
-                let user = await User.findById(decodedToken.id);
-                res.json({user: user, signed_in: true});
-            }
-        })
-    }else{
+    try{
+        const token = req.cookies.jwt;
+        console.log(token);
+        if(token){
+            jwt.verify(token, 'example secret', async (err, decodedToken)=>{
+                if(err){
+                    console.log(err.message);
+                    res.json({signed_in: false});
+                }else{
+                    console.log(decodedToken);
+                    let user = await User.findById(decodedToken.id);
+                    res.json({user: user, signed_in: true});
+                }
+            })
+        }else{
+            res.json({signed_in: false});
+       }
+    }catch(err){
+        console.log(err);
         res.json({signed_in: false});
     }
 });
 
 
-// app.use('/home', requireAuth, )
+app.use('/home', requireAuth, )
 app.use(authRoutes);
 
 

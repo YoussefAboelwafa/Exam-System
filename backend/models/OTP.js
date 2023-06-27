@@ -24,23 +24,14 @@ OTPschema.post('save', function(doc, next){
 
 
 OTPschema.statics.verifyOTP = async function(phone, code){
-    const otp = await this.findOne({phone});
-    if(!phone) throw Error("phone incorrect");
+    const otp = await this.findOne({phone: phone});
+    console.log(otp);
+    if(!otp) throw Error("phone incorrect");
     let auth = await bcrypt.compare(code, otp.code);
     if(auth){
-        this.findByIdAndDelete(phone).then(deletedUser => {
-            if (deletedUser) {
-              console.log('User deleted successfully');
-            } else {
-              console.log('User not found');
-            }
-          })
-          .catch(error => {
-            console.error('Error deleting user:', error);
-          });
         return true;
     }
-    throw Error("Incorrect code");
+    return false;
 }
 
 
