@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const {requireAuth} = require('./middleware/authMiddleware')
 const cors = require('cors');
+const User = require('./models/User')
 
 const app = express();
 app.use(cors());
@@ -14,20 +15,25 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     .catch((err) => console.log(err));
 
 
-app.get('/is_signin', requireAuth ,(req, res) => {
+
+app.get('/is_signedin', (req, res) => {
     const token = req.cookies.jwt;
     if(token){
-        jwt.verify(token, 'example secret', (err, decodedToken)=>{
+        jwt.verify(token, 'example secret', async (err, decodedToken)=>{
             if(err){
+                console.log(err.message);
                 res.json({signed_in: false});
             }else{
-                res.json({signed_in: true});
+                console.log(decodedToken);
+                let user = await User.findById(decodedToken.id);
+                res.json({user: user, signed_in: true});
             }
         })
     }else{
         res.json({signed_in: false});
     }
 });
+
 
 // app.use('/home', requireAuth, )
 app.use(authRoutes);
