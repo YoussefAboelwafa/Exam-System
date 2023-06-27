@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { users } from '../objects/users';
 import { ServicService } from '../services/servic.service';
-
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-sign-up',
@@ -34,9 +32,7 @@ export class SignUpComponent implements OnInit {
     'new zealan'
   
 ];
-
   constructor(user:users,private service:ServicService,private router: Router) {
-
     this.signup_user=user;
    }
 
@@ -95,14 +91,8 @@ export class SignUpComponent implements OnInit {
     }
   }
   submit(){
-// <<<<<<< Backend
-//     this.service.sign_up(this.signup_user).subscribe(
-//       (x)=> {
-        
-//         console.log(x.status);
-//       })
-// =======
      //service with user_signup
+    this.service.user = this.signup_user;
      this.service.sign_up(this.signup_user).subscribe
            (
              (x)=> {
@@ -111,11 +101,13 @@ export class SignUpComponent implements OnInit {
                 alert("email or phone is found in system");
               }
               else{
-                this.router.navigate(['/verify'], { queryParams: { user: this.signup_user } });                            }
-             error:(error: HttpErrorResponse) =>alert(error.message);
+                
+                this.router.navigate([`/verify/${this.signup_user}`]);    
+              }                        
+                error:(error: HttpErrorResponse) =>alert(error.message);
               }
-           )
 
+           )
     
   }
 

@@ -21,9 +21,11 @@ export class VerificationComponent implements OnInit {
   submit(){
      let code=this.digits[0]+''+this.digits[1]+''+this.digits[2]+''+this.digits[3]+''+this.digits[4]+''+this.digits[5];
      
-     this.route.queryParamMap.subscribe(params => {
-      this.user = params.get('user');
-    });
+    //  this.route.paramMap.subscribe(params => {
+    //   console.log(params);
+      
+    //   this.user = params.get('user');
+    // });
 
        //service with verify
       this.service.verify_code(code,this.user).subscribe
@@ -50,9 +52,10 @@ export class VerificationComponent implements OnInit {
 
 
   send_again(){
-    this.route.queryParamMap.subscribe(params => {
+    this.route.paramMap.subscribe(params => {
       this.user = params.get('user');
     });
+
 
        //service to make backend to send code again 
       this.service.send_again(this.user).subscribe
