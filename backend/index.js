@@ -1,9 +1,11 @@
 const express = require("express");
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const {requireAuth} = require('./middleware/authMiddleware')
+const cors = require('cors');
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 
 const dbURI = 'mongodb+srv://admin:7RUA6rN0a8FkISWy@cluster0.nbw43uf.mongodb.net/mydb'
@@ -12,7 +14,22 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     .catch((err) => console.log(err));
 
 
+app.get('/is_signin', requireAuth ,(req, res) => {
+    const token = req.cookies.jwt;
+    if(token){
+        jwt.verify(token, 'example secret', (err, decodedToken)=>{
+            if(err){
+                res.json({signed_in: false});
+            }else{
+                res.json({signed_in: true});
+            }
+        })
+    }else{
+        res.json({signed_in: false});
+    }
+});
 
+// app.use('/home', requireAuth, )
 app.use(authRoutes);
 
 

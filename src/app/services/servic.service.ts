@@ -16,7 +16,11 @@ export class ServicService {
 //send user with all date ,recieve json="success=false" if the email or phone are found in system
 //else i recieve json="success=true"  back active verification code and i will send to backend the verify 
 public sign_up(new_user:any):Observable<any>{
+<<<<<<< Updated upstream
   return this.http.post<any>(`${this.apiServerUrl}/sign_up`,{email: new_user.email,phone: new_user.phone});
+=======
+  return this.http.post<any>(`${this.apiServerUrl}/sign_up`,{email: new_user.email, phone: new_user.phone});
+>>>>>>> Stashed changes
 }
 //send user with email and pass if the user not found recive json="success=false"else recive json="success=true ,user:user" with all data
 public login(user:any):Observable<any>{
@@ -39,6 +43,26 @@ public city_country():Observable<any>{
 }
 
 
-
-
 }
+// //send user with all date ,recieve flag ==0 if the email or phone are found in system
+// //else i recieve flag==1  back active verification code and i will send to backend the verify 
+// public sign_up({email, phone}:any):Observable<any>{
+//   return this.http.post<any>(${this.apiServerUrl}/sign_up, {email, phone});
+// }
+// //send user with email and pass if the user not found recive flag==0 else recive some date i will tell you soon ...
+// public login(user:any):Observable<any>{
+//   return this.http.post<any>(${this.apiServerUrl}/login,user);
+// }
+// // i will send verify code to back and if it wrong i will recive flag==0 else flag ==1;
+// public verify_code(code:any, new_user):Observable<any>{
+//   return this.http.post<any>(${this.apiServerUrl}/verify_code,{code, new_user});
+// }
+// // i will send this request if user go to sign up and i recive pair of array ,
+// //one to all city ,other to all country. it can be not used and replace this request
+// // with arrays in frontend and this array fill with any  cities and countries  
+// public city_country():Observable<any>{
+//   return this.http.get<any>(${this.apiServerUrl}/city_country);
+// }
+
+
+// }

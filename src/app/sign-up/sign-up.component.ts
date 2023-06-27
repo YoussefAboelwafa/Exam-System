@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { users } from '../objects/users';
+import { ServicService } from '../services/servic.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -29,7 +30,7 @@ export class SignUpComponent implements OnInit {
     'new zealan'
   
 ];
-  constructor(user:users) {
+  constructor(user:users, private service:ServicService) {
     this.signup_user=user;
   
    }
@@ -89,6 +90,11 @@ export class SignUpComponent implements OnInit {
     }
   }
   submit(){
+    this.service.sign_up(this.signup_user).subscribe(
+      (x)=> {
+        
+        console.log(x.status);
+      })
     
   }
 
