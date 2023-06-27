@@ -14,7 +14,7 @@ export class ServicService {
   constructor(private http: HttpClient) { }
 
 //send user with all date ,recieve json="success=false" if the email or phone are found in system
-//else i recieve json="success=true"  back active verification code and i will send to backend the verify 
+//else i recieve json="success=true"  backend active verification code and i will send to backend the verify 
 public sign_up(new_user:any):Observable<any>{
 <<<<<<< Updated upstream
   return this.http.post<any>(`${this.apiServerUrl}/sign_up`,{email: new_user.email,phone: new_user.phone});
@@ -32,7 +32,7 @@ public verify_code(code:any,user:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/verify_code`,{code:code,user:user});
 }
 
-public send_agin(user:any):Observable<any>{
+public send_again(user:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/send_agin`,user.phone);
 }
 // i will send this request if user go to sign up and i recive pair of array ,
@@ -41,6 +41,10 @@ public send_agin(user:any):Observable<any>{
 public city_country():Observable<any>{
   return this.http.get<any>(`${this.apiServerUrl}/city_country`);
 }
+public is_signin():Observable<any>{
+  return this.http.get<any>(`${this.apiServerUrl}/is_signedin`);
+}
+ 
 
 
 }

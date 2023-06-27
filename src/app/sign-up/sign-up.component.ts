@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { users } from '../objects/users';
 import { ServicService } from '../services/servic.service';
 
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -30,9 +34,10 @@ export class SignUpComponent implements OnInit {
     'new zealan'
   
 ];
-  constructor(user:users, private service:ServicService) {
+
+  constructor(user:users,private service:ServicService,private router: Router) {
+
     this.signup_user=user;
-  
    }
 
   ngOnInit(): void {
@@ -90,11 +95,27 @@ export class SignUpComponent implements OnInit {
     }
   }
   submit(){
-    this.service.sign_up(this.signup_user).subscribe(
-      (x)=> {
+// <<<<<<< Backend
+//     this.service.sign_up(this.signup_user).subscribe(
+//       (x)=> {
         
-        console.log(x.status);
-      })
+//         console.log(x.status);
+//       })
+// =======
+     //service with user_signup
+     this.service.sign_up(this.signup_user).subscribe
+           (
+             (x)=> {
+
+              if(x.success==false){
+                alert("email or phone is found in system");
+              }
+              else{
+                this.router.navigate(['/verify'], { queryParams: { user: this.signup_user } });                            }
+             error:(error: HttpErrorResponse) =>alert(error.message);
+              }
+           )
+
     
   }
 

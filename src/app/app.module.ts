@@ -13,6 +13,7 @@ import { VerificationComponent } from './verification/verification.component';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { HomeComponent } from './home/home.component';
+import { GuardServiceService } from './services/guard-service.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,7 @@ import { HomeComponent } from './home/home.component';
     CustomFormsModule,
     
   ],
-  providers: [ServicService,users],
+  providers: [ServicService,users,GuardServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
