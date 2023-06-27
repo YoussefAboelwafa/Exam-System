@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submit(){ //service with user_login
+  submit(){
+     //service with user_login
     //  this.service.login(this.user_login).subscribe
     //        (
             

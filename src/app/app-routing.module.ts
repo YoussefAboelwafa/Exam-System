@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { VerificationComponent } from './verification/verification.component';
 import { HomeComponent } from './home/home.component';
+import { GuardServiceService } from './services/guard-service.service';
 
 const routes: Routes = [
   {
@@ -15,12 +16,13 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'verify',
+    path: 'verify/:user',
     component: VerificationComponent,
   },
   {
     path: 'home',
     component: HomeComponent,
+    // canActivate:[GuardServiceService]
   },
   // {
   //   path: 'home/:name',
@@ -48,3 +50,6 @@ export class AppRoutingModule { }
 
 // this.router.navigate([`/home/${this.email}/show/inbox`]);
 // routerLink="show/inbox"
+// this.route.queryParamMap.subscribe(params => {
+//   this.user = params.get('user');
+// });
