@@ -143,7 +143,7 @@ module.exports.logout_get = (req, res) => {
 module.exports.verifyCode = async (req, res) => {
     try{
         const {code, user} = req.body;
-        console.log(req.body.code);
+        // console.log(req.body.code);
         ///verify otp
         const correct = await OTP.verifyOTP(user.phone, code);
         if(correct){
@@ -161,3 +161,26 @@ module.exports.verifyCode = async (req, res) => {
     }
 }
 
+
+module.exports.send_again = async (req, res) =>{
+    try{
+        ////check if email and phone provided are unique
+        const {phone} = req.body;
+        console.log(req.body);
+        // console.log(phone);
+        const code = generateOTP();
+        // console.log(code);
+        const otp = await OTP.insert({phone: phone, code: code});
+
+        // sendSMS(phone, code);   /////remove comment later
+
+        res.status(201).json({success: true});
+        
+        // const token = createToken(user._id);                    ///// not needed since we direct the user back to the login page
+        // res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000})
+
+    }catch(err){
+        const errors = errorHandler(err);
+        res.status(201).json({success: false});
+    }
+}
