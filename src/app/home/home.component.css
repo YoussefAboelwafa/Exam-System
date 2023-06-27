@@ -1,32 +1,193 @@
+div {
+  font-family: "Montserrat", sans-serif;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  flex-wrap: wrap;
+  background: rgba(204, 255, 251, 0.21);
+}
 
-.container{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    flex-wrap: wrap;
-    background: rgba(204, 255, 251, 0.21);
+.section {
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin: 7px;
 }
-    
-.section{
-    border-radius: 10px;
-    box-sizing: border-box;
-    margin: 7px;
+.section1 {
+  width: 25%;
+  height: 20%;
+  order: 1;
+  background: radial-gradient(
+    circle at top left,
+    rgba(255, 145, 76, 0.18),
+    rgba(0, 129, 130, 0.2)
+  );
 }
-.section1{
-    width: 25%;
-    height: 20%;
-    order: 1;
-    background: radial-gradient(circle at top left, rgba(255, 145, 76, 0.18),rgba(0, 129, 130, 0.20));
+.section2 {
+  width: 25%;
+  height: 72.9%;
+  order: 2;
+  background: radial-gradient(
+    circle at top left,
+    rgba(255, 145, 76, 0.18),
+    rgba(0, 129, 130, 0.2)
+  );
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
-.section2{
-    width: 25%;
-    height: 72.9%;
-    order: 2;
-    background: radial-gradient(circle at top left, rgba(255, 145, 76, 0.18),rgba(0, 129, 130, 0.20));
+.section3 {
+  width: 74%;
+  height: 95%;
+  order: 3;
+  background: radial-gradient(
+    circle at top left,
+    rgba(255, 145, 76, 0.18),
+    rgba(0, 129, 130, 0.2)
+  );
 }
-.section3{
-    width: 74%;
-    height: 95%;
-    order: 3;
-    background: radial-gradient(circle at top left, rgba(255, 145, 76, 0.18),rgba(0, 129, 130, 0.20));
+.name,
+.btns1 {
+  display: flex;
+  flex-direction: row;
+}
+.name {
+  color: #003f3d;
+  font-size: 20px;
+  font-family: Montserrat;
+  font-weight: 700;
+}
+.name2 {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 100%;
+}
+.name img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 10px 8px 8px 10px;
+  box-shadow: 1px 4px 13px 1px rgba(0, 0, 0, 0.54);
+}
+#id {
+  margin: 0px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.btns1 {
+  margin-left: 4px;
+}
+.btns1 button {
+  background: #008182;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-family: Montserrat;
+  font-weight: 600;
+  line-height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 45%;
+  height: 5%;
+  padding: 8px 10px;
+  justify-content: center;
+  align-items: center;
+}
+.btns1 button:hover {
+  background: #fff;
+  color: #008182;
+  border: 1px solid #008182;
+  transition: 1s;
+}
+
+.sidebar {
+  border-radius: 20px;
+}
+.sidebar img {
+  margin-right: 2%;
+}
+ul {
+  margin-top: 5%;
+}
+.sidebar li {
+  padding: 5px;
+  margin: 5px;
+  list-style-type: none;
+}
+.sidebar ul li button {
+  border: none;
+  border-style: none;
+  outline: none;
+  background: none;
+  display: block;
+  border-radius: 10px;
+  height: 50px;
+  width: 90%;
+  line-height: 30px;
+  padding-left: 20px;
+  text-align: left;
+  justify-content: center;
+  color: #008182;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  line-height: 150%;
+  box-sizing: border-box;
+  transition: 0.4s;
+  color: #008182;
+  background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
+  border-radius: 10px;
+}
+li:is(:hover, .active) button {
+  margin-left: 15px;
+}
+.book {
+  height: 25%;
+  width: 80%;
+  text-align: left;
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  background: radial-gradient(
+      313.28% 209.98% at 99.43% 99.22%,
+      #008182 0%,
+      rgba(0, 129, 130, 0) 100%
+    ),
+    #fff;
+  box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.47);
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+}
+.book label {
+  color: #fff;
+  font-size: 26px;
+  font-family: Montserrat;
+  font-weight: 500;
+  line-height: 100%;
+}
+.book button {
+  border-radius: 8px;
+  background: #f79051;
+  color: #fff;
+  font-size: 14px;
+  font-family: Montserrat;
+  font-weight: 700;
+  line-height: 20px;
+  height: 35%;
+  border: none;
+  margin-top: 5%;
+}
+.book button:hover {
+  background: #fff;
+  color: #f79051;
+  border: 1px solid #f79051;
+  transition: 1s;
 }
