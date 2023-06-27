@@ -92,8 +92,8 @@ module.exports.signup_post = async (req, res) =>{
         const isUnique = await checkUniqueness(email, phone);
         if(isUnique){
             const code = generateOTP();
-            console.log('hello ');
-            const otp = await OTP.create({phone: phone, code: code});
+            console.log(code);
+            const otp = await OTP.insert({phone: phone, code: code});
 
             // sendSMS(phone, code);   /////remove comment later
 
@@ -121,7 +121,7 @@ module.exports.login_post = async (req, res) => {
     try {
         const user = await User.login(email, password);
         const token = createToken(user._id);
-        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000, sameSite: 'None',})
+        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000, sameSite: 'Lax',})
         res.status(200).json({user:user, success: true});
     } catch (err) {
         const errors = errorHandler(err)
@@ -153,8 +153,6 @@ module.exports.verifyCode = async (req, res) => {
         }else{
             res.status(201).json({success: false, created: false});
         }
-        // const token = createToken(user._id);                    ///// not needed since we direct the user back to the login page
-        // res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000})
     }catch(err){            
           
         const errors = errorHandler(err);
