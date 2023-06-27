@@ -22,7 +22,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate:[GuardServiceService]
+    // canActivate:[GuardServiceService]
   },
   // {
   //   path: 'home/:name',

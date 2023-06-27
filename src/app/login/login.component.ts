@@ -13,7 +13,7 @@ import { DOCUMENT } from '@angular/common';
 export class LoginComponent implements OnInit {
   user_login:any;
   power=-1;
-  constructor(user:users,private service:ServicService, private router: Router, @Inject(DOCUMENT) private document: Document) {
+  constructor(user:users,private service:ServicService, private router: Router) {
     this.user_login = user;
    }
 
@@ -31,9 +31,7 @@ export class LoginComponent implements OnInit {
                 alert("fault");
               }
               else{
-                console.log('helllo world from indeisnd login');
-                console.log(this.document.cookie);
-                
+                console.log('helllo world from indeisnd login');                
                 this.router.navigate(['/home'])
               }
               

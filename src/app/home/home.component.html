@@ -1,7 +1,8 @@
 <div class="container">
   <div class="section section1">
     <div class="name">
-      <img src="../../assets/images/img3.jpg" alt="" />
+      <input type="file" accept="image/*" class="file-input" (change)="onFileSelect($event)">
+      <img [src]="photo" alt="" class="image" />
       <div class="name2">
         <label>Youssef Aboelwafa</label>
         <label id="id">#12345678</label>
@@ -54,12 +55,19 @@
       <div class="card card-body upcoming">
         <h5 class="card-title">Upcoming <br />Exams</h5>
         <p class="card-text"></p>
-        <a href="#" class="btn">See more >></a>
-      </div>
+        <!-- Button trigger modal -->
+        <!-- <button type="button" id="btn_pop" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+          see more >>
+        </button> -->
+        <a class="btn" data-toggle="modal" data-target="#exampleModalCenter" (click)="see()">
+          see more >>
+        </a>
+            </div>
       <div class="card card-body taken">
         <h5 class="card-title">Taken <br />Exams</h5>
         <p class="card-text"></p>
-        <a href="#" class="btn">See more >></a>
+        <a class="btn" data-toggle="modal" data-target="#exampleModalCenter" (click)="see()">
+          see more >></a> 
       </div>
       <div class="card card-body rank">
         <h5 class="card-title">
@@ -67,30 +75,60 @@
           Rank
         </h5>
         <p class="card-text"></p>
-        <a href="#" class="btn">See more >></a>
+        <a class="btn" data-toggle="modal" data-target="#exampleModalCenter" (click)="see()">
+          see more >></a> 
       </div>
     </div>
     <!-- Discover exams section -->
     <div class="discoverexamslabel">
       <p>Discover Exams</p>
-      <a href="#" class="btn">See more >></a>
+      <a  class="btn">See more >></a>
     </div>
     <div class="discoverexamswidgets">
       <div class="card card-body upcoming">
         <h5 class="card-title">C++<br />Programming</h5>
         <p class="card-text"></p>
-        <a href="#" class="btn">See more >></a>
+        <a  class="btn" data-toggle="modal" data-target="#not_taken_exam" (click)="see()">
+          see more >></a> 
       </div>
       <div class="card card-body upcoming">
         <h5 class="card-title">Flutter</h5>
         <p class="card-text"></p>
-        <a href="#" class="btn">See more >></a>
+        <a  class="btn"  data-toggle="modal" data-target="#not_taken_exam" (click)="see()">
+          see more >></a> 
       </div>
       <div class="card card-body upcoming">
         <h5 class="card-title">Algorithms</h5>
         <p class="card-text"></p>
-        <a href="#" class="btn">See more >></a>
+        <a class="btn" data-toggle="modal" data-target="#not_taken_exam" (click)="see()">
+          see more >></a> 
       </div>
     </div>
   </div>
 </div>
+
+<!-- Moda-->
+<!-- Other Exams  -->
+<div class="modal fade" id="not_taken_exam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{name_course}}</h5>
+       <button class="outer_button" disabled > <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </button>
+      </div>
+      <div class="modal-body">
+        <p>{{discription}}</p>
+        <ul>
+          <li *ngFor="let info of about_course" style="margin-top: 20px;">{{info}}</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="take_exam()">Take Exam</button>
+      </div>
+    </div>
+  </div>
+</div>
+
