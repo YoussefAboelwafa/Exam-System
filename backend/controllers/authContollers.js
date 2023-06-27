@@ -92,20 +92,21 @@ module.exports.signup_post = async (req, res) =>{
         const isUnique = await checkUniqueness(email, phone);
         if(isUnique){
             const code = generateOTP();
+            console.log('hello ');
             const otp = await OTP.create({phone: phone, code: code});
 
             // sendSMS(phone, code);   /////remove comment later
 
             res.status(201).json({success: true});
         }else{
-            res.status(400).json({success: false});
+            res.status(201).json({success: false});
         }
         // const token = createToken(user._id);                    ///// not needed since we direct the user back to the login page
         // res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000})
 
     }catch(err){
         const errors = errorHandler(err);
-        res.status(400).json({success: false});
+        res.status(201).json({success: false});
     }
 
 }
@@ -120,7 +121,7 @@ module.exports.login_post = async (req, res) => {
     try {
         const user = await User.login(email, password);
         const token = createToken(user._id);
-        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000})
+        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000, sameSite: 'None',})
         res.status(200).json({user:user, success: true});
     } catch (err) {
         const errors = errorHandler(err)
@@ -132,6 +133,7 @@ module.exports.login_post = async (req, res) => {
 
 module.exports.logout_get = (req, res) => {
     res.cookie('jwt', '', {maxAge: 1});
+    res.send('done')
     // res.redirect('/');
     ///// redirect back to home page
 }
@@ -141,20 +143,23 @@ module.exports.logout_get = (req, res) => {
 module.exports.verifyCode = async (req, res) => {
     try{
         const {code, user} = req.body;
+        console.log(req.body.code);
         ///verify otp
-        const correct = await OTP.verifyCode(code);
+        const correct = await OTP.verifyOTP(user.phone, code);
         if(correct){
             const new_user = await User.create(user);  ///////review later to check if waiting here is really necessary
+            if(new_user)
+                res.status(201).json({success: true, created: true});
         }else{
-            res.status(201).json({success: false, error:'incorrect code'});
+            res.status(201).json({success: false, created: false});
         }
         // const token = createToken(user._id);                    ///// not needed since we direct the user back to the login page
         // res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000})
-
-        res.status(201).json({success: true});
-    }catch(err){
+    }catch(err){            
+          
         const errors = errorHandler(err);
-        res.status(400).json({success: false, created: err.code !== 11000});
+        console.log(err);
+        res.status(201).json({success: true, created: false});
     }
 }
 

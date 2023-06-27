@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const userSchema = new mongoose.Schema({
-    _id: {type: Number},
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
     country: {type: String, required: true},
@@ -21,7 +20,6 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: [true, 'password required']}
 })
 
-userSchema.plugin(AutoIncrement, { inc_field: '_id' });
 
 /// trust that the front will check the email before sending
 ////add the rest of information like exams taken and so on and so forth
