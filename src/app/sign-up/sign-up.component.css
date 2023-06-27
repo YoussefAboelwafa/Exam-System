@@ -9,10 +9,11 @@
     position: fixed;
     left: 0px;
     top: 0px;
+    padding: 0px;
     }
 
     .form {
-    width: 80vh;
+    width: 70vh;
     align-items: center;
     justify-self: center;
     display: flex;
@@ -36,8 +37,6 @@
     display: flex;
     width: 141px;
     padding: 0px 0px 0.013px 0px;
-    /* justify-content: center;
-    align-items: center; */
     gap: 7.768px;
     margin-top: 5%;
     order: 3;
@@ -59,6 +58,7 @@
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
     line-height: 150%;
+    margin-top: 5%;
     }
     .box label {
     align-self: stretch;

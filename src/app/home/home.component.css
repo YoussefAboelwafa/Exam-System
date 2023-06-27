@@ -1,0 +1,32 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    flex-wrap: wrap;
+    background: rgba(204, 255, 251, 0.21);
+}
+    
+.section{
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin: 7px;
+}
+.section1{
+    width: 25%;
+    height: 20%;
+    order: 1;
+    background: radial-gradient(circle at top left, rgba(255, 145, 76, 0.18),rgba(0, 129, 130, 0.20));
+}
+.section2{
+    width: 25%;
+    height: 72.9%;
+    order: 2;
+    background: radial-gradient(circle at top left, rgba(255, 145, 76, 0.18),rgba(0, 129, 130, 0.20));
+}
+.section3{
+    width: 74%;
+    height: 95%;
+    order: 3;
+    background: radial-gradient(circle at top left, rgba(255, 145, 76, 0.18),rgba(0, 129, 130, 0.20));
+}

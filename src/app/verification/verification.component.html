@@ -1,1 +1,104 @@
-<p>verification works!</p>
+<div class="container">
+    <div class="image"></div>
+  
+    <div class="form">
+      <div class="logo">
+        <img id="logo1" src="../../assets/images/logo1.svg" alt="" />
+        <img id="logo2" src="../../assets/images/logo2.svg" alt="" />
+      </div>
+      <form class="box" #input_form="ngForm" (ngSubmit)="submit()">
+        <h3>Verify your phone number</h3>
+        <div class="field">
+          <input
+          [(ngModel)]="digits[0]"
+          name="d1"
+          id="d1"
+          #d1="ngModel"
+          required
+          class="form-control"
+          [class.is-invalid]="d1.invalid && d1.touched"
+          type="text"
+          maxlength="1"
+          (input)="moveToNext($event.target, 'd2')"
+        >
+        
+        <input
+          [(ngModel)]="digits[1]"
+          name="d2"
+          id="d2"
+          #d2="ngModel"
+          required
+          class="form-control"
+          [class.is-invalid]="d2.invalid && d2.touched"
+          (input)="moveToNext($event.target, 'd3')" 
+          type="text"
+          maxlength="1"
+        >
+
+            <input  name="d3" id="d3"
+            [(ngModel)]="digits[2]"
+            #d3="ngModel"
+            required
+            class="form-control"
+            [class.is-invalid]="d3.invalid && d3.touched"
+            (input)="moveToNext($event.target, 'd4')" 
+            type="text" digits  maxlength="1" >
+
+            <input  name="d4" id="d4"
+            [(ngModel)]="digits[3]"
+            #d4="ngModel"
+            required
+            class="form-control"
+            [class.is-invalid]="d4.invalid && d4.touched"
+            type="text" digits   maxlength="1" (input)="moveToNext($event.target, 'd5')" >
+            
+
+            <input  name="d5" id="d5"
+            [(ngModel)]="digits[4]"
+            #d5="ngModel"
+            required
+            class="form-control"
+            [class.is-invalid]="d5.invalid && d5.touched"
+            type="text" digits   maxlength="1" (input)="moveToNext($event.target, 'd6')"  >
+
+            <input  name="d6" id="d6"
+            [(ngModel)]="digits[5]"
+            #d6="ngModel"
+            required
+            class="form-control"
+            [class.is-invalid]="d6.invalid && d6.touched"
+            type="text"
+            digits   maxlength="1"  >
+        </div>
+        
+        <!-- handle errors -->
+        <div *ngIf="d1.touched || d2.touched||d3.touched||d4.touched||d5.touched||d6.touched">
+
+            <div *ngIf="d1.errors?.['digits']||d2.errors?.['digits']||d3.errors?.['digits']||d4.errors?.['digits']
+             ||d5.errors?.['digits']||d6.errors?.['digits']" class="error" >Digit Only Is Allowed</div>
+
+            <div *ngIf="d1.errors?.['required']||d2.errors?.['required']||d3.errors?.['required']||d4.errors?.['required']
+             ||d5.errors?.['required']||d6.errors?.['required']" [hidden]="d1.errors?.['digits']||d2.errors?.['digits']||d3.errors?.['digits']||d4.errors?.['digits']
+             ||d5.errors?.['digits']||d6.errors?.['digits']" class="error" >This Field Is Required</div>
+        </div>
+        
+       <!-- not active -->
+        <button class="field" [disabled]="d1.errors?.['required']||d1.errors?.['digits']||d2.errors?.['required']||d2.errors?.['digits']||
+        d3.errors?.['required']||d3.errors?.['digits']||d4.errors?.['required']||d4.errors?.['digits']||d5.errors?.['required']||d5.errors?.['digits']
+        ||d6.errors?.['required']||d6.errors?.['digits']"   *ngIf="d1.errors?.['required']||d1.errors?.['digits']||d2.errors?.['required']||d2.errors?.['digits']||
+        d3.errors?.['required']||d3.errors?.['digits']||d4.errors?.['required']||d4.errors?.['digits']||d5.errors?.['required']||d5.errors?.['digits']
+        ||d6.errors?.['required']||d6.errors?.['digits']"  style="background-color: gray;" id="btn" type="submit">Verify</button>
+
+        <!-- active -->
+        <button class="field" [hidden]="d1.errors?.['required']||d1.errors?.['digits']||d2.errors?.['required']||d2.errors?.['digits']||
+        d3.errors?.['required']||d3.errors?.['digits']||d4.errors?.['required']||d4.errors?.['digits']||d5.errors?.['required']||d5.errors?.['digits']
+        ||d6.errors?.['required']||d6.errors?.['digits']" id="btn" type="submit">Verify</button>
+    
+      <div>
+        <button id="btn-send">Send Again </button>
+    </div>
+      </form>
+      
+    </div>
+  </div>
+  

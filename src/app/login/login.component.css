@@ -9,6 +9,7 @@ div {
   position: fixed;
   left: 0px;
   top: 0px;
+  padding: 0px;
 }
 
 .form {

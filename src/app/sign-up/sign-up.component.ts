@@ -47,7 +47,7 @@ export class SignUpComponent implements OnInit {
     if (password.length == 0) {
       this.pow_password = -1;
     } else if (
-     (password.length >= 11 
+     (password.length >= 8 
       && lowercaseRegex.test(password)
       && uppercaseRegex.test(password)
       && digitRegex.test(password)
@@ -55,12 +55,12 @@ export class SignUpComponent implements OnInit {
       ||password.length >= 18 
     ) {
       this.pow_password = 3;  // strong password
-    } else if (password.length >= 9 
+    } else if (password.length >= 8 
       && (lowercaseRegex.test(password) || uppercaseRegex.test(password))
       && (digitRegex.test(password) || specialRegex.test(password))
     ) {
       this.pow_password = 2;  // medium password
-    } else if (password.length >= 7) {
+    } else if (password.length >= 8) {
       this.pow_password = 1; // weak password
     } else {
       this.pow_password = 0; // very weak password
