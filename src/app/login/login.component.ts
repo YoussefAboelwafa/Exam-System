@@ -18,22 +18,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submit(){
-     //service with user_login
-    //  this.service.login(this.user_login).subscribe
-    //        (
-            
-              
-    //          (x)=> {
-              
 
-
-    //          error:(error: HttpErrorResponse) =>alert(error.message);
-    //           }
-            
+  submit(){ //service with user_login
+     this.service.login(this.user_login).subscribe(
+      (x)=> {
+        console.log(x);
+      })
   }
-
- 
-  
   
 }
