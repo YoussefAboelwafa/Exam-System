@@ -177,13 +177,13 @@ li:is(:hover, .active) button {
   border-radius: 8px;
   background: #f79051;
   color: #fff;
-  font-size: 14px;
+  font-size: 16px;
   font-family: Montserrat;
   font-weight: 700;
   line-height: 20px;
   height: 35%;
   border: none;
-  margin-top: 5%;
+  margin-top: 10%;
 }
 .book button:hover {
   background: #fff;
