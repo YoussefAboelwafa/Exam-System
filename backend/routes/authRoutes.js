@@ -15,4 +15,6 @@ router.get('/logout', authController.logout_get);
 
 router.post('/verify_code', authController.verifyCode);
 
+router.post('/send_agin', authController.send_again);
+
 module.exports = router;
