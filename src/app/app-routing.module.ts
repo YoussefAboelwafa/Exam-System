@@ -18,7 +18,7 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'verify/:user',
+    path: 'verify',
     component: VerificationComponent,
   },
   {
