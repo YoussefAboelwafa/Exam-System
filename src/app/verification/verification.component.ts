@@ -58,7 +58,7 @@ export class VerificationComponent implements OnInit {
 
 
        //service to make backend to send code again 
-      this.service.send_again(this.user).subscribe
+      this.service.send_again().subscribe
        (
          (x)=> {
       error:(error: HttpErrorResponse) =>alert(error.message);
