@@ -28,6 +28,8 @@ export class VerificationComponent implements OnInit {
     // });
 
        //service with verify
+       console.log('helllo wfrom verify');
+       
       this.service.verify_code(code).subscribe
        (
          (x)=> {

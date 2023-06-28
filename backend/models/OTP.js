@@ -3,23 +3,23 @@ const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
 
 const OTPschema = new mongoose.Schema({
-    phone: {type: String, required: true, unique: true, index: true},
+    phone_namber: {type: String, required: true, unique: true, index: true},
     code: {type: String, required: true},
     createdAt: { type: Date, default: Date.now, expires: 3600 }
 })
 ///could be improved by removing the id field
-OTPschema.index({phone: 1});
+OTPschema.index({phone_namber: 1});
 
 
 OTPschema.statics.insert = async function(elem){
     try {
-        const {phone, code} = elem;
+        const {phone_namber, code} = elem;
         console.log('before saving', elem);
         const salt = await bcrypt.genSalt();
         const hashed_code = await bcrypt.hash(code, salt);
 
         await this.findOneAndUpdate(
-          { phone:phone },
+          { phone_namber:phone_namber },
           { code: hashed_code , createdAt: Date.now()},
           { upsert: true }
         );
@@ -29,8 +29,8 @@ OTPschema.statics.insert = async function(elem){
     }
 }
 
-OTPschema.statics.verifyOTP = async function(phone, code){
-    const otp = await this.findOne({phone: phone});
+OTPschema.statics.verifyOTP = async function(phone_namber, code){
+    const otp = await this.findOne({phone_namber: phone_namber});
     console.log(otp);
     if(!otp) throw Error("phone incorrect");
     let auth = await bcrypt.compare(code, otp.code);

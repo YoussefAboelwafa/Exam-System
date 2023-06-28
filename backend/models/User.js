@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     last_name: {type: String, required: true},
     country: {type: String, required: true},
     city: {type: String, required: true},
-    phone: {type: String, required: true, unique: true, index: true},
+    phone_namber: {type: String, required: true, unique: true, index: true},
     email: {
         type: String,
         required: [true, 'Email required'],
@@ -25,8 +25,6 @@ const userSchema = new mongoose.Schema({
 ////add the rest of information like exams taken and so on and so forth
 ///and most of that information will probably be on the form of foreign keys
 
-
-userSchema.index({email: 1})
 
 userSchema.pre('save', async function(next){
     console.log('before saving', this);

@@ -24,7 +24,7 @@ function generateOTP() {
 
 function errorHandler(err) {
     console.log(err.message, err.code);
-    let errors = { email: [], password: [], first_name: [], last_name: [], country: [], city: [], phone: [] }; /// add the rest later
+    let errors = { email: [], password: [], first_name: [], last_name: [], country: [], city: [], phone_namber: [] }; /// add the rest later
 
     if (err.message === 'Email incorrect') {
         errors.email = 'Email not found';
@@ -56,11 +56,11 @@ const createToken = (id) => {
     })
 }
 
-const checkUniqueness = async (email, phone) => {
+const checkUniqueness = async (email, phone_namber) => {
     try{
         const user = await User.findOne({
             $or: [
-            { phone: phone },
+            { phone_namber: phone_namber },
             { email: email }
             ]
         })
@@ -87,15 +87,15 @@ module.exports.signup_get = (req, res) =>{
 module.exports.signup_post = async (req, res) =>{
     try{
         ////check if email and phone provided are unique
-        const {email, phone} = req.body;
+        const {email, phone_namber} = req.body;
 
-        const isUnique = await checkUniqueness(email, phone);
+        const isUnique = await checkUniqueness(email, phone_namber);
         if(isUnique){
             const code = generateOTP();
             console.log(code);
-            const otp = await OTP.insert({phone: phone, code: code});
+            const otp = await OTP.insert({phone_namber: phone_namber, code: code});
 
-            // sendSMS(phone, code);   /////remove comment later
+            // sendSMS(phone_namber, code);   /////remove comment later
 
             res.status(201).json({success: true});
         }else{
@@ -145,7 +145,7 @@ module.exports.verifyCode = async (req, res) => {
         const {code, user} = req.body;
         // console.log(req.body.code);
         ///verify otp
-        const correct = await OTP.verifyOTP(user.phone, code);
+        const correct = await OTP.verifyOTP(user.phone_namber, code);
         if(correct){
             const new_user = await User.create(user);  ///////review later to check if waiting here is really necessary
             if(new_user)
@@ -165,14 +165,14 @@ module.exports.verifyCode = async (req, res) => {
 module.exports.send_again = async (req, res) =>{
     try{
         ////check if email and phone provided are unique
-        const {phone} = req.body;
+        const {phone_namber} = req.body;
         console.log(req.body);
         // console.log(phone);
         const code = generateOTP();
         // console.log(code);
-        const otp = await OTP.insert({phone: phone, code: code});
+        const otp = await OTP.insert({phone_namber: phone_namber, code: code});
 
-        // sendSMS(phone, code);   /////remove comment later
+        // sendSMS(phone_namber, code);   /////remove comment later
 
         res.status(201).json({success: true});
         
