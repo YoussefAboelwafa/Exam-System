@@ -47,69 +47,14 @@
     </div>
   </div>
   <div class="section section3">
+    <router-outlet></router-outlet>
     <!-- Good morning section -->
-    <div class="goodmorninglabel">
-      <p>Good Morning</p>
-    </div>
-    <div class="goodmorningwidgets">
-      <div class="card card-body upcoming">
-        <h5 class="card-title">Upcoming <br />Exams</h5>
-        <p class="card-text"></p>
-        <!-- Button trigger modal -->
-        <!-- <button type="button" id="btn_pop" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-          see more >>
-        </button> -->
-        <a class="btn" data-toggle="modal" data-target="#exampleModalCenter" (click)="see()">
-          see more >>
-        </a>
-            </div>
-      <div class="card card-body taken">
-        <h5 class="card-title">Taken <br />Exams</h5>
-        <p class="card-text"></p>
-        <a class="btn" data-toggle="modal" data-target="#exampleModalCenter" (click)="see()">
-          see more >></a> 
-      </div>
-      <div class="card card-body rank">
-        <h5 class="card-title">
-          Your<br />
-          Rank
-        </h5>
-        <p class="card-text"></p>
-        <a class="btn" data-toggle="modal" data-target="#exampleModalCenter" (click)="see()">
-          see more >></a> 
-      </div>
-    </div>
-    <!-- Discover exams section -->
-    <div class="discoverexamslabel">
-      <p>Discover Exams</p>
-      <a  class="btn">See more >></a>
-    </div>
-    <div class="discoverexamswidgets">
-      <div class="card card-body upcoming">
-        <h5 class="card-title">C++<br />Programming</h5>
-        <p class="card-text"></p>
-        <a  class="btn" data-toggle="modal" data-target="#not_taken_exam" (click)="see()">
-          see more >></a> 
-      </div>
-      <div class="card card-body upcoming">
-        <h5 class="card-title">Flutter</h5>
-        <p class="card-text"></p>
-        <a  class="btn"  data-toggle="modal" data-target="#not_taken_exam" (click)="see()">
-          see more >></a> 
-      </div>
-      <div class="card card-body upcoming">
-        <h5 class="card-title">Algorithms</h5>
-        <p class="card-text"></p>
-        <a class="btn" data-toggle="modal" data-target="#not_taken_exam" (click)="see()">
-          see more >></a> 
-      </div>
-    </div>
   </div>
 </div>
 
-<!-- Moda-->
+<!-- Moda -->
 <!-- Other Exams  -->
-<div class="modal fade" id="not_taken_exam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- <div class="modal fade" id="not_taken_exam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -131,4 +76,7 @@
     </div>
   </div>
 </div>
+ -->
 
+ <!-- skipLocationChange="true"
+  routerLink="home/exam"   -->

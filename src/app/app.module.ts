@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { HomeComponent } from './home/home.component';
 import { GuardServiceService } from './services/guard-service.service';
+import { HomeBarComponent } from './home-bar/home-bar.component';
+import { ExamsBarComponent } from './exams-bar/exams-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +23,8 @@ import { GuardServiceService } from './services/guard-service.service';
     SignUpComponent,
     VerificationComponent,
     HomeComponent,
+    HomeBarComponent,
+    ExamsBarComponent,
   ],
   imports: [
     BrowserModule,
