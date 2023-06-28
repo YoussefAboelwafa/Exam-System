@@ -28,7 +28,7 @@ export class VerificationComponent implements OnInit {
     // });
 
        //service with verify
-      this.service.verify_code(code,this.user).subscribe
+      this.service.verify_code(code).subscribe
        (
          (x)=> {
 
