@@ -98,6 +98,8 @@ export class SignUpComponent implements OnInit {
      this.service.sign_up(this.signup_user).subscribe
            (
              (x)=> {
+
+              console.log(x);
               
               if(x.success==false){
                 this.pop_service.open_error_signup();
