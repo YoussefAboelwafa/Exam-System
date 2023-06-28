@@ -52,13 +52,13 @@
       </div>
       
              <!-- not_active -->
-      <button class="field" [disabled]="email.errors?.['required']||email.errors?.['email']||password.errors?.['required']||password.errors?.['minlength']"   *ngIf="email.errors?.['required']
-      ||password.errors?.['required']||password.errors?.['minlength']||email.errors?.['email']"
+      <button class="field" [disabled]="email.errors?.['required']||(email.errors?.['email']&&(email.errors?.['phone']))||password.errors?.['required']||password.errors?.['minlength']"   *ngIf="email.errors?.['required']
+      ||password.errors?.['required']||password.errors?.['minlength']||(email.errors?.['email']&&(email.errors?.['phone']))"
        style="background-color: gray;" id="btn" type="submit">Sign in</button>
 
                <!-- active -->
       <button class="field" [hidden]="(email.errors?.['required']||password.errors?.['required'])
-      ||email.errors?.['email']||password.errors?.['minlength']" id="btn" type="submit">Sign in</button>
+      ||(email.errors?.['email']&&(email.errors?.['phone']))||password.errors?.['minlength']" id="btn" type="submit">Sign in</button>
 
       <label id="signup"
         >Not a member?

@@ -1,18 +1,20 @@
-<div class="modal fade" id="ERROR" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="ERROR_login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">ERRoR</h5>
-         <button class="outer_button" disabled > <button (click)="closeModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <h5 class="modal-title-error" id="exampleModalLongTitle" id="error-title"></h5>
+         <button class="outer_button" disabled > <button (click)="close_ER_login()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="close" aria-hidden="true">&times;</span>
           </button>
         </button>
         </div>
-        <div class="modal-body">
-          <p>sadddddddddddddddddddddddddsda</p>
+        <div class="modal-body" id="error-message">
+            <!-- "Sorry, we couldn't log you in. The email or password you entered was not found in our system. Please make sure you have entered the correct email and password and try again." -->
         </div>
         <div class="modal-footer">
         </div>
       </div>
     </div>
   </div> 
+
+  

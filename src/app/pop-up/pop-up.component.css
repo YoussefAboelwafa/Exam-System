@@ -1,5 +1,5 @@
-.modal-title {
-    color: #006A6A;
+.modal-title-error {
+    color: red;
   font-size: 30px;
   font-family: Montserrat;
   font-weight: 700;
@@ -34,7 +34,7 @@
   }
   
   .modal-body{
-    color: #008182;
+    color:  #FF0052;;
     font-size: 16px;
     font-family: Montserrat;
     font-weight: 500;
@@ -46,3 +46,29 @@
     transition: 1s;
   }
   
+  .outer_button{
+  border:none;
+  border-radius: 10px;
+  background-color: #FFF;
+  width: 27px;
+  height: 27px;
+  margin-left:3px;
+  margin-bottom:3px;
+
+}
+
+.close{
+
+    margin-bottom: 1.5px;
+    margin-left: .5px;
+    
+}
+
+.modal-title{
+    color: #006A6A;
+    font-size: 30px;
+  font-family: Montserrat;
+  font-weight: 700;
+  line-height: 100%;
+  
+  }

@@ -48,21 +48,6 @@ public is_signin():Observable<any>{
   return this.http.get<any>(`${this.apiServerUrl}/is_signedin`, { withCredentials: true });
 }
 
-public openModal() {
-  const modal = document.getElementById('ERROR');
-  if (modal) {
-    modal.classList.add('show');
-    modal.style.display = 'block';
-  }
-}
-
-public closeModal() {
-  const modal = document.getElementById('ERROR');
-  if (modal) {
-    modal.classList.remove('show');
-    modal.style.display = 'none';
-  }
-}
  
 
 

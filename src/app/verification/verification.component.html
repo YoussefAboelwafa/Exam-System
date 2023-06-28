@@ -2,6 +2,7 @@
     <div class="image"></div>
   
     <div class="form">
+      
       <div class="logo">
         <img id="logo1" src="../../assets/images/logo1.svg" alt="" />
         <img id="logo2" src="../../assets/images/logo2.svg" alt="" />
@@ -96,8 +97,9 @@
       </form>
 
       <div>
-        <button (click)="send()">Send Message</button>
+        <button id="btn-send" (click)="send()">Send Message</button>
       </div>
+
     </div>
   </div>
-  
+  <app-pop-up></app-pop-up>

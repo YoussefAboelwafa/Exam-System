@@ -3,6 +3,7 @@ import { users } from '../objects/users';
 import { ServicService } from '../services/servic.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ModalPopServiceService } from '../services/modal-pop-service.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -32,7 +33,7 @@ export class SignUpComponent implements OnInit {
     'new zealan'
   
 ];
-  constructor(user:users,private service:ServicService,private router: Router) {
+  constructor(user:users,private service:ServicService,private router: Router,private pop_service:ModalPopServiceService) {
     this.signup_user=user;
    }
 
@@ -92,16 +93,16 @@ export class SignUpComponent implements OnInit {
   }
   submit(){
      //service with user_signup
+
     this.service.user = this.signup_user;
      this.service.sign_up(this.signup_user).subscribe
            (
              (x)=> {
               
               if(x.success==false){
-                alert("email or phone is found in system");
+                this.pop_service.open_error_signup();
               }
               else{
-                
                 this.router.navigate([`/verify`]);    
               }                        
                 error:(error: HttpErrorResponse) =>alert(error.message);

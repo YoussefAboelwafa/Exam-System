@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalPopServiceService } from '../services/modal-pop-service.service';
 
 @Component({
   selector: 'app-pop-up',
@@ -7,28 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PopUpComponent implements OnInit {
 
-  constructor() { }
+  
+  
+  constructor(private pop_service:ModalPopServiceService) { 
+    
+    
+  }
 
   ngOnInit(): void {
   }
 
 
-  
-  openModal() {
-    const modal = document.getElementById('ERROR');
-    if (modal) {
-      modal.classList.add('show');
-      modal.style.display = 'block';
-    }
-  }
-  
-  closeModal() {
-    const modal = document.getElementById('ERROR');
-    if (modal) {
-      modal.classList.remove('show');
-      modal.style.display = 'none';
-    }
-    
+  close_ER_login() {
+    this.pop_service.close_error();  
   }
 
 }
