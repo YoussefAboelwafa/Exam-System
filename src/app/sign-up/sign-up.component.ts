@@ -96,13 +96,13 @@ export class SignUpComponent implements OnInit {
      this.service.sign_up(this.signup_user).subscribe
            (
              (x)=> {
-
+              
               if(x.success==false){
                 alert("email or phone is found in system");
               }
               else{
                 
-                this.router.navigate([`/verify/${this.signup_user}`]);    
+                this.router.navigate([`/verify`]);    
               }                        
                 error:(error: HttpErrorResponse) =>alert(error.message);
               }

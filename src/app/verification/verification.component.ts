@@ -37,7 +37,7 @@ export class VerificationComponent implements OnInit {
           }
           //code correct but email is token now
           else if(x.success==true&&x.created==false) {
-          this.router.navigate([`/signup`]);
+            this.router.navigate([`/signup`]);
             }
             else{
               this.router.navigate([`/login`]);
@@ -51,10 +51,10 @@ export class VerificationComponent implements OnInit {
   }
 
 
-  send_again(){
-    this.route.paramMap.subscribe(params => {
-      this.user = params.get('user');
-    });
+  send(){
+    // this.route.paramMap.subscribe(params => {
+    //   this.user = params.get('user');
+    // });
 
 
        //service to make backend to send code again 
@@ -66,6 +66,7 @@ export class VerificationComponent implements OnInit {
        )
 
   }
+  
    moveToNext(currentInput:any, nextInputId:any) {
     const maxLength = parseInt(currentInput.getAttribute('maxlength'));
     const currentLength = currentInput.value.length;
