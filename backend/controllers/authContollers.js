@@ -126,7 +126,7 @@ module.exports.login_post = async (req, res) => {
     } catch (err) {
         const errors = errorHandler(err)
         console.log(errors);
-        res.status(400).json({errors:errors, success: false})
+        res.status(200).json({errors:errors, success: false})
     }
 }
 

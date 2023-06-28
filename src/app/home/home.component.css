@@ -318,6 +318,7 @@ li:is(:hover, .active) button {
 .modal-header {
   
 }
+
 .outer_button{
   border:none;
   border-radius: 10px;

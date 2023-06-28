@@ -4,6 +4,7 @@ import { users } from '../objects/users';
 import { ServicService } from '../services/servic.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DOCUMENT } from '@angular/common';
+import { PopUpComponent } from '../pop-up/pop-up.component';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +14,10 @@ import { DOCUMENT } from '@angular/common';
 export class LoginComponent implements OnInit {
   user_login:any;
   power=-1;
-  constructor(user:users,private service:ServicService, private router: Router) {
+  pop_up:any;
+  constructor(user:users,private service:ServicService, private router: Router,) {
     this.user_login = user;
+  
    }
 
   ngOnInit(): void {
@@ -24,25 +27,28 @@ export class LoginComponent implements OnInit {
   submit(){
     //  service with user_login
     console.log('helllo world from submit login');
-     this.service.login(this.user_login).subscribe
-           (  
-             (x)=> {
-              if(x.success==false){
-                alert("fault");
-              }
-              else{
-                console.log('helllo world from indeisnd login');                
-                this.router.navigate(['/home'])
-              }
+    this.service.openModal();
+    //  this.service.login(this.user_login).subscribe
+    //        (  
+    //          (x)=> {
+    //           if(x.success==false){
+    //             alert("fault");
+    //           }
+    //           else{
+    //             console.log('helllo world from indeisnd login');                
+    //             this.router.navigate(['/home'])
+    //           }
               
 
 
-             error:(error: HttpErrorResponse) =>{
-              console.log('hel submit login');
-              alert(error.message)};
-              }
-           )
+    //          error:(error: HttpErrorResponse) =>{
+    //           console.log('hel submit login');
+    //           alert(error.message)};
+    //           }
+    //        )
             
   }
+
+
   
 }

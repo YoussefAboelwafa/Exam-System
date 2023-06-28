@@ -117,3 +117,13 @@ a {
   margin-bottom: 10px;
   color: red;
 }
+
+
+.outer_button{
+  border:none;
+  border-radius: 10px;
+  background-color: #FFF;
+  width: 25px;
+  height: 25px;
+  margin-left:3px
+}
