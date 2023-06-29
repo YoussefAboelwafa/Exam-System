@@ -7,15 +7,16 @@ const requireAuth = (req, res, next) => {
     if(token){
         jwt.verify(token, 'example secret', (err, decodedToken)=>{
             if(err){
-                console.log(err.message);
-                
+                console.log('stranger danger, stranger danger');
+                res.send('go away stranger');
             }else{
                 console.log(decodedToken);
                 next();
             }
         })
     }else{
-        // res.redirect('/login');
+        console.log('stranger danger, stranger danger');
+        res.send('go away stranger')
     }
 }
 
@@ -29,7 +30,6 @@ const checkUser = (req, res, next) => {
                 next();
             }else{
                 console.log(decodedToken);
-                let user = await User.findById(decodedToken.id);
                 next();
             }
         })

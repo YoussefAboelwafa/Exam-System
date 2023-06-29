@@ -32,13 +32,15 @@ OTPschema.statics.insert = async function(elem){
 OTPschema.statics.verifyOTP = async function(phone_namber, code){
     const otp = await this.findOne({phone_namber: phone_namber});
     console.log(otp);
-    if(!otp) throw Error("phone incorrect");
+    if(!otp)
+        throw Error("phone incorrect");
     let auth = await bcrypt.compare(code, otp.code);
     if(auth){
         return true;
     }
     return false;
 }
+
 
 
 const OTP = mongoose.model('otp', OTPschema);

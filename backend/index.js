@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const examRoutes = require('./routes/examRoutes');
 const {requireAuth} = require('./middleware/authMiddleware')
 const cors = require('cors');
 const User = require('./models/User')
@@ -10,7 +11,7 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:4200',
+    // origin: 'http://localhost:4200',
     credentials: true
 }));
 app.use(express.json());
@@ -47,8 +48,10 @@ app.get('/is_signedin', (req, res) => {
     }
 });
 
-
-app.use('/home', requireAuth, )
 app.use(authRoutes);
+app.use('/home', requireAuth)
+app.use('/exam', examRoutes);
+
+
 
 

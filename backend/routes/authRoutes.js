@@ -18,6 +18,8 @@ router.post('/verify_code', authController.verifyCode);
 router.post('/send_agin', authController.send_again);
 
 
-router.post('/test', authController.test);
+router.post('/populate_otp', authController.test);
+router.post('/populate_users', authController.populate_users);
+
 
 module.exports = router;

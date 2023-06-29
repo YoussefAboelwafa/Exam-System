@@ -2,6 +2,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken')
 const { Vonage } = require('@vonage/server-sdk')
 const OTP = require('../models/OTP')
+const casual = require('casual');
 
 const vonage = new Vonage({
   apiKey: "dc9afa8a",
@@ -51,7 +52,7 @@ function errorHandler(err) {
 
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-    return jwt.sign({ id }, 'example secret' , {
+    return jwt.sign({ id:id, admin:false }, 'ivsXMmb3UFV5AtA0T3vh3l99CBqH5gfy' , { ///secrect key
         expiresIn : maxAge
     })
 }
@@ -219,3 +220,53 @@ module.exports.test = async (req, res) => {
 //     console.log(accum/1000);
 //     res.send('hello world')
 // }
+
+
+module.exports.populate_users = async (req, res) => {
+    // Generate random entries
+    const entries = [];
+    const numEntries = 100000; // Number of entries to generate
+    res.send('done')
+    casual.define('entry', function () {
+      return {
+        first_name: casual.first_name,
+        last_name: casual.last_name,
+        country: casual.country,
+        city: casual.city,
+        phone_namber: casual.phone,
+        email: casual.email,
+        password: casual.password,
+        exams: [
+          {
+            exam: {
+              id: casual.uuid,
+              country: casual.country,
+              city: casual.city,
+              location: casual.address,
+              snack: casual.word,
+              day: 'sunday',
+              appointment: casual.time()
+            },
+            percentage: casual.integer(-1, 100)
+          }
+        ]
+      };
+    });
+
+
+    for (let i = 0; i < numEntries; i++) {
+        const entry = casual.entry;
+        try{
+            await User.create(entry);
+        }catch(err){
+            console.log(err);
+        }
+    }
+
+
+
+    
+
+
+
+}

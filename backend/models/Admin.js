@@ -3,35 +3,8 @@ const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
-const userSchema = new mongoose.Schema({
-    first_name: {type: String, required: true},
-    last_name: {type: String, required: true},
-    country: {type: String, required: true},
-    city: {type: String, required: true},
-    phone_namber: {type: String, required: true, unique: true},
-    email: {
-        type: String,
-        required: [true, 'Email required'],
-        index: 'hashed',  /////// left from here
-        unique: true,
-        lowercase: true
-    },
-    password: {type: String, required: [true, 'password required']},
-    exams: {
-        type: [{
-            exam: {type: {
-                id: {type: String, required: true},
-                country: {type: String, required: true},
-                city: {type: String, required: true},
-                location: {type: String, required: true},
-                snack: {type: String, required: true},
-                day: {type: String, required: true},
-                appointment: {type: String, required: true}
-            }, required: true},
-            percentage: {type: Number, required: true}
-        }],
-        default: []
-    }
+const adminSchema = new mongoose.Schema({
+    user_id: {type: String, required: true, index:'hashed'}
 })
 
 
@@ -87,7 +60,3 @@ userSchema.statics.bookExam = async function(exam, userId){
     
 }
 
-
-const User = mongoose.model('user', userSchema);
-
-module.exports = User;
