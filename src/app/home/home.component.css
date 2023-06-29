@@ -54,6 +54,7 @@ div {
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow-y: scroll;
 }
 .name,
 .btns1 {
@@ -209,7 +210,6 @@ border: 3px solid #008182 !important ;
 .goodmorningwidgets,
 .discoverexamswidgets {
   width: 90%;
-  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
