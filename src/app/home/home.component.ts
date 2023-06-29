@@ -16,6 +16,10 @@ export class HomeComponent implements OnInit {
  name_course="Algoritms Course"
  discription="algorithms are a fundamental concept in computer science, and are essential for solving complex problems and developing efficient software systems.There are many different types of algorithms, including sorting algorithms, searching algorithms, graph algorithms, and optimization algorithms. "
  about_course=["sorting algoritms","DFS algoritm","DAG algoritm"]
+
+ snacks=["kikat",'twix','snickers'];
+
+
   constructor(private service:ServicService,private router: Router) { 
     // this.current_user=
     // this.service.is_signin().subscribe
@@ -61,8 +65,13 @@ export class HomeComponent implements OnInit {
       // Reset the input field
       event.target.value = '';
     };
-  
     // Read the file as a data URL
     reader.readAsDataURL(file);
   }
+
+  select_snack(value:any){
+
+  }
+  submit(){}
+
 }

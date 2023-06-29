@@ -127,6 +127,7 @@ ul {
   padding: 5px;
   margin: 5px;
   list-style-type: none;
+  
 }
 .sidebar ul li button {
   border: none;
@@ -147,13 +148,18 @@ ul {
   font-weight: 700;
   line-height: 150%;
   box-sizing: border-box;
-  transition: 0.4s;
+  transition: 0.2s;
   color: #008182;
   background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
   border-radius: 10px;
+  
 }
-li:is(:hover, .active) button {
+li:is(:hover) button {
   margin-left: 15px;
+}
+li.active button {
+  margin-left: 18px;
+border: 3px solid #008182 !important ;
 }
 .book {
   height: 30%;
@@ -315,9 +321,6 @@ li:is(:hover, .active) button {
   font-size: 20px;
 }
 
-.modal-header {
-  
-}
 
 .outer_button{
   border:none;
@@ -396,3 +399,80 @@ line-height: 100%;
   border-radius: 100px;
   opacity: 0;
 }
+
+/* .kimo{
+  background: rgba(0, 0, 0, 0.179);
+  backdrop-filter: blur(5px);
+  color: black;
+  font-size: 48px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  flex-wrap: wrap;
+  font-weight: 1400;
+  background: rgba(204, 255, 251, 0.21);
+  position: fixed;
+  left: 5%;
+  top: 2%;
+}
+.qq{
+  font-size: 24px;
+font-family: Montserrat;
+font-style: normal;
+font-weight: 700;
+line-height: 150%;
+}
+
+h3{
+  font-size: 12px;
+font-family: Montserrat;
+font-style: normal;
+font-weight: 700;
+line-height: 16px;
+color: #0A0A0A;
+margin-left: 4px;
+}
+
+.snack{
+  display: inline-flex;
+height: 40px;
+padding: 10px 16px;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+}
+.box{
+  margin-right: 80px;
+  margin-top: 35px;
+}
+select {
+  margin-bottom: 20px;
+  display: flex;
+  padding: 10px 12px;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #c2c2c2;
+  color: #000;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  width: fill-available;
+  margin-top: 5px;
+  width: 400px;
+  }
+
+  #btn {
+    width: 400px;
+    border-radius: 8px;
+    background: #008081;
+    font-size: 16px;
+    padding: 10px 16px;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+  } */
