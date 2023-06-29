@@ -94,3 +94,391 @@ width: 30vw;
   text-align: center;
 }
 
+div {
+  font-family: "Montserrat", sans-serif;
+}
+.carousel {
+  width: 98%;
+  height: 22vh;
+  background: url(../../assets/images/img4.jpg);
+  border-radius: 20px;
+  margin-top: 1%;
+  margin-left: 1%;
+  border: 3px solid #008182;
+}
+.goodmorningwidgets,
+.discoverexamswidgets {
+  width: 98%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 2%;
+  margin-bottom: 2%;
+}
+.card {
+  width: 20vw;
+  height: 25vh;
+  position: relative;
+  margin-right: 2%;
+}
+.card h5 {
+  align-items: left;
+  font-size: 28px;
+  font-family: "Montserrat";
+  font-weight: 500;
+  line-height: 100%;
+}
+.card a {
+  font-size: 12px;
+  font-family: "Montserrat";
+  font-weight: 700;
+  text-decoration: underline;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transition: 0.5s;
+}
+.card a:hover {
+  font-size: 15px;
+}
+.upcoming {
+  border-radius: 10px;
+  background: radial-gradient(
+      313.28% 209.98% at 99.43% 99.22%,
+      #dff 0%,
+      rgba(235, 247, 248, 0) 100%
+    ),
+    #fff;
+  box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
+  justify-content: left;
+}
+.upcoming a {
+  color: #006a6a;
+}
+.upcoming h5 {
+  color: #006a6a;
+  font-size: 22px;
+
+}
+
+.taken {
+  border-radius: 10px;
+  background: radial-gradient(
+      313.28% 209.98% at 99.43% 99.22%,
+      #ffd7bf 0%,
+      rgba(255, 215, 191, 0) 100%
+    ),
+    #fff;
+  box-shadow: 0px 0px 25px 0px rgba(247, 144, 81, 0.15);
+  justify-content: left;
+}
+.taken a {
+  color: #99562e;
+}
+.taken h5 {
+  color: #99562e;
+  font-size: 22px;
+}
+.rank {
+  border-radius: 10px;
+  background: radial-gradient(
+      313.28% 209.98% at 99.43% 99.22%,
+      #008182 0%,
+      rgba(0, 129, 130, 0) 100%
+    ),
+    #fff;
+  box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.47);
+  justify-content: left;
+}
+.rank a {
+  color: #fff;
+}
+.rank h5 {
+  color: #fff;
+  font-size: 22px;
+
+}
+.goodmorninglabel,
+.discoverexamslabel {
+  color: #003f3d;
+  font-size: 28px;
+  font-family: "Montserrat";
+  font-weight: 700;
+  line-height: 150%;
+  margin-left: 2%;
+}
+.discoverexamslabel {
+  display: flex;
+  flex-direction: row;
+}
+.discoverexamslabel a {
+  right: 10%;
+  color: #008081;
+  font-size: 16px;
+  font-family: Montserrat;
+  font-weight: 700;
+  line-height: 20px;
+  text-decoration-line: underline;
+  position: absolute;
+  transition: 0.5s;
+}
+.discoverexamslabel a:hover {
+  font-size: 20px;
+}
+
+
+.outer_button{
+  border:none;
+  border-radius: 10px;
+  background-color: #fff;
+  width: 25px;
+  height: 25px;
+  margin-left: 3px;
+}
+
+.modal-title {
+  color: #006A6A;
+font-size: 30px;
+font-family: Montserrat;
+font-weight: 700;
+line-height: 100%;
+
+}
+.modal-content{
+  border-radius: 15px;
+  background: radial-gradient(313.28% 209.98% at 99.43% 99.22%, #DFF 0%, rgba(235, 247, 248, 0.00) 100%), rgba(255, 255, 255, 0.75);
+  box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
+  backdrop-filter: blur(6.5px);
+}
+
+.modal-footer button{
+  background: #008182;
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  color:#FFF;
+  width: 200px;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 8px 10px;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+
+}
+
+
+.modal-body{
+  color: #008182;
+  font-size: 16px;
+  font-family: Montserrat;
+  font-weight: 500;
+}
+.modal-footer button:hover {
+  background: #fff;
+  color: #008182;
+  border: 1px solid #008182;
+  transition: 1s;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image {
+  display: block;
+  width: 300px;
+  height: 200px;
+}
+
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  margin-left: 32px;
+  margin-top: 16px;
+  border-radius: 100px;
+  opacity: 0;
+}
+li:is(:hover, .active) button {
+  color: rgb(0, 0, 0);
+  margin-left: 20px;
+}
+li:is(:hover, .active) i {
+  color: azure;
+}
+.titlebar button:hover {
+  color: azure;
+}
+.upcomingbox {
+  display: flex;
+  flex-direction: column;
+}
+.upcominginfo {
+  color: #006a6a;
+  display: flex;
+  flex-direction: row;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 5px 5px 5px 5px rgba(0, 129, 130, 0.16);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+}
+.upcominginfo label {
+  margin-right: 10px;
+}
+.examname1 {
+  margin: 0px;
+}
+.smallbox {
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 0px 0px 9px 0px rgba(0, 129, 130, 0.16);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0px;
+  padding: 2px;
+}
+.takenbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.takeninfo {
+  color: #99562e;
+  display: flex;
+  flex-direction: row;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 5px 5px 5px 5px rgba(0, 129, 130, 0.16);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 5px;
+  margin-right: 10px;
+}
+.takeninfo span {
+  font-size: 34px;
+  font-weight: 400;
+}
+.takeninfo label {
+  font-size: 14px;
+}
+.rankinfo {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 5px 5px 5px 5px rgba(0, 129, 130, 0.16);
+  justify-content: center;
+  align-items: left;
+  text-align: left;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 2px;
+  margin-right: 10px;
+}
+.rankname {
+  font-weight: 700;
+  margin: 0px;
+}
+.examname2 {
+  font-weight: 300;
+  margin: 0px;
+}
+.rankscore {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0px;
+}
+.discoverbox1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.discoversmallbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 8px;
+  padding: 10px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  margin-right: 20px;
+}
+.discoverinfo {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.discoversmallbox label {
+  color: #006a6a;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0px;
+}
+.discoversmallbox .discoverscore {
+  font-size: 32px;
+  font-weight: 300;
+  margin: 0px;
+}
+.learnmore {
+  border-radius: 16px;
+  background: #fff;
+  outline: none;
+  border: none;
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  color: #008182;
+  font-weight: 500;
+  width: 100%;
+  padding: 5px;
+  font-size: small;
+  margin-bottom: 10px;
+  
+}
+.takeagain {
+  border-radius: 16px;
+  background: #008182;
+  outline: none;
+  border: none;
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  color: #fff;
+  font-weight: 500;
+  width: 100%;
+  padding: 5px;
+  font-size: small;
+}
+.examlist li{
+  color: #008182;
+  font-size: 10px;
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+.examlist{
+  padding-left: 15px;
+}
+

@@ -1,16 +1,193 @@
-<p>exams-bar works!</p> 
+<div class="goodmorninglabel">
+  <p>Upcoming exams</p>
+</div>
+<div class="goodmorningwidgets">
+  <!-- start div with class upcoming indicate to style of this card -->
+  <div class="card card-body upcoming">
+    <h5 class="card-title">C programming</h5>
+    <div class="card-text upcomingbox">
+      <!-- ng for -->
+      <div class="upcominginfo">
+        <label class="smallbox">location</label>
+        <label class="smallbox">City</label>
+        <label class="smallbox"> Country</label>
+      </div>
+      <div class="upcominginfo">
+        <label class="smallbox">14 April</label>
+        <label class="smallbox">Sunday</label>
+        <label class="smallbox">3:00 pm</label>
+      </div>
+      <div class="upcominginfo">
+        <label class="smallbox">Favorite food</label>
+      </div> 
+    </div>
+   
+  </div>
+  <div class="card card-body upcoming">
+    <h5 class="card-title">C programming</h5>
+    <div class="card-text upcomingbox">
+      <!-- ng for -->
+      <div class="upcominginfo">
+        <label class="smallbox">location</label>
+        <label class="smallbox">City</label>
+        <label class="smallbox"> Country</label>
+      </div>
+      <div class="upcominginfo">
+        <label class="smallbox">14 April</label>
+        <label class="smallbox">Sunday</label>
+        <label class="smallbox">3:00 pm</label>
+      </div>
+      <div class="upcominginfo">
+        <label class="smallbox">Favorite food</label>
+      </div> 
+    </div>
+   
+  </div>
+  <div class="card card-body upcoming">
+    <h5 class="card-title">C programming</h5>
+    <div class="card-text upcomingbox">
+      <!-- ng for -->
+      <div class="upcominginfo">
+        <label class="smallbox">location</label>
+        <label class="smallbox">City</label>
+        <label class="smallbox"> Country</label>
+      </div>
+      <div class="upcominginfo">
+        <label class="smallbox">14 April</label>
+        <label class="smallbox">Sunday</label>
+        <label class="smallbox">3:00 pm</label>
+      </div>
+      <div class="upcominginfo">
+        <label class="smallbox">Favorite food</label>
+      </div> 
+    </div>
+   
+  </div>
+</div>
+<!-- Discover exams section -->
+<div class="discoverexamslabel">
+  <p>Taken Exams</p>
+</div>
+<div class="discoverexamswidgets">
+  <!-- ngfor ya kimoo -->
+  <div class="card card-body upcoming">
+    <!-- Not taken again -->
+    <h5 class="card-title">C++<br />Programming</h5>
+    <div class="discoverbox1">
+      <div class="discoversmallbox">
+        <label class="discoverexamname">Your last mark</label>
+        <label class="discoverscore">100%</label>
+      </div>
+      <div class="discoverinfo">
+        <button class="discoverbtns learnmore">Learn More</button>
+        <button class="discoverbtns takeagain">Take exam again</button>
+      </div>
+    </div>
+  </div>
+  <div class="card card-body upcoming">
+    <!-- taken again -->
+    <h5 class="card-title">C<br />Programming</h5>
+    <div class="discoverbox1">
+      <div class="discoversmallbox">
+        <label class="discoverexamname">Your last mark</label>
+        <label class="discoverscore">88%</label>
+      </div>
+      <div class="discoverinfo">
+        <button class="discoverbtns learnmore">Learn More</button>
+        <button class="discoverbtns takeagain">Take exam again</button>
+      </div>
+    </div>
+  </div>
+  <div class="card card-body upcoming">
+    <!--  taken again -->
+    <h5 class="card-title">C<br />Programming</h5>
+    <div class="discoverbox1">
+      <div class="discoversmallbox">
+        <label class="discoverexamname">Your last mark</label>
+        <label class="discoverscore">70%</label>
+      </div>
+      <div class="discoverinfo">
+        <button class="discoverbtns learnmore">Learn More</button>
+        <button class="discoverbtns takeagain">Take exam again</button>
+      </div>
+    </div>
+  </div>
+  
+</div>
 
+<div class="discoverexamslabel">
+  <p>Other Exams</p>
+</div>
+<div class="discoverexamswidgets">
+  <!-- ngfor ya kimoo -->
+  <div class="card card-body upcoming">
+    <h5 class="card-title">Algorithms</h5>
 
+    <div class="discoverbox1">
+      <div class="discoversmallbox">
+        <ul class="examlist">
+          <li>About the exam</li>
+          <li>About the exam</li>
+          <li>About the exam</li>
+          <li>About the exam</li>
+        </ul>
+      </div>
+      <div class="discoverinfo">
+        <button data-toggle="modal" data-target="#not_taken_exam"  class="discoverbtns learnmore">Learn More</button>
+        <button (click)="take_exam('Algorithms',1)" class="discoverbtns takeagain">Take exam</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="card card-body upcoming">
+    <h5 class="card-title">Algorithms</h5>
+
+    <div class="discoverbox1">
+      <div class="discoversmallbox">
+        <ul class="examlist">
+          <li>About the exam</li>
+          <li>About the exam</li>
+          <li>About the exam</li>
+          <li>About the exam</li>
+        </ul>
+      </div>
+      <div class="discoverinfo">
+        <button class="discoverbtns learnmore">Learn More</button>
+        <button class="discoverbtns takeagain">Take exam</button>
+      </div>
+    </div>
+  </div>
+  <div class="card card-body upcoming">
+    <h5 class="card-title">Algorithms</h5>
+
+    <div class="discoverbox1">
+      <div class="discoversmallbox">
+        <ul class="examlist">
+          <li>About the exam</li>
+          <li>About the exam</li>
+          <li>About the exam</li>
+          <li>About the exam</li>
+        </ul>
+      </div>
+      <div class="discoverinfo">
+        <button class="discoverbtns learnmore">Learn More</button>
+        <button class="discoverbtns takeagain">Take exam</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- booking exam -->
 
 <div *ngIf="flag_book==true"  class="contain" >
   <div class="close">
-    <button class="closebtn">
+    <button (click)="close_book()" class="closebtn">
     <i class="fa-solid fa-xmark"></i>
   </button>
   </div>
   <div class="order">Book your exam</div>  
     <div class="box">
-     <form #input_form="ngForm" (ngSubmit)="submit()">
+     <form #input_form="ngForm" (ngSubmit)="submit_book()">
         <div>
             <h3>Country</h3>
             <select class="sel" required #snack id="snack" name="snack" (change)="select_snack(snack.value)">
@@ -43,13 +220,13 @@
 
 <div *ngIf="flag_snack==true"  class="contain" >
   <div class="close">
-    <button class="closebtn">
+    <button (click)="close_book()" class="closebtn">
     <i class="fa-solid fa-xmark"></i>
   </button>
   </div>
   <div class="order">Choose what you prefer!</div>  
     <div class="box">
-      <form #input_form="ngForm" (ngSubmit)="submit()">
+      <form #input_form="ngForm" (ngSubmit)="submit_snack()">
           <h3>Select your snack</h3>
               <select required #snack id="snack" name="snack" (change)="select_snack(snack.value)">
                 <option>Snack</option>
@@ -71,13 +248,13 @@
 
 <div *ngIf="flag_time==true"  class="contain" >
   <div class="close">
-    <button class="closebtn">
+    <button (click)="close_book()" class="closebtn">
     <i class="fa-solid fa-xmark"></i>
   </button>
   </div>
   <div class="order">Select your time</div>  
     <div class="box">
-      <form #input_form="ngForm" (ngSubmit)="submit()">
+      <form #input_form="ngForm" (ngSubmit)="submit_time()">
           <h3>Day of exam</h3>
               <select required #snack id="snack" name="snack" (change)="select_snack(snack.value)">
                 <option>Select a day</option>
@@ -99,4 +276,29 @@
        
       </form>
     </div>
+</div>
+
+<!-- mesage template -->
+
+<div class="modal fade" id="not_taken_exam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{name_course}}</h5>
+       <button class="outer_button" disabled > <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </button>
+      </div>
+      <div class="modal-body">
+        <p>{{discription}}</p>
+        <ul>
+          <li *ngFor="let info of about_course" style="margin-top: 20px;">{{info}}</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="take_exam('Algorithms',1)">Take Exam</button>
+      </div>
+    </div>
+  </div>
 </div>

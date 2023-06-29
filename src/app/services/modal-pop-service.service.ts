@@ -8,6 +8,13 @@ export class ModalPopServiceService {
   constructor() { }
   error_message:any="";
   title:any=""
+
+  name_course:any="";
+  discription:any=""
+
+
+
+
 public open_error_login() {
   this.error_message = "Sorry, we couldn't log you in. The email or password you entered was not found in our system. Please make sure you have entered the correct email and password and try again.";
   this.title="Login Error Message !"
@@ -69,4 +76,14 @@ public close_error() {
     modal.style.display = 'none';
   }
 }
+
+
+
+
+
+
+
+
+
+
 }

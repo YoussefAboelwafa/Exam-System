@@ -37,8 +37,8 @@
           News
         </button>
       </li>
-      <li>
-        <button>
+      <li [routerLinkActive]="'active'">
+        <button   routerLink="/home/ranking_bar" >
           <img src="../../assets/images/rank.svg" alt="" />
           Ranking
         </button>
@@ -46,7 +46,7 @@
     </ul>
     <div class="book">
       <label>Book Your Next <br />Exam Now</label>
-      <button>Book Now</button>
+      <button  routerLink="/home/exam_bar">Book Now</button>
     </div>
   </div>
   <div class="section section3">
@@ -56,29 +56,9 @@
 </div>
 
 
+
 <!-- Other Exams  -->
-<div class="modal fade" id="not_taken_exam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">{{name_course}}</h5>
-       <button class="outer_button" disabled > <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </button>
-      </div>
-      <div class="modal-body">
-        <p>{{discription}}</p>
-        <ul>
-          <li *ngFor="let info of about_course" style="margin-top: 20px;">{{info}}</li>
-        </ul>
-      </div>
-      <div class="modal-footer">
-        <button type="button" (click)="take_exam()">Take Exam</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 
  <!-- skipLocationChange="true"

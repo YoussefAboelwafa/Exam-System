@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { GuardServiceService } from './services/guard-service.service';
 import { HomeBarComponent } from './home-bar/home-bar.component';
 import { ExamsBarComponent } from './exams-bar/exams-bar.component';
+import { RankingBarComponent } from './ranking-bar/ranking-bar.component';
 
 const routes: Routes = [
   {
@@ -24,20 +25,27 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    // canActivate:[GuardServiceService]
     children:[
       {
         path:'home_bar',
-        component:HomeBarComponent,
+        component:HomeBarComponent,    
+
 
       },
       {
         path:'exam_bar',
         component:ExamsBarComponent,
 
-      }
+      },
+       {
+    path: 'ranking_bar',
+    component: RankingBarComponent,   
+    canActivate:[GuardServiceService]
+
+    }
     ]
   },
+ 
   // {
   //   path: 'home/:name',
   //   component: HomeComponent,
