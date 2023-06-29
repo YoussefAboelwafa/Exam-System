@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExamsBarComponent implements OnInit {
 
-  constructor() { }
+  flag_snack=false;
+  flag_book=false;
+  flag_time=true;
+  snacks=["kikat",'twix','snickers'];
+
+  constructor() { 
+  }
 
   ngOnInit(): void {
   }
+
+  select_snack(value:any){
+
+  }
+  submit(){}
 
 }

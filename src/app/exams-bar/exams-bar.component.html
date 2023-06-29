@@ -1,1 +1,102 @@
-<p>exams-bar works!</p>
+<p>exams-bar works!</p> 
+
+
+
+<div *ngIf="flag_book==true"  class="contain" >
+  <div class="close">
+    <button class="closebtn">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  </div>
+  <div class="order">Book your exam</div>  
+    <div class="box">
+     <form #input_form="ngForm" (ngSubmit)="submit()">
+        <div>
+            <h3>Country</h3>
+            <select class="sel" required #snack id="snack" name="snack" (change)="select_snack(snack.value)">
+              <option>Country</option>
+              <option *ngFor="let snack of snacks" >{{ snack }}</option>
+            </select>
+
+            <h3>City</h3>
+            <select class="sel" required #snack id="snack" name="snack" (change)="select_snack(snack.value)">
+              <option>City</option>
+              <option *ngFor="let snack of snacks" >{{ snack }}</option>
+            </select>
+            <h3>Location</h3>
+            <select class="sel" required #snack id="snack" name="snack" (change)="select_snack(snack.value)">
+              <option>Location</option>
+              <option *ngFor="let snack of snacks" >{{ snack }}</option>
+            </select>
+
+            <button id="btn" type="submit">Next</button>
+       </div>  
+       <div class="circle">   
+        <i class="fa-solid fa-circle" style="color:#008182;"></i> 
+        <i class="fa-regular fa-circle"></i>
+        <i class="fa-regular fa-circle"></i>
+       </div>
+       
+    </form>
+  </div>
+</div>
+
+<div *ngIf="flag_snack==true"  class="contain" >
+  <div class="close">
+    <button class="closebtn">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  </div>
+  <div class="order">Choose what you prefer!</div>  
+    <div class="box">
+      <form #input_form="ngForm" (ngSubmit)="submit()">
+          <h3>Select your snack</h3>
+              <select required #snack id="snack" name="snack" (change)="select_snack(snack.value)">
+                <option>Snack</option>
+                <option *ngFor="let snack of snacks" >{{ snack }}</option>
+    
+              </select>
+              <button id="btn" type="submit">Next</button>
+         
+         <div class="circle">
+          <i class="fa-regular fa-circle"></i>
+          <i class="fa-solid fa-circle" style="color:#008182;"></i> 
+          <i class="fa-regular fa-circle"></i>
+         </div>
+
+      </form>
+    </div>
+</div>
+
+
+<div *ngIf="flag_time==true"  class="contain" >
+  <div class="close">
+    <button class="closebtn">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  </div>
+  <div class="order">Select your time</div>  
+    <div class="box">
+      <form #input_form="ngForm" (ngSubmit)="submit()">
+          <h3>Day of exam</h3>
+              <select required #snack id="snack" name="snack" (change)="select_snack(snack.value)">
+                <option>Select a day</option>
+                <option *ngFor="let snack of snacks" >{{ snack }}</option>
+              </select>
+              <h3>Appointment</h3>
+            <select class="sel" required #snack id="snack" name="snack" (change)="select_snack(snack.value)">
+              <option>Select an Appointment</option>
+              <option *ngFor="let snack of snacks" >{{ snack }}</option>
+            </select>
+              <button id="btn" type="submit">Next</button>
+
+         <div class="circle">
+          <i class="fa-regular fa-circle"></i>
+          <i class="fa-regular fa-circle"></i>
+          <i class="fa-solid fa-circle" style="color:#008182;"></i> 
+
+         </div>
+       
+      </form>
+    </div>
+</div>

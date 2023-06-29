@@ -125,8 +125,9 @@ div {
   font-size: 20px;
 }
 
-.outer_button {
-  border: none;
+
+.outer_button{
+  border:none;
   border-radius: 10px;
   background-color: #fff;
   width: 25px;
