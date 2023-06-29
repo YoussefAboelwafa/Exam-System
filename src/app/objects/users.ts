@@ -9,6 +9,8 @@ export class users{
     private password:any;
     private id:any;
     private photo:any;
+    
+    exams:any; //exam that contain the array of exam that user take it and the degree of each exam
 
         set_first_name(value:any){
         this.first_name = value;

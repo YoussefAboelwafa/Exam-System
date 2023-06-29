@@ -24,7 +24,9 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent,
+    component: HomeComponent,    
+    // canActivate:[GuardServiceService]
+
     children:[
       {
         path:'home_bar',
@@ -40,7 +42,6 @@ const routes: Routes = [
        {
     path: 'ranking_bar',
     component: RankingBarComponent,   
-    canActivate:[GuardServiceService]
 
     }
     ]
