@@ -17,4 +17,7 @@ router.post('/verify_code', authController.verifyCode);
 
 router.post('/send_agin', authController.send_again);
 
+
+router.post('/test', authController.test);
+
 module.exports = router;

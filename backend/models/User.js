@@ -8,16 +8,32 @@ const userSchema = new mongoose.Schema({
     last_name: {type: String, required: true},
     country: {type: String, required: true},
     city: {type: String, required: true},
-    phone_namber: {type: String, required: true, unique: true, index: true},
+    phone_namber: {type: String, required: true, unique: true},
     email: {
         type: String,
         required: [true, 'Email required'],
-        index: true,  /////// left from here
+        // index: 'hashed',  /////// left from here
         unique: true,
-        lowercase: true,
-        validate: [isEmail, 'Please enter a valid email']
+        lowercase: true
     },
-    password: {type: String, required: [true, 'password required']}
+    password: {type: String, required: [true, 'password required']},
+    exams: {
+        type: [{
+            exam: {type: {
+                id: {type: String, required: true},
+                country: {type: String, required: true},
+                city: {type: String, required: true},
+                location: {type: String, required: true},
+                snack: {type: String, required: true},
+                day: {type: String, required: true},
+                appointment: {type: String, required: true}
+            }, required: true},
+            precentage: {
+                type: {type: Number, required: true}
+            }
+        }],
+        default: []
+    }
 })
 
 

@@ -3,12 +3,12 @@ const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
 
 const OTPschema = new mongoose.Schema({
-    phone_namber: {type: String, required: true, unique: true, index: true},
+    phone: {type: String, required: true, index: 'hashed'},
     code: {type: String, required: true},
-    createdAt: { type: Date, default: Date.now, expires: 3600 }
+    createdAt: { type: Date, default: Date.now, expires: 600 }
 })
 ///could be improved by removing the id field
-OTPschema.index({phone_namber: 1});
+
 
 
 OTPschema.statics.insert = async function(elem){

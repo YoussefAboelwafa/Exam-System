@@ -184,3 +184,38 @@ module.exports.send_again = async (req, res) =>{
         res.status(201).json({success: false});
     }
 }
+
+
+module.exports.test = async (req, res) => {
+    res.send('working on it')
+    console.log('starting');
+    let accum = 0;
+    for (let i = 1; i <= 10000; i++) {
+        const otp = {
+          phone: `+123456789${i}`,
+          code: `+12345ZXCZXCZXCZXCZXc6789${i}`
+        };
+        const startTime = Date.now();
+        await OTP.insert(otp);
+        const endTime = Date.now();
+        accum += endTime - startTime;
+        console.log(i);
+    }
+    console.log(accum/1000);
+    console.log('done');
+}
+
+// module.exports.test = async (req, res) => {
+//     let accum = 0
+//     for(let i=0;i<1000;i++){
+//         const phone = `+123456789${Math.floor(Math.random() * 10000) + 1}`;
+//         const startTime = Date.now();
+//         await OTP.findOne({phone: phone}, );
+//         const endTime = Date.now();
+//         accum += endTime-startTime;
+//         console.log(`at i=${i}`);
+//     }
+
+//     console.log(accum/1000);
+//     res.send('hello world')
+// }
