@@ -1,57 +1,118 @@
+<div class="carousel"></div>
 <div class="goodmorninglabel">
-    <p>Good Morning</p>
+  <p>Good Morning</p>
+</div>
+<div class="goodmorningwidgets">
+  <div class="card card-body upcoming">
+    <h5 class="card-title">Upcoming <br />Exams</h5>
+    <div class="card-text upcomingbox">
+      <!-- ng for -->
+      <div class="upcominginfo">
+        <label class="examname1">C programming</label>
+        <label class="smallbox">Egypt</label>
+        <label class="smallbox">15 April</label>
+        <label class="smallbox">3.00 pm</label>
+      </div>
+      <div class="upcominginfo">
+        <label class="examname1">C programming</label>
+        <label class="smallbox">Egypt</label>
+        <label class="smallbox">15 April</label>
+        <label class="smallbox">3.00 pm</label>
+      </div>
+    </div>
+    <a class="btn" data-toggle="modal" data-target="#exampleModalCenter">
+      see more >>
+    </a>
   </div>
-  <div class="goodmorningwidgets">
-    <div class="card card-body upcoming">
-      <h5 class="card-title">Upcoming <br />Exams</h5>
-      <p class="card-text"></p>
-      <!-- Button trigger modal -->
-      <!-- <button type="button" id="btn_pop" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-        see more >>
-      </button> -->
-      <a class="btn" data-toggle="modal" data-target="#exampleModalCenter" >
-        see more >>
-      </a>
-          </div>
-    <div class="card card-body taken">
-      <h5 class="card-title">Taken <br />Exams</h5>
-      <p class="card-text"></p>
-      <a class="btn" data-toggle="modal" data-target="#exampleModalCenter" >
-        see more >></a> 
+  <div class="card card-body taken">
+    <h5 class="card-title">Taken <br />Exams</h5>
+    <div class="card-text takenbox">
+      <!-- ng for -->
+      <div class="takeninfo">
+        <label class="examname1">C programming<br /><span>100%</span></label>
+      </div>
+      <div class="takeninfo">
+        <label class="examname1">Algorithms<br /><span>95%</span></label>
+      </div>
     </div>
-    <div class="card card-body rank">
-      <h5 class="card-title">
-        Your<br />
-        Rank
-      </h5>
-      <p class="card-text"></p>
-      <a class="btn" data-toggle="modal" data-target="#exampleModalCenter" >
-        see more >></a> 
+    <a class="btn" data-toggle="modal" data-target="#exampleModalCenter">
+      see more >></a
+    >
+  </div>
+  <div class="card card-body rank">
+    <h5 class="card-title">
+      Your<br />
+      Ranks
+    </h5>
+    <div class="card-text takenbox">
+      <!-- ng for -->
+      <div class="rankinfo">
+        <label class="rankname">Your Rank</label>
+        <label class="examname2">C programming</label>
+        <label class="rankscore">#300th</label>
+      </div>
+      <div class="rankinfo">
+        <label class="rankname">City Rank</label>
+        <label class="examname2">C programming</label>
+        <label class="rankscore">#240th</label>
+      </div>
+    </div>
+    <a class="btn" data-toggle="modal" data-target="#exampleModalCenter">
+      see more >></a
+    >
+  </div>
+</div>
+<!-- Discover exams section -->
+<div class="discoverexamslabel">
+  <p>Discover Exams</p>
+  <a class="btn">See more >></a>
+</div>
+<div class="discoverexamswidgets">
+  <!-- ngfor ya kimoo -->
+  <div class="card card-body upcoming">
+    <!-- Not taken again -->
+    <h5 class="card-title">C++<br />Programming</h5>
+    <div class="discoverbox1">
+      <div class="discoversmallbox">
+        <label class="discoverexamname">Your last mark</label>
+        <label class="discoverscore">100%</label>
+      </div>
+      <div class="discoverinfo">
+        <button class="discoverbtns learnmore">Learn More</button>
+        <button class="discoverbtns takeagain">Take exam again</button>
+      </div>
     </div>
   </div>
-  <!-- Discover exams section -->
-  <div class="discoverexamslabel">
-    <p>Discover Exams</p>
-    <a  class="btn">See more >></a>
-  </div>
-  <div class="discoverexamswidgets">
-    <div class="card card-body upcoming">
-      <h5 class="card-title">C++<br />Programming</h5>
-      <p class="card-text"></p>
-      <a  class="btn" data-toggle="modal" data-target="#not_taken_exam" >
-        see more >></a> 
-    </div>
-    <div class="card card-body upcoming">
-      <h5 class="card-title">Flutter</h5>
-      <p class="card-text"></p>
-      <a  class="btn"  data-toggle="modal" data-target="#not_taken_exam" >
-        see more >></a> 
-    </div>
-    <div class="card card-body upcoming">
-      <h5 class="card-title">Algorithms</h5>
-      <p class="card-text"></p>
-      <a class="btn" data-toggle="modal" data-target="#not_taken_exam">
-        see more >></a> 
+  <div class="card card-body upcoming">
+    <!-- Not taken again -->
+    <h5 class="card-title">C<br />Programming</h5>
+    <div class="discoverbox1">
+      <div class="discoversmallbox">
+        <label class="discoverexamname">Your last mark</label>
+        <label class="discoverscore">88%</label>
+      </div>
+      <div class="discoverinfo">
+        <button class="discoverbtns learnmore">Learn More</button>
+        <button class="discoverbtns takeagain">Take exam again</button>
+      </div>
     </div>
   </div>
+  <div class="card card-body upcoming">
+    <h5 class="card-title">Algorithms</h5>
 
+    <div class="discoverbox1">
+      <div class="discoversmallbox">
+        <ul class="examlist">
+          <li>About the exam</li>
+          <li>About the exam</li>
+          <li>About the exam</li>
+          <li>About the exam</li>
+        </ul>
+      </div>
+      <div class="discoverinfo">
+        <button class="discoverbtns learnmore">Learn More</button>
+        <button class="discoverbtns takeagain">Take exam</button>
+      </div>
+    </div>
+  </div>
+</div>
