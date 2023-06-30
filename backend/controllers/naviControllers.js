@@ -2,9 +2,13 @@ const User = require('../models/User')
 const Exam = require('../models/Exam')
 const casual = require('casual');
 const jwt = require('jsonwebtoken');
+
+
 const payment = (req, res) => {
     console.log('payment succeeded');
 }
+
+
 
 
 module.exports.getHome = async (req, res) => {
@@ -43,7 +47,7 @@ module.exports.getHome = async (req, res) => {
 
 module.exports.getOtherExams = async (req, res) => {
     ///assume req holds only
-    // req should also contain the ids of the taken and upcoming exams
+    // req should  also contain the ids of the taken and upcoming exams
     try{
         const exams = await Exam.find({ _id: { $nin: req.body.ids } }).select('title info about');
         res.json(exams);
@@ -75,6 +79,8 @@ module.exports.populate_exams = async (req, res) =>{
         console.log(err);
     }
 }
+
+
 
 
 
