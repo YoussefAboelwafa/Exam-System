@@ -12,13 +12,13 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 app.use(cors({
-    // origin: 'http://localhost:4200',
+    origin: 'http://localhost:4200',
     credentials: true
 }));
 app.use(express.json());
 app.use(cookieParser());
 
-const dbURI = 'mongodb://localhost:27017/newdb'
+const dbURI = 'mongodb+srv://admin:7RUA6rN0a8FkISWy@cluster0.nbw43uf.mongodb.net/mydb'
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => app.listen(8080))
     .catch((err) => console.log(err));
