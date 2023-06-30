@@ -1,7 +1,7 @@
 const User = require('../models/User')
 const Exam = require('../models/Exam')
 const casual = require('casual');
-
+const jwt = require('jsonwebtoken');
 const payment = (req, res) => {
     console.log('payment succeeded');
 }
@@ -9,25 +9,33 @@ const payment = (req, res) => {
 
 module.exports.getHome = async (req, res) => {
     try{
-        const user = await User.findById(req.body._id).select({first_name: 1, last_name: 1, exams: 1, _id: 1});
+        const token = req.cookies.jwt;
+        console.log(token);
+        if(token){
+            jwt.verify(token, 'example secret', async (err, decodedToken)=>{
+                if(err){
+                    console.log(err.message);
+                    res.json({signed_in: false});
+                }else{
+                    const user = await User.findById(decodedToken.id).select({first_name: 1, last_name: 1, exams: 1, _id: 1});
+                    const exam_ids = user.exams.map((elem)=>elem.exam._id);
 
-        if(user){
-            const exam_ids = user.exams.map((elem)=>elem.exam._id);
+                    const taken_exam_info = (await Exam.find({ _id: { $in: exam_ids } }).select('title about')).map((elem) => ({title: elem.title, about: elem.about}));
+                    
+                    const other_exam = await Exam.findOne({ _id: { $nin: exam_ids } }).select('title info about');
 
-            const taken_exam_info = (await Exam.find({ _id: { $in: exam_ids } }).select('title about')).map((elem) => ({title: elem.title, about: elem.about}));
-            
-            const other_exam = await Exam.findOne({ _id: { $nin: exam_ids } }).select('title info about');
-
-            console.log(user);
-            res.json({user: user, taken_exam_info, other_exam: other_exam});
+                    console.log(user);
+                    res.json({user: user, taken_exam_info, other_exam: other_exam});
+                }
+            })
         }else{
-            console.log(err);
             res.json({signed_in: false});
-        }
+       }
     }catch(err){
         console.log(err);
-        res.json(err);
+        res.json({signed_in: false});
     }
+   
 }
 
 module.exports.getOtherExams = async (req, res) => {

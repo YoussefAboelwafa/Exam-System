@@ -52,7 +52,7 @@ function errorHandler(err) {
 
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-    return jwt.sign({ id:id, admin:false }, 'ivsXMmb3UFV5AtA0T3vh3l99CBqH5gfy' , { ///secrect key
+    return jwt.sign({ id:id, admin:false }, 'example secret' , { ///secrect key
         expiresIn : maxAge
     })
 }
@@ -124,7 +124,7 @@ module.exports.login_post = async (req, res) => {
         const user = await User.login(email, password);
         const token = createToken(user._id);
         res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000, sameSite: 'Lax',})
-        res.status(200).json({user:user, success: true});
+        res.status(200).json({success: true});
     } catch (err) {
         const errors = errorHandler(err)
         console.log(errors);
