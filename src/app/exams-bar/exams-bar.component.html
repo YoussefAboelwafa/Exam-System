@@ -40,7 +40,7 @@
       <div class="discoverinfo">
         <button
           data-toggle="modal"
-          data-target="#not_token_exam"
+          data-target="#token_exam"
           class="discoverbtns learnmore"
         >
           Learn More
@@ -409,14 +409,20 @@
       </div>
       <div class="modal-body">
         <p>{{ learn_dataof_nontoken.about }}</p>
-        <ul>
-          <li
-            *ngFor="let info of learn_dataof_nontoken.info"
-            style="margin-top: 20px"
-          >
-            {{ info }}
-          </li>
-        </ul>
+        <div class="discoverbox1">
+          <ul>
+            <li
+              *ngFor="let info of learn_dataof_nontoken.info"
+              style="margin-top: 20px"
+            >
+              {{ info }}
+            </li>
+          </ul>
+          <div class="discoversmallbox2">
+            <label class="discoverexamname1">Your last mark</label>
+            <label class="discoverscore1">90%</label>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button
