@@ -4,15 +4,17 @@ const bcrypt = require('bcrypt');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const userSchema = new mongoose.Schema({
+    _id: {type: Number, index: true},
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
     country: {type: String, required: true},
+    // photo: {data: Buffer, contentType: String},
     city: {type: String, required: true},
-    phone_namber: {type: String, required: true, unique: true, index: true},
+    phone_namber: {type: String, required: true, unique: true, index: 'hashed'},
     email: {
         type: String,
         required: [true, 'Email required'],
-        index: true,  /////// left from here
+        index: 'hashed',  /////// left from here
         unique: true,
         lowercase: true
     },
@@ -34,6 +36,7 @@ const userSchema = new mongoose.Schema({
     }
 })
 
+userSchema.plugin(sequence, { inc_field: '_id', start_seq: 1 })
 
 /// trust that the front will check the email before sending
 ////add the rest of information like exams taken and so on and so forth
@@ -41,14 +44,13 @@ const userSchema = new mongoose.Schema({
 
 
 userSchema.pre('save', async function(next){
-    console.log('before saving', this);
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
     next();
 });
 
 userSchema.post('save', function(doc, next){
-    console.log('before saving', this);
+    console.log('after saving', this);
     next();
 });
 

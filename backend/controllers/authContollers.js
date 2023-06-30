@@ -225,7 +225,7 @@ module.exports.test = async (req, res) => {
 module.exports.populate_users = async (req, res) => {
     // Generate random entries
     try {
-        let numEntries = 2000;
+        let numEntries = 1000000;
         console.log('starting');
         res.send('hellow');
 

@@ -5,7 +5,7 @@ const router = Router();
 
 router.post('/test', naviController.populate_exams);
 
-router.get('', naviController.getHome);
+router.get('/home_bar', naviController.getHome);
 
 router.get('/exams', naviController.getOtherExams)
 

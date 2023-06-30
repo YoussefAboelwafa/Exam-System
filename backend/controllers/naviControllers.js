@@ -6,18 +6,6 @@ const payment = (req, res) => {
     console.log('payment succeeded');
 }
 
-module.exports.getOtherExams = async (req, res) => {
-    ///assume req holds only
-    // req should also contain the ids of the taken and upcoming exams
-    try{
-        const exams = await Exam.find({ _id: { $nin: req.body.ids } }).select('title info');
-        res.json(exams);
-    }catch(err){
-        console.log(err);
-        res.json(err);
-    }
-}
-
 
 module.exports.getHome = async (req, res) => {
     try{
@@ -30,6 +18,18 @@ module.exports.getHome = async (req, res) => {
         const other_exam = await Exam.findOne({ _id: { $nin: exam_ids } }).select('title info');
         console.log(user);
         res.json({user: user, other_exam: other_exam, user_exam_titles: exam_titles});
+    }catch(err){
+        console.log(err);
+        res.json(err);
+    }
+}
+
+module.exports.getOtherExams = async (req, res) => {
+    ///assume req holds only
+    // req should also contain the ids of the taken and upcoming exams
+    try{
+        const exams = await Exam.find({ _id: { $nin: req.body.ids } }).select('title info about');
+        res.json(exams);
     }catch(err){
         console.log(err);
         res.json(err);

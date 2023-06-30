@@ -3,7 +3,7 @@ const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
 
 const OTPschema = new mongoose.Schema({
-    _id: {type: String, required: true},
+    _id: {type: String, required: true}, ///used to store phone number
     code: {type: String, required: true},
     createdAt: { type: Date, default: Date.now, expires: 600 }
 })
