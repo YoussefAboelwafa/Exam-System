@@ -3,12 +3,12 @@ const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
 
 const OTPschema = new mongoose.Schema({
-    phone_namber: {type: String, required: true, unique: true, index: true},
+    _id: {type: String, required: true}, ///used to store phone number
     code: {type: String, required: true},
-    createdAt: { type: Date, default: Date.now, expires: 3600 }
+    createdAt: { type: Date, default: Date.now, expires: 600 }
 })
 ///could be improved by removing the id field
-OTPschema.index({phone_namber: 1});
+
 
 
 OTPschema.statics.insert = async function(elem){
@@ -19,7 +19,7 @@ OTPschema.statics.insert = async function(elem){
         const hashed_code = await bcrypt.hash(code, salt);
 
         await this.findOneAndUpdate(
-          { phone_namber:phone_namber },
+          { _id:phone_namber },
           { code: hashed_code , createdAt: Date.now()},
           { upsert: true }
         );
@@ -30,15 +30,17 @@ OTPschema.statics.insert = async function(elem){
 }
 
 OTPschema.statics.verifyOTP = async function(phone_namber, code){
-    const otp = await this.findOne({phone_namber: phone_namber});
+    const otp = await this.findOne({_id: phone_namber});
     console.log(otp);
-    if(!otp) throw Error("phone incorrect");
+    if(!otp)
+        throw Error("phone incorrect");
     let auth = await bcrypt.compare(code, otp.code);
     if(auth){
         return true;
     }
     return false;
 }
+
 
 
 const OTP = mongoose.model('otp', OTPschema);

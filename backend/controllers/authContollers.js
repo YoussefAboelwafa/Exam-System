@@ -2,6 +2,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken')
 const { Vonage } = require('@vonage/server-sdk')
 const OTP = require('../models/OTP')
+const casual = require('casual');
 
 const vonage = new Vonage({
   apiKey: "dc9afa8a",
@@ -51,7 +52,7 @@ function errorHandler(err) {
 
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-    return jwt.sign({ id }, 'example secret' , {
+    return jwt.sign({ id:id, admin:false }, 'ivsXMmb3UFV5AtA0T3vh3l99CBqH5gfy' , { ///secrect key
         expiresIn : maxAge
     })
 }
@@ -93,7 +94,7 @@ module.exports.signup_post = async (req, res) =>{
         if(isUnique){
             const code = generateOTP();
             console.log(code);
-            const otp = await OTP.insert({phone_namber: phone_namber, code: code});
+            const otp = await OTP.insert({_id: phone_namber, code: code});
 
             // sendSMS(phone_namber, code);   /////remove comment later
 
@@ -170,7 +171,7 @@ module.exports.send_again = async (req, res) =>{
         // console.log(phone);
         const code = generateOTP();
         // console.log(code);
-        const otp = await OTP.insert({phone_namber: phone_namber, code: code});
+        const otp = await OTP.insert({_id: phone_namber, code: code});
 
         // sendSMS(phone_namber, code);   /////remove comment later
 
@@ -183,4 +184,92 @@ module.exports.send_again = async (req, res) =>{
         const errors = errorHandler(err);
         res.status(201).json({success: false});
     }
+}
+
+
+module.exports.test = async (req, res) => {
+    res.send('working on it')
+    console.log('starting');
+    let accum = 0;
+    for (let i = 1; i <= 10000; i++) {
+        const otp = {
+          phone: `+123456789${i}`,
+          code: `+12345ZXCZXCZXCZXCZXc6789${i}`
+        };
+        const startTime = Date.now();
+        await OTP.insert(otp);
+        const endTime = Date.now();
+        accum += endTime - startTime;
+        console.log(i);
+    }
+    console.log(accum/1000);
+    console.log('done');
+}
+
+// module.exports.test = async (req, res) => {
+//     let accum = 0
+//     for(let i=0;i<1000;i++){
+//         const phone = `+123456789${Math.floor(Math.random() * 10000) + 1}`;
+//         const startTime = Date.now();
+//         await OTP.findOne({phone: phone}, );
+//         const endTime = Date.now();
+//         accum += endTime-startTime;
+//         console.log(`at i=${i}`);
+//     }
+
+//     console.log(accum/1000);
+//     res.send('hello world')
+// }
+
+
+module.exports.populate_users = async (req, res) => {
+    // Generate random entries
+    try {
+        let numEntries = 1000000;
+        console.log('starting');
+        res.send('hellow');
+
+        for (let i = 0; i < numEntries; i++) {
+            const entry = {
+                first_name: casual.first_name,
+                last_name: casual.last_name,
+                country: casual.country,
+                city: casual.city,
+                phone_namber: casual.phone,
+                email: casual.email.toLowerCase(),
+                password: casual.password,
+                exams: []
+            };
+            const numExams = casual.integer(0, 5);
+            for (let j = 0; j < numExams; j++) {
+                const exam = {
+                    _id: '649e2cc7d6f9e22572a2a2e1',
+                    country: casual.country,
+                    city: casual.city,
+                    location: casual.address,
+                    snack: casual.word,
+                    day: casual.date('YYYY-MM-DD'),
+                    appointment: casual.word,
+                    percentage: casual.integer(0, 100)
+                };
+                entry.exams.push({ exam });
+            }
+
+            await User.create(entry)
+        }
+        
+        // Insert entries into the database
+
+        
+        console.log('finished');
+        
+        console.log(`Generated ${numEntries} random entries successfully!`);
+      } catch (err) {
+    
+        console.error('Error generating random entries:', err);
+      }
+    
+
+
+
 }

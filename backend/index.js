@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const examRoutes = require('./routes/examRoutes');
+const homeRoutes = require('./routes/homeRoutes');
 const {requireAuth} = require('./middleware/authMiddleware')
 const cors = require('cors');
 const User = require('./models/User')
@@ -47,8 +49,10 @@ app.get('/is_signedin', (req, res) => {
     }
 });
 
-
-app.use('/home', requireAuth, )
 app.use(authRoutes);
+app.use('/home', requireAuth,homeRoutes); ////add requiredAuth after finishing testing
+app.use('/exam', requireAuth,examRoutes);
+
+
 
 
