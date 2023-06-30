@@ -114,12 +114,14 @@ div {
   justify-content: space-between;
   margin-left: 2%;
   margin-bottom: 2%;
+  flex-wrap: wrap;
 }
 .card {
   width: 20vw;
   height: 25vh;
   position: relative;
   margin-right: 2%;
+  margin-bottom: 15px;
 }
 .card h5 {
   align-items: left;

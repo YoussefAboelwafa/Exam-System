@@ -3,7 +3,7 @@
 </div>
 <div class="goodmorningwidgets">
   <!-- start div with class upcoming indicate to style of this card -->
-  <div *ngFor="let exam of upcoming_exam | slice:0:2" class="card card-body upcoming">
+  <div *ngFor="let exam of upcoming_exam" class="card card-body upcoming">
     <h5 class="card-title">{{exam.title}}</h5>
     <div class="card-text upcomingbox">
       <!-- ng for -->
@@ -23,6 +23,7 @@
     </div>
    
   </div>
+
 </div>
 <!-- taken exams section -->
 <div class="discoverexamslabel">
@@ -177,8 +178,30 @@
 </div>
 
 <!-- mesage template -->
-
 <div class="modal fade" id="not_token_exam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{learn_dataof_nontoken.title}}</h5>
+      <button class="outer_button" disabled > <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      </button>
+      </div>
+      <div class="modal-body">
+        <p>{{learn_dataof_nontoken.about}}</p>
+        <ul>
+          <li *ngFor="let info of learn_dataof_nontoken.info" style="margin-top: 20px;">{{info}}</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="take_exam(learn_dataof_nontoken.title,learn_dataof_nontoken._id)">Take Exam</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="token_exam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">

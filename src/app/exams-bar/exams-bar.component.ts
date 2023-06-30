@@ -51,6 +51,38 @@ upcoming_exam:any[]=[
       appointment:"3.00 pm",
       percentage:"-1"
     },
+    {
+      title:"c++ programming",
+      _id:"",
+      country:"Egypt",
+      city:"Alex",
+      location:"sss",
+      snack:"kitkat",
+      day:"15 April",
+      appointment:"3.00 pm",
+      percentage:"-1"
+    },
+    {
+      title:"c++ programming",
+      _id:"",
+      country:"Egypt",
+      city:"Alex",
+      location:"sss",
+      snack:"moro",
+      day:"15 April",
+      appointment:"3.00 pm",
+      percentage:"-1"
+    },{
+      title:"c++ programming",
+      _id:"",
+      country:"Egypt",
+      city:"Alex",
+      location:"sss",
+      snack:"kitkat",
+      day:"15 April",
+      appointment:"3.00 pm",
+      percentage:"-1"
+    },
   ]
 
   token_exam:any[]=[
@@ -66,7 +98,7 @@ upcoming_exam:any[]=[
       percentage:"100"
     },
     {
-      title:"data structure ",
+      title:"data structure 1 ",
       _id:"",
       country:"Egypt",
       city:"Alex",
@@ -76,6 +108,47 @@ upcoming_exam:any[]=[
       appointment:"3.00 pm",
       percentage:"80"
     },
+    {
+      title:"data structure 2 ",
+      _id:"",
+      country:"Egypt",
+      city:"Alex",
+      location:"sss",
+      snack:"kitkat",
+      day:"15 April",
+      appointment:"3.00 pm",
+      percentage:"40"
+    },{
+      title:"C# ",
+      _id:"",
+      country:"Egypt",
+      city:"Alex",
+      location:"sss",
+      snack:"kitkat",
+      day:"15 April",
+      appointment:"3.00 pm",
+      percentage:"100"
+    },{
+      title:"javascript",
+      _id:"",
+      country:"Egypt",
+      city:"Alex",
+      location:"sss",
+      snack:"kitkat",
+      day:"15 April",
+      appointment:"3.00 pm",
+      percentage:"50"
+    },{
+      title:"python ",
+      _id:"",
+      country:"Egypt",
+      city:"Alex",
+      location:"sss",
+      snack:"kitkat",
+      day:"15 April",
+      appointment:"3.00 pm",
+      percentage:"50"
+    }
   ]
   
   //take it from back
@@ -94,9 +167,21 @@ upcoming_exam:any[]=[
       _id:"",
     },
     {
-      title:"c++ programming",
-      about:" C++ is a powerful and flexible language that is well-suited for a wide range of programming tasks. However, it can be more difficult to learn and use than some other languages due to its complexity and the need to manage memory manually in some cases.",
-      info:["STL","OOP with C++"],
+      title:"python programming",
+      about:" python is a powerful and flexible language that is well-suited for a wide range of programming tasks. However, it can be more difficult to learn and use than some other languages due to its complexity and the need to manage memory manually in some cases.",
+      info:["STL","OOP with python"],
+      _id:"",
+    },
+    {
+      title:"java programming",
+      about:" java is a powerful and flexible language that is well-suited for a wide range of programming tasks. However, it can be more difficult to learn and use than some other languages due to its complexity and the need to manage memory manually in some cases.",
+      info:["basic","colections"],
+      _id:"",
+    },
+    {
+      title:"c programming",
+      about:" C is a powerful and flexible language that is well-suited for a wide range of programming tasks. However, it can be more difficult to learn and use than some other languages due to its complexity and the need to manage memory manually in some cases.",
+      info:["basic","advanced"],
       _id:"",
     }
 
