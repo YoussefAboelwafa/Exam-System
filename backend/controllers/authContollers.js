@@ -125,7 +125,7 @@ module.exports.login_post = async (req, res) => {
         const user = await User.login(email, password);
         const token = createToken(user._id);
         res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000, sameSite: 'Lax',})
-        res.status(200).json({success: true});
+        res.status(200).json({user:user, success: true});
     } catch (err) {
         const errors = errorHandler(err)
         console.log(errors);
@@ -229,19 +229,19 @@ module.exports.test = async (req, res) => {
 module.exports.populate_users = async (req, res) => {
     // Generate random entries
     try {
-        let numEntries = 1;
+        let numEntries = 5000;
         console.log('starting');
         res.send('hellow');
 
         for (let i = 0; i < numEntries; i++) {
             const entry = {
-                first_name: "karem",
-                last_name: "ibrahim",
-                country: "Egypt",
-                city: "Cairo",
-                phone_namber: "+201202743255",
-                email: "karemtarek0222@gmail.com",
-                password: "11111111",
+                first_name: casual.first_name,
+                last_name: casual.last_name,
+                country: casual.country,
+                city: casual.city,
+                phone_namber: casual.phone,
+                email: casual.email.toLowerCase(),
+                password: casual.password,
                 exams: []
             };
             const numExams = casual.integer(0, 5);
@@ -259,7 +259,7 @@ module.exports.populate_users = async (req, res) => {
                 entry.exams.push({ exam });
             }
 
-            await User.create(entry)
+            try{await User.create(entry)}catch(err){console.log('army ohmo fe alzbala');}
         }
         
         // Insert entries into the database

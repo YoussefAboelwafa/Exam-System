@@ -3,18 +3,34 @@ const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
 const sequence = require('mongoose-sequence')(mongoose);
 
+
+const characterSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const idLength = 8;
+
+const generateRandomCode = ()=> {
+    let userCode = '';
+    for (let i = 0; i < idLength; i++) {
+      const randomIndex = Math.floor(Math.random() * characterSet.length);
+      userCode += characterSet[randomIndex];
+    }
+    return userCode;
+  }
+  
+
+
 const userSchema = new mongoose.Schema({
     // _id: {type: Number, index: true},
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
     country: {type: String, required: true},
-    // photo: {data: Buffer, contentType: String},
+    photo: {type: String, default: null}, ////leave for later
     city: {type: String, required: true},
-    phone_namber: {type: String, required: true, unique: true, index: 'hashed'},
+    user_code: {type: String, required: true, index: 'hashed', unique: true,default: generateRandomCode},
+    phone_namber: {type: String, required: true, unique: true, index: true},
     email: {
         type: String,
         required: [true, 'Email required'],
-        index: 'hashed',  /////// left from here
+        index: true,  /////// left from here
         unique: true,
         lowercase: true
     },
