@@ -14,7 +14,6 @@ div {
   
   .form {
     width: 80vh;
-    gap: 35px;
     align-items: center;
     justify-self: center;
     display: flex;
@@ -134,9 +133,9 @@ div {
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
     line-height: 150%;
-    margin-top: 10px ;
     margin-left:-3px;
     display: inline;
     margin-right:420px;
+    margin-top: 20px;
   }
  
