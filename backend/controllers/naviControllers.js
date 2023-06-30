@@ -1,7 +1,7 @@
 const User = require('../models/User')
 const Exam = require('../models/Exam')
 const casual = require('casual');
-
+const jwt = require('jsonwebtoken');
 const payment = (req, res) => {
     console.log('payment succeeded');
 }
@@ -10,9 +10,10 @@ const payment = (req, res) => {
 module.exports.getHome = async (req, res) => {
     try{
         const token = req.cookies.jwt;
-        console.log(token);
+
         if(token){
             jwt.verify(token, 'example secret', async (err, decodedToken)=>{
+                console.log();
                 if(err){
                     console.log(err.message);
                     res.json({signed_in: false});
