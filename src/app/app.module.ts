@@ -17,6 +17,7 @@ import { GuardServiceService } from './services/guard-service.service';
 import { HomeBarComponent } from './home-bar/home-bar.component';
 import { ExamsBarComponent } from './exams-bar/exams-bar.component';
 import { PopUpComponent } from './pop-up/pop-up.component';
+import { RankingBarComponent } from './ranking-bar/ranking-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import { PopUpComponent } from './pop-up/pop-up.component';
     HomeBarComponent,
     ExamsBarComponent,
     PopUpComponent,
+    RankingBarComponent,
   ],
   imports: [
     BrowserModule,

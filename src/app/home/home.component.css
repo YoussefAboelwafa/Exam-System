@@ -54,6 +54,7 @@ div {
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow-y: scroll;
 }
 .name,
 .btns1 {
@@ -127,6 +128,7 @@ ul {
   padding: 5px;
   margin: 5px;
   list-style-type: none;
+  
 }
 .sidebar ul li button {
   border: none;
@@ -147,13 +149,18 @@ ul {
   font-weight: 700;
   line-height: 150%;
   box-sizing: border-box;
-  transition: 0.4s;
+  transition: 0.2s;
   color: #008182;
   background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
   border-radius: 10px;
+  
 }
-li:is(:hover, .active) button {
+li:is(:hover) button {
   margin-left: 15px;
+}
+li.active button {
+  margin-left: 18px;
+border: 3px solid #008182 !important ;
 }
 .book {
   height: 30%;
@@ -203,7 +210,6 @@ li:is(:hover, .active) button {
 .goodmorningwidgets,
 .discoverexamswidgets {
   width: 90%;
-  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -315,9 +321,6 @@ li:is(:hover, .active) button {
   font-size: 20px;
 }
 
-.modal-header {
-  
-}
 
 .outer_button{
   border:none;
@@ -396,3 +399,4 @@ line-height: 100%;
   border-radius: 100px;
   opacity: 0;
 }
+

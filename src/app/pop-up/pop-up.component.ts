@@ -12,14 +12,13 @@ export class PopUpComponent implements OnInit {
   
   constructor(private pop_service:ModalPopServiceService) { 
     
-    
   }
 
   ngOnInit(): void {
   }
 
 
-  close_ER_login() {
+  close_ER() {
     this.pop_service.close_error();  
   }
 
