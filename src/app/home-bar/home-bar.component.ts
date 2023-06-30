@@ -13,25 +13,7 @@ export class HomeBarComponent implements OnInit {
   
   
   
-  constructor(private service:ServicService) {
-
-    this.service.home_bar_init().subscribe
-    (
-      (x)=> {
-
-       console.log(x);
-       this.service.user=x.user;
-       error:(error: HttpErrorResponse) =>alert(error.message);
-       }
-
-    )
-
-
-
-  }
-
-  ngOnInit(): void {
-  }
+  
 
   flag_snack=false;
   flag_book=false;
@@ -49,6 +31,7 @@ export class HomeBarComponent implements OnInit {
     _id:"", //id of exam
     title:"",
    }
+
 upcoming_exam:any[]=[
     {
       title:"c programming",
@@ -122,6 +105,35 @@ upcoming_exam:any[]=[
   days=["14 April","12 May"];
   Appointments=["3pm","4pm","8pm"]
   
+
+
+
+
+  constructor(private service:ServicService) {
+
+    this.service.home_bar_init().subscribe
+    (
+      (x)=> {
+
+       this.service.user=x.user;
+       console.log(x);
+       console.log(x.user);
+       console.log(x.other_exam);
+       console.log(x.user_exam_titles)
+
+      //  for(var i=0; i<)
+       
+       error:(error: HttpErrorResponse) =>alert(error.message);
+       }
+
+    )
+
+
+
+  }
+
+  ngOnInit(): void {
+  }
 
 
   reset_order_exam(){

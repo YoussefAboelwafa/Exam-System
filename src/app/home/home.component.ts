@@ -24,12 +24,12 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private service:ServicService,private router: Router) { 
-    this.current_user={
-      first_name:service.user.get_first_name(),
-      last_name:service.user.get_last_name(),
-      photo:service.user.get_photo(),  
-      _id:service.user.get_id()
-    };
+    // this.current_user={
+    //   first_name:service.user.get_first_name(),
+    //   last_name:service.user.get_last_name(),
+    //   photo:service.user.get_photo(),  
+    //   _id:service.user.get_id()
+    // };
     // this.service.is_signin().subscribe
     //        (
     //          (x)=> {

@@ -57,12 +57,12 @@ public change_photo(url:any):Observable<any>{
 
 // when i enter home bar i send request and want to receive json that contains {user:user,non_taken_exam:any exam that the user does not take it yet}
 public home_bar_init():Observable<any>{
-  return this.http.get<any>(`${this.apiServerUrl}/home/home_bar`);
+  return this.http.get<any>(`${this.apiServerUrl}/home/home_bar`, { withCredentials: true });
 }
 // when i enter home bar i send request and want to receive json that contains {user:user,non_taken_exam:any exam that the user does not take it yet}
 //he take ids of all exams in user
 public exam_bar_init():Observable<any>{
-  return this.http.get<any>(`${this.apiServerUrl}/home/exams`);
+  return this.http.get<any>(`${this.apiServerUrl}/home/exams`, { withCredentials: true });
 }
  
 
