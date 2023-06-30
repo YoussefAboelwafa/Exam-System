@@ -22,12 +22,12 @@ module.exports.getHome = async (req, res) => {
 
                     const exam_ids = user.exams.map((elem)=>elem.exam._id);
 
-                    const taken_exam_info = (await Exam.find({ _id: { $in: exam_ids } }).select('title about')).map((elem) => ({title: elem.title, about: elem.about}));
+                    const token_exam_info = (await Exam.find({ _id: { $in: exam_ids } }).select('title about')).map((elem) => ({title: elem.title, about: elem.about}));
                     
                     const other_exam = await Exam.findOne({ _id: { $nin: exam_ids } }).select('title info about');
 
                     console.log(user);
-                    res.json({user: user, taken_exam_info, other_exam: other_exam});
+                    res.json({user: user, token_exam_info, other_exam: other_exam});
 
                 }
             })

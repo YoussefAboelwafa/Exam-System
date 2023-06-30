@@ -13,6 +13,9 @@ import { users } from "../objects/users";
 export class ServicService {
   private apiServerUrl = 'http://localhost:8080';
   user!: users;
+  upcoming_ex!:any[];
+  token_ex!:any[];
+  ids_ex!:any[];
   constructor(private http: HttpClient) { }
 
   
@@ -62,7 +65,8 @@ public home_bar_init():Observable<any>{
 // when i enter home bar i send request and want to receive json that contains {user:user,non_taken_exam:any exam that the user does not take it yet}
 //he take ids of all exams in user
 public exam_bar_init():Observable<any>{
-  return this.http.get<any>(`${this.apiServerUrl}/home/exams`, { withCredentials: true });
+  console.log(this.ids_ex)
+  return this.http.post<any>(`${this.apiServerUrl}/home/exams`,{ids:this.ids_ex}, { withCredentials: true });
 }
  
 

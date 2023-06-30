@@ -76,7 +76,7 @@
       </div>
       <div class="discoverinfo">
         <button class="discoverbtns learnmore">Learn More</button>
-        <button *ngIf="token.percentage!=100" (click)="take_exam(token.title,token.id)" class="discoverbtns takeagain">Take exam again</button>
+        <button *ngIf="token.percentage!=100" (click)="take_exam(token.title,token._id)" class="discoverbtns takeagain">Take exam again</button>
         <button disabled *ngIf="token.percentage==100"  id="disable_btn" class="discoverbtns takeagain">Take exam again</button>
       </div>
     </div>
