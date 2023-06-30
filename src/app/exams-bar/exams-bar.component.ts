@@ -38,6 +38,12 @@ export class ExamsBarComponent implements OnInit {
     info:["sorting","DAG","DFS algoritm"],
     _id:"",
   };
+  learn_dataof_token:any={
+    title:"Algoritms",
+    about:"algorithms are a fundamental concept in computer science, and are essential for solving complex problems and developing efficient software systems.There are many different types of algorithms, including sorting algorithms, searching algorithms, graph algorithms, and optimization algorithms. ",
+    info:["sorting","DAG","DFS algoritm"],
+    _id:"",
+  };
 
   non_token_exam:any[]=[
     // {
@@ -177,6 +183,10 @@ export class ExamsBarComponent implements OnInit {
 
   learn_non_token(value_send_by_btn_learn:any){
     this.learn_dataof_nontoken=value_send_by_btn_learn;
+  }
+
+  learn_token(value_send_by_btn_learn:any){
+    this.learn_dataof_token=value_send_by_btn_learn;
   }
 
 

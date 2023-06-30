@@ -39,6 +39,7 @@
       </div>
       <div class="discoverinfo">
         <button
+          (click)="learn_token(token)"
           data-toggle="modal"
           data-target="#token_exam"
           class="discoverbtns learnmore"
@@ -382,6 +383,11 @@
   </div>
 </div>
 
+
+
+
+<!-- token_exam example -->
+
 <div
   class="modal fade"
   id="token_exam"
@@ -394,7 +400,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">
-          {{ learn_dataof_nontoken.title }}
+          {{ learn_dataof_token.title }}
         </h5>
         <button class="outer_button" disabled>
           <button
@@ -408,11 +414,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>{{ learn_dataof_nontoken.about }}</p>
+        <p>{{ learn_dataof_token.about }}</p>
         <div class="discoverbox1">
           <ul>
             <li
-              *ngFor="let info of learn_dataof_nontoken.info"
+              *ngFor="let info of learn_dataof_token.info"
               style="margin-top: 20px"
             >
               {{ info }}
@@ -420,7 +426,7 @@
           </ul>
           <div class="discoversmallbox2">
             <label class="discoverexamname1">Your last mark</label>
-            <label class="discoverscore1">90%</label>
+            <label class="discoverscore1">{{learn_dataof_token.percentage}}%</label>
           </div>
         </div>
       </div>
@@ -428,7 +434,7 @@
         <button
           type="button"
           (click)="
-            take_exam(learn_dataof_nontoken.title, learn_dataof_nontoken._id)
+            take_exam(learn_dataof_token.title, learn_dataof_token._id)
           "
         >
           Take Exam
