@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
-const AutoIncrement = require('mongoose-sequence')(mongoose);
+const sequence = require('mongoose-sequence')(mongoose);
 
 const userSchema = new mongoose.Schema({
-    _id: {type: Number, index: true},
+    // _id: {type: Number, index: true},
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
     country: {type: String, required: true},
@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-userSchema.plugin(sequence, { inc_field: '_id', start_seq: 1 })
+// userSchema.plugin(sequence, { inc_field: '_id', start_seq: 1 })
 
 /// trust that the front will check the email before sending
 ////add the rest of information like exams taken and so on and so forth

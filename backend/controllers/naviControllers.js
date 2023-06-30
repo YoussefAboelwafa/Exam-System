@@ -9,7 +9,7 @@ const payment = (req, res) => {
 
 module.exports.getHome = async (req, res) => {
     try{
-        const user = await User.findById(req.body.id).select({first_name: 1, last_name: 1, exams: 1, _id: 1});
+        const user = await User.findById(req.body._id).select({first_name: 1, last_name: 1, exams: 1, _id: 1});
 
         const exam_ids = user.exams.map((elem)=>elem.exam._id);
 

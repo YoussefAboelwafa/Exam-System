@@ -94,7 +94,8 @@ module.exports.signup_post = async (req, res) =>{
         if(isUnique){
             const code = generateOTP();
             console.log(code);
-            const otp = await OTP.insert({_id: phone_namber, code: code});
+            console.log('adsfasdfasdfasdfasfd');
+            const otp = await OTP.insert({phone_namber: phone_namber, code: code});
 
             // sendSMS(phone_namber, code);   /////remove comment later
 
@@ -143,9 +144,11 @@ module.exports.logout_get = (req, res) => {
 
 module.exports.verifyCode = async (req, res) => {
     try{
-        const {code, user} = req.body;
+        const {user, code} = req.body;
         // console.log(req.body.code);
         ///verify otp
+        console.log(user);
+        console.log(code);
         const correct = await OTP.verifyOTP(user.phone_namber, code);
         if(correct){
             const new_user = await User.create(user);  ///////review later to check if waiting here is really necessary

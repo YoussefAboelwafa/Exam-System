@@ -50,8 +50,8 @@ app.get('/is_signedin', (req, res) => {
 });
 
 app.use(authRoutes);
-app.use('/home', requireAuth,homeRoutes); ////add requiredAuth after finishing testing
-app.use('/exam', requireAuth,examRoutes);
+app.use('/home', homeRoutes); ////add requiredAuth after finishing testing
+app.use('/exam', examRoutes);
 
 
 
