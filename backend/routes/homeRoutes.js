@@ -7,7 +7,7 @@ router.post('/test', naviController.populate_exams);
 
 router.get('/home_bar', naviController.getHome);
 
-router.get('/exams', naviController.getOtherExams)
+router.post('/exams', naviController.getOtherExams)
 
 
 module.exports = router;
