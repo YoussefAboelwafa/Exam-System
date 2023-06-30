@@ -228,25 +228,25 @@ module.exports.test = async (req, res) => {
 module.exports.populate_users = async (req, res) => {
     // Generate random entries
     try {
-        let numEntries = 1000000;
+        let numEntries = 1;
         console.log('starting');
         res.send('hellow');
 
         for (let i = 0; i < numEntries; i++) {
             const entry = {
-                first_name: casual.first_name,
-                last_name: casual.last_name,
-                country: casual.country,
-                city: casual.city,
-                phone_namber: casual.phone,
-                email: casual.email.toLowerCase(),
-                password: casual.password,
+                first_name: "karem",
+                last_name: "ibrahim",
+                country: "Egypt",
+                city: "Cairo",
+                phone_namber: "+201202743255",
+                email: "karemtarek0222@gmail.com",
+                password: "11111111",
                 exams: []
             };
             const numExams = casual.integer(0, 5);
             for (let j = 0; j < numExams; j++) {
                 const exam = {
-                    _id: '649e2cc7d6f9e22572a2a2e1',
+                    _id: casual.uuid,
                     country: casual.country,
                     city: casual.city,
                     location: casual.address,

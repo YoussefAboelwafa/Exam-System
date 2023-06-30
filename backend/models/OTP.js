@@ -43,6 +43,8 @@ OTPschema.statics.verifyOTP = async function(phone_namber, code){
 
 
 
+
+
 const OTP = mongoose.model('otp', OTPschema);
 
 module.exports = OTP;

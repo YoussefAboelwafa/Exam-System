@@ -11,13 +11,19 @@ module.exports.getHome = async (req, res) => {
     try{
         const user = await User.findById(req.body._id).select({first_name: 1, last_name: 1, exams: 1, _id: 1});
 
-        const exam_ids = user.exams.map((elem)=>elem.exam._id);
+        if(user){
+            const exam_ids = user.exams.map((elem)=>elem.exam._id);
 
-        const exam_titles = (await Exam.find({ _id: { $in: exam_ids } }).select('title')).map((elem) => elem.title);
-        
-        const other_exam = await Exam.findOne({ _id: { $nin: exam_ids } }).select('title info');
-        console.log(user);
-        res.json({user: user, other_exam: other_exam, user_exam_titles: exam_titles});
+            const taken_exam_info = (await Exam.find({ _id: { $in: exam_ids } }).select('title about')).map((elem) => ({title: elem.title, about: elem.about}));
+            
+            const other_exam = await Exam.findOne({ _id: { $nin: exam_ids } }).select('title info about');
+
+            console.log(user);
+            res.json({user: user, taken_exam_info, other_exam: other_exam});
+        }else{
+            console.log(err);
+            res.json({signed_in: false});
+        }
     }catch(err){
         console.log(err);
         res.json(err);
@@ -41,7 +47,7 @@ module.exports.getOtherExams = async (req, res) => {
 module.exports.populate_exams = async (req, res) =>{
     try{
         res.send('populate')
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 5; i++) {
             const entry = {
                 title: casual.title,
                 date: casual.date('YYYY-MM-DD'),
@@ -58,3 +64,9 @@ module.exports.populate_exams = async (req, res) =>{
         console.log(err);
     }
 }
+
+
+
+
+
+
