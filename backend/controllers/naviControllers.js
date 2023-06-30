@@ -10,7 +10,6 @@ const payment = (req, res) => {
 module.exports.getHome = async (req, res) => {
     try{
         const token = req.cookies.jwt;
-        console.log(token);
         if(token){
             jwt.verify(token, 'example secret', async (err, decodedToken)=>{
                 if(err){
