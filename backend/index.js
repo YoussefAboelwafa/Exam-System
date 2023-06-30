@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const examRoutes = require('./routes/examRoutes');
+const homeRoutes = require('./routes/homeRoutes');
 const {requireAuth} = require('./middleware/authMiddleware')
 const cors = require('cors');
 const User = require('./models/User')
@@ -17,7 +18,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-const dbURI = 'mongodb://localhost:27017'
+const dbURI = 'mongodb://localhost:27017/newdb'
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => app.listen(8080))
     .catch((err) => console.log(err));
@@ -49,8 +50,8 @@ app.get('/is_signedin', (req, res) => {
 });
 
 app.use(authRoutes);
-app.use('/home', requireAuth)
-app.use('/exam', examRoutes);
+app.use('/home',  homeRoutes); ////add requiredAuth after finishing testing
+app.use('/exam',  examRoutes);
 
 
 

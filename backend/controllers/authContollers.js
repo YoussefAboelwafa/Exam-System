@@ -94,7 +94,7 @@ module.exports.signup_post = async (req, res) =>{
         if(isUnique){
             const code = generateOTP();
             console.log(code);
-            const otp = await OTP.insert({phone_namber: phone_namber, code: code});
+            const otp = await OTP.insert({_id: phone_namber, code: code});
 
             // sendSMS(phone_namber, code);   /////remove comment later
 
@@ -171,7 +171,7 @@ module.exports.send_again = async (req, res) =>{
         // console.log(phone);
         const code = generateOTP();
         // console.log(code);
-        const otp = await OTP.insert({phone_namber: phone_namber, code: code});
+        const otp = await OTP.insert({_id: phone_namber, code: code});
 
         // sendSMS(phone_namber, code);   /////remove comment later
 
@@ -224,47 +224,50 @@ module.exports.test = async (req, res) => {
 
 module.exports.populate_users = async (req, res) => {
     // Generate random entries
-    const entries = [];
-    const numEntries = 100000; // Number of entries to generate
-    res.send('done')
-    casual.define('entry', function () {
-      return {
-        first_name: casual.first_name,
-        last_name: casual.last_name,
-        country: casual.country,
-        city: casual.city,
-        phone_namber: casual.phone,
-        email: casual.email,
-        password: casual.password,
-        exams: [
-          {
-            exam: {
-              id: casual.uuid,
-              country: casual.country,
-              city: casual.city,
-              location: casual.address,
-              snack: casual.word,
-              day: 'sunday',
-              appointment: casual.time()
-            },
-            percentage: casual.integer(-1, 100)
-          }
-        ]
-      };
-    });
+    try {
+        let numEntries = 2000;
+        console.log('starting');
+        res.send('hellow');
 
+        for (let i = 0; i < numEntries; i++) {
+            const entry = {
+                first_name: casual.first_name,
+                last_name: casual.last_name,
+                country: casual.country,
+                city: casual.city,
+                phone_namber: casual.phone,
+                email: casual.email.toLowerCase(),
+                password: casual.password,
+                exams: []
+            };
+            const numExams = casual.integer(0, 5);
+            for (let j = 0; j < numExams; j++) {
+                const exam = {
+                    _id: '649e2cc7d6f9e22572a2a2e1',
+                    country: casual.country,
+                    city: casual.city,
+                    location: casual.address,
+                    snack: casual.word,
+                    day: casual.date('YYYY-MM-DD'),
+                    appointment: casual.word,
+                    percentage: casual.integer(0, 100)
+                };
+                entry.exams.push({ exam });
+            }
 
-    for (let i = 0; i < numEntries; i++) {
-        const entry = casual.entry;
-        try{
-            await User.create(entry);
-        }catch(err){
-            console.log(err);
+            await User.create(entry)
         }
-    }
+        
+        // Insert entries into the database
 
-
-
+        
+        console.log('finished');
+        
+        console.log(`Generated ${numEntries} random entries successfully!`);
+      } catch (err) {
+    
+        console.error('Error generating random entries:', err);
+      }
     
 
 

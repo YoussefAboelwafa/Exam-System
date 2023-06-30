@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const adminSchema = new mongoose.Schema({
-    user_id: {type: String, required: true, index:'hashed'}
+    _id: {type: String, required: true, index:'hashed'}
 })
 
 

@@ -8,11 +8,11 @@ const userSchema = new mongoose.Schema({
     last_name: {type: String, required: true},
     country: {type: String, required: true},
     city: {type: String, required: true},
-    phone_namber: {type: String, required: true, unique: true},
+    phone_namber: {type: String, required: true, unique: true, index: true},
     email: {
         type: String,
         required: [true, 'Email required'],
-        index: 'hashed',  /////// left from here
+        index: true,  /////// left from here
         unique: true,
         lowercase: true
     },
@@ -20,15 +20,15 @@ const userSchema = new mongoose.Schema({
     exams: {
         type: [{
             exam: {type: {
-                id: {type: String, required: true},
+                _id: {type: String, required: true},
                 country: {type: String, required: true},
                 city: {type: String, required: true},
                 location: {type: String, required: true},
                 snack: {type: String, required: true},
                 day: {type: String, required: true},
-                appointment: {type: String, required: true}
+                appointment: {type: String, required: true},
+                percentage: {type: Number, required: true}
             }, required: true},
-            percentage: {type: Number, required: true}
         }],
         default: []
     }
