@@ -407,9 +407,9 @@ li:is(:hover, .active) i {
 }
 .close{
   position:fixed;
-  right:10%;
-  top: 10%;
+  position: sticky;
   color: #008182;
+
 }
 .closebtn{
   border-radius: 50%;

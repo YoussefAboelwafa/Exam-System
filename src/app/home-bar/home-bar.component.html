@@ -230,3 +230,27 @@
   </div>
 </div>
 
+<div class="modal fade" id="token_exam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{non_token_exam.title}}</h5>
+       <button class="outer_button" disabled > <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </button>
+      </div>
+      <div class="modal-body">
+        <p>{{non_token_exam.about}}</p>
+        <ul>
+          <li *ngFor="let info of non_token_exam.info" style="margin-top: 20px;">{{info}}</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="take_exam(non_token_exam.title,non_token_exam.id)">Take Exam</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
