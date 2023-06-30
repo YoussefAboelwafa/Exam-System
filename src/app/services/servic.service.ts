@@ -44,33 +44,27 @@ public send_again():Observable<any>{
 public city_country():Observable<any>{
   return this.http.get<any>(`${this.apiServerUrl}/city_country`);
 }
+
+//it checks if the user is in sign in a system or not and authenticated to the system
 public is_signin():Observable<any>{
   return this.http.get<any>(`${this.apiServerUrl}/is_signedin`, { withCredentials: true });
 }
 
+// it take url of the new photo of the user and return no thing
+public change_photo(url:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/change_photo`,{url:url});
+}
+
+// when i enter home bar i send request and want to receive json that contains {user:user,non_taken_exam:any exam that the user does not take it yet}
+public home_bar_init():Observable<any>{
+  return this.http.get<any>(`${this.apiServerUrl}/home/home_bar`);
+}
+// when i enter home bar i send request and want to receive json that contains {user:user,non_taken_exam:any exam that the user does not take it yet}
+//he take ids of all exams in user
+public exam_bar_init():Observable<any>{
+  return this.http.get<any>(`${this.apiServerUrl}/home/exams`);
+}
  
 
 
 }
-// //send user with all date ,recieve flag ==0 if the email or phone are found in system
-// //else i recieve flag==1  back active verification code and i will send to backend the verify 
-// public sign_up({email, phone}:any):Observable<any>{
-//   return this.http.post<any>(${this.apiServerUrl}/sign_up, {email, phone});
-// }
-// //send user with email and pass if the user not found recive flag==0 else recive some date i will tell you soon ...
-// public login(user:any):Observable<any>{
-//   return this.http.post<any>(${this.apiServerUrl}/login,user);
-// }
-// // i will send verify code to back and if it wrong i will recive flag==0 else flag ==1;
-// public verify_code(code:any, new_user):Observable<any>{
-//   return this.http.post<any>(${this.apiServerUrl}/verify_code,{code, new_user});
-// }
-// // i will send this request if user go to sign up and i recive pair of array ,
-// //one to all city ,other to all country. it can be not used and replace this request
-// // with arrays in frontend and this array fill with any  cities and countries  
-// public city_country():Observable<any>{
-//   return this.http.get<any>(${this.apiServerUrl}/city_country);
-// }
-
-
-// }

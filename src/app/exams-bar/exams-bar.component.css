@@ -48,7 +48,7 @@ margin-top: 10px;
 margin-bottom: 10px;
 }
 
-#snack{
+#select{
   display: inline-flex;
 height: 40px;
 padding: 10px 16px;
@@ -482,3 +482,7 @@ li:is(:hover, .active) i {
   padding-left: 15px;
 }
 
+#disable_btn{
+  background: rgba(207, 207, 207, 0.44);
+  color: rgba(151, 151, 151, 0.44);
+}

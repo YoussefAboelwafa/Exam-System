@@ -7,7 +7,7 @@ export class users{
     private email:any;
     private phone_namber:any;
     private password:any;
-    private id:any;
+    private _id:any;
     private photo:any;
     
     exams:any; //exam that contain the array of exam that user take it and the degree of each exam
@@ -34,7 +34,7 @@ export class users{
             this.password = value;
         }
         set_id(value:any){
-            this.id = value;
+            this._id = value;
         }
         set_photo(value:any){
             this.photo = value;
@@ -62,7 +62,7 @@ export class users{
             return  this.password 
         }
         get_id(){
-            return this.id 
+            return this._id 
         }
         get_photo(){
             return this.photo 

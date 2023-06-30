@@ -2,10 +2,10 @@
   <div class="section section1">
     <div class="name">
       <input type="file" accept="image/*" class="file-input" (change)="onFileSelect($event)">
-      <img [src]="photo" alt="" class="image" />
+      <img [src]="current_user.photo" alt="" class="image" />
       <div class="name2">
-        <label>Youssef Aboelwafa</label>
-        <label id="id">#12345678</label>
+        <label>{{current_user.first_name}} {{current_user.last_name}}</label>
+        <label id="id">#{{current_user._id}}</label>
       </div>
     </div>
     <div class="btns1">
@@ -57,34 +57,5 @@
 
 
 
-<!-- Other Exams  -->
-
-
-
  <!-- skipLocationChange="true"
   routerLink="home/exam"   -->
-
-
-<!-- <div class="kimo">
-<div class="qq">Choose what you prefer!</div>  
-  <div class="mm">
-    <form #input_form="ngForm" (ngSubmit)="submit()">
-      <table class="box">
-        <div>
-        <h3>Select your snack</h3>
-        <tr>
-          <td>
-            <select required #snack id="snack" name="snack" (change)="select_snack(snack.value)">
-              <option>Select</option>
-              <option *ngFor="let snack of snacks" >{{ snack }}</option>
-  
-            </select>
-          </td>
-        </tr> 
-        <tr><button id="btn" type="submit">Next</button></tr>
-       </div>  </table>
-     
-    </form>
-  </div>
-  
-  </div> -->
