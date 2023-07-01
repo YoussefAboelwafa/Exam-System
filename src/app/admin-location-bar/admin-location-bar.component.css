@@ -180,6 +180,6 @@ td {
   cursor: pointer;
   transition: 0.5s;
 }
-.taken .edit i:hover {
+.taken i:hover {
   color: #ff0052;
 }
