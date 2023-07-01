@@ -15,6 +15,7 @@ export class ServicService {
   user!: users;
   upcoming_ex!:any[];
   token_ex!:any[];
+  non_token!:any[];
   ids_ex!:any[];
   constructor(private http: HttpClient) { }
 
