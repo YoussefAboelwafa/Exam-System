@@ -155,6 +155,7 @@ ngOnInit(): void {
       //becouse if the user click take exam from modal,hide pop up if it show
       this.order_exam._id=id_exam;
       $('#not_token_exam').modal('hide');
+      $('#token_exam').modal('hide');
       this.flag_book=true;
     }
   

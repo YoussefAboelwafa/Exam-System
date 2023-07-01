@@ -1,0 +1,422 @@
+div {
+    font-family: "Montserrat", sans-serif;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    flex-wrap: wrap;
+    background: rgba(204, 255, 251, 0.21);
+    position: fixed;
+    left: 5%;
+    top: 2%;
+  }
+  
+  .section {
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin: 7px;
+  }
+  .section1 {
+    width: 20vw;
+    height: 22vh;
+    order: 1;
+    background: radial-gradient(
+      circle at top left,
+      rgba(255, 145, 76, 0.18),
+      rgba(0, 129, 130, 0.2)
+    );
+  }
+  .section2 {
+    width: 20vw;
+    height: 72.9vh;
+    order: 2;
+    background: radial-gradient(
+      circle at top left,
+      rgba(255, 145, 76, 0.18),
+      rgba(0, 129, 130, 0.2)
+    );
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .section3 {
+    width: 70vw;
+    height: 95vh;
+    order: 3;
+    background: radial-gradient(
+      circle at top left,
+      rgba(255, 145, 76, 0.18),
+      rgba(0, 129, 130, 0.2)
+    );
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-y: scroll;
+  }
+  .name,
+  .btns1 {
+    display: flex;
+    flex-direction: row;
+  }
+  .name {
+    color: #003f3d;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+  }
+  .name2 {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 100%;
+  }
+  .name img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 10px 8px 8px 10px;
+    box-shadow: 1px 4px 13px 1px rgba(0, 0, 0, 0.54);
+  }
+  #id {
+    margin: 0px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .btns1 {
+    margin-left: 4px;
+    margin-top: 5%;
+    padding: 1%;
+  }
+  .btns1 button {
+    background: #008182;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 600;
+    line-height: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 45%;
+    height: 5%;
+    padding: 8px 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  .btns1 button:hover {
+    background: #fff;
+    color: #008182;
+    border: 1px solid #008182;
+    transition: 1s;
+  }
+  
+  .sidebar {
+    border-radius: 20px;
+  }
+  .sidebar img {
+    margin-right: 2%;
+  }
+  ul {
+    margin-top: 5%;
+  }
+  .sidebar li {
+    padding: 5px;
+    margin: 5px;
+    list-style-type: none;
+    
+  }
+  .sidebar ul li button {
+    border: none;
+    border-style: none;
+    outline: none;
+    background: none;
+    display: block;
+    border-radius: 10px;
+    height: 50px;
+    width: 90%;
+    line-height: 30px;
+    padding-left: 20px;
+    text-align: left;
+    justify-content: center;
+    color: #008182;
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    line-height: 150%;
+    box-sizing: border-box;
+    transition: 0.2s;
+    color: #008182;
+    background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
+    border-radius: 10px;
+    
+  }
+  li:is(:hover) button {
+    margin-left: 15px;
+  }
+  li.active button {
+    margin-left: 18px;
+  border: 3px solid #008182 !important ;
+  }
+  .book {
+    height: 30%;
+    width: 80%;
+    text-align: left;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    background: radial-gradient(
+        313.28% 209.98% at 99.43% 99.22%,
+        #008182 0%,
+        rgba(0, 129, 130, 0) 100%
+      ),
+      #fff;
+    box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.47);
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+  }
+  .book label {
+    color: #fff;
+    font-size: 26px;
+    font-family: Montserrat;
+    font-weight: 500;
+    line-height: 100%;
+  }
+  .book button {
+    border-radius: 8px;
+    background: #f79051;
+    color: #fff;
+    font-size: 16px;
+    font-family: Montserrat;
+    font-weight: 700;
+    line-height: 20px;
+    height: 35%;
+    border: none;
+    margin-top: 10%;
+  }
+  .book button:hover {
+    background: #fff;
+    color: #f79051;
+    border: 1px solid #f79051;
+    transition: 1s;
+  }
+  .goodmorningwidgets,
+  .discoverexamswidgets {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 2%;
+  }
+  .card {
+    width: 25vw;
+    height: 25vh;
+    position: relative;
+    margin-right: 2%;
+  }
+  .card h5 {
+    align-items: left;
+    font-size: 32px;
+    font-family: "Montserrat";
+    font-weight: 500;
+    line-height: 100%;
+  }
+  .card a {
+    font-size: 12px;
+    font-family: "Montserrat";
+    font-weight: 700;
+    text-decoration: underline;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transition: 0.5s;
+  }
+  .card a:hover {
+    font-size: 15px;
+  }
+  .upcoming {
+    border-radius: 10px;
+    background: radial-gradient(
+        313.28% 209.98% at 99.43% 99.22%,
+        #dff 0%,
+        rgba(235, 247, 248, 0) 100%
+      ),
+      #fff;
+    box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
+    justify-content: left;
+  }
+  .upcoming a {
+    color: #006a6a;
+  }
+  .upcoming h5 {
+    color: #006a6a;
+  }
+  
+  .taken {
+    border-radius: 10px;
+    background: radial-gradient(
+        313.28% 209.98% at 99.43% 99.22%,
+        #ffd7bf 0%,
+        rgba(255, 215, 191, 0) 100%
+      ),
+      #fff;
+    box-shadow: 0px 0px 25px 0px rgba(247, 144, 81, 0.15);
+    justify-content: left;
+  }
+  .taken a {
+    color: #99562e;
+  }
+  .taken h5 {
+    color: #99562e;
+  }
+  .rank {
+    border-radius: 10px;
+    background: radial-gradient(
+        313.28% 209.98% at 99.43% 99.22%,
+        #008182 0%,
+        rgba(0, 129, 130, 0) 100%
+      ),
+      #fff;
+    box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.47);
+    justify-content: left;
+  }
+  .rank a {
+    color: #fff;
+  }
+  .rank h5 {
+    color: #fff;
+  }
+  .goodmorninglabel,
+  .discoverexamslabel {
+    color: #003f3d;
+    font-size: 32px;
+    font-family: Montserrat;
+    font-weight: 700;
+    line-height: 150%;
+    margin-left: 2%;
+  }
+  .discoverexamslabel {
+    display: flex;
+    flex-direction: row;
+  }
+  .discoverexamslabel a {
+    right: 10%;
+    color: #008081;
+    font-size: 16px;
+    font-family: Montserrat;
+    font-weight: 700;
+    line-height: 20px;
+    text-decoration-line: underline;
+    position: absolute;
+    transition: 0.5s;
+  }
+  .discoverexamslabel a:hover {
+    font-size: 20px;
+  }
+  
+  
+  .outer_button{
+    border:none;
+    border-radius: 10px;
+    background-color: #FFF;
+    width: 25px;
+    height: 25px;
+    margin-left:3px
+  }
+  .modal-title {
+    color: #006A6A;
+  font-size: 30px;
+  font-family: Montserrat;
+  font-weight: 700;
+  line-height: 100%;
+  
+  }
+  .modal-content{
+    border-radius: 15px;
+    background: radial-gradient(313.28% 209.98% at 99.43% 99.22%, #DFF 0%, rgba(235, 247, 248, 0.00) 100%), rgba(255, 255, 255, 0.75);
+    box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
+    backdrop-filter: blur(6.5px);
+  }
+  
+  .modal-footer button{
+    background: #008182;
+    box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+    color:#FFF;
+    width: 200px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 8px 10px;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+  
+  }
+  
+  .modal-body{
+    color: #008182;
+    font-size: 16px;
+    font-family: Montserrat;
+    font-weight: 500;
+  }
+  .modal-footer button:hover {
+    background: #fff;
+    color: #008182;
+    border: 1px solid #008182;
+    transition: 1s;
+  }
+  .image-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .image {
+    display: block;
+    width: 300px;
+    height: 200px;
+  }
+  
+  .file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    margin-left: 32px;
+    margin-top: 16px;
+    border-radius: 100px;
+    opacity: 0;
+  }
+  
+  .contain {
+    background: rgba(0, 0, 0, 0.082);
+    backdrop-filter: blur(5px);
+    color: black;
+    font-size: 48px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    flex-wrap: wrap;
+    font-weight: 1400;
+    background: rgba(204, 255, 251, 0.111);
+    position: fixed;
+    left: 5%;
+    top: 2%;
+    height: 100vh;
+    width: 100vw;
+  }

@@ -498,20 +498,28 @@
         <button
           type="button"
           id="showcertificate"
-          (click)="
-            take_exam(learn_dataof_token.title, learn_dataof_token._id)
-          "
+          
         >
           Show certificate
         </button>
         <button
-        type="button"
-        (click)="
-          take_exam(learn_dataof_token.title, learn_dataof_token._id)
-        "
-      >
-        Take Exam
-      </button>
+          disabled
+          *ngIf="learn_dataof_token.percentage==100"
+          style="background: rgba(199, 199, 199, 0.46);
+          box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+          "
+          type="button"
+          (click)="take_exam(learn_dataof_token.title, learn_dataof_token._id)"
+        >
+          Take Exam
+        </button>
+        <button
+        *ngIf="learn_dataof_token.percentage!=100"
+          type="button"
+          (click)="take_exam(learn_dataof_token.title, learn_dataof_token._id)"
+        >
+          Take Exam
+        </button>
       </div>
     </div>
   </div>
