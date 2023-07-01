@@ -1,1 +1,269 @@
-<p>admin-exams works!</p>
+<div class="discoverexamslabel">
+    <p>Exams</p>
+</div>
+
+<div class="discoverexamslabel">
+    <button
+     data-toggle="modal"
+    data-target="#add_exam"
+     class="discoverbtns btn_exam btn_add" style="margin-bottom: 10px;margin-right: 6px;">Add Exam</button>
+</div>
+
+<div class="discoverexamswidgets">
+    <!-- ngfor ya kimoo -->
+    <div *ngFor="let non_token of non_token_exam; let i = index" class="card card-body upcoming">
+        <div class="remove" >
+            <button class="btn_remove"
+            data-toggle="modal"
+            data-target="#confirmation" (click)="remove_exam(non_token,i)"><i class="fa-solid fa-trash-can"  ></i></button>            
+        </div>
+      <h5 class="card-title">{{ non_token.title }}</h5>
+      <div class="discoverbox1">
+        <div class="discoversmallbox">
+          <ul class="examlist">
+            <li *ngFor="let infomration of non_token.info">{{ infomration }}</li>
+          </ul>
+        </div>
+        <div class="discoverinfo">
+          <button
+            (click)="learn_non_token(non_token)"
+            data-toggle="modal"
+            data-target="#not_token_exam"
+            class="discoverbtns learnmore"
+          >
+            Learn More
+          </button>
+          <button
+            (click)="Edit_exam(non_token,i)"
+            class="discoverbtns btn_exam"
+            data-toggle="modal"
+            data-target="#edit"
+          >
+            Edit Exam
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div
+  class="modal fade"
+  id="not_token_exam"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          {{ learn_dataof_nontoken.title }}
+        </h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ learn_dataof_nontoken.about }}</p>
+        <ul>
+          <li
+            *ngFor="let info of learn_dataof_nontoken.info"
+            style="margin-top: 20px"
+          >
+            {{ info }}
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button
+        (click)="Edit_exam(learn_dataof_nontoken,-1)"
+        class="discoverbtns btn_exam"
+        data-toggle="modal"
+        data-target="#edit"
+          >
+            Edit Exam
+          </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div
+  class="modal fade"
+  id="confirmation"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          <p style="color: red;">Confirmation Remove</p>
+        </h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body" style="color: red;">
+        Are you sure you want to remove {{remove_ex.title}}?
+      </div>
+      <div class="modal-footer">
+        <button
+            (click)="totaly_remove(remove_ex,index_remove)"
+            class="discoverbtns btn_exam"
+          >
+          YES
+        </button>
+        <button 
+           style="background-color: #FF0052;"
+            class="discoverbtns btn_exam"
+            (click)="close();"
+          >
+          NO
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div
+  class="modal fade"
+  id="edit"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          <p >Edit exam</p>
+        </h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body" >
+
+        <h3>Title of exam</h3>
+        <input  #ed_title type="text" [value]="edit_ex.title" class="input_edit">
+        <h3>About of exam</h3>
+        <textarea #ed_about [value]="edit_ex.about" class="input_edit" id="t_area"></textarea>
+
+
+        </div>
+      <div class="modal-footer">
+        <button
+            (click)="confirm_edit(ed_title.value,ed_about.value)"
+            class="discoverbtns btn_exam"
+            style="background-color: #FF0052;"
+
+          >
+          confirm Edit
+        </button>
+        <button 
+            class="discoverbtns btn_exam"
+            (click)="close();"
+          >
+          Cancle Edit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="add_exam"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          <p >Add exam</p>
+        </h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body" >
+
+        <h3>Title of exam</h3>
+        <input 
+        [(ngModel)]="title_add"
+        #ed_title type="text" [value]="" class="input_edit">
+        <h3>About of exam</h3>
+        <textarea        
+        [(ngModel)]="about_add"
+        #ed_about [value]="" class="input_edit" id="t_area"></textarea>
+        <h3>number of Information</h3>
+        <input (blur)="set_number(number_info.value)" min="0"  #number_info type="number" [value]="" class="input_edit">
+        <h3>Information of exam</h3>
+        <div *ngFor="let info of information; let i = index">
+            <input #in (blur)="set_info(in.value,i)" [value]="information[i]" type="text" class="input_edit">
+          </div>
+
+        </div>
+      <div class="modal-footer">
+        <button
+            (click)="add_exam()"
+            class="discoverbtns btn_exam"
+            style="background-color: #FF0052;"
+
+          >
+          Add Exam
+        </button>
+        <button 
+            class="discoverbtns btn_exam"
+            (click)="close();"
+          >
+          Cancle Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
