@@ -53,7 +53,7 @@ function errorHandler(err) {
 ///ivsXMmb3UFV5AtA0T3vh3l99CBqH5gfy
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-    return jwt.sign({ id:id, admin:false }, 'example secret' , { ///secrect key
+    return jwt.sign({ id:id, privilages:0 }, 'example secret' , { ///secrect key  /// 0:normal user, 1:moderator, 2:admin 
         expiresIn : maxAge
     })
 }
@@ -175,7 +175,7 @@ module.exports.send_again = async (req, res) =>{
         // console.log(phone);
         const code = generateOTP();
         // console.log(code);
-        const otp = await OTP.insert({_id: phone_namber, code: code});
+        const otp = await OTP.insert({phone_namber: phone_namber, code: code});
 
         // sendSMS(phone_namber, code);   /////remove comment later
 
@@ -197,7 +197,7 @@ module.exports.test = async (req, res) => {
     let accum = 0;
     for (let i = 1; i <= 10000; i++) {
         const otp = {
-          phone: `+123456789${i}`,
+          phone_namber: `+123456789${i}`,
           code: `+12345ZXCZXCZXCZXCZXc6789${i}`
         };
         const startTime = Date.now();

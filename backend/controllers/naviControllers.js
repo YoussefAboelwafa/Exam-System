@@ -13,15 +13,18 @@ const payment = (req, res) => {
 
 module.exports.getHome = async (req, res) => {
     try{
+        let startTime = Date.now();
         const token = req.cookies.jwt;
 
         if(token){
+            let startTime = Date.now();
             jwt.verify(token, 'example secret', async (err, decodedToken)=>{
 
                 if(err){
                     console.log(err.message);
                     res.json({signed_in: false});
                 }else{
+                    
                     const user = await User.findById(decodedToken.id).select({first_name: 1, last_name: 1, exams: 1, _id: 1});
 
                     const exam_ids = user.exams.map((elem)=>elem.exam._id);
@@ -30,8 +33,8 @@ module.exports.getHome = async (req, res) => {
                     
                     const other_exam = await Exam.findOne({ _id: { $nin: exam_ids } }).select('title info about');
 
-                    console.log(user);
-                    res.json({user: user, taken_exam_info, other_exam: other_exam});
+                    res.json({user: user, token_exam_info, other_exam: other_exam});
+
 
                 }
             })

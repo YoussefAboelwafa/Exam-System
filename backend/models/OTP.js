@@ -2,8 +2,23 @@ const mongoose = require('mongoose');
 const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
 
+
+const characterSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const idLength = 6;
+const generateRandomCode = ()=> {
+    let userCode = '';
+    for (let i = 0; i < idLength; i++) {
+      const randomIndex = Math.floor(Math.random() * characterSet.length);
+      userCode += characterSet[randomIndex];
+    }
+    console.log(Buffer.byteLength(userCode, 'utf8'));
+    return userCode;
+  }
+  
+
 const OTPschema = new mongoose.Schema({
-    phone_namber: {type: String, required: true, index: 'hashed'},
+    _id: {type: String, required: true, unique: true, default: generateRandomCode},
+    phone_namber: {type: String, required: true, index:'hashed'},
     code: {type: String, required: true},
     createdAt: { type: Date, default: Date.now, expires: 600 }
 })
@@ -11,19 +26,21 @@ const OTPschema = new mongoose.Schema({
 
 
 
+
 OTPschema.statics.insert = async function(elem){
     try {
         const {phone_namber, code} = elem;
-        console.log('before saving', elem);
         const salt = await bcrypt.genSalt();
         const hashed_code = await bcrypt.hash(code, salt);
+        
+        const filter = { phone_namber: phone_namber };
+        const update = { code: hashed_code, createdAt: Date.now() };
+        const options = { upsert: true };
 
-        await this.findOneAndUpdate(
-          { phone_namber:phone_namber },
-          { code: hashed_code , createdAt: Date.now()},
-          { upsert: true }
-        );
-        console.log('OTP entry updated or created successfully.');
+        const otp = await OTP.findOneAndUpdate(filter, update, options);
+
+        console.log(otp);
+    
     } catch (error) {
         console.error('Error updating or creating OTP entry:', error);
     }

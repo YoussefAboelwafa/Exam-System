@@ -13,19 +13,19 @@ const generateRandomCode = ()=> {
       const randomIndex = Math.floor(Math.random() * characterSet.length);
       userCode += characterSet[randomIndex];
     }
+    console.log(Buffer.byteLength(userCode, 'utf8'));
     return userCode;
   }
   
 
 
 const userSchema = new mongoose.Schema({
-    // _id: {type: Number, index: true},
+    _id: {type: Number, index: true, unique: true, index: true},
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
     country: {type: String, required: true},
     photo: {type: String, default: null}, ////leave for later
     city: {type: String, required: true},
-    user_code: {type: String, required: true, index: 'hashed', unique: true,default: generateRandomCode},
     phone_namber: {type: String, required: true, unique: true, index: true},
     email: {
         type: String,
