@@ -383,9 +383,6 @@
   </div>
 </div>
 
-
-
-
 <!-- token_exam example -->
 
 <div
@@ -426,16 +423,23 @@
           </ul>
           <div class="discoversmallbox2">
             <label class="discoverexamname1">Your last mark</label>
-            <label class="discoverscore1">{{learn_dataof_token.percentage}}%</label>
+            <label class="discoverscore1"
+              >{{ learn_dataof_token.percentage }}%</label
+            >
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button
           type="button"
-          (click)="
-            take_exam(learn_dataof_token.title, learn_dataof_token._id)
-          "
+          id="showcertificate"
+          (click)="take_exam(learn_dataof_token.title, learn_dataof_token._id)"
+        >
+          Show certificate
+        </button>
+        <button
+          type="button"
+          (click)="take_exam(learn_dataof_token.title, learn_dataof_token._id)"
         >
           Take Exam
         </button>

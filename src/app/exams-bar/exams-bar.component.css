@@ -513,9 +513,18 @@ li:is(:hover, .active) i {
   font-size: 16px;
   font-weight: 700;
   margin: 0px;
+  padding: 5px;
 }
 .discoverscore1{
   font-size: 62px;
   font-weight: 300;
-  margin: 0px;
+  margin-top: 20px;
+}
+#showcertificate{
+  color: #008182;
+  background-color: #fff;
+}
+#showcertificate:hover{
+  color: #fff;
+  background-color: #008182;
 }

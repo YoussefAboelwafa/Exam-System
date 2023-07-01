@@ -32,7 +32,7 @@
     role="button"
     data-slide="prev"
   >
-    <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
   <a
@@ -41,7 +41,7 @@
     role="button"
     data-slide="next"
   >
-    <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
 </div>
@@ -86,7 +86,6 @@
       Ranks
     </h5>
     <div class="card-text takenbox">
-      <!-- ng for -->
       <div class="rankinfo">
         <label class="rankname">Your Rank</label>
         <label class="examname2">C programming</label>
@@ -498,12 +497,21 @@
       <div class="modal-footer">
         <button
           type="button"
+          id="showcertificate"
           (click)="
             take_exam(learn_dataof_token.title, learn_dataof_token._id)
           "
         >
-          Take Exam
+          Show certificate
         </button>
+        <button
+        type="button"
+        (click)="
+          take_exam(learn_dataof_token.title, learn_dataof_token._id)
+        "
+      >
+        Take Exam
+      </button>
       </div>
     </div>
   </div>
