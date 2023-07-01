@@ -39,12 +39,14 @@ const userSchema = new mongoose.Schema({
         type: [{
             exam: {type: {
                 _id: {type: String, required: true},
+                ///// delete later and replace with id of the appointment
+                //// and populate
                 country: {type: String, required: true},
                 city: {type: String, required: true},
                 location: {type: String, required: true},
-                snack: {type: String, required: true},
                 day: {type: String, required: true},
                 appointment: {type: String, required: true},
+                snack: {type: String, required: true},
                 percentage: {type: Number, required: true}
             }, required: true},
         }],

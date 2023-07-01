@@ -19,14 +19,14 @@ const generateRandomCode = ()=> {
 
 const appointmentsSchema = new mongoose.Schema({
     // _id: {type: String, required: true, unique: true, default: generateRandomCode},
-    appointment: {type: String, required: true, index: 'hashed'},
-    reserved_number: {type: Number, required: true, default: 0}
+    appointment: {type: String, required: true, index: 'hashed'}
 })
 
 const daysSchema = new mongoose.Schema({
     // _id: {type: String, required: true, unique: true, default: generateRandomCode},
     day: {type: String, required: true, unique: true, index: 'hashed'},
-    appointments: [{type: appointmentsSchema, required: true}]
+    appointments: {type:[{type: appointmentsSchema, required: true}], default: []},
+    reserved_number: {type: Number, required: true, default: 0}
 })
 
 
