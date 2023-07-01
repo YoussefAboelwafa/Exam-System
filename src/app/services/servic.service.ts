@@ -69,7 +69,19 @@ public exam_bar_init():Observable<any>{
   console.log(this.ids_ex)
   return this.http.post<any>(`${this.apiServerUrl}/home/exams`,{ids:this.ids_ex}, { withCredentials: true });
 }
- 
+
+//return id of the
+public add_new_exam(new_exam:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/add_exam`,{new_exam:new_exam}, { withCredentials: true });
+}
+
+public edit_exam(id:any,new_exam:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/edit_exam`,{_id:id,new_exam:new_exam}, { withCredentials: true });
+}
+
+public remove_exam(id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/remove_exam`,{_id:id}, { withCredentials: true });
+}
 
 
 }
