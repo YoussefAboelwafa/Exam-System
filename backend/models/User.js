@@ -20,7 +20,7 @@ const generateRandomCode = ()=> {
 
 
 const userSchema = new mongoose.Schema({
-    _id: {type: Number, index: true, unique: true, index: true},
+    // _id: {type: Number, index: true, unique: true, index: true},
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
     country: {type: String, required: true},

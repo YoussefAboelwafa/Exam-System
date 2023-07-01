@@ -17,7 +17,7 @@ const generateRandomCode = ()=> {
   
 
 const OTPschema = new mongoose.Schema({
-    _id: {type: String, required: true, unique: true, default: generateRandomCode},
+    // _id: {type: String, required: true, unique: true, default: generateRandomCode},
     phone_namber: {type: String, required: true, index:'hashed'},
     code: {type: String, required: true},
     createdAt: { type: Date, default: Date.now, expires: 600 }
