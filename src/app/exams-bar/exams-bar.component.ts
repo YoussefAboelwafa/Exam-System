@@ -30,52 +30,10 @@ export class ExamsBarComponent implements OnInit {
   }
   upcoming_exam:any[]=[]
   token_exam:any[]=[]
-  
   //take it from back
-  learn_dataof_nontoken:any={
-    title:"Algoritms",
-    about:"algorithms are a fundamental concept in computer science, and are essential for solving complex problems and developing efficient software systems.There are many different types of algorithms, including sorting algorithms, searching algorithms, graph algorithms, and optimization algorithms. ",
-    info:["sorting","DAG","DFS algoritm"],
-    _id:"",
-  };
-  learn_dataof_token:any={
-    title:"Algoritms",
-    about:"algorithms are a fundamental concept in computer science, and are essential for solving complex problems and developing efficient software systems.There are many different types of algorithms, including sorting algorithms, searching algorithms, graph algorithms, and optimization algorithms. ",
-    info:["sorting","DAG","DFS algoritm"],
-    _id:"",
-  };
-
-  non_token_exam:any[]=[
-    // {
-    //   title:"Algoritms",
-    //   about:"algorithms are a fundamental concept in computer science, and are essential for solving complex problems and developing efficient software systems.There are many different types of algorithms, including sorting algorithms, searching algorithms, graph algorithms, and optimization algorithms. ",
-    //   info:["sorting","DAG","DFS algoritm"],
-    //   _id:"",
-    // },
-    // {
-    //   title:"python programming",
-    //   about:" python is a powerful and flexible language that is well-suited for a wide range of programming tasks. However, it can be more difficult to learn and use than some other languages due to its complexity and the need to manage memory manually in some cases.",
-    //   info:["STL","OOP with python"],
-    //   _id:"",
-    // },
-    // {
-    //   title:"java programming",
-    //   about:" java is a powerful and flexible language that is well-suited for a wide range of programming tasks. However, it can be more difficult to learn and use than some other languages due to its complexity and the need to manage memory manually in some cases.",
-    //   info:["basic","colections"],
-    //   _id:"",
-    // },
-    // {
-    //   title:"c programming",
-    //   about:" C is a powerful and flexible language that is well-suited for a wide range of programming tasks. However, it can be more difficult to learn and use than some other languages due to its complexity and the need to manage memory manually in some cases.",
-    //   info:["basic","advanced"],
-    //   _id:"",
-    // }
-
-  ]
-
-
-  // ranking_exam:any;
-
+  learn_dataof_nontoken:any=[];
+  learn_dataof_token:any=[]
+  non_token_exam:any[]=[]
 
   current_user_h_bar={
   }
@@ -90,19 +48,10 @@ export class ExamsBarComponent implements OnInit {
   
 
   constructor(private service:ServicService) {
-    
     this.upcoming_exam=this.service.upcoming_ex;
     this.token_exam=this.service.token_ex;
-    this.service.exam_bar_init().subscribe
-    (
-      (x)=> {
-        console.log(x);
-        this.non_token_exam=x  
-        this.service.user=x.user;
-       error:(error: HttpErrorResponse) =>alert(error.message);
-       }
-
-    )
+    this.non_token_exam=this.service.non_token;
+    console.log(this.token_exam)
   }
 
   ngOnInit(): void {
@@ -186,6 +135,7 @@ export class ExamsBarComponent implements OnInit {
   }
 
   learn_token(value_send_by_btn_learn:any){
+    console.log(value_send_by_btn_learn)
     this.learn_dataof_token=value_send_by_btn_learn;
   }
 

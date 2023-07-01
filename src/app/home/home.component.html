@@ -1,6 +1,6 @@
 <div class="container">
   <div class="section section1">
-    <div class="name">
+    <div class="name"*ngIf="current_user">
       <input type="file" accept="image/*" class="file-input" (change)="onFileSelect($event)">
       <img [src]="current_user.photo" alt="" class="image" />
       <div class="name2">

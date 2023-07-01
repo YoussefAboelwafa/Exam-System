@@ -29,6 +29,8 @@ import { RankingBarComponent } from './ranking-bar/ranking-bar.component';
     ExamsBarComponent,
     PopUpComponent,
     RankingBarComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { RankingBarComponent } from './ranking-bar/ranking-bar.component';
     CommonModule,
     FormsModule,
     CustomFormsModule,
+
     
   ],
   providers: [ServicService,users,GuardServiceService],
