@@ -286,9 +286,10 @@ li:is(:hover, .active) i {
   padding-top: 5px;
   margin-right: 10px;
 }
-.takeninfo span {
-  font-size: 34px;
+.takeninfo label span {
+  font-size: 32px;
   font-weight: 400;
+  
 }
 .takeninfo label {
   font-size: 14px;
@@ -305,10 +306,9 @@ li:is(:hover, .active) i {
   justify-content: center;
   align-items: left;
   text-align: left;
-  padding-right: 10px;
-  padding-left: 10px;
-  padding-top: 2px;
+  padding: 10px;
   margin-right: 10px;
+
 }
 .rankname {
   font-weight: 700;
@@ -350,12 +350,13 @@ li:is(:hover, .active) i {
   color: #006a6a;
   font-size: 12px;
   font-weight: 700;
-  margin: 0px;
+  padding: 5px;
 }
 .discoversmallbox .discoverscore {
   font-size: 32px;
   font-weight: 300;
   margin: 0px;
+
 }
 .learnmore {
   border-radius: 16px;
@@ -495,4 +496,39 @@ h3 {
 #disable_btn {
   background: rgba(207, 207, 207, 0.44);
   color: rgba(151, 151, 151, 0.44);
+}
+
+.discoversmallbox2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width:24vh;
+  height: 20vh;
+  margin: 8px;
+  padding: 10px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  margin-right: 20px;
+  margin-left: 20%;
+}
+.discoversmallbox2 .discoverexamname1{
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0px;
+  padding: 5px;
+}
+.discoversmallbox2 .discoverscore1{
+  font-size: 62px;
+  font-weight: 300;
+  margin-top: 20px;
+}
+#showcertificate{
+  color: #008182;
+  background-color: #fff;
+}
+#showcertificate:hover{
+  color: #fff;
+  background-color: #008182;
 }
