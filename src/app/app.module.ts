@@ -18,6 +18,7 @@ import { HomeBarComponent } from './home-bar/home-bar.component';
 import { ExamsBarComponent } from './exams-bar/exams-bar.component';
 import { PopUpComponent } from './pop-up/pop-up.component';
 import { RankingBarComponent } from './ranking-bar/ranking-bar.component';
+import { NgxTypedJsModule } from 'ngx-typed-js';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,8 @@ import { RankingBarComponent } from './ranking-bar/ranking-bar.component';
     CommonModule,
     FormsModule,
     CustomFormsModule,
+    NgxTypedJsModule,
+
 
     
   ],

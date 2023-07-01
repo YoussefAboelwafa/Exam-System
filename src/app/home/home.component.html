@@ -51,11 +51,24 @@
   </div>
   <div class="section section3">
     <router-outlet></router-outlet>
+
+
+
+
+<div *ngIf="flag_type == true" class="contain">
+<ngx-typed-js 
+[strings]="['Welcome to Gammal Tech\'s Exam System!. ']"
+[loop]="false"
+[typeSpeed]="8"
+[shuffle]="true"
+>
+  <h1 class="typing"></h1>
+</ngx-typed-js>
+
     <!-- Good morning section -->
   </div>
 </div>
 
-
-
+</div>
  <!-- skipLocationChange="true"
   routerLink="home/exam"   -->

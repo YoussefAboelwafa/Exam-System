@@ -3,6 +3,7 @@ import { ServicService } from '../services/servic.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { exams } from '../objects/exams';
+import {NgxTypedJsModule} from 'ngx-typed-js';
 declare const $: any;
  
 
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit {
   photo:"../../assets/images/img3.jpg",  
   _id: ""
 };
+flag_type=true;
   constructor(private service:ServicService,private router: Router) { 
 
     this.service.home_bar_init().subscribe
@@ -95,14 +97,14 @@ export class HomeComponent implements OnInit {
     this.service.exam_bar_init().subscribe
     (
       (x)=> {
-        console.log(x);
         this.service.non_token=x  
        }
 
     )
   
          
-        
+    this.flag_type=false;
+    
 
        error:(error: HttpErrorResponse) =>alert(error.message);
        }
