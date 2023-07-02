@@ -91,7 +91,7 @@ CountrySchema.statics.insertPlace = async function(elem) {
         let endTime = Date.now();
         console.log(endTime-startTime);
 
-        return saved_country_id;
+        return saved_location_id;
     } catch (error) {
       console.error('Error updating or creating place entry:', error);
     }
