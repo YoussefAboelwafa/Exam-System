@@ -17,6 +17,7 @@ module.exports.add_place = async (req, res) => {
             max_number: number
         }
         */
+       console.log(req.body)
         const place = await TimeAndSpace.Country.insertPlace(req.body)
         res.json(place);
     }catch(err){

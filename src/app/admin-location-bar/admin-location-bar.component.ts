@@ -54,7 +54,29 @@ export class AdminLocationBarComponent implements OnInit {
   index_edit_address:any;
   
 
-  constructor(private service:ServicService) { }
+  constructor(private service:ServicService) { 
+
+    this.service.get_places().subscribe(
+      (x)=> {
+        console.log(x);
+        console.log(x[0].country_name);
+        console.log(x[0].cities);
+        console.log(x[0].cities[0].city_name);
+        console.log(x[0].cities[0].locations);
+        console.log(x[0].cities[0].locations[0].location_name);
+        console.log(x[0].cities[0].locations[0].snacks);
+        console.log(x[0].cities[0].locations[0].snacks[0]);
+
+
+
+
+
+         error:(error: HttpErrorResponse) =>alert(error.message);
+       }
+  
+    )
+    
+  }
 
   ngOnInit(): void {
   }
@@ -78,12 +100,14 @@ export class AdminLocationBarComponent implements OnInit {
   }
 
   totaly_remove(){
+    let x=new address;
+   x=this.address[this.index_remved_address];
     this.address.splice(this.index_remved_address, 1);
     this.close_popup();
    this.remove_ad=new address;
    this.index_remved_address="";
    //service remove address
-   this.service.add_location(this.address[this.index_remved_address]._id).subscribe(
+   this.service.remove_locate(x._id).subscribe(
     (x)=> {
        error:(error: HttpErrorResponse) =>alert(error.message);
      }
@@ -92,30 +116,30 @@ export class AdminLocationBarComponent implements OnInit {
 
 
   }
-  edit_address(value:any,index:any) {
-    this.edit_ad=value;
-    this.index_edit_address=index;
-  }
+  // edit_address(value:any,index:any) {
+  //   this.edit_ad=value;
+  //   this.index_edit_address=index;
+  // }
 
-  totaly_edit(ed_country:any,ed_city:any,ed_location:any,ed_capacity:any,ed_snacks:any){
-    this.address[this.index_edit_address].country=ed_country;
-    this.address[this.index_edit_address].city=ed_city;
-    this.address[this.index_edit_address].location=ed_location;
-    this.address[this.index_edit_address].capacity=ed_capacity;
-    this.address[this.index_edit_address].snacks=ed_snacks;
+  // totaly_edit(ed_country:any,ed_city:any,ed_location:any,ed_capacity:any,ed_snacks:any){
+  //   this.address[this.index_edit_address].country=ed_country;
+  //   this.address[this.index_edit_address].city=ed_city;
+  //   this.address[this.index_edit_address].location=ed_location;
+  //   this.address[this.index_edit_address].capacity=ed_capacity;
+  //   this.address[this.index_edit_address].snacks=ed_snacks;
 
-    this.close_popup();
+  //   this.close_popup();
 
-    this.service.edit_location(this.address[this.index_edit_address]._id,this.address[this.index_edit_address]).subscribe(
-      (x)=> {
+  //   this.service.edit_location(this.address[this.index_edit_address]._id,this.address[this.index_edit_address]).subscribe(
+  //     (x)=> {
   
-         error:(error: HttpErrorResponse) =>alert(error.message);
-       }
+  //        error:(error: HttpErrorResponse) =>alert(error.message);
+  //      }
   
-    )
+  //   )
 
-    //service edit address
-  }
+  //   //service edit address
+  // }
 
   add_locate(add_country:any,add_city:any,add_location:any,add_capacity:any,add_snacks:any) {
     let x=new address;
@@ -130,8 +154,9 @@ export class AdminLocationBarComponent implements OnInit {
 
     this.service.add_location(x).subscribe(
       (x)=> {
-  
-       this.address[this.address.length-1]._id=x;
+       this.address[this.address.length-1]._id=x._id;
+       console.log(this.address[this.address.length-1])
+
          error:(error: HttpErrorResponse) =>alert(error.message);
        }
   

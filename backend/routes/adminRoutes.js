@@ -7,6 +7,7 @@ const router = Router();
 
 router.post('/add_location', adminControllers.add_place);
 
+router.post('/remove_location', adminControllers.remove_location);
 
 
 

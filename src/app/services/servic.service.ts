@@ -89,12 +89,17 @@ public add_location(new_locate:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/add_location`,new_locate, { withCredentials: true });
 }
 
-public edit_location(id:any,new_locate:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/add_location`,{_id:id,new_locate:new_locate}, { withCredentials: true });
-}
+// sooon.....
+// public edit_location(id:any,new_locate:any):Observable<any>{
+//   return this.http.post<any>(`${this.apiServerUrl}/admin/add_location`,{_id:id,new_locate:new_locate}, { withCredentials: true });
+// }
 
 public remove_locate(id:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/remove_location`,{_id:id}, { withCredentials: true });
+}
+
+public get_places():Observable<any>{
+  return this.http.get<any>(`${this.apiServerUrl}/home/get_places`, { withCredentials: true });
 }
 
 

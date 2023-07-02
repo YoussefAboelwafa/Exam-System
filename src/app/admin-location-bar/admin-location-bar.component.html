@@ -36,13 +36,13 @@
   <!-- ng for -->
   <div *ngFor="let locate of address; let i=index" class="card card-body taken" >
     <div class="remove_edit">
-      <button (click)="edit_address(locate,i)">
+      <!-- <button (click)="edit_address(locate,i)">
         <i
         class="fa-solid fa-pen"
         data-toggle="modal"
         data-target="#editlocationmodal"
         ></i>
-      </button>
+      </button> -->
       <button
       (click)="remove_address(locate,i)"
        data-toggle="modal"
@@ -196,7 +196,7 @@
   </div>
 </div>
 
-<div
+<!-- <div
   class="modal fade"
   id="editlocationmodal"
   tabindex="-1"
@@ -280,7 +280,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 
