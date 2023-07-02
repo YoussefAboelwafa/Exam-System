@@ -127,7 +127,7 @@ CountrySchema.statics.insertTime = async function(elem){
         );
         if (!saved_location_id) throw Error("City not found");
         console.log(saved_location_id);
-        return saved_location_id;
+        return day_id;
     } catch (error) {
         console.error('Error updating or creating place entry:', error);
     }
