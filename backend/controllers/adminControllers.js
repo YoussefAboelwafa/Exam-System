@@ -117,6 +117,20 @@ module.exports.get_users_with_day = async (req, res) => {
 
 
 
+module.exports.remove_location = async (req, res) => {
+    /*
+        location_id: 
+    */
+    try{
+        await TimeAndSpace.Location.remove_location(req.body._id);
+        res.json({success: true})
+    }catch(err){
+        console.log(err);
+        res.json(err);
+    }
+}
+
+
 
 
 

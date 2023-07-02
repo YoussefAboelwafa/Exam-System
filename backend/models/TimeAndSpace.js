@@ -125,6 +125,26 @@ CountrySchema.statics.insertTime = async function(elem){
 
 
 
+LocationSchema.statics.remove_location = async (location_id) =>{
+  try{
+    ///////////////////ahhhhhhhhh don't forget about the case if someone had an exam in that place before
+    let deletedLocation = await Location.findOneAndRemove({_id:location_id});
+    if (deletedLocation) {
+      console.log('Exam deleted successfully:', deletedLocation);
+      return deletedLocation;
+    } else {
+      console.log('Exam not found');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error deleting exam:', error);
+    throw error;
+  }
+}
+
+
+
+
 
 const Country = mongoose.model('country', CountrySchema);
 const City = mongoose.model('city', CitiesSchema);
