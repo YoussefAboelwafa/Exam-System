@@ -90,6 +90,16 @@
           </td>
         </div>
       </tr>
+      <tr>
+        <div class="card-text takenbox" >
+          <td><label class="card-title">Snacks</label></td>
+          <td>
+            <div class="takeninfo">
+              <label>{{locate.snacks}}</label>
+            </div>
+          </td>
+        </div>
+      </tr>
     </table>
   </div>
 </div>
@@ -158,10 +168,23 @@
             #add_capacity
           />
         </div>
+      
+      <div class="form-group">
+        <label for="exampleFormControlInput4">Snacks:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleFormControlInput4"
+          placeholder="Enter snacks, separating each two with a comma (,)."
+          #add_snacks
+        />
       </div>
+    </div>
+
+      
       <div class="modal-footer">
         <button 
-        (click)="add_locate(add_country.value,add_city.value,add_location.value,add_capacity.value);
+        (click)="add_locate(add_country.value,add_city.value,add_location.value,add_capacity.value,add_snacks.value);
         " type="button" id="addnewlocation" >
           Add <i class="fa-solid fa-plus"></i>
         </button>
@@ -238,9 +261,19 @@
             #ed_capacity
           />
         </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput4">Snacks:</label>
+          <input
+            [value]="edit_ad.snacks"
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput4"
+            #ed_snacks
+          />
+        </div>
       </div>
       <div class="modal-footer">
-        <button (click)="totaly_edit(ed_country.value,ed_city.value,ed_location.value,ed_capacity.value)" type="button" id="addnewlocation">
+        <button (click)="totaly_edit(ed_country.value,ed_city.value,ed_location.value,ed_capacity.value,ed_snacks.value)" type="button" id="addnewlocation">
           Edit Address <i class="fa-solid fa-plus"></i>
         </button>
         <button (click)="close()" type="button" id="addnewlocation" style="background-color: #FF0052;" >Cancel Edit</button>

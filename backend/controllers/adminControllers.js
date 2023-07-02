@@ -55,7 +55,8 @@ module.exports.add_new_exam = async (req, res) => {
     }
     */
     try{
-        const exam = await Exam.insertExam(req.body);
+        console.log(req.body);
+        const exam = await Exam.insertExam(req.body.new_exam);
         res.json(exam._id);
     }catch(err){
         console.log(err);
@@ -73,7 +74,12 @@ module.exports.edit_exam = async (req, res) => {
         }
     */
     try{
-        await Exam.editExam(req.body);
+        const new_exam = {
+            _id: req.body._id,
+            title: req.body.new_exam.title,
+            about: req.body.new_exam.about
+        }
+        await Exam.editExam(new_exam);
         res.json({success: true});
     }catch(err){
         console.log(err);

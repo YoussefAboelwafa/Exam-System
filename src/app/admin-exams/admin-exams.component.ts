@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { exams } from '../objects/exams';
 import { Token } from '@angular/compiler';
+import { ServicService } from '../services/servic.service';
+import { HttpErrorResponse } from '@angular/common/http';
 declare const $: any;
 
 @Component({
@@ -10,7 +12,7 @@ declare const $: any;
 })
 export class AdminExamsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service:ServicService) { }
 
   ngOnInit(): void {
   }
@@ -79,11 +81,24 @@ export class AdminExamsComponent implements OnInit {
 
   totaly_remove(index:any){
    //service_remove exam pass object 
+   let x=new exams;
+   x=this.non_token_exam[index]
    this.non_token_exam.splice(index, 1);
    this.close_popup();
    this.remove_ex=new exams;
     this.index_remove="";
-  }
+    this.service.remove_exam(x._id).subscribe(
+      (x)=> {
+       console.log(x);        
+         error:(error: HttpErrorResponse) =>alert(error.message);
+       }
+  
+    )
+
+ }
+
+    
+  
   close() {
     this.close_popup();
 
@@ -114,6 +129,13 @@ export class AdminExamsComponent implements OnInit {
     this.close_popup();
 
     //service to edit this exam
+    this.service.edit_exam(this.non_token_exam[this.edit_index]._id,this.non_token_exam[this.edit_index]).subscribe(
+      (x)=> {
+       console.log(x);        
+         error:(error: HttpErrorResponse) =>alert(error.message);
+       }
+  
+    )
  }
 
  add_exam(){
@@ -124,7 +146,19 @@ export class AdminExamsComponent implements OnInit {
   this.non_token_exam.push(x);
   this.close_popup();
 
+  this.service.add_new_exam(x).subscribe(
+    (x)=> {
+
+     console.log(x);
+     this.non_token_exam[this.non_token_exam.length-1]._id=x;
+        
+       error:(error: HttpErrorResponse) =>alert(error.message);
+     }
+
+  )
+
   //service add exam to system
+
  }
 
  set_number(value:any){
