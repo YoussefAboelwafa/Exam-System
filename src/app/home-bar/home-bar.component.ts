@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicService } from '../services/servic.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { exams } from '../objects/exams';
 declare const $: any;
 
 @Component({
@@ -32,65 +33,29 @@ export class HomeBarComponent implements OnInit {
     title:"",
    }
 
-upcoming_exam:any[]=[
-    {
-      title:"c programming",
-      _id:"",
-      country:"Egypt",
-      city:"Alex",
-      location:"sss",
-      snack:"kitkat",
-      day:"15 April",
-      appointment:"3.00 pm",
-      percentage:"-1"
-    },
-    {
-      title:"c++ programming",
-      _id:"",
-      country:"Egypt",
-      city:"Alex",
-      location:"sss",
-      snack:"kitkat",
-      day:"15 April",
-      appointment:"3.00 pm",
-      percentage:"-1"
-    },
-  ]
-
-  token_exam:any[]=[
-    {
-      title:"Algoritms ",
-      _id:"",
-      country:"Egypt",
-      city:"Alex",
-      location:"sss",
-      snack:"kitkat",
-      day:"15 April",
-      appointment:"3.00 pm",
-      percentage:"100"
-    },
-    {
-      title:"data structure ",
-      _id:"",
-      country:"Egypt",
-      city:"Alex",
-      location:"sss",
-      snack:"kitkat",
-      day:"15 April",
-      appointment:"3.00 pm",
-      percentage:"80"
-    },
-  ]
-  
+upcoming_exam:any[]=[];
+token_exam:any[]=[]
+ids_exams:any[]=[]
   //take it from back
-  non_token_exam:any={
-      title:"Algoritms",
-      about:"algorithms are a fundamental concept in computer science, and are essential for solving complex problems and developing efficient software systems.There are many different types of algorithms, including sorting algorithms, searching algorithms, graph algorithms, and optimization algorithms. ",
-      info:["sorting","DAG","DFS algoritm"],
-      _id:"",
-  }
+non_token_exam:any={
+  title:"Algoritms",
+  about:"algorithms are a fundamental concept in computer science, and are essential for solving complex problems and developing efficient software systems.There are many different types of algorithms, including sorting algorithms, searching algorithms, graph algorithms, and optimization algorithms. ",
+  info:["sorting","DAG","DFS algoritm"],
+  _id:"",
+}
 
-
+  learn_dataof_nontoken:any={
+    title:"Algoritms",
+    about:"algorithms are a fundamental concept in computer science, and are essential for solving complex problems and developing efficient software systems.There are many different types of algorithms, including sorting algorithms, searching algorithms, graph algorithms, and optimization algorithms. ",
+    info:["sorting","DAG","DFS algoritm"],
+    _id:"",
+  };
+  learn_dataof_token:any={
+    title:"Algoritms",
+    about:"algorithms are a fundamental concept in computer science, and are essential for solving complex problems and developing efficient software systems.There are many different types of algorithms, including sorting algorithms, searching algorithms, graph algorithms, and optimization algorithms. ",
+    info:["sorting","DAG","DFS algoritm"],
+    _id:"",
+  };
   // ranking_exam:any;
 
 
@@ -107,33 +72,17 @@ upcoming_exam:any[]=[
   
 
 
-
+ngOnInit(): void {
+  }
 
   constructor(private service:ServicService) {
-
-    this.service.home_bar_init().subscribe
-    (
-      (x)=> {
-
-       this.service.user=x.user;
-       console.log(x);
-       console.log(x.user);
-       console.log(x.other_exam);
-       console.log(x.user_exam_titles)
-
-      //  for(var i=0; i<)
-       
-       error:(error: HttpErrorResponse) =>alert(error.message);
-       }
-
-    )
-
-
+    this.upcoming_exam=this.service.upcoming_ex;
+    this.token_exam=this.service.token_ex;
+    this.non_token_exam=this.service.non_token[0];
 
   }
 
-  ngOnInit(): void {
-  }
+  
 
 
   reset_order_exam(){
@@ -206,6 +155,7 @@ upcoming_exam:any[]=[
       //becouse if the user click take exam from modal,hide pop up if it show
       this.order_exam._id=id_exam;
       $('#not_token_exam').modal('hide');
+      $('#token_exam').modal('hide');
       this.flag_book=true;
     }
   
@@ -214,7 +164,12 @@ upcoming_exam:any[]=[
       this.reset_order_exam();
     }
 
-
+    learn_token(value_send_by_btn_learn:any){
+      this.learn_dataof_token=value_send_by_btn_learn;
+    }
+    learn_non_token(value_send_by_btn_learn:any){
+      this.learn_dataof_nontoken=value_send_by_btn_learn;
+    }
 
     //service.user=current_user
 }

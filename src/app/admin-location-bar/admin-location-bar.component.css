@@ -1,0 +1,197 @@
+.outer_button {
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  width: 25px;
+  height: 25px;
+  margin-left: 3px;
+}
+.modal-title {
+  color: #006a6a;
+  font-size: 30px;
+  font-family: Montserrat;
+  font-weight: 700;
+  line-height: 100%;
+}
+.modal-content {
+  border-radius: 15px;
+  background: radial-gradient(
+      313.28% 209.98% at 99.43% 99.22%,
+      #dff 0%,
+      rgba(235, 247, 248, 0) 100%
+    ),
+    rgba(255, 255, 255, 0.75);
+  box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
+  backdrop-filter: blur(6.5px);
+}
+
+.modal-footer button {
+  background: #008182;
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  color: #fff;
+  width: 200px;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 8px 10px;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+}
+
+.modal-body {
+  color: #008182;
+  font-size: 16px;
+  font-family: Montserrat;
+  font-weight: 500;
+}
+.modal-body label {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 2%;
+}
+.modal-footer button:hover {
+  background: #fff;
+  color: #008182;
+  border: 1px solid #008182;
+  transition: 1s;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  gap: 2%;
+  margin-top: 2%;
+  margin-left: 2%;
+}
+
+.toolbar .btn {
+  border-radius: 8px;
+  background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
+  color: #008182;
+  font-size: 20px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 150%;
+  width: 14vw;
+}
+.dropdown-item {
+  color: #008182;
+  background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
+}
+.dropdown-item:hover {
+  background: #ababab;
+  color: #000;
+  transition: 0.2s;
+}
+.locations {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+  gap: 2%;
+}
+.taken {
+  border-radius: 10px;
+  background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
+  box-shadow: 0px 0px 25px 0px rgba(247, 144, 81, 0.15);
+  justify-content: left;
+  height: fit-content;
+  position: relative;
+  margin-bottom: 1%;
+
+  
+}
+
+.takenbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  text-align: center;
+  width: 20vw;
+  height: 8vh;
+}
+.takeninfo {
+  color: #008182;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 5px 5px 5px 5px rgba(0, 129, 130, 0.16);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5px;
+}
+.card-title {
+  color: #008182;
+  font-size: 20px;
+  font-weight: 300;
+  margin-left: 2%;
+  margin-right: 4%;
+}
+.takeninfo label {
+  font-size: 22px;
+  font-weight: 700;
+}
+td {
+  width: 50%;
+  margin-top: 2%;
+}
+.addlocationbtn {
+  font-size: larger;
+  font-weight: 400;
+  border-radius: 9px;
+  background: #008182;
+  color: #fff;
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  width: 100%;
+  padding: 12px 8px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border: none;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+.addlocationbtn:hover {
+  background: #fff;
+  color: #008182;
+  border: 1px solid #008182;
+  transition: 0.5s;
+}
+.remove_edit {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: flex-end;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+.remove_edit button {
+  all: unset;
+  font-size: 20px;
+  margin-right: 4%;
+  color: #008182;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.taken i:hover {
+  color: #ff0052;
+}
+/* .card {
+  width: 20vw;
+  height: 4vh;
+  position: relative;
+  margin-right: 2%;
+  margin-bottom: 15px;
+} */

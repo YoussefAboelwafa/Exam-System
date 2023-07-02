@@ -14,17 +14,17 @@ const payment = (req, res) => {
 
 module.exports.getHome = async (req, res) => {
     try{
-        // let startTime = Date.now();
-        // const token = req.cookies.jwt;
+        let startTime = Date.now();
+        const token = req.cookies.jwt;
 
-        // if(token){
-        //     let startTime = Date.now();
-        //     jwt.verify(token, 'example secret', async (err, decodedToken)=>{
+        if(token){
+            let startTime = Date.now();
+            jwt.verify(token, 'example secret', async (err, decodedToken)=>{
 
-        //         if(err){
-        //             console.log(err.message);
-        //             res.json({signed_in: false});
-        //         }else{
+                if(err){
+                    console.log(err.message);
+                    res.json({signed_in: false});
+                }else{
                      /*
                     country: {type: String, required: true},
                     /city: {type: String, required: true},
@@ -38,6 +38,7 @@ module.exports.getHome = async (req, res) => {
 
                     const exam_ids = user.exams.map((elem)=>elem.exam._id);
 
+      
                     const [token_exam_info, other_exam] = await Promise.all([
                         Exam.find({ _id: { $in: exam_ids } }).select('title about'),
                         Exam.findOne({ _id: { $nin: exam_ids } }).select('title info about')
@@ -49,6 +50,9 @@ module.exports.getHome = async (req, res) => {
                         select: 'day_name',
                         path:'exams.exam.'    });
                           
+// =======
+//                     const token_exam_info = (await Exam.find({ _id: { $in: exam_ids } }).select('title info about')).map((elem) => ({title: elem.title, about:elem.about,info:elem.info}));
+// >>>>>>> main
                     
                     const result = user.exams.map((exam) => ({
                        exam: { _id: exam.exam._id,
@@ -74,11 +78,11 @@ module.exports.getHome = async (req, res) => {
                     res.json({user: parsed_user, token_exam_info, other_exam: other_exam});
 
 
-        //         }
-        //     })
-        // }else{
-        //     res.json({signed_in: false});
-        // }
+                }
+            })
+        }else{
+            res.json({signed_in: false});
+        }
     }catch(err){
         console.log(err);
         res.json({signed_in: false});

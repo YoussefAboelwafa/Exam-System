@@ -8,6 +8,11 @@ import { GuardServiceService } from './services/guard-service.service';
 import { HomeBarComponent } from './home-bar/home-bar.component';
 import { ExamsBarComponent } from './exams-bar/exams-bar.component';
 import { RankingBarComponent } from './ranking-bar/ranking-bar.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminCalendarComponent } from './admin-calendar/admin-calendar.component';
+import { AdminExamsComponent } from './admin-exams/admin-exams.component';
+import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.component';
+import { AdminLocationBarComponent } from './admin-location-bar/admin-location-bar.component';
 
 const routes: Routes = [
   {
@@ -46,6 +51,33 @@ const routes: Routes = [
     }
     ]
   },
+  {
+    path: 'admin_home',
+    component: AdminHomeComponent,
+    children:[
+      {
+        path:'admin_calendar',
+        component:AdminCalendarComponent,    
+
+
+      },
+      {
+        path:'admin_exams',
+        component:AdminExamsComponent,
+
+      },
+       {
+       path: 'admin_analytics',
+       component: AdminAnalyticsComponent,   
+
+    },
+    {
+       path: 'admin_location',
+       component: AdminLocationBarComponent,   
+
+ }
+    ] 
+  }
  
   // {
   //   path: 'home/:name',

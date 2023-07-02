@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
                 this.pop_service.open_error_login();
               }
               else{
-                 this.router.navigate(['/home/home_bar'])
+                 this.router.navigate(['/home'])
               }
               
 

@@ -18,6 +18,12 @@ import { HomeBarComponent } from './home-bar/home-bar.component';
 import { ExamsBarComponent } from './exams-bar/exams-bar.component';
 import { PopUpComponent } from './pop-up/pop-up.component';
 import { RankingBarComponent } from './ranking-bar/ranking-bar.component';
+import { NgxTypedJsModule } from 'ngx-typed-js';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminLocationBarComponent } from './admin-location-bar/admin-location-bar.component';
+import { AdminCalendarComponent } from './admin-calendar/admin-calendar.component';
+import { AdminExamsComponent } from './admin-exams/admin-exams.component';
+import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +35,13 @@ import { RankingBarComponent } from './ranking-bar/ranking-bar.component';
     ExamsBarComponent,
     PopUpComponent,
     RankingBarComponent,
+    AdminHomeComponent,
+    AdminLocationBarComponent,
+    AdminCalendarComponent,
+    AdminExamsComponent,
+    AdminAnalyticsComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -37,6 +50,9 @@ import { RankingBarComponent } from './ranking-bar/ranking-bar.component';
     CommonModule,
     FormsModule,
     CustomFormsModule,
+    NgxTypedJsModule,
+
+
     
   ],
   providers: [ServicService,users,GuardServiceService],

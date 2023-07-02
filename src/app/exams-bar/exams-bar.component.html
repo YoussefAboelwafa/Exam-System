@@ -4,26 +4,24 @@
 <div class="goodmorningwidgets">
   <!-- start div with class upcoming indicate to style of this card -->
   <div *ngFor="let exam of upcoming_exam" class="card card-body upcoming">
-    <h5 class="card-title">{{exam.title}}</h5>
+    <h5 class="card-title">{{ exam.title }}</h5>
     <div class="card-text upcomingbox">
       <!-- ng for -->
       <div class="upcominginfo">
-        <label class="smallbox">{{exam.location}}</label>
-        <label class="smallbox">{{exam.city}}</label>
-        <label class="smallbox">{{exam.country}}</label>
+        <label class="smallbox">{{ exam.location }}</label>
+        <label class="smallbox">{{ exam.city }}</label>
+        <label class="smallbox">{{ exam.country }}</label>
       </div>
       <div class="upcominginfo">
-        <label class="smallbox">{{exam.day}}</label>
+        <label class="smallbox">{{ exam.day }}</label>
         <!-- <label class="smallbox">Sunday</label> -->
-        <label class="smallbox">{{exam.appointment}}</label>
+        <label class="smallbox">{{ exam.appointment }}</label>
       </div>
       <div class="upcominginfo">
-        <label class="smallbox">{{exam.snack}}</label>
-      </div> 
+        <label class="smallbox">{{ exam.snack }}</label>
+      </div>
     </div>
-   
   </div>
-
 </div>
 <!-- taken exams section -->
 <div class="discoverexamslabel">
@@ -31,24 +29,42 @@
 </div>
 <div class="discoverexamswidgets">
   <!-- ngfor ya kimoo -->
-<div *ngFor="let token of token_exam" class="card card-body upcoming">
+  <div *ngFor="let token of token_exam" class="card card-body upcoming">
     <!-- Not taken again -->
-    <h5 class="card-title">{{token.title}}</h5>
+    <h5 class="card-title">{{ token.title }}</h5>
     <div class="discoverbox1">
       <div class="discoversmallbox">
         <label class="discoverexamname">Your last mark</label>
-        <label class="discoverscore">{{token.percentage}}%</label>
+        <label class="discoverscore">{{ token.percentage }}%</label>
       </div>
       <div class="discoverinfo">
-        <button data-toggle="modal" data-target="#not_token_exam" class="discoverbtns learnmore">Learn More</button>
-        <button *ngIf="token.percentage!=100" (click)="take_exam(token.title,token._id)" class="discoverbtns takeagain">Take exam again</button>
-        <button disabled *ngIf="token.percentage==100"  id="disable_btn" class="discoverbtns takeagain">Take exam again</button>
-     
+        <button
+          (click)="learn_token(token)"
+          data-toggle="modal"
+          data-target="#token_exam"
+          class="discoverbtns learnmore"
+        >
+          Learn More
+        </button>
+        <button
+          *ngIf="token.percentage != 100"
+          (click)="take_exam(token.title, token._id)"
+          class="discoverbtns takeagain"
+        >
+          Take exam again
+        </button>
+        <button
+          disabled
+          *ngIf="token.percentage == 100"
+          id="disable_btn"
+          class="discoverbtns takeagain"
+        >
+          Take exam again
+        </button>
       </div>
     </div>
   </div>
 </div>
-
 
 <!-- non_token_exam section -->
 <div class="discoverexamslabel">
@@ -57,16 +73,28 @@
 <div class="discoverexamswidgets">
   <!-- ngfor ya kimoo -->
   <div *ngFor="let non_token of non_token_exam" class="card card-body upcoming">
-    <h5 class="card-title">{{non_token.title}}</h5>
+    <h5 class="card-title">{{ non_token.title }}</h5>
     <div class="discoverbox1">
       <div class="discoversmallbox">
         <ul class="examlist">
-          <li *ngFor="let infomration of non_token.info">{{infomration}}</li>
+          <li *ngFor="let infomration of non_token.info">{{ infomration }}</li>
         </ul>
       </div>
       <div class="discoverinfo">
-        <button (click)="learn_non_token(non_token)" data-toggle="modal" data-target="#not_token_exam"  class="discoverbtns learnmore">Learn More</button>
-        <button (click)="take_exam(non_token.title,non_token._id)" class="discoverbtns takeagain">Take exam</button>
+        <button
+          (click)="learn_non_token(non_token)"
+          data-toggle="modal"
+          data-target="#not_token_exam"
+          class="discoverbtns learnmore"
+        >
+          Learn More
+        </button>
+        <button
+          (click)="take_exam(non_token.title, non_token._id)"
+          class="discoverbtns takeagain"
+        >
+          Take exam
+        </button>
       </div>
     </div>
   </div>
@@ -74,151 +102,359 @@
 
 <!-- booking exam -->
 
-<div *ngIf="flag_book==true"  class="contain" >
+<div *ngIf="flag_book == true" class="contain">
   <div class="close">
     <button (click)="close_book()" class="closebtn">
-    <i class="fa-solid fa-xmark"></i>
-  </button>
+      <i class="fa-solid fa-xmark"></i>
+    </button>
   </div>
-  <div class="order">Book your exam ({{book_title_course}})</div>  
-    <div class="box">
-     <form #input_form="ngForm" (ngSubmit)="submit_book()">
-        <div>
-            <h3>Country</h3>
-            <select class="sel" required #country id="select" name="country" (change)="select_country(country.value)">
-              <option>country</option>
-              <option *ngFor="let country of countries" >{{ country }}</option>
-            </select>
+  <div class="order">Book your exam ({{ book_title_course }})</div>
+  <div class="box">
+    <form #input_form="ngForm" (ngSubmit)="submit_book()">
+      <div>
+        <h3>Country</h3>
+        <select
+          class="sel"
+          required
+          #country
+          id="select"
+          name="country"
+          (change)="select_country(country.value)"
+        >
+          <option>country</option>
+          <option *ngFor="let country of countries">{{ country }}</option>
+        </select>
 
-            <h3>City</h3>
-            <select class="sel" required #city id="select" name="city" (change)="select_city(city.value)">
-              <option>city</option>
-              <option *ngFor="let city of cities" >{{ city }}</option>
-            </select>
-            <h3>Location</h3>
-            <select class="sel" required #location id="select" name="location" (change)="select_location(location.value)">
-              <option>location</option>
-              <option *ngFor="let location of locations" >{{ location }}</option>
-            </select>
+        <h3>City</h3>
+        <select
+          class="sel"
+          required
+          #city
+          id="select"
+          name="city"
+          (change)="select_city(city.value)"
+        >
+          <option>city</option>
+          <option *ngFor="let city of cities">{{ city }}</option>
+        </select>
+        <h3>Location</h3>
+        <select
+          class="sel"
+          required
+          #location
+          id="select"
+          name="location"
+          (change)="select_location(location.value)"
+        >
+          <option>location</option>
+          <option *ngFor="let location of locations">{{ location }}</option>
+        </select>
 
-            <button disabled *ngIf="order_exam.country=='country'||order_exam.city=='city'||order_exam.location=='location'" id="btn" style="background-color: gray;" type="submit"  >Next</button>
-            <button *ngIf="order_exam.country!='country'&&order_exam.city!='city'&&order_exam.location!='location'" id="btn" type="submit">Next</button>
-
-       </div>  
-       <div class="circle">   
-        <i *ngIf="order_exam.country=='country'||order_exam.city=='city'||order_exam.location=='location'" class="fa-solid fa-circle" style="color:red"></i> 
-        <i *ngIf="order_exam.country!='country'&&order_exam.city!='city'&&order_exam.location!='location'" class="fa-solid fa-circle" style="color:#008182;"></i>         <i class="fa-regular fa-circle"></i>
+        <button
+          disabled
+          *ngIf="
+            order_exam.country == 'country' ||
+            order_exam.city == 'city' ||
+            order_exam.location == 'location'
+          "
+          id="btn"
+          style="background-color: gray"
+          type="submit"
+        >
+          Next
+        </button>
+        <button
+          *ngIf="
+            order_exam.country != 'country' &&
+            order_exam.city != 'city' &&
+            order_exam.location != 'location'
+          "
+          id="btn"
+          type="submit"
+        >
+          Next
+        </button>
+      </div>
+      <div class="circle">
+        <i
+          *ngIf="
+            order_exam.country == 'country' ||
+            order_exam.city == 'city' ||
+            order_exam.location == 'location'
+          "
+          class="fa-solid fa-circle"
+          style="color: red"
+        ></i>
+        <i
+          *ngIf="
+            order_exam.country != 'country' &&
+            order_exam.city != 'city' &&
+            order_exam.location != 'location'
+          "
+          class="fa-solid fa-circle"
+          style="color: #008182"
+        ></i>
         <i class="fa-regular fa-circle"></i>
-       </div>
-       
+        <i class="fa-regular fa-circle"></i>
+      </div>
     </form>
   </div>
 </div>
 
-<div *ngIf="flag_snack==true"  class="contain" >
+<div *ngIf="flag_snack == true" class="contain">
   <div class="close">
     <button (click)="close_book()" class="closebtn">
-    <i class="fa-solid fa-xmark"></i>
-  </button>
+      <i class="fa-solid fa-xmark"></i>
+    </button>
   </div>
-  <div class="order">Choose what you prefer!</div>  
-    <div class="box">
-      <form #input_form="ngForm" (ngSubmit)="submit_snack()">
-          <h3>Select your snack</h3>
-              <select required #snack id="select" name="snack" (change)="select_snack(snack.value)">
-                <option>snack</option>
-                <option *ngFor="let snack of snacks" >{{ snack }}</option>
-    
-              </select>
-              <button disabled *ngIf="order_exam.snack=='snack'" id="btn" style="background-color: gray;" type="submit"  >Next</button>
-              <button *ngIf="order_exam.snack!='snack'" id="btn" type="submit">Next</button>
+  <div class="order">Choose what you prefer!</div>
+  <div class="box">
+    <form #input_form="ngForm" (ngSubmit)="submit_snack()">
+      <h3>Select your snack</h3>
+      <select
+        required
+        #snack
+        id="select"
+        name="snack"
+        (change)="select_snack(snack.value)"
+      >
+        <option>snack</option>
+        <option *ngFor="let snack of snacks">{{ snack }}</option>
+      </select>
+      <button
+        disabled
+        *ngIf="order_exam.snack == 'snack'"
+        id="btn"
+        style="background-color: gray"
+        type="submit"
+      >
+        Next
+      </button>
+      <button *ngIf="order_exam.snack != 'snack'" id="btn" type="submit">
+        Next
+      </button>
 
-         <div class="circle">
-          <i class="fa-regular fa-circle"></i>
-          <i *ngIf="order_exam.snack=='snack'" class="fa-solid fa-circle" style="color:red"></i> 
-          <i *ngIf="order_exam.snack!='snack'" class="fa-solid fa-circle" style="color:#008182;"></i> 
-          <i class="fa-regular fa-circle"></i>
-         </div>
-
-      </form>
-    </div>
+      <div class="circle">
+        <i class="fa-regular fa-circle"></i>
+        <i
+          *ngIf="order_exam.snack == 'snack'"
+          class="fa-solid fa-circle"
+          style="color: red"
+        ></i>
+        <i
+          *ngIf="order_exam.snack != 'snack'"
+          class="fa-solid fa-circle"
+          style="color: #008182"
+        ></i>
+        <i class="fa-regular fa-circle"></i>
+      </div>
+    </form>
+  </div>
 </div>
 
-
-<div *ngIf="flag_time==true"  class="contain" >
+<div *ngIf="flag_time == true" class="contain">
   <div class="close">
     <button (click)="close_book()" class="closebtn">
-    <i class="fa-solid fa-xmark"></i>
-  </button>
+      <i class="fa-solid fa-xmark"></i>
+    </button>
   </div>
-  <div class="order">Select your time</div>  
-    <div class="box">
-      <form #input_form="ngForm" (ngSubmit)="submit_time()">
-          <h3>Day of exam</h3>
-              <select required #day id="select" name="snack" (change)="select_day(day.value)">
-                <option>Select a day</option>
-                <option *ngFor="let day of days" >{{ day }}</option>
-              </select>
-              <h3>Appointment</h3>
-            <select class="sel" required #appointment id="select" name="snack" (change)="select_appointment(appointment.value)">
-              <option>Select an Appointment</option>
-              <option *ngFor="let Appointment of Appointments" >{{ Appointment }}</option>
-            </select>
-            <button disabled *ngIf="order_exam.day=='Select a day'||order_exam.appointment=='Select an Appointment'" id="btn" style="background-color: gray;" type="submit"  >Next</button>
-            <button *ngIf="order_exam.day!='Select a day'&&order_exam.appointment!='Select an Appointment'" id="btn" type="submit">Next</button>
-         <div class="circle">
-          <i class="fa-regular fa-circle"></i>
-          <i class="fa-regular fa-circle"></i>
-          <i *ngIf="order_exam.day=='Select a day'||order_exam.appointment=='Select an Appointment'" class="fa-solid fa-circle" style="color:red"></i> 
-          <i *ngIf="order_exam.day!='Select a day'&&order_exam.appointment!='Select an Appointment'" class="fa-solid fa-circle" style="color:#008182;"></i> 
-         </div>
-       
-      </form>
-    </div>
+  <div class="order">Select your time</div>
+  <div class="box">
+    <form #input_form="ngForm" (ngSubmit)="submit_time()">
+      <h3>Day of exam</h3>
+      <select
+        required
+        #day
+        id="select"
+        name="snack"
+        (change)="select_day(day.value)"
+      >
+        <option>Select a day</option>
+        <option *ngFor="let day of days">{{ day }}</option>
+      </select>
+      <h3>Appointment</h3>
+      <select
+        class="sel"
+        required
+        #appointment
+        id="select"
+        name="snack"
+        (change)="select_appointment(appointment.value)"
+      >
+        <option>Select an Appointment</option>
+        <option *ngFor="let Appointment of Appointments">
+          {{ Appointment }}
+        </option>
+      </select>
+      <button
+        disabled
+        *ngIf="
+          order_exam.day == 'Select a day' ||
+          order_exam.appointment == 'Select an Appointment'
+        "
+        id="btn"
+        style="background-color: gray"
+        type="submit"
+      >
+        Next
+      </button>
+      <button
+        *ngIf="
+          order_exam.day != 'Select a day' &&
+          order_exam.appointment != 'Select an Appointment'
+        "
+        id="btn"
+        type="submit"
+      >
+        Next
+      </button>
+      <div class="circle">
+        <i class="fa-regular fa-circle"></i>
+        <i class="fa-regular fa-circle"></i>
+        <i
+          *ngIf="
+            order_exam.day == 'Select a day' ||
+            order_exam.appointment == 'Select an Appointment'
+          "
+          class="fa-solid fa-circle"
+          style="color: red"
+        ></i>
+        <i
+          *ngIf="
+            order_exam.day != 'Select a day' &&
+            order_exam.appointment != 'Select an Appointment'
+          "
+          class="fa-solid fa-circle"
+          style="color: #008182"
+        ></i>
+      </div>
+    </form>
+  </div>
 </div>
 
 <!-- mesage template -->
-<div class="modal fade" id="not_token_exam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div
+  class="modal fade"
+  id="not_token_exam"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">{{learn_dataof_nontoken.title}}</h5>
-      <button class="outer_button" disabled > <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-      </button>
-      </button>
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          {{ learn_dataof_nontoken.title }}
+        </h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
       </div>
       <div class="modal-body">
-        <p>{{learn_dataof_nontoken.about}}</p>
+        <p>{{ learn_dataof_nontoken.about }}</p>
         <ul>
-          <li *ngFor="let info of learn_dataof_nontoken.info" style="margin-top: 20px;">{{info}}</li>
+          <li
+            *ngFor="let info of learn_dataof_nontoken.info"
+            style="margin-top: 20px"
+          >
+            {{ info }}
+          </li>
         </ul>
       </div>
       <div class="modal-footer">
-        <button type="button" (click)="take_exam(learn_dataof_nontoken.title,learn_dataof_nontoken._id)">Take Exam</button>
+        <button
+          type="button"
+          (click)="
+            take_exam(learn_dataof_nontoken.title, learn_dataof_nontoken._id)
+          "
+        >
+          Take Exam
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="token_exam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- token_exam example -->
+
+<div
+  class="modal fade"
+  id="token_exam"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">{{learn_dataof_nontoken.title}}</h5>
-      <button class="outer_button" disabled > <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-      </button>
-      </button>
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          {{ learn_dataof_token.title }}
+        </h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
       </div>
       <div class="modal-body">
-        <p>{{learn_dataof_nontoken.about}}</p>
-        <ul>
-          <li *ngFor="let info of learn_dataof_nontoken.info" style="margin-top: 20px;">{{info}}</li>
-        </ul>
+        <p>{{ learn_dataof_token.about }}</p>
+        <div class="discoverbox1">
+          <ul>
+            <li
+              *ngFor="let info of learn_dataof_token.info"
+              style="margin-top: 20px"
+            >
+              {{ info }}
+            </li>
+          </ul>
+          <div class="discoversmallbox2">
+            <label class="discoverexamname1">Your last mark</label>
+            <label class="discoverscore1"
+              >{{ learn_dataof_token.percentage }}%</label
+            >
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" (click)="take_exam(learn_dataof_nontoken.title,learn_dataof_nontoken._id)">Take Exam</button>
+        <button
+          type="button"
+          id="showcertificate"
+        >
+          Show certificate
+        </button>
+
+        <button
+          disabled
+          *ngIf="learn_dataof_token.percentage==100"
+          style="background: rgba(199, 199, 199, 0.46);
+          box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+          "
+          type="button"
+          (click)="take_exam(learn_dataof_token.title, learn_dataof_token._id)"
+        >
+          Take Exam
+        </button>
+        <button
+        *ngIf="learn_dataof_token.percentage!=100"
+          type="button"
+          (click)="take_exam(learn_dataof_token.title, learn_dataof_token._id)"
+        >
+          Take Exam
+        </button>
       </div>
     </div>
   </div>

@@ -1,0 +1,301 @@
+<div class="toolbar">
+  <!-- country -->
+  <div class="dropdown countrydiv">
+    <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
+      <option selected>Country</option>
+      <option value="Egypt">Egypt</option>
+      <option value="UAE">UAE</option>
+    </select>
+  </div>
+  <!-- city -->
+  <div class="dropdown countrydiv">
+    <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
+      <option selected>City</option>
+      <option value="Alexandria">Alexandria</option>
+      <option value="Dubai">Dubai</option>
+    </select>
+  </div>
+  <!-- location -->
+  <div class="dropdown countrydiv">
+    <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
+      <option selected>Location</option>
+      <option value="Smouha">Smouha</option>
+      <option value="Maydan">Maydan</option>
+    </select>
+  </div>
+</div>
+
+<div class="locations">
+  <button
+    data-toggle="modal"
+    data-target="#addlocationmodal"
+    class="addlocationbtn"
+  >
+    Add location <i class="fa-solid fa-plus"></i>
+  </button>
+  <!-- ng for -->
+  <div *ngFor="let locate of address; let i=index" class="card card-body taken" >
+    <div class="remove_edit">
+      <button (click)="edit_address(locate,i)">
+        <i
+        class="fa-solid fa-pen"
+        data-toggle="modal"
+        data-target="#editlocationmodal"
+        ></i>
+      </button>
+      <button
+      (click)="remove_address(locate,i)"
+       data-toggle="modal"
+      data-target="#confirm_adress"
+      ><i class="fa-solid fa-trash"></i></button>
+    </div>
+    <table>
+      <tr>
+        <div class="card-text takenbox">
+          <td><label class="card-title">Country</label></td>
+          <td>
+            <div class="takeninfo">
+              <label>{{locate.country}}</label>
+            </div>
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <div class="card-text takenbox">
+          <td><label class="card-title">City</label></td>
+          <td>
+            <div class="takeninfo">
+              <label>{{locate.city}}</label>
+            </div>
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <div class="card-text takenbox">
+          <td><label class="card-title">Location</label></td>
+          <td>
+            <div class="takeninfo">
+              <label>{{locate.location}}</label>
+            </div>
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <div class="card-text takenbox">
+          <td><label class="card-title">Capacity</label></td>
+          <td>
+            <div class="takeninfo">
+              <label>{{locate.capacity}}</label>
+            </div>
+          </td>
+        </div>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="addlocationmodal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Country:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="Enter Country"
+            #add_country
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput2">City:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput2"
+            placeholder="Enter City"
+            #add_city
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">Location:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput3"
+            placeholder="Enter Location"
+            #add_location
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput4">Capacity:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput4"
+            placeholder="Enter Capacity"
+            #add_capacity
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button 
+        (click)="add_locate(add_country.value,add_city.value,add_location.value,add_capacity.value);
+        " type="button" id="addnewlocation" >
+          Add <i class="fa-solid fa-plus"></i>
+        </button>
+        <button (click)="close()" type="button" id="addnewlocation" style="background-color: #FF0052;">
+          Cancel <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="editlocationmodal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Country:</label>
+          <input
+           [value]="edit_ad.country"
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            #ed_country
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput2">City:</label>
+          <input
+            [value]="edit_ad.city"
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput2"
+            #ed_city
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">Location:</label>
+          <input
+            [value]="edit_ad.location"
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput3"
+            #ed_location
+        
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput4">Capacity:</label>
+          <input
+            [value]="edit_ad.capacity"
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput4"
+            #ed_capacity
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button (click)="totaly_edit(ed_country.value,ed_city.value,ed_location.value,ed_capacity.value)" type="button" id="addnewlocation">
+          Edit Address <i class="fa-solid fa-plus"></i>
+        </button>
+        <button (click)="close()" type="button" id="addnewlocation" style="background-color: #FF0052;" >Cancel Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div
+  class="modal fade"
+  id="confirm_adress"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          <p style="color: red;">Confirmation Remove</p>
+        </h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body" style="color: red;">
+        Are you sure you want to remove {{remove_ad.location}}?
+      </div>
+      <div class="modal-footer">
+        <button
+            (click)="totaly_remove()"
+            class="discoverbtns btn_exam"
+          >
+          YES
+        </button>
+        <button 
+           style="background-color: #FF0052;"
+            class="discoverbtns btn_exam"
+            (click)="close();"
+          >
+          NO
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

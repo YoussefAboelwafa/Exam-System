@@ -13,6 +13,10 @@ import { users } from "../objects/users";
 export class ServicService {
   private apiServerUrl = 'http://localhost:8080';
   user!: users;
+  upcoming_ex!:any[];
+  token_ex!:any[];
+  non_token!:any[];
+  ids_ex!:any[];
   constructor(private http: HttpClient) { }
 
   
@@ -62,9 +66,22 @@ public home_bar_init():Observable<any>{
 // when i enter home bar i send request and want to receive json that contains {user:user,non_taken_exam:any exam that the user does not take it yet}
 //he take ids of all exams in user
 public exam_bar_init():Observable<any>{
-  return this.http.get<any>(`${this.apiServerUrl}/home/exams`, { withCredentials: true });
+  console.log(this.ids_ex)
+  return this.http.post<any>(`${this.apiServerUrl}/home/exams`,{ids:this.ids_ex}, { withCredentials: true });
 }
- 
+
+//return id of the
+public add_new_exam(new_exam:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/add_exam`,{new_exam:new_exam}, { withCredentials: true });
+}
+
+public edit_exam(id:any,new_exam:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/edit_exam`,{_id:id,new_exam:new_exam}, { withCredentials: true });
+}
+
+public remove_exam(id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/remove_exam`,{_id:id}, { withCredentials: true });
+}
 
 
 }

@@ -4,11 +4,15 @@ div {
 .carousel {
   width: 98%;
   height: 22vh;
-  background: url(../../assets/images/img4.jpg);
   border-radius: 20px;
   margin-top: 1%;
   margin-left: 1%;
   border: 3px solid #008182;
+}
+#myCarousel .carousel-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
 }
 .goodmorningwidgets,
 .discoverexamswidgets {
@@ -99,7 +103,6 @@ div {
 .rank h5 {
   color: #fff;
   font-size: 22px;
-
 }
 .goodmorninglabel,
 .discoverexamslabel {
@@ -129,9 +132,8 @@ div {
   font-size: 20px;
 }
 
-
-.outer_button{
-  border:none;
+.outer_button {
+  border: none;
   border-radius: 10px;
   background-color: #fff;
   width: 25px;
@@ -278,9 +280,10 @@ li:is(:hover, .active) i {
   padding-top: 5px;
   margin-right: 10px;
 }
-.takeninfo span {
-  font-size: 34px;
+.takeninfo label span {
+  font-size: 32px;
   font-weight: 400;
+  
 }
 .takeninfo label {
   font-size: 14px;
@@ -297,10 +300,9 @@ li:is(:hover, .active) i {
   justify-content: center;
   align-items: left;
   text-align: left;
-  padding-right: 10px;
-  padding-left: 10px;
-  padding-top: 2px;
+  padding: 10px;
   margin-right: 10px;
+
 }
 .rankname {
   font-weight: 700;
@@ -342,12 +344,13 @@ li:is(:hover, .active) i {
   color: #006a6a;
   font-size: 12px;
   font-weight: 700;
-  margin: 0px;
+  padding: 5px;
 }
 .discoversmallbox .discoverscore {
   font-size: 32px;
   font-weight: 300;
   margin: 0px;
+
 }
 .learnmore {
   border-radius: 16px;
@@ -361,7 +364,6 @@ li:is(:hover, .active) i {
   padding: 5px;
   font-size: small;
   margin-bottom: 10px;
-  
 }
 .takeagain {
   border-radius: 16px;
@@ -375,17 +377,17 @@ li:is(:hover, .active) i {
   padding: 5px;
   font-size: small;
 }
-.examlist li{
+.examlist li {
   color: #008182;
   font-size: 10px;
   font-weight: 500;
   margin-bottom: 3px;
 }
-.examlist{
+.examlist {
   padding-left: 15px;
 }
 
-.contain{
+.contain {
   background: rgba(0, 0, 0, 0.082);
   backdrop-filter: blur(5px);
   color: black;
@@ -401,86 +403,126 @@ li:is(:hover, .active) i {
   background: rgba(204, 255, 251, 0.111);
   position: fixed;
   left: 5%;
-  top: 2%; 
+  top: 2%;
   height: 100vh;
   width: 100vw;
 }
-.close{
-  position:fixed;
-  right:10%;
+.close {
+  position: fixed;
+  right: 10%;
   top: 10%;
   color: #008182;
 }
-.closebtn{
+.close1 {
+  position: sticky;
+  color: #008182;
+}
+.closebtn {
   border-radius: 50%;
+  margin-right: 140px;
 }
-.order{
-font-size: 24px;
-font-family: Montserrat;
-font-style: normal;
-font-weight: 700;
-line-height: 150%;
-margin-bottom: 1.5%;
+.order {
+  font-size: 24px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  margin-bottom: 1.5%;
 }
 
-h3{
+h3 {
   font-size: 12px;
-font-family: Montserrat;
-font-style: normal;
-font-weight: 700;
-line-height: 16px;
-color: #0A0A0A;
-margin-left: 4px;
-margin-top: 10px;
-margin-bottom: 10px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  color: #0a0a0a;
+  margin-left: 4px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-#select{
+#select {
   display: inline-flex;
-height: 40px;
-padding: 10px 16px;
-align-items: center;
-gap: 10px;
-flex-shrink: 0;
-margin-bottom: 0px;
-display: flex;
-padding: 10px 12px;
-align-items: center;
-border-radius: 8px;
-border: 1px solid #c2c2c2;
-color: #000;
-font-family: "Montserrat", sans-serif;
-font-size: 12px;
-width: fill-available;
-width: 30vw;
+  height: 40px;
+  padding: 10px 16px;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-bottom: 0px;
+  display: flex;
+  padding: 10px 12px;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #c2c2c2;
+  color: #000;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  width: fill-available;
+  width: 30vw;
 }
 #btn {
-    width: 30vw;
-    border-radius: 8px;
-    background: #008081;
-    font-size: 16px;
-    font-weight:700;
-    padding: 10px;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    color: #fff;
-    font-family: "Montserrat", sans-serif;
+  width: 30vw;
+  border-radius: 8px;
+  background: #008081;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
 }
 .circle {
-  width:30vw;
+  width: 30vw;
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   font-size: 12px;
   align-items: center;
   text-align: center;
   justify-content: center;
 }
-.circle i{
+.circle i {
   margin: 8px;
   text-align: center;
 }
-#disable_btn{
+#disable_btn {
   background: rgba(207, 207, 207, 0.44);
   color: rgba(151, 151, 151, 0.44);
+}
+
+.discoversmallbox2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width:24vh;
+  height: 20vh;
+  margin: 8px;
+  padding: 10px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  margin-right: 20px;
+  margin-left: 20%;
+}
+.discoversmallbox2 .discoverexamname1{
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0px;
+  padding: 5px;
+}
+.discoversmallbox2 .discoverscore1{
+  font-size: 62px;
+  font-weight: 300;
+  margin-top: 20px;
+}
+#showcertificate{
+  color: #008182;
+  background-color: #fff;
+}
+#showcertificate:hover{
+  color: #fff;
+  background-color: #008182;
 }
