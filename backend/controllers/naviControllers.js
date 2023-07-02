@@ -3,7 +3,7 @@ const Exam = require('../models/Exam')
 const casual = require('casual');
 const jwt = require('jsonwebtoken');
 const { populate } = require('../models/Admin');
-
+const {Country} = require('../models/TimeAndSpace')
 
 const payment = (req, res) => {
     console.log('payment succeeded');
@@ -118,6 +118,24 @@ module.exports.populate_exams = async (req, res) =>{
         }
     }catch(err){
         res.send('errrrrrrrrrrrrr')
+        console.log(err);
+    }
+}
+
+
+module.exports.get_places = async (req, res) => {
+    try{
+        const places = await Country.find().select('country_name cities').populate({
+            path: 'cities',
+            select: 'city_name locations',
+            populate:{
+                path: 'locations',
+                select: 'location_name'
+            }
+        });
+        console.log(places);
+        res.json(places);
+    }catch(err){
         console.log(err);
     }
 }
