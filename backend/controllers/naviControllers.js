@@ -52,7 +52,8 @@ module.exports.getHome = async (req, res) => {
 // >>>>>>> main
                     
                     const result = user.exams.map((exam) => ({
-                       exam: { _id: exam.exam._id,
+                       exam: { 
+                        _id: exam.exam._id,
                         snack: exam.exam.snack,
                         percentage: exam.exam.percentage,
                         appointment: exam.exam.appointment,
@@ -129,8 +130,9 @@ module.exports.get_places = async (req, res) => {
             path: 'cities',
             select: 'city_name locations',
             populate:{
-                path: 'locations',
-                select: 'location_name snacks max_number'
+
+              path: 'locations',
+              select: 'location_name snacks max_number'
                 
             }
         });

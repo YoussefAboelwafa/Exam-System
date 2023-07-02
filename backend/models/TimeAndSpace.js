@@ -20,19 +20,26 @@ const generateRandomCode = ()=> {
 
 const DaysSchema = new mongoose.Schema({
     // _id: {type: String, required: true, unique: true, default: generateRandomCode},
-    day_name: {type: String, required: true, index: 'hashed'},
-    moderator: {type: String, index: 'hashed', default: 'none'},
-    appointments: {type:[String], default: []},
-    reserved_number: {type: Number, required: true, default: 0},
+    day_name: {type: String, required: true},
+    day_number: {type: String},
+    month_name: {type: String},
+    month_number: {type: String},
+    
+    moderator: {type: String, default: 'none'},
+    appointment: {type:String, default: '3 pm'}, // time
+    reserved_number: {type: Number, required: true, default: 0}, // student number
     reserved_users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
+
     /*
       a pointer back up to the parent so that instead of storing
       all of the location's data in the user we can we this to traverse
       up the tree
     */
-    // locations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'location', default: null}] 
+    location: { type: mongoose.Schema.Types.ObjectId, ref: 'location', default: null}
 })
 
+
+DaysSchema.index({day_number:1, month_number:1});
 
 const LocationSchema = new mongoose.Schema({
     location_name: {type: String, required: true, index: 'hashed'},
@@ -101,12 +108,14 @@ CountrySchema.statics.insertPlace = async function(elem) {
 
 CountrySchema.statics.insertTime = async function(elem){
     try {
-        const {location_id, day, appointment} = elem;
+        const {location_id, month_number, month_name, day_name, day_number, appointment} = elem;
         console.log(elem);
         const day_id = await Day.findOneAndUpdate (
-            { day_name: day },
-            { $addToSet: { appointments: appointment },
-              parent: location_id},
+            {day_number:day_number, month_number:month_number},
+            { appointment: appointment,
+              month_name: month_name,
+              day_name: day_name,
+              location: location_id},
             { upsert: true, new: true , setDefaultsOnInsert: true, select: '_id' }
         );
         if (!day_id) throw Error("Location not found");
@@ -118,7 +127,7 @@ CountrySchema.statics.insertTime = async function(elem){
         );
         if (!saved_location_id) throw Error("City not found");
         console.log(saved_location_id);
-        return saved_location_id;
+        return day_id;
     } catch (error) {
         console.error('Error updating or creating place entry:', error);
     }
@@ -155,3 +164,14 @@ const Day = mongoose.model('day', DaysSchema);
 
 
 module.exports = {Country, City, Location, Day};
+
+
+
+
+
+
+
+
+
+
+
