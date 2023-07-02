@@ -17,5 +17,7 @@ router.post('/remove_exam', adminControllers.remove_exam);
 
 router.get('/get_day', adminControllers.get_users_with_day);
 
+router.get('/get_all_days', adminControllers.get_all_days);
+
 
 module.exports = router;
