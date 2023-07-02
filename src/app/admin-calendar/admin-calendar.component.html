@@ -1,6 +1,6 @@
 
 <div *ngIf="flag_calender==true">
-    <div class="toolbar">
+    <div class="toolbar"> 
     <!-- country -->
     <div class="dropdown countrydiv">
       <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
@@ -53,19 +53,31 @@
       Add appointment <i class="fa-solid fa-plus"></i>
     </button>
     <!-- ng for -->
-    <div class="card card-text box">
+    <div *ngFor="let calend of calendar;let i=index" [ngClass]="{'card': true, 'card-text': true, 'box': true, 'bg': calend.student == calend.capacity}">
       <div class="remove">
-        <button><i class="fa-solid fa-magnifying-glass"></i></button>
-        <button><i class="fa-solid fa-trash"></i></button>
+        <button (click)="goto_all_student(calend.day_number,calend.month_name)"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button
+         (click)="remove_calender(calend,i)"
+         data-toggle="modal"
+         data-target="#confirmation"
+          *ngIf="calend.student==0"><i class="fa-solid fa-trash"></i></button>
       </div>
       <div class="info">
-        <label class="monthNumber">25</label>
+        <label class="monthNumber">{{calend.day_number}}</label>
         <div class="monthdiv">
-          <label class="monthName">Feb</label>
-          <label class="day">Monday</label>
+          <label class="monthName">{{calend.month_name}}</label>
+          <label class="day">{{calend.day_name}}</label>
         </div>
       </div>
-      <div class="smallbox"><span class="score">20</span>/25</div>
+      <div class="card-text upcomingbox">
+        <!-- ng for -->
+        <div  class="upcominginfo" style=" margin-bottom: 9px;" >
+          <label class="locate_box smallbox"  >{{ calend.country }}</label>
+          <label class="locate_box smallbox">{{ calend.city }}</label>
+          <label class="locate_box smallbox">{{ calend.location }}</label>
+        </div>
+      </div>
+      <div class="smallbox"><span class="score">{{calend.student}}</span>/{{calend.capacity}}</div>
     </div>
   </div>
   
@@ -88,6 +100,7 @@
               class="close close1"
               data-dismiss="modal"
               aria-label="Close"
+              (click)="close()"
             >
               <span aria-hidden="true">&times;</span>
             </button>
@@ -101,6 +114,7 @@
               class="form-control"
               id="exampleFormControlInput1"
               placeholder="Enter Country"
+              #add_country
             />
           </div>
           <div class="form-group">
@@ -110,6 +124,7 @@
               class="form-control"
               id="exampleFormControlInput2"
               placeholder="Enter City"
+              #add_city
             />
           </div>
           <div class="form-group">
@@ -119,6 +134,8 @@
               class="form-control"
               id="exampleFormControlInput3"
               placeholder="Enter Location"
+              #add_location
+
             />
           </div>
           <div class="form-group">
@@ -127,6 +144,7 @@
               type="date"
               class="form-control"
               id="exampleFormControlInput4"
+              #add_date
             />
           </div>
           <div class="form-group">
@@ -135,11 +153,12 @@
               type="time"
               class="form-control"
               id="exampleFormControlInput5"
+              #add_time
             />
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" id="addnewlocation">
+          <button (click)="add_calendar(add_country.value,add_city.value,add_location.value,add_date.value,add_time.value)" type="button" id="addnewlocation">
             Add <i class="fa-solid fa-plus"></i>
           </button>
         </div>
@@ -175,6 +194,7 @@
         <div class="form-group">
           <label for="exampleFormControlInput1">Moderator Name:</label>
           <input
+            #moderatorName
             type="text"
             class="form-control"
             id="exampleFormControlInput1"
@@ -184,7 +204,7 @@
        
       </div>
       <div class="modal-footer">
-        <button type="button" id="addnewlocation">
+        <button (click)="add_moderator(moderatorName.value)" type="button" id="addnewlocation">
           Add <i class="fa-solid fa-plus"></i>
         </button>
       </div>
@@ -221,7 +241,9 @@
 
 <div *ngIf="flag_all_student ==true " >
     <div class="discoverexamslabel">
-        <p><span>25</span>Feb</p>
+        <p style="display: inline;"><span>{{day_all}}</span>{{month_all}}</p>
+        
+        <button (click)="close_all_student()" class="btn_back"><i  class="fa-solid fa-arrow-left"></i></button>
     </div>
     <div class="moderator">
         <button
@@ -234,28 +256,28 @@
     </div>
   <div class="discoverexamswidgets">
     <!-- ngfor ya kimoo -->
-    <div *ngFor="let token of token_exam" class="card card-body upcoming">
+    <div *ngFor="let user of user_exam ;let i=index " class="card card-body upcoming">
       <!-- Not taken again -->
       <div class="name2">
         <img [src]="current_user.photo" alt="" class="image" />
         <div class="name1">
-          <h5 class="card-title">{{current_user.first_name}} {{current_user.last_name}}</h5>
-          <h5 class="card-title" id="id">#{{current_user._id}}</h5>
+          <h5 class="card-title">{{user.name_user}}</h5>
+          <h5 class="card-title" id="id">#{{user._id_user}}</h5>
         </div>
       </div>
 
       <div class="discoverbox1">
         <div class="discoverinfo">
           <ul>
-            <li>Exam title</li>
-            <li>Loction</li>
-            <li>time</li>
-            <li>snack</li>
+            <li>{{user.exam_title}}</li>
+            <li>{{user.location}}</li>
+            <li>{{user.time_book}}</li>
+            <li>{{user.snack}}</li>
           </ul>
         </div>
         <div class="discoversmallbox">
-          <label class="discoverscore">{{ token.percentage }}%</label>
-          <button class="change">Click to change</button>
+          <label class="discoverscore">{{ user.percentage_user }}%</label>
+          <button (click)="open_user_card(user,i)" class="change">Click to change</button>
         </div>
       </div>
     </div>
@@ -277,32 +299,81 @@
     <div  class="card card-body upcoming " id="special_card"  >
         <!-- Not taken again -->
         <div class="name2">
-          <img [src]="current_user.photo" alt="" class="image" />
+          <img [src]="change_user.photo" alt="" class="image" />
           <div class="name1">
-            <h5 class="card-title">{{current_user.first_name}} {{current_user.last_name}}</h5>
-            <h5 class="card-title" id="id">#{{current_user._id}}</h5>
+            <h5 class="card-title">{{change_user.first_name}} {{current_user.last_name}}</h5>
+            <h5 class="card-title" id="id">#{{change_user._id_user}}</h5>
           </div>
         </div>
   
         <div class="discoverbox1">
           <div class="discoverinfo">
             <ul>
-              <li>Exam title</li>
-              <li>Loction</li>
-              <li>time</li>
-              <li>snack</li>
+              <li>{{change_user.exam_title}}</li>
+              <li>{{change_user.location}}</li>
+              <li>{{change_user.time}}</li>
+              <li>{{change_user.snack}}</li>
             </ul>
           </div>
           <div class="discoversmallbox" style="height: 20vh;">
             <label >Current percentage</label>
-            <input class="input_percentage" type=number min="0" max="100" placeholder="00 %" >
+            <input #user_percentage class="input_percentage" type=number min="0" max="100" placeholder="00 %" >
           </div>
         </div>
         <div style="margin-top:-3.5ch;">
         <hr style="color:#008081;">
-        <button class="update_card">Update card</button>
+        <button (click)="change_percentage(user_percentage.value)" class="update_card">Update card</button>
         </div>
 
       </div>   
     </div>
   </div>
+
+
+
+  <div
+  class="modal fade"
+  id="confirmation"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          <p style="color: red;">Confirmation Remove</p>
+        </h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body" style="color: red;">
+        Are you sure you want to remove the <span style="font-size: 20px;">{{remove_calend.day_number}}</span>  {{remove_calend.month_name}}?
+      </div>
+      <div class="modal-footer">
+        <button
+            (click)="totaly_remove()"
+            class="discoverbtns btn_exam"
+          >
+          YES
+        </button>
+        <button 
+           style="background-color: #FF0052;"
+            class="discoverbtns btn_exam"
+            (click)="close();"
+          >
+          NO
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

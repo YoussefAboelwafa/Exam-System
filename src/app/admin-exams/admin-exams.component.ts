@@ -74,11 +74,10 @@ export class AdminExamsComponent implements OnInit {
 
   remove_exam(value:any,index:any) {
     this.remove_ex=value;
-    this.index_remove=index;
-    
+    this.index_remove=index; 
   }
 
-  totaly_remove(value:any,index:any){
+  totaly_remove(index:any){
    //service_remove exam pass object 
    this.non_token_exam.splice(index, 1);
    this.close_popup();
@@ -90,6 +89,7 @@ export class AdminExamsComponent implements OnInit {
 
     this.remove_ex=new exams;
     this.index_remove="";
+    this.edit_ex=new exams
   }
 
   Edit_exam(value:any,index:any){

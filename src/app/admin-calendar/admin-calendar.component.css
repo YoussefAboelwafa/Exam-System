@@ -49,7 +49,7 @@
     background: rgba(255, 255, 255, 0.32);
     box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
     margin-right: 20px;
-    width: 20vw;
+    width: 21vw;
     height: 13vh;
     margin-bottom: 5%;
     margin-right: 12%;
@@ -257,8 +257,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 18vw;
-    height: 25vh;
+    width: 19vw;
+    height: 35vh;
     margin-left: 2%;
     margin-top: 2%;
     padding: 5px;
@@ -283,7 +283,7 @@
     display: flex;
     margin: 0px;
     padding: 2px;
-    width: 50%;
+    width: 55%;
     height: 40%;
     justify-content: center;
     align-items: center;
@@ -455,4 +455,31 @@
     border: 1px solid #008182;
     transition: 1s;
   }
-  
+  .bg {
+    border-radius: 10px;
+    background: radial-gradient(313.28% 209.98% at 99.43% 99.22%, #FDD6BF 0%, rgba(253, 214, 191, 0.00) 100%), #FFF;
+    box-shadow: 0px 0px 25px 0px rgba(247, 144, 81, 0.15);
+  }
+  .upcomingbox {
+    display: flex;
+    flex-direction: column;
+  }
+  .examname1 {
+    margin: 0px;
+  }
+  .locate_box{
+    display: inline;
+    font-size: 18px;
+    margin-right: 5px;
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+    box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  }
+  .btn_back{
+    all:unset;
+    cursor: pointer;
+    margin-left:85%
+    
+  }

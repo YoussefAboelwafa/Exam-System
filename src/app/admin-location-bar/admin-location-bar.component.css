@@ -106,6 +106,9 @@
   justify-content: left;
   height: fit-content;
   position: relative;
+  margin-bottom: 1%;
+
+  
 }
 
 .takenbox {
@@ -114,6 +117,8 @@
   justify-content: left;
   align-items: center;
   text-align: center;
+  width: 20vw;
+  height: 8vh;
 }
 .takeninfo {
   color: #008182;
@@ -183,3 +188,10 @@ td {
 .taken i:hover {
   color: #ff0052;
 }
+/* .card {
+  width: 20vw;
+  height: 4vh;
+  position: relative;
+  margin-right: 2%;
+  margin-bottom: 15px;
+} */
