@@ -36,7 +36,7 @@ module.exports.getHome = async (req, res) => {
                    const id = req.body._id
                     let user = await User.findById(id).select({first_name: 1, last_name: 1, exams: 1, _id: 1});
 
-                    const exam_ids = user.exams.map((elem)=>elem.exam._id);
+                    const exam_ids = user.exams.map((exam)=>exam._id);
 
       
                     const [token_exam_info, other_exam] = await Promise.all([
@@ -45,12 +45,9 @@ module.exports.getHome = async (req, res) => {
                       ]);
 
                       let startTime = Date.now();
-                    user = await user.populate({
-                        path:'exams.exam.place_and_time_id',
-                        select: 'day_name',
-                        path:'exams.exam.'    });
-                          
-// =======
+                    user = await user.populate('exams.day').select('day_name').populate('exams.location').select('location_name');
+                    console.log(user);               
+// ======= 
 //                     const token_exam_info = (await Exam.find({ _id: { $in: exam_ids } }).select('title info about')).map((elem) => ({title: elem.title, about:elem.about,info:elem.info}));
 // >>>>>>> main
                     
