@@ -66,12 +66,12 @@ public home_bar_init():Observable<any>{
 // when i enter home bar i send request and want to receive json that contains {user:user,non_taken_exam:any exam that the user does not take it yet}
 //he take ids of all exams in user
 public exam_bar_init():Observable<any>{
-  console.log(this.ids_ex)
   return this.http.post<any>(`${this.apiServerUrl}/home/exams`,{ids:this.ids_ex}, { withCredentials: true });
 }
 
 //return id of the
 public add_new_exam(new_exam:any):Observable<any>{
+  console.log(new_exam)
   return this.http.post<any>(`${this.apiServerUrl}/admin/add_exam`,{new_exam:new_exam}, { withCredentials: true });
 }
 
@@ -81,6 +81,31 @@ public edit_exam(id:any,new_exam:any):Observable<any>{
 
 public remove_exam(id:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/remove_exam`,{_id:id}, { withCredentials: true });
+}
+
+
+public add_location(new_locate:any):Observable<any>{
+  console.log(new_locate)
+  return this.http.post<any>(`${this.apiServerUrl}/admin/add_location`,new_locate, { withCredentials: true });
+}
+
+// sooon.....
+// public edit_location(id:any,new_locate:any):Observable<any>{
+//   return this.http.post<any>(`${this.apiServerUrl}/admin/add_location`,{_id:id,new_locate:new_locate}, { withCredentials: true });
+// }
+
+public remove_locate(id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/remove_location`,{_id:id}, { withCredentials: true });
+}
+
+public get_places():Observable<any>{
+  return this.http.get<any>(`${this.apiServerUrl}/home/get_places`, { withCredentials: true });
+}
+public get_calender():Observable<any>{
+  return this.http.get<any>(`${this.apiServerUrl}/admin/get_all_days`, { withCredentials: true });
+}
+public add_day():Observable<any>{
+  return this.http.get<any>(`${this.apiServerUrl}/admin/add_time`, { withCredentials: true });
 }
 
 

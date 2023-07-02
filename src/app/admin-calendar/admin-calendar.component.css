@@ -483,3 +483,12 @@
     margin-left:85%
     
   }
+  .form-group {
+    display:flex;
+    flex-direction: column;
+  }
+  select{
+    justify-content: left;
+    text-align: left;
+    background-color: #fff;
+  }

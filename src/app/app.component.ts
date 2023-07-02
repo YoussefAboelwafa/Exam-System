@@ -11,6 +11,6 @@ export class AppComponent {
 
   constructor(private router: Router) {
 
-    this.router.navigate(['admin_home/admin_calendar']);
+    this.router.navigate(['admin_home/admin_location']);
   }
 }

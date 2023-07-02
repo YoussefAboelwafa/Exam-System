@@ -7,6 +7,7 @@ export class calendar{
     location:any;
     city:any;
     country:any;
+    location_id:any;
     time:any;
     moderator:any;
     _id:any

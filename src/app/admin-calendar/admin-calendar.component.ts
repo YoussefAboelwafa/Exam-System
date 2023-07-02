@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { calendar } from '../objects/calender';
 import { book_user } from '../objects/book_user';
+import { ServicService } from '../services/servic.service';
+import { address } from '../objects/loction_address';
+import { HttpErrorResponse } from '@angular/common/http';
 declare const $: any;
 
 @Component({
@@ -80,50 +83,11 @@ export class AdminCalendarComponent implements OnInit {
       country:"egypt",
       city:"alex",
       location:"smouha",
+      location_id:"ksdc",
       _id: "1",
       time:"5 pm",
       moderator:"",
-      student:0,
-      capacity:25,
-    }, {
-      day_number:1,
-      day_name:"saturday",
-      month_name:"jan",
-      month_number:"march",
-      country:"egypt",
-      city:"cairo",
-      location:"Ramsis",
-      _id: "1",
-      time:"5 pm",
-      moderator:"",
-      student:40,
-      capacity:40,
-    }, {
-      day_number:1,
-      day_name:"saturday",
-      month_name:"jan",
-      month_number:"march",
-      country:"egypt",
-      city:"alex",
-      location:"smouha",
-      _id: "1",
-      time:"5 pm",
-      moderator:"",
-      student:0,
-      capacity:30,
-    },
-    {
-      day_number:1,
-      day_name:"saturday",
-      month_name:"jan",
-      month_number:"march",
-      country:"egypt",
-      city:"alex",
-      location:"smouha",
-      _id: "1",
-      time:"5 pm",
-      moderator:"",
-      student:25,
+      student:21,
       capacity:25,
     },
   ]
@@ -135,7 +99,78 @@ export class AdminCalendarComponent implements OnInit {
   change_user:any;
   index_change_user:any;
 
-  constructor() { }
+
+  all_locations:any;
+  country:any[]=[];
+  city:any[]=[];
+  locations:any[]=[];
+  snacks:any[]=[];
+  capacity:any[]=[];
+  index_country:any;
+  index_city:any;
+  index_location:any;
+  id_location:any;
+
+
+  address:address[]=[]
+  temp_country_address:any;
+  temp_city_address:any;
+  temp_location_address:any;
+  constructor(private service:ServicService) {
+
+    this.service.get_places().subscribe(
+      (x)=> {
+        this.all_locations=x;
+        this.country= x.map((cont:any)=> cont.country_name);
+      //  this.city= x.map((cont:any)=> cont.cities)[0].map((c:any)=> c.city_name);
+      //   console.log(x);
+        
+        // console.log(x[0].cities);
+        // console.log(x[0].cities[0].city_name);
+        // console.log(x[0].cities[0].locations);
+        // console.log(x[0].cities[0].locations[0].location_name);
+        // console.log(x[0].cities[0].locations[0].snacks);
+        // console.log(x[0].cities[0].locations[0].snacks[0]);
+        // console.log(x[0].cities[0].locations[0].max_number);
+        let combinations: string[] = [];
+
+this.all_locations.forEach((country: any) => {
+  country.cities.forEach((city: any) => {
+    city.locations.forEach((location: any) => {
+      combinations.push(`${country.country_name}: ${city.city_name}: ${location.location_name}:${location.max_number}:${location.snacks}:${location._id}`);
+    });
+  });
+});
+
+for(let i=0; i<combinations.length; i++) {
+  let x=new address;
+  const dateArr = combinations[i].split(":");
+
+  x.country=dateArr[0];
+  x.city=dateArr[1];
+  x.location=dateArr[2];
+  x.capacity=dateArr[3];
+  x.snacks=dateArr[4];
+  x._id=dateArr[5]
+  console.log(x);
+  this.address.push(x);
+}
+
+console.log(combinations);
+
+
+
+         error:(error: HttpErrorResponse) =>alert(error.message);
+       }
+  
+    )
+      }
+  //   this.service.get_calender().subscribe(
+  //     (x:any) => {
+  //       console.log(x);
+  //     }
+  //   )
+  //  }
 
   ngOnInit(): void {
   }
@@ -197,7 +232,7 @@ export class AdminCalendarComponent implements OnInit {
     this.flag_all_student=true;
   }
 
-  add_calendar(add_country:any,add_city:any,add_location:any,add_date:any,add_time:any){
+  add_calendar(add_date:any,add_time:any){
     let x=new calendar;
     let dateArr = add_date.split("-");
     const month = parseInt(dateArr[1]);
@@ -215,10 +250,11 @@ export class AdminCalendarComponent implements OnInit {
     }    
     const time = `${hours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
   
-    x.country=add_country;
-    x.city=add_city;
+    // x.country=add_country;
+    // x.city=add_city;
+    // x.location=add_location;
+    x.location_id=this.id_location;
     x.day_number=day;
-    x.location=add_location;
     x.month_number=month;
     x.time=time;
     x.day_name=this.get_name_date(add_date,1);
@@ -250,5 +286,63 @@ export class AdminCalendarComponent implements OnInit {
     this.close_popup();
 
   }
+
+  onCountrySelected(event: Event) {
+    const selectedCountry = (event.target as HTMLSelectElement).value;
+    // Call your function here with the selectedCountry value
+    if(selectedCountry != "Country" ){
+      this.temp_country_address=this.address;
+       this.address = this.address.filter(obj => obj.country === selectedCountry);
+    }
+    else{
+      this.address=this.temp_country_address;
+      this.temp_country_address = null;
+    }
+    for (let i=0; i<this.country.length; i++){
+      if(this.country[i]==selectedCountry){
+        this.index_country=i;
+      }
+    }
+
+    this.city= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.city_name);
+  }
+
+  oncitySelected(event: Event){
+    const selectedCity = (event.target as HTMLSelectElement).value;
+    // Call your function here with the selectedCountry value
+    if(selectedCity != "City" ){
+      
+      this.temp_city_address=this.address;
+       this.address = this.address.filter(obj => obj.city === selectedCity);
+    }
+    else{
+      this.address=this.temp_city_address;
+      this.temp_city_address = null;
+    }
+    for (let i=0; i<this.city.length; i++){
+      if(this.city[i]==selectedCity){
+        this.index_city=i;
+      }
+    }
+      console.log(this.index_city)
+    this.locations= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c.location_name)
+    ;
+    console.log(this.locations)
+  }
+
+  onlocationSelected(event: Event){
+    const selectedlocation = (event.target as HTMLSelectElement).value;
+
+    for (let i=0; i<this.locations.length; i++){
+      if(this.locations[i]==selectedlocation){
+        this.index_location=i;
+      }
+    }
+    // this.snacks= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c.snacks)
+    this.id_location= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c._id)
+
+
+  }
+
 
 }
