@@ -94,7 +94,7 @@ public edit_location(id:any,new_locate:any):Observable<any>{
 }
 
 public remove_locate(id:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/remove_exam`,{_id:id}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/admin/remove_location`,{_id:id}, { withCredentials: true });
 }
 
 

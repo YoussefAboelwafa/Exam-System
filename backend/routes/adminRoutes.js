@@ -5,7 +5,10 @@ const adminControllers = require('../controllers/adminControllers')
 
 const router = Router();
 
-router.post('/add_place', adminControllers.add_place);
+router.post('/add_location', adminControllers.add_place);
+
+
+
 
 router.post('/add_time', adminControllers.add_time);
 
