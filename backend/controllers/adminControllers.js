@@ -17,7 +17,7 @@ module.exports.add_place = async (req, res) => {
             max_number: number
         }
         */
-        const place = await TimeAndSpace.insertPlace(req.body)
+        const place = await TimeAndSpace.Country.insertPlace(req.body)
         res.json(place);
     }catch(err){
         console.log(err);
@@ -30,13 +30,13 @@ module.exports.add_place = async (req, res) => {
 module.exports.add_time = async (req, res) => {
     /*
     req.body = {
-        location_id: id
+        location_id: id,
         day: day name,
         appointment: time
     }
     */
     try{ 
-        await TimeAndSpace.insertTime(req.body)
+        await TimeAndSpace.Country.insertTime(req.body)
         res.json({success: true});
     }catch(err){
         console.log(err);
@@ -108,11 +108,11 @@ module.exports.remove_exam = async (req, res) => {
 module.exports.get_users_with_day = async (req, res) => {
     try{
         // const location 
-        const day = await TimeAndSpace.Day.findOne({_id: req.dayId}).select('reserved_users')
+        const day = await TimeAndSpace.Day.findOne({_id: req.dayId})
+            .select('reserved_users')
             .populate({
                 path: 'exams', // add id and photo
                 select: 'title',
-                
             })
         res.json({success: true});
     }catch(err){
