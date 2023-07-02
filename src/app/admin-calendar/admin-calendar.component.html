@@ -1,1 +1,308 @@
-<p>admin-calendar works!</p>
+
+<div *ngIf="flag_calender==true">
+    <div class="toolbar">
+    <!-- country -->
+    <div class="dropdown countrydiv">
+      <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
+        <option selected>Country</option>
+        <option value="Egypt">Egypt</option>
+        <option value="UAE">UAE</option>
+      </select>
+    </div>
+    <!-- city -->
+    <div class="dropdown countrydiv">
+      <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
+        <option selected>City</option>
+        <option value="Alexandria">Alexandria</option>
+        <option value="Dubai">Dubai</option>
+      </select>
+    </div>
+    <!-- location -->
+    <div class="dropdown countrydiv">
+      <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
+        <option selected>Location</option>
+        <option value="Smouha">Smouha</option>
+        <option value="Maydan">Maydan</option>
+      </select>
+    </div>
+    <div class="dropdown monthdiv">
+      <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
+        <option selected>Month</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="container">
+    <button
+      data-toggle="modal"
+      data-target="#addappointmodal"
+      class="addappointbtn"
+    >
+      Add appointment <i class="fa-solid fa-plus"></i>
+    </button>
+    <!-- ng for -->
+    <div class="card card-text box">
+      <div class="remove">
+        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button><i class="fa-solid fa-trash"></i></button>
+      </div>
+      <div class="info">
+        <label class="monthNumber">25</label>
+        <div class="monthdiv">
+          <label class="monthName">Feb</label>
+          <label class="day">Monday</label>
+        </div>
+      </div>
+      <div class="smallbox"><span class="score">20</span>/25</div>
+    </div>
+  </div>
+  
+  </div>
+  <div
+    class="modal fade"
+    id="addappointmodal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button class="outer_button" disabled>
+            <button
+              type="button"
+              class="close close1"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Country:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput1"
+              placeholder="Enter Country"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput2">City:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput2"
+              placeholder="Enter City"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput3">Location:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput3"
+              placeholder="Enter Location"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput4">Date:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="exampleFormControlInput4"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput5">Time:</label>
+            <input
+              type="time"
+              class="form-control"
+              id="exampleFormControlInput5"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="addnewlocation">
+            Add <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div
+  class="modal fade"
+  id="moderatormodal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Moderator Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="Enter Name"
+          />
+        </div>
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="addnewlocation">
+          Add <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div *ngIf="flag_all_student ==true " >
+    <div class="discoverexamslabel">
+        <p><span>25</span>Feb</p>
+    </div>
+    <div class="moderator">
+        <button
+    data-toggle="modal"
+    data-target="#moderatormodal"
+    class="moderatorbtn"
+  >
+    Assign Moderator <i class="fa-solid fa-plus"></i>
+  </button>
+    </div>
+  <div class="discoverexamswidgets">
+    <!-- ngfor ya kimoo -->
+    <div *ngFor="let token of token_exam" class="card card-body upcoming">
+      <!-- Not taken again -->
+      <div class="name2">
+        <img [src]="current_user.photo" alt="" class="image" />
+        <div class="name1">
+          <h5 class="card-title">{{current_user.first_name}} {{current_user.last_name}}</h5>
+          <h5 class="card-title" id="id">#{{current_user._id}}</h5>
+        </div>
+      </div>
+
+      <div class="discoverbox1">
+        <div class="discoverinfo">
+          <ul>
+            <li>Exam title</li>
+            <li>Loction</li>
+            <li>time</li>
+            <li>snack</li>
+          </ul>
+        </div>
+        <div class="discoversmallbox">
+          <label class="discoverscore">{{ token.percentage }}%</label>
+          <button class="change">Click to change</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div *ngIf="flag_student == true" class="contain">
+   
+    <div class="one_card">
+        <div class="close" >
+            <button (click)="close_card()" class="closebtn">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+    <div  class="card card-body upcoming " id="special_card"  >
+        <!-- Not taken again -->
+        <div class="name2">
+          <img [src]="current_user.photo" alt="" class="image" />
+          <div class="name1">
+            <h5 class="card-title">{{current_user.first_name}} {{current_user.last_name}}</h5>
+            <h5 class="card-title" id="id">#{{current_user._id}}</h5>
+          </div>
+        </div>
+  
+        <div class="discoverbox1">
+          <div class="discoverinfo">
+            <ul>
+              <li>Exam title</li>
+              <li>Loction</li>
+              <li>time</li>
+              <li>snack</li>
+            </ul>
+          </div>
+          <div class="discoversmallbox" style="height: 20vh;">
+            <label >Current percentage</label>
+            <input class="input_percentage" type=number min="0" max="100" placeholder="00 %" >
+          </div>
+        </div>
+        <div style="margin-top:-3.5ch;">
+        <hr style="color:#008081;">
+        <button class="update_card">Update card</button>
+        </div>
+
+      </div>   
+    </div>
+  </div>

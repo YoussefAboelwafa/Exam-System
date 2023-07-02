@@ -1,55 +1,27 @@
 <div class="toolbar">
   <!-- country -->
   <div class="dropdown countrydiv">
-    <button
-      class="btn dropdown-toggle"
-      type="button"
-      id="dropdownMenuButton"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false"
-    >
-      Country
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Egypt</a>
-      <a class="dropdown-item" href="#">UAE</a>
-    </div>
+    <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
+      <option selected>Country</option>
+      <option value="Egypt">Egypt</option>
+      <option value="UAE">UAE</option>
+    </select>
   </div>
   <!-- city -->
-  <div class="dropdown citydiv">
-    <button
-      class="btn dropdown-toggle"
-      type="button"
-      id="dropdownMenuButton"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false"
-    >
-      City
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Cairo</a>
-      <a class="dropdown-item" href="#">Dubai</a>
-    </div>
+  <div class="dropdown countrydiv">
+    <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
+      <option selected>City</option>
+      <option value="Alexandria">Alexandria</option>
+      <option value="Dubai">Dubai</option>
+    </select>
   </div>
   <!-- location -->
-  <div class="dropdown locationdiv">
-    <button
-      class="btn dropdown-toggle"
-      type="button"
-      id="dropdownMenuButton"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false"
-    >
-      Location
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Option 1</a>
-      <a class="dropdown-item" href="#">Option 2</a>
-      <a class="dropdown-item" href="#">Option 3</a>
-    </div>
+  <div class="dropdown countrydiv">
+    <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
+      <option selected>Location</option>
+      <option value="Smouha">Smouha</option>
+      <option value="Maydan">Maydan</option>
+    </select>
   </div>
 </div>
 
@@ -64,7 +36,13 @@
   <!-- ng for -->
   <div class="card card-body taken">
     <div class="remove_edit">
-      <button><i class="fa-solid fa-pen"></i></button>
+      <button>
+        <i
+          class="fa-solid fa-pen"
+          data-toggle="modal"
+          data-target="#editlocationmodal"
+        ></i>
+      </button>
       <button><i class="fa-solid fa-trash"></i></button>
     </div>
     <table>
@@ -113,8 +91,10 @@
 
   <div class="card card-body taken">
     <div class="remove_edit">
-      <button class="edit"><i class="fa-solid fa-pen"></i></button>
-      <button class="remove"><i  class="fa-solid fa-trash"></i></button>
+      <button class="edit" data-toggle="modal" data-target="#editlocationmodal">
+        <i class="fa-solid fa-pen"></i>
+      </button>
+      <button class="remove"><i class="fa-solid fa-trash"></i></button>
     </div>
     <table>
       <tr>
@@ -164,6 +144,76 @@
 <div
   class="modal fade"
   id="addlocationmodal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Country:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="Enter Country"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput2">City:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput2"
+            placeholder="Enter City"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">Location:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput3"
+            placeholder="Enter Location"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput4">Capacity:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput4"
+            placeholder="Enter Capacity"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="addnewlocation">
+          Add <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="editlocationmodal"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalCenterTitle"

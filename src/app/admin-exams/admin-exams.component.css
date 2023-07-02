@@ -196,7 +196,8 @@
     font-weight: 500;
     width: 100%;
     padding: 5px;
-    font-size: small;
+    font-size: 17px;
+    font-family: Montserrat;
   }
   .btn_add{
     margin-bottom: 10px;
@@ -274,3 +275,5 @@
     height: 20vh;
 
   }
+
+  

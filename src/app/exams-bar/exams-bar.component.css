@@ -291,29 +291,6 @@ line-height: 100%;
   border: 1px solid #008182;
   transition: 1s;
 }
-
-.image-container {
-  position: relative;
-  display: inline-block;
-}
-
-.image {
-  display: block;
-  width: 300px;
-  height: 200px;
-}
-
-.file-input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 80px;
-  height: 80px;
-  margin-left: 32px;
-  margin-top: 16px;
-  border-radius: 100px;
-  opacity: 0;
-}
 li:is(:hover, .active) button {
   color: rgb(0, 0, 0);
   margin-left: 20px;
