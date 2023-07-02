@@ -146,6 +146,7 @@ LocationSchema.statics.remove_location = async (location_id) =>{
 
 
 
+
 const Country = mongoose.model('country', CountrySchema);
 const City = mongoose.model('city', CitiesSchema);
 const Location = mongoose.model('location', LocationSchema);
