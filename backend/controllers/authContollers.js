@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const { Vonage } = require('@vonage/server-sdk')
 const OTP = require('../models/OTP')
 const casual = require('casual');
+const Admin = require('../models/Admin')
 
 const vonage = new Vonage({
   apiKey: "dc9afa8a",
@@ -53,7 +54,7 @@ function errorHandler(err) {
 ///ivsXMmb3UFV5AtA0T3vh3l99CBqH5gfy
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-    return jwt.sign({ id:id, privilages:0 }, 'example secret' , { ///secrect key  /// 0:normal user, 1:moderator, 2:admin 
+    return jwt.sign({ id:id, admin:Admin.isAdmin(id)}, 'example secret' , { 
         expiresIn : maxAge
     })
 }

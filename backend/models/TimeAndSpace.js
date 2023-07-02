@@ -18,37 +18,38 @@ const generateRandomCode = ()=> {
 
 
 
-const daysSchema = new mongoose.Schema({
+const DaysSchema = new mongoose.Schema({
     // _id: {type: String, required: true, unique: true, default: generateRandomCode},
-    name: {type: String, required: true, index: 'hashed'},
+    day_name: {type: String, required: true, index: 'hashed'},
     moderator: {type: String, index: 'hashed', default: 'none'},
     appointments: {type:[String], default: []},
     reserved_number: {type: Number, required: true, default: 0},
+    reserved_users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
     /*
       a pointer back up to the parent so that instead of storing
       all of the location's data in the user we can we this to traverse
       up the tree
     */
-    parent: { type: mongoose.Schema.Types.ObjectId, ref: 'location' } 
+    // locations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'location', default: null}] 
 })
 
 
 const LocationSchema = new mongoose.Schema({
-    name: {type: String, required: true, index: 'hashed'},
+    location_name: {type: String, required: true, index: 'hashed'},
     time: [{ type: mongoose.Schema.Types.ObjectId, ref: 'day' }],
     snacks: {type:[String], default: []},
     max_number: {type: Number, required: true},
-    parent: { type: mongoose.Schema.Types.ObjectId, ref: 'city' } 
+    parent: { type: mongoose.Schema.Types.ObjectId, ref: 'city', default: null } 
 })
 
 const CitiesSchema = new mongoose.Schema({
-    name: {type: String, required: true, index: 'hashed'},
+    city_name: {type: String, required: true, index: 'hashed'},
     locations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'location' }],
-    parent: { type: mongoose.Schema.Types.ObjectId, ref: 'country' }
+    parent: { type: mongoose.Schema.Types.ObjectId, ref: 'country', default: null }
 })
 
 const CountrySchema = new mongoose.Schema({
-    name: {type: String, required: true, unique: true, index: 'hashed'},
+    country_name: {type: String, required: true, unique: true, index: 'hashed'},
     cities: [{ type: mongoose.Schema.Types.ObjectId, ref: 'city' }]
 })
 
@@ -59,33 +60,38 @@ CountrySchema.statics.insertPlace = async function(elem) {
         const { country, city, location, max_number, snacks } = elem;
         let startTime = Date.now();
         const saved_location_id = await Location.findOneAndUpdate (
-            { name: location },
+            { location_name: location },
             { $addToSet: { snacks: snacks }, max_number: max_number },
             { upsert: true, new: true , setDefaultsOnInsert: true, select: '_id' }
           );
         if (!saved_location_id) throw Error("Location not found");
           
         const saved_city_id = await City.findOneAndUpdate (
-            { name: city },
-            { $addToSet: { locations: saved_location_id } },
+            { city_name: city },
+            { $addToSet: { locations: saved_location_id }},
             { upsert: true, new: true, setDefaultsOnInsert: true, select: '_id' }
           );
         if (!saved_city_id) throw Error("City not found");
           
-        const saved_country = await Country.findOneAndUpdate (
-            { name: country },
-            { $addToSet: { cities: saved_city_id } },
-            { upsert: true, new: true , setDefaultsOnInsert: true, select: '_id'}
+        const saved_country_id = await Country.findOneAndUpdate (
+            { country_name: country },
+            { $addToSet: { cities: saved_city_id }},
+            {upsert: true, new: true , setDefaultsOnInsert: true, select: '_id'}
           )
-        if (!saved_country) throw Error("Country not found");
+        if (!saved_country_id) throw Error("Country not found");
         
-          
+        const update_city = City.updateOne({_id: saved_city_id},
+          {parent: saved_country_id})
+
+        const update_location = Location.updateOne({_id: saved_location_id},
+          {parent: saved_city_id})
+
+        await Promise.all([update_city, update_location])
         
+        let endTime = Date.now();
+        console.log(endTime-startTime);
 
-
-          let endTime = Date.now();
-          console.log(endTime-startTime);
-        return saved_country;
+        return saved_country_id;
     } catch (error) {
       console.error('Error updating or creating place entry:', error);
     }
@@ -95,9 +101,11 @@ CountrySchema.statics.insertPlace = async function(elem) {
 CountrySchema.statics.insertTime = async function(elem){
     try {
         const {location_id, day, appointment} = elem;
+        console.log(elem);
         const day_id = await Day.updateOne (
-            { name: day },
-            { $addToSet: { appointments: appointment } },
+            { day_name: day },
+            { $addToSet: { appointments: appointment },
+              parent: location_id},
             { upsert: true, new: true , setDefaultsOnInsert: true, select: '_id' }
         );
         if (!day_id) throw Error("Location not found");
@@ -120,7 +128,7 @@ CountrySchema.statics.insertTime = async function(elem){
 const Country = mongoose.model('country', CountrySchema);
 const City = mongoose.model('city', CitiesSchema);
 const Location = mongoose.model('location', LocationSchema);
-const Day = mongoose.model('day', daysSchema);
+const Day = mongoose.model('day', DaysSchema);
 
 
-module.exports = Country;
+module.exports = {Country, City, Location, Day};

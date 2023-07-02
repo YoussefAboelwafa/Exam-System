@@ -32,7 +32,7 @@ module.exports.add_time = async (req, res) => {
     req.body = {
         location_id: id
         day: day name,
-        appointments: city name
+        appointment: time
     }
     */
     try{ 
@@ -47,7 +47,7 @@ module.exports.add_time = async (req, res) => {
 
 
 module.exports.add_new_exam = async (req, res) => {
-     /*
+    /*
     req.body = {
         title: new title,
         about: new about,
@@ -97,6 +97,23 @@ module.exports.remove_exam = async (req, res) => {
     }
 }
 
+
+
+module.exports.get_users_with_day = async (req, res) => {
+    try{
+        // const location 
+        const day = await TimeAndSpace.Day.findOne({_id: req.dayId}).select('reserved_users')
+            .populate({
+                path: 'exams', // add id and photo
+                select: 'title',
+                
+            })
+        res.json({success: true});
+    }catch(err){
+        console.log(err);
+        res.json(err);
+    }
+}
 
 
 

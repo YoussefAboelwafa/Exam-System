@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
 const sequence = require('mongoose-sequence')(mongoose);
-
+const {Location, Day} = require('./TimeAndSpace')
+const Exam = require('./TimeAndSpace')
 
 const characterSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const idLength = 8;
@@ -36,16 +37,16 @@ const userSchema = new mongoose.Schema({
     },
     password: {type: String, required: [true, 'password required']},
     exams: {
-        type: [{
-            exam: {type: {
-                _id: {type: String, required: true},
-                ///// delete later and replace with id of the appointment
-                //// and populate
-                place_and_time_id: { type: mongoose.Schema.Types.ObjectId, ref: 'day' },
+        type: [
+            {type: {
+                _id: {type: mongoose.Schema.Types.ObjectId, required: true},
+                day: { type: mongoose.Schema.Types.ObjectId, ref: 'day' },
+                location: {type: mongoose.Schema.Types.ObjectId, ref: 'location'},
+                appointment: {type: String, required: true},
                 snack: {type: String, required: true},
                 percentage: {type: Number, required: true}
             }, required: true},
-        }],
+        ],
         default: []
     }
 })
@@ -82,19 +83,32 @@ userSchema.statics.login = async function(email, password){
 
 userSchema.statics.bookExam = async function(exam, userId){
     try{
-        await this.updateOne(
-        { _id: userId }, // Match the document by its ID
-        { $push: { exams: {exam:exam, percentage:-1} } }, // Use $push to add the new element
-        (err, result) => {
-            if (err) {
-                console.error(err);
-                // Handle the error
-            } else {
-                console.log(result);
-                // The result object contains information about the update operation
-            }
+        const {location_id, day_id, exam_id, snack, appointment} = exam
+
+
+        const [location, day] = await Promise.all([
+            Location.findOne({_id: location_id}),
+            Day.findOne({_id: day_id})
+        ])
+        if(day.reserved_number >= location.max_number){
+            throw "This day is already full"
         }
-        );
+        await Promise.all[
+            await Day.updateOne({_id: day._id}, 
+                {reserved_number: day.reserved_number + 1
+                ,$push: userId}, {
+                new :true
+            }),
+            await User.updateOne({_id: userId}, {
+                $push:{
+                    _id: exam_id,
+                    appointment: appointment,
+                    snack: snack,
+                    percentage: -1,
+                    place_and_time_id: day_id
+                }
+            }) 
+        ]
         return true;
     }catch(err){
         console.log(`Error in updating exam ${userId}`);

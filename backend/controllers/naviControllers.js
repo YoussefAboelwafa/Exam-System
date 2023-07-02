@@ -2,6 +2,7 @@ const User = require('../models/User')
 const Exam = require('../models/Exam')
 const casual = require('casual');
 const jwt = require('jsonwebtoken');
+const { populate } = require('../models/Admin');
 
 
 const payment = (req, res) => {
@@ -13,34 +14,71 @@ const payment = (req, res) => {
 
 module.exports.getHome = async (req, res) => {
     try{
-        let startTime = Date.now();
-        const token = req.cookies.jwt;
+        // let startTime = Date.now();
+        // const token = req.cookies.jwt;
 
-        if(token){
-            let startTime = Date.now();
-            jwt.verify(token, 'example secret', async (err, decodedToken)=>{
+        // if(token){
+        //     let startTime = Date.now();
+        //     jwt.verify(token, 'example secret', async (err, decodedToken)=>{
 
-                if(err){
-                    console.log(err.message);
-                    res.json({signed_in: false});
-                }else{
-                    
-                    const user = await User.findById(decodedToken.id).select({first_name: 1, last_name: 1, exams: 1, _id: 1});
+        //         if(err){
+        //             console.log(err.message);
+        //             res.json({signed_in: false});
+        //         }else{
+                     /*
+                    country: {type: String, required: true},
+                    /city: {type: String, required: true},
+                    /location: {type: String, required: true},
+                    /day: {type: String, required: true},
+                    /appointment: {type: String, required: true},
+                    /snack: {type: String, required: true},
+                    */
+                   const id = req.body._id
+                    let user = await User.findById(id).select({first_name: 1, last_name: 1, exams: 1, _id: 1});
 
                     const exam_ids = user.exams.map((elem)=>elem.exam._id);
 
-                    const taken_exam_info = (await Exam.find({ _id: { $in: exam_ids } }).select('title about')).map((elem) => ({title: elem.title, about: elem.about}));
+                    const [token_exam_info, other_exam] = await Promise.all([
+                        Exam.find({ _id: { $in: exam_ids } }).select('title about'),
+                        Exam.findOne({ _id: { $nin: exam_ids } }).select('title info about')
+                      ]);
+
+                      let startTime = Date.now();
+                    user = await user.populate({
+                        path:'exams.exam.place_and_time_id',
+                        select: 'day_name',
+                        path:'exams.exam.'    });
+                          
                     
-                    const other_exam = await Exam.findOne({ _id: { $nin: exam_ids } }).select('title info about');
+                    const result = user.exams.map((exam) => ({
+                       exam: { _id: exam.exam._id,
+                        snack: exam.exam.snack,
+                        percentage: exam.exam.percentage,
+                        appointment: exam.exam.appointment,
+                        day: exam.exam.place_and_time_id.day_name,
+                        location: exam.exam.place_and_time_id.parent.location_name,
+                        city: exam.exam.place_and_time_id.parent.parent.city_name,
+                        country: exam.exam.place_and_time_id.parent.parent.parent.country_name}
+                    }))
+                    const parsed_user = {
+                        _id: user._id,
+                        first_name: user.first_name,
+                        last_name: user.last_name,
+                        percentage: user.percentage,
+                        exams: result
+                    }
+                    // user.exams = result
+                    
+                    let endTime = Date.now();
+                    console.log(endTime-startTime);
+                    res.json({user: parsed_user, token_exam_info, other_exam: other_exam});
 
-                    res.json({user: user, token_exam_info, other_exam: other_exam});
 
-
-                }
-            })
-        }else{
-            res.json({signed_in: false});
-        }
+        //         }
+        //     })
+        // }else{
+        //     res.json({signed_in: false});
+        // }
     }catch(err){
         console.log(err);
         res.json({signed_in: false});
