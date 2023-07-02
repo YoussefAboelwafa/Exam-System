@@ -58,7 +58,7 @@ examSchema.statics.editExam = async (newExam) => {
   }
 }
 
-
+  
   examSchema.statics.deleteExam = async (exam) => {
     try {
       const filter = { _id: exam._id }; // Specify the condition to find the exam to delete

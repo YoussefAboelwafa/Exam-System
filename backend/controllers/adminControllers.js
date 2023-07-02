@@ -1,60 +1,60 @@
 const User = require('../models/User')
 const Exam = require('../models/Exam')
-const Place = require('../models/Places')
+const TimeAndSpace = require('../models/TimeAndSpace')
 const casual = require('casual');
 const jwt = require('jsonwebtoken');
 
 
 
 module.exports.add_place = async (req, res) => {
-    // try{
-    //     /*
-    //     req.body = {
-    //         country: country name,
-    //         cities: city name,
-    //         location: location name,
-    //         snacks: [snacks name]
-    //         max_number: number
-    //     }
-    //     */
-        
-    //     res.json(exams);
-    // }catch(err){
-    //     console.log(err);
-    //     res.json(err);
-    // }
+    try{
+        /*
+        req.body = {
+            country: country name,
+            city: city name,
+            location: location name,
+            snacks: [snacks name]
+            max_number: number
+        }
+        */
+        const place = await TimeAndSpace.insertPlace(req.body)
+        res.json(place);
+    }catch(err){
+        console.log(err);
+        res.json(err);
+    }
 }
 
 
 
 module.exports.add_time = async (req, res) => {
-    // try{
-    //     /*
-    //     req.body = {
-    //         location_id: id
-    //         day: day name,
-    //         appointments: city name
-    //     }
-    //     */
-       
-    //     res.json(exams);
-    // }catch(err){
-    //     console.log(err);
-    //     res.json(err);
-    // }
+    /*
+    req.body = {
+        location_id: id
+        day: day name,
+        appointments: city name
+    }
+    */
+    try{ 
+        await TimeAndSpace.insertTime(req.body)
+        res.json({success: true});
+    }catch(err){
+        console.log(err);
+        res.json(err);
+    }
 }
 
 
 
 module.exports.add_new_exam = async (req, res) => {
+     /*
+    req.body = {
+        title: new title,
+        about: new about,
+        info: new info
+    }
+    */
     try{
-        /*
-        req.body = {
-            location_id: id
-            day: day name,
-            appointments: city name
-        }
-        */
         const exam = await Exam.insertExam(req.body);
         res.json(exam._id);
     }catch(err){
@@ -65,6 +65,13 @@ module.exports.add_new_exam = async (req, res) => {
 
 
 module.exports.edit_exam = async (req, res) => {
+    /*
+        req.body = {
+            _id: id of the exam,
+            title: new title,
+            about: new about
+        }
+    */
     try{
         await Exam.editExam(req.body);
         res.json({success: true});
@@ -76,16 +83,14 @@ module.exports.edit_exam = async (req, res) => {
 
 
 module.exports.remove_exam = async (req, res) => {
-    try{
-        /*
+    /*
         req.body = {
-            location_id: id
-            day: day name,
-            appointments: city name
+            _id: id of the exam
         }
-        */
-       await Exam.deleteExam(req.body)
-        res.json(exams);
+    */
+    try{
+        await Exam.deleteExam(req.body)
+        res.json({success: true});
     }catch(err){
         console.log(err);
         res.json(err);

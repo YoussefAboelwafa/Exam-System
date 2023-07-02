@@ -41,11 +41,7 @@ const userSchema = new mongoose.Schema({
                 _id: {type: String, required: true},
                 ///// delete later and replace with id of the appointment
                 //// and populate
-                country: {type: String, required: true},
-                city: {type: String, required: true},
-                location: {type: String, required: true},
-                day: {type: String, required: true},
-                appointment: {type: String, required: true},
+                place_and_time_id: { type: mongoose.Schema.Types.ObjectId, ref: 'day' },
                 snack: {type: String, required: true},
                 percentage: {type: Number, required: true}
             }, required: true},
