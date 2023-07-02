@@ -57,7 +57,8 @@ const CountrySchema = new mongoose.Schema({
 
 CountrySchema.statics.insertPlace = async function(elem) {
     try {
-        const { country, city, location, max_number, snacks } = elem;
+        const { country, city, location, snacks } = elem;
+        const max_number = elem.capacity;
         let startTime = Date.now();
         const saved_location_id = await Location.findOneAndUpdate (
             { location_name: location },

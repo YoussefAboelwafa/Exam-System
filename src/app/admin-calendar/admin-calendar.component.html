@@ -109,34 +109,24 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="exampleFormControlInput1">Country:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput1"
-              placeholder="Enter Country"
-              #add_country
-            />
+            <select (change)="onCountrySelected($event)"  id="countrySelect" class="btn dropdown-toggle">
+              <option selected>Country</option>
+              <option    *ngFor="let coun of country">{{coun}}</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="exampleFormControlInput2">City:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput2"
-              placeholder="Enter City"
-              #add_city
-            />
+            <select (change)="oncitySelected($event)" class="form-control" id="countrySelect" class="btn dropdown-toggle">
+              <option selected>City</option>
+              <option    *ngFor="let cit of city">{{cit}}</option>
+             </select>
           </div>
           <div class="form-group">
             <label for="exampleFormControlInput3">Location:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput3"
-              placeholder="Enter Location"
-              #add_location
-
-            />
+            <select (change)="onlocationSelected($event)" class="form-control" id="countrySelect" class="btn dropdown-toggle">
+              <option selected>Location</option>
+              <option    *ngFor="let locate of locations">{{locate}}</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="exampleFormControlInput4">Date:</label>
@@ -158,7 +148,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button (click)="add_calendar(add_country.value,add_city.value,add_location.value,add_date.value,add_time.value)" type="button" id="addnewlocation">
+          <button (click)="add_calendar(add_date.value,add_time.value)" type="button" id="addnewlocation">
             Add <i class="fa-solid fa-plus"></i>
           </button>
         </div>

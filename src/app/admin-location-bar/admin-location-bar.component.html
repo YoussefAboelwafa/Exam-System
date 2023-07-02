@@ -1,26 +1,23 @@
 <div class="toolbar">
   <!-- country -->
   <div class="dropdown countrydiv">
-    <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
+    <select (change)="onCountrySelected($event)" class="form-control" id="countrySelect" class="btn dropdown-toggle">
       <option selected>Country</option>
-      <option value="Egypt">Egypt</option>
-      <option value="UAE">UAE</option>
+      <option    *ngFor="let coun of country">{{coun}}</option>
     </select>
   </div>
   <!-- city -->
   <div class="dropdown countrydiv">
-    <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
-      <option selected>City</option>
-      <option value="Alexandria">Alexandria</option>
-      <option value="Dubai">Dubai</option>
+    <select (change)="oncitySelected($event)" class="form-control" id="countrySelect" class="btn dropdown-toggle">
+     <option selected>City</option>
+     <option    *ngFor="let cit of city">{{cit}}</option>
     </select>
   </div>
   <!-- location -->
   <div class="dropdown countrydiv">
-    <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
+    <select (change)="onlocationSelected($event)" class="form-control" id="countrySelect" class="btn dropdown-toggle">
       <option selected>Location</option>
-      <option value="Smouha">Smouha</option>
-      <option value="Maydan">Maydan</option>
+      <option    *ngFor="let locate of locations">{{locate}}</option>
     </select>
   </div>
 </div>
