@@ -83,37 +83,51 @@ userSchema.statics.login = async function(email, password){
 
 
 userSchema.statics.bookExam = async function(exam, userId){
+    const session = await this.startSession();
+    session.startTransaction();
     try{
         const {location_id, day_id, exam_id, snack, appointment} = exam
 
         ////change to $inc for atomicity on the db side
+        
 
         const [location, day] = await Promise.all([
-            Location.findOne({_id: location_id}),
-            Day.findOne({_id: day_id})
-        ])
+            Location.findOne({ _id: location_id }).session(session),
+            Day.findOne({ _id: day_id }).session(session)
+          ]);
+      
         if(day.reserved_number >= location.max_number){
             throw "This day is already full"
         }
-        await Promise.all[
-            await Day.updateOne({_id: day._id}, 
-                {reserved_number: day.reserved_number + 1
-                ,$push: userId}, {
-                new :true
-            }),
-            await User.updateOne({_id: userId}, {
-                $push:{
+        await Promise.all([
+            Day.updateOne(
+              { _id: day._id },
+              {$inc: { reserved_number: 1 },
+                $push: { userId: userId }},
+              { session }
+            ),
+            User.updateOne(
+              { _id: userId },
+              {$push: {exams: { exam:{
                     _id: exam_id,
-                    appointment: appointment,
-                    snack: snack,
+                    appointment,
+                    snack,
                     percentage: -1,
-                    place_and_time_id: day_id
-                }
-            }) 
-        ]
+                    location: location_id,
+                    day: day_id}
+                  }}
+                },
+              { session }
+            )
+          ]);
+        await session.commitTransaction();
+        session.endSession();
         return true;
     }catch(err){
-        console.log(`Error in updating exam ${userId}`);
+        await session.abortTransaction();
+        session.endSession();
+
+        console.log(err);
         return false;
     }
     

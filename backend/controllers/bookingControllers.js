@@ -13,10 +13,10 @@ module.exports.book_exam = async (req, res) => {
     // req should also contain the id, or any user identification
 
     try{
-
+        ////check if the user didn't already book before
         ///add payment and other stuff
         /// will need to add a function to remove the exam from user
-        await User.bookExam(req.body.exam, req.body.userId)
+        res.json({success: await User.bookExam(req.body.exam, req.body.userId)})
     }catch(err){
         console.log(err);
         res.json(err)
