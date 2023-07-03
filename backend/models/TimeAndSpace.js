@@ -148,12 +148,13 @@ LocationSchema.statics.remove_location = async (location_id) =>{
   try{
     ///could be improved i guess and i should probably think more about concurrent reqs
     ///////////////////ahhhhhhhhh don't forget about the case if someone had an exam in that place before
-    const location = await Location.findOneAndUpdate({_id: location_id}).select('parent');
-    const parentCity = await City.findOneAndUpdate({id:location.parent}, {$pull: {locations: location_id}}).select('parent');
-    
-    if(await City.findOne({id:location.parent, 'refCounter': 0})){
-      await Country.findOneAndUpdate({id:parentCity.parent}, {$pull: {cities: parentCity._id}})
-      await Country.findOne({id:parentCity.parent, 'refCounter': 0}, {$set: {deleted: true}})
+    const location = await Location.findOne({_id: location_id}).select('parent');
+    const parentCity = await City.findOneAndUpdate({_id:location.parent}, {$pull: {locations: location_id}});
+    console.log(parentCity);
+    if(await City.findOne({_id:location.parent, 'refCounter': 0})){
+      console.log('hello world');
+      await Country.updateOne({_id:parentCity.parent}, {$pull: {cities: parentCity._id}})
+      await Country.updateOne({_id:parentCity.parent, 'refCounter': 0}, {$set: {deleted: true}})
     }
 
     if(!location){
