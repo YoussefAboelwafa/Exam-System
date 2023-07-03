@@ -43,75 +43,7 @@ export class HomeComponent implements OnInit {
 flag_type=true;
   constructor(private service:ServicService,private router: Router) { 
 
-    this.service.home_bar_init().subscribe
-    (
-      (x)=> {
-
-        this.service.user=x.user;
-        this.current_user.first_name=x.user.first_name;
-        this.current_user.last_name=x.user.last_name;
-        this.current_user._id=x.user._id;
-        this.service.user=x.user;
-        this.non_token_exam=x.other_exam;
-        let up=0,token=0;
-
-         for(var i=0; i<x.user.exams.length; i++){  
-            if(x.user.exams[i].exam.percentage==-1){
-              this.upcoming_exam.push(new exams)
-              this.upcoming_exam[up].country=x.user.exams[i].exam.country;
-              this.upcoming_exam[up].city=x.user.exams[i].exam.city;
-              this.upcoming_exam[up].location=x.user.exams[i].exam.location;
-              this.upcoming_exam[up].snack=x.user.exams[i].exam.snack;
-              this.upcoming_exam[up].percentage=x.user.exams[i].exam.percentage;
-              this.upcoming_exam[up].appointment=x.user.exams[i].exam.appointment;
-              this.upcoming_exam[up].day=x.user.exams[i].exam.day;
-
-              this.upcoming_exam[up]._id=x.user.exams[i].exam._id;
-              this.upcoming_exam[up].title=x.token_exam_info[i].title;
-              up++;  
-              this.ids_exams.push(x.user.exams[i].exam._id)
-             }
-             else{
-              this.token_exam.push(new exams);
-              this.token_exam[token].country=x.user.exams[i].exam.country;
-              this.token_exam[token].city=x.user.exams[i].exam.city;
-              this.token_exam[token].location=x.user.exams[i].exam.location;
-              this.token_exam[token].snack=x.user.exams[i].exam.snack;
-              this.token_exam[token].percentage=x.user.exams[i].exam.percentage;
-              this.token_exam[token].appointment=x.user.exams[i].exam.appointment;
-              this.token_exam[token]._id=x.user.exams[i].exam._id;
-              this.ids_exams.push(x.user.exams[i].exam._id)
-              this.token_exam[token].title=x.token_exam_info[i].title;
-              this.token_exam[token].about=x.token_exam_info[i].about;
-              this.token_exam[token].info=x.token_exam_info[i].info;
-
-              token++;
-             }
-         }
-         
-         console.log(this.upcoming_exam);
-         this.service.ids_ex=this.ids_exams;
-         this.service.upcoming_ex=this.upcoming_exam;
-         this.service.token_ex=this.token_exam;
-         
-
-
-    this.service.exam_bar_init().subscribe
-    (
-      (x)=> {
-        this.service.non_token=x  
-       }
-
-    )
-  
-         
-    this.flag_type=false;
-    
-
-       error:(error: HttpErrorResponse) =>alert(error.message);
-       }
-
-    )
+   this.refresh();
 
     // this.current_user={
     //   first_name:service.user.get_first_name(),
@@ -175,8 +107,78 @@ flag_type=true;
   }
 
   refresh(){
-    this.router.navigate(['/home']);
-  }
+    this.flag_type=true;
+
+    this.service.home_bar_init().subscribe
+    (
+      (x)=> {
+        this.flag_type=false;
+        this.service.user=x.user;
+        this.current_user.first_name=x.user.first_name;
+        this.current_user.last_name=x.user.last_name;
+        this.current_user._id=x.user._id;
+        this.service.user=x.user;
+        this.non_token_exam=x.other_exam;
+        let up=0,token=0, y:any[]=[] ,z:any[]=[],temp:any[]=[];
+
+         for(var i=0; i<x.user.exams.length; i++){  
+            if(x.user.exams[i].exam.percentage==-1){
+              y.push(new exams)
+              y[up].country=x.user.exams[i].exam.country;
+              y[up].city=x.user.exams[i].exam.city;
+              y[up].location=x.user.exams[i].exam.location;
+              y[up].snack=x.user.exams[i].exam.snack;
+              y[up].percentage=x.user.exams[i].exam.percentage;
+              y[up].appointment=x.user.exams[i].exam.appointment;
+              y[up].day=x.user.exams[i].exam.day;
+              y[up]._id=x.user.exams[i].exam._id;
+              y[up].title=x.token_exam_info[i].title;
+              up++;  
+              temp.push(x.user.exams[i].exam._id)
+             }
+             else{
+              z.push(new exams);
+              z[token].country=x.user.exams[i].exam.country;
+              z[token].city=x.user.exams[i].exam.city;
+              z[token].location=x.user.exams[i].exam.location;
+              z[token].snack=x.user.exams[i].exam.snack;
+              z[token].percentage=x.user.exams[i].exam.percentage;
+              z[token].appointment=x.user.exams[i].exam.appointment;
+             z[token]._id=x.user.exams[i].exam._id;
+              temp.push(x.user.exams[i].exam._id)
+              z[token].title=x.token_exam_info[i].title;
+              z[token].about=x.token_exam_info[i].about;
+              z[token].info=x.token_exam_info[i].info;
+
+              token++;
+             }
+         }
+         
+         this.service.ids_ex=temp;
+         this.ids_exams=temp
+         this.service.upcoming_ex=y;
+         this.upcoming_exam=y; 
+         console.log(this.upcoming_exam);
+         this.service.token_ex=z;
+         this.token_exam=z;
+
+
+    this.service.exam_bar_init().subscribe
+    (
+      (x)=> {
+        this.service.non_token=x  
+       }
+
+    )
+  
+         
+    this.flag_type=false;
+    
+
+       error:(error: HttpErrorResponse) =>alert(error.message);
+       }
+
+    )  }
   
 
 }

@@ -71,7 +71,7 @@ export class ExamsBarComponent implements OnInit {
 
   avilable_time:any;
 
-  constructor(private service:ServicService) {
+constructor(private service:ServicService) {
     this.upcoming_exam=this.service.upcoming_ex;
     this.token_exam=this.service.token_ex;
     this.non_token_exam=this.service.non_token;
@@ -80,7 +80,6 @@ export class ExamsBarComponent implements OnInit {
     this.service.get_places().subscribe(
       (x)=> {
         this.all_locations=x;
-        console.log(14)
         this.countrys= x.map((cont:any)=> cont.country_name);
       
         let combinations: string[] = [];
@@ -110,7 +109,6 @@ for(let i=0; i<combinations.length; i++) {
   x.capacity=dateArr[3];
   x.snacks=dateArr[4];
   x._id=dateArr[5]
-  console.log(x);
   this.address.push(x);
 }
 
@@ -216,7 +214,6 @@ console.log(combinations);
   }
 
   learn_token(value_send_by_btn_learn:any){
-    console.log(value_send_by_btn_learn)
     this.learn_dataof_token=value_send_by_btn_learn;
   }
 

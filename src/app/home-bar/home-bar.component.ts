@@ -84,6 +84,7 @@ ngOnInit(): void {
   constructor(private service:ServicService,private router:Router) {
     this.upcoming_exam=this.service.upcoming_ex;
     this.token_exam=this.service.token_ex;
+    
     this.non_token_exam=this.service.non_token[0];
 
 
@@ -92,7 +93,6 @@ ngOnInit(): void {
     this.service.get_places().subscribe(
       (x)=> {
         this.all_locations=x;
-        console.log(14)
         this.countrys= x.map((cont:any)=> cont.country_name);
       
         let combinations: string[] = [];

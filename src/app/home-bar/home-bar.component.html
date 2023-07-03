@@ -142,7 +142,7 @@
     </div>
   </div>
 
-  <div class="card card-body upcoming">
+  <div class="card card-body upcoming" *ngIf="non_token_exam!=undefined">
     <h5 class="card-title">{{ non_token_exam.title }}</h5>
 
     <div class="discoverbox1">
@@ -402,6 +402,7 @@
 <!-- mesage template -->
 
 <div
+  *ngIf="non_token_exam!= undefined"
   class="modal fade"
   id="not_token_exam"
   tabindex="-1"
