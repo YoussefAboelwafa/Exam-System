@@ -34,8 +34,11 @@ module.exports.getHome = async (req, res) => {
                     /snack: {type: String, required: true},
                     */
                    const id = decodedToken._id;
+                   
                     let user = await User.findById(id).select({first_name: 1, last_name: 1, exams: 1, _id: 1});
-
+                    if(!user){
+                        throw "user doesn't exist"
+                    }
                     const exam_ids = user.exams.map((exam)=>exam.exam._id);
                     // console.log(user.exams.exam);
                     console.log(exam_ids);
@@ -96,7 +99,7 @@ module.exports.getHome = async (req, res) => {
         }
     }catch(err){
         console.log(err);
-        res.json({signed_in: false});
+        res.json({signed_in: false, error:err});
     }
    
 }
