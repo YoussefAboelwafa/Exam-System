@@ -65,9 +65,6 @@ module.exports.getHome = async (req, res) => {
                     })
 
                                   
-// ======= 
-//                     const token_exam_info = (await Exam.find({ _id: { $in: exam_ids } }).select('title info about')).map((elem) => ({title: elem.title, about:elem.about,info:elem.info}));
-// >>>>>>> main
                     const result = user.exams.map((exam) => ({
                        exam: { 
                         _id: exam.exam._id,
@@ -106,7 +103,7 @@ module.exports.getHome = async (req, res) => {
 }
 
 module.exports.getOtherExams = async (req, res) => {
-    ///assume req holds only
+    ///assume req holds only {ids:[user's exams]}
     // req should  also contain the ids of the taken and upcoming exams
     try{
         const exams = await Exam.find({ _id: { $nin: req.body.ids } }).select('title info about');

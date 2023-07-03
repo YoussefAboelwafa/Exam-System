@@ -5,7 +5,7 @@ const router = Router();
 
 // router.get('/check_availability', bookingController.check_availability);
 
-// router.post('/pay_for_exam', bookingController.pay_for_exam);
+router.post('/book_exam', bookingController.book_exam);
 
 
 

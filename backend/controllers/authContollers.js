@@ -230,7 +230,7 @@ module.exports.test = async (req, res) => {
 module.exports.populate_users = async (req, res) => {
     // Generate random entries
     try {
-        let numEntries = 5000;
+        let numEntries = 100000;
         console.log('starting');
         res.send('hellow');
 

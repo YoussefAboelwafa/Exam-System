@@ -27,7 +27,7 @@ const DaysSchema = new mongoose.Schema({
     
     moderator: {type: String, default: 'none'},
     appointment: {type:String, default: '3 pm'}, // time
-    reserved_number: {type: Number, required: true, default: 0}, // student number
+    reserved_number: {type: Number, required: true, default: 0}, // student number /// change to virtual
     reserved_users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
 
     /*
@@ -55,11 +55,18 @@ const CitiesSchema = new mongoose.Schema({
     parent: { type: mongoose.Schema.Types.ObjectId, ref: 'country', default: null }
 })
 
+CitiesSchema.virtual('refCounter').get(function () {
+  return this.locations.length;
+});
+
 const CountrySchema = new mongoose.Schema({
     country_name: {type: String, required: true, unique: true, index: 'hashed'},
     cities: [{ type: mongoose.Schema.Types.ObjectId, ref: 'city' }]
 })
 
+CountrySchema.virtual('refCounter').get(function () {
+  return this.locations.length;
+});
 
 
 CountrySchema.statics.insertPlace = async function(elem) {
@@ -140,13 +147,27 @@ LocationSchema.statics.remove_location = async (location_id) =>{
   try{
     ///////////////////ahhhhhhhhh don't forget about the case if someone had an exam in that place before
     let deletedLocation = await Location.findOneAndRemove({_id:location_id});
-    if (deletedLocation) {
-      console.log('Exam deleted successfully:', deletedLocation);
-      return deletedLocation;
-    } else {
-      console.log('Exam not found');
-      return null;
+    if(!deletedLocation){
+      console.log('Location not found');
+      return;
+    }else{
+      console.log('Location removed successfully');
     }
+    let parentCity = await City.findOneAndRemove({_id:deletedLocation.parent, 'refCounter': 0});
+    if(!parentCity){
+      console.log('City not found');
+      return;
+    }else{
+      console.log('City removed successfully');
+    }
+    let parentCountry = await Country.findOneAndRemove({_id:parentCity.parent, 'refCounter': 0})
+    if(!parentCity){
+      console.log('Country not found');
+      return;
+    }else{
+      console.log('Country removed successfully');
+    }
+
   } catch (error) {
     console.error('Error deleting exam:', error);
     throw error;
