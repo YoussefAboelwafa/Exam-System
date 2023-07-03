@@ -9,13 +9,46 @@ import { ServicService } from '../services/servic.service';
 export class AdminHomeComponent implements OnInit {
 
   current_user = {
-    first_name: "wait",
-    last_name: "wait",
+    first_name: "Ahmed",
+    last_name: "Ali",
     photo:"../../assets/images/img3.jpg",  
-    _id: ""
+    _id: "1256893"
   };
   flag_type=false;
-  constructor(private service:ServicService) { }
+  constructor(private service:ServicService) {
+
+
+    // this.service.home_bar_init().subscribe
+    // (
+    //   (x)=> {
+    //     this.service.user=x.user;
+    //     this.current_user.first_name=x.user.first_name;
+    //     this.current_user.last_name=x.user.last_name;
+    //     this.current_user._id=x.user._id;
+    //     this.service.user=x.user;
+    //   }
+        
+    //   )
+
+      this.service.exam_bar_init_admin().subscribe
+    (
+      (x)=> {
+
+        this.service.non_token=x;
+
+      }
+        
+      )
+
+
+
+
+
+
+
+
+
+  }
 
   ngOnInit(): void {
   }

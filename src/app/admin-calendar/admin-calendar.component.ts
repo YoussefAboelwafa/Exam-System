@@ -20,53 +20,17 @@ export class AdminCalendarComponent implements OnInit {
   moderator_name='';
   user_exam:book_user[]=[
     {
-      name_user:"karim tarek",
-      _id:"",
+      first_name:"karim",
+      last_name:"tarek",
       _id_user:"123456",
       photo_user:"",
       exam_title:"c++",
       location:"smoha",
       snack:"kitkat",
-      time_book:"15 April 3.00 pm",
-      percentage_user:"00",
+      appointment:"15 April 3.00 pm",
+      percentage:"00",
       _id_exam:"",
-    },
-    {
-      name_user:"ahmed ali",
-      _id:"",
-      _id_user:"124481",
-      photo_user:"",
-      exam_title:"python",
-      location:"smoha",
-      snack:"moro",
-      time_book:"15 April 3.00 pm",
-      percentage_user:"00",
-      _id_exam:"",
-    },{
-      name_user:"noha tarek",
-      _id:"",
-      _id_user:"114845",
-      photo_user:"",
-      exam_title:"algorithms",
-      location:"smoha",
-      snack:"kitkat",
-      time_book:"15 April 3.00 pm",
-      percentage_user:"00",
-      _id_exam:"",
-      
-    },{
-      name_user:"kimo fathy",
-      _id:"",
-      _id_user:"123456",
-      photo_user:"",
-      exam_title:"data structure",
-      location:"smoha",
-      snack:"kitkat",
-      time_book:"15 April 3.00 pm",
-      percentage_user:"00",
-      _id_exam:"",
-    },
-  ]
+    },  ]
   current_user = {
     first_name: "karim",
     last_name: "tarek",
@@ -74,23 +38,7 @@ export class AdminCalendarComponent implements OnInit {
     _id: "1234567"
   };
 
-  calendar:calendar[]=[
-    {
-      day_number:1,
-      day_name:"saturday",
-      month_name:"jan",
-      month_number:"march",
-      country:"egypt",
-      city:"alex",
-      location:"smouha",
-      location_id:"ksdc",
-      _id: "1",
-      time:"5 pm",
-      moderator:"",
-      student:21,
-      capacity:25,
-    },
-  ]
+  calendar:calendar[]=[]
 
   remove_calend=new calendar;
   index_calend:any;
@@ -116,31 +64,29 @@ export class AdminCalendarComponent implements OnInit {
   temp_country_address:any;
   temp_city_address:any;
   temp_location_address:any;
+  temp_calender:any;
   constructor(private service:ServicService) {
 
     this.service.get_places().subscribe(
       (x)=> {
         this.all_locations=x;
         this.country= x.map((cont:any)=> cont.country_name);
-      //  this.city= x.map((cont:any)=> cont.cities)[0].map((c:any)=> c.city_name);
-      //   console.log(x);
-        
-        // console.log(x[0].cities);
-        // console.log(x[0].cities[0].city_name);
-        // console.log(x[0].cities[0].locations);
-        // console.log(x[0].cities[0].locations[0].location_name);
-        // console.log(x[0].cities[0].locations[0].snacks);
-        // console.log(x[0].cities[0].locations[0].snacks[0]);
-        // console.log(x[0].cities[0].locations[0].max_number);
+
         let combinations: string[] = [];
 
 this.all_locations.forEach((country: any) => {
   country.cities.forEach((city: any) => {
     city.locations.forEach((location: any) => {
-      combinations.push(`${country.country_name}: ${city.city_name}: ${location.location_name}:${location.max_number}:${location.snacks}:${location._id}`);
+      combinations.push(`${country.country_name}:${city.city_name}:${location.location_name}:${location.max_number}:${location.snacks}:${location._id}`);
     });
   });
 });
+
+
+this.service.get_calender().subscribe(
+  x=>{
+    this.calendar=x;
+})
 
 for(let i=0; i<combinations.length; i++) {
   let x=new address;
@@ -176,6 +122,52 @@ console.log(combinations);
   }
 
 
+
+
+
+
+
+get_all_place(){
+
+
+    this.service.get_places().subscribe(
+      (x)=> {
+        this.all_locations=x;
+        this.country= x.map((cont:any)=> cont.country_name);
+  
+        let combinations: string[] = [];
+  
+  this.all_locations.forEach((country: any) => {
+  country.cities.forEach((city: any) => {
+    city.locations.forEach((location: any) => {
+      combinations.push(`${country.country_name}:${city.city_name}:${location.location_name}:${location.max_number}:${location.snacks}:${location._id}`);
+    });
+  });
+  });
+  
+  for(let i=0; i<combinations.length; i++) {
+  let x=new address;
+  const dateArr = combinations[i].split(":");
+  
+  x.country=dateArr[0];
+  x.city=dateArr[1];
+  x.location=dateArr[2];
+  x.capacity=dateArr[3];
+  x.snacks=dateArr[4];
+  x._id=dateArr[5]
+  console.log(x);
+  this.address.push(x);
+  }
+  
+  
+  
+  
+         error:(error: HttpErrorResponse) =>alert(error.message);
+       }
+  
+    )
+      
+    }
    get_name_date(dateStr: string, flag: number): string {
     const dateArr = dateStr.split("-");
     const year = parseInt(dateArr[0]);
@@ -204,10 +196,21 @@ console.log(combinations);
 
   totaly_remove(){
    //service_remove exam pass object 
+   let x=new calendar;
+   x=this.calendar[this.index_calend];
    this.calendar.splice(this.index_calend, 1);
    this.close_popup();
    this.remove_calend=new calendar;
-    this.index_calend="";
+   this.index_calend="";
+   console.log(x._id);
+   this.service.remove_day(x._id).subscribe(
+    x =>{
+      this.service.get_calender().subscribe(
+        x=>{
+          this.calendar=x;
+      })   })
+   
+   
   }
   close() {
     this.close_popup();
@@ -260,9 +263,18 @@ console.log(combinations);
     x.day_name=this.get_name_date(add_date,1);
     x.month_name=this.get_name_date(add_date,0);
     this.close();
-    this.calendar.push(x);
-    console.log(x.day_name)
+    // this.calendar.push(x);
     //services add calendar : capacity from location 
+    this.service.add_day(x).subscribe(y =>{
+
+      this.calendar.push(y);
+      this.service.get_calender().subscribe(
+        x=>{
+          this.calendar=x;
+      })    })
+  
+
+    
   }
 
   open_user_card(user_value:any,index:any){
@@ -273,7 +285,7 @@ console.log(combinations);
 
   change_percentage(value:any){
 
-    this.user_exam[this.index_change_user].percentage_user=value;
+    this.user_exam[this.index_change_user].percentage=value;
     //service send _id_user and new_percentage
     this.close_card();
   }
@@ -287,17 +299,26 @@ console.log(combinations);
 
   }
 
-  onCountrySelected(event: Event) {
-    const selectedCountry = (event.target as HTMLSelectElement).value;
+  onCountrySelected(event: Event,flag:any) {
+    console.log(flag)
+     const selectedCountry = (event.target as HTMLSelectElement).value;
     // Call your function here with the selectedCountry value
+    //flag==1 that meen filter
+    if(flag==1){
+    if(this.temp_country_address!=null) {
+    this.calendar=this.temp_country_address;
+    this.temp_country_address = null;
+    }
     if(selectedCountry != "Country" ){
-      this.temp_country_address=this.address;
-       this.address = this.address.filter(obj => obj.country === selectedCountry);
+      this.temp_country_address=this.calendar;
+       this.calendar = this.calendar.filter(obj => obj.country === selectedCountry);
+
     }
     else{
-      this.address=this.temp_country_address;
-      this.temp_country_address = null;
+      this.city=[]
+      return
     }
+  }
     for (let i=0; i<this.country.length; i++){
       if(this.country[i]==selectedCountry){
         this.index_country=i;
@@ -307,18 +328,25 @@ console.log(combinations);
     this.city= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.city_name);
   }
 
-  oncitySelected(event: Event){
+  oncitySelected(event: Event,flag:any){
     const selectedCity = (event.target as HTMLSelectElement).value;
     // Call your function here with the selectedCountry value
-    if(selectedCity != "City" ){
+    if(flag ==1){
+    if(this.temp_city_address!=null) {
+      this.calendar=this.temp_city_address;
+      this.temp_city_address = null;
+      }
+    if(selectedCity  != "City" ){
       
-      this.temp_city_address=this.address;
-       this.address = this.address.filter(obj => obj.city === selectedCity);
+      this.temp_city_address=this.calendar;
+       this.calendar = this.calendar.filter(obj => (obj.city === selectedCity) );
     }
     else{
-      this.address=this.temp_city_address;
-      this.temp_city_address = null;
+      this.locations=[]
+      return
     }
+  }
+    
     for (let i=0; i<this.city.length; i++){
       if(this.city[i]==selectedCity){
         this.index_city=i;
@@ -326,12 +354,22 @@ console.log(combinations);
     }
       console.log(this.index_city)
     this.locations= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c.location_name)
-    ;
-    console.log(this.locations)
   }
 
-  onlocationSelected(event: Event){
+  onlocationSelected(event: Event,flag:any){
     const selectedlocation = (event.target as HTMLSelectElement).value;
+
+    if(flag==1){
+    if(this.temp_location_address!=null) {
+      this.calendar=this.temp_location_address;
+      this.temp_location_address = null;
+      }
+    if(selectedlocation  != "Location" ){
+      
+      this.temp_location_address=this.calendar;
+       this.calendar = this.calendar.filter(obj => (obj.location === selectedlocation) );
+    }
+  }
 
     for (let i=0; i<this.locations.length; i++){
       if(this.locations[i]==selectedlocation){
@@ -339,10 +377,25 @@ console.log(combinations);
       }
     }
     // this.snacks= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c.snacks)
-    this.id_location= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c._id)
+    this.id_location= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c._id)[this.index_location]
 
 
   }
 
+
+  onmonthSelected(event: Event){
+    const selectedmonth = (event.target as HTMLSelectElement).value;
+
+    if(this.temp_calender!=null) {
+      this.calendar=this.temp_calender;
+      this.temp_calender = null;
+    }
+    if(selectedmonth  != "Month" ){
+      
+      this.temp_calender=this.calendar;
+       this.calendar = this.calendar.filter(obj => (obj.month_number === selectedmonth) );
+    }
+  
+  }
 
 }

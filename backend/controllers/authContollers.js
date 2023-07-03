@@ -87,7 +87,7 @@ module.exports.signup_get = (req, res) =>{
     res.send('signup_get');
 }
 
-module.exports.signup_post = async (req, res) =>{
+module.exports.signup_post = async (req, res) =>{ 
     try{
         ////check if email and phone provided are unique
         const {email, phone_namber} = req.body;
