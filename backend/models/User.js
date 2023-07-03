@@ -139,6 +139,10 @@ userSchema.statics.bookExam = async function(exam, userId){
 }
 
 
+
+
+
+
 const User = mongoose.model('user', userSchema);
 
 module.exports = User;

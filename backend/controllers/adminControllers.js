@@ -314,3 +314,31 @@ module.exports.delete_day = async (req, res) => {
 
 
 
+module.exports.set_percentage = async (req, res) => {
+
+    try{
+        const {user_id, exam_id, percentage} = req.body
+        
+
+        const user = await User.findOneAndUpdate(
+            { _id: user_id, 'exams.exam._id': exam_id },
+            { $set: { 'exams.$.exam.percentage': percentage } },
+            { new: true }
+          );
+      
+        if(!user){
+            throw "This day is already full"
+        }
+        
+
+        res.json(user);
+    }catch(err){
+
+
+        console.log(err);
+        res.json({success: false});
+    }
+}
+
+
+
