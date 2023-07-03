@@ -54,7 +54,6 @@ flag_type=true;
         this.service.user=x.user;
         this.non_token_exam=x.other_exam;
         let up=0,token=0;
-        console.log(x)
 
          for(var i=0; i<x.user.exams.length; i++){  
             if(x.user.exams[i].exam.percentage==-1){
@@ -92,6 +91,7 @@ flag_type=true;
          this.service.ids_ex=this.ids_exams;
          this.service.upcoming_ex=this.upcoming_exam;
          this.service.token_ex=this.token_exam;
+         
 
 
     this.service.exam_bar_init().subscribe

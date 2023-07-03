@@ -244,7 +244,7 @@ module.exports.get_all_days = async (req, res) => {
 
 module.exports.delete_day = async (req, res) => {
     try{
-        res.json(await TimeAndSpace.Location.remove_location(req.body))
+        res.json(await TimeAndSpace.Day.remove_day(req.body))
     }catch(err){
         console.log(err);
         res.json(err);

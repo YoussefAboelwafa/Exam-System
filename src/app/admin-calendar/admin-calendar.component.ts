@@ -116,6 +116,7 @@ export class AdminCalendarComponent implements OnInit {
   temp_country_address:any;
   temp_city_address:any;
   temp_location_address:any;
+  temp_calender:any;
   constructor(private service:ServicService) {
 
     this.service.get_places().subscribe(
@@ -128,7 +129,7 @@ export class AdminCalendarComponent implements OnInit {
 this.all_locations.forEach((country: any) => {
   country.cities.forEach((city: any) => {
     city.locations.forEach((location: any) => {
-      combinations.push(`${country.country_name}: ${city.city_name}: ${location.location_name}:${location.max_number}:${location.snacks}:${location._id}`);
+      combinations.push(`${country.country_name}:${city.city_name}:${location.location_name}:${location.max_number}:${location.snacks}:${location._id}`);
     });
   });
 });
@@ -173,6 +174,52 @@ console.log(combinations);
   }
 
 
+
+
+
+
+
+get_all_place(){
+
+
+    this.service.get_places().subscribe(
+      (x)=> {
+        this.all_locations=x;
+        this.country= x.map((cont:any)=> cont.country_name);
+  
+        let combinations: string[] = [];
+  
+  this.all_locations.forEach((country: any) => {
+  country.cities.forEach((city: any) => {
+    city.locations.forEach((location: any) => {
+      combinations.push(`${country.country_name}:${city.city_name}:${location.location_name}:${location.max_number}:${location.snacks}:${location._id}`);
+    });
+  });
+  });
+  
+  for(let i=0; i<combinations.length; i++) {
+  let x=new address;
+  const dateArr = combinations[i].split(":");
+  
+  x.country=dateArr[0];
+  x.city=dateArr[1];
+  x.location=dateArr[2];
+  x.capacity=dateArr[3];
+  x.snacks=dateArr[4];
+  x._id=dateArr[5]
+  console.log(x);
+  this.address.push(x);
+  }
+  
+  
+  
+  
+         error:(error: HttpErrorResponse) =>alert(error.message);
+       }
+  
+    )
+      
+    }
    get_name_date(dateStr: string, flag: number): string {
     const dateArr = dateStr.split("-");
     const year = parseInt(dateArr[0]);
@@ -207,9 +254,13 @@ console.log(combinations);
    this.close_popup();
    this.remove_calend=new calendar;
    this.index_calend="";
+   console.log(x._id);
    this.service.remove_day(x._id).subscribe(
     x =>{
-   })
+      this.service.get_calender().subscribe(
+        x=>{
+          this.calendar=x;
+      })   })
    
    
   }
@@ -265,12 +316,15 @@ console.log(combinations);
     x.month_name=this.get_name_date(add_date,0);
     this.close();
     // this.calendar.push(x);
-    console.log(x.day_name)
     //services add calendar : capacity from location 
     this.service.add_day(x).subscribe(y =>{
 
       this.calendar.push(y);
-    })
+      this.service.get_calender().subscribe(
+        x=>{
+          this.calendar=x;
+      })    })
+  
 
     
   }
@@ -297,17 +351,26 @@ console.log(combinations);
 
   }
 
-  onCountrySelected(event: Event) {
-    const selectedCountry = (event.target as HTMLSelectElement).value;
+  onCountrySelected(event: Event,flag:any) {
+    console.log(flag)
+     const selectedCountry = (event.target as HTMLSelectElement).value;
     // Call your function here with the selectedCountry value
+    //flag==1 that meen filter
+    if(flag==1){
+    if(this.temp_country_address!=null) {
+    this.calendar=this.temp_country_address;
+    this.temp_country_address = null;
+    }
     if(selectedCountry != "Country" ){
-      this.temp_country_address=this.address;
-       this.address = this.address.filter(obj => obj.country === selectedCountry);
+      this.temp_country_address=this.calendar;
+       this.calendar = this.calendar.filter(obj => obj.country === selectedCountry);
+
     }
     else{
-      this.address=this.temp_country_address;
-      this.temp_country_address = null;
+      this.city=[]
+      return
     }
+  }
     for (let i=0; i<this.country.length; i++){
       if(this.country[i]==selectedCountry){
         this.index_country=i;
@@ -317,18 +380,25 @@ console.log(combinations);
     this.city= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.city_name);
   }
 
-  oncitySelected(event: Event){
+  oncitySelected(event: Event,flag:any){
     const selectedCity = (event.target as HTMLSelectElement).value;
     // Call your function here with the selectedCountry value
-    if(selectedCity != "City" ){
+    if(flag ==1){
+    if(this.temp_city_address!=null) {
+      this.calendar=this.temp_city_address;
+      this.temp_city_address = null;
+      }
+    if(selectedCity  != "City" ){
       
-      this.temp_city_address=this.address;
-       this.address = this.address.filter(obj => obj.city === selectedCity);
+      this.temp_city_address=this.calendar;
+       this.calendar = this.calendar.filter(obj => (obj.city === selectedCity) );
     }
     else{
-      this.address=this.temp_city_address;
-      this.temp_city_address = null;
+      this.locations=[]
+      return
     }
+  }
+    
     for (let i=0; i<this.city.length; i++){
       if(this.city[i]==selectedCity){
         this.index_city=i;
@@ -336,12 +406,22 @@ console.log(combinations);
     }
       console.log(this.index_city)
     this.locations= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c.location_name)
-    ;
-    console.log(this.locations)
   }
 
-  onlocationSelected(event: Event){
+  onlocationSelected(event: Event,flag:any){
     const selectedlocation = (event.target as HTMLSelectElement).value;
+
+    if(flag==1){
+    if(this.temp_location_address!=null) {
+      this.calendar=this.temp_location_address;
+      this.temp_location_address = null;
+      }
+    if(selectedlocation  != "Location" ){
+      
+      this.temp_location_address=this.calendar;
+       this.calendar = this.calendar.filter(obj => (obj.location === selectedlocation) );
+    }
+  }
 
     for (let i=0; i<this.locations.length; i++){
       if(this.locations[i]==selectedlocation){
@@ -354,5 +434,20 @@ console.log(combinations);
 
   }
 
+
+  onmonthSelected(event: Event){
+    const selectedmonth = (event.target as HTMLSelectElement).value;
+
+    if(this.temp_calender!=null) {
+      this.calendar=this.temp_calender;
+      this.temp_calender = null;
+    }
+    if(selectedmonth  != "Month" ){
+      
+      this.temp_calender=this.calendar;
+       this.calendar = this.calendar.filter(obj => (obj.month_number === selectedmonth) );
+    }
+  
+  }
 
 }

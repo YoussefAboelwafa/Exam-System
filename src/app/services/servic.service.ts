@@ -68,6 +68,9 @@ public home_bar_init():Observable<any>{
 public exam_bar_init():Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/home/exams`,{ids:this.ids_ex}, { withCredentials: true });
 }
+public exam_bar_init_admin():Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/home/exams`,{ids:["1"]}, { withCredentials: true });
+}
 
 //return id of the
 public add_new_exam(new_exam:any):Observable<any>{
@@ -108,7 +111,7 @@ public add_day(new_time:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/add_time`,new_time, { withCredentials: true });
 }
 public remove_day(id_day:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/add_time`,{day_id:id_day}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/admin/delete_day`,{day_id:id_day}, { withCredentials: true });
 }
 
 }

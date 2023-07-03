@@ -15,7 +15,41 @@ export class AdminHomeComponent implements OnInit {
     _id: ""
   };
   flag_type=false;
-  constructor(private service:ServicService) { }
+  constructor(private service:ServicService) {
+
+
+    // this.service.home_bar_init().subscribe
+    // (
+    //   (x)=> {
+
+    //     this.service.user=x.user;
+    //     this.current_user.first_name=x.user.first_name;
+    //     this.current_user.last_name=x.user.last_name;
+    //     this.current_user._id=x.user._id;
+    //     this.service.user=x.user;
+    //   }
+        
+    //   )
+
+      this.service.exam_bar_init_admin().subscribe
+    (
+      (x)=> {
+        console.log(x);
+        this.service.non_token=x;
+
+      }
+        
+      )
+
+
+
+
+
+
+
+
+
+  }
 
   ngOnInit(): void {
   }
