@@ -87,7 +87,7 @@ flag_type=true;
              }
          }
          
-
+         console.log(this.upcoming_exam);
          this.service.ids_ex=this.ids_exams;
          this.service.upcoming_ex=this.upcoming_exam;
          this.service.token_ex=this.token_exam;

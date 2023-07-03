@@ -200,7 +200,7 @@ console.log(combinations);
       day_id:this.day_id,
       exam_id:this.book_id_exam,
       snack:this.select_snacks,
-      appoinment:this.selectedappointment,
+      appointment:this.selectedappointment,
     }
     this.service.book_exam(x).subscribe(
       x=>{
