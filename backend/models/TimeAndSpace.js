@@ -108,25 +108,26 @@ CountrySchema.statics.insertPlace = async function(elem) {
 
 CountrySchema.statics.insertTime = async function(elem){
     try {
-        const {location_id, month_number, month_name, day_name, day_number, appointment} = elem;
-        console.log(elem);
+        const {location_id, month_number, month_name, day_name, day_number} = elem;
+        const appointment=elem.time;
+        // console.log(elem);
         const day_id = await Day.findOneAndUpdate (
             {day_number:day_number, month_number:month_number},
             { appointment: appointment,
               month_name: month_name,
               day_name: day_name,
               location: location_id},
-            { upsert: true, new: true , setDefaultsOnInsert: true, select: '_id' }
+            { upsert: true, new: true , setDefaultsOnInsert: true }
         );
         if (!day_id) throw Error("Location not found");
-        console.log(day_id);
+        // console.log(day_id);
         const saved_location_id = await Location.findOneAndUpdate (
             { _id: location_id },
             { $push: { time: day_id._id } },
             { new: true, setDefaultsOnInsert: true}
         );
         if (!saved_location_id) throw Error("City not found");
-        console.log(saved_location_id);
+        // console.log(saved_location_id);
         return day_id;
     } catch (error) {
         console.error('Error updating or creating place entry:', error);

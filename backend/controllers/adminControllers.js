@@ -37,8 +37,39 @@ module.exports.add_time = async (req, res) => {
     }
     */
     try{ 
-        await TimeAndSpace.Country.insertTime(req.body)
-        res.json(await TimeAndSpace.Country.insertTime(req.body));
+        let day = await TimeAndSpace.Country.insertTime(req.body);
+        
+        day = await day.populate({
+            path:'location',
+            select: 'location_name parent max_number',
+            populate:{
+                path: 'parent',
+                select: 'city_name parent',
+                populate: {
+                    path: 'parent',
+                    select: 'country_name',
+                }
+            }
+        });
+        console.log(day);
+        const result = {
+            _id: day._id,
+            time: day.appointment,
+            day: day.day_name,
+            location: day.location.location_name,
+            city: day.location.parent.city_name,
+            country: day.location.parent.parent.country_name,
+            moderator: day.moderator,
+            student: day.reserved_number,
+            capacity: day.location.max_number,
+            month_name: day.month_name,
+            month_number: day.month_number,
+            day_name: day.day_name,
+            day_number: day.day_number
+        }
+
+        console.log(day);
+        res.json(result);
     }catch(err){
         console.log(err);
         res.json(err);

@@ -75,21 +75,21 @@ export class AdminCalendarComponent implements OnInit {
   };
 
   calendar:calendar[]=[
-    {
-      day_number:1,
-      day_name:"saturday",
-      month_name:"jan",
-      month_number:"march",
-      country:"egypt",
-      city:"alex",
-      location:"smouha",
-      location_id:"ksdc",
-      _id: "1",
-      time:"5 pm",
-      moderator:"",
-      student:21,
-      capacity:25,
-    },
+    // {
+    //   day_number:1,
+    //   day_name:"saturday",
+    //   month_name:"jan",
+    //   month_number:"march",
+    //   country:"egypt",
+    //   city:"alex",
+    //   location:"smouha",
+    //   location_id:"ksdc",
+    //   _id: "1",
+    //   time:"5 pm",
+    //   moderator:"",
+    //   student:21,
+    //   capacity:25,
+    // },
   ]
 
   remove_calend=new calendar;
@@ -122,16 +122,7 @@ export class AdminCalendarComponent implements OnInit {
       (x)=> {
         this.all_locations=x;
         this.country= x.map((cont:any)=> cont.country_name);
-      //  this.city= x.map((cont:any)=> cont.cities)[0].map((c:any)=> c.city_name);
-      //   console.log(x);
-        
-        // console.log(x[0].cities);
-        // console.log(x[0].cities[0].city_name);
-        // console.log(x[0].cities[0].locations);
-        // console.log(x[0].cities[0].locations[0].location_name);
-        // console.log(x[0].cities[0].locations[0].snacks);
-        // console.log(x[0].cities[0].locations[0].snacks[0]);
-        // console.log(x[0].cities[0].locations[0].max_number);
+
         let combinations: string[] = [];
 
 this.all_locations.forEach((country: any) => {
@@ -141,6 +132,12 @@ this.all_locations.forEach((country: any) => {
     });
   });
 });
+
+
+this.service.get_calender().subscribe(
+  x=>{
+    this.calendar=x;
+})
 
 for(let i=0; i<combinations.length; i++) {
   let x=new address;
@@ -204,10 +201,17 @@ console.log(combinations);
 
   totaly_remove(){
    //service_remove exam pass object 
+   let x=new calendar;
+   x=this.calendar[this.index_calend];
    this.calendar.splice(this.index_calend, 1);
    this.close_popup();
    this.remove_calend=new calendar;
-    this.index_calend="";
+   this.index_calend="";
+   this.service.remove_day(x._id).subscribe(
+    x =>{
+   })
+   
+   
   }
   close() {
     this.close_popup();
@@ -260,9 +264,15 @@ console.log(combinations);
     x.day_name=this.get_name_date(add_date,1);
     x.month_name=this.get_name_date(add_date,0);
     this.close();
-    this.calendar.push(x);
+    // this.calendar.push(x);
     console.log(x.day_name)
     //services add calendar : capacity from location 
+    this.service.add_day(x).subscribe(y =>{
+
+      this.calendar.push(y);
+    })
+
+    
   }
 
   open_user_card(user_value:any,index:any){
@@ -339,7 +349,7 @@ console.log(combinations);
       }
     }
     // this.snacks= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c.snacks)
-    this.id_location= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c._id)
+    this.id_location= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c._id)[this.index_location]
 
 
   }

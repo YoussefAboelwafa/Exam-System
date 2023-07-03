@@ -104,9 +104,11 @@ public get_places():Observable<any>{
 public get_calender():Observable<any>{
   return this.http.get<any>(`${this.apiServerUrl}/admin/get_all_days`, { withCredentials: true });
 }
-public add_day():Observable<any>{
-  return this.http.get<any>(`${this.apiServerUrl}/admin/add_time`, { withCredentials: true });
+public add_day(new_time:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/add_time`,new_time, { withCredentials: true });
 }
-
+public remove_day(id_day:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/add_time`,{day_id:id_day}, { withCredentials: true });
+}
 
 }
