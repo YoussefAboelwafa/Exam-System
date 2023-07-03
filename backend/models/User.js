@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
     exams: {
         type: [
             { exam: {type: {
-                    _id: {type: mongoose.Schema.Types.ObjectId, required: true},
+                    _id: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'exam'},
                     day: { type: mongoose.Schema.Types.ObjectId, ref: 'day' },
                     location: {type: mongoose.Schema.Types.ObjectId, ref: 'location'},
                     appointment: {type: String, required: true},

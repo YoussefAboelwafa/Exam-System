@@ -142,7 +142,7 @@ module.exports.get_users_with_day = async (req, res) => {
             select: 'title'
         })
 
-        console.log(day.reserved_users[0].exams[0].exam);
+        console.log(day.reserved_users[0].exams[0]);
 
         // console.log(day);
 
@@ -157,6 +157,7 @@ module.exports.get_users_with_day = async (req, res) => {
                 //  location: exam.exam.location.location_name,
                 //  city: exam.exam.location.parent.city_name,
                 //  country: exam.exam.location.parent.parent.country_name}
+                console.log(exam.exam.title);
                 result.push({
                     first_name: user.first_name,
                     last_name: user.last_name,
@@ -165,7 +166,7 @@ module.exports.get_users_with_day = async (req, res) => {
                     location: exam.exam.location.location_name,
                     appointment: exam.exam.appointment,
                     percentage: exam.exam.percentage,
-                    exam_title: 'hello world'
+                    exam_title: exam.exam._id.title
                  });
                  
              })
