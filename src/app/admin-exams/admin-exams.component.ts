@@ -104,8 +104,6 @@ export class AdminExamsComponent implements OnInit {
     this.close_popup();
   }
  confirm_edit(ed_title:any,ed_about:any){
-    // console.log(ed_title);
-    // console.log("about:"+ed_about);
     this.non_token_exam[this.edit_index].title=ed_title;
     this.non_token_exam[this.edit_index].about=ed_about;
     this.close_popup();

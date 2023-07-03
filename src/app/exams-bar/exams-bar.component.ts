@@ -140,28 +140,7 @@ console.log(combinations);
   this.flag_book=false;
   this.flag_time=false;
   }
-  // select_snack(value:any){
-  //   this.order_exam.snack=value;
-
-  // }
-  // select_day(value:any){
-  //   this.order_exam.day=value;
-  // }
-  // select_appointment(value:any){
-  //   this.order_exam.appointment=value;
-  // }
-
-  // select_country(value:any){
-  //   this.order_exam.country=value;
-
-  // }
-  // select_city(value:any){
-  //   this.order_exam.city=value;
-  // }
-  // select_location(value:any){
-  //   this.order_exam.location=value;
-  // }
-
+  
   submit_book(){ 
     //service becouse i need city and country and location then next step
     this.clear_flag_book();
@@ -219,7 +198,7 @@ console.log(combinations);
 
 
 
-
+ 
 
   onCountrySelected(event: Event) {
      this.selectedCountry = (event.target as HTMLSelectElement).value;
@@ -236,6 +215,7 @@ console.log(combinations);
     }
     else{
       this.citys=[]
+      this.locations=[]
       return
     }
   
@@ -290,6 +270,8 @@ console.log(combinations);
  
 
     for (let i=0; i<this.locations.length; i++){
+      console.log(this.locations[i])
+      console.log(this.selectedlocation)
       if(this.locations[i]==this.selectedlocation){
         this.index_location=i;
       }
