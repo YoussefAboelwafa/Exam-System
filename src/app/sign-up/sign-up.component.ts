@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { users } from '../objects/users';
 import { ServicService } from '../services/servic.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -33,7 +33,7 @@ export class SignUpComponent implements OnInit {
     'new zealan'
   
 ];
-  constructor(user:users,private service:ServicService,private router: Router,private pop_service:ModalPopServiceService) {
+  constructor(user:users,private service:ServicService,private router: Router,private pop_service:ModalPopServiceService,private renderer: Renderer2) {
     this.signup_user=user;
    }
 
@@ -113,5 +113,7 @@ export class SignUpComponent implements OnInit {
            )
     
   }
+
+  
 
 }

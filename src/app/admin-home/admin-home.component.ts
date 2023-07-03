@@ -30,15 +30,7 @@ export class AdminHomeComponent implements OnInit {
         
     //   )
 
-      this.service.exam_bar_init_admin().subscribe
-    (
-      (x)=> {
-
-        this.service.non_token=x;
-
-      }
-        
-      )
+      
 
 
 

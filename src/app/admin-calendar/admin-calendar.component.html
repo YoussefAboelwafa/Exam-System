@@ -52,7 +52,7 @@
     <!-- ng for -->
     <div *ngFor="let calend of calendar;let i=index" [ngClass]="{'card': true, 'card-text': true, 'box': true, 'bg': calend.student == calend.capacity}">
       <div class="remove">
-        <button (click)="goto_all_student(calend.day_number,calend.month_name)"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button (click)="goto_all_student(calend.day_number,calend.month_name,calend._id)"><i class="fa-solid fa-magnifying-glass"></i></button>
         <button
          (click)="remove_calender(calend,i)"
          data-toggle="modal"
@@ -298,7 +298,7 @@
             <ul>
               <li>{{change_user.exam_title}}</li>
               <li>{{change_user.location}}</li>
-              <li>{{change_user.time}}</li>
+              <li>{{change_user.appointment}}</li>
               <li>{{change_user.snack}}</li>
             </ul>
           </div>

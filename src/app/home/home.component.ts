@@ -64,6 +64,8 @@ flag_type=true;
               this.upcoming_exam[up].snack=x.user.exams[i].exam.snack;
               this.upcoming_exam[up].percentage=x.user.exams[i].exam.percentage;
               this.upcoming_exam[up].appointment=x.user.exams[i].exam.appointment;
+              this.upcoming_exam[up].day=x.user.exams[i].exam.day;
+
               this.upcoming_exam[up]._id=x.user.exams[i].exam._id;
               this.upcoming_exam[up].title=x.token_exam_info[i].title;
               up++;  
@@ -172,9 +174,9 @@ flag_type=true;
              
   }
 
-  select_snack(value:any){
-
+  refresh(){
+    this.router.navigate(['/home']);
   }
-  submit(){}
+  
 
 }

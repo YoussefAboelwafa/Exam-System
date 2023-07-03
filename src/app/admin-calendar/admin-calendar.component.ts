@@ -18,19 +18,8 @@ export class AdminCalendarComponent implements OnInit {
   flag_all_student=false;
   flag_calender=true;
   moderator_name='';
-  user_exam:book_user[]=[
-    {
-      first_name:"karim",
-      last_name:"tarek",
-      _id_user:"123456",
-      photo_user:"",
-      exam_title:"c++",
-      location:"smoha",
-      snack:"kitkat",
-      appointment:"15 April 3.00 pm",
-      percentage:"00",
-      _id_exam:"",
-    },  ]
+  user_exam:book_user[]=[]
+
   current_user = {
     first_name: "karim",
     last_name: "tarek",
@@ -144,7 +133,8 @@ get_all_place(){
     });
   });
   });
-  
+
+  let temp:any[]=[]
   for(let i=0; i<combinations.length; i++) {
   let x=new address;
   const dateArr = combinations[i].split(":");
@@ -156,8 +146,9 @@ get_all_place(){
   x.snacks=dateArr[4];
   x._id=dateArr[5]
   console.log(x);
-  this.address.push(x);
+  temp.push(x);
   }
+  this.address=temp;
   
   
   
@@ -228,11 +219,25 @@ get_all_place(){
     this.flag_student=false;
   }
 
-  goto_all_student(day:any,month:any){
+  goto_all_student(day:any,month:any,id:any){
     this.day_all=day;
     this.month_all=month;
+    this.service.get_allstudent_inoneday(id).subscribe
+    (x=>{
+
+      this.user_exam=x;
+      console.log(x)
+      for(var i=0; i<this.user_exam.length;i++){
+        if(this.user_exam[i].percentage==-1){
+          this.user_exam[i].percentage=0;
+        }
+      }
     this.flag_calender=false;
     this.flag_all_student=true;
+
+    }
+      
+      )
   }
 
   add_calendar(add_date:any,add_time:any){
@@ -253,9 +258,7 @@ get_all_place(){
     }    
     const time = `${hours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
   
-    // x.country=add_country;
-    // x.city=add_city;
-    // x.location=add_location;
+    
     x.location_id=this.id_location;
     x.day_number=day;
     x.month_number=month;
@@ -263,7 +266,6 @@ get_all_place(){
     x.day_name=this.get_name_date(add_date,1);
     x.month_name=this.get_name_date(add_date,0);
     this.close();
-    // this.calendar.push(x);
     //services add calendar : capacity from location 
     this.service.add_day(x).subscribe(y =>{
 
@@ -287,6 +289,10 @@ get_all_place(){
 
     this.user_exam[this.index_change_user].percentage=value;
     //service send _id_user and new_percentage
+    this.service.change_percentage(this.user_exam[this.index_change_user]._id_user,this.user_exam[this.index_change_user].exam_id,value).subscribe(
+      x=>{
+        
+      })
     this.close_card();
   }
   close_all_student(){
@@ -316,6 +322,7 @@ get_all_place(){
     }
     else{
       this.city=[]
+      this.locations=[]
       return
     }
   }

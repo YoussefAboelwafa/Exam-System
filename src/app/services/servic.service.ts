@@ -118,7 +118,11 @@ public book_exam(order_exam:any):Observable<any>{
 }
 
 public get_allstudent_inoneday(id_day:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/get_users_with_day`,{dat_id:id_day}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/admin/get_users_with_day`,{day_id:id_day}, { withCredentials: true });
+}
+
+public change_percentage(id_user:any,id_exam:any,percentage:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/set_percentage`,{user_id:id_user,exam_id:id_exam,percentage:percentage}, { withCredentials: true });
 }
 
 }

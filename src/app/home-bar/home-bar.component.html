@@ -190,11 +190,11 @@
           required
           #country
           id="select"
-          name="country"
-          (change)="select_country(country.value)"
+          name="country" 
+          (change)="onCountrySelected($event)"
         >
-          <option>country</option>
-          <option *ngFor="let country of countries">{{ country }}</option>
+          <option selected>Country</option>
+          <option *ngFor="let coun of countrys">{{coun}}</option>
         </select>
 
         <h3>City</h3>
@@ -204,11 +204,11 @@
           #city
           id="select"
           name="city"
-          (change)="select_city(city.value)"
+          (change)="oncitySelected($event)"
         >
-          <option>city</option>
-          <option *ngFor="let city of cities">{{ city }}</option>
-        </select>
+          <option selected>City</option>
+          <option    *ngFor="let cit of citys">{{cit}}</option>
+         </select>
         <h3>Location</h3>
         <select
           class="sel"
@@ -216,18 +216,18 @@
           #location
           id="select"
           name="location"
-          (change)="select_location(location.value)"
+          (change)="onlocationSelected($event)"
         >
-          <option>location</option>
-          <option *ngFor="let location of locations">{{ location }}</option>
-        </select>
+          <option selected>Location</option>
+          <option    *ngFor="let locate of locations">{{locate}}</option>
+          </select>
 
         <button
           disabled
           *ngIf="
-            order_exam.country == 'country' ||
-            order_exam.city == 'city' ||
-            order_exam.location == 'location'
+          selectedCountry == 'country' ||
+          selectedCity == 'city' ||
+          selectedlocation == 'location'
           "
           id="btn"
           style="background-color: gray"
@@ -237,9 +237,9 @@
         </button>
         <button
           *ngIf="
-            order_exam.country != 'country' &&
-            order_exam.city != 'city' &&
-            order_exam.location != 'location'
+          selectedCountry != 'country' &&
+          selectedCity != 'city' &&
+          selectedlocation != 'location'
           "
           id="btn"
           type="submit"
@@ -250,18 +250,18 @@
       <div class="circle">
         <i
           *ngIf="
-            order_exam.country == 'country' ||
-            order_exam.city == 'city' ||
-            order_exam.location == 'location'
+          selectedCountry == 'country' ||
+          selectedCity == 'city' ||
+          selectedlocation == 'location'
           "
           class="fa-solid fa-circle"
           style="color: red"
         ></i>
         <i
           *ngIf="
-            order_exam.country != 'country' &&
-            order_exam.city != 'city' &&
-            order_exam.location != 'location'
+          selectedCountry != 'country' &&
+          selectedCity != 'city' &&
+          selectedlocation != 'location'
           "
           class="fa-solid fa-circle"
           style="color: #008182"
@@ -288,34 +288,33 @@
         #snack
         id="select"
         name="snack"
-        (change)="select_snack(snack.value)"
-      >
+        (change)="onselectsnack($event)"      >
         <option>snack</option>
-        <option *ngFor="let snack of snacks">{{ snack }}</option>
+        <option   *ngFor="let snack of snacks">{{snack}}</option>
       </select>
       <button
         disabled
-        *ngIf="order_exam.snack == 'snack'"
+        *ngIf="select_snacks== 'Snack'"
         id="btn"
         style="background-color: gray"
         type="submit"
       >
         Next
       </button>
-      <button *ngIf="order_exam.snack != 'snack'" id="btn" type="submit">
+      <button *ngIf="select_snacks != 'Snack'" id="btn" type="submit">
         Next
       </button>
 
       <div class="circle">
         <i class="fa-regular fa-circle"></i>
         <i
-          *ngIf="order_exam.snack == 'snack'"
+        *ngIf="select_snacks == 'Snack'" 
           class="fa-solid fa-circle"
           style="color: red"
         ></i>
         <i
-          *ngIf="order_exam.snack != 'snack'"
-          class="fa-solid fa-circle"
+        *ngIf="select_snacks!= 'Snack'"
+         class="fa-solid fa-circle"
           style="color: #008182"
         ></i>
         <i class="fa-regular fa-circle"></i>
@@ -335,34 +334,30 @@
     <form #input_form="ngForm" (ngSubmit)="submit_time()">
       <h3>Day of exam</h3>
       <select
-        required
-        #day
-        id="select"
-        name="snack"
-        (change)="select_day(day.value)"
-      >
-        <option>Select a day</option>
-        <option *ngFor="let day of days">{{ day }}</option>
+      required
+      #snack
+      id="select"
+      name="snack"
+      (change)="ondayselect($event)"      >
+      <option>Select a day</option>
+      <option   *ngFor="let appoint of calendar; let i=index">{{appoint.day_number}} : {{appoint.day_name}}</option>
       </select>
+
       <h3>Appointment</h3>
       <select
-        class="sel"
-        required
-        #appointment
-        id="select"
-        name="snack"
-        (change)="select_appointment(appointment.value)"
-      >
-        <option>Select an Appointment</option>
-        <option *ngFor="let Appointment of Appointments">
-          {{ Appointment }}
-        </option>
+      required
+      #snack
+      id="select"
+      name="snack"
+      (change)="ontimeselect($event)"      >
+      <option>Select an Appointment</option>
+      <option >{{avilable_time}}</option>
       </select>
       <button
         disabled
         *ngIf="
-          order_exam.day == 'Select a day' ||
-          order_exam.appointment == 'Select an Appointment'
+        selectedday == 'Select a day' ||
+        selectedappointment == 'Select an Appointmen'
         "
         id="btn"
         style="background-color: gray"
@@ -372,8 +367,8 @@
       </button>
       <button
         *ngIf="
-          order_exam.day != 'Select a day' &&
-          order_exam.appointment != 'Select an Appointment'
+        selectedday != 'Select a day' &&
+        selectedappointment != 'Select an Appointmen'
         "
         id="btn"
         type="submit"
@@ -385,16 +380,16 @@
         <i class="fa-regular fa-circle"></i>
         <i
           *ngIf="
-            order_exam.day == 'Select a day' ||
-            order_exam.appointment == 'Select an Appointment'
+          selectedday == 'Select a day' ||
+          selectedappointment == 'Select an Appointmen'
           "
           class="fa-solid fa-circle"
           style="color: red"
         ></i>
         <i
           *ngIf="
-            order_exam.day != 'Select a day' &&
-            order_exam.appointment != 'Select an Appointment'
+          selectedday != 'Select a day' &&
+          selectedappointment != 'Select an Appointmen'
           "
           class="fa-solid fa-circle"
           style="color: #008182"
