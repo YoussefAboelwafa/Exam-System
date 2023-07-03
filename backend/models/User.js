@@ -94,12 +94,14 @@ userSchema.statics.bookExam = async function(exam, userId){
         ////change to $inc for atomicity on the db side
         
 
-        const [location, day] = await Promise.all([
+        const [location, day, user] = await Promise.all([
             Location.findOne({ _id: location_id }).session(session),
-            Day.findOne({ _id: day_id }).session(session)
+            Day.findOne({ _id: day_id }).session(session),
+            User.findById({_id: userId})
           ]);
-      
-        if(day.reserved_number >= location.max_number){
+
+        
+        if(!user || day.reserved_number >= location.max_number){
             throw "This day is already full"
         }
         await Promise.all([
