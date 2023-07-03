@@ -29,11 +29,14 @@ export class LoginComponent implements OnInit {
      this.service.login(this.user_login).subscribe
            (  
              (x)=> {
-              if(x.success==false){
-                this.pop_service.open_error_login();
+              if(x.success==2){
+                this.router.navigate(['/admin_home'])
+              }
+              else if(x.success==1){
+                 this.router.navigate(['/home'])
               }
               else{
-                 this.router.navigate(['/home'])
+                this.pop_service.open_error_login();
               }
               
 
