@@ -21,7 +21,10 @@ const generateRandomCode = ()=> {
 
 
 const userSchema = new mongoose.Schema({
-    // _id: {type: Number, index: true, unique: true, index: true},
+    // _id: {type: Number, index: true, unique: true, index: true}, //use later for generating the 8 chars code
+    /*
+        but don't forget to add a handler to handle duplicate ids
+    */
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
     country: {type: String, required: true},
