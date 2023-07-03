@@ -6,9 +6,12 @@
       <div class="name2">
         <label>{{current_user.first_name}} {{current_user.last_name}}</label>
         <label id="id">#{{current_user._id}}</label>
+        <button (click)="refresh()" style=" all:unset; cursor: pointer;border-radius: 8px;"> <i class="fa-solid fa-rotate-right"></i></button>
       </div>
     </div>
+
     <div class="btns1">
+      
       <button>Certificates</button>
       <button>Past Exams</button>
     </div>
@@ -56,14 +59,18 @@
 
 
 <div *ngIf="flag_type == true" class="contain">
-<ngx-typed-js 
-[strings]="['Welcome to Gammal Tech\'s Exam System!. ']"
-[loop]="false"
-[typeSpeed]="8"
-[shuffle]="true"
+  <ngx-typed-js 
+  [strings]="['Loading...']"
+  [loop]="true"
+  [typeSpeed]="20"
+  [backSpeed]="40"
+  [backDelay]="40"
+  [cursorChar]="' '"
 >
   <h1 class="typing"></h1>
 </ngx-typed-js>
+
+
 
     <!-- Good morning section -->
   </div>

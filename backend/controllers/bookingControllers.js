@@ -28,7 +28,7 @@ module.exports.book_exam = async (req, res) => {
                     res.json({signed_in: false});
                 }else{
                     console.log(decodedToken._id);
-                    res.json({success: await User.bookExam(req.body.exam, req.body.userId)})
+                    res.json({success: await User.bookExam(req.body.exam, decodedToken._id)});
                 }
             })
         }else{

@@ -75,7 +75,6 @@ export class ExamsBarComponent implements OnInit {
     this.upcoming_exam=this.service.upcoming_ex;
     this.token_exam=this.service.token_ex;
     this.non_token_exam=this.service.non_token;
-    console.log(this.token_exam)
 
 
     this.service.get_places().subscribe(
@@ -123,29 +122,12 @@ console.log(combinations);
        }
   
     )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
 
   ngOnInit(): void {
   }
 
-  reset_order_exam(){
+ reset_order_exam(){
  this.select_snacks="Snack";
  this.selectedlocation="location";
  this.selectedCity="city";

@@ -64,7 +64,7 @@ module.exports.getHome = async (req, res) => {
                         }
                     })
 
-                    console.log(user.exams[2].exam.day);
+                    // console.log(user.exams[2].exam.day);
                     const result = user.exams.map((exam) => ({
                        exam: { 
                         _id: exam.exam._id,

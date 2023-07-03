@@ -32,7 +32,6 @@ export class AdminLocationBarComponent implements OnInit {
    index_location:any;
   
 
-
   constructor(private service:ServicService) { 
 
 
@@ -63,6 +62,7 @@ country.cities.forEach((city: any) => {
 });
 });
 
+let temp:address[]=[]
 for(let i=0; i<combinations.length; i++) {
 let x=new address;
 const dateArr = combinations[i].split(":");
@@ -73,9 +73,10 @@ x.location=dateArr[2];
 x.capacity=dateArr[3];
 x.snacks=dateArr[4];
 x._id=dateArr[5]
-console.log(x);
-this.address.push(x);
+temp.push(x);
 }
+
+this.address=temp;
 
 console.log(combinations);
 

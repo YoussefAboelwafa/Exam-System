@@ -198,7 +198,8 @@ module.exports.get_users_with_day = async (req, res) => {
                     appointment: exam.exam.appointment,
                     percentage: exam.exam.percentage,
                     exam_title: exam.exam._id.title,
-                    snack: exam.exam.snack
+                    snack: exam.exam.snack,
+                    exam_id:exam.exam._id._id
 
                  });
                  
