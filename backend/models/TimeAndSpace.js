@@ -152,15 +152,27 @@ LocationSchema.statics.remove_location = async (location_id) =>{
     }else{
       console.log('Location removed successfully');
     }
-    let parentCity = await City.findOneAndRemove({_id:deletedLocation.parent, 'refCounter': 0});
-    if(!parentCity){
+    
+    let parentCity = await City.updateOne(
+      { _id: deletedLocation.parent },
+      { $pull: { locations: deletedLocation._id } },
+      { new: true }
+    );
+    let deleted_parentCity = await City.findOneAndRemove({_id:deletedLocation.parent, 'refCounter': 0});
+    if(!deleted_parentCity){
       console.log('City not found');
       return;
     }else{
       console.log('City removed successfully');
     }
-    let parentCountry = await Country.findOneAndRemove({_id:parentCity.parent, 'refCounter': 0})
-    if(!parentCity){
+
+    let parentCountry = await Country.updateOne(
+      { _id: deletedLocation.parent },
+      { $pull: { locations: deletedLocation._id } },
+      { new: true }
+    );
+    let deletedCountry = await Country.findOneAndRemove({_id:deleted_parentCity.parent, 'refCounter': 0})
+    if(!deletedCountry){
       console.log('Country not found');
       return;
     }else{
