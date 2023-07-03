@@ -69,7 +69,7 @@ public exam_bar_init():Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/home/exams`,{ids:this.ids_ex}, { withCredentials: true });
 }
 public exam_bar_init_admin():Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/home/exams`,{ids:["1"]}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/home/exams`,{ids:[]}, { withCredentials: true });
 }
 
 //return id of the

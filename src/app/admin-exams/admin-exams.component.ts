@@ -146,4 +146,25 @@ set_info(value:any,index:number){
   this.information[index]=value;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

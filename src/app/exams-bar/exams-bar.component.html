@@ -22,6 +22,11 @@
       </div>
     </div>
   </div>
+  <ng-container *ngIf="upcoming_exam.length == 0">
+    <div   class="upcominginfo" style="font-weight: 600; font-size: 15px;">
+      <p>You have worked hard to get to where you are today, and you deserve to be recognized for your skills and expertise. Taking the exam can help you achieve the recognition and success you deserve. You have what it takes to pass this exam and take your career to the next level. Believe in yourself and take the leap – book your exam today and show the world what you're capable of!</p>
+    </div>
+  </ng-container>
 </div>
 <!-- taken exams section -->
 <div class="discoverexamslabel">
@@ -64,6 +69,13 @@
       </div>
     </div>
   </div>
+
+
+  <ng-container *ngIf="token_exam.length == 0">
+    <div   class="upcominginfo" style="font-weight: 600; font-size: 15px;">
+      <p>You have not taken the exam yet. You can now book the exam. What are you waiting for?</p>
+    </div>
+  </ng-container>
 </div>
 
 <!-- non_token_exam section -->
