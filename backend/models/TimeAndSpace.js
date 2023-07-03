@@ -53,7 +53,8 @@ const LocationSchema = new mongoose.Schema({
 
 const CitiesSchema = new mongoose.Schema({
     city_name: {type: String, required: true, index: 'hashed'},
-    locations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'location' }]
+    locations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'location' }],
+    parent: { type: mongoose.Schema.Types.ObjectId, ref: 'country', default: null }
 })
 
 CitiesSchema.virtual('refCounter').get(function () {
