@@ -19,7 +19,7 @@ export class AdminCalendarComponent implements OnInit {
   flag_calender=true;
   moderator_name='';
   user_exam:book_user[]=[]
-  
+
   current_user = {
     first_name: "karim",
     last_name: "tarek",
@@ -258,9 +258,7 @@ get_all_place(){
     }    
     const time = `${hours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
   
-    // x.country=add_country;
-    // x.city=add_city;
-    // x.location=add_location;
+    
     x.location_id=this.id_location;
     x.day_number=day;
     x.month_number=month;
@@ -268,7 +266,6 @@ get_all_place(){
     x.day_name=this.get_name_date(add_date,1);
     x.month_name=this.get_name_date(add_date,0);
     this.close();
-    // this.calendar.push(x);
     //services add calendar : capacity from location 
     this.service.add_day(x).subscribe(y =>{
 
@@ -325,6 +322,7 @@ get_all_place(){
     }
     else{
       this.city=[]
+      this.locations=[]
       return
     }
   }
