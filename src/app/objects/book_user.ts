@@ -1,13 +1,14 @@
 export class book_user{
-    name_user:any;
-    _id:any;
+    first_name:any;
+    last_name:any;
     _id_user:any;
     _id_exam:any;
     photo_user:any="../../assets/images/img5.svg";
     exam_title:any;
     location:any;
-    time_book:any;
+    appointment:any;
     snack:any;
-    percentage_user:any="00";
+    percentage:any="00";
     
+     
 }

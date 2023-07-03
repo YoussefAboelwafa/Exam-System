@@ -66,6 +66,8 @@ export class ExamsBarComponent implements OnInit {
   selectedday:any='Select a day';
   selectedappointment:any="Select an Appointmen"
   index_day:any;
+  day_id:any="";
+  book_id_exam:any="";
 
   avilable_time:any;
 
@@ -193,8 +195,22 @@ console.log(combinations);
 
   }
   submit_time(){
+    let x={
+      location_id:this.id_location,
+      day_id:this.day_id,
+      exam_id:this.book_id_exam,
+      snack:this.select_snacks,
+      appoinment:this.selectedappointment,
+    }
+    this.service.book_exam(x).subscribe(
+      x=>{
+
+      }
+  )
+  this.reset_order_exam();
         //service becouse i need Day of exam and Appointment then next step
     this.clear_flag_book();
+
     //send notification and reset order exam 
 
   }
@@ -202,7 +218,7 @@ console.log(combinations);
   take_exam(name_exam:any,id_exam:any){
     this.book_title_course=name_exam;
     //becouse if the user click take exam from modal,hide pop up if it show
-    this.order_exam._id=id_exam;
+    this.book_id_exam=id_exam;
     $('#not_token_exam').modal('hide');
     $('#token_exam').modal('hide');
     this.flag_book=true;
@@ -305,10 +321,6 @@ console.log(combinations);
 
 onselectsnack(event: Event){
   this.select_snacks=(event.target as HTMLSelectElement).value;
-
-  console.log(this.calendar)
-
-
 }
 
 ondayselect(event:Event){
@@ -317,11 +329,14 @@ ondayselect(event:Event){
   for(var i=0;i<this.calendar.length;i++){
     if(this.calendar[i].day_number==this.selectedday.split(" : ")[0]){
       this.avilable_time=this.calendar[i].time;
+      this.day_id=this.calendar[i]._id;
+
 
   };
 
   if(this.selectedday=='Select a day'){
     this.selectedappointment="";
+    this.avilable_time="";
   }
 }
 }

@@ -248,7 +248,7 @@
       <div class="name2">
         <img [src]="current_user.photo" alt="" class="image" />
         <div class="name1">
-          <h5 class="card-title">{{user.name_user}}</h5>
+          <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
           <h5 class="card-title" id="id">#{{user._id_user}}</h5>
         </div>
       </div>
@@ -258,12 +258,12 @@
           <ul>
             <li>{{user.exam_title}}</li>
             <li>{{user.location}}</li>
-            <li>{{user.time_book}}</li>
+            <li>{{user.appointment}}</li>
             <li>{{user.snack}}</li>
           </ul>
         </div>
         <div class="discoversmallbox">
-          <label class="discoverscore">{{ user.percentage_user }}%</label>
+          <label class="discoverscore">{{ user.percentage }}%</label>
           <button (click)="open_user_card(user,i)" class="change">Click to change</button>
         </div>
       </div>

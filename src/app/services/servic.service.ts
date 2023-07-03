@@ -113,5 +113,12 @@ public add_day(new_time:any):Observable<any>{
 public remove_day(id_day:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/delete_day`,{day_id:id_day}, { withCredentials: true });
 }
+public book_exam(order_exam:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/exam/book_exam`,{exam:order_exam}, { withCredentials: true });
+}
+
+public get_allstudent_inoneday(id_day:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/get_users_with_day`,{dat_id:id_day}, { withCredentials: true });
+}
 
 }

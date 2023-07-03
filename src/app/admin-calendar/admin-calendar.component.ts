@@ -20,53 +20,17 @@ export class AdminCalendarComponent implements OnInit {
   moderator_name='';
   user_exam:book_user[]=[
     {
-      name_user:"karim tarek",
-      _id:"",
+      first_name:"karim",
+      last_name:"tarek",
       _id_user:"123456",
       photo_user:"",
       exam_title:"c++",
       location:"smoha",
       snack:"kitkat",
-      time_book:"15 April 3.00 pm",
-      percentage_user:"00",
+      appointment:"15 April 3.00 pm",
+      percentage:"00",
       _id_exam:"",
-    },
-    {
-      name_user:"ahmed ali",
-      _id:"",
-      _id_user:"124481",
-      photo_user:"",
-      exam_title:"python",
-      location:"smoha",
-      snack:"moro",
-      time_book:"15 April 3.00 pm",
-      percentage_user:"00",
-      _id_exam:"",
-    },{
-      name_user:"noha tarek",
-      _id:"",
-      _id_user:"114845",
-      photo_user:"",
-      exam_title:"algorithms",
-      location:"smoha",
-      snack:"kitkat",
-      time_book:"15 April 3.00 pm",
-      percentage_user:"00",
-      _id_exam:"",
-      
-    },{
-      name_user:"kimo fathy",
-      _id:"",
-      _id_user:"123456",
-      photo_user:"",
-      exam_title:"data structure",
-      location:"smoha",
-      snack:"kitkat",
-      time_book:"15 April 3.00 pm",
-      percentage_user:"00",
-      _id_exam:"",
-    },
-  ]
+    },  ]
   current_user = {
     first_name: "karim",
     last_name: "tarek",
@@ -74,23 +38,7 @@ export class AdminCalendarComponent implements OnInit {
     _id: "1234567"
   };
 
-  calendar:calendar[]=[
-    // {
-    //   day_number:1,
-    //   day_name:"saturday",
-    //   month_name:"jan",
-    //   month_number:"march",
-    //   country:"egypt",
-    //   city:"alex",
-    //   location:"smouha",
-    //   location_id:"ksdc",
-    //   _id: "1",
-    //   time:"5 pm",
-    //   moderator:"",
-    //   student:21,
-    //   capacity:25,
-    // },
-  ]
+  calendar:calendar[]=[]
 
   remove_calend=new calendar;
   index_calend:any;
@@ -337,7 +285,7 @@ get_all_place(){
 
   change_percentage(value:any){
 
-    this.user_exam[this.index_change_user].percentage_user=value;
+    this.user_exam[this.index_change_user].percentage=value;
     //service send _id_user and new_percentage
     this.close_card();
   }
