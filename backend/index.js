@@ -20,7 +20,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 const dbURI = 'mongodb://localhost:27017/mydb';  /// change to local
-mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(dbURI, 
+    {useNewUrlParser: true, useUnifiedTopology: true,
+        retryWrites: true})
     .then((result) => app.listen(8080))
     .catch((err) => console.log(err));
 
@@ -51,8 +53,8 @@ app.get('/is_signedin', (req, res) => {
 });
 
 app.use(authRoutes);
-app.use('/home', homeRoutes); ////add requiredAuth after finishing testing
-app.use('/exam', examRoutes);
+app.use('/home',  homeRoutes); ////add requiredAuth after finishing testing
+app.use('/exam',  examRoutes);
 app.use('/admin', adminRoutes)
 
 

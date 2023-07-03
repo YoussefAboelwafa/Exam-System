@@ -73,12 +73,13 @@ CountrySchema.virtual('refCounter').get(function () {
 
 CountrySchema.statics.insertPlace = async function(elem) {
     try {
-        const { country, city, location, snacks } = elem;
+        const { country, city, location } = elem;
+        const snacks = elem.snacks.split(",")
         const max_number = elem.capacity;
         let startTime = Date.now();
         const saved_location_id = await Location.findOneAndUpdate (
             { location_name: location },
-            { $addToSet: { snacks: snacks }, max_number: max_number },
+            { $addToSet: { snacks: {$each: snacks} }, max_number: max_number },
             { upsert: true, new: true , setDefaultsOnInsert: true, select: '_id' }
           );
         if (!saved_location_id) throw Error("Location not found");

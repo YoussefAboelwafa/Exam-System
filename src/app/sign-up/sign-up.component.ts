@@ -31,7 +31,6 @@ export class SignUpComponent implements OnInit {
     'canada',
     'australia',
     'new zealan'
-  
 ];
   constructor(user:users,private service:ServicService,private router: Router,private pop_service:ModalPopServiceService,private renderer: Renderer2) {
     this.signup_user=user;

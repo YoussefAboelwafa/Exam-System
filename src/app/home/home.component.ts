@@ -45,28 +45,28 @@ flag_type=true;
 
    this.refresh();
 
-    this.current_user={
-      first_name:service.user.get_first_name(),
-      last_name:service.user.get_last_name(),
-      photo:service.user.get_photo(),  
-      _id:service.user.get_id()
-    };
-    this.service.is_signin().subscribe
-           (
-             (x)=> {
-              if(x.signed_in==true){
-              this.current_user._id=x.user.id;
-              this.current_user.first_name=x.user.first_name;
-             this.current_user.last_name=x.user.last_name;
-              this.current_user.photo=x.user.photo;
-              }
-              else{
-                this.router.navigate(['/login'])
-              }
+    // this.current_user={
+    //   first_name:this.service.user.get_first_name(),
+    //   last_name:this.service.user.get_last_name(),
+    //   photo:this.service.user.get_photo(),  
+    //   _id:this.service.user.get_id()
+    // };
+    // this.service.is_signin().subscribe
+    //        (
+    //          (x)=> {
+    //           if(x.signed_in==true){
+    //           this.current_user._id=x.user.id;
+    //           this.current_user.first_name=x.user.first_name;
+    //          this.current_user.last_name=x.user.last_name;
+    //           this.current_user.photo=x.user.photo;
+    //           }
+    //           else{
+    //             this.router.navigate(['/login'])
+    //           }
 
-             error:(error: HttpErrorResponse) =>alert(error.message);
-              }
-           )
+    //          error:(error: HttpErrorResponse) =>alert(error.message);
+    //           }
+    //        )
   }
 
   ngOnInit(): void {

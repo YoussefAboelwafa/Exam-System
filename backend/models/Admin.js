@@ -9,9 +9,8 @@ const adminSchema = new mongoose.Schema({
 })
 
 
-module.exports.isAdmin = async (user_id) =>{
-    const exists = await findOne({user_id: user_id})
-    return (exists)? true: false;
+adminSchema.statics.isAdmin = async (user_id) =>{
+    return await Admin.findOne({user_id: user_id})
 }
 
 
