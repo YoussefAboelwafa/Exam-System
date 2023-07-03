@@ -140,16 +140,19 @@ module.exports.remove_exam = async (req, res) => {
 module.exports.get_users_with_day = async (req, res) => {
     try{
         // const location 
-        const day = await TimeAndSpace.Day.findOne({_id: req.body.day_id})
+        let users = await TimeAndSpace.Day.findOne({_id: req.body.day_id})
         .select('reserved_users').populate({
             path:'reserved_users',
             select: 'first_name last_name last_name exams',
             populate:{
-                path: 'exams.day'
+                path: 'exams'
             }
         })
+
+        users = users.populate({path:'exams.exam.location'});
+        console.log(users);
         
-        res.json(day);
+        res.json(users);
     }catch(err){
         console.log(err);
         res.json(err);
@@ -239,6 +242,14 @@ module.exports.get_all_days = async (req, res) => {
 
 
 
+module.exports.delete_day = async (req, res) => {
+    try{
+        res.json(await TimeAndSpace.Location.remove_location(req.body))
+    }catch(err){
+        console.log(err);
+        res.json(err);
+    }
+}
 
 
 
