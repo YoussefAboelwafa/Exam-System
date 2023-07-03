@@ -47,8 +47,7 @@ const LocationSchema = new mongoose.Schema({
     time: [{ type: mongoose.Schema.Types.ObjectId, ref: 'day' }],
     snacks: {type:[String], default: []},
     max_number: {type: Number, required: true},
-    parent: { type: mongoose.Schema.Types.ObjectId, ref: 'city', default: null },
-    deleted: {type: Boolean, default: false}
+    parent: { type: mongoose.Schema.Types.ObjectId, ref: 'city', default: null }
 })
 
 const CitiesSchema = new mongoose.Schema({
@@ -67,6 +66,9 @@ const CountrySchema = new mongoose.Schema({
     deleted: {type: Boolean, default: false}
 })
 
+CountrySchema.virtual('refCounter').get(function () {
+  return this.locations.length;
+});
 
 
 CountrySchema.statics.insertPlace = async function(elem) {
@@ -148,10 +150,11 @@ LocationSchema.statics.remove_location = async (location_id) =>{
     ///could be improved i guess and i should probably think more about concurrent reqs
     ///////////////////ahhhhhhhhh don't forget about the case if someone had an exam in that place before
     const location = await Location.findOneAndUpdate({_id: location_id}).select('parent');
-    const parentCity = await City.findOneAndUpdate({id:location.parent}, {$pull: {locations: location_id}});
+    const parentCity = await City.findOneAndUpdate({id:location.parent}, {$pull: {locations: location_id}}).select('parent');
     
-    if(await parentCity.findOne({id:location.parent, 'refCounter': 0})){
-      await Country.updateOne({_id: parentCity.parent}, {$set: {deleted: true}});
+    if(await City.findOne({id:location.parent, 'refCounter': 0})){
+      await Country.findOneAndUpdate({id:parentCity.parent}, {$pull: {cities: parentCity._id}})
+      await Country.findOne({id:parentCity.parent, 'refCounter': 0}, {$set: {deleted: true}})
     }
 
     if(!location){
