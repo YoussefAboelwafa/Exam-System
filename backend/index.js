@@ -19,7 +19,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-const dbURI = 'mongodb+srv://admin:7RUA6rN0a8FkISWy@cluster0.nbw43uf.mongodb.net/mydb';  /// change to local
+const dbURI = 'mongodb://localhost:27017/mydb';  /// change to local
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => app.listen(8080))
     .catch((err) => console.log(err));

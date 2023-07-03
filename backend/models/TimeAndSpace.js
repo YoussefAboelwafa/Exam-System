@@ -151,11 +151,11 @@ LocationSchema.statics.remove_location = async (location_id) =>{
     ///////////////////ahhhhhhhhh don't forget about the case if someone had an exam in that place before
     const location = await Location.findOne({_id: location_id}).select('parent');
     const parentCity = await City.findOneAndUpdate({_id:location.parent}, {$pull: {locations: location_id}});
-    console.log(parentCity);
-    if(await City.findOne({_id:location.parent, 'refCounter': 0})){
-      console.log('hello world');
+
+    console.log(await City.findOne({_id:location.parent, $where: function(){return this.locations.length === 0}}));
+    if(await City.findOne({_id:location.parent, $where: function(){return this.locations.length === 0}})){
       await Country.updateOne({_id:parentCity.parent}, {$pull: {cities: parentCity._id}})
-      await Country.updateOne({_id:parentCity.parent, 'refCounter': 0}, {$set: {deleted: true}})
+      console.log(await Country.findOneAndUpdate({_id:parentCity.parent, $where: function(){return this.cities.length === 0}}, {$set: {deleted: true}}))
     }
 
     if(!location){
