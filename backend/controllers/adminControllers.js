@@ -146,7 +146,8 @@ const populate_exams = async (users) => {
 module.exports.get_users_with_day = async (req, res) => {
     try{
         // const location 
-        let day = await TimeAndSpace.Day.findOne({_id: req.body.day_id})
+        const day_id = req.body.day_id;
+        let day = await TimeAndSpace.Day.findOne({_id: day_id})
         .select('reserved_users').populate({
             path:'reserved_users',
             select: 'first_name last_name exams',
@@ -173,13 +174,13 @@ module.exports.get_users_with_day = async (req, res) => {
             select: 'title'
         })
 
-        console.log(day.reserved_users[0].exams[0]);
 
         // console.log(day);
 
         let result = []
         day.reserved_users.forEach((user) => {
-            user.exams.forEach((exam) => {
+            let exams_on_day = user.exams.filter((exam) => exam.exam.day.toString() === day_id);
+            exams_on_day.forEach((exam) => {
                 // exam: { 
                 //  _id: exam.exam._id,
                 //  snack: exam.exam.snack,
