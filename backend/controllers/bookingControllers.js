@@ -16,7 +16,23 @@ module.exports.book_exam = async (req, res) => {
         ////check if the user didn't already book before
         ///add payment and other stuff
         /// will need to add a function to remove the exam from user
-        res.json({success: await User.bookExam(req.body.exam, req.body.userId)})
+        let startTime = Date.now();
+        const token = req.cookies.jwt;
+
+        if(token){
+            let startTime = Date.now();
+            jwt.verify(token, 'example secret', async (err, decodedToken)=>{
+                if(err){
+                    console.log(err.message);
+                    res.json({signed_in: false});
+                }else{
+                    console.log(decodedToken._id);
+                    res.json({success: await User.bookExam(req.body.exam, decodedToken._id)})
+                }
+            })
+        }else{
+            res.json({signed_in: false});
+        }
     }catch(err){
         console.log(err);
         res.json(err)
