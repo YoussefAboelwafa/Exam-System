@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
 
+
 const characterSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const idLength = 6;
 const generateRandomCode = ()=> {
@@ -52,8 +53,7 @@ const LocationSchema = new mongoose.Schema({
 
 const CitiesSchema = new mongoose.Schema({
     city_name: {type: String, required: true, index: 'hashed'},
-    locations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'location' }],
-    parent: { type: mongoose.Schema.Types.ObjectId, ref: 'country', default: null }
+    locations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'location' }]
 })
 
 CitiesSchema.virtual('refCounter').get(function () {
@@ -62,12 +62,10 @@ CitiesSchema.virtual('refCounter').get(function () {
 
 const CountrySchema = new mongoose.Schema({
     country_name: {type: String, required: true, unique: true, index: 'hashed'},
-    cities: [{ type: mongoose.Schema.Types.ObjectId, ref: 'city' }]
+    cities: [{ type: mongoose.Schema.Types.ObjectId, ref: 'city' }],
+    deleted: {type: Boolean, default: false}
 })
 
-CountrySchema.virtual('refCounter').get(function () {
-  return this.locations.length;
-});
 
 
 CountrySchema.statics.insertPlace = async function(elem) {
@@ -91,7 +89,7 @@ CountrySchema.statics.insertPlace = async function(elem) {
           
         const saved_country_id = await Country.findOneAndUpdate (
             { country_name: country },
-            { $addToSet: { cities: saved_city_id }},
+            { $addToSet: { cities: saved_city_id }, $set:{deleted: false}},
             {upsert: true, new: true , setDefaultsOnInsert: true, select: '_id'}
           )
         if (!saved_country_id) throw Error("Country not found");
@@ -146,12 +144,16 @@ CountrySchema.statics.insertTime = async function(elem){
 
 LocationSchema.statics.remove_location = async (location_id) =>{
   try{
+    ///could be improved i guess and i should probably think more about concurrent reqs
     ///////////////////ahhhhhhhhh don't forget about the case if someone had an exam in that place before
-    let deletedLocation = await Location.findOneAndUpdate(
-      {_id:location_id},
-      {$set: {deleted: true}},
-      {new: true});
-    if(!deletedLocation){
+    const location = await Location.findOneAndUpdate({_id: location_id}).select('parent');
+    const parentCity = await City.findOneAndUpdate({id:location.parent}, {$pull: {locations: location_id}});
+    
+    if(await parentCity.findOne({id:location.parent, 'refCounter': 0})){
+      await Country.updateOne({_id: parentCity.parent}, {$set: {deleted: true}});
+    }
+
+    if(!location){
       console.log('Location not found');
       return;
     }else{
