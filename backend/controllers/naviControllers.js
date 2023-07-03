@@ -139,7 +139,7 @@ module.exports.populate_exams = async (req, res) =>{
 
 module.exports.get_places = async (req, res) => {
     try{
-        const places = await Country.find().select('country_name cities').populate({
+        const places = await Country.find({deleted: false}).select('country_name cities').populate({
             path: 'cities',
             select: 'city_name locations',
             populate:{

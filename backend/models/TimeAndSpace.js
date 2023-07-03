@@ -46,7 +46,8 @@ const LocationSchema = new mongoose.Schema({
     time: [{ type: mongoose.Schema.Types.ObjectId, ref: 'day' }],
     snacks: {type:[String], default: []},
     max_number: {type: Number, required: true},
-    parent: { type: mongoose.Schema.Types.ObjectId, ref: 'city', default: null } 
+    parent: { type: mongoose.Schema.Types.ObjectId, ref: 'city', default: null },
+    deleted: {type: Boolean, default: false}
 })
 
 const CitiesSchema = new mongoose.Schema({
@@ -146,7 +147,10 @@ CountrySchema.statics.insertTime = async function(elem){
 LocationSchema.statics.remove_location = async (location_id) =>{
   try{
     ///////////////////ahhhhhhhhh don't forget about the case if someone had an exam in that place before
-    let deletedLocation = await Location.findOneAndRemove({_id:location_id});
+    let deletedLocation = await Location.findOneAndUpdate(
+      {_id:location_id},
+      {$set: {deleted: true}},
+      {new: true});
     if(!deletedLocation){
       console.log('Location not found');
       return;
@@ -154,32 +158,6 @@ LocationSchema.statics.remove_location = async (location_id) =>{
       console.log('Location removed successfully');
     }
     
-    let parentCity = await City.updateOne(
-      { _id: deletedLocation.parent },
-      { $pull: { locations: deletedLocation._id } },
-      { new: true }
-    );
-    let deleted_parentCity = await City.findOneAndRemove({_id:deletedLocation.parent, 'refCounter': 0});
-    if(!deleted_parentCity){
-      console.log('City not found');
-      return;
-    }else{
-      console.log('City removed successfully');
-    }
-
-    let parentCountry = await Country.updateOne(
-      { _id: deletedLocation.parent },
-      { $pull: { locations: deletedLocation._id } },
-      { new: true }
-    );
-    let deletedCountry = await Country.findOneAndRemove({_id:deleted_parentCity.parent, 'refCounter': 0})
-    if(!deletedCountry){
-      console.log('Country not found');
-      return;
-    }else{
-      console.log('Country removed successfully');
-    }
-
   } catch (error) {
     console.error('Error deleting exam:', error);
     throw error;
