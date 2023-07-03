@@ -27,6 +27,6 @@ router.get('/get_all_days', adminControllers.get_all_days);
 
 router.get('/get_users_with_day', adminControllers.get_users_with_day)
 
-router.get('/delete_day', adminControllers.delete_day)
+router.post('/delete_day', adminControllers.delete_day)
 
 module.exports = router;
