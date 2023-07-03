@@ -108,15 +108,15 @@ userSchema.statics.bookExam = async function(exam, userId){
             Day.updateOne(
               { _id: day._id },
               {$inc: { reserved_number: 1 },
-                $push: { userId: userId }},
+                $push: { reserved_users: userId }},
               { session }
             ),
             User.updateOne(
               { _id: userId },
               {$push: {exams: { exam:{
                     _id: exam_id,
-                    appointment,
-                    snack,
+                    appointment:appointment,
+                    snack:snack,
                     percentage: -1,
                     location: location_id,
                     day: day_id}

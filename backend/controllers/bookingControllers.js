@@ -1,6 +1,6 @@
 const User = require('../models/User')
 const Exam = require('../models/Exam')
-
+const jwt = require('jsonwebtoken')
 
 const payment = (req, res) => {
     console.log('payment succeeded');
@@ -13,9 +13,9 @@ module.exports.book_exam = async (req, res) => {
     // req should also contain the id, or any user identification
 
     try{
-        ////check if the user didn't already book before
-        ///add payment and other stuff
-        /// will need to add a function to remove the exam from user
+        // ////check if the user didn't already book before
+        // ///add payment and other stuff
+        // /// will need to add a function to remove the exam from user
         let startTime = Date.now();
         const token = req.cookies.jwt;
 
@@ -27,7 +27,7 @@ module.exports.book_exam = async (req, res) => {
                     res.json({signed_in: false});
                 }else{
                     console.log(decodedToken._id);
-                    res.json({success: await User.bookExam(req.body.exam, decodedToken._id)})
+                    res.json({success: await User.bookExam(req.body.exam, req.body.userId)})
                 }
             })
         }else{

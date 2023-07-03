@@ -33,7 +33,7 @@ module.exports.getHome = async (req, res) => {
                     /appointment: {type: String, required: true},
                     /snack: {type: String, required: true},
                     */
-                   const id = decodedToken._id
+                   const id = decodedToken._id;
                     let user = await User.findById(id).select({first_name: 1, last_name: 1, exams: 1, _id: 1});
 
                     const exam_ids = user.exams.map((exam)=>exam.exam._id);
@@ -48,7 +48,7 @@ module.exports.getHome = async (req, res) => {
                     let startTime = Date.now();
                     user = await user.populate({
                         path:'exams.exam.day',
-                        select: 'day_name'
+                        select: 'day_number month_name'
                     })
 
                     user = await user.populate({
@@ -64,14 +64,14 @@ module.exports.getHome = async (req, res) => {
                         }
                     })
 
-                                  
+                    console.log(user.exams[2].exam.day);
                     const result = user.exams.map((exam) => ({
                        exam: { 
                         _id: exam.exam._id,
                         snack: exam.exam.snack,
                         percentage: exam.exam.percentage,
                         appointment: exam.exam.appointment,
-                        day: exam.exam.day.day_name,
+                        day: exam.exam.day.day_number + " " + exam.exam.day.month_name,
                         location: exam.exam.location.location_name,
                         city: exam.exam.location.parent.city_name,
                         country: exam.exam.location.parent.parent.country_name}
@@ -80,7 +80,6 @@ module.exports.getHome = async (req, res) => {
                         _id: user._id,
                         first_name: user.first_name,
                         last_name: user.last_name,
-                        percentage: user.percentage,
                         exams: result
                     }
                     
