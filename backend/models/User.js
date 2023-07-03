@@ -38,14 +38,15 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: [true, 'password required']},
     exams: {
         type: [
-            {type: {
-                _id: {type: mongoose.Schema.Types.ObjectId, required: true},
-                day: { type: mongoose.Schema.Types.ObjectId, ref: 'day' },
-                location: {type: mongoose.Schema.Types.ObjectId, ref: 'location'},
-                appointment: {type: String, required: true},
-                snack: {type: String, required: true},
-                percentage: {type: Number, required: true}
-            }, required: true},
+            { exam: {type: {
+                    _id: {type: mongoose.Schema.Types.ObjectId, required: true},
+                    day: { type: mongoose.Schema.Types.ObjectId, ref: 'day' },
+                    location: {type: mongoose.Schema.Types.ObjectId, ref: 'location'},
+                    appointment: {type: String, required: true},
+                    snack: {type: String, required: true},
+                    percentage: {type: Number, required: true}
+                }, required: true},
+            }
         ],
         default: []
     }
