@@ -130,8 +130,10 @@ module.exports.get_places = async (req, res) => {
             path: 'cities',
             select: 'city_name locations',
             populate:{
-                path: 'location',
-                select: 'location_name',
+
+              path: 'locations',
+              select: 'location_name snacks max_number'
+                
             }
         });
         console.log(places);

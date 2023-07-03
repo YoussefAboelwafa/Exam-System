@@ -1,26 +1,23 @@
 <div class="toolbar">
   <!-- country -->
   <div class="dropdown countrydiv">
-    <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
+    <select (change)="onCountrySelected($event)" class="form-control" id="countrySelect" class="btn dropdown-toggle">
       <option selected>Country</option>
-      <option value="Egypt">Egypt</option>
-      <option value="UAE">UAE</option>
+      <option    *ngFor="let coun of country">{{coun}}</option>
     </select>
   </div>
   <!-- city -->
   <div class="dropdown countrydiv">
-    <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
-      <option selected>City</option>
-      <option value="Alexandria">Alexandria</option>
-      <option value="Dubai">Dubai</option>
+    <select (change)="oncitySelected($event)" class="form-control" id="countrySelect" class="btn dropdown-toggle">
+     <option selected>City</option>
+     <option    *ngFor="let cit of city">{{cit}}</option>
     </select>
   </div>
   <!-- location -->
   <div class="dropdown countrydiv">
-    <select class="form-control" id="countrySelect" class="btn dropdown-toggle">
+    <select (change)="onlocationSelected($event)" class="form-control" id="countrySelect" class="btn dropdown-toggle">
       <option selected>Location</option>
-      <option value="Smouha">Smouha</option>
-      <option value="Maydan">Maydan</option>
+      <option    *ngFor="let locate of locations">{{locate}}</option>
     </select>
   </div>
 </div>
@@ -36,13 +33,13 @@
   <!-- ng for -->
   <div *ngFor="let locate of address; let i=index" class="card card-body taken" >
     <div class="remove_edit">
-      <button (click)="edit_address(locate,i)">
+      <!-- <button (click)="edit_address(locate,i)">
         <i
         class="fa-solid fa-pen"
         data-toggle="modal"
         data-target="#editlocationmodal"
         ></i>
-      </button>
+      </button> -->
       <button
       (click)="remove_address(locate,i)"
        data-toggle="modal"
@@ -86,6 +83,16 @@
           <td>
             <div class="takeninfo">
               <label>{{locate.capacity}}</label>
+            </div>
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <div class="card-text takenbox" >
+          <td><label class="card-title">Snacks</label></td>
+          <td>
+            <div class="takeninfo">
+              <label>{{locate.snacks}}</label>
             </div>
           </td>
         </div>
@@ -158,10 +165,23 @@
             #add_capacity
           />
         </div>
+      
+      <div class="form-group">
+        <label for="exampleFormControlInput4">Snacks:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleFormControlInput4"
+          placeholder="Enter snacks, separating each two with a comma (,)."
+          #add_snacks
+        />
       </div>
+    </div>
+
+      
       <div class="modal-footer">
         <button 
-        (click)="add_locate(add_country.value,add_city.value,add_location.value,add_capacity.value);
+        (click)="add_locate(add_country.value,add_city.value,add_location.value,add_capacity.value,add_snacks.value);
         " type="button" id="addnewlocation" >
           Add <i class="fa-solid fa-plus"></i>
         </button>
@@ -173,7 +193,7 @@
   </div>
 </div>
 
-<div
+<!-- <div
   class="modal fade"
   id="editlocationmodal"
   tabindex="-1"
@@ -238,16 +258,26 @@
             #ed_capacity
           />
         </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput4">Snacks:</label>
+          <input
+            [value]="edit_ad.snacks"
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput4"
+            #ed_snacks
+          />
+        </div>
       </div>
       <div class="modal-footer">
-        <button (click)="totaly_edit(ed_country.value,ed_city.value,ed_location.value,ed_capacity.value)" type="button" id="addnewlocation">
+        <button (click)="totaly_edit(ed_country.value,ed_city.value,ed_location.value,ed_capacity.value,ed_snacks.value)" type="button" id="addnewlocation">
           Edit Address <i class="fa-solid fa-plus"></i>
         </button>
         <button (click)="close()" type="button" id="addnewlocation" style="background-color: #FF0052;" >Cancel Edit</button>
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 

@@ -4,4 +4,5 @@ export class address{
     capacity: any;
     location:any;
     _id:any;
+    snacks:any;
 }
