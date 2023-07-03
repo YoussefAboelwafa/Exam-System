@@ -118,45 +118,58 @@ module.exports.get_users_with_day = async (req, res) => {
         let day = await TimeAndSpace.Day.findOne({_id: req.body.day_id})
         .select('reserved_users').populate({
             path:'reserved_users',
-            select: 'first_name last_name last_name exams',
-            // populate:{
-            //     path: 'exams'
-            // }
-        })
-        if(!day)
-            throw "day not found"
+            select: 'first_name last_name exams',
 
-        
+        })
+
+        // console.log(day);
 
         day = await day.populate({
             path:'reserved_users.exams.exam.location',
-            select: 'parent location_name',
-            populate: {
-                path: 'parent',
-                select: 'city_name parent',
-                populate: {
-                    path: 'parent',
-                    select: 'country_name'
-                }
-            }
-        }).populate({
-            path:'reserved_users.exams.exam.location'
+            select: 'location_name',
+            // populate: {
+            //     path: 'parent',
+            //     select: 'city_name parent',
+            //     populate: {
+            //         path: 'parent',
+            //         select: 'country_name'
+            //     }
+            // }
         })
 
-        console.log(day);
+        day = await day.populate({
+            path: 'reserved_users.exams.exam._id',
+            select: 'title'
+        })
 
-        res.json(day)  
-        // const result = user.exams.map((exam) => ({
-        //    exam: { 
-        //     _id: exam.exam._id,
-        //     snack: exam.exam.snack,
-        //     percentage: exam.exam.percentage,
-        //     appointment: exam.exam.appointment,
-        //     day: exam.exam.day.day_name,
-        //     location: exam.exam.location.location_name,
-        //     city: exam.exam.location.parent.city_name,
-        //     country: exam.exam.location.parent.parent.country_name}
-        // }))
+        console.log(day.reserved_users[0].exams[0].exam);
+
+        // console.log(day);
+
+        let result = []
+        day.reserved_users.forEach((user) => {
+            user.exams.forEach((exam) => {
+                // exam: { 
+                //  _id: exam.exam._id,
+                //  snack: exam.exam.snack,
+                //  percentage: exam.exam.percentage,
+                //  appointment: exam.exam.appointment,
+                //  location: exam.exam.location.location_name,
+                //  city: exam.exam.location.parent.city_name,
+                //  country: exam.exam.location.parent.parent.country_name}
+                result.push({
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    _id_user: user._id,
+                    photo_user: user.photo_user,
+                    location: exam.exam.location.location_name,
+                    appointment: exam.exam.appointment,
+                    percentage: exam.exam.percentage,
+                    exam_title: 'hello world'
+                 });
+                 
+             })
+        })
         // const parsed_user = {
         //     _id: user._id,
         //     first_name: user.first_name,
@@ -165,7 +178,7 @@ module.exports.get_users_with_day = async (req, res) => {
         //     exams: result
         // }
 
-
+        res.json(result) 
     }catch(err){
         console.log(err);
         res.json(err);

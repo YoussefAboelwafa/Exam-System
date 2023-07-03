@@ -54,7 +54,7 @@ function errorHandler(err) {
 ///ivsXMmb3UFV5AtA0T3vh3l99CBqH5gfy
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-    return jwt.sign({ id:id, admin:Admin.isAdmin(id)}, 'example secret' , { 
+    return jwt.sign({ _id:id, admin:false}, 'example secret' , { 
         expiresIn : maxAge
     })
 }

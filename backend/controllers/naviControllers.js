@@ -33,7 +33,7 @@ module.exports.getHome = async (req, res) => {
                     /appointment: {type: String, required: true},
                     /snack: {type: String, required: true},
                     */
-                   const id = req.body._id
+                   const id = decodedToken._id
                     let user = await User.findById(id).select({first_name: 1, last_name: 1, exams: 1, _id: 1});
 
                     const exam_ids = user.exams.map((exam)=>exam.exam._id);

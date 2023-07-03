@@ -86,6 +86,7 @@ userSchema.statics.bookExam = async function(exam, userId){
     try{
         const {location_id, day_id, exam_id, snack, appointment} = exam
 
+        ////change to $inc for atomicity on the db side
 
         const [location, day] = await Promise.all([
             Location.findOne({_id: location_id}),
