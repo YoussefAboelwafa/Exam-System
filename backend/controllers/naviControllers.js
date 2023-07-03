@@ -36,31 +36,48 @@ module.exports.getHome = async (req, res) => {
                    const id = req.body._id
                     let user = await User.findById(id).select({first_name: 1, last_name: 1, exams: 1, _id: 1});
 
-                    const exam_ids = user.exams.map((exam)=>exam._id);
+                    const exam_ids = user.exams.map((exam)=>exam.exam._id);
+                    // console.log(user.exams.exam);
+                    console.log(exam_ids);
 
-      
                     const [token_exam_info, other_exam] = await Promise.all([
                         Exam.find({ _id: { $in: exam_ids } }).select('title about'),
                         Exam.findOne({ _id: { $nin: exam_ids } }).select('title info about')
                       ]);
 
-                      let startTime = Date.now();
-                    user = await user.populate('exams.day').select('day_name').populate('exams.location').select('location_name');
-                    console.log(user);               
+                    let startTime = Date.now();
+                    user = await user.populate({
+                        path:'exams.exam.day',
+                        select: 'day_name'
+                    })
+
+                    user = await user.populate({
+                        path:'exams.exam.location',
+                        select: 'parent location_name',
+                        populate: {
+                            path: 'parent',
+                            select: 'city_name parent',
+                            populate: {
+                                path: 'parent',
+                                select: 'country_name'
+                            }
+                        }
+                    })
+
+                                  
 // ======= 
 //                     const token_exam_info = (await Exam.find({ _id: { $in: exam_ids } }).select('title info about')).map((elem) => ({title: elem.title, about:elem.about,info:elem.info}));
 // >>>>>>> main
-                    
                     const result = user.exams.map((exam) => ({
                        exam: { 
                         _id: exam.exam._id,
                         snack: exam.exam.snack,
                         percentage: exam.exam.percentage,
                         appointment: exam.exam.appointment,
-                        day: exam.exam.place_and_time_id.day_name,
-                        location: exam.exam.place_and_time_id.parent.location_name,
-                        city: exam.exam.place_and_time_id.parent.parent.city_name,
-                        country: exam.exam.place_and_time_id.parent.parent.parent.country_name}
+                        day: exam.exam.day.day_name,
+                        location: exam.exam.location.location_name,
+                        city: exam.exam.location.parent.city_name,
+                        country: exam.exam.location.parent.parent.country_name}
                     }))
                     const parsed_user = {
                         _id: user._id,
@@ -69,10 +86,10 @@ module.exports.getHome = async (req, res) => {
                         percentage: user.percentage,
                         exams: result
                     }
-                    // user.exams = result
                     
-                    let endTime = Date.now();
-                    console.log(endTime-startTime);
+                    
+                    // let endTime = Date.now();
+                    // console.log(endTime-startTime);
                     res.json({user: parsed_user, token_exam_info, other_exam: other_exam});
 
 

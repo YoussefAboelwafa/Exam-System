@@ -122,7 +122,7 @@ CountrySchema.statics.insertTime = async function(elem){
         console.log(day_id);
         const saved_location_id = await Location.findOneAndUpdate (
             { _id: location_id },
-            { $push: { time: day_id._id } },
+            { $addToSet: { time: day_id._id } },
             { new: true, setDefaultsOnInsert: true}
         );
         if (!saved_location_id) throw Error("City not found");
@@ -157,7 +157,7 @@ DaysSchema.statics.remove_day = async (elem) => {
   try{
     ///////////////////ahhhhhhhhh don't forget about the case if someone had an exam in that place before
     const {day_id} = elem;
-    let deletedDay = await Day.findOneAndRemove({_id:day_id, reserved_number: 0}, {}, {new: true});
+    let deletedDay = await Day.findOneAndRemove({_id:day_id, reserved_number: 0}, {}, {new: true, upsert: false});
     
     if (deletedDay) {
       console.log('Exam deleted successfully:', deletedDay);
