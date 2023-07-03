@@ -14,7 +14,15 @@ export class AdminExamsComponent implements OnInit {
 
   constructor(private service:ServicService) { 
 
+    this.service.exam_bar_init_admin().subscribe
+    (
+      (x)=> {
 
+        this.service.non_token=x;
+
+      }
+        
+      )
 
     this.non_token_exam=this.service.non_token;
   }
