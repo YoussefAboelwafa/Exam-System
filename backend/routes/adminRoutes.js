@@ -29,4 +29,6 @@ router.get('/get_users_with_day', adminControllers.get_users_with_day)
 
 router.post('/delete_day', adminControllers.delete_day)
 
+router.post('/set_percentage', adminControllers.set_percentage)
+
 module.exports = router;
