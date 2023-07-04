@@ -148,11 +148,12 @@ module.exports.get_users_with_day = async (req, res) => {
         // const location 
         const day_id = req.body.day_id;
         let day = await TimeAndSpace.Day.findOne({_id: day_id})
-        .select('reserved_users').populate({
+        .select('reserved_users location').populate({
             path:'reserved_users',
             select: 'first_name last_name exams',
 
         })
+        day.reserved_users = [...new Set(day.reserved_users)]
 
         // console.log(day);
 
@@ -175,12 +176,15 @@ module.exports.get_users_with_day = async (req, res) => {
         })
 
 
+
         // console.log(day);
 
         let result = []
         day.reserved_users.forEach((user) => {
+            
             let exams_on_day = user.exams.filter((exam) => exam.exam.day.toString() === day_id);
-            exams_on_day.forEach((exam) => {
+            let exams_in_location = exams_on_day.filter((exam) =>exam.exam.location._id.toString() === day.location.toString())
+            exams_in_location.forEach((exam) => {
                 // exam: { 
                 //  _id: exam.exam._id,
                 //  snack: exam.exam.snack,
@@ -189,7 +193,6 @@ module.exports.get_users_with_day = async (req, res) => {
                 //  location: exam.exam.location.location_name,
                 //  city: exam.exam.location.parent.city_name,
                 //  country: exam.exam.location.parent.parent.country_name}
-                console.log(exam.exam.title);
                 result.push({
                     first_name: user.first_name,
                     last_name: user.last_name,
