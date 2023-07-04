@@ -4,7 +4,7 @@ const authRoutes = require('./routes/authRoutes');
 const examRoutes = require('./routes/examRoutes');
 const homeRoutes = require('./routes/homeRoutes');
 const adminRoutes = require('./routes/adminRoutes');
-const {requireAuth} = require('./middleware/authMiddleware')
+const {checkUser, checkAdmin} = require('./middleware/authMiddleware')
 const cors = require('cors');
 const User = require('./models/User')
 const jwt = require('jsonwebtoken');
@@ -53,9 +53,9 @@ app.get('/is_signedin', (req, res) => {
 });
 
 app.use(authRoutes);
-app.use('/home',  homeRoutes); ////add requiredAuth after finishing testing
-app.use('/exam',  examRoutes);
-app.use('/admin', adminRoutes)
+app.use('/home', checkUser, homeRoutes); ////add requiredAuth after finishing testing
+app.use('/exam', checkUser, examRoutes);
+app.use('/admin', checkAdmin, adminRoutes)
 
 
 

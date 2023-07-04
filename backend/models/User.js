@@ -21,7 +21,7 @@ const generateRandomCode = ()=> {
 
 
 const userSchema = new mongoose.Schema({
-    // _id: {type: Number, index: true, unique: true, index: true}, //use later for generating the 8 chars code
+    // _id: {type: String, index: true, unique: true, default: generateRandomCode}, //use later for generating the 8 chars code
     /*
         but don't forget to add a handler to handle duplicate ids
     */
@@ -86,8 +86,6 @@ userSchema.statics.login = async function(email, password){
 
 
 userSchema.statics.bookExam = async function(exam, userId){
-    const session = await this.startSession();
-    session.startTransaction();
     try{
         const {location_id, day_id, exam_id, snack, appointment} = exam
 
@@ -95,43 +93,39 @@ userSchema.statics.bookExam = async function(exam, userId){
         
 
         const [location, day, user] = await Promise.all([
-            Location.findOne({ _id: location_id }).session(session),
-            Day.findOne({ _id: day_id }).session(session),
+            Location.findOne({ _id: location_id }),
+            Day.findOne({ _id: day_id }),
             User.findById({_id: userId})
           ]);
 
         
-        if(!user || day.reserved_number >= location.max_number){
-            throw "This day is already full"
+        if(!user || !day || !location){
+            throw "a problem occured"
         }
-        await Promise.all([
-            Day.updateOne(
-              { _id: day._id },
-              {$inc: { reserved_number: 1 },
-                $push: { reserved_users: userId }},
-              { session }
-            ),
-            User.updateOne(
-              { _id: userId },
-              {$push: {exams: { exam:{
-                    _id: exam_id,
-                    appointment:appointment,
-                    snack:snack,
-                    percentage: -1,
-                    location: location_id,
-                    day: day_id}
-                  }}
-                },
-              { session }
-            )
-          ]);
-        await session.commitTransaction();
-        session.endSession();
+
+        const updated_day = await Day.findOneAndUpdate({_id: day_id, 
+            $where: ()=>{return this.reserved_number < location.max_number}}
+        ,{$inc: { reserved_number: 1 },
+        $push: { reserved_users: userId }}
+        ,{new: true});
+        if(!updated_day){
+            throw "day doesn't exist or already full"
+        }
+
+        await User.updateOne({ _id: userId },
+            {$push: {exams: { exam:{
+                _id: exam_id,
+                appointment:appointment,
+                snack:snack,
+                percentage: -1,
+                location: location_id,
+                day: day_id}
+                }}
+            }
+        )
+
         return true;
     }catch(err){
-        await session.abortTransaction();
-        session.endSession();
-
         console.log(err);
         return false;
     }

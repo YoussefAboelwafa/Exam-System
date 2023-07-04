@@ -152,7 +152,6 @@ module.exports.get_places = async (req, res) => {
                 
             }
         });
-        console.log(places);
         res.json(places);
     }catch(err){
         console.log(err);

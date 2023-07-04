@@ -53,8 +53,8 @@ function errorHandler(err) {
 
 ///ivsXMmb3UFV5AtA0T3vh3l99CBqH5gfy
 const maxAge = 3 * 24 * 60 * 60;
-const createToken = (id) => {
-    return jwt.sign({ _id:id, admin:false}, 'example secret' , { 
+const createToken = async (id) => {
+    return jwt.sign({ _id:id, admin:!(await Admin.isAdmin(id) === null)}, 'example secret' , { 
         expiresIn : maxAge
     })
 }
@@ -124,12 +124,13 @@ module.exports.login_post = async (req, res) => {
     console.log(req.body);
     try {
         const user = await User.login(email, password);
-        const token = createToken(user._id);
+        console.log(user);
+        const token = await createToken(user._id);
         res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000, sameSite: 'Lax'})
+        console.log("herrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
         res.status(200).json({success: (await Admin.isAdmin(user._id) === null)?1:2});
     } catch (err) {
-        const errors = errorHandler(err)
-        console.log(errors);
+        console.log(err);
         res.status(200).json({success: 0})
     }
 }
