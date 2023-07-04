@@ -148,6 +148,7 @@ reset_order_exam(){
  this.selectedday='Select a day';
  this.selectedappointment="Select an Appointmen"
  this.avilable_time="";
+ this.snacks = []
  }
 
   clear_flag_book(){
@@ -186,7 +187,7 @@ reset_order_exam(){
     this.clear_flag_book();
 
     //send notification and reset order exam 
-
+    this.router.navigate(['home'])
   }
 
   take_exam(name_exam:any,id_exam:any){
@@ -196,6 +197,7 @@ reset_order_exam(){
     $('#not_token_exam').modal('hide');
     $('#token_exam').modal('hide');
     this.flag_book=true;
+    this.reset_order_exam()
   }
 
   close_book(){

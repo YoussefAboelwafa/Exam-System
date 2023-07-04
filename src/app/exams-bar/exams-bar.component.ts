@@ -3,6 +3,7 @@ import { ServicService } from '../services/servic.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { address } from '../objects/loction_address';
 import { calendar } from '../objects/calender';
+import { Router } from '@angular/router';
 declare const $: any;
 
 @Component({
@@ -71,7 +72,7 @@ export class ExamsBarComponent implements OnInit {
 
   avilable_time:any;
 
-constructor(private service:ServicService) {
+constructor(private service:ServicService, private router: Router) {
     this.upcoming_exam=this.service.upcoming_ex;
     this.token_exam=this.service.token_ex;
     this.non_token_exam=this.service.non_token;
@@ -133,6 +134,7 @@ console.log(combinations);
  this.selectedday='Select a day';
  this.selectedappointment="Select an Appointmen"
  this.avilable_time="";
+ this.snacks = [];
  }
 
   clear_flag_book(){
@@ -171,7 +173,7 @@ console.log(combinations);
     this.clear_flag_book();
 
     //send notification and reset order exam 
-
+      this.router.navigate(['home'])
   }
 
   take_exam(name_exam:any,id_exam:any){
@@ -181,6 +183,7 @@ console.log(combinations);
     $('#not_token_exam').modal('hide');
     $('#token_exam').modal('hide');
     this.flag_book=true;
+    this.reset_order_exam();
   }
 
   close_book(){
