@@ -71,7 +71,7 @@ module.exports.getHome = async (req, res) => {
                     const result = user.exams.map((exam) => ({
                        exam: { 
                         _id: exam.exam._id,
-                        snack: exam.exam.snack,
+                        snack: exam.exam.snack.split(","),
                         percentage: exam.exam.percentage,
                         appointment: exam.exam.appointment,
                         day: exam.exam.day.day_number + " " + exam.exam.day.month_name,

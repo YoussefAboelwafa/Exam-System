@@ -19,12 +19,12 @@ export class AdminExamsComponent implements OnInit {
       (x)=> {
 
         this.service.non_token=x;
-
+        this.non_token_exam=this.service.non_token;
       }
         
       )
 
-    this.non_token_exam=this.service.non_token;
+    // this.non_token_exam=this.service.non_token;
   }
 
   ngOnInit(): void {

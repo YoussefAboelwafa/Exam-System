@@ -40,7 +40,7 @@ app.get('/is_signedin', (req, res) => {
                 }else{
                     console.log(decodedToken);
                     let user = await User.findById(decodedToken.id);
-                    res.json({user: user, signed_in: true});
+                    res.json({signed_in: true});
                 }
             })
         }else{

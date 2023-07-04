@@ -40,7 +40,7 @@ const DaysSchema = new mongoose.Schema({
 })
 
 
-DaysSchema.index({day_number:1, month_number:1});
+DaysSchema.index({day_number:1, month_number:1, location: 1, });
 
 const LocationSchema = new mongoose.Schema({
     location_name: {type: String, required: true, index: 'hashed'},
@@ -122,7 +122,7 @@ CountrySchema.statics.insertTime = async function(elem){
         const appointment=elem.time;
         // console.log(elem);
         const day_id = await Day.findOneAndUpdate (
-            {day_number:day_number, month_number:month_number},
+            {day_number:day_number, month_number:month_number, location:location_id},
             { appointment: appointment,
               month_name: month_name,
               day_name: day_name,
