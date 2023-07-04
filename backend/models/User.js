@@ -113,7 +113,7 @@ userSchema.statics.bookExam = async function(exam, userId){
         }
 
         //improve to only one query using arrayfilters
-        if(user.exams.map((exam) => exam.exam._id.toString()).contains(exam_id))
+        if(user.exams.map((exam) => exam.exam._id.toString()).includes(exam_id))
         {
             await User.updateOne(
                 { _id: userId, 'exams.exam._id': exam_id },
