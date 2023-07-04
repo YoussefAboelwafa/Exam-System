@@ -3,7 +3,7 @@ const Exam = require('../models/Exam')
 const casual = require('casual');
 const jwt = require('jsonwebtoken');
 const { populate } = require('../models/Admin');
-const {Country} = require('../models/TimeAndSpace')
+const TimeAndSpace = require('../models/TimeAndSpace')
 
 const payment = (req, res) => {
     console.log('payment succeeded');
@@ -142,7 +142,7 @@ module.exports.populate_exams = async (req, res) =>{
 
 module.exports.get_places = async (req, res) => {
     try{
-        const places = await Country.find({deleted: false}).select('country_name cities').populate({
+        const places = await TimeAndSpace.Country.find({deleted: false}).select('country_name cities').populate({
             path: 'cities',
             select: 'city_name locations',
             populate:{
@@ -158,6 +158,65 @@ module.exports.get_places = async (req, res) => {
     }
 }
 
+
+
+
+module.exports.get_all_days = async (req, res) => {
+    /*
+    day_number:1,
+    day_name:"saturday",
+    month_name:"jan",
+    month_number:"march",
+    country:"egypt", //
+    city:"alex", //
+    location:"smouha", //
+    _id: "1", /// 
+    time:"5 pm", //
+    moderator:"", //
+    student:0, //
+    capacity:25, ///
+    */
+
+
+    try{
+        const all_days = await TimeAndSpace.Day.find().populate({
+            path:'location',
+            select: 'location_name parent max_number',
+            populate:{
+                path: 'parent',
+                select: 'city_name parent',
+                populate: {
+                    path: 'parent',
+                    select: 'country_name',
+                }
+            }
+        });
+        const result = all_days.map((day) => ({
+            _id: day._id,
+            time: day.appointment,
+            day: day.day_name,
+            location: day.location.location_name,
+            city: day.location.parent.city_name,
+            country: day.location.parent.parent.country_name,
+            month_name: day.month_name,
+            month_number: day.month_number,
+            day_name: day.day_name,
+            day_number: day.day_number
+        }
+         ))
+        //  const parsed_user = {
+        //      _id: user._id,
+        //      first_name: user.first_name,
+        //      last_name: user.last_name,
+        //      percentage: user.percentage,
+        //      exams: result
+        //  }
+        res.json(result)
+    }catch(err){
+        console.log(err);
+        res.json(err);
+    }
+}
 
 
 

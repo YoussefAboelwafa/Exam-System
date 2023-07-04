@@ -72,7 +72,7 @@ this.all_locations.forEach((country: any) => {
 });
 
 
-this.service.get_calender().subscribe(
+this.service.get_calender_admin().subscribe(
   x=>{
     this.calendar=x;
 })
@@ -196,7 +196,7 @@ get_all_place(){
    console.log(x._id);
    this.service.remove_day(x._id).subscribe(
     x =>{
-      this.service.get_calender().subscribe(
+      this.service.get_calender_admin().subscribe(
         x=>{
           this.calendar=x;
       })   })
@@ -270,7 +270,7 @@ get_all_place(){
     this.service.add_day(x).subscribe(y =>{
 
       this.calendar.push(y);
-      this.service.get_calender().subscribe(
+      this.service.get_calender_admin().subscribe(
         x=>{
           this.calendar=x;
       })    })

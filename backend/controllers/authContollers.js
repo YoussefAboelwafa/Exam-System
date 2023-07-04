@@ -124,11 +124,17 @@ module.exports.login_post = async (req, res) => {
     console.log(req.body);
     try {
         const user = await User.login(email, password);
+        if(!user){
+            throw "user not found"
+        }
         console.log(user);
         const token = await createToken(user._id);
+        if(!token){
+            throw "Failed to create a token"
+        }
         res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000, sameSite: 'Lax'})
         console.log("herrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-        res.status(200).json({success: (await Admin.isAdmin(user._id) === null)?1:2});
+        res.status(200).json({user:user, success: (await Admin.isAdmin(user._id) === null)?1:2});
     } catch (err) {
         console.log(err);
         res.status(200).json({success: 0})

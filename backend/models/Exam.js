@@ -14,6 +14,10 @@ const examSchema = new mongoose.Schema({
 
 });
 
+
+
+///doesn't check if an exam with the same title exists
+///because still don't know if i have to
 examSchema.statics.insertExam = async (newExam) => {
     try {
         const {title, about, info} = newExam    
