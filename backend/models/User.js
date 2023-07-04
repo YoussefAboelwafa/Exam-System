@@ -112,17 +112,32 @@ userSchema.statics.bookExam = async function(exam, userId){
             throw "day doesn't exist or already full"
         }
 
-        await User.updateOne({ _id: userId },
-            {$push: {exams: { exam:{
-                _id: exam_id,
-                appointment:appointment,
-                snack:snack,
-                percentage: -1,
-                location: location_id,
-                day: day_id}
-                }}
-            }
-        )
+        //improve to only one query using arrayfilters
+        if(user.exams.map((exam) => exam.exam._id.toString()).contains(exam_id))
+        {
+            await User.updateOne(
+                { _id: userId, 'exams.exam._id': exam_id },
+                {$set: { 
+                    'exams.$.exam.percentage': -1,
+                    'exams.$.exam.appointment': appointment,
+                    'exams.$.exam.snack': snack,
+                    'exams.$.exam.location': location_id,
+                    'exams.$.exam.day': day_id,
+                 }}
+            )
+        }else{
+            await User.updateOne({ _id: userId },
+                {$push: {exams: { exam:{
+                    _id: exam_id,
+                    appointment:appointment,
+                    snack:snack,
+                    percentage: -1,
+                    location: location_id,
+                    day: day_id}
+                    }}
+                }
+            )
+        }
 
         return true;
     }catch(err){
