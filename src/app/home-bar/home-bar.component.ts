@@ -187,7 +187,7 @@ reset_order_exam(){
     this.clear_flag_book();
 
     //send notification and reset order exam 
-    this.router.navigate(['home'])
+    this.router.navigate(['home/home_bar'])
   }
 
   take_exam(name_exam:any,id_exam:any){

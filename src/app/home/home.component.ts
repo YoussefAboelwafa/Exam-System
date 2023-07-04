@@ -44,6 +44,8 @@ flag_type=true;
   constructor(private service:ServicService,private router: Router) { 
 
    this.refresh();
+    console.log("helllo world from refresh");
+  
 
     // this.current_user={
     //   first_name:this.service.user.get_first_name(),
@@ -108,7 +110,6 @@ flag_type=true;
 
   refresh(){
     this.flag_type=true;
-
     this.service.home_bar_init().subscribe
     (
       (x)=> {
@@ -178,7 +179,9 @@ flag_type=true;
        error:(error: HttpErrorResponse) =>alert(error.message);
        }
 
-    )  }
+    )  
+    this.router.navigate(['home/home_bar'])
+  }
   
 
 }
