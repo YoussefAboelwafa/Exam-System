@@ -96,7 +96,7 @@ module.exports.signup_post = async (req, res) =>{
         if(isUnique){
             const code = generateOTP();
             console.log(code);
-            console.log('adsfasdfasdfasdfasfd');
+            console.log('code section');
             const otp = await OTP.insert({phone_namber: phone_namber, code: code});
 
             // sendSMS(phone_namber, code);   /////remove comment later
@@ -182,7 +182,7 @@ module.exports.send_again = async (req, res) =>{
         console.log(req.body);
         // console.log(phone);
         const code = generateOTP();
-        // console.log(code);
+         console.log(code);
         const otp = await OTP.insert({phone_namber: phone_namber, code: code});
 
         // sendSMS(phone_namber, code);   /////remove comment later

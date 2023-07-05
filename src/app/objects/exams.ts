@@ -11,6 +11,7 @@ export class exams{
     percentage:any;
     about:any;
     info:any;
+    turn_on_off=1;
 
 
 }

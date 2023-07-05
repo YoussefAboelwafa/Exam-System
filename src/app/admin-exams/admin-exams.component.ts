@@ -33,6 +33,7 @@ export class AdminExamsComponent implements OnInit {
   index_remove:any;
   edit_ex:any=new exams;
   edit_index:any;
+  turn_on_off:any;//to open and close exam
   learn_dataof_nontoken:any={
     title:"python programming",
       about:" python is a powerful and flexible language that is well-suited for a wide range of programming tasks. However, it can be more difficult to learn and use than some other languages due to its complexity and the need to manage memory manually in some cases.",
@@ -42,7 +43,13 @@ export class AdminExamsComponent implements OnInit {
     information:any[]=[];//numberof info used in ngfor
     title_add:any;
     about_add:any;
-  non_token_exam:any[]=[];
+    non_token_exam:any[]=[
+      {title:"python programming",
+    about:" python is a powerful and flexible language that is well-suited for a wide range of programming tasks. However, it can be more difficult to learn and use than some other languages due to its complexity and the need to manage memory manually in some cases.",
+    info:["STL","OOP with python"],
+    _id:"",
+    turn_on_off:1,
+  }];
 
   close_popup(){
     $('#confirmation').modal('hide');
@@ -91,6 +98,7 @@ export class AdminExamsComponent implements OnInit {
 
   Edit_exam(value:any,index:any){
     this.edit_ex=value;
+    //if index ==-1 thenn it indicate that i dont know the index of exam
     if(index==-1){
       for(var i=0;i<this.non_token_exam.length;i++){
         if(this.non_token_exam[i]==value){
@@ -106,6 +114,8 @@ export class AdminExamsComponent implements OnInit {
  confirm_edit(ed_title:any,ed_about:any){
     this.non_token_exam[this.edit_index].title=ed_title;
     this.non_token_exam[this.edit_index].about=ed_about;
+    this.non_token_exam[this.edit_index].info=this.information;
+
     this.close_popup();
 
     //service to edit this exam
@@ -150,6 +160,25 @@ export class AdminExamsComponent implements OnInit {
 
 set_info(value:any,index:number){
   this.information[index]=value;
+}
+
+
+turn_off_on_exam(exam:any){
+  if(exam.turn_on_off==0){
+    exam.turn_on_off=1;
+  }
+  else{
+    exam.turn_on_off=0
+  }
+
+  this.service.turn_on_off(exam._id,exam.turn_on_off).subscribe(
+      (x)=> {
+       console.log(x);        
+         error:(error: HttpErrorResponse) =>alert(error.message);
+       }
+  
+    )
+  
 }
 
 

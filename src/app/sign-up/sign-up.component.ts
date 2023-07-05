@@ -18,20 +18,54 @@ export class SignUpComponent implements OnInit {
   flag_choose_country=false;
 
 
-  cities = [
-    'Cairo',
-    'New York',
-    'Toronto',
-    'Sydney',
-    'Auckland'
-  ];
+  // cities = [
+  //   'Cairo',
+  //   'New York',
+  //   'Toronto',
+  //   'Sydney',
+  //   'Auckland'
+  // ];
   countries = [
+    'United States',
+    'China',
+    'Japan',
+    'Germany',
+    'United Kingdom',
+    'India',
+    'France',
+    'Brazil',
+    'Italy',
+    'Canada',
+    'South Korea',
+    'Russia',
+    'Australia',
+    'Spain',
+    'Mexico',
+    'Indonesia',
+    'Algeria',
+    'Bahrain',
+    'Comoros',
+    'Djibouti',
     'Egypt',
-    'usa',
-    'canada',
-    'australia',
-    'new zealan'
-];
+    'Iraq',
+    'Jordan',
+    'Kuwait',
+    'Lebanon',
+    'Libya',
+    'Mauritania',
+    'Morocco',
+    'Oman',
+    'Palestine',
+    'Qatar',
+    'Saudi Arabia',
+    'Somalia',
+    'Sudan',
+    'Syria',
+    'Tunisia',
+    'United Arab Emirates',
+    'Yemen'
+    ];
+
   constructor(user:users,private service:ServicService,private router: Router,private pop_service:ModalPopServiceService,private renderer: Renderer2) {
     this.signup_user=user;
    }

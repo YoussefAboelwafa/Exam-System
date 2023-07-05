@@ -35,9 +35,9 @@ export class HomeComponent implements OnInit {
  }  
 
  current_user = {
-  first_name: "wait",
-  last_name: "wait",
-  photo:"../../assets/images/img3.jpg",  
+  first_name: "none",
+  last_name: "none",
+  photo:"../../assets/images/img5.svg",  
   _id: ""
 };
 flag_type=true;
@@ -90,7 +90,7 @@ flag_type=true;
   
     // Set up an event listener for when the file is loaded
     reader.onload = (event: any) => {
-      this.service.user.set_photo(event.target.result);
+      this.service.user.photo=event.target.result;
   
       // Reset the input field
       event.target.value = '';
@@ -113,7 +113,6 @@ flag_type=true;
     this.service.home_bar_init().subscribe
     (
       (x)=> {
-        this.flag_type=false;
         this.service.user=x.user;
         this.current_user.first_name=x.user.first_name;
         this.current_user.last_name=x.user.last_name;
@@ -159,7 +158,6 @@ flag_type=true;
          this.ids_exams=temp
          this.service.upcoming_ex=y;
          this.upcoming_exam=y; 
-         console.log(this.upcoming_exam);
          this.service.token_ex=z;
          this.token_exam=z;
 

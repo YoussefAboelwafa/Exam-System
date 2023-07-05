@@ -1,16 +1,15 @@
 export class users{
 
-    private first_name:any;
-    private last_name:any;
-    private country:any;
-    private city:any;
-    private email:any;
-    private phone_namber:any;
-    private password:any;
-    private _id:any;
-    private photo:any;
-    
-    exams:any; //exam that contain the array of exam that user take it and the degree of each exam
+      first_name:any;
+      last_name:any;
+      country:any;
+      city:any;
+      email:any;
+      phone_namber:any;
+      password:any;
+      _id:any;
+      photo:any;
+     exams:any; //exam that contain the array of exam that user take it and the degree of each exam
 
         set_first_name(value:any){
         this.first_name = value;

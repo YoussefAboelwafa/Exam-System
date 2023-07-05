@@ -44,7 +44,7 @@
       </tr>
 
       <tr>
-        <td>
+        <td colspan="2">
           <label for="country">Country</label>
           <select required #country id="country" name="country" (change)="select_country(country.value)">
             <option>Select</option>
@@ -52,13 +52,13 @@
 
           </select>
         </td>
-        <td>
+        <!-- <td>
           <label for="city">City</label>
           <select required #city id="city" name="city" (change)="select_city(city.value)">
             <option >Select</option>
              <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
           </select>
-        </td>
+        </td> -->
       </tr>
       <tr>
         <td colspan="2">
@@ -82,7 +82,7 @@
       <tr>
         <td colspan="2">
           <label for="phone">Phone number</label>
-          <input type="tel" id="phone" name="phone" placeholder="Phone number"
+          <input type="tel" id="phone" name="phone" placeholder="Phone number with country code"
           [(ngModel)]="signup_user.phone_namber"
           #phone="ngModel"
           required
@@ -158,17 +158,17 @@
           <button class="field" [disabled]="email.errors?.['required']||email.errors?.['email']
           ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
           ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
-          ||phone.errors?.['required']||flag_choose_city==false||flag_choose_country==false"
+          ||phone.errors?.['required']||flag_choose_country==false"
           *ngIf="email.errors?.['required']||email.errors?.['email']
           ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
           ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
-          ||phone.errors?.['required']||flag_choose_city==false||flag_choose_country==false" style="background-color: gray;" id="btn" type="submit">Sign in</button>
+          ||phone.errors?.['required']||flag_choose_country==false" style="background-color: gray;" id="btn" type="submit">Sign in</button>
          
           <!-- active btn -->
           <button class="field" [hidden]="email.errors?.['required']||email.errors?.['email']
           ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
           ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
-          ||phone.errors?.['required']||flag_choose_city==false||flag_choose_country==false" id="btn" type="submit">Sign in</button>
+          ||phone.errors?.['required']||flag_choose_country==false" id="btn" type="submit">Sign in</button>
              <p id="signup">
             Already a member?
             <a routerLink="/login">Sign in now</a>

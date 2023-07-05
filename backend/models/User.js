@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     last_name: {type: String, required: true},
     country: {type: String, required: true},
     photo: {type: String, default: null}, ////leave for later
-    city: {type: String, required: true},
+    city: {type: String, required: false}, ////leave for later
     phone_namber: {type: String, required: true, unique: true, index: true},
     email: {
         type: String,
@@ -75,13 +75,17 @@ userSchema.post('save', function(doc, next){
 
 
 userSchema.statics.login = async function(email, password){
-    const user = await this.findOne({email});
-    if(!user) throw Error("Email incorrect");
-    let auth = await bcrypt.compare(password, user.password);
-    if(auth){
-        return user;
+    try{
+        const user = await this.findOne({email});
+        if(!user) throw Error("Email incorrect");
+        let auth = await bcrypt.compare(password, user.password);
+        if(auth){
+            return user;
+        }
+        throw Error("Password incorrect");
+    }catch(err){
+        console.log(err);
     }
-    throw Error("Password incorrect");
 }
 
 

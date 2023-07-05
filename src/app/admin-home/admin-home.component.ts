@@ -11,23 +11,23 @@ export class AdminHomeComponent implements OnInit {
   current_user = {
     first_name: "Ahmed",
     last_name: "Ali",
-    photo:"../../assets/images/img3.jpg",  
+    photo:"../../assets/images/img5.svg",  
     _id: "1256893"
   };
   flag_type=false;
   constructor(private service:ServicService) {
 
 
-    this.service.home_bar_init().subscribe
-    (
-      (x)=> {
-        this.service.user=x.user;
-        this.current_user.first_name=x.user.first_name;
-        this.current_user.last_name=x.user.last_name;
-        this.current_user._id=x.user._id;
-      }
+    // this.service.home_bar_init().subscribe
+    // (
+    //   (x)=> {
+    //     this.service.user=x.user;
+    //     this.current_user.first_name=x.user.first_name;
+    //     this.current_user.last_name=x.user.last_name;
+    //     this.current_user._id=x.user._id;
+    //   }
         
-      )
+    //   )
 
       
 
@@ -56,8 +56,9 @@ export class AdminHomeComponent implements OnInit {
   
     // Set up an event listener for when the file is loaded
     reader.onload = (event: any) => {
-      this.service.user.set_photo(event.target.result);
-  
+      // this.service.user.photo=event.target.result;
+      // console.log(this.service.user.photo)
+      this.current_user.photo=event.target.result
       // Reset the input field
       event.target.value = '';
     };

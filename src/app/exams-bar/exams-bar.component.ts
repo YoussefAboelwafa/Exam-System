@@ -69,14 +69,12 @@ export class ExamsBarComponent implements OnInit {
   index_day:any;
   day_id:any="";
   book_id_exam:any="";
-
   avilable_time:any;
 
 constructor(private service:ServicService, private router: Router) {
     this.upcoming_exam=this.service.upcoming_ex;
     this.token_exam=this.service.token_ex;
     this.non_token_exam=this.service.non_token;
-
 
     this.service.get_places().subscribe(
       (x)=> {
@@ -99,7 +97,7 @@ this.service.get_calender().subscribe(
     this.calendar=x;
 
 })
-
+this.address=[];
 for(let i=0; i<combinations.length; i++) {
   let x=new address;
   const dateArr = combinations[i].split(":");
