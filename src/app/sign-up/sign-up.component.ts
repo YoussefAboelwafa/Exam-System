@@ -66,7 +66,7 @@ export class SignUpComponent implements OnInit {
     'Yemen'
     ];
 
-  constructor(user:users,private service:ServicService,private router: Router,private pop_service:ModalPopServiceService,private renderer: Renderer2) {
+  constructor(user:users,private service:ServicService,private router: Router,private pop_service:ModalPopServiceService) {
     this.signup_user=user;
    }
 

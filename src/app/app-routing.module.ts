@@ -18,10 +18,13 @@ const routes: Routes = [
   {
     path: 'signup',
     component:SignUpComponent ,
+
   },
   {
-    path: 'login',
+    path: '', 
+    pathMatch: 'full',
     component: LoginComponent,
+
   },
   {
     path: 'verify',
