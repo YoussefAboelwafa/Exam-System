@@ -10,8 +10,11 @@ export class AppComponent {
   title = 'Exam-System';
 
   constructor(private router: Router) {
-
-    this.router.navigate(['login']);
-
+    const previousUrl= localStorage.getItem('previousUrl');
+    if (previousUrl) {
+      router.navigateByUrl(previousUrl);
+      localStorage.removeItem('previousUrl');
+    }
   }
+ 
 }
