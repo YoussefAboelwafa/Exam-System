@@ -116,7 +116,7 @@ module.exports.getOtherExams = async (req, res) => {
                 title: exam.title,
                 info: exam.info,
                 about: exam.about,
-                turn_on_off: exam.turn_on_off
+                turn_on_off: (exam.turn_on_off)? 1 : 0
             }))
         res.json(parsed_exams);
     }catch(err){
