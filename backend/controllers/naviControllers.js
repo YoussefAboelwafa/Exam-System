@@ -45,7 +45,7 @@ module.exports.getHome = async (req, res) => {
 
                     const [token_exam_info, other_exam] = await Promise.all([
                         Exam.find({ _id: { $in: exam_ids } }).select('title about'),
-                        Exam.findOne({ _id: { $nin: exam_ids } }).select('title info about')
+                        Exam.findOne({ _id: { $nin: exam_ids }, deleted:false }).select('title info about status')
                       ]);
 
 
@@ -77,7 +77,8 @@ module.exports.getHome = async (req, res) => {
                         day: exam.exam.day.day_number + " " + exam.exam.day.month_name,
                         location: exam.exam.location.location_name,
                         city: exam.exam.location.parent.city_name,
-                        country: exam.exam.location.parent.parent.country_name}
+                        country: exam.exam.location.parent.parent.country_name},
+                        turn_on_off: exam.exam.status
 
                     }))
                     const parsed_user = {
@@ -90,7 +91,13 @@ module.exports.getHome = async (req, res) => {
                     
                     // let endTime = Date.now();
                     // console.log(endTime-startTime);
-                    res.json({user: parsed_user, token_exam_info, other_exam: other_exam});
+                    res.json({user: parsed_user, token_exam_info, other_exam: {
+                        _id: other_exam._id,
+                        title: other_exam.title,
+                        about: other_exam.about,
+                        info: other_exam.info,
+                        turn_on_off: other_exam.status
+                    }});
 
 
                 }
@@ -109,15 +116,16 @@ module.exports.getOtherExams = async (req, res) => {
     ///assume req holds only {ids:[user's exams]}
     // req should  also contain the ids of the taken and upcoming exams
     try{
-        const exams = await Exam.find({ _id: { $nin: req.body.ids } }).select('title info about status');
+        const exams = await Exam.find({ _id: { $nin: req.body.ids }, deleted: false}).select('title info about status');
 
         const parsed_exams = exams.map((exam) => ({
                 _id: exam._id,
                 title: exam.title,
                 info: exam.info,
                 about: exam.about,
-                turn_on_off: (exam.turn_on_off)? 1 : 0
+                turn_on_off: (exam.status)? 1 : 0
             }))
+        console.log(exams[0].status);
         res.json(parsed_exams);
     }catch(err){
         console.log(err);

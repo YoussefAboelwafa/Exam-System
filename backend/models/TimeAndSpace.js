@@ -174,16 +174,16 @@ DaysSchema.statics.remove_day = async (elem) => {
     ///////////////////ahhhhhhhhh don't forget about the case if someone had an exam in that place before
     const {day_id} = elem;
     let deletedDay = await Day.findOneAndRemove({_id:day_id, reserved_number: 0}, {}, {new: true, upsert: false});
+
+    if(!deletedDay)
+      throw "day not found or has someone booked in it"
     
-    if (deletedDay) {
-      console.log('Exam deleted successfully:', deletedDay);
-      return {success: true};
-    } else {
-      console.log('Exam not found');
-      return {success: false};
-    }
+    const parentCity = await Location.updateOne({_id:deletedDay.location}, {$pull: {time: deletedDay._id}});
+
+
+    
   } catch (error) {
-    console.error('Error deleting exam:', error);
+    console.error('Error deleting day:', error);
     throw error;
   }
 }

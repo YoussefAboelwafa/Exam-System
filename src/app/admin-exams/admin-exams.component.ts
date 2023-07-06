@@ -157,11 +157,13 @@ set_info(value:any,index:number){
 
 
 turn_off_on_exam(exam:any){
-  if(exam.turn_on_off==0){
-    exam.turn_on_off=1;
+  console.log(exam.turn_on_off === "0");
+  
+  if(exam.turn_on_off==="0"){
+    exam.turn_on_off="1";
   }
   else{
-    exam.turn_on_off=0
+    exam.turn_on_off="0"
   }
 
   this.service.turn_on_off(exam._id,exam.turn_on_off).subscribe(

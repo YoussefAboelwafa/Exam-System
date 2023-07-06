@@ -80,18 +80,20 @@ examSchema.statics.editExam = async (newExam) => {
 
   examSchema.statics.setStatus = async (data) => {
     try {
-      const exam_id = data;
+      const exam_id = data.exam_id;
       const new_status = data.turn
 
       ///assuming we stop any more bookings because we have enough
-      const result = await this.updateOne({_id: exam_id}
+      const result = await Exam.findOneAndUpdate({_id: exam_id}
         , {$set: {status: (new_status == 1)? true: false}}); 
         /// not sure if i need to parse the new_status first to an int
         ///that's why i am using only 2 equal signs 
 
-      if (!(result && result.modifiedCount > 0)) {
-        throw "Error occured while setting the exam's status exam_id: " + exam_id
-      }
+      // if (!(result && result.modifiedCount > 0)) {
+      //   throw "Error occured while setting the exam's status exam_id: " + exam_id
+      // }
+      console.log(new_status);
+      console.log(result);
     } catch (error) {
       console.log(error);
     }

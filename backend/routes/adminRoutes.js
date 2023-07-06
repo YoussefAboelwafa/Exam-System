@@ -31,6 +31,6 @@ router.post('/delete_day', adminControllers.delete_day)
 
 router.post('/set_percentage', adminControllers.set_percentage)
 
-router.post('/set_exam_status', adminControllers.set_exam_status)
+router.post('/turn_on_off', adminControllers.set_exam_status)
 
 module.exports = router;

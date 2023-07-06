@@ -18,16 +18,16 @@ export class AdminHomeComponent implements OnInit {
   constructor(private service:ServicService) {
 
 
-    // this.service.home_bar_init().subscribe
-    // (
-    //   (x)=> {
-    //     this.service.user=x.user;
-    //     this.current_user.first_name=x.user.first_name;
-    //     this.current_user.last_name=x.user.last_name;
-    //     this.current_user._id=x.user._id;
-    //   }
+    this.service.home_bar_init().subscribe
+    (
+      (x)=> {
+        this.service.user=x.user;
+        this.current_user.first_name=x.user.first_name;
+        this.current_user.last_name=x.user.last_name;
+        this.current_user._id=x.user._id;
+      }
         
-    //   )
+      )
 
       
 

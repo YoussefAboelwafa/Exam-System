@@ -95,8 +95,7 @@ module.exports.signup_post = async (req, res) =>{
         const isUnique = await checkUniqueness(email, phone_namber);
         if(isUnique){
             const code = generateOTP();
-            console.log(code);
-            console.log('code section');
+            console.log("code is: ", code);
             const otp = await OTP.insert({phone_namber: phone_namber, code: code});
 
             // sendSMS(phone_namber, code);   /////remove comment later
@@ -155,8 +154,6 @@ module.exports.verifyCode = async (req, res) => {
         const {user, code} = req.body;
         // console.log(req.body.code);
         ///verify otp
-        console.log(user);
-        console.log(code);
         const correct = await OTP.verifyOTP(user.phone_namber, code);
         if(correct){
             const new_user = await User.create(user);  ///////review later to check if waiting here is really necessary

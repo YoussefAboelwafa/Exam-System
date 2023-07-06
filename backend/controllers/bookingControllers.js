@@ -27,9 +27,7 @@ module.exports.book_exam = async (req, res) => {
                 }else{
                     console.log(decodedToken._id);
                     const viableRequest = await User.checkViability(req.body.exam, decodedToken._id);
-                    if(!viableRequest){
-                        throw "Not a viable request";
-                    }
+
                     const result = await User.bookExam(req.body.exam, decodedToken._id)
                     res.json({success: result});
                 }

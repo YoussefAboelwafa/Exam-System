@@ -14,11 +14,11 @@
     <div *ngFor="let non_token of non_token_exam; let i = index" class="card card-body upcoming">
         <div class="remove" >
           <button class="btn_remove" style="margin-right: 5px;"
-            *ngIf="non_token.turn_on_off==0"      
+            *ngIf="non_token.turn_on_off=='0'"      
            (click)="turn_off_on_exam(non_token)"><i style="color: red;" title="Open exam" class="fa-solid fa-circle-xmark"></i>
           </button>
           <button class="btn_remove"  style="margin-right: 5px;"   
-          *ngIf="non_token.turn_on_off==1"        
+          *ngIf="non_token.turn_on_off=='1'"        
            (click)="turn_off_on_exam(non_token)"><i style="color:#008081;"title="Close exam" class="fa-solid fa-circle-xmark"></i>
           </button> 
            
