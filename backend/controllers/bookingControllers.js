@@ -17,22 +17,25 @@ module.exports.book_exam = async (req, res) => {
         // ////check if the user didn't already book before
         // ///add payment and other stuff
         // /// will need to add a function to remove the exam from user
-        let startTime = Date.now();
         const token = req.cookies.jwt;
 
         if(token){
-            let startTime = Date.now();
             jwt.verify(token, 'example secret', async (err, decodedToken)=>{
                 if(err){
                     console.log(err.message);
-                    res.json({signed_in: false});
+                    throw "bad cookies"
                 }else{
                     console.log(decodedToken._id);
-                    res.json({success: await User.bookExam(req.body.exam, decodedToken._id)});
+                    const viableRequest = await User.checkViability(req.body.exam, decodedToken._id);
+                    if(!viableRequest){
+                        throw "Not a viable request";
+                    }
+                    const result = await User.bookExam(req.body.exam, decodedToken._id)
+                    res.json({success: result});
                 }
             })
         }else{
-            res.json({signed_in: false});
+            throw "bad cookies"
         }
     }catch(err){
         console.log(err);
