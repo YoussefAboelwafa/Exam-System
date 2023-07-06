@@ -3,7 +3,7 @@ const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
 const sequence = require('mongoose-sequence')(mongoose);
 const {Location, Day} = require('./TimeAndSpace')
-const Exam = require('./TimeAndSpace')
+const Exam = require('./Exam')
 
 const characterSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const idLength = 8;
@@ -75,44 +75,75 @@ userSchema.post('save', function(doc, next){
 
 
 userSchema.statics.login = async function(email, password){
-    try{
-        const user = await this.findOne({email});
-        if(!user) throw Error("Email incorrect");
-        let auth = await bcrypt.compare(password, user.password);
-        if(auth){
-            return user;
+    const user = await this.findOne({email});
+    if(!user) throw Error("Email incorrect");
+    let auth = await bcrypt.compare(password, user.password);
+    if(auth){
+        return user;
+    }
+    throw Error("Password incorrect");
+}
+
+
+
+userSchema.statics.checkViability = async (exam_data, userId) =>{
+    try {
+        ////not the best or most efficient way but good and safe for now
+        ////will have to improve in next version
+        const {day_id} = exam_data
+        const [day, user] = await Promise.all([
+            Day.findOne({ _id: day_id }),
+            User.findById({_id: userId}).populate('exams.exam.day')
+          ]);
+        
+        if(!day || !user){
+            throw "an error occurred"
         }
-        throw Error("Password incorrect");
-    }catch(err){
-        console.log(err);
+
+        if(user.exams.map((exam) => exam.exam.day.month_number + " " + exam.exam.day.day_number)
+            .includes(day.month_number + " " + day.day_number)){
+                throw "Can't book two exams in the same day"
+        }
+
+
+    } catch (error) {
+        
     }
 }
 
 
-userSchema.statics.bookExam = async function(exam, userId){
+userSchema.statics.bookExam = async function(exam_data, userId){
     try{
-        const {location_id, day_id, exam_id, snack, appointment} = exam
+        const {location_id, day_id, exam_id, snack, appointment} = exam_data
 
         ////change to $inc for atomicity on the db side
         
 
-        const [location, day, user] = await Promise.all([
+        const [location, day, user, exam] = await Promise.all([
             Location.findOne({ _id: location_id }),
             Day.findOne({ _id: day_id }),
-            User.findById({_id: userId})
+            User.findById({_id: userId}),
+            Exam.findOne({_id: exam_id, status: true, deleted: false})
           ]);
 
         
-        if(!user || !day || !location){
+        if(!user || !day || !location || !exam){
             throw "a problem occured"
         }
 
         const updated_day = await Day.findOneAndUpdate({_id: day_id, 
             $where: ()=>{return this.reserved_number < location.max_number}}
-        ,{$inc: { reserved_number: 1 },
-        $push: { reserved_users: userId }}
-        ,{new: true});
-        if(!updated_day){
+            ,{$inc: { reserved_number: 1 },
+            $push: { reserved_users: userId }}
+            ,{new: true});
+
+        
+        const updated_exam = await Exam.findOneAndUpdate({_id: exam_id, status:true, deleted:false}
+            ,{$inc: { reserved_number: 1 }}
+            ,{new: true})
+
+
+        if(!updated_day || !updated_exam){
             throw "day doesn't exist or already full"
         }
 
@@ -142,6 +173,9 @@ userSchema.statics.bookExam = async function(exam, userId){
                 }
             )
         }
+
+
+
 
         return true;
     }catch(err){

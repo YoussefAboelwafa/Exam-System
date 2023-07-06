@@ -133,7 +133,6 @@ module.exports.login_post = async (req, res) => {
             throw "Failed to create a token"
         }
         res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000, sameSite: 'Lax'})
-        console.log("herrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
         res.status(200).json({user:user, success: (await Admin.isAdmin(user._id) === null)?1:2});
     } catch (err) {
         console.log(err);
@@ -199,89 +198,5 @@ module.exports.send_again = async (req, res) =>{
 }
 
 
-module.exports.test = async (req, res) => {
-    res.send('working on it')
-    console.log('starting');
-    let accum = 0;
-    for (let i = 1; i <= 10000; i++) {
-        const otp = {
-          phone_namber: `+123456789${i}`,
-          code: `+12345ZXCZXCZXCZXCZXc6789${i}`
-        };
-        const startTime = Date.now();
-        await OTP.insert(otp);
-        const endTime = Date.now();
-        accum += endTime - startTime;
-        console.log(i);
-    }
-    console.log(accum/1000);
-    console.log('done');
-}
-
-// module.exports.test = async (req, res) => {
-//     let accum = 0
-//     for(let i=0;i<1000;i++){
-//         const phone = `+123456789${Math.floor(Math.random() * 10000) + 1}`;
-//         const startTime = Date.now();
-//         await OTP.findOne({phone: phone}, );
-//         const endTime = Date.now();
-//         accum += endTime-startTime;
-//         console.log(`at i=${i}`);
-//     }
-
-//     console.log(accum/1000);
-//     res.send('hello world')
-// }
 
 
-module.exports.populate_users = async (req, res) => {
-    // Generate random entries
-    try {
-        let numEntries = 100000;
-        console.log('starting');
-        res.send('hellow');
-
-        for (let i = 0; i < numEntries; i++) {
-            const entry = {
-                first_name: casual.first_name,
-                last_name: casual.last_name,
-                country: casual.country,
-                city: casual.city,
-                phone_namber: casual.phone,
-                email: casual.email.toLowerCase(),
-                password: casual.password,
-                exams: []
-            };
-            const numExams = casual.integer(0, 5);
-            for (let j = 0; j < numExams; j++) {
-                const exam = {
-                    _id: casual.uuid,
-                    country: casual.country,
-                    city: casual.city,
-                    location: casual.address,
-                    snack: casual.word,
-                    day: casual.date('YYYY-MM-DD'),
-                    appointment: casual.word,
-                    percentage: casual.integer(0, 100)
-                };
-                entry.exams.push({ exam });
-            }
-
-            try{await User.create(entry)}catch(err){console.log('army ohmo fe alzbala');}
-        }
-        
-        // Insert entries into the database
-
-        
-        console.log('finished');
-        
-        console.log(`Generated ${numEntries} random entries successfully!`);
-      } catch (err) {
-    
-        console.error('Error generating random entries:', err);
-      }
-    
-
-
-
-}
