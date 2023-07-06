@@ -192,7 +192,7 @@
         <h3>About of exam</h3>
         <textarea #ed_about [value]="edit_ex.about" class="input_edit" id="t_area"></textarea>
         <h3>number of Information</h3>
-        <input (blur)="set_number(number_info.value)" min="0"  #number_info type="number" [value]="" class="input_edit">
+        <input (blur)="set_number(number_info_ed.value)" min="0"  #number_info_ed type="number" [value]="" class="input_edit">
          <h3>Information of exam</h3>
         <div *ngFor="let info of information; let i = index">
           <input #inf (blur)="set_info(inf.value,i)" [value]="information[i]" type="text" class="input_edit">

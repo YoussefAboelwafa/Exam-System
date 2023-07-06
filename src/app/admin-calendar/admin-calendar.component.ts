@@ -310,6 +310,9 @@ get_all_place(){
      const selectedCountry = (event.target as HTMLSelectElement).value;
     // Call your function here with the selectedCountry value
     //flag==1 that meen filter
+    this.locations=[]
+    this.city=[]
+
     if(flag==1){
     if(this.temp_country_address!=null) {
     this.calendar=this.temp_country_address;
@@ -318,6 +321,7 @@ get_all_place(){
     if(selectedCountry != "Country" ){
       this.temp_country_address=this.calendar;
        this.calendar = this.calendar.filter(obj => obj.country === selectedCountry);
+       
 
     }
     else{

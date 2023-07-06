@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
 
 
              error:(error: HttpErrorResponse) =>{
-              console.log('hel submit login');
               alert(error.message)};
               }
            )

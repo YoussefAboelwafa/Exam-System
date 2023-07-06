@@ -351,7 +351,7 @@
       name="snack"
       (change)="ontimeselect($event)"      >
       <option>Select an Appointment</option>
-      <option >{{avilable_time}}</option>
+      <option *ngIf="avilable_time!=''" >{{avilable_time}}</option>
       </select>
       <button
         disabled

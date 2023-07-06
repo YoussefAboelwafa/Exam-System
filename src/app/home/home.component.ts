@@ -44,9 +44,7 @@ flag_type=true;
   constructor(private service:ServicService,private router: Router) { 
 
    this.refresh();
-    console.log("helllo world from refresh");
   
-
     // this.current_user={
     //   first_name:this.service.user.get_first_name(),
     //   last_name:this.service.user.get_last_name(),
@@ -153,15 +151,13 @@ flag_type=true;
               token++;
              }
          }
-         
+
          this.service.ids_ex=temp;
          this.ids_exams=temp
          this.service.upcoming_ex=y;
          this.upcoming_exam=y; 
          this.service.token_ex=z;
          this.token_exam=z;
-
-
     this.service.exam_bar_init().subscribe
     (
       (x)=> {
@@ -178,7 +174,7 @@ flag_type=true;
        }
 
     )  
-    this.router.navigate(['home/home_bar'])
+    // this.router.navigate(['home/home_bar'])
   }
   
 

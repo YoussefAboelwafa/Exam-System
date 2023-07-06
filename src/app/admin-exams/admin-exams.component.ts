@@ -43,20 +43,13 @@ export class AdminExamsComponent implements OnInit {
     information:any[]=[];//numberof info used in ngfor
     title_add:any;
     about_add:any;
-    non_token_exam:any[]=[
-      {title:"python programming",
-    about:" python is a powerful and flexible language that is well-suited for a wide range of programming tasks. However, it can be more difficult to learn and use than some other languages due to its complexity and the need to manage memory manually in some cases.",
-    info:["STL","OOP with python"],
-    _id:"",
-    turn_on_off:1,
-  }];
+    non_token_exam:any[]=[];
 
   close_popup(){
     $('#confirmation').modal('hide');
     $('#edit').modal('hide');
     $('#not_token_exam').modal('hide');
     $('#add_exam').modal('hide');
-
   }
   learn_non_token(value_send_by_btn_learn:any){
     this.learn_dataof_nontoken=value_send_by_btn_learn;

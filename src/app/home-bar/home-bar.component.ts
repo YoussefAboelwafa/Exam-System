@@ -56,16 +56,7 @@ export class HomeBarComponent implements OnInit {
   avilable_time:any;
 
   //after you order exam you should clear it
-  order_exam:any={
-    country:"country",
-    city:"city",
-    location:"location",
-    snack:"snack",
-    day:"Select a day",
-    appointment:"Select an Appointment",
-    _id:"", //id of exam
-    title:"",
-   }
+
 
 upcoming_exam:exams[]=[];
 token_exam:exams[]=[]
@@ -82,13 +73,19 @@ ngOnInit(): void {
   }
 
   constructor(private service:ServicService,private router:Router) {
+
+    this.refresh_all();
     this.upcoming_exam=this.service.upcoming_ex;
     this.token_exam=this.service.token_ex;
     
+    if(this.service.non_token!==undefined){
     this.non_token_exam=this.service.non_token[0];
+    }
 
 
+  }
 
+  refresh_all(){
 
     this.service.get_places().subscribe(
       (x)=> {
@@ -96,50 +93,106 @@ ngOnInit(): void {
         this.countrys= x.map((cont:any)=> cont.country_name);
       
         let combinations: string[] = [];
-
-this.all_locations.forEach((country: any) => {
-  country.cities.forEach((city: any) => {
-    city.locations.forEach((location: any) => {
-      combinations.push(`${country.country_name}:${city.city_name}:${location.location_name}:${location.max_number}:${location.snacks}:${location._id}`);
-    });
-  });
-});
-
-
-this.service.get_calender().subscribe(
-  x=>{
-    this.calendar=x;
-
-})
-
-for(let i=0; i<combinations.length; i++) {
-  let x=new address;
-  const dateArr = combinations[i].split(":");
-
-  x.country=dateArr[0];
-  x.city=dateArr[1];
-  x.location=dateArr[2];
-  x.capacity=dateArr[3];
-  x.snacks=dateArr[4];
-  x._id=dateArr[5]
-  this.address.push(x);
-}
-
-console.log(combinations);
-
-
-
+  
+        this.all_locations.forEach((country: any) => {
+          country.cities.forEach((city: any) => {
+            city.locations.forEach((location: any) => {
+               combinations.push(`${country.country_name}:${city.city_name}:${location.location_name}:${location.max_number}:${location.snacks}:${location._id}`);
+           });
+          });
+        });
+  
+  
+      this.service.get_calender().subscribe(
+        x=>{
+          this.calendar=x;
+        })
+        this.address=[];
+        for(let i=0; i<combinations.length; i++) {
+          let x=new address;
+          const dateArr = combinations[i].split(":");
+  
+            x.country=dateArr[0];
+             x.city=dateArr[1];
+            x.location=dateArr[2];
+            x.capacity=dateArr[3];
+            x.snacks=dateArr[4];
+            x._id=dateArr[5]
+            this.address.push(x);
+            }
+  
          error:(error: HttpErrorResponse) =>alert(error.message);
        }
   
     )
-
-
-  }
-
-
   
-
+  
+    this.service.home_bar_init().subscribe
+    (
+      (x)=> {
+        this.service.user=x.user;
+        this.service.user=x.user;
+        this.non_token_exam=x.other_exam;
+        let up=0,token=0, y:any[]=[] ,z:any[]=[],temp:any[]=[];
+  
+         for(var i=0; i<x.user.exams.length; i++){  
+            if(x.user.exams[i].exam.percentage==-1){
+              y.push(new exams)
+              y[up].country=x.user.exams[i].exam.country;
+              y[up].city=x.user.exams[i].exam.city;
+              y[up].location=x.user.exams[i].exam.location;
+              y[up].snack=x.user.exams[i].exam.snack;
+              y[up].percentage=x.user.exams[i].exam.percentage;
+              y[up].appointment=x.user.exams[i].exam.appointment;
+              y[up].day=x.user.exams[i].exam.day;
+              y[up]._id=x.user.exams[i].exam._id;
+              y[up].title=x.token_exam_info[i].title;
+              up++;  
+              temp.push(x.user.exams[i].exam._id)
+             }
+             else{
+              z.push(new exams);
+              z[token].country=x.user.exams[i].exam.country;
+              z[token].city=x.user.exams[i].exam.city;
+              z[token].location=x.user.exams[i].exam.location;
+              z[token].snack=x.user.exams[i].exam.snack;
+              z[token].percentage=x.user.exams[i].exam.percentage;
+              z[token].appointment=x.user.exams[i].exam.appointment;
+             z[token]._id=x.user.exams[i].exam._id;
+              temp.push(x.user.exams[i].exam._id)
+              z[token].title=x.token_exam_info[i].title;
+              z[token].about=x.token_exam_info[i].about;
+              z[token].info=x.token_exam_info[i].info;
+  
+              token++;
+             }
+         }
+         
+         this.service.ids_ex=temp;
+         this.ids_exams=temp
+         this.service.upcoming_ex=y;
+         this.upcoming_exam=y; 
+         this.service.token_ex=z;
+         this.token_exam=z;
+  
+  
+    this.service.exam_bar_init().subscribe
+    (
+      (x)=> {
+        this.service.non_token=x 
+   
+       }
+    )
+  
+         
+    
+  
+       error:(error: HttpErrorResponse) =>alert(error.message);
+       }
+  
+    ) 
+  
+  }
 reset_order_exam(){
  this.select_snacks="Snack";
  this.selectedlocation="location";
@@ -203,6 +256,7 @@ reset_order_exam(){
   close_book(){
     this.clear_flag_book();
     this.reset_order_exam();
+    this.refresh_all();
   }
 
   learn_non_token(value_send_by_btn_learn:any){
@@ -222,6 +276,8 @@ reset_order_exam(){
      this.selectedCountry = (event.target as HTMLSelectElement).value;
     // Call your function here with the selectedCountry value
     //flag==1 that meen filter
+    this.citys=[]
+    this.locations=[]
     if(this.temp_country_address!=null) {
     this.calendar=this.temp_country_address;
     this.temp_country_address = null;
@@ -232,7 +288,8 @@ reset_order_exam(){
 
     }
     else{
-      this.citys=[]
+   
+
       return
     }
   
@@ -246,6 +303,7 @@ reset_order_exam(){
   }
 
   oncitySelected(event: Event){
+    this.locations=[]
     this.selectedCity = (event.target as HTMLSelectElement).value;
     // Call your function here with the selectedCountry value
     if(this.temp_city_address!=null) {
@@ -258,7 +316,6 @@ reset_order_exam(){
        this.calendar = this.calendar.filter((obj: { city: any; }) => (obj.city === this.selectedCity) );
     }
     else{
-      this.locations=[]
       return
     }
   
@@ -268,7 +325,6 @@ reset_order_exam(){
         this.index_city=i;
       }
     }
-      console.log(this.index_city)
     this.locations= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c.location_name)
   }
 
@@ -291,7 +347,7 @@ reset_order_exam(){
         this.index_location=i;
       }
     }
-    this.snacks= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c.snacks);
+    this.snacks= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c.snacks)[this.index_location];
     this.id_location= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c._id)[this.index_location]
 }
 
@@ -311,7 +367,7 @@ ondayselect(event:Event){
   };
 
   if(this.selectedday=='Select a day'){
-    this.selectedappointment="";
+    this.selectedappointment="Select an Appointmen";
     this.avilable_time="";
   }
 }
