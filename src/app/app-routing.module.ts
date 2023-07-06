@@ -17,14 +17,12 @@ import { AdminLocationBarComponent } from './admin-location-bar/admin-location-b
 const routes: Routes = [
   {
     path: 'signup',
-    component:SignUpComponent ,
-
+    component: SignUpComponent,
   },
   {
-    path: '', 
+    path: '',
     pathMatch: 'full',
     component: LoginComponent,
-
   },
   {
     path: 'verify',
@@ -32,57 +30,48 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent,    
-    canActivate:[GuardServiceService],
+    component: HomeComponent,
+    canActivate: [GuardServiceService],
 
-    children:[
+    children: [
       {
-        path:'home_bar',
-        component:HomeBarComponent,    
-
-
+        path: 'home_bar',
+        component: HomeBarComponent,
       },
       {
-        path:'exam_bar',
-        component:ExamsBarComponent,
-
+        path: 'exam_bar',
+        component: ExamsBarComponent,
       },
-       {
-    path: 'ranking_bar',
-    component: RankingBarComponent,   
-
-    }
-    ]
+      {
+        path: 'ranking_bar',
+        component: RankingBarComponent,
+      },
+    ],
   },
   {
     path: 'admin_home',
     component: AdminHomeComponent,
-    canActivate:[GuardServiceService],
-    children:[
+    canActivate: [GuardServiceService],
+    children: [
       {
-        path:'admin_calendar',
-        component:AdminCalendarComponent,    
-
-
+        path: 'admin_calendar',
+        component: AdminCalendarComponent,
       },
       {
-        path:'admin_exams',
-        component:AdminExamsComponent,
-
+        path: 'admin_exams',
+        component: AdminExamsComponent,
       },
-       {
-       path: 'admin_analytics',
-       component: AdminAnalyticsComponent,   
+      {
+        path: 'admin_analytics',
+        component: AdminAnalyticsComponent,
+      },
+      {
+        path: 'admin_location',
+        component: AdminLocationBarComponent,
+      },
+    ],
+  },
 
-    },
-    {
-       path: 'admin_location',
-       component: AdminLocationBarComponent,   
-
- }
-    ] 
-  }
- 
   // {
   //   path: 'home/:name',
   //   component: HomeComponent,
@@ -90,18 +79,17 @@ const routes: Routes = [
   //     {
   //       path: 'show/:mails',
   //       component:ShowComponent
-    
-    
+
   //     }
-      
+
   //   ]
   // },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
 
 // this.route.paramMap.subscribe((x) => (
 //   this.email = x.get('name')

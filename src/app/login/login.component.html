@@ -24,13 +24,15 @@
           email
           phone="CN"
         />
-                <!-- handle errors -->
-        <div *ngIf="email.invalid && email.touched" class="error" >
-          <div *ngIf="email.errors?.['email']&&(email.errors?.['phone'])">Email Or Phone Is Required</div>
+        <!-- handle errors -->
+        <div *ngIf="email.invalid && email.touched" class="error">
+          <div *ngIf="email.errors?.['email']&&(email.errors?.['phone'])">
+            Email Or Phone Is Required
+          </div>
           <div *ngIf="email.errors?.['required']">This Field Is Required</div>
         </div>
       </div>
-      <div class="field" >
+      <div class="field">
         <label for="password">Password</label>
         <input
           type="password"
@@ -45,31 +47,42 @@
           minlength="8"
         />
       </div>
-              <!-- handle errors -->
-      <div *ngIf="password.invalid && password.touched" class="error" >
-        <div *ngIf="password.errors?.['required']">This Field Is Required</div> 
-        <div *ngIf="password.errors?.['minlength']">Min Length is 8</div> 
+      <!-- handle errors -->
+      <div *ngIf="password.invalid && password.touched" class="error">
+        <div *ngIf="password.errors?.['required']">This Field Is Required</div>
+        <div *ngIf="password.errors?.['minlength']">Min Length is 8</div>
       </div>
-      
-             <!-- not_active -->
-      <button class="field" [disabled]="email.errors?.['required']||(email.errors?.['email']&&(email.errors?.['phone']))||password.errors?.['required']||password.errors?.['minlength']"   *ngIf="email.errors?.['required']
-      ||password.errors?.['required']||password.errors?.['minlength']||(email.errors?.['email']&&(email.errors?.['phone']))"
-       style="background-color: gray;" id="btn" type="submit">Sign in</button>
 
-               <!-- active -->
-      <button class="field" [hidden]="(email.errors?.['required']||password.errors?.['required'])
-      ||(email.errors?.['email']&&(email.errors?.['phone']))||password.errors?.['minlength']" id="btn" type="submit">Sign in</button>
+      <!-- not_active -->
+      <button
+        class="field"
+        [disabled]="email.errors?.['required']||(email.errors?.['email']&&(email.errors?.['phone']))||password.errors?.['required']||password.errors?.['minlength']"
+        *ngIf="email.errors?.['required']
+      ||password.errors?.['required']||password.errors?.['minlength']||(email.errors?.['email']&&(email.errors?.['phone']))"
+        style="background-color: gray"
+        id="btn"
+        type="submit"
+      >
+        Sign in
+      </button>
+
+      <!-- active -->
+      <button
+        class="field"
+        [hidden]="(email.errors?.['required']||password.errors?.['required'])
+      ||(email.errors?.['email']&&(email.errors?.['phone']))||password.errors?.['minlength']"
+        id="btn"
+        type="submit"
+      >
+        Sign in
+      </button>
 
       <label id="signup"
         >Not a member?
         <a routerLink="/signup">Sign up now</a>
       </label>
     </form>
-    
   </div>
 </div>
 
 <app-pop-up></app-pop-up>
-
-
-

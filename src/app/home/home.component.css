@@ -128,7 +128,6 @@ ul {
   padding: 5px;
   margin: 5px;
   list-style-type: none;
-  
 }
 .sidebar ul li button {
   border: none;
@@ -153,14 +152,13 @@ ul {
   color: #008182;
   background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
   border-radius: 10px;
-  
 }
 li:is(:hover) button {
   margin-left: 15px;
 }
 li.active button {
   margin-left: 18px;
-border: 3px solid #008182 !important ;
+  border: 3px solid #008182 !important ;
 }
 .book {
   height: 30%;
@@ -321,34 +319,37 @@ border: 3px solid #008182 !important ;
   font-size: 20px;
 }
 
-
-.outer_button{
-  border:none;
+.outer_button {
+  border: none;
   border-radius: 10px;
-  background-color: #FFF;
+  background-color: #fff;
   width: 25px;
   height: 25px;
-  margin-left:3px
+  margin-left: 3px;
 }
 .modal-title {
-  color: #006A6A;
-font-size: 30px;
-font-family: Montserrat;
-font-weight: 700;
-line-height: 100%;
-
+  color: #006a6a;
+  font-size: 30px;
+  font-family: Montserrat;
+  font-weight: 700;
+  line-height: 100%;
 }
-.modal-content{
+.modal-content {
   border-radius: 15px;
-  background: radial-gradient(313.28% 209.98% at 99.43% 99.22%, #DFF 0%, rgba(235, 247, 248, 0.00) 100%), rgba(255, 255, 255, 0.75);
+  background: radial-gradient(
+      313.28% 209.98% at 99.43% 99.22%,
+      #dff 0%,
+      rgba(235, 247, 248, 0) 100%
+    ),
+    rgba(255, 255, 255, 0.75);
   box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
   backdrop-filter: blur(6.5px);
 }
 
-.modal-footer button{
+.modal-footer button {
   background: #008182;
   box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
-  color:#FFF;
+  color: #fff;
   width: 200px;
   border: none;
   border-radius: 10px;
@@ -362,10 +363,9 @@ line-height: 100%;
   justify-content: center;
   align-items: center;
   width: 500px;
-
 }
 
-.modal-body{
+.modal-body {
   color: #008182;
   font-size: 16px;
   font-family: Montserrat;
@@ -420,10 +420,10 @@ line-height: 100%;
   height: 100vh;
   width: 100vw;
 }
- 
-.typing  {
-all: unset;
-color: #008081;
-font-weight: bold;
+
+.typing {
+  all: unset;
+  color: #008081;
+  font-weight: bold;
   text-align: center;
 }
