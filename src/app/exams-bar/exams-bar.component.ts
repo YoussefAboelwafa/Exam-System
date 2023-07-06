@@ -166,6 +166,9 @@ export class ExamsBarComponent implements OnInit {
       this.token_exam = z;
 
       this.service.exam_bar_init().subscribe((x) => {
+        if(x.length==0){
+          x=[];
+        }
         this.service.non_token = x;
         this.non_token_exam = this.service.non_token;
       });

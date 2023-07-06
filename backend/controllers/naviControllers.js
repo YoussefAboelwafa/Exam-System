@@ -91,15 +91,17 @@ module.exports.getHome = async (req, res) => {
                     
                     // let endTime = Date.now();
                     // console.log(endTime-startTime);
-                    res.json({user: parsed_user, token_exam_info, other_exam: {
-                        _id: other_exam._id,
-                        title: other_exam.title,
-                        about: other_exam.about,
-                        info: other_exam.info,
-                        turn_on_off: other_exam.status
-                    }});
-
-
+                    let parsed_other_exam = null;
+                    if(other_exam){
+                        parsed_other_exam = {
+                            _id: other_exam._id,
+                            title: other_exam.title,
+                            about: other_exam.about,
+                            info: other_exam.info,
+                            turn_on_off: other_exam.status
+                       };
+                    }
+                    res.json({user: parsed_user, token_exam_info, other_exam: parsed_other_exam});
                 }
             })
         }else{
@@ -117,7 +119,7 @@ module.exports.getOtherExams = async (req, res) => {
     // req should  also contain the ids of the taken and upcoming exams
     try{
         const exams = await Exam.find({ _id: { $nin: req.body.ids }, deleted: false}).select('title info about status');
-
+        
         const parsed_exams = exams.map((exam) => ({
                 _id: exam._id,
                 title: exam.title,
@@ -125,7 +127,6 @@ module.exports.getOtherExams = async (req, res) => {
                 about: exam.about,
                 turn_on_off: (exam.status)? 1 : 0
             }))
-        console.log(exams[0].status);
         res.json(parsed_exams);
     }catch(err){
         console.log(err);

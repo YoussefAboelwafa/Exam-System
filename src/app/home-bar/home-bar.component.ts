@@ -69,6 +69,8 @@ export class HomeBarComponent implements OnInit {
     if (this.service.non_token !== undefined) {
       this.non_token_exam = this.service.non_token[0];
     }
+
+
   }
 
   refresh_all() {
@@ -90,6 +92,7 @@ export class HomeBarComponent implements OnInit {
 
       this.service.get_calender().subscribe((x) => {
         this.calendar = x;
+        console.log(this.calendar);
       });
       this.address = [];
       for (let i = 0; i < combinations.length; i++) {
@@ -211,17 +214,20 @@ export class HomeBarComponent implements OnInit {
   take_exam(name_exam: any, id_exam: any) {
     this.book_title_course = name_exam;
     //becouse if the user click take exam from modal,hide pop up if it show
-    this.book_id_exam = id_exam;
+    this.book_id_exam = id_exam; 
+     this.reset_order_exam();
     $('#not_token_exam').modal('hide');
     $('#token_exam').modal('hide');
     this.flag_book = true;
-    this.reset_order_exam();
   }
 
   close_book() {
     this.clear_flag_book();
     this.reset_order_exam();
     this.refresh_all();
+
+    console.log(this.calendar);
+
   }
 
   learn_non_token(value_send_by_btn_learn: any) {
@@ -229,14 +235,15 @@ export class HomeBarComponent implements OnInit {
   }
 
   learn_token(value_send_by_btn_learn: any) {
-    console.log(value_send_by_btn_learn);
     this.learn_dataof_token = value_send_by_btn_learn;
   }
 
   onCountrySelected(event: Event) {
+    
     this.selectedCountry = (event.target as HTMLSelectElement).value;
     // Call your function here with the selectedCountry value
     //flag==1 that meen filter
+    console.log(this.calendar);
     this.citys = [];
     this.locations = [];
     if (this.temp_country_address != null) {
@@ -261,6 +268,7 @@ export class HomeBarComponent implements OnInit {
     this.citys = this.all_locations
       .map((cont: any) => cont.cities)
       [this.index_country].map((c: any) => c.city_name);
+      console.log(this.calendar);
   }
 
   oncitySelected(event: Event) {
@@ -289,6 +297,8 @@ export class HomeBarComponent implements OnInit {
       .map((cont: any) => cont.cities)
       [this.index_country].map((c: any) => c.locations)
       [this.index_city].map((c: any) => c.location_name);
+      console.log(this.calendar);
+
   }
 
   onlocationSelected(event: Event) {
@@ -318,6 +328,10 @@ export class HomeBarComponent implements OnInit {
       .map((cont: any) => cont.cities)
       [this.index_country].map((c: any) => c.locations)
       [this.index_city].map((c: any) => c._id)[this.index_location];
+
+
+      console.log(this.calendar);
+
   }
 
   onselectsnack(event: Event) {

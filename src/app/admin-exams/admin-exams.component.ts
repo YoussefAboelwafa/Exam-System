@@ -13,11 +13,15 @@ declare const $: any;
 export class AdminExamsComponent implements OnInit {
   constructor(private service: ServicService) {
     this.service.exam_bar_init_admin().subscribe((x) => {
+        
+      if(x.length==0){
+        x=[];
+      }
       this.service.non_token = x;
       this.non_token_exam = this.service.non_token;
     });
 
-    // this.non_token_exam=this.service.non_token;
+     this.non_token_exam=this.service.non_token;
   }
 
   ngOnInit(): void {}
@@ -26,13 +30,7 @@ export class AdminExamsComponent implements OnInit {
   edit_ex: any = new exams();
   edit_index: any;
   turn_on_off: any; //to open and close exam
-  learn_dataof_nontoken: any = {
-    title: 'python programming',
-    about:
-      ' python is a powerful and flexible language that is well-suited for a wide range of programming tasks. However, it can be more difficult to learn and use than some other languages due to its complexity and the need to manage memory manually in some cases.',
-    info: ['STL', 'OOP with python'],
-    _id: '',
-  };
+  learn_dataof_nontoken=new exams
   information: any[] = []; //numberof info used in ngfor
   title_add: any;
   about_add: any;

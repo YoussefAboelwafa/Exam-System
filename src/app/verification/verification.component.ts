@@ -46,7 +46,7 @@ export class VerificationComponent implements OnInit {
       else if (x.success == true && x.created == false) {
         this.router.navigate([`/signup`]);
       } else {
-        this.router.navigate([`/login`]);
+        this.router.navigate(['']);
       }
 
       error: (error: HttpErrorResponse) => alert(error.message);

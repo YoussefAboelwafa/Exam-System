@@ -94,33 +94,31 @@
 <div class="discoverexamswidgets">
   <!-- ngfor ya kimoo -->
 
-  <div *ngFor="let non_token of non_token_exam" class="card card-body upcoming">
-    <div *ngIf="non_token.turn_on_off == 1">
-      <h5 class="card-title">{{ non_token.title }}</h5>
-      <div class="discoverbox1">
-        <div class="discoversmallbox">
-          <ul class="examlist">
-            <li *ngFor="let infomration of non_token.info">
-              {{ infomration }}
-            </li>
-          </ul>
-        </div>
-        <div class="discoverinfo">
-          <button
-            (click)="learn_non_token(non_token)"
-            data-toggle="modal"
-            data-target="#not_token_exam"
-            class="discoverbtns learnmore"
-          >
-            Learn More
-          </button>
-          <button
-            (click)="take_exam(non_token.title, non_token._id)"
-            class="discoverbtns takeagain"
-          >
-            Take exam
-          </button>
-        </div>
+  <div *ngFor="let non_token of non_token_exam"  class="card card-body upcoming">
+    <h5 class="card-title">{{ non_token.title }}</h5>
+    <div class="discoverbox1">
+      <div class="discoversmallbox">
+        <ul class="examlist">
+          <li *ngFor="let infomration of non_token.info">
+            {{ infomration }}
+          </li>
+        </ul>
+      </div>
+      <div class="discoverinfo">
+        <button
+          (click)="learn_non_token(non_token)"
+          data-toggle="modal"
+          data-target="#not_token_exam"
+          class="discoverbtns learnmore"
+        >
+          Learn More
+        </button>
+        <button
+          (click)="take_exam(non_token.title, non_token._id)"
+          class="discoverbtns takeagain"
+        >
+          Take exam
+        </button>
       </div>
     </div>
   </div>

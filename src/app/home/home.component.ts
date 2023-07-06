@@ -39,12 +39,12 @@ export class HomeComponent implements OnInit {
   constructor(private service: ServicService, private router: Router) {
     this.refresh();
 
-    this.current_user = {
-      first_name: this.service.user.get_first_name(),
-      last_name: this.service.user.get_last_name(),
-      photo: this.service.user.get_photo(),
-      _id: this.service.user.get_id(),
-    };
+    // this.current_user = {
+    //   first_name: this.service.user.get_first_name(),
+    //   last_name: this.service.user.get_last_name(),
+    //   photo: this.service.user.get_photo(),
+    //   _id: this.service.user.get_id(),
+    // };
     // this.service.is_signin().subscribe
     //        (
     //          (x)=> {
@@ -149,6 +149,9 @@ export class HomeComponent implements OnInit {
       this.service.token_ex = z;
       this.token_exam = z;
       this.service.exam_bar_init().subscribe((x) => {
+        if(x.length==0){
+          x=[];
+        }
         this.service.non_token = x;
       });
 
