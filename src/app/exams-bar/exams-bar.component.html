@@ -36,6 +36,7 @@
   <!-- ngfor ya kimoo -->
   <div *ngFor="let token of token_exam" class="card card-body upcoming">
     <!-- Not taken again -->
+    <div *ngIf="token.turn_on_off==1">
     <h5 class="card-title">{{ token.title }}</h5>
     <div class="discoverbox1">
       <div class="discoversmallbox">
@@ -65,7 +66,8 @@
           class="discoverbtns takeagain"
         >
           Take exam again
-        </button>
+         </button>
+       </div>
       </div>
     </div>
   </div>
