@@ -346,3 +346,12 @@ module.exports.set_percentage = async (req, res) => {
 
 
 
+module.exports.set_exam_status = async (req, res) => {
+    try {
+        await Exam.setStatus(req.body)
+    } catch (error) {
+        console.log(err);
+        res.json({success: false});
+    }
+}
+

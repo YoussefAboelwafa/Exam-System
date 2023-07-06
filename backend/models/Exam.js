@@ -80,8 +80,8 @@ examSchema.statics.editExam = async (newExam) => {
 
   examSchema.statics.setStatus = async (data) => {
     try {
-      const {exam_id, new_status} = data;
-      
+      const exam_id = data;
+      const new_status = data.turn
 
       ///assuming we stop any more bookings because we have enough
       const result = await this.updateOne({_id: exam_id}

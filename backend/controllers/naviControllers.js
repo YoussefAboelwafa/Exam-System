@@ -48,7 +48,7 @@ module.exports.getHome = async (req, res) => {
                         Exam.findOne({ _id: { $nin: exam_ids } }).select('title info about')
                       ]);
 
-                    let startTime = Date.now();
+
                     user = await user.populate({
                         path:'exams.exam.day',
                         select: 'day_number month_name'
@@ -78,6 +78,7 @@ module.exports.getHome = async (req, res) => {
                         location: exam.exam.location.location_name,
                         city: exam.exam.location.parent.city_name,
                         country: exam.exam.location.parent.parent.country_name}
+
                     }))
                     const parsed_user = {
                         _id: user._id,
@@ -108,8 +109,16 @@ module.exports.getOtherExams = async (req, res) => {
     ///assume req holds only {ids:[user's exams]}
     // req should  also contain the ids of the taken and upcoming exams
     try{
-        const exams = await Exam.find({ _id: { $nin: req.body.ids } }).select('title info about');
-        res.json(exams);
+        const exams = await Exam.find({ _id: { $nin: req.body.ids } }).select('title info about status');
+
+        const parsed_exams = exams.map((exam) => ({
+                _id: exam._id,
+                title: exam.title,
+                info: exam.info,
+                about: exam.about,
+                turn_on_off: exam.turn_on_off
+            }))
+        res.json(parsed_exams);
     }catch(err){
         console.log(err);
         res.json(err);
