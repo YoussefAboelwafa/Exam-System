@@ -9,7 +9,7 @@ const payment = (req, res) => {
     console.log('payment succeeded');
 }
 
-
+const token_secrect = '252345'
 
 
 module.exports.getHome = async (req, res) => {
@@ -19,7 +19,7 @@ module.exports.getHome = async (req, res) => {
 
         if(token){
             let startTime = Date.now();
-            jwt.verify(token, 'example secret', async (err, decodedToken)=>{
+            jwt.verify(token, token_secrect, async (err, decodedToken)=>{
 
                 if(err){
                     console.log(err.message);
@@ -122,7 +122,9 @@ module.exports.getOtherExams = async (req, res) => {
         const token = req.cookies.jwt;
 
         if(token){
-            jwt.verify(token, 'example secret', async (err, decodedToken)=>{
+
+            jwt.verify(token, token_secrect, async (err, decodedToken)=>{
+
                 if(err){
                     console.log(err.message);
                     res.json({success: false});

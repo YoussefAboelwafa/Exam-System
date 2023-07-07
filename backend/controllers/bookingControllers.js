@@ -1,12 +1,19 @@
 const User = require('../models/User')
 const Exam = require('../models/Exam')
 const jwt = require('jsonwebtoken')
+const payment = require('../services/payment')
 
 
-const payment = (req, res) => {
-    console.log('payment succeeded');
+const token_secrect = '23452345'
+
+module.exports.startPayment = async (req, res) => {
+    try {
+        const result = await payment.cowpay_init_and_auth({});
+        res.json({success: true, token: result.data.token})    
+    } catch (error) {
+        res.json({success: false})
+    }
 }
-
 
 
 module.exports.book_exam = async (req, res) => {
@@ -20,7 +27,9 @@ module.exports.book_exam = async (req, res) => {
         const token = req.cookies.jwt;
 
         if(token){
-            jwt.verify(token, 'example secret', async (err, decodedToken)=>{
+
+            jwt.verify(token, token_secrect, async (err, decodedToken)=>{
+
                 try{
                     if(err){
                         console.log(err.message);
@@ -46,7 +55,8 @@ module.exports.book_exam = async (req, res) => {
         }
     }catch(err){
         console.log(err);
-        res.json({success: false})
+        res.json({success:false})
+
     }
 }
 
