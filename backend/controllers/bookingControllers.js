@@ -8,8 +8,34 @@ const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
 module.exports.startPayment = async (req, res) => {
     try {
-        const result = await payment.cowpay_init_and_auth({});
-        res.json({success: true, token: result.data.token})    
+        const token = req.cookies.jwt;
+
+        if(token){
+
+            jwt.verify(token, token_secrect, async (err, decodedToken)=>{
+
+                try{
+                    if(err){
+                        console.log(err.message);
+                        throw "bad cookies"
+                    }else{
+                        const viableRequest = await User.checkViability(req.body.exam_id, decodedToken._id);
+                        if(!viableRequest){
+                            throw "not a viable request"
+                        }
+                        const result = await payment.cowpay_init_and_auth({});
+                        res.json({success: true, token: result.data.token})  
+                    }
+                }catch(err){
+                    console.log(err);
+                    res.json({success: false})
+                }
+            }
+            )
+
+        }else{
+            throw "bad cookies"
+        }
     } catch (error) {
         res.json({success: false})
     }
