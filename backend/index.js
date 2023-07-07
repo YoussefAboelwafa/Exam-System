@@ -9,7 +9,7 @@ const cors = require('cors');
 const User = require('./models/User')
 const jwt = require('jsonwebtoken');
 const cookieParser = require("cookie-parser");
-
+const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
 const app = express();
 app.use(cors({
@@ -33,7 +33,7 @@ app.get('/is_signedin', (req, res) => {
         const token = req.cookies.jwt;
         console.log(token);
         if(token){
-            jwt.verify(token, 'example secret', async (err, decodedToken)=>{
+            jwt.verify(token, token_secrect, async (err, decodedToken)=>{
                 if(err){
                     console.log(err.message);
                     res.json({signed_in: false});
