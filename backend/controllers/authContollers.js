@@ -5,7 +5,7 @@ const OTP = require('../models/OTP')
 const casual = require('casual');
 const Admin = require('../models/Admin')
 
-const token_secrect = '23452345'
+const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
 const vonage = new Vonage({
   apiKey: "dc9afa8a",
