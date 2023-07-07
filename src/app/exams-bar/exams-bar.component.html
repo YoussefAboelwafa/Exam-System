@@ -295,7 +295,7 @@
       >
         <option>Select a day</option>
         <option *ngFor="let appoint of calendar; let i = index">
-          {{ appoint.day_number }} : {{ appoint.day_name }}
+          {{ appoint.day_number }} : {{ appoint.day_name }} : {{appoint.month_name}}
         </option>
       </select>
 
@@ -479,3 +479,4 @@
     </div>
   </div>
 </div>
+<app-pop-up></app-pop-up>

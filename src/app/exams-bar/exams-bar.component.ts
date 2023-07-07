@@ -5,6 +5,7 @@ import { address } from '../objects/loction_address';
 import { calendar } from '../objects/calender';
 import { Router } from '@angular/router';
 import { exams } from '../objects/exams';
+import { ModalPopServiceService } from '../services/modal-pop-service.service';
 declare const $: any;
 
 @Component({
@@ -70,7 +71,7 @@ export class ExamsBarComponent implements OnInit {
   avilable_time: any;
   ids_exams: any[] = [];
 
-  constructor(private service: ServicService, private router: Router) {
+  constructor(private service: ServicService, private router: Router,private popup:ModalPopServiceService) {
     this.refresh_all();
     // this.upcoming_exam=this.service.upcoming_ex;
     // this.token_exam=this.service.token_ex;
@@ -211,14 +212,19 @@ export class ExamsBarComponent implements OnInit {
       snack: this.select_snacks,
       appointment: this.selectedappointment,
     };
-    this.service.book_exam(x).subscribe((x) => {});
+    this.service.book_exam(x).subscribe((y) => {
+      console.log(y);
+      if(y.success==false){  
+        console.log(1)
+        this.popup.open_error_book();
+      }
+    });
 
     //service becouse i need Day of exam and Appointment then next step
     this.reset_order_exam();
     this.refresh_all();
     this.clear_flag_book();
     //send notification and reset order exam
-    this.router.navigate(['home/home_bar']);
   }
 
   take_exam(name_exam: any, id_exam: any) {
