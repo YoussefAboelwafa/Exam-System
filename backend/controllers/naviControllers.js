@@ -45,7 +45,7 @@ module.exports.getHome = async (req, res) => {
 
                     const [token_exam_info, other_exam] = await Promise.all([
                         Exam.find({ _id: { $in: exam_ids } }).select('title about'),
-                        Exam.findOne({ _id: { $nin: exam_ids }, deleted:false }).select('title info about status')
+                        Exam.findOne({ _id: { $nin: exam_ids }, deleted:false,status:true}).select('title info about status')
                       ]);
 
 
