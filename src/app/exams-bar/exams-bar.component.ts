@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { exams } from '../objects/exams';
 import { ModalPopServiceService } from '../services/modal-pop-service.service';
 declare const $: any;
-
+declare let COWPAYOTPDIALOG: any;
 @Component({
   selector: 'app-exams-bar',
   templateUrl: './exams-bar.component.html',
@@ -212,14 +212,20 @@ export class ExamsBarComponent implements OnInit {
       snack: this.select_snacks,
       appointment: this.selectedappointment,
     };
-    this.service.book_exam(x).subscribe((y) => {
-      console.log(y);
-      if(y.success==false){  
-        console.log(1)
-        this.popup.open_error_book();
-      }
-    });
-
+    COWPAYOTPDIALOG.init();
+    // this.service.book_exam(x).subscribe(
+    //   (y) => {
+    //   if(y.success==false){  
+    //     console.log(1)
+    //     this.popup.open_error_book();
+    //   }
+    //   else{
+    //   }
+    // });
+this.service.payment(this.book_id_exam).subscribe(
+          token=>{
+            COWPAYOTPDIALOG.load(token);
+        })
     //service becouse i need Day of exam and Appointment then next step
     this.reset_order_exam();
     this.refresh_all();
