@@ -8,9 +8,8 @@ describe('AdminLocationBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminLocationBarComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminLocationBarComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AdminLocationBarComponent);
     component = fixture.componentInstance;

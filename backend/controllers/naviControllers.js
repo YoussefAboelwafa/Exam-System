@@ -42,10 +42,10 @@ module.exports.getHome = async (req, res) => {
 
                     const [token_exam_info, other_exam] = await Promise.all([
                         Exam.find({ _id: { $in: exam_ids } }).select('title about'),
-                        Exam.findOne({ _id: { $nin: exam_ids } }).select('title info about')
+                        Exam.findOne({ _id: { $nin: exam_ids }, deleted:false,status:true}).select('title info about status')
                       ]);
 
-                    let startTime = Date.now();
+
                     user = await user.populate({
                         path:'exams.exam.day',
                         select: 'day_number month_name'
@@ -74,7 +74,9 @@ module.exports.getHome = async (req, res) => {
                         day: exam.exam.day.day_number + " " + exam.exam.day.month_name,
                         location: exam.exam.location.location_name,
                         city: exam.exam.location.parent.city_name,
-                        country: exam.exam.location.parent.parent.country_name}
+                        country: exam.exam.location.parent.parent.country_name},
+                        turn_on_off: exam.exam.status
+
                     }))
                     const parsed_user = {
                         _id: user._id,
@@ -86,8 +88,17 @@ module.exports.getHome = async (req, res) => {
                     
                     // let endTime = Date.now();
                     // console.log(endTime-startTime);
-                    res.json({user: parsed_user, token_exam_info, other_exam: other_exam});
-
+                    let parsed_other_exam = null;
+                    if(other_exam){
+                        parsed_other_exam = {
+                            _id: other_exam._id,
+                            title: other_exam.title,
+                            about: other_exam.about,
+                            info: other_exam.info,
+                            turn_on_off: other_exam.status
+                       };
+                    }
+                    res.json({user: parsed_user, token_exam_info, other_exam: parsed_other_exam});
 
                 }
             })
@@ -108,7 +119,9 @@ module.exports.getOtherExams = async (req, res) => {
         const token = req.cookies.jwt;
 
         if(token){
+
             jwt.verify(token, token_secrect, async (err, decodedToken)=>{
+
                 if(err){
                     console.log(err.message);
                     res.json({success: false});

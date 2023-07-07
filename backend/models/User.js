@@ -105,10 +105,12 @@ userSchema.statics.checkViability = async (exam_data, userId) =>{
                 throw "Can't book two exams in the same day"
         }
 
-
+        return true
     } catch (error) {
-        
+        return false
     }
+        
+    
 }
 
 

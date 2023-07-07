@@ -130,7 +130,7 @@ public change_percentage(id_user:any,id_exam:any,percentage:any):Observable<any>
   return this.http.post<any>(`${this.apiServerUrl}/admin/set_percentage`,{user_id:id_user,exam_id:id_exam,percentage:percentage}, { withCredentials: true });
 }
 public turn_on_off(id_exam:any,turn_value:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/turn_on_off`,{exam_id:id_exam,turn:turn_value}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/admin/turn_on_off`,{exam_id:id_exam, turn:turn_value}, { withCredentials: true });
 }
 
 

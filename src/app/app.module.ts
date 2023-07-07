@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -40,8 +39,6 @@ import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.compo
     AdminCalendarComponent,
     AdminExamsComponent,
     AdminAnalyticsComponent,
-    
-    
   ],
   imports: [
     BrowserModule,
@@ -51,11 +48,8 @@ import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.compo
     FormsModule,
     CustomFormsModule,
     NgxTypedJsModule,
-
-
-    
   ],
-  providers: [ServicService,users,GuardServiceService],
-  bootstrap: [AppComponent]
+  providers: [ServicService, users, GuardServiceService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

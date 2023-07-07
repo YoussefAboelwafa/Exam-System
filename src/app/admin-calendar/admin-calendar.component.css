@@ -1,500 +1,492 @@
 .contain {
-    background: rgba(0, 0, 0, 0.082);
-    backdrop-filter: blur(5px);
-    color: black;
-    font-size: 48px;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    flex-wrap: wrap;
-    font-weight: 1400;
-    background: rgba(204, 255, 251, 0.111);
-    position: fixed;
-    left: 5%;
-    top: 2%;
-    height: 100vh;
-    width: 100vw;
-  }
-  close {
-    color: #008182;
-    
-  }
+  background: rgba(0, 0, 0, 0.082);
+  backdrop-filter: blur(5px);
+  color: black;
+  font-size: 48px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  flex-wrap: wrap;
+  font-weight: 1400;
+  background: rgba(204, 255, 251, 0.111);
+  position: fixed;
+  left: 5%;
+  top: 2%;
+}
+close {
+  color: #008182;
+}
 .closebtn {
-    border-radius: 50%;
-    position: absolute;
-    right: 10%;
-    top: 10%;
-  }
+  border-radius: 50%;
+  position: absolute;
+  right: 10%;
+  top: 10%;
+}
 .discoverexamslabel a:hover {
   font-size: 20px;
 }
 
 .discoverbox1 {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-  }
-  .discoversmallbox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    border-radius: 9px;
-    background: rgba(255, 255, 255, 0.32);
-    box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
-    margin-right: 20px;
-    width: 21vw;
-    height: 13vh;
-    margin-bottom: 5%;
-    margin-right: 12%;
-    
-  }
-  .discoverinfo {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    color: #008182;
-    font-weight:520;
-    margin-right: 10px;
-
-  }
-  .discoversmallbox label {
-    color: #006a6a;
-    font-size: 12px;
-    font-weight: 700;
-    margin: 0px;
-  }
-  .discoversmallbox .discoverscore {
-    font-size: 32px;
-    font-weight: 300;
-    margin: 0px;
-  }
- 
- 
-
-  .goodmorningwidgets,
-  .discoverexamswidgets {
-    display: flex;
-    flex-direction: row;
-    margin-left: 2%;
-    margin-bottom: 2%;
-    flex-wrap: wrap;
-    width:98%;
-  }
-  .card {
-    width: 22vw;
-    height: 29vh;
-    margin-right: 2%;
-    margin-bottom: 15px;
-  }
-.one_card{
-    justify-content:center;
-    align-items: center;
-    
-} 
- #special_card{
-    width: 40vw;
-    height: 45vh;
-    font-weight: 100;
-    font-size: medium;
-  }
-  .input_percentage{
-    border-radius: 5px;
-    color:#008182;
-    background-color: #fff;
-    height: 10vh;
-    width: 30vh;
-    font-size: 30px;
-    font-weight: 50px;
-    padding-left: 28%;
-    margin-top: 3%;
-  }
-  .card h5 {
-    align-items: left;
-    font-size: 28px;
-    font-family: "Montserrat";
-    font-weight: 500;
-    line-height: 100%;
-  }
-  .card a {
-    font-size: 12px;
-    font-family: "Montserrat";
-    font-weight: 700;
-    text-decoration: underline;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    transition: 0.5s;
-  }
-
-  .card a:hover {
-    font-size: 15px;
-  }
-  .upcoming {
-    border-radius: 10px;
-    background: radial-gradient(
-        313.28% 209.98% at 99.43% 99.22%,
-        #dff 0%,
-        rgba(235, 247, 248, 0) 100%
-      ),
-      #fff;
-    box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
-  }
-  .upcoming a {
-    color: #006a6a;
-  }
-  .upcoming h5 {
-    color: #006a6a;
-    font-size: 22px;
-  
-  }
-  .image {
-    display: inline;
-    width: 60px;
-    height: 60px;
-  }
-.name2 {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
 }
-.name1{
+.discoversmallbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  margin-right: 20px;
+  width: 21vw;
+  height: 13vh;
+  margin-bottom: 5%;
+  margin-right: 12%;
+}
+.discoverinfo {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  color: #008182;
+  font-weight: 520;
+  margin-right: 10px;
+}
+.discoversmallbox label {
+  color: #006a6a;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0px;
+}
+.discoversmallbox .discoverscore {
+  font-size: 32px;
+  font-weight: 300;
+  margin: 0px;
+}
 
-    margin-left: 10px;
+.goodmorningwidgets,
+.discoverexamswidgets {
+  display: flex;
+  flex-direction: row;
+  margin-left: 2%;
+  margin-bottom: 2%;
+  flex-wrap: wrap;
+  width: 98%;
+}
+.card {
+  width: 22vw;
+  height: 29vh;
+  margin-right: 2%;
+  margin-bottom: 15px;
+}
+.one_card {
+  justify-content: center;
+  align-items: center;
+}
+#special_card {
+  width: 40vw;
+  height: 45vh;
+  font-weight: 100;
+  font-size: medium;
+}
+.input_percentage {
+  border-radius: 5px;
+  color: #008182;
+  background-color: #fff;
+  height: 10vh;
+  width: 30vh;
+  font-size: 30px;
+  font-weight: 50px;
+  padding-left: 28%;
+  margin-top: 3%;
+}
+.card h5 {
+  align-items: left;
+  font-size: 28px;
+  font-family: "Montserrat";
+  font-weight: 500;
+  line-height: 100%;
+}
+.card a {
+  font-size: 12px;
+  font-family: "Montserrat";
+  font-weight: 700;
+  text-decoration: underline;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transition: 0.5s;
+}
+
+.card a:hover {
+  font-size: 15px;
+}
+.upcoming {
+  border-radius: 10px;
+  background: radial-gradient(
+      313.28% 209.98% at 99.43% 99.22%,
+      #dff 0%,
+      rgba(235, 247, 248, 0) 100%
+    ),
+    #fff;
+  box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
+}
+.upcoming a {
+  color: #006a6a;
+}
+.upcoming h5 {
+  color: #006a6a;
+  font-size: 22px;
+}
+.image {
+  display: inline;
+  width: 60px;
+  height: 60px;
+}
+.name2 {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+.name1 {
+  margin-left: 10px;
 }
 .change {
-    all: unset;
-    cursor: pointer;
-    color: #006A6A;
-    text-align: center;
-    font-size: 15px;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 400;
-    margin-top: 6%;
+  all: unset;
+  cursor: pointer;
+  color: #006a6a;
+  text-align: center;
+  font-size: 15px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 6%;
 }
-.update_card{
-    border-radius: 10px;
-    background: #008182;
-    outline: none;
-    border: none;
-    box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
-    color: #fff;
-    font-weight: 500;
-    width: 100%;
-    padding: 5px;
-    height: 40px;
-    
+.update_card {
+  border-radius: 10px;
+  background: #008182;
+  outline: none;
+  border: none;
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  color: #fff;
+  font-weight: 500;
+  width: 100%;
+  padding: 5px;
+  height: 40px;
 }
 .toolbar {
-    display: flex;
-    flex-direction: row;
-    gap: 2%;
-    margin-top: 2%;
-    margin-left: 2%;
-  }
-  
-  .toolbar .btn {
-    border-radius: 8px;
-    background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
-    color: #008182;
-    font-size: 20px;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 150%;
-    width: 14vw;
-  }
-  .dropdown-item {
-    color: #008182;
-    background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
-  }
-  .dropdown-item:hover {
-    background: #ababab;
-    color: #000;
-    transition: 0.2s;
-  }
-  .addappointbtn {
-    font-size: larger;
-    font-weight: 400;
-    border-radius: 9px;
-    background: #008182;
-    color: #fff;
-    width: 90%;
-    box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
-    padding: 12px 8px;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    border: none;
-    margin: 0% 2% 0% 2%;
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 2%;
-  }
-  .box {
-    color: #008182;
-    border-radius: 20px;
-    background: radial-gradient(
-        313.28% 209.98% at 99.43% 99.22%,
-        #dff 0%,
-        rgba(235, 247, 248, 0) 100%
-      ),
-      #fff;
-    box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 19vw;
-    height: 35vh;
-    margin-left: 2%;
-    margin-top: 2%;
-    padding: 5px;
-    position: relative;
-  }
-  .info {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-  .monthdiv {
-    display: flex;
-    flex-direction: column;
-    margin-left: 10px;
-  }
-  
-  .smallbox {
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.32);
-    box-shadow: 0px 8px 10px 0px rgba(0, 129, 130, 0.16);
-    display: flex;
-    margin: 0px;
-    padding: 2px;
-    width: 55%;
-    height: 40%;
-    justify-content: center;
-    align-items: center;
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 2%;
-    margin-top: 4%;
-  }
-  .score {
-    font-size: 46px;
-    font-weight: 200;
-  }
-  .monthNumber {
-    color: #006a6a;
-    font-size: 64px;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 100%;
-  }
-  .monthName {
-    color: #006a6a;
-    font-size: 20px;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 100%;
-  }
-  .day {
-    color: #006a6a;
-    font-size: 20px;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 100%;
-  }
-  .addappointbtn:hover {
-    background: #fff;
-    color: #008182;
-    border: 1px solid #008182;
-    transition: 0.5s;
-  }
-  .moderatorbtn {
-    font-size: larger;
-    font-weight: 400;
-    border-radius: 9px;
-    background: #008182;
-    color: #fff;
-    box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
-    width: 95%;
-    padding: 12px 8px;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    border: none;
-    margin-bottom: 2%;
-    margin-left: 2%;
-    margin-right: 2%;
-  }
-  .discoverexamslabel {
-    color:#006A6A;
-    font-size: 28px;
-    font-family: "Montserrat";
-    font-weight: 700;
-    line-height: 150%;
-    margin-left: 2%;
-    margin-top: 2%;
-  }
-  .discoverexamslabel span{
-    font-size: 60px;
-    font-weight: 400;
-    margin-right: 5px;
-   
-  }
-  .addlocationbtn:hover {
-    background: #fff;
-    color: #008182;
-    border: 1px solid #008182;
-    transition: 0.5s;
-  }
-  .moderatorbtn:hover {
-    background: #fff;
-    color: #008182;
-    border: 1px solid #008182;
-    transition: 0.5s;
-  }
-  .remove {
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    right: 6%;
-    top: 3%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-  }
-  .remove button {
-    all: unset;
-    font-size: 20px;
-    margin-right: 4%;
-    color: #008182;
-    cursor: pointer;
-    transition: 0.5s;
-    justify-content: flex-end;
-    margin-right: 10px;
-  }
-  .remove i:hover {
-    color: #ff0052;
-  }
-  
-  .outer_button {
-    border: none;
-    border-radius: 10px;
-    background-color: #fff;
-    width: 25px;
-    height: 25px;
-    margin-left: 3px;
-  }
-  .modal-title {
-    color: #006a6a;
-    font-size: 30px;
-    font-family: Montserrat;
-    font-weight: 700;
-    line-height: 100%;
-  }
-  .modal-content {
-    border-radius: 15px;
-    background: radial-gradient(
-        313.28% 209.98% at 99.43% 99.22%,
-        #dff 0%,
-        rgba(235, 247, 248, 0) 100%
-      ),
-      rgba(255, 255, 255, 0.75);
-    box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
-    backdrop-filter: blur(6.5px);
-  }
-  
-  .modal-footer button {
-    background: #008182;
-    box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
-    color: #fff;
-    width: 200px;
-    border: none;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 8px 10px;
-    justify-content: center;
-    align-items: center;
-    width: 500px;
-  }
-  
-  .modal-body {
-    color: #008182;
-    font-size: 16px;
-    font-family: Montserrat;
-    font-weight: 500;
-  }
-  .modal-body label {
-    font-size: 18px;
-    font-weight: 600;
-    margin-top: 2%;
-  }
-  .modal-footer button:hover {
-    background: #fff;
-    color: #008182;
-    border: 1px solid #008182;
-    transition: 1s;
-  }
-  .bg {
-    border-radius: 10px;
-    background: radial-gradient(313.28% 209.98% at 99.43% 99.22%, #FDD6BF 0%, rgba(253, 214, 191, 0.00) 100%), #FFF;
-    box-shadow: 0px 0px 25px 0px rgba(247, 144, 81, 0.15);
-  }
-  .upcomingbox {
-    display: flex;
-    flex-direction: column;
-  }
-  .examname1 {
-    margin: 0px;
-  }
-  .locate_box{
-    display: inline;
-    font-size: 18px;
-    margin-right: 5px;
-    font-weight: 500;
-    justify-content: center;
-    align-items: center;
-    gap: 1px;
-    padding: 10px;
-    margin:10px;
-    box-shadow: 5px 5px 10px 0px rgba(0, 129, 130, 0.16);
-  }
-  .btn_back{
-    all:unset;
-    cursor: pointer;
-    margin-left:85%
-    
-  }
-  .form-group {
-    display:flex;
-    flex-direction: column;
-  }
-  select{
-    justify-content: left;
-    text-align: left;
-    background-color: #fff;
-  }
-  .smalldiv{
-    margin-bottom: 10px;
-  }
+  display: flex;
+  flex-direction: row;
+  gap: 2%;
+  margin-top: 2%;
+  margin-left: 2%;
+}
+
+.toolbar .btn {
+  border-radius: 8px;
+  background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
+  color: #008182;
+  font-size: 20px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 150%;
+  width: 14vw;
+}
+.dropdown-item {
+  color: #008182;
+  background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
+}
+.dropdown-item:hover {
+  background: #ababab;
+  color: #000;
+  transition: 0.2s;
+}
+.addappointbtn {
+  font-size: larger;
+  font-weight: 400;
+  border-radius: 9px;
+  background: #008182;
+  color: #fff;
+  width: 90%;
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  padding: 12px 8px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border: none;
+  margin: 0% 2% 0% 2%;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 2%;
+}
+.box {
+  color: #008182;
+  border-radius: 20px;
+  background: radial-gradient(
+      313.28% 209.98% at 99.43% 99.22%,
+      #dff 0%,
+      rgba(235, 247, 248, 0) 100%
+    ),
+    #fff;
+  box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 27vw;
+  height: 35vh;
+  margin-left: 2%;
+  margin-top: 2%;
+  padding: 5px;
+  position: relative;
+}
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.monthdiv {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.smallbox {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 0px 8px 10px 0px rgba(0, 129, 130, 0.16);
+  display: flex;
+  margin: 0px;
+  padding: 2px;
+  width: 55%;
+  height: 40%;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 2%;
+  margin-top: 4%;
+}
+.score {
+  font-size: 46px;
+  font-weight: 200;
+}
+.monthNumber {
+  color: #006a6a;
+  font-size: 64px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+}
+.monthName {
+  color: #006a6a;
+  font-size: 20px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+}
+.day {
+  color: #006a6a;
+  font-size: 20px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+}
+.addappointbtn:hover {
+  background: #fff;
+  color: #008182;
+  border: 1px solid #008182;
+  transition: 0.5s;
+}
+.moderatorbtn {
+  font-size: larger;
+  font-weight: 400;
+  border-radius: 9px;
+  background: #008182;
+  color: #fff;
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  width: 95%;
+  padding: 12px 8px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border: none;
+  margin-bottom: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.discoverexamslabel {
+  color: #006a6a;
+  font-size: 28px;
+  font-family: "Montserrat";
+  font-weight: 700;
+  line-height: 150%;
+  margin-left: 2%;
+  margin-top: 2%;
+}
+.discoverexamslabel span {
+  font-size: 60px;
+  font-weight: 400;
+  margin-right: 5px;
+}
+.addlocationbtn:hover {
+  background: #fff;
+  color: #008182;
+  border: 1px solid #008182;
+  transition: 0.5s;
+}
+.moderatorbtn:hover {
+  background: #fff;
+  color: #008182;
+  border: 1px solid #008182;
+  transition: 0.5s;
+}
+.remove {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  right: 6%;
+  top: 3%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+.remove button {
+  all: unset;
+  font-size: 20px;
+  margin-right: 4%;
+  color: #008182;
+  cursor: pointer;
+  transition: 0.5s;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+.remove i:hover {
+  color: #ff0052;
+}
+
+.outer_button {
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  width: 25px;
+  height: 25px;
+  margin-left: 3px;
+}
+.modal-title {
+  color: #006a6a;
+  font-size: 30px;
+  font-family: Montserrat;
+  font-weight: 700;
+  line-height: 100%;
+}
+.modal-content {
+  border-radius: 15px;
+  background: radial-gradient(
+      313.28% 209.98% at 99.43% 99.22%,
+      #dff 0%,
+      rgba(235, 247, 248, 0) 100%
+    ),
+    rgba(255, 255, 255, 0.75);
+  box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
+  backdrop-filter: blur(6.5px);
+}
+
+.modal-footer button {
+  background: #008182;
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  color: #fff;
+  width: 200px;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 8px 10px;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+}
+
+.modal-body {
+  color: #008182;
+  font-size: 16px;
+  font-family: Montserrat;
+  font-weight: 500;
+}
+.modal-body label {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 2%;
+}
+.modal-footer button:hover {
+  background: #fff;
+  color: #008182;
+  border: 1px solid #008182;
+  transition: 1s;
+}
+.bg {
+  border-radius: 10px;
+  background: radial-gradient(
+      313.28% 209.98% at 99.43% 99.22%,
+      #fdd6bf 0%,
+      rgba(253, 214, 191, 0) 100%
+    ),
+    #fff;
+  box-shadow: 0px 0px 25px 0px rgba(247, 144, 81, 0.15);
+}
+.upcomingbox {
+  display: flex;
+  flex-direction: column;
+}
+.examname1 {
+  margin: 0px;
+}
+.locate_box {
+  display: inline;
+  font-size: 18px;
+  margin-right: 5px;
+  font-weight: 500;
+  justify-content: center;
+  align-items: center;
+  gap: 1px;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 5px 5px 10px 0px rgba(0, 129, 130, 0.16);
+}
+.btn_back {
+  all: unset;
+  cursor: pointer;
+  margin-left: 85%;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+select {
+  justify-content: left;
+  text-align: left;
+  background-color: #fff;
+}
+.smalldiv {
+  margin-bottom: 10px;
+}

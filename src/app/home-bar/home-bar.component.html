@@ -7,10 +7,7 @@
   <!-- IMAGES -->
   <div class="carousel-inner">
     <div class="carousel-item active" id="c1">
-      <img
-        src="../../assets/images/img4.jpg"
-        alt="Slide 1"
-      />
+      <img src="../../assets/images/img4.jpg" alt="Slide 1" />
       <p>youssef</p>
     </div>
     <div class="carousel-item" id="c2">
@@ -121,8 +118,14 @@
         <label class="discoverscore">{{ token.percentage }}%</label>
       </div>
       <div class="discoverinfo">
-        <button (click)="learn_token(token)" data-toggle="modal"
-        data-target="#token_exam" class="discoverbtns learnmore">Learn More</button>
+        <button
+          (click)="learn_token(token)"
+          data-toggle="modal"
+          data-target="#token_exam"
+          class="discoverbtns learnmore"
+        >
+          Learn More
+        </button>
         <button
           *ngIf="token.percentage != 100"
           (click)="take_exam(token.title, token._id)"
@@ -142,7 +145,7 @@
     </div>
   </div>
 
-  <div class="card card-body upcoming" *ngIf="non_token_exam!=undefined">
+  <div class="card card-body upcoming" *ngIf="non_token_exam != undefined">
     <h5 class="card-title">{{ non_token_exam.title }}</h5>
 
     <div class="discoverbox1">
@@ -190,11 +193,11 @@
           required
           #country
           id="select"
-          name="country" 
+          name="country"
           (change)="onCountrySelected($event)"
         >
           <option selected>Country</option>
-          <option *ngFor="let coun of countrys">{{coun}}</option>
+          <option *ngFor="let coun of countrys">{{ coun }}</option>
         </select>
 
         <h3>City</h3>
@@ -207,8 +210,8 @@
           (change)="oncitySelected($event)"
         >
           <option selected>City</option>
-          <option    *ngFor="let cit of citys">{{cit}}</option>
-         </select>
+          <option *ngFor="let cit of citys">{{ cit }}</option>
+        </select>
         <h3>Location</h3>
         <select
           class="sel"
@@ -219,15 +222,15 @@
           (change)="onlocationSelected($event)"
         >
           <option selected>Location</option>
-          <option    *ngFor="let locate of locations">{{locate}}</option>
-          </select>
+          <option *ngFor="let locate of locations">{{ locate }}</option>
+        </select>
 
         <button
           disabled
           *ngIf="
-          selectedCountry == 'country' ||
-          selectedCity == 'city' ||
-          selectedlocation == 'location'
+            selectedCountry == 'country' ||
+            selectedCity == 'city' ||
+            selectedlocation == 'location'
           "
           id="btn"
           style="background-color: gray"
@@ -237,9 +240,9 @@
         </button>
         <button
           *ngIf="
-          selectedCountry != 'country' &&
-          selectedCity != 'city' &&
-          selectedlocation != 'location'
+            selectedCountry != 'country' &&
+            selectedCity != 'city' &&
+            selectedlocation != 'location'
           "
           id="btn"
           type="submit"
@@ -250,18 +253,18 @@
       <div class="circle">
         <i
           *ngIf="
-          selectedCountry == 'country' ||
-          selectedCity == 'city' ||
-          selectedlocation == 'location'
+            selectedCountry == 'country' ||
+            selectedCity == 'city' ||
+            selectedlocation == 'location'
           "
           class="fa-solid fa-circle"
           style="color: red"
         ></i>
         <i
           *ngIf="
-          selectedCountry != 'country' &&
-          selectedCity != 'city' &&
-          selectedlocation != 'location'
+            selectedCountry != 'country' &&
+            selectedCity != 'city' &&
+            selectedlocation != 'location'
           "
           class="fa-solid fa-circle"
           style="color: #008182"
@@ -288,13 +291,14 @@
         #snack
         id="select"
         name="snack"
-        (change)="onselectsnack($event)"      >
+        (change)="onselectsnack($event)"
+      >
         <option>snack</option>
-        <option   *ngFor="let snack of snacks">{{snack}}</option>
+        <option *ngFor="let snack of snacks">{{ snack }}</option>
       </select>
       <button
         disabled
-        *ngIf="select_snacks== 'Snack'"
+        *ngIf="select_snacks == 'Snack'"
         id="btn"
         style="background-color: gray"
         type="submit"
@@ -308,13 +312,13 @@
       <div class="circle">
         <i class="fa-regular fa-circle"></i>
         <i
-        *ngIf="select_snacks == 'Snack'" 
+          *ngIf="select_snacks == 'Snack'"
           class="fa-solid fa-circle"
           style="color: red"
         ></i>
         <i
-        *ngIf="select_snacks!= 'Snack'"
-         class="fa-solid fa-circle"
+          *ngIf="select_snacks != 'Snack'"
+          class="fa-solid fa-circle"
           style="color: #008182"
         ></i>
         <i class="fa-regular fa-circle"></i>
@@ -334,30 +338,34 @@
     <form #input_form="ngForm" (ngSubmit)="submit_time()">
       <h3>Day of exam</h3>
       <select
-      required
-      #snack
-      id="select"
-      name="snack"
-      (change)="ondayselect($event)"      >
-      <option>Select a day</option>
-      <option   *ngFor="let appoint of calendar; let i=index">{{appoint.day_number}} : {{appoint.day_name}}</option>
+        required
+        #snack
+        id="select"
+        name="snack"
+        (change)="ondayselect($event)"
+      >
+        <option>Select a day</option>
+        <option *ngFor="let appoint of calendar; let i = index">
+          {{ appoint.day_number }} : {{ appoint.day_name }} : {{appoint.month_name}}
+        </option>
       </select>
 
       <h3>Appointment</h3>
       <select
-      required
-      #snack
-      id="select"
-      name="snack"
-      (change)="ontimeselect($event)"      >
-      <option>Select an Appointment</option>
-      <option >{{avilable_time}}</option>
+        required
+        #snack
+        id="select"
+        name="snack"
+        (change)="ontimeselect($event)"
+      >
+        <option>Select an Appointment</option>
+        <option *ngIf="avilable_time != ''">{{ avilable_time }}</option>
       </select>
       <button
         disabled
         *ngIf="
-        selectedday == 'Select a day' ||
-        selectedappointment == 'Select an Appointmen'
+          selectedday == 'Select a day' ||
+          selectedappointment == 'Select an Appointmen'
         "
         id="btn"
         style="background-color: gray"
@@ -367,8 +375,8 @@
       </button>
       <button
         *ngIf="
-        selectedday != 'Select a day' &&
-        selectedappointment != 'Select an Appointmen'
+          selectedday != 'Select a day' &&
+          selectedappointment != 'Select an Appointmen'
         "
         id="btn"
         type="submit"
@@ -380,16 +388,16 @@
         <i class="fa-regular fa-circle"></i>
         <i
           *ngIf="
-          selectedday == 'Select a day' ||
-          selectedappointment == 'Select an Appointmen'
+            selectedday == 'Select a day' ||
+            selectedappointment == 'Select an Appointmen'
           "
           class="fa-solid fa-circle"
           style="color: red"
         ></i>
         <i
           *ngIf="
-          selectedday != 'Select a day' &&
-          selectedappointment != 'Select an Appointmen'
+            selectedday != 'Select a day' &&
+            selectedappointment != 'Select an Appointmen'
           "
           class="fa-solid fa-circle"
           style="color: #008182"
@@ -402,7 +410,7 @@
 <!-- mesage template -->
 
 <div
-  *ngIf="non_token_exam!= undefined"
+  *ngIf="non_token_exam != undefined && non_token_exam.turn_on_off != 0"
   class="modal fade"
   id="not_token_exam"
   tabindex="-1"
@@ -447,7 +455,6 @@
   </div>
 </div>
 
-
 <div
   class="modal fade"
   id="token_exam"
@@ -486,23 +493,20 @@
           </ul>
           <div class="discoversmallbox2">
             <label class="discoverexamname1">Your last mark</label>
-            <label class="discoverscore1">{{learn_dataof_token.percentage}}%</label>
+            <label class="discoverscore1"
+              >{{ learn_dataof_token.percentage }}%</label
+            >
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          id="showcertificate"
-          
-        >
-          Show certificate
-        </button>
+        <button type="button" id="showcertificate">Show certificate</button>
         <button
           disabled
-          *ngIf="learn_dataof_token.percentage==100"
-          style="background: rgba(199, 199, 199, 0.46);
-          box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+          *ngIf="learn_dataof_token.percentage == 100"
+          style="
+            background: rgba(199, 199, 199, 0.46);
+            box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
           "
           type="button"
           (click)="take_exam(learn_dataof_token.title, learn_dataof_token._id)"
@@ -510,7 +514,7 @@
           Take Exam
         </button>
         <button
-        *ngIf="learn_dataof_token.percentage!=100"
+          *ngIf="learn_dataof_token.percentage != 100"
           type="button"
           (click)="take_exam(learn_dataof_token.title, learn_dataof_token._id)"
         >
@@ -520,7 +524,4 @@
     </div>
   </div>
 </div>
-
-
-
-
+<app-pop-up></app-pop-up>

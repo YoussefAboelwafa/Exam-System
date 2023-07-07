@@ -1,29 +1,48 @@
-
-<div *ngIf="flag_calender==true">
-    <div class="toolbar"> 
+<div *ngIf="flag_calender == true">
+  <div class="toolbar">
     <!-- country -->
     <div class="dropdown countrydiv">
-      <select (change)="onCountrySelected($event,1)" class="form-control" id="countrySelect" class="btn dropdown-toggle">
+      <select
+        (change)="onCountrySelected($event, 1)"
+        class="form-control"
+        id="countrySelect"
+        class="btn dropdown-toggle"
+      >
         <option selected>Country</option>
-        <option    *ngFor="let coun of country">{{coun}}</option>
+        <option *ngFor="let coun of country">{{ coun }}</option>
       </select>
     </div>
     <!-- city -->
     <div class="dropdown countrydiv">
-      <select (change)="oncitySelected($event,1)" class="form-control" id="countrySelect" class="btn dropdown-toggle">
+      <select
+        (change)="oncitySelected($event, 1)"
+        class="form-control"
+        id="countrySelect"
+        class="btn dropdown-toggle"
+      >
         <option selected>City</option>
-        <option    *ngFor="let cit of city">{{cit}}</option>
-       </select>
+        <option *ngFor="let cit of city">{{ cit }}</option>
+      </select>
     </div>
     <!-- location -->
     <div class="dropdown countrydiv">
-      <select (change)="onlocationSelected($event,1)" class="form-control" id="countrySelect" class="btn dropdown-toggle">
+      <select
+        (change)="onlocationSelected($event, 1)"
+        class="form-control"
+        id="countrySelect"
+        class="btn dropdown-toggle"
+      >
         <option selected>Location</option>
-        <option    *ngFor="let locate of locations">{{locate}}</option>
+        <option *ngFor="let locate of locations">{{ locate }}</option>
       </select>
     </div>
     <div class="dropdown monthdiv">
-      <select (change)="onmonthSelected($event)" class="form-control" id="countrySelect" class="btn dropdown-toggle">
+      <select
+        (change)="onmonthSelected($event)"
+        class="form-control"
+        id="countrySelect"
+        class="btn dropdown-toggle"
+      >
         <option selected>Month</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -40,7 +59,7 @@
       </select>
     </div>
   </div>
-  
+
   <div class="container">
     <button
       data-toggle="modal"
@@ -50,111 +69,147 @@
       Add appointment <i class="fa-solid fa-plus"></i>
     </button>
     <!-- ng for -->
-    <div *ngFor="let calend of calendar;let i=index" [ngClass]="{'card': true, 'card-text': true, 'box': true, 'bg': calend.student == calend.capacity}">
+    <div
+      *ngFor="let calend of calendar; let i = index"
+      [ngClass]="{
+        card: true,
+        'card-text': true,
+        box: true,
+        bg: calend.student == calend.capacity
+      }"
+    >
       <div class="remove">
-        <button (click)="goto_all_student(calend.day_number,calend.month_name,calend._id)"><i class="fa-solid fa-magnifying-glass"></i></button>
         <button
-         (click)="remove_calender(calend,i)"
-         data-toggle="modal"
-         data-target="#confirmation"
-          *ngIf="calend.student==0"><i class="fa-solid fa-trash"></i></button>
+          (click)="
+            goto_all_student(calend.day_number, calend.month_name, calend._id)
+          "
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button
+          (click)="remove_calender(calend, i)"
+          data-toggle="modal"
+          data-target="#confirmation"
+          *ngIf="calend.student == 0"
+        >
+          <i class="fa-solid fa-trash"></i>
+        </button>
       </div>
       <div class="info">
-        <label class="monthNumber">{{calend.day_number}}</label>
+        <label class="monthNumber">{{ calend.day_number }}</label>
         <div class="monthdiv">
-          <label class="monthName">{{calend.month_name}}</label>
-          <label class="day">{{calend.day_name}}</label>
+          <label class="monthName">{{ calend.month_name }}</label>
+          <label class="day">{{ calend.day_name }}</label>
         </div>
       </div>
       <div class="card-text upcomingbox">
         <!-- ng for -->
-        <div  class="upcominginfo smalldiv" style=" margin-bottom: 9px;" >
-          <label class="locate_box smallbox"  >{{ calend.country }}</label>
+        <div class="upcominginfo smalldiv" style="margin-bottom: 9px">
+          <label class="locate_box smallbox">{{ calend.country }}</label>
           <label class="locate_box smallbox">{{ calend.city }}</label>
           <label class="locate_box smallbox">{{ calend.location }}</label>
         </div>
       </div>
-      <div class="smallbox"><span class="score">{{calend.student}}</span>/{{calend.capacity}}</div>
-    </div>
-  </div>
-  
-  </div>
-  <div
-    class="modal fade"
-    id="addappointmodal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-          <button class="outer_button" disabled>
-            <button
-              type="button"
-              class="close close1"
-              data-dismiss="modal"
-              aria-label="Close"
-              (click)="close()"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="exampleFormControlInput1">Country:</label>
-            <select (change)="onCountrySelected($event,2)"  id="countrySelect" class="btn dropdown-toggle">
-              <option selected>Country</option>
-              <option    *ngFor="let coun of country">{{coun}}</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput2">City:</label>
-            <select (change)="oncitySelected($event,2)" class="form-control" id="countrySelect" class="btn dropdown-toggle">
-              <option selected>City</option>
-              <option    *ngFor="let cit of city">{{cit}}</option>
-             </select>
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput3">Location:</label>
-            <select (change)="onlocationSelected($event,2)" class="form-control" id="countrySelect" class="btn dropdown-toggle">
-              <option selected>Location</option>
-              <option    *ngFor="let locate of locations">{{locate}}</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput4">Date:</label>
-            <input
-              type="date"
-              class="form-control"
-              id="exampleFormControlInput4"
-              #add_date
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput5">Time:</label>
-            <input
-              type="time"
-              class="form-control"
-              id="exampleFormControlInput5"
-              #add_time
-            />
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button (click)="add_calendar(add_date.value,add_time.value)" type="button" id="addnewlocation">
-            Add <i class="fa-solid fa-plus"></i>
-          </button>
-        </div>
+      <div class="smallbox">
+        <span class="score">{{ calend.student }}</span
+        >/{{ calend.capacity }}
       </div>
     </div>
   </div>
-  
+</div>
+<div
+  class="modal fade"
+  id="addappointmodal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="close()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Country:</label>
+          <select
+            (change)="onCountrySelected($event, 2)"
+            id="countrySelect"
+            class="btn dropdown-toggle"
+          >
+            <option selected>Country</option>
+            <option *ngFor="let coun of country">{{ coun }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput2">City:</label>
+          <select
+            (change)="oncitySelected($event, 2)"
+            class="form-control"
+            id="countrySelect"
+            class="btn dropdown-toggle"
+          >
+            <option selected>City</option>
+            <option *ngFor="let cit of city">{{ cit }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">Location:</label>
+          <select
+            (change)="onlocationSelected($event, 2)"
+            class="form-control"
+            id="countrySelect"
+            class="btn dropdown-toggle"
+          >
+            <option selected>Location</option>
+            <option *ngFor="let locate of locations">{{ locate }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput4">Date:</label>
+          <input
+            type="date"
+            class="form-control"
+            id="exampleFormControlInput4"
+            #add_date
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput5">Time:</label>
+          <input
+            type="time"
+            class="form-control"
+            id="exampleFormControlInput5"
+            #add_time
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          (click)="add_calendar(add_date.value, add_time.value)"
+          type="button"
+          id="addnewlocation"
+        >
+          Add <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <div
+<div
   class="modal fade"
   id="moderatormodal"
   tabindex="-1"
@@ -188,10 +243,13 @@
             placeholder="Enter Name"
           />
         </div>
-       
       </div>
       <div class="modal-footer">
-        <button (click)="add_moderator(moderatorName.value)" type="button" id="addnewlocation">
+        <button
+          (click)="add_moderator(moderatorName.value)"
+          type="button"
+          id="addnewlocation"
+        >
           Add <i class="fa-solid fa-plus"></i>
         </button>
       </div>
@@ -199,126 +257,115 @@
   </div>
 </div>
 
+<div *ngIf="flag_all_student == true">
+  <div class="discoverexamslabel">
+    <p style="display: inline">
+      <span>{{ day_all }}</span
+      >{{ month_all }}
+    </p>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div *ngIf="flag_all_student ==true " >
-    <div class="discoverexamslabel">
-        <p style="display: inline;"><span>{{day_all}}</span>{{month_all}}</p>
-        
-        <button (click)="close_all_student()" class="btn_back"><i  class="fa-solid fa-arrow-left"></i></button>
-    </div>
-    <div class="moderator">
-        <button
-    data-toggle="modal"
-    data-target="#moderatormodal"
-    class="moderatorbtn"
-  >
-    Assign Moderator <i class="fa-solid fa-plus"></i>
-  </button>
-    </div>
+    <button (click)="close_all_student()" class="btn_back">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+  </div>
+  <div class="moderator">
+    <button
+      data-toggle="modal"
+      data-target="#moderatormodal"
+      class="moderatorbtn"
+    >
+      Assign Moderator <i class="fa-solid fa-plus"></i>
+    </button>
+  </div>
   <div class="discoverexamswidgets">
     <!-- ngfor ya kimoo -->
-    <div *ngFor="let user of user_exam ;let i=index " class="card card-body upcoming">
+    <div
+      *ngFor="let user of user_exam; let i = index"
+      class="card card-body upcoming"
+    >
       <!-- Not taken again -->
       <div class="name2">
         <img [src]="current_user.photo" alt="" class="image" />
         <div class="name1">
-          <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
-          <h5 class="card-title" id="id">#{{user._id_user}}</h5>
+          <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+          <h5 class="card-title" id="id">#{{ user._id_user }}</h5>
         </div>
       </div>
 
       <div class="discoverbox1">
         <div class="discoverinfo">
           <ul>
-            <li>{{user.exam_title}}</li>
-            <li>{{user.location}}</li>
-            <li>{{user.appointment}}</li>
-            <li>{{user.snack}}</li>
+            <li>{{ user.exam_title }}</li>
+            <li>{{ user.location }}</li>
+            <li>{{ user.appointment }}</li>
+            <li>{{ user.snack }}</li>
           </ul>
         </div>
         <div class="discoversmallbox">
           <label class="discoverscore">{{ user.percentage }}%</label>
-          <button (click)="open_user_card(user,i)" class="change">Click to change</button>
+          <button (click)="open_user_card(user, i)" class="change">
+            Click to change
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-
-
-
-
 <div *ngIf="flag_student == true" class="contain">
-   
-    <div class="one_card">
-        <div class="close" >
-            <button (click)="close_card()" class="closebtn">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-    <div  class="card card-body upcoming " id="special_card"  >
-        <!-- Not taken again -->
-        <div class="name2">
-          <img [src]="change_user.photo" alt="" class="image" />
-          <div class="name1">
-            <h5 class="card-title">{{change_user.first_name}} {{current_user.last_name}}</h5>
-            <h5 class="card-title" id="id">#{{change_user._id_user}}</h5>
-          </div>
+  <div class="one_card">
+    <div class="close">
+      <button (click)="close_card()" class="closebtn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="card card-body upcoming" id="special_card">
+      <!-- Not taken again -->
+      <div class="name2">
+        <img src="..//../assets/images/img5.svg" alt="" class="image" />
+        <div class="name1">
+          <h5 class="card-title">
+            {{ change_user.first_name }} {{ current_user.last_name }}
+          </h5>
+          <h5 class="card-title" id="id">#{{ change_user._id_user }}</h5>
         </div>
-  
-        <div class="discoverbox1">
-          <div class="discoverinfo">
-            <ul>
-              <li>{{change_user.exam_title}}</li>
-              <li>{{change_user.location}}</li>
-              <li>{{change_user.appointment}}</li>
-              <li>{{change_user.snack}}</li>
-            </ul>
-          </div>
-          <div class="discoversmallbox" style="height: 20vh;">
-            <label >Current percentage</label>
-            <input #user_percentage class="input_percentage" type=number min="0" max="100" placeholder="00 %" >
-          </div>
-        </div>
-        <div style="margin-top:-3.5ch;">
-        <hr style="color:#008081;">
-        <button (click)="change_percentage(user_percentage.value)" class="update_card">Update card</button>
-        </div>
+      </div>
 
-      </div>   
+      <div class="discoverbox1">
+        <div class="discoverinfo">
+          <ul>
+            <li>{{ change_user.exam_title }}</li>
+            <li>{{ change_user.location }}</li>
+            <li>{{ change_user.appointment }}</li>
+            <li>{{ change_user.snack }}</li>
+          </ul>
+        </div>
+        <div class="discoversmallbox" style="height: 20vh">
+          <label>Current percentage</label>
+          <input
+            #user_percentage
+            class="input_percentage"
+            type="number"
+            min="0"
+            max="100"
+            placeholder="00 %"
+          />
+        </div>
+      </div>
+      <div style="margin-top: -3.5ch">
+        <hr style="color: #008081" />
+        <button
+          (click)="change_percentage(user_percentage.value)"
+          class="update_card"
+        >
+          Update card
+        </button>
+      </div>
     </div>
   </div>
+</div>
 
-
-
-  <div
+<div
   class="modal fade"
   id="confirmation"
   tabindex="-1"
@@ -330,7 +377,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">
-          <p style="color: red;">Confirmation Remove</p>
+          <p style="color: red">Confirmation Remove</p>
         </h5>
         <button class="outer_button" disabled>
           <button
@@ -343,24 +390,24 @@
           </button>
         </button>
       </div>
-      <div class="modal-body" style="color: red;">
-        Are you sure you want to remove the <span style="font-size: 20px;">{{remove_calend.day_number}}</span>  {{remove_calend.month_name}}?
+      <div class="modal-body" style="color: red">
+        Are you sure you want to remove the
+        <span style="font-size: 20px">{{ remove_calend.day_number }}</span>
+        {{ remove_calend.month_name }}?
       </div>
       <div class="modal-footer">
-        <button
-            (click)="totaly_remove()"
-            class="discoverbtns btn_exam"
-          >
+        <button (click)="totaly_remove()" class="discoverbtns btn_exam">
           YES
         </button>
-        <button 
-           style="background-color: #FF0052;"
-            class="discoverbtns btn_exam"
-            (click)="close();"
-          >
+        <button
+          style="background-color: #ff0052"
+          class="discoverbtns btn_exam"
+          (click)="close()"
+        >
           NO
         </button>
       </div>
     </div>
   </div>
 </div>
+<app-pop-up></app-pop-up>
