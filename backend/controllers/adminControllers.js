@@ -131,7 +131,7 @@ module.exports.remove_exam = async (req, res) => {
         res.json({success: true});
     }catch(err){
         console.log(err);
-        res.json(err);
+        res.json({success: false});
     }
 }
 
@@ -235,7 +235,7 @@ module.exports.remove_location = async (req, res) => {
         res.json({success: true})
     }catch(err){
         console.log(err);
-        res.json(err);
+        res.json({success: false});
     }
 }
 
@@ -309,10 +309,11 @@ module.exports.get_all_days = async (req, res) => {
 
 module.exports.delete_day = async (req, res) => {
     try{
-        res.json(await TimeAndSpace.Day.remove_day(req.body))
+        await TimeAndSpace.Day.remove_day(req.body)
+        res.json({success: true})
     }catch(err){
         console.log(err);
-        res.json(err);
+        res.json({success: false});
     }
 }
 
