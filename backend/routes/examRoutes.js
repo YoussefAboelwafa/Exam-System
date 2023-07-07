@@ -7,6 +7,6 @@ const router = Router();
 
 router.post('/book_exam', bookingController.book_exam);
 
-
+router.get('/get_token', bookingController.startPayment)
 
 module.exports = router;

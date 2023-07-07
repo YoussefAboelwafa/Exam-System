@@ -5,6 +5,8 @@ const OTP = require('../models/OTP')
 const casual = require('casual');
 const Admin = require('../models/Admin')
 
+const token_secrect = '23452345'
+
 const vonage = new Vonage({
   apiKey: "dc9afa8a",
   apiSecret: "7LgnGBCpn6HS6aoI"
@@ -54,7 +56,7 @@ function errorHandler(err) {
 ///ivsXMmb3UFV5AtA0T3vh3l99CBqH5gfy
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = async (id) => {
-    return jwt.sign({ _id:id, admin:!(await Admin.isAdmin(id) === null)}, 'example secret' , { 
+    return jwt.sign({ _id:id, admin:!(await Admin.isAdmin(id) === null)}, token_secrect , { 
         expiresIn : maxAge
     })
 }

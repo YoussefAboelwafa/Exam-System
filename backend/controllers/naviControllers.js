@@ -9,7 +9,7 @@ const payment = (req, res) => {
     console.log('payment succeeded');
 }
 
-
+const token_secrect = '252345'
 
 
 module.exports.getHome = async (req, res) => {
@@ -19,7 +19,7 @@ module.exports.getHome = async (req, res) => {
 
         if(token){
             let startTime = Date.now();
-            jwt.verify(token, 'example secret', async (err, decodedToken)=>{
+            jwt.verify(token, token_secrect, async (err, decodedToken)=>{
 
                 if(err){
                     console.log(err.message);
@@ -108,8 +108,36 @@ module.exports.getOtherExams = async (req, res) => {
     ///assume req holds only {ids:[user's exams]}
     // req should  also contain the ids of the taken and upcoming exams
     try{
-        const exams = await Exam.find({ _id: { $nin: req.body.ids } }).select('title info about');
-        res.json(exams);
+        const token = req.cookies.jwt;
+
+        if(token){
+            jwt.verify(token, token_secrect, async (err, decodedToken)=>{
+                if(err){
+                    console.log(err.message);
+                    res.json({success: false});
+                }else{
+                    let filter = {}
+                    if(decodedToken.admin){
+                        filter = { _id: { $nin: req.body.ids }, deleted: false}
+                    }else{
+                        filter = { _id: { $nin: req.body.ids }, deleted: false, status: true}
+                    }
+                    const exams = await Exam.find(filter).select('title info about status');
+
+                    const parsed_exams = exams.map((exam) => ({
+                            _id: exam._id,
+                            title: exam.title,
+                            info: exam.info,
+                            about: exam.about,
+                            turn_on_off: (exam.status)? 1 : 0
+                        }))
+                    res.json(parsed_exams);
+                }
+            })
+        }else{
+            res.json({err});
+        }
+        
     }catch(err){
         console.log(err);
         res.json(err);

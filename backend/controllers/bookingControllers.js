@@ -1,12 +1,19 @@
 const User = require('../models/User')
 const Exam = require('../models/Exam')
 const jwt = require('jsonwebtoken')
+const payment = require('../services/payment')
 
 
-const payment = (req, res) => {
-    console.log('payment succeeded');
+const token_secrect = '23452345'
+
+module.exports.startPayment = async (req, res) => {
+    try {
+        const result = await payment.cowpay_init_and_auth({});
+        res.json({success: true, token: result.data.token})    
+    } catch (error) {
+        res.json({success: false})
+    }
 }
-
 
 
 module.exports.book_exam = async (req, res) => {
@@ -20,18 +27,25 @@ module.exports.book_exam = async (req, res) => {
         const token = req.cookies.jwt;
 
         if(token){
-            jwt.verify(token, 'example secret', async (err, decodedToken)=>{
-                if(err){
-                    console.log(err.message);
-                    throw "bad cookies"
-                }else{
-                    console.log(decodedToken._id);
-                    const viableRequest = await User.checkViability(req.body.exam, decodedToken._id);
-                    if(!viableRequest){
-                        throw "Not a viable request";
+            jwt.verify(token, token_secrect, async (err, decodedToken)=>{
+                try{
+                    if(err){
+                        console.log(err.message);
+                        throw "bad cookies"
+                    }else{
+                        console.log(decodedToken._id);
+                        const viableRequest = await User.checkViability(req.body.exam, decodedToken._id);
+                        if(!viableRequest){
+                            throw "not a viable request"
+                        }
+                        const result = await User.bookExam(req.body.exam, decodedToken._id)
+                        res.json({success: result});
                     }
                     const result = await User.bookExam(req.body.exam, decodedToken._id)
                     res.json({success: result});
+                }catch(err){
+                    console.log(err);
+                    res.json({success:false})
                 }
             })
         }else{
@@ -39,7 +53,7 @@ module.exports.book_exam = async (req, res) => {
         }
     }catch(err){
         console.log(err);
-        res.json(err)
+        res.json({success:false})
     }
 }
 
