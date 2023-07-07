@@ -21,19 +21,26 @@ module.exports.book_exam = async (req, res) => {
 
         if(token){
             jwt.verify(token, 'example secret', async (err, decodedToken)=>{
-                if(err){
-                    console.log(err.message);
-                    throw "bad cookies"
-                }else{
-                    console.log(decodedToken._id);
-                    const viableRequest = await User.checkViability(req.body.exam, decodedToken._id);
-                    if(!viableRequest){
-                        throw "not a viable request"
+                try{
+                    if(err){
+                        console.log(err.message);
+                        throw "bad cookies"
+                    }else{
+                        console.log(decodedToken._id);
+                        const viableRequest = await User.checkViability(req.body.exam, decodedToken._id);
+                        if(!viableRequest){
+                            throw "not a viable request"
+                        }
+                        const result = await User.bookExam(req.body.exam, decodedToken._id)
+                        res.json({success: result});
                     }
-                    const result = await User.bookExam(req.body.exam, decodedToken._id)
-                    res.json({success: result});
+                }catch(err){
+                    console.log(err);
+                    res.json({success: false})
                 }
-            })
+            }
+            )
+
         }else{
             throw "bad cookies"
         }
