@@ -3,6 +3,7 @@ import { exams } from '../objects/exams';
 import { Token } from '@angular/compiler';
 import { ServicService } from '../services/servic.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ModalPopServiceService } from '../services/modal-pop-service.service';
 declare const $: any;
 
 @Component({
@@ -11,7 +12,7 @@ declare const $: any;
   styleUrls: ['./admin-exams.component.css'],
 })
 export class AdminExamsComponent implements OnInit {
-  constructor(private service: ServicService) {
+  constructor(private service: ServicService,private popup:ModalPopServiceService) {
     this.service.exam_bar_init_admin().subscribe((x) => {
         
       if(x.length==0){
@@ -60,7 +61,10 @@ export class AdminExamsComponent implements OnInit {
     this.remove_ex = new exams();
     this.index_remove = '';
     this.service.remove_exam(x._id).subscribe((x) => {
-      console.log(x);
+      // if(x.success==false) {
+      //   this.popup.open_error_delete_exam(); 
+      //   return;      
+      // }
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }
@@ -115,7 +119,6 @@ export class AdminExamsComponent implements OnInit {
     this.close_popup();
 
     this.service.add_new_exam(x).subscribe((x) => {
-      console.log(x);
       this.non_token_exam[this.non_token_exam.length - 1]._id = x;
 
       error: (error: HttpErrorResponse) => alert(error.message);

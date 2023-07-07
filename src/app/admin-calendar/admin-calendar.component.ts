@@ -4,6 +4,7 @@ import { book_user } from '../objects/book_user';
 import { ServicService } from '../services/servic.service';
 import { address } from '../objects/loction_address';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ModalPopServiceService } from '../services/modal-pop-service.service';
 declare const $: any;
 
 @Component({
@@ -50,7 +51,7 @@ export class AdminCalendarComponent implements OnInit {
   temp_city_address: any;
   temp_location_address: any;
   temp_calender: any;
-  constructor(private service: ServicService) {
+  constructor(private service: ServicService,private popup:ModalPopServiceService) {
     this.service.get_places().subscribe((x) => {
       this.all_locations = x;
       this.country = x.map((cont: any) => cont.country_name);
@@ -192,6 +193,10 @@ export class AdminCalendarComponent implements OnInit {
     this.index_calend = '';
     console.log(x._id);
     this.service.remove_day(x._id).subscribe((x) => {
+      if(x.success==false) {
+        this.popup.open_error_delete_calender(); 
+        return;      
+      }
       this.service.get_calender_admin().subscribe((x) => {
         this.calendar = x;
       });

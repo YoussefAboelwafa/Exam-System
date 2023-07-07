@@ -5,6 +5,7 @@ import { exams } from '../objects/exams';
 import { calendar } from '../objects/calender';
 import { address } from '../objects/loction_address';
 import { Router } from '@angular/router';
+import { ModalPopServiceService } from '../services/modal-pop-service.service';
 declare const $: any;
 
 @Component({
@@ -61,7 +62,7 @@ export class HomeBarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  constructor(private service: ServicService, private router: Router) {
+  constructor(private service: ServicService, private router: Router,private popup: ModalPopServiceService) {
     this.refresh_all();
     this.upcoming_exam = this.service.upcoming_ex;
     this.token_exam = this.service.token_ex;
@@ -202,7 +203,11 @@ export class HomeBarComponent implements OnInit {
       snack: this.select_snacks,
       appointment: this.selectedappointment,
     };
-    this.service.book_exam(x).subscribe((x) => {});
+    this.service.book_exam(x).subscribe((x) => {
+      if(x.success==false) {
+        this.popup.open_error_book();        
+      }
+    });
     this.reset_order_exam();
     //service becouse i need Day of exam and Appointment then next step
     this.clear_flag_book();

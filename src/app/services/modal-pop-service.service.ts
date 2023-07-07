@@ -67,6 +67,64 @@ export class ModalPopServiceService {
       modal.style.display = 'block';
     }
   }
+  public open_error_book() {
+    this.error_message =
+      'You can\'t book two exams on the same day.';
+    this.title = 'Book Error Message !';
+    const errorMessageElement = document.getElementById('error-message');
+    if (errorMessageElement) {
+      errorMessageElement.textContent = this.error_message;
+    }
+    const title_message = document.getElementById('error-title');
+    if (title_message) {
+      title_message.textContent = this.title;
+    }
+    const modal = document.getElementById('ERROR_login');
+    if (modal) {
+      modal.classList.add('show');
+      modal.style.display = 'block';
+    }
+  }
+
+  public open_error_delete_calender() {
+    this.error_message =
+      'you cant delete this day';
+    this.title = 'Book Error Message !';
+    const errorMessageElement = document.getElementById('error-message');
+    if (errorMessageElement) {
+      errorMessageElement.textContent = this.error_message;
+    }
+    const title_message = document.getElementById('error-title');
+    if (title_message) {
+      title_message.textContent = this.title;
+    }
+    const modal = document.getElementById('ERROR_login');
+    if (modal) {
+      modal.classList.add('show');
+      modal.style.display = 'block';
+    }
+  }
+
+  
+  // public open_error_delete_exam() {
+  //   this.error_message =
+  //     'You can\'t delete an exam if a student has already booked it.';
+  //   this.title = 'Book Error Message !';
+  //   const errorMessageElement = document.getElementById('error-message');
+  //   if (errorMessageElement) {
+  //     errorMessageElement.textContent = this.error_message;
+  //   }
+  //   const title_message = document.getElementById('error-title');
+  //   if (title_message) {
+  //     title_message.textContent = this.title;
+  //   }
+  //   const modal = document.getElementById('ERROR_login');
+  //   if (modal) {
+  //     modal.classList.add('show');
+  //     modal.style.display = 'block';
+  //   }
+  // }
+
 
   public close_error() {
     const modal = document.getElementById('ERROR_login');
