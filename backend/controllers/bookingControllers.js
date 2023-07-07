@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const payment = require('../services/payment')
 
 
-const token_secrect = '23452345'
+const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
 module.exports.startPayment = async (req, res) => {
     try {

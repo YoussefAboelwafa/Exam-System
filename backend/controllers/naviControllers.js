@@ -5,11 +5,8 @@ const jwt = require('jsonwebtoken');
 const { populate } = require('../models/Admin');
 const TimeAndSpace = require('../models/TimeAndSpace')
 
-const payment = (req, res) => {
-    console.log('payment succeeded');
-}
 
-const token_secrect = '252345'
+const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
 
 module.exports.getHome = async (req, res) => {
