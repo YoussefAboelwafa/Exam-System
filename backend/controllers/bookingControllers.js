@@ -37,7 +37,7 @@ module.exports.book_exam = async (req, res) => {
         }
     }catch(err){
         console.log(err);
-        res.json(err)
+        res.json({success: false})
     }
 }
 
