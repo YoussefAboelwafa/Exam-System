@@ -23,8 +23,15 @@
     </div>
   </div>
   <ng-container *ngIf="upcoming_exam.length == 0">
-    <div   class="upcominginfo" style="font-weight: 600; font-size: 15px;">
-      <p>You have worked hard to get to where you are today, and you deserve to be recognized for your skills and expertise. Taking the exam can help you achieve the recognition and success you deserve. You have what it takes to pass this exam and take your career to the next level. Believe in yourself and take the leap – book your exam today and show the world what you're capable of!</p>
+    <div class="upcominginfo" style="font-weight: 600; font-size: 15px">
+      <p>
+        You have worked hard to get to where you are today, and you deserve to
+        be recognized for your skills and expertise. Taking the exam can help
+        you achieve the recognition and success you deserve. You have what it
+        takes to pass this exam and take your career to the next level. Believe
+        in yourself and take the leap – book your exam today and show the world
+        what you're capable of!
+      </p>
     </div>
   </ng-container>
 </div>
@@ -70,10 +77,12 @@
     </div>
   </div>
 
-
   <ng-container *ngIf="token_exam.length == 0">
-    <div   class="upcominginfo" style="font-weight: 600; font-size: 15px;">
-      <p>You have not taken the exam yet. You can now book the exam. What are you waiting for?</p>
+    <div class="upcominginfo" style="font-weight: 600; font-size: 15px">
+      <p>
+        You have not taken the exam yet. You can now book the exam. What are you
+        waiting for?
+      </p>
     </div>
   </ng-container>
 </div>
@@ -84,13 +93,15 @@
 </div>
 <div class="discoverexamswidgets">
   <!-- ngfor ya kimoo -->
-  
-  <div *ngFor="let non_token of non_token_exam" class="card card-body upcoming">
+
+  <div *ngFor="let non_token of non_token_exam"  class="card card-body upcoming">
     <h5 class="card-title">{{ non_token.title }}</h5>
     <div class="discoverbox1">
       <div class="discoversmallbox">
         <ul class="examlist">
-          <li *ngFor="let infomration of non_token.info">{{ infomration }}</li>
+          <li *ngFor="let infomration of non_token.info">
+            {{ infomration }}
+          </li>
         </ul>
       </div>
       <div class="discoverinfo">
@@ -111,6 +122,13 @@
       </div>
     </div>
   </div>
+  <ng-container *ngIf="non_token_exam.length == 0">
+    <div class="upcominginfo" style="font-weight: 600; font-size: 15px ">
+      <p >
+        Stay tuned .....
+      </p>
+    </div>
+  </ng-container>
 </div>
 
 <!-- booking exam -->
@@ -131,11 +149,11 @@
           required
           #country
           id="select"
-          name="country" 
+          name="country"
           (change)="onCountrySelected($event)"
         >
           <option selected>Country</option>
-          <option *ngFor="let coun of countrys">{{coun}}</option>
+          <option *ngFor="let coun of countrys">{{ coun }}</option>
         </select>
 
         <h3>City</h3>
@@ -148,8 +166,8 @@
           (change)="oncitySelected($event)"
         >
           <option selected>City</option>
-          <option    *ngFor="let cit of citys">{{cit}}</option>
-         </select>
+          <option *ngFor="let cit of citys">{{ cit }}</option>
+        </select>
         <h3>Location</h3>
         <select
           class="sel"
@@ -160,15 +178,15 @@
           (change)="onlocationSelected($event)"
         >
           <option selected>Location</option>
-          <option    *ngFor="let locate of locations">{{locate}}</option>
-          </select>
+          <option *ngFor="let locate of locations">{{ locate }}</option>
+        </select>
 
         <button
           disabled
           *ngIf="
-          selectedCountry == 'country' ||
-          selectedCity == 'city' ||
-          selectedlocation == 'location'
+            selectedCountry == 'country' ||
+            selectedCity == 'city' ||
+            selectedlocation == 'location'
           "
           id="btn"
           style="background-color: gray"
@@ -178,9 +196,9 @@
         </button>
         <button
           *ngIf="
-          selectedCountry != 'country' &&
-          selectedCity != 'city' &&
-          selectedlocation != 'location'
+            selectedCountry != 'country' &&
+            selectedCity != 'city' &&
+            selectedlocation != 'location'
           "
           id="btn"
           type="submit"
@@ -191,18 +209,18 @@
       <div class="circle">
         <i
           *ngIf="
-          selectedCountry == 'country' ||
-          selectedCity == 'city' ||
-          selectedlocation == 'location'
+            selectedCountry == 'country' ||
+            selectedCity == 'city' ||
+            selectedlocation == 'location'
           "
           class="fa-solid fa-circle"
           style="color: red"
         ></i>
         <i
           *ngIf="
-          selectedCountry != 'country' &&
-          selectedCity != 'city' &&
-          selectedlocation != 'location'
+            selectedCountry != 'country' &&
+            selectedCity != 'city' &&
+            selectedlocation != 'location'
           "
           class="fa-solid fa-circle"
           style="color: #008182"
@@ -229,13 +247,14 @@
         #snack
         id="select"
         name="snack"
-        (change)="onselectsnack($event)"      >
+        (change)="onselectsnack($event)"
+      >
         <option>snack</option>
-        <option   *ngFor="let snack of snacks">{{snack}}</option>
+        <option *ngFor="let snack of snacks">{{ snack }}</option>
       </select>
       <button
         disabled
-        *ngIf="select_snacks== 'Snack'"
+        *ngIf="select_snacks == 'Snack'"
         id="btn"
         style="background-color: gray"
         type="submit"
@@ -249,13 +268,13 @@
       <div class="circle">
         <i class="fa-regular fa-circle"></i>
         <i
-        *ngIf="select_snacks == 'Snack'" 
+          *ngIf="select_snacks == 'Snack'"
           class="fa-solid fa-circle"
           style="color: red"
         ></i>
         <i
-        *ngIf="select_snacks!= 'Snack'"
-         class="fa-solid fa-circle"
+          *ngIf="select_snacks != 'Snack'"
+          class="fa-solid fa-circle"
           style="color: #008182"
         ></i>
         <i class="fa-regular fa-circle"></i>
@@ -275,30 +294,34 @@
     <form #input_form="ngForm" (ngSubmit)="submit_time()">
       <h3>Day of exam</h3>
       <select
-      required
-      #snack
-      id="select"
-      name="snack"
-      (change)="ondayselect($event)"      >
-      <option>Select a day</option>
-      <option   *ngFor="let appoint of calendar; let i=index">{{appoint.day_number}} : {{appoint.day_name}}</option>
+        required
+        #snack
+        id="select"
+        name="snack"
+        (change)="ondayselect($event)"
+      >
+        <option>Select a day</option>
+        <option *ngFor="let appoint of calendar; let i = index">
+          {{ appoint.day_number }} : {{ appoint.day_name }} : {{appoint.month_name}}
+        </option>
       </select>
 
       <h3>Appointment</h3>
       <select
-      required
-      #snack
-      id="select"
-      name="snack"
-      (change)="ontimeselect($event)"      >
-      <option>Select an Appointment</option>
-      <option >{{avilable_time}}</option>
+        required
+        #snack
+        id="select"
+        name="snack"
+        (change)="ontimeselect($event)"
+      >
+        <option>Select an Appointment</option>
+        <option *ngIf="avilable_time != ''">{{ avilable_time }}</option>
       </select>
       <button
         disabled
         *ngIf="
-        selectedday == 'Select a day' ||
-        selectedappointment == 'Select an Appointmen'
+          selectedday == 'Select a day' ||
+          selectedappointment == 'Select an Appointmen'
         "
         id="btn"
         style="background-color: gray"
@@ -308,8 +331,8 @@
       </button>
       <button
         *ngIf="
-        selectedday != 'Select a day' &&
-        selectedappointment != 'Select an Appointmen'
+          selectedday != 'Select a day' &&
+          selectedappointment != 'Select an Appointmen'
         "
         id="btn"
         type="submit"
@@ -321,16 +344,16 @@
         <i class="fa-regular fa-circle"></i>
         <i
           *ngIf="
-          selectedday == 'Select a day' ||
-          selectedappointment == 'Select an Appointmen'
+            selectedday == 'Select a day' ||
+            selectedappointment == 'Select an Appointmen'
           "
           class="fa-solid fa-circle"
           style="color: red"
         ></i>
         <i
           *ngIf="
-          selectedday != 'Select a day' &&
-          selectedappointment != 'Select an Appointmen'
+            selectedday != 'Select a day' &&
+            selectedappointment != 'Select an Appointmen'
           "
           class="fa-solid fa-circle"
           style="color: #008182"
@@ -438,18 +461,14 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          id="showcertificate"
-        >
-          Show certificate
-        </button>
+        <button type="button" id="showcertificate">Show certificate</button>
 
         <button
           disabled
-          *ngIf="learn_dataof_token.percentage==100"
-          style="background: rgba(199, 199, 199, 0.46);
-          box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+          *ngIf="learn_dataof_token.percentage == 100"
+          style="
+            background: rgba(199, 199, 199, 0.46);
+            box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
           "
           type="button"
           (click)="take_exam(learn_dataof_token.title, learn_dataof_token._id)"
@@ -457,7 +476,7 @@
           Take Exam
         </button>
         <button
-        *ngIf="learn_dataof_token.percentage!=100"
+          *ngIf="learn_dataof_token.percentage != 100"
           type="button"
           (click)="take_exam(learn_dataof_token.title, learn_dataof_token._id)"
         >
@@ -467,3 +486,4 @@
     </div>
   </div>
 </div>
+<app-pop-up></app-pop-up>

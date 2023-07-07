@@ -111,11 +111,9 @@ a {
   text-decoration: none;
 }
 
-.error{
+.error {
   font-size: small;
   margin-top: -25px;
   margin-bottom: 10px;
   color: red;
 }
-
-

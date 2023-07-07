@@ -1,74 +1,73 @@
 .modal-title-error {
-    color: red;
+  color: red;
   font-size: 30px;
   font-family: Montserrat;
   font-weight: 700;
   line-height: 100%;
-  
-  }
-  .modal-content{
-    border-radius: 15px;
-    background: radial-gradient(313.28% 209.98% at 99.43% 99.22%, #DFF 0%, rgba(235, 247, 248, 0.00) 100%), rgba(255, 255, 255, 0.75);
-    box-shadow: 0px 0px 25px 0px rgba(130, 52, 0, 0.15);
-    backdrop-filter: blur(6.5px);
-  }
-  
-  .modal-footer button{
-    background: #008182;
-    box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
-    color:#FFF;
-    width: 200px;
-    border: none;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 8px 10px;
-    justify-content: center;
-    align-items: center;
-    width: 500px;
-  
-  }
-  
-  .modal-body{
-    color:  #FF0052;;
-    font-size: 16px;
-    font-family: Montserrat;
-    font-weight: 500;
-  }
-  .modal-footer button:hover {
-    background: #fff;
-    color: #008182;
-    border: 1px solid #008182;
-    transition: 1s;
-  }
-  
-  .outer_button{
-  border:none;
+}
+.modal-content {
+  border-radius: 15px;
+  background: radial-gradient(
+      313.28% 209.98% at 99.43% 99.22%,
+      #dff 0%,
+      rgba(235, 247, 248, 0) 100%
+    ),
+    rgba(255, 255, 255, 0.75);
+  box-shadow: 0px 0px 25px 0px rgba(130, 52, 0, 0.15);
+  backdrop-filter: blur(6.5px);
+}
+
+.modal-footer button {
+  background: #008182;
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  color: #fff;
+  width: 200px;
+  border: none;
   border-radius: 10px;
-  background-color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 8px 10px;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+}
+
+.modal-body {
+  color: #ff0052;
+  font-size: 16px;
+  font-family: Montserrat;
+  font-weight: 500;
+}
+.modal-footer button:hover {
+  background: #fff;
+  color: #008182;
+  border: 1px solid #008182;
+  transition: 1s;
+}
+
+.outer_button {
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
   width: 27px;
   height: 27px;
-  margin-left:3px;
-  margin-bottom:3px;
-
+  margin-left: 3px;
+  margin-bottom: 3px;
 }
 
-.close{
-
-    margin-bottom: 1.5px;
-    margin-left: .5px;
-    
+.close {
+  margin-bottom: 1.5px;
+  margin-left: 0.5px;
 }
 
-.modal-title{
-    color: #006A6A;
-    font-size: 30px;
+.modal-title {
+  color: #006a6a;
+  font-size: 30px;
   font-family: Montserrat;
   font-weight: 700;
   line-height: 100%;
-  
-  }
+}

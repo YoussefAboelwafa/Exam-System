@@ -14,11 +14,11 @@
     <div *ngFor="let non_token of non_token_exam; let i = index" class="card card-body upcoming">
         <div class="remove" >
           <button class="btn_remove" style="margin-right: 5px;"
-            *ngIf="non_token.turn_on_off==0"      
+            *ngIf="non_token.turn_on_off=='0'"      
            (click)="turn_off_on_exam(non_token)"><i style="color: red;" title="Open exam" class="fa-solid fa-circle-xmark"></i>
           </button>
           <button class="btn_remove"  style="margin-right: 5px;"   
-          *ngIf="non_token.turn_on_off==1"        
+          *ngIf="non_token.turn_on_off=='1'"        
            (click)="turn_off_on_exam(non_token)"><i style="color:#008081;"title="Close exam" class="fa-solid fa-circle-xmark"></i>
           </button> 
            
@@ -192,7 +192,7 @@
         <h3>About of exam</h3>
         <textarea #ed_about [value]="edit_ex.about" class="input_edit" id="t_area"></textarea>
         <h3>number of Information</h3>
-        <input (blur)="set_number(number_info.value)" min="0"  #number_info type="number" [value]="" class="input_edit">
+        <input (blur)="set_number(number_info_ed.value)" min="0"  #number_info_ed type="number" [value]="" class="input_edit">
          <h3>Information of exam</h3>
         <div *ngFor="let info of information; let i = index">
           <input #inf (blur)="set_info(inf.value,i)" [value]="information[i]" type="text" class="input_edit">

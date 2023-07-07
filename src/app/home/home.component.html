@@ -1,17 +1,22 @@
 <div class="container">
   <div class="section section1">
-    <div class="name"*ngIf="current_user">
-      <input type="file" accept="image/*" class="file-input" (change)="onFileSelect($event)">
+    <div class="name" *ngIf="current_user">
+      <input
+        type="file"
+        accept="image/*"
+        class="file-input"
+        (change)="onFileSelect($event)"
+      />
       <img [src]="current_user.photo" alt="" class="image" />
       <div class="name2">
-        <label>{{current_user.first_name}} {{current_user.last_name}}</label>
-        <label id="id">#{{current_user._id}}</label>
-        <button (click)="refresh()" style=" all:unset; cursor: pointer;border-radius: 8px;"> <i class="fa-solid fa-rotate-right"></i></button>
+        <label
+          >{{ current_user.first_name }} {{ current_user.last_name }}</label
+        >
+        <label id="id">#{{ current_user._id }}</label>
       </div>
     </div>
 
     <div class="btns1">
-      
       <button>Certificates</button>
       <button>Past Exams</button>
     </div>
@@ -19,17 +24,14 @@
   <!-- Side bar -->
   <div class="section section2 sidebar">
     <ul>
-      <li  [routerLinkActive]="'active'">
-        <button
-        routerLink="/home/home_bar">
+      <li [routerLinkActive]="'active'">
+        <button routerLink="/home/home_bar">
           <img src="../../assets/images/home.svg" alt="" />
           Home
         </button>
       </li>
       <li [routerLinkActive]="'active'">
-        <button 
-        routerLink="/home/exam_bar"
-        >
+        <button routerLink="/home/exam_bar">
           <img src="../../assets/images/exams.svg" alt="" />
           Exams
         </button>
@@ -41,7 +43,7 @@
         </button>
       </li>
       <li [routerLinkActive]="'active'">
-        <button   routerLink="/home/ranking_bar" >
+        <button routerLink="/home/ranking_bar">
           <img src="../../assets/images/rank.svg" alt="" />
           Ranking
         </button>
@@ -49,33 +51,25 @@
     </ul>
     <div class="book">
       <label>Book Your Next <br />Exam Now</label>
-      <button  routerLink="/home/exam_bar">Book Now</button>
+      <button routerLink="/home/exam_bar">Book Now</button>
     </div>
   </div>
   <div class="section section3">
     <router-outlet></router-outlet>
 
-
-
-
-<div *ngIf="flag_type == true" class="contain">
-  <ngx-typed-js 
-  [strings]="['Loading...']"
-  [loop]="true"
-  [typeSpeed]="20"
-  [backSpeed]="40"
-  [backDelay]="40"
-  [cursorChar]="' '"
->
-  <h1 class="typing"></h1>
-</ngx-typed-js>
-
-
-
-    <!-- Good morning section -->
+    <div *ngIf="flag_type == true" class="contain">
+      <ngx-typed-js
+        [strings]="['Loading...']"
+        [loop]="true"
+        [typeSpeed]="20"
+        [backSpeed]="40"
+        [backDelay]="40"
+        [cursorChar]="' '"
+      >
+        <h1 class="typing"></h1>
+      </ngx-typed-js>
+    </div>
   </div>
 </div>
-
-</div>
- <!-- skipLocationChange="true"
+<!-- skipLocationChange="true"
   routerLink="home/exam"   -->

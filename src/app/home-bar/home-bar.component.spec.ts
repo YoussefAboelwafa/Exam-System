@@ -8,9 +8,8 @@ describe('HomeBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomeBarComponent ]
-    })
-    .compileComponents();
+      declarations: [HomeBarComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HomeBarComponent);
     component = fixture.componentInstance;

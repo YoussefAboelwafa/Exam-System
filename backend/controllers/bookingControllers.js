@@ -27,7 +27,9 @@ module.exports.book_exam = async (req, res) => {
         const token = req.cookies.jwt;
 
         if(token){
+
             jwt.verify(token, token_secrect, async (err, decodedToken)=>{
+
                 try{
                     if(err){
                         console.log(err.message);
@@ -41,19 +43,20 @@ module.exports.book_exam = async (req, res) => {
                         const result = await User.bookExam(req.body.exam, decodedToken._id)
                         res.json({success: result});
                     }
-                    const result = await User.bookExam(req.body.exam, decodedToken._id)
-                    res.json({success: result});
                 }catch(err){
                     console.log(err);
-                    res.json({success:false})
+                    res.json({success: false})
                 }
-            })
+            }
+            )
+
         }else{
             throw "bad cookies"
         }
     }catch(err){
         console.log(err);
         res.json({success:false})
+
     }
 }
 
