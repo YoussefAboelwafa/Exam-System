@@ -20,7 +20,5 @@ router.post('/verify_code', authController.verifyCode);
 router.post('/send_agin', authController.send_again);
 
 
-router.get('/test', booking.startPayment)
-
 
 module.exports = router;
