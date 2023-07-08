@@ -205,27 +205,44 @@ export class ExamsBarComponent implements OnInit {
     this.flag_time = true;
   }
   submit_time() {
-    let x = {
+    let book_exam= {
       location_id: this.id_location,
       day_id: this.day_id,
       exam_id: this.book_id_exam,
       snack: this.select_snacks,
       appointment: this.selectedappointment,
     };
-    COWPAYOTPDIALOG.init();
-    // this.service.book_exam(x).subscribe(
-    //   (y) => {
-    //   if(y.success==false){  
-    //     console.log(1)
-    //     this.popup.open_error_book();
-    //   }
-    //   else{
-    //   }
-    // });
-this.service.payment(this.book_id_exam).subscribe(
-          token=>{
-            COWPAYOTPDIALOG.load(token);
-        })
+    
+  this.service.payment(book_exam).subscribe(
+          res=>{
+
+            COWPAYOTPDIALOG.init();
+            COWPAYOTPDIALOG.load(res.token);
+    })
+    // cowpay_reference_id
+    // signature
+
+    window.addEventListener('message', (e:any)=>{
+      if (e.data && e.data.message_source === 'cowpay') {
+          let paymentStatus = e.data.payment_status,
+          cowpayReferenceId = e.data.cowpay_reference_id,
+          signature = e.data.signature;
+          if(paymentStatus == "FAILED"){
+            this.popup.open_error_payment();
+                    }
+          this.service.book_exam(book_exam,cowpayReferenceId,signature).subscribe(
+            (y) => {
+            if(y.success==false){  
+              this.popup.open_error_book(y.error);
+            }
+            else{
+            }
+          });
+          
+          // take an action based on the values
+      }
+
+  }, false);
     //service becouse i need Day of exam and Appointment then next step
     this.reset_order_exam();
     this.refresh_all();

@@ -7,7 +7,7 @@ import { address } from '../objects/loction_address';
 import { Router } from '@angular/router';
 import { ModalPopServiceService } from '../services/modal-pop-service.service';
 declare const $: any;
-
+declare let COWPAYOTPDIALOG: any;
 @Component({
   selector: 'app-home-bar',
   templateUrl: './home-bar.component.html',
@@ -196,18 +196,44 @@ export class HomeBarComponent implements OnInit {
     this.flag_time = true;
   }
   submit_time() {
-    let x = {
+    let book_exam = {
       location_id: this.id_location,
       day_id: this.day_id,
       exam_id: this.book_id_exam,
       snack: this.select_snacks,
       appointment: this.selectedappointment,
     };
-    this.service.book_exam(x).subscribe((x) => {
-      if(x.success==false) {
-        this.popup.open_error_book();        
+    
+  this.service.payment(book_exam).subscribe(
+          res=>{
+             COWPAYOTPDIALOG.init();
+            COWPAYOTPDIALOG.load(res.token);
+    })
+    // cowpay_reference_id
+    // signature
+
+    window.addEventListener('message', (e:any)=>{
+      if (e.data && e.data.message_source === 'cowpay') {
+          let paymentStatus = e.data.payment_status,
+          cowpayReferenceId = e.data.cowpay_reference_id,
+          signature = e.data.signature;
+          if(paymentStatus == "FAILED"){
+            this.popup.open_error_payment();
+                    }
+          this.service.book_exam(book_exam,cowpayReferenceId,signature).subscribe(
+            (y) => {
+            if(y.success==false){  
+              console.log(1)
+              this.popup.open_error_book(y.error);
+            }
+            else{
+            }
+          });
+          
+          // take an action based on the values
       }
-    });
+
+  }, false);
     this.reset_order_exam();
     //service becouse i need Day of exam and Appointment then next step
     this.clear_flag_book();

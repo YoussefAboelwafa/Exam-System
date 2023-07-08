@@ -122,7 +122,7 @@
       </div>
     </div>
   </div>
-  <ng-container *ngIf="non_token_exam.length == 0">
+  <ng-container *ngIf="non_token_exam!=null&&non_token_exam.length == 0">
     <div class="upcominginfo" style="font-weight: 600; font-size: 15px ">
       <p >
         Stay tuned .....
@@ -327,7 +327,7 @@
         style="background-color: gray"
         type="submit"
       >
-        Next
+      Pay Now
       </button>
       <button
         *ngIf="

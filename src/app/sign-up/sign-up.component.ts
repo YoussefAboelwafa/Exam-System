@@ -15,6 +15,7 @@ export class SignUpComponent implements OnInit {
   pow_password = -1;
   flag_choose_city = false;
   flag_choose_country = false;
+  index_country =0;
 
   // cities = [
   //   'Cairo',
@@ -64,6 +65,49 @@ export class SignUpComponent implements OnInit {
     'Yemen',
   ];
 
+  countryPhoneCodes = [
+    '+1', 
+    '+86', 
+    '+81',    
+    '+49',
+    '+44',   
+    '+91',  
+    '+33',
+    '+55',     
+    '+39',
+    '+1',  
+    '+82',   
+    '+7',    
+    '+61',     
+    '+34',  
+    '+52',
+    '+62',     
+    '+213',   
+    '+973',     
+    '+269',      
+    '+253',     
+    '+20',     
+    '+964',
+    '+962',  
+    '+965',
+    '+961', 
+    '+212',  
+    '+218',  
+    '+212',  
+    '+968',  
+    '+970',   
+    '+974',
+    '+925',
+    '+974',
+    '+966',
+    '+249',   
+    '+249',   
+    '+963',       
+    '+216',   
+    '+971',
+    '+250',
+];
+
   constructor(
     user: users,
     private service: ServicService,
@@ -112,7 +156,25 @@ export class SignUpComponent implements OnInit {
     } else {
       this.flag_choose_country = true;
       this.signup_user.set_country(value);
+      
+      for (let i = 0; i <this.countries.length; i++) {
+        if(this.countries[i]==value) {
+          this.index_country=i;
+          this.signup_user.phone_namber='+'+this.index_country
+          break;
+        }
+      }
+
+
     }
+
+
+
+
+
+
+
+
   }
   select_city(value: any) {
     if (value == 'Select') {
@@ -125,7 +187,10 @@ export class SignUpComponent implements OnInit {
   }
   submit() {
     //service with user_signup
-
+    // if(this.signup_user.phone_namber[0]!='+'){
+    // this.signup_user.phone_namber='+'+this.index_country+''+this.signup_user.phone_namber;
+    // }
+    console.log(this.signup_user.phone_namber);
     this.service.user = this.signup_user;
     this.service.sign_up(this.signup_user).subscribe((x) => {
       console.log(x);
@@ -138,4 +203,8 @@ export class SignUpComponent implements OnInit {
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }
+
+  
+
+  
 }

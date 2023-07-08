@@ -64,7 +64,10 @@
               (change)="select_country(country.value)"
             >
               <option>Select</option>
-              <option *ngFor="let country of countries" [value]="country">
+              <option
+                *ngFor="let country of countries; let i = index"
+                [value]="country"
+              >
                 {{ country }}
               </option>
             </select>
@@ -119,6 +122,7 @@
               class="form-control"
               [class.is-invalid]="phone.invalid && phone.touched"
             />
+           
             <!-- handle errors -->
             <div
               class="error"

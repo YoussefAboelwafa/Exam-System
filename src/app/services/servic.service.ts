@@ -118,9 +118,10 @@ public add_day(new_time:any):Observable<any>{
 public remove_day(id_day:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/delete_day`,{day_id:id_day}, { withCredentials: true });
 }
-public book_exam(order_exam:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/exam/book_exam`,{exam:order_exam}, { withCredentials: true });
+public book_exam(order_exam:any,cowpay_reference_id:any,signature:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/exam/book_exam`,{exam:order_exam,signature:signature,cowpay_reference_id:cowpay_reference_id}, { withCredentials: true });
 }
+
 
 public get_allstudent_inoneday(id_day:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/get_users_with_day`,{day_id:id_day}, { withCredentials: true });
@@ -133,8 +134,8 @@ public turn_on_off(id_exam:any,turn_value:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/turn_on_off`,{exam_id:id_exam, turn:turn_value}, { withCredentials: true });
 }
 
-public payment(exam_id:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/exam/get_token`,{exam_id:exam_id}, { withCredentials: true });
+public payment(exam:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/exam/get_token`,{exam:exam}, { withCredentials: true });
 }
 
 

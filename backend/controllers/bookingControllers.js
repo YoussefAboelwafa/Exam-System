@@ -19,10 +19,10 @@ module.exports.startPayment = async (req, res) => {
                         console.log(err.message);
                         throw "bad cookies"
                     }else{
-                        const viableRequest = await User.checkViability(req.body.exam_id, decodedToken._id);
-                        if(!viableRequest){
-                            throw "not a viable request"
-                        }
+                        // const viableRequest = await User.checkViability(req.body.exam_id, decodedToken._id);
+                        // if(!viableRequest){
+                        //     throw "not a viable request"
+                        // }
                         const result = await payment.cowpay_init_and_auth({});
                         res.json({success: true, token: result.data.token})  
                     }

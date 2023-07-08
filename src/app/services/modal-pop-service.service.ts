@@ -67,9 +67,28 @@ export class ModalPopServiceService {
       modal.style.display = 'block';
     }
   }
-  public open_error_book() {
+  public open_error_book(error:any) {
+    this.error_message =error;
+    this.title = 'Book Error Message !';
+    const errorMessageElement = document.getElementById('error-message');
+    if (errorMessageElement) {
+      errorMessageElement.textContent = this.error_message;
+    }
+    const title_message = document.getElementById('error-title');
+    if (title_message) {
+      title_message.textContent = this.title;
+    }
+    const modal = document.getElementById('ERROR_login');
+    if (modal) {
+      modal.classList.add('show');
+      modal.style.display = 'block';
+    }
+  }
+
+
+  public open_error_payment() {
     this.error_message =
-      'You can\'t book two exams on the same day.';
+      'Payment failed, but no money has been taken from you. Please try again.';
     this.title = 'Book Error Message !';
     const errorMessageElement = document.getElementById('error-message');
     if (errorMessageElement) {
