@@ -2,48 +2,23 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken')
 const OTP = require('../models/OTP')
 const Admin = require('../models/Admin')
-const firebase = require("firebase-admin");
-const serviceAccount = require("../smsotp-3b5f1-firebase-adminsdk-uju7p-539b86995b.json");
+const { Vonage } = require('@vonage/server-sdk')
+
 
 const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
-firebase.initializeApp({
-
-    apiKey: "AIzaSyCUUhdobsYT99ZPramfIk9RQ_8cjgx7Bmo",
-
-    authDomain: "smsotp-3b5f1.firebaseapp.com",
-
-    projectId: "smsotp-3b5f1",
-
-    storageBucket: "smsotp-3b5f1.appspot.com",
-
-    messagingSenderId: "99084028681",
-
-    appId: "1:99084028681:web:04e689e84458d6c6c421d8",
-
-    measurementId: "G-28SZ45CY4E",
-
-    credential: firebase.credential.cert(serviceAccount)
-
-  });  
-
-
-
-const messaging = firebase.messaging();
+const vonage = new Vonage({
+  apiKey: "dc9afa8a",
+  apiSecret: "7LgnGBCpn6HS6aoI"
+})
 
 
 async function sendSMS(to, code) {
     try{  
-        // const messaging = firebase.messaging();
-        // const message = {
-        //     token: to,
-        //     notification: {
-        //         body: `Your verification code is ${code}`,
-        //     },
-        // };  
-
-        // const response = await messaging.send(message)
-        // console.log(response);
+        const text = `Your verification code is: ${code} \n
+        Please enter this code within the next ten minutes.`
+        await vonage.sms.send({to, from:"Gammal Tech", text})
+        .then(resp => { console.log('Message sent successfully'); console.log(resp); })
     }catch(err){
         console.log(err);
     }

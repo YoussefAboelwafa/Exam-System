@@ -14,7 +14,7 @@ const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
 const app = express();
 app.use(cors({
-    origin: 'https://localhost:4200',
+    origin: 'http://localhost:4200',
     credentials: true
 }));
 app.use(express.json());
