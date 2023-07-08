@@ -11,7 +11,7 @@ import { users } from "../objects/users";
 
 
 export class ServicService {
-  private apiServerUrl = 'http://localhost:8080';
+  private apiServerUrl = 'https://crazy-belt-deer.cyclic.app';
   user!: users;
   upcoming_ex!:any[];
   token_ex!:any[];
