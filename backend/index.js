@@ -20,7 +20,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-const dbURI = 'mongodb+srv://heshamyoussef:ZbyFJgPGRpHmQMXA@booking-system.jrs9uu7.mongodb.net/mydb?retryWrites=true&w=majority'; ///
+const dbURI = 'mongodb+srv://heshamyoussef:ZbyFJgPGRpHmQMXA@booking-system.jrs9uu7.mongodb.net/mydb?retryWrites=true'; ///
 mongoose.connect(dbURI, 
     {useNewUrlParser: true, useUnifiedTopology: true,
         retryWrites: true})
