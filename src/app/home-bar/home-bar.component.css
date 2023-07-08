@@ -289,15 +289,7 @@ li:is(:hover, .active) i {
   font-size: 14px;
 }
 
-#sl1{
-  background: url("../../assets/images/img4.jpg");
-}
-#sl2{
-  background: url("../../assets/images/sl2.jpg");
-}
-#sl3{
-  background: url("../../assets/images/sl3.jpg");
-}
+
 .rankinfo {
   color: white;
   display: flex;
