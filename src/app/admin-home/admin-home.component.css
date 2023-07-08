@@ -399,7 +399,10 @@ li.active button {
   border-radius: 100px;
   opacity: 0;
 }
+#img_home{
+  background: url("../../assets/images/img5.svg");
 
+}
 .contain {
   background: rgba(0, 0, 0, 0.082);
   backdrop-filter: blur(5px);

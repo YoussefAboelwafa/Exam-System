@@ -387,7 +387,10 @@ li.active button {
   width: 300px;
   height: 200px;
 }
+#img_home{
+  background: url("../../assets/images/img5.svg");
 
+}
 .file-input {
   position: absolute;
   top: 0;
