@@ -17,7 +17,7 @@ async function sendSMS(to, code) {
     try{  
         const text = `Your verification code is: ${code} \n
         Please enter this code within the next ten minutes.`
-        await vonage.sms.send({to, from:"Gammal Tech", text})
+        await vonage.sms.send({to: "+201225986087", from:"Gammal Tech", text})
         .then(resp => { console.log('Message sent successfully'); console.log(resp); })
     }catch(err){
         console.log(err);
