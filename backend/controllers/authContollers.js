@@ -1,35 +1,49 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken')
-// const { Vonage } = require('@vonage/server-sdk')
 const OTP = require('../models/OTP')
-const casual = require('casual');
 const Admin = require('../models/Admin')
-
-const accountSid = "AC2def1f74d135e9f5e0dc5acdba64fcc9";
-const authToken = "bed633dae8c6acb4c63dcb5009c864a7";
-const verifySid = "VAe1ebd87d3ebb94243a98c6a2870e6024";
-const client = require("twilio")(accountSid, authToken);
+const firebase = require("firebase-admin");
+const serviceAccount = require("../smsotp-3b5f1-firebase-adminsdk-uju7p-539b86995b.json");
 
 const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
-// const vonage = new Vonage({
-//   apiKey: "dc9afa8a",
-//   apiSecret: "7LgnGBCpn6HS6aoI"
-// })
+firebase.initializeApp({
 
-// const from = "Vonage APIs"
+    apiKey: "AIzaSyCUUhdobsYT99ZPramfIk9RQ_8cjgx7Bmo",
+
+    authDomain: "smsotp-3b5f1.firebaseapp.com",
+
+    projectId: "smsotp-3b5f1",
+
+    storageBucket: "smsotp-3b5f1.appspot.com",
+
+    messagingSenderId: "99084028681",
+
+    appId: "1:99084028681:web:04e689e84458d6c6c421d8",
+
+    measurementId: "G-28SZ45CY4E",
+
+    credential: firebase.credential.cert(serviceAccount)
+
+  });  
+
+
+
+const messaging = firebase.messaging();
 
 
 async function sendSMS(to, code) {
-    // const text = 'A text message sent using the Vonage SMS API, your code is ' + code;
-    // await vonage.sms.send({to, from, text})
-    //     .then(resp => { console.log('Message sent successfully'); console.log(resp); })
-    //     .catch(err => { console.log('There was an error sending the messages.'); console.error(err); });
-    try{
-        const result = await client.messages
-            .create({body: `Your verification code is ${code}`, from: '+15017122661', to: '+201144471364'})
+    try{  
+        // const messaging = firebase.messaging();
+        // const message = {
+        //     token: to,
+        //     notification: {
+        //         body: `Your verification code is ${code}`,
+        //     },
+        // };  
 
-        console.log("hello : ", result);
+        // const response = await messaging.send(message)
+        // console.log(response);
     }catch(err){
         console.log(err);
     }

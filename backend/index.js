@@ -14,13 +14,13 @@ const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:4200',
+    origin: 'https://youssefaboelwafa.github.io/Exam-System',
     credentials: true
 }));
 app.use(express.json());
 app.use(cookieParser());
 
-const dbURI = 'mongodb://127.0.0.1:27017/mydb';  /// change to local
+const dbURI = 'mongodb+srv://heshamyoussef:ZbyFJgPGRpHmQMXA@booking-system.jrs9uu7.mongodb.net/mydb?retryWrites=true&w=majority'; ///
 mongoose.connect(dbURI, 
     {useNewUrlParser: true, useUnifiedTopology: true,
         retryWrites: true})
