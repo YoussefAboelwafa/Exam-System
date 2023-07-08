@@ -145,7 +145,7 @@ LocationSchema.statics.remove_location = async (location_id) =>{
     ///could be improved i guess and i should probably think more about concurrent reqs
     ///////////////////ahhhhhhhhh don't forget about the case if someone had an exam in that place before
     const location = await Location.findOne({_id: location_id
-      , $where: function(){return this.time.length === 0}}).select('parent');
+      , $expr: { $eq: [{ $size: "$time" }, 0] }}).select('parent');
     
     if(!location){
       throw "location not found or has days booked in it"
@@ -157,9 +157,9 @@ LocationSchema.statics.remove_location = async (location_id) =>{
       throw "city not found";
     }
 
-    if(await City.findOne({_id:location.parent, $where: function(){return this.locations.length === 0}})){
+    if(await City.findOne({_id:location.parent, $expr: { $eq: [{ $size: "$locations" }, 0] }})){
       await Country.updateOne({_id:parentCity.parent}, {$pull: {cities: parentCity._id}})
-      console.log(await Country.findOneAndUpdate({_id:parentCity.parent, $where: function(){return this.cities.length === 0}}, {$set: {deleted: true}}))
+      console.log(await Country.findOneAndUpdate({_id:parentCity.parent, $expr: { $eq: [{ $size: "$cities" }, 0] }}, {$set: {deleted: true}}))
     }
 
   } catch (error) {

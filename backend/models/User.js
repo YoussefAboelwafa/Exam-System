@@ -117,6 +117,8 @@ userSchema.statics.checkViability = async (exam_data, userId) =>{
 
 
 userSchema.statics.bookExam = async function(exam_data, userId){
+    const session = await this.startSession();
+    session.startTransaction();
     try{
         const {location_id, day_id, exam_id, snack, appointment} = exam_data
 
@@ -136,7 +138,7 @@ userSchema.statics.bookExam = async function(exam_data, userId){
         }
 
         const updated_day = await Day.findOneAndUpdate({_id: day_id, 
-            $where: ()=>{return this.reserved_number < location.max_number}}
+            reserved_number: { $lt: location.max_number }}
             ,{$inc: { reserved_number: 1 },
             $push: { reserved_users: userId }}
             ,{new: true});
@@ -180,9 +182,12 @@ userSchema.statics.bookExam = async function(exam_data, userId){
 
 
 
-
+        await session.commitTransaction();
+        session.endSession();
         return true;
     }catch(err){
+        await session.abortTransaction();
+        session.endSession();
         console.log(err);
         return false;
     }
