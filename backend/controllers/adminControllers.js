@@ -1,8 +1,6 @@
 const User = require('../models/User')
 const Exam = require('../models/Exam')
 const TimeAndSpace = require('../models/TimeAndSpace')
-const casual = require('casual');
-const jwt = require('jsonwebtoken');
 
 
 

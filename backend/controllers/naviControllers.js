@@ -2,7 +2,6 @@ const User = require('../models/User')
 const Exam = require('../models/Exam')
 const casual = require('casual');
 const jwt = require('jsonwebtoken');
-const { populate } = require('../models/Admin');
 const TimeAndSpace = require('../models/TimeAndSpace')
 
 

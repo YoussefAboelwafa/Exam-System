@@ -14,7 +14,7 @@ const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:4200',
+    origin: 'https://youssefaboelwafa.github.io/Exam-System',
     credentials: true
 }));
 app.use(express.json());

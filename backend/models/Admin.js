@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-const {isEmail} = require('validator');
-const bcrypt = require('bcrypt');
-const AutoIncrement = require('mongoose-sequence')(mongoose);
+
 
 const adminSchema = new mongoose.Schema({
     _id: {type: String, required: true, index:'hashed'},

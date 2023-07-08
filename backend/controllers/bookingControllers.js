@@ -1,5 +1,4 @@
 const User = require('../models/User')
-const Exam = require('../models/Exam')
 const jwt = require('jsonwebtoken')
 const payment = require('../services/payment')
 

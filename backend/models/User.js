@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
-const sequence = require('mongoose-sequence')(mongoose);
 const {Location, Day} = require('./TimeAndSpace')
 const Exam = require('./Exam')
 
