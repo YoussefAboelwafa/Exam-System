@@ -135,7 +135,7 @@ module.exports.login_post = async (req, res) => {
         if(!token){
             throw "Failed to create a token"
         }
-        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000, sameSite: 'Strict'})
+        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000, sameSite: 'None'})
         res.status(200).json({user:user, success: (await Admin.isAdmin(user._id) === null)?1:2});
     } catch (err) {
         console.log(err);
