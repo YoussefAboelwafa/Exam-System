@@ -25,11 +25,14 @@ async function sendSMS(to, code) {
     // await vonage.sms.send({to, from, text})
     //     .then(resp => { console.log('Message sent successfully'); console.log(resp); })
     //     .catch(err => { console.log('There was an error sending the messages.'); console.error(err); });
+    try{
+        const result = await client.messages
+            .create({body: `Your verification code is ${code}`, from: '+15017122661', to: '+201144471364'})
 
-    const result = await client.messages
-        .create({body: `Your verification code is ${code}`, from: '+15017122661', to: '+201144471364'})
-
-    console.log("hello : ", result);
+        console.log("hello : ", result);
+    }catch(err){
+        console.log(err);
+    }
 }
 
 function generateOTP() {
