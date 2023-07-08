@@ -39,6 +39,7 @@ const userSchema = new mongoose.Schema({
         lowercase: true
     },
     password: {type: String, required: [true, 'password required']},
+    last_booking_time: {type: String, default: null},
     exams: {
         type: [
             { exam: {type: {
@@ -93,20 +94,21 @@ userSchema.statics.checkViability = async (exam_data, userId) =>{
         const {day_id} = exam_data
         const [day, user] = await Promise.all([
             Day.findOne({ _id: day_id }),
-            User.findById({_id: userId}).populate('exams.exam.day')
+            User.findById({_id: userId}).select('first_name last_name phone_namber email exams last_booking_time').populate('exams.exam.day')
           ]);
         
         if(!day || !user){
             throw "an error occurred"
         }
-
+        
         if(user.exams.map((exam) => exam.exam.day.month_number + " " + exam.exam.day.day_number)
             .includes(day.month_number + " " + day.day_number)){
                 throw "Can't book two exams in the same day"
         }
-
-        return true
+        console.log(user);
+        return user
     } catch (error) {
+        console.log(error);
         return false
     }
         

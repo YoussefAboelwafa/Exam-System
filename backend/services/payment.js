@@ -1,5 +1,7 @@
 const axios = require('axios')
 const sha256 = require('js-sha256');
+const User = require('../models/User')
+
 
 const merchant_hash_key = "$2y$10$zkNcAi.MUIvKc.arq3HMFuasoEQ4yvzSXkR45sfzQL0bBHXPbCjo2"
 const merchant_code = "UxrqrLTixPdu" 
@@ -20,26 +22,25 @@ const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZWI5
 }
 
 */
-module.exports.cowpay_init_and_auth= async (param) => {
+module.exports.cowpay_init_and_auth= async (user) => {
     try{       
-        let user = {
-            first_name: "hello",
-            last_name: "world",
-            email:"example@gmail.com",
-            phone:"+201096545211",
-            _id: "64a704c55aafae9e951b1aee"
+        const {first_name, last_name, email, phone_namber, _id} = user;
+        const current_time = Date.now().toString();
+        const reference_id = _id.toString() + 'at' + current_time;
+
+        const result = await User.updateOne({_id: _id}, {$set: {last_booking_time: current_time}})
+        if(result.modifiedCount === 0){
+            throw "Error setting last booking time, no money was taken yet"
         }
-
-        const reference_id = Date.now().toString() + '00' + user._id ;
-
+        console.log(result);
         let data = {
             "merchant_reference_id": `${merchant_code}-${reference_id}`,
-            "customer_merchant_profile_id": user._id,
-            "customer_name": user.first_name + " " + user.last_name,
-            "customer_email": user.email,
-            "customer_mobile": user.phone,
+            "customer_merchant_profile_id": _id,
+            "customer_name": first_name + " " + last_name,
+            "customer_email": email,
+            "customer_mobile": phone_namber,
             "amount": amount,
-            "signature": sha256(merchant_code + `${merchant_code}-${reference_id}` + user._id + amount + merchant_hash_key),
+            "signature": sha256(merchant_code + `${merchant_code}-${reference_id}` + _id + amount + merchant_hash_key),
             "description": "Jammal tech exam booking",
             "transaction_type": "sale-auth"
         }
@@ -57,37 +58,33 @@ module.exports.cowpay_init_and_auth= async (param) => {
             data: data
         }
         
-        return await axios(axiosConfig)
+        const res = await axios(axiosConfig);
+        console.log(res);
+        return res
     }catch(err){
-        console.log(err.response.data);
-        return err
+        console.log(err);
+        return false
     }
 }
 
 
 
 
-module.exports.cowpay_capture= async (param) => {
+module.exports.cowpay_capture= async (cowpay_reference_id, recieved_signature) => {
     try{
         // const {cowpay_reference_id, user_id} = param
-        const cowpay_reference_id = 4018119
-        let user = {
-            first_name: "hello",
-            last_name: "world",
-            email:"example@gmail.com",
-            phone:"+201096545211",
-            _id: "64a704c55aafae9e951b1aee"
-        } 
+        const signature = sha256(merchant_code + `${cowpay_reference_id}` + amount + merchant_hash_key);
+
         let data = {
             "cowpay_reference_id": cowpay_reference_id,
             "amount": amount,
-            "signature": sha256(merchant_code + `${cowpay_reference_id}` + amount + merchant_hash_key)
+            "signature": signature
         }
 
 
         let axiosConfig = {
             method: 'post',
-            baseURL: baseURL, // or https://staging.cowpay.me/api/v2/,
+            baseURL: baseURL, 
             url: 'charge/card/capture',
             headers: {
                 'Content-Type': 'application/json',
@@ -96,10 +93,106 @@ module.exports.cowpay_capture= async (param) => {
             },
             data: data
         }
-        
-        return await axios(axiosConfig)
+        const result = await axios(axiosConfig)
+        console.log(result);
+        return true
     }catch(err){
-        console.log(err.response.data);
-        return err
+        console.log(err);
+        return false
     }
 }
+
+
+module.exports.return_money = async (param) => {
+    try{
+        const {cowpay_reference_id, user_id, last_booking_time} = param
+
+        const status = await check_status(user_id, last_booking_time);
+        console.log(status.order_status);
+
+        if(status === "UNPAID" || status === "PAID"){
+            refund_or_de_auth(cowpay_reference_id, status);
+        }
+
+        return true
+    }catch(err){
+        console.log(err);
+        return false
+    }
+}
+
+
+
+const refund_or_de_auth = async (cowpay_reference_id, status) => {
+    try {
+        const signature = sha256(merchant_code + cowpay_reference_id + amount + merchant_hash_key)
+        let url = '';
+
+        if(status === "PAID"){
+            url = 'charge/card/refund'
+        }else{
+            url = 'charge/card/void'
+        }
+        let data = {
+            "cowpay_reference_id": cowpay_reference_id,
+            "amount": amount,
+            "signature": signature
+        }
+
+
+        let axiosConfig = {
+            method: 'post',
+            baseURL: baseURL, 
+            url: url,
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            data: data
+        }
+
+        const status = await axios(axiosConfig);
+        console.log(status);
+    } catch (error) {
+        console.log(error);
+        return false
+    }
+}
+
+
+
+
+
+const check_status = async (user_id, last_booking_time) => {
+    // const merchant_reference_id = 
+    try {
+        const cowpay_reference_id = `${merchant_code}-${user_id + 'at' + last_booking_time}`
+        const signature = sha256(merchant_code + cowpay_reference_id + merchant_hash_key )
+        let data = {
+            "merchant_reference_id": cowpay_reference_id,
+            "signature": signature
+        }
+
+
+        let axiosConfig = {
+            method: 'get',
+            baseURL: baseURL, 
+            url: 'charge/status',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            data: data
+        }
+
+        const status = await axios(axiosConfig);
+        return status.data
+    } catch (error) {
+        console.log(error);
+        return false
+    }
+}
+
+
+
+

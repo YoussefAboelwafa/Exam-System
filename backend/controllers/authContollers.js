@@ -1,25 +1,35 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken')
-const { Vonage } = require('@vonage/server-sdk')
+// const { Vonage } = require('@vonage/server-sdk')
 const OTP = require('../models/OTP')
 const casual = require('casual');
 const Admin = require('../models/Admin')
 
+const accountSid = "AC2def1f74d135e9f5e0dc5acdba64fcc9";
+const authToken = "bed633dae8c6acb4c63dcb5009c864a7";
+const verifySid = "VAe1ebd87d3ebb94243a98c6a2870e6024";
+const client = require("twilio")(accountSid, authToken);
+
 const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
-const vonage = new Vonage({
-  apiKey: "dc9afa8a",
-  apiSecret: "7LgnGBCpn6HS6aoI"
-})
+// const vonage = new Vonage({
+//   apiKey: "dc9afa8a",
+//   apiSecret: "7LgnGBCpn6HS6aoI"
+// })
 
-const from = "Vonage APIs"
+// const from = "Vonage APIs"
 
 
 async function sendSMS(to, code) {
-    const text = 'A text message sent using the Vonage SMS API, your code is ' + code;
-    await vonage.sms.send({to, from, text})
-        .then(resp => { console.log('Message sent successfully'); console.log(resp); })
-        .catch(err => { console.log('There was an error sending the messages.'); console.error(err); });
+    // const text = 'A text message sent using the Vonage SMS API, your code is ' + code;
+    // await vonage.sms.send({to, from, text})
+    //     .then(resp => { console.log('Message sent successfully'); console.log(resp); })
+    //     .catch(err => { console.log('There was an error sending the messages.'); console.error(err); });
+
+    const result = await client.messages
+        .create({body: `Your verification code is ${code}`, from: '+15017122661', to: '+201144471364'})
+
+    console.log("hello : ", result);
 }
 
 function generateOTP() {
@@ -53,7 +63,7 @@ function errorHandler(err) {
     return errors;
 }
 
-///ivsXMmb3UFV5AtA0T3vh3l99CBqH5gfy
+
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = async (id) => {
     return jwt.sign({ _id:id, admin:!(await Admin.isAdmin(id) === null)}, token_secrect , { 
@@ -100,7 +110,7 @@ module.exports.signup_post = async (req, res) =>{
             console.log("code is: ", code);
             const otp = await OTP.insert({phone_namber: phone_namber, code: code});
 
-            // sendSMS(phone_namber, code);   /////remove comment later
+            sendSMS(phone_namber, code);   /////remove comment later
 
             res.status(201).json({success: true});
         }else{
@@ -183,7 +193,7 @@ module.exports.send_again = async (req, res) =>{
          console.log(code);
         const otp = await OTP.insert({phone_namber: phone_namber, code: code});
 
-        // sendSMS(phone_namber, code);   /////remove comment later
+        sendSMS(phone_namber, code);   /////remove comment later
 
         res.status(201).json({success: true});
         

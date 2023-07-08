@@ -19,15 +19,20 @@ module.exports.startPayment = async (req, res) => {
                         console.log(err.message);
                         throw "bad cookies"
                     }else{
-                        // const viableRequest = await User.checkViability(req.body.exam_id, decodedToken._id);
-                        // if(!viableRequest){
-                        //     throw "not a viable request"
-                        // }
-                        const result = await payment.cowpay_init_and_auth({});
+                        const user = await User.checkViability(req.body.exam, decodedToken._id)
+                        if(!user){
+                            throw "not a viable request, no money was taken yet"
+                        }
+                        console.log(user);
+                        const result = await payment.cowpay_init_and_auth(user);
+                        if(!result){
+                            throw 'an error occured while authing the money'
+                        }
                         res.json({success: true, token: result.data.token})  
                     }
                 }catch(err){
                     console.log(err);
+                    ///check that no money was taken from the user
                     res.json({success: false})
                 }
             }
@@ -37,7 +42,7 @@ module.exports.startPayment = async (req, res) => {
             throw "bad cookies"
         }
     } catch (error) {
-        res.json({success: false})
+        res.json({success: false, error: error})
     }
 }
 
@@ -55,35 +60,53 @@ module.exports.book_exam = async (req, res) => {
         if(token){
 
             jwt.verify(token, token_secrect, async (err, decodedToken)=>{
-
+                let user = null;
                 try{
                     if(err){
                         console.log(err.message);
                         throw "bad cookies"
                     }else{
-                        console.log(decodedToken._id);
-                        const viableRequest = await User.checkViability(req.body.exam, decodedToken._id);
-                        if(!viableRequest){
-                            throw "not a viable request"
+                        console.log(req.body);
+                        user = await User.checkViability(req.body.exam, decodedToken._id);
+                        if(!user){
+                            throw "not a viable request, returning the money to user ..."
+                        }
+                        const payment_result = await payment.cowpay_capture(req.body.cowpay_reference_id, req.body.signature);
+                        if(!payment_result){
+                            throw `and error occurred during payment capture, returning the money to user ...`
                         }
                         const result = await User.bookExam(req.body.exam, decodedToken._id)
+                        if(!result){
+                            throw `and error occurred during booking the exam, returning the money to user ...`
+                        }
                         res.json({success: result});
                     }
                 }catch(err){
                     console.log(err);
-                    res.json({success: false})
+                    ///de-auth the amount from user
+                    if(!user){
+                        res.json({success: false, error:"no money was taken"})
+                    }
+                    await payment.return_money({last_booking_time:user.last_booking_time, user_id:user._id});
+
+                    res.json({success: false, error: "error occurred but taken money was returned"})
                 }
-            }
-            )
+            })
 
         }else{
             throw "bad cookies"
         }
     }catch(err){
         console.log(err);
+        ///de-auth the amount from user
         res.json({success:false})
 
     }
 }
 
+
+
+module.exports.get_status = (req, res) => {
+    res.json(payment.return_money({user_id: req.body.user_id, last_booking_time:req.body.last_booking_time}))
+}
 
