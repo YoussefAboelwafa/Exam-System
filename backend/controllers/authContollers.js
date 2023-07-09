@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const OTP = require('../models/OTP')
 const Admin = require('../models/Admin')
 const nodemailer = require('nodemailer');
+const { async } = require('rxjs');
 
 const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
@@ -26,17 +27,16 @@ async function sendSMS(to, code) {
             text: `Your verification code is: ${code}\n
             The code expires after 10 minutes` 
           };
-
-        const res = await transporter.sendMail(mailOptions)
-        // , function(error, info){
-        //     if (error) {
-        //         reject(error)
-        //     } else {
-        //         console.log('Email sent: ' + info.response);
-        //         resolve('Email sent: ' + info.response);
-        //     }
-        // });
-        console.log(res);
+        await new Promise((resolve, reject) => {
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                    reject(error)
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    resolve('Email sent: ' + info.response);
+                }
+            });
+        })
     }catch(err){
         console.log(err);
     }
