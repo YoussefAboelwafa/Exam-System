@@ -24,7 +24,7 @@ const dbURI = 'mongodb+srv://heshamyoussef:ZbyFJgPGRpHmQMXA@booking-system.jrs9u
 mongoose.connect(dbURI, 
     {useNewUrlParser: true, useUnifiedTopology: true,
         retryWrites: true})
-    .then((result) => app.listen(8080))
+    .then((result) => app.listen(process.env.PORT || 8080 || 3000))
     .catch((err) => console.log(err));
 
 
