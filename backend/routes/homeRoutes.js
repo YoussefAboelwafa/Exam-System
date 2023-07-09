@@ -5,8 +5,6 @@ const naviController = require('../controllers/naviControllers')
 
 const router = Router();
 
-router.post('/test', naviController.populate_exams);
-
 router.get('/home_bar', naviController.getHome);
 
 router.post('/exams', naviController.getOtherExams)
