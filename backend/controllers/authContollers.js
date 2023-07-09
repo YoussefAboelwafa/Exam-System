@@ -2,23 +2,34 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken')
 const OTP = require('../models/OTP')
 const Admin = require('../models/Admin')
-const { Vonage } = require('@vonage/server-sdk')
-
+const nodemailer = require('nodemailer');
 
 const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
-const vonage = new Vonage({
-  apiKey: "dc9afa8a",
-  apiSecret: "7LgnGBCpn6HS6aoI"
-})
-
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'gammalexambooking@gmail.com',
+      pass: 'LVeKzFIE8WwhaBpK'
+    }
+  });
 
 async function sendSMS(to, code) {
-    try{  
-        const text = `Your verification code is: ${code} \n
-        Please enter this code within the next ten minutes.`
-        await vonage.sms.send({to: "+201225986087", from:"Gammal Tech", text})
-        .then(resp => { console.log('Message sent successfully'); console.log(resp); })
+    try{
+        const mailOptions = {
+            from: 'gammalexambooking@gmail.com',
+            to: "heshamyoussef2025@gmail.com",
+            subject: 'Gammal Tech Verification Code',
+            text: `Your verification code is: ${code}\n
+            The code expires after 10 minutesss` 
+          };
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
     }catch(err){
         console.log(err);
     }
@@ -102,7 +113,7 @@ module.exports.signup_post = async (req, res) =>{
             console.log("code is: ", code);
             const otp = await OTP.insert({phone_namber: phone_namber, code: code});
 
-            sendSMS(phone_namber, code);   /////remove comment later
+            sendSMS(email, code);   /////remove comment later
 
             res.status(201).json({success: true});
         }else{
@@ -178,14 +189,14 @@ module.exports.verifyCode = async (req, res) => {
 module.exports.send_again = async (req, res) =>{
     try{
         ////check if email and phone provided are unique
-        const {phone_namber} = req.body;
+        const {phone_namber, email} = req.body; //// change in infront tooo
         console.log(req.body);
         // console.log(phone);
         const code = generateOTP();
          console.log(code);
         const otp = await OTP.insert({phone_namber: phone_namber, code: code});
 
-        sendSMS(phone_namber, code);   /////remove comment later
+        sendSMS(email, code);   /////remove comment later
 
         res.status(201).json({success: true});
         
