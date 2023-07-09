@@ -18,6 +18,7 @@ const transporter = nodemailer.createTransport({
 
 async function sendSMS(to, code) {
     try{
+        console.log(transporter);
         const mailOptions = {
             from: 'gammalexambooking@gmail.com',
             to: to,
@@ -25,16 +26,17 @@ async function sendSMS(to, code) {
             text: `Your verification code is: ${code}\n
             The code expires after 10 minutes` 
           };
-        new Promise((resolve, reject) => {
-            transporter.sendMail(mailOptions, function(error, info){
-                if (error) {
-                    reject(error)
-                } else {
-                    console.log('Email sent: ' + info.response);
-                    resolve('Email sent: ' + info.response);
-                }
-            });
-        })
+
+        const res = await transporter.sendMail(mailOptions)
+        // , function(error, info){
+        //     if (error) {
+        //         reject(error)
+        //     } else {
+        //         console.log('Email sent: ' + info.response);
+        //         resolve('Email sent: ' + info.response);
+        //     }
+        // });
+        console.log(res);
     }catch(err){
         console.log(err);
     }
