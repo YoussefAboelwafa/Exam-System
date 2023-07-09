@@ -7,7 +7,9 @@ const nodemailer = require('nodemailer');
 const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
       user: 'gammalexambooking@gmail.com',
       pass: 'djvjnulxvitpdzcb'
@@ -26,8 +28,9 @@ async function sendSMS(to, code) {
         new Promise((resolve, reject) => {
             transporter.sendMail(mailOptions, function(error, info){
                 if (error) {
-                    resolve(error)
+                    reject(error)
                 } else {
+                    console.log('Email sent: ' + info.response);
                     resolve('Email sent: ' + info.response);
                 }
             });
