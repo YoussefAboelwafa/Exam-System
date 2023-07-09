@@ -115,13 +115,12 @@ module.exports.signup_post = async (req, res) =>{
 
         const isUnique = await checkUniqueness(email, phone_namber);
         if(isUnique){
+            res.status(201).json({success: true});
             const code = generateOTP();
             console.log("code is: ", code);
             const otp = await OTP.insert({phone_namber: phone_namber, code: code});
+            await sendSMS(email, code);   /////remove comment later
 
-            sendSMS(email, code);   /////remove comment later
-
-            res.status(201).json({success: true});
         }else{
             res.status(201).json({success: false});
         }
