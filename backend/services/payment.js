@@ -3,16 +3,28 @@ const sha256 = require('js-sha256');
 const User = require('../models/User')
 
 
-const merchant_hash_key = ""
-const merchant_code = "" 
-const baseURL = 'https://atfawry.fawrystaging.com/fawrypay-api/api/'
-const amount = 50.00
+const merchant_hash_key = "$2y$10$zkNcAi.MUIvKc.arq3HMFuasoEQ4yvzSXkR45sfzQL0bBHXPbCjo2"
+const merchant_code = "UxrqrLTixPdu" 
+const baseURL = 'https://staging.cowpay.me/api/v2/'
+const amount = "10.00"
+const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZWI5YzA0ZmMyNTQyZDU1ODMzMmVhYTIyODdlM2FmMTFlYmYwZWEzZDQ5MmNjN2VmYzUxM2RjM2VhNWU2MzExYmIzODU1NGZhMTI1OTRjZDgiLCJpYXQiOjE2ODg3NDcxMjUuOTg5NjI2LCJuYmYiOjE2ODg3NDcxMjUuOTg5NjMyLCJleHAiOjQ4NDQ0MjQzMjUuOTg0MTA0LCJzdWIiOiIyMzQxIiwic2NvcGVzIjpbXX0.E8BGmZedNiMZlEom_QTlXtMRPXbDmxvnlFaQYPuutr8wby6Bou8dfFcbSY4cjKSsvGdOlhBYQWYLOHvRbWwUiZRKj5LFX2ooo7jBDOSwCNTSZSqM-jQZbjQMnm6sumQK_jMM1YQj_VaNw8BBHs2pD9pjZ3GCsT_5c5NJ8Qip5qbtj_tDU8uyOMUQofAEHZ97rmSJx50Hz_MCypbEXuubN5hfUlv8Usg_qTG3UThTzLynR8KZhzvRncZda9sG20GMrJ4IarDWc-P8O5SDzllX9BOACRlU7M-cFSPdjKiHtyxLCwzeLFua-WTvnKdLSFBqL5uBS4MnzGSVvpLQfY-sLJnxQ5rqXtavp9uDoWEk1s03Ine8HCBXkn5yTHNahUh_vnyaBk6wrD9hzmhti_FsnpioRw7xorS9jDsTYAtmEjSG0Oy9FwWU9p2Dk7slfFRUz0gq9phfwSZZu1G42o_spXpsSMj25JKTnmMPsW_AO-2pTKQZbhMgcajr6xZLu87aYvK8CzgscinmyI2REbIZcLGcB9HZGuLK3GRPdCs-W1gal6Xm9fsGrpdeYiI3QYp5L22EqvvV7xEWerm6uGcfJaSX8ZpPDVE1oeP7UZZ4rY2-UelDIC6eXsX_vG6M73P0djL4EgYzIryLzf4q9J8jQTYrQqLaZ-K32OBhfhaaoCM'
 
+/*
+{
+  "merchant_reference_id": "mc-12545",
+  "customer_merchant_profile_id": "253",
+  "customer_name": "John Doe",
+  "customer_email": "example@gmail.com",
+  "customer_mobile": "+201xxxxxxxxx",
+  "amount": "10.00",
+  "signature": "6fec70795ae74b15f43fd645d85e2b03c86f8a08c2c671ab345914c0eae4f7da",
+  "description": "Charge request description"
+}
 
-module.exports.cowpay_init_and_auth= async (user, user_exam) => {
+*/
+module.exports.cowpay_init_and_auth= async (user) => {
     try{       
         const {first_name, last_name, email, phone_namber, _id} = user;
-        const {exam_id} = user_exam;
         const current_time = Date.now().toString();
         const reference_id = _id.toString() + 'at' + current_time;
 
@@ -22,26 +34,16 @@ module.exports.cowpay_init_and_auth= async (user, user_exam) => {
         }
         console.log(result);
         let data = {
-            // merchantCode: merchant_code,
-            // merchantRefNum: reference_id,
-            // customerMobile: phone_namber,
-            // customerEmail: email,
-            // customerName: first_name + " " + last_name,
-            // customerProfileId: _id.toString(),
-            // paymentExpiry: , /////////// set later
-            // language : "en-gb",
-            // chargeItems: [
-            //         {
-            //             itemId: exam_id,
-            //             description: 'Product Description', /// don't know if i should set it to just the description of the exam or the options the user's chose
-            //             price: amount, ////
-            //             quantity: 1
-            //         }
-            // ],
-            // returnUrl: 'https://developer.fawrystaging.com',
-            // authCaptureModePayment: false,
-            // signature: "2ca4c078ab0d4c50ba90e31b3b0339d4d4ae5b32f97092dd9e9c07888c7eef36"
-        };
+            "merchant_reference_id": `${merchant_code}-${reference_id}`,
+            "customer_merchant_profile_id": _id,
+            "customer_name": first_name + " " + last_name,
+            "customer_email": email,
+            "customer_mobile": phone_namber,
+            "amount": amount,
+            "signature": sha256(merchant_code + `${merchant_code}-${reference_id}` + _id + amount + merchant_hash_key),
+            "description": "Jammal tech exam booking",
+            "transaction_type": "sale-auth"
+        }
 
 
         let axiosConfig = {
