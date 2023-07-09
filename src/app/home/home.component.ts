@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
     photo: '../../assets/images/img5.svg',
     _id: '',
   };
-  flag_type = true;
+  flag_type = false;
   constructor(private service: ServicService, private router: Router) {
     this.refresh();
 
@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit {
   }
 
   refresh() {
-    this.flag_type = true;
+    this.flag_type = false;
     this.service.home_bar_init().subscribe((x) => {
       this.service.user = x.user;
       this.current_user.first_name = x.user.first_name;

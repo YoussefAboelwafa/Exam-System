@@ -45,11 +45,15 @@ div {
   width: 46.596px;
   height: 46.987px;
   flex-shrink: 0;
+  background: url("../../assets/images/logo1.svg");
+
 }
 #logo2 {
   width: 86.636px;
   height: 35.237px;
   flex-shrink: 0;
+  background: url("../../assets/images/logo2.svg");
+
 }
 h3 {
   color: #090914;

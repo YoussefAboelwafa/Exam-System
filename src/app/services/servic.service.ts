@@ -11,7 +11,7 @@ import { users } from "../objects/users";
 
 
 export class ServicService {
-  private apiServerUrl = 'http://localhost:8080';
+  private apiServerUrl = 'https://gold-elegant-pig.cyclic.app';
   user!: users;
   upcoming_ex!:any[];
   token_ex!:any[];
@@ -24,7 +24,7 @@ export class ServicService {
 //send user with all date ,recieve json="success=false" if the email or phone are found in system
 //else i recieve json="success=true"  backend active verification code and i will send to backend the verify 
 public sign_up(new_user:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/sign_up`,{email: new_user.get_email(),phone_namber: new_user.get_phone_namber()});
+  return this.http.post<any>(`${this.apiServerUrl}/sign_up`,{email: new_user.get_email(),phone_namber: new_user.get_phone_namber()}, { withCredentials: true });
 }
 //send user with email and pass if the user not found recive json="success=false"else recive json="success=true ,user:user" with all data
 public login(user:any):Observable<any>{
@@ -33,14 +33,14 @@ public login(user:any):Observable<any>{
 // i will send verify code to back and if it code is wrong i will recive json="success=false ", code good but email is token {success=true created=false } redirect to sign up
 // {success=true created=false } redirect to login
 public verify_code(code:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/verify_code`,{code: code, user:this.user});
+  return this.http.post<any>(`${this.apiServerUrl}/verify_code`,{code: code, user:this.user}, { withCredentials: true });
 }
 
 // send another verification code again  
 public send_again():Observable<any>{
   console.log(this.user.get_phone_namber());
   
-  return this.http.post<any>(`${this.apiServerUrl}/send_agin`,{phone_namber:this.user.get_phone_namber()});
+  return this.http.post<any>(`${this.apiServerUrl}/send_agin`,{phone_namber:this.user.get_phone_namber()}, { withCredentials: true });
 }
 // i will send this request if user go to sign up and i recive pair of array ,
 //one to all city ,other to all country. it can be not used and replace this request
@@ -56,7 +56,7 @@ public is_signin():Observable<any>{
 
 // it take url of the new photo of the user and return no thing
 public change_photo(url:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/change_photo`,{url:url});
+  return this.http.post<any>(`${this.apiServerUrl}/change_photo`,{url:url}, { withCredentials: true });
 }
 
 // when i enter home bar i send request and want to receive json that contains {user:user,non_taken_exam:any exam that the user does not take it yet}

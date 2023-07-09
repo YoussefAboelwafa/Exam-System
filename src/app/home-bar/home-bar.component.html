@@ -7,8 +7,10 @@
   <!-- IMAGES -->
   <div class="carousel-inner">
     <div class="carousel-item active" id="c1">
-      <img src="../../assets/images/img4.jpg" alt="Slide 1" />
-      <p>youssef</p>
+      <img
+        src="https://via.placeholder.com/1200x200?text=Slide+1"
+        alt="Slide 1"
+      />
     </div>
     <div class="carousel-item" id="c2">
       <img
@@ -346,7 +348,8 @@
       >
         <option>Select a day</option>
         <option *ngFor="let appoint of calendar; let i = index">
-          {{ appoint.day_number }} : {{ appoint.day_name }} : {{appoint.month_name}}
+          {{ appoint.day_number }} : {{ appoint.day_name }} :
+          {{ appoint.month_name }}
         </option>
       </select>
 
@@ -371,7 +374,7 @@
         style="background-color: gray"
         type="submit"
       >
-      Pay Now
+        Pay Now
       </button>
       <button
         *ngIf="
@@ -381,7 +384,7 @@
         id="btn"
         type="submit"
       >
-      Pay Now
+        Pay Now
       </button>
       <div class="circle">
         <i class="fa-regular fa-circle"></i>

@@ -288,6 +288,8 @@ li:is(:hover, .active) i {
 .takeninfo label {
   font-size: 14px;
 }
+
+
 .rankinfo {
   color: white;
   display: flex;
