@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken')
 const OTP = require('../models/OTP')
 const Admin = require('../models/Admin')
 const nodemailer = require('nodemailer');
-const { async } = require('rxjs');
 
 const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
