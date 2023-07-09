@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: 'gammalexambooking@gmail.com',
-      pass: 'LVeKzFIE8WwhaBpK'
+      pass: 'djvjnulxvitpdzcb'
     }
   });
 
@@ -18,10 +18,10 @@ async function sendSMS(to, code) {
     try{
         const mailOptions = {
             from: 'gammalexambooking@gmail.com',
-            to: "heshamyoussef2025@gmail.com",
+            to: to,
             subject: 'Gammal Tech Verification Code',
             text: `Your verification code is: ${code}\n
-            The code expires after 10 minutesss` 
+            The code expires after 10 minutes` 
           };
         transporter.sendMail(mailOptions, function(error, info){
             if (error) {
