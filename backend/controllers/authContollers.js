@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken')
 const OTP = require('../models/OTP')
 const Admin = require('../models/Admin')
 const nodemailer = require('nodemailer');
-const { resolve } = require('mathjs');
 
 const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
@@ -27,7 +26,7 @@ async function sendSMS(to, code) {
         new Promise((resolve, reject) => {
             transporter.sendMail(mailOptions, function(error, info){
                 if (error) {
-                    reject(error)
+                    resolve(error)
                 } else {
                     resolve('Email sent: ' + info.response);
                 }
