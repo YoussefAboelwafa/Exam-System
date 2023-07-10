@@ -4,7 +4,7 @@ const User = require('../models/User')
 
 
 const merchant_hash_key = `${process.env.merchant_hash_key}`
-const merchant_code = `${process.env.merchant_code}`
+const merchant_code = `${process.env.merchant_code}4`
 const baseURL = 'https://atfawry.fawrystaging.com/fawrypay-api/api/'
 const amount = '50.00'
 const returnUrl = 'https://www.google.com/' ///check later
