@@ -23,7 +23,7 @@ const dbURI = process.env.dp_uri; ///
 mongoose.connect(dbURI, 
     {useNewUrlParser: true, useUnifiedTopology: true,
         retryWrites: true})
-    .then((result) => app.listen(process.env.PORT || 8080 || 3000))
+    .then((result) => app.listen(8080))
     .catch((err) => console.log(err));
 
 
