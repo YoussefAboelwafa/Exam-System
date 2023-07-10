@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Inject, OnInit } from '@angular/core';
 import { users } from '../objects/users';
 import { ServicService } from '../services/servic.service';
@@ -19,12 +19,16 @@ export class LoginComponent implements OnInit {
     user: users,
     private service: ServicService,
     private router: Router,
-    private pop_service: ModalPopServiceService
+    private pop_service: ModalPopServiceService,
+    private route: ActivatedRoute
   ) {
     this.user_login = user;
+    
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+   
+  }
 
   submit() {
     //  service with user_login

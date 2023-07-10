@@ -63,6 +63,28 @@ export class HomeBarComponent implements OnInit {
   ngOnInit(): void {}
 
   constructor(private service: ServicService, private router: Router,private popup: ModalPopServiceService) {
+  
+    const queryParams = new URLSearchParams(window.location.search);
+    const paramsObj: any = {};
+    for (const [name, value] of queryParams.entries()) {
+      paramsObj[name] = value;
+    }
+    if(paramsObj['type']!=undefined&&paramsObj['orderStatus']!=undefined&&paramsObj.length!=0){
+
+        if(paramsObj['statusCode']=="200"){
+
+          this.service.book_exam(paramsObj['merchantRefNumber'],paramsObj['signature'],paramsObj['referenceNumber']).subscribe(
+            x=>{
+              if(x.success==false){
+               this.popup.open_error_book(x.error);
+              }
+          })
+        }
+        this.router.navigate(['/home/home_bar']);
+    }
+    
+
+    
     this.refresh_all();
     this.upcoming_exam = this.service.upcoming_ex;
     this.token_exam = this.service.token_ex;
@@ -73,6 +95,7 @@ export class HomeBarComponent implements OnInit {
 
 
   }
+
 
   refresh_all() {
     this.service.get_places().subscribe((x) => {
@@ -196,7 +219,7 @@ export class HomeBarComponent implements OnInit {
     this.flag_time = true;
   }
   submit_time() {
-    let book_exam = {
+    let book_exam= {
       location_id: this.id_location,
       day_id: this.day_id,
       exam_id: this.book_id_exam,
@@ -205,10 +228,12 @@ export class HomeBarComponent implements OnInit {
     };
     
   this.service.payment(book_exam).subscribe(
-          res=>{
-             COWPAYOTPDIALOG.init();
-            COWPAYOTPDIALOG.load(res.token);
+          x=>{
+            if(x.success==true) {
+              window.location.href =x.token;
+            }
     })
+  
     // cowpay_reference_id
     // signature
 
