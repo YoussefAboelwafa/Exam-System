@@ -212,37 +212,16 @@ export class ExamsBarComponent implements OnInit {
       snack: this.select_snacks,
       appointment: this.selectedappointment,
     };
+    console.log(book_exam);
     
   this.service.payment(book_exam).subscribe(
           res=>{
-
-            COWPAYOTPDIALOG.init();
-            COWPAYOTPDIALOG.load(res.token);
+            console.log(res);
+            
     })
     // cowpay_reference_id
     // signature
 
-    window.addEventListener('message', (e:any)=>{
-      if (e.data && e.data.message_source === 'cowpay') {
-          let paymentStatus = e.data.payment_status,
-          cowpayReferenceId = e.data.cowpay_reference_id,
-          signature = e.data.signature;
-          if(paymentStatus == "FAILED"){
-            this.popup.open_error_payment();
-                    }
-          this.service.book_exam(book_exam,cowpayReferenceId,signature).subscribe(
-            (y) => {
-            if(y.success==false){  
-              this.popup.open_error_book(y.error);
-            }
-            else{
-            }
-          });
-          
-          // take an action based on the values
-      }
-
-  }, false);
     //service becouse i need Day of exam and Appointment then next step
     this.reset_order_exam();
     this.refresh_all();

@@ -10,7 +10,6 @@ const User = require('./models/User')
 const jwt = require('jsonwebtoken');
 const cookieParser = require("cookie-parser");
 
-const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
 const app = express();
 app.use(cors({
@@ -20,7 +19,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-const dbURI = 'mongodb+srv://heshamyoussef:ZbyFJgPGRpHmQMXA@booking-system.jrs9uu7.mongodb.net/mydb?retryWrites=true'; ///
+const dbURI = process.env.dp_uri; ///
 mongoose.connect(dbURI, 
     {useNewUrlParser: true, useUnifiedTopology: true,
         retryWrites: true})
@@ -34,7 +33,7 @@ app.get('/is_signedin', (req, res) => {
         const token = req.cookies.jwt;
         console.log(token);
         if(token){
-            jwt.verify(token, token_secrect, async (err, decodedToken)=>{
+            jwt.verify(token, process.env.token_secrets, async (err, decodedToken)=>{
                 if(err){
                     console.log(err.message);
                     res.json({signed_in: false});
@@ -60,3 +59,8 @@ app.use('/admin', checkAdmin, adminRoutes)
 
 
 
+
+/*
+    Don't forget to change all the secrets to environment variables
+    
+*/

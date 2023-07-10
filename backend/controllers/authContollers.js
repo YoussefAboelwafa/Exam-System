@@ -4,7 +4,6 @@ const OTP = require('../models/OTP')
 const Admin = require('../models/Admin')
 const nodemailer = require('nodemailer');
 
-const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -74,7 +73,7 @@ function errorHandler(err) {
 
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = async (id) => {
-    return jwt.sign({ _id:id, admin:!(await Admin.isAdmin(id) === null)}, token_secrect , { 
+    return jwt.sign({ _id:id, admin:!(await Admin.isAdmin(id) === null)}, process.env.token_secret , { 
         expiresIn : maxAge
     })
 }
@@ -103,21 +102,25 @@ const checkUniqueness = async (email, phone_namber) => {
 
 module.exports.signup_get = (req, res) =>{
     console.log('hello wwwww');
-
-    res.send('signup_get');
+    const test = {
+        user_id:"34523452354",
+        time:Date.now().toString(),
+        exam_info: req.body
+    }
+    res.send(JSON.stringify(test));
 }
 
 module.exports.signup_post = async (req, res) =>{ 
     try{
         ////check if email and phone provided are unique
         const {email, phone_namber} = req.body;
-
+        
         const isUnique = await checkUniqueness(email, phone_namber);
         if(isUnique){
             
             const code = generateOTP();
             console.log("code is: ", code);
-            await new Promise.all([
+            await Promise.all([
                 OTP.insert({phone_namber: phone_namber, code: code}),
                 sendSMS(email, code)
             ])
@@ -130,7 +133,7 @@ module.exports.signup_post = async (req, res) =>{
         // res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000})
 
     }catch(err){
-        const errors = errorHandler(err);
+        console.log(err);
         res.status(201).json({success: false});
     }
 

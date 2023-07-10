@@ -46,7 +46,8 @@ const userSchema = new mongoose.Schema({
                     location: {type: mongoose.Schema.Types.ObjectId, ref: 'location'},
                     appointment: {type: String, required: true},
                     snack: {type: String, required: true},
-                    percentage: {type: Number, required: true}
+                    percentage: {type: Number, required: true},
+                    bookedAt: {type:String, required: true}
                 }, required: true},
             }
         ],
