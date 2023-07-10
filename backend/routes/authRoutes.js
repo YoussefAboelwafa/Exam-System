@@ -1,7 +1,6 @@
 const {Router} = require('express');
 const authController = require('../controllers/authContollers')
 
-const booking = require('../controllers/bookingControllers')
 
 const router = Router();
 
@@ -19,8 +18,6 @@ router.post('/verify_code', authController.verifyCode);
 
 router.post('/send_agin', authController.send_again);
 
-
-router.get('/test', booking.startPayment)
 
 
 module.exports = router;

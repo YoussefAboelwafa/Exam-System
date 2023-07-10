@@ -14,17 +14,17 @@ const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:4200',
+    origin: 'https://youssefaboelwafa.github.io', /// 
     credentials: true
 }));
 app.use(express.json());
 app.use(cookieParser());
 
-const dbURI = 'mongodb+srv://heshamyoussef:ZbyFJgPGRpHmQMXA@booking-system.jrs9uu7.mongodb.net/mydb?retryWrites=true&w=majority'; ///
+const dbURI = 'mongodb+srv://heshamyoussef:ZbyFJgPGRpHmQMXA@booking-system.jrs9uu7.mongodb.net/mydb?retryWrites=true'; ///
 mongoose.connect(dbURI, 
     {useNewUrlParser: true, useUnifiedTopology: true,
         retryWrites: true})
-    .then((result) => app.listen(8080))
+    .then((result) => app.listen(process.env.PORT || 8080 || 3000))
     .catch((err) => console.log(err));
 
 

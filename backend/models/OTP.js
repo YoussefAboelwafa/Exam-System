@@ -37,8 +37,6 @@ OTPschema.statics.insert = async function(elem){
         const options = { upsert: true };
 
         const otp = await OTP.findOneAndUpdate(filter, update, options);
-
-        console.log(otp);
     
     } catch (error) {
         console.error('Error updating or creating OTP entry:', error);

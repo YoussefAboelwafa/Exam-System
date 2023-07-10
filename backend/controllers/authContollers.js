@@ -2,23 +2,39 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken')
 const OTP = require('../models/OTP')
 const Admin = require('../models/Admin')
-const { Vonage } = require('@vonage/server-sdk')
-
+const nodemailer = require('nodemailer');
 
 const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
-const vonage = new Vonage({
-  apiKey: "dc9afa8a",
-  apiSecret: "7LgnGBCpn6HS6aoI"
-})
-
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: 'gammalexambooking@gmail.com',
+      pass: 'djvjnulxvitpdzcb'
+    }
+  });
 
 async function sendSMS(to, code) {
-    try{  
-        const text = `Your verification code is: ${code} \n
-        Please enter this code within the next ten minutes.`
-        await vonage.sms.send({to, from:"Gammal Tech", text})
-        .then(resp => { console.log('Message sent successfully'); console.log(resp); })
+    try{
+        const mailOptions = {
+            from: 'gammalexambooking@gmail.com',
+            to: to,
+            subject: 'Gammal Tech Verification Code',
+            text: `Your verification code is: ${code}\n
+            The code expires after 10 minutes` 
+          };
+        await new Promise((resolve, reject) => {
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                    reject(error)
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    resolve('Email sent: ' + info.response);
+                }
+            });
+        })
     }catch(err){
         console.log(err);
     }
@@ -98,12 +114,14 @@ module.exports.signup_post = async (req, res) =>{
 
         const isUnique = await checkUniqueness(email, phone_namber);
         if(isUnique){
+            
             const code = generateOTP();
             console.log("code is: ", code);
-            const otp = await OTP.insert({phone_namber: phone_namber, code: code});
-
-            sendSMS(phone_namber, code);   /////remove comment later
-
+            await new Promise.all([
+                OTP.insert({phone_namber: phone_namber, code: code}),
+                sendSMS(email, code)
+            ])
+              /////remove comment later
             res.status(201).json({success: true});
         }else{
             res.status(201).json({success: false});
@@ -135,7 +153,7 @@ module.exports.login_post = async (req, res) => {
         if(!token){
             throw "Failed to create a token"
         }
-        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000, sameSite: 'Lax'})
+        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000, sameSite: 'None', secure: 'true'})
         res.status(200).json({user:user, success: (await Admin.isAdmin(user._id) === null)?1:2});
     } catch (err) {
         console.log(err);
@@ -167,8 +185,6 @@ module.exports.verifyCode = async (req, res) => {
             res.status(201).json({success: false, created: false});
         }
     }catch(err){            
-          
-        const errors = errorHandler(err);
         console.log(err);
         res.status(201).json({success: true, created: false});
     }
@@ -178,14 +194,16 @@ module.exports.verifyCode = async (req, res) => {
 module.exports.send_again = async (req, res) =>{
     try{
         ////check if email and phone provided are unique
-        const {phone_namber} = req.body;
+        const {phone_namber, email} = req.body; //// change in infront tooo
         console.log(req.body);
         // console.log(phone);
         const code = generateOTP();
          console.log(code);
-        const otp = await OTP.insert({phone_namber: phone_namber, code: code});
 
-        sendSMS(phone_namber, code);   /////remove comment later
+        await Promise.all([
+            await OTP.insert({phone_namber: phone_namber, code: code}),
+            sendSMS(email, code)
+        ])
 
         res.status(201).json({success: true});
         
@@ -193,7 +211,6 @@ module.exports.send_again = async (req, res) =>{
         // res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000})
 
     }catch(err){
-        const errors = errorHandler(err);
         res.status(201).json({success: false});
     }
 }
