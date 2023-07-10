@@ -7,7 +7,7 @@ const merchant_hash_key = `${process.env.merchant_hash_key}`
 const merchant_code = `${process.env.merchant_code}`
 const baseURL = 'https://atfawry.fawrystaging.com/fawrypay-api/api/'
 const amount = '50.00'
-const returnUrl = 'https://youssefaboelwafa.github.io/Exam-System/home/home_bar' ///check later
+const returnUrl = 'https://www.google.com/' ///check later
 
 
 module.exports.start_payment= async (user, exam_info) => {
