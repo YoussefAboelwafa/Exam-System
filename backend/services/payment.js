@@ -55,11 +55,11 @@ module.exports.start_payment= async (user, exam_info) => {
         }
         
         const res = await axios(axiosConfig);
-        console.log(res.response.data);
-        return res.response.data
+        console.log(res);
+        return res
     }catch(err){
         console.log("hellooo world ---------------------------------------");
-        console.log(err.response);
+        console.log(err);
         return false
     }
 }
