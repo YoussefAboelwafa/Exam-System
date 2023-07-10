@@ -31,9 +31,8 @@ mongoose.connect(dbURI,
 app.get('/is_signedin', (req, res) => {
     try{
         const token = req.cookies.jwt;
-        console.log(token);
         if(token){
-            jwt.verify(token, process.env.token_secrets, async (err, decodedToken)=>{
+            jwt.verify(token, process.env.token_secret, async (err, decodedToken)=>{
                 if(err){
                     console.log(err.message);
                     res.json({signed_in: false});
