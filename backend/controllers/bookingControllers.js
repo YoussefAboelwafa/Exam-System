@@ -25,7 +25,7 @@ module.exports.startPayment = async (req, res) => {
                             throw 'an error occured while authing the money'
                         }
                         console.log(result);
-                        res.json({success: true, token: "helllo world"})  
+                        res.json({success: true, token: result})  
                     }
                 }catch(err){
                     console.log(err);
