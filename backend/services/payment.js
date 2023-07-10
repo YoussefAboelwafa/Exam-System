@@ -36,11 +36,11 @@ module.exports.start_payment= async (user, exam_info) => {
                     itemId: exam_info.exam_id, /// check later
                     description: 'Product Description', /// change later
                     price: amount, /// change later
-                    quantity: 1
+                    quantity: '1'
                 }
             ],
             returnUrl: returnUrl,
-            authCaptureModePayment: false,
+            authCaptureModePayment: true,
             signature: sha256(merchant_code + merchantRefNum + "" + returnUrl + exam_info.exam_id + '1' + amount + merchant_hash_key)
         };
         
