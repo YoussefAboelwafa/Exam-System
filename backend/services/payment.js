@@ -2,8 +2,8 @@ const axios = require('axios')
 const sha256 = require('js-sha256');
 const User = require('../models/User')
 
-const merchant_hash_key = process.env.merchant_hash_key.toString()
-const merchant_code = process.env.merchant_code.toString()
+const merchant_hash_key = process.env.merchant_hash_key
+const merchant_code = process.env.merchant_code
 const baseURL = 'https://atfawry.fawrystaging.com/fawrypay-api/api/'
 const amount = '50.00'
 const returnUrl = 'https://www.google.com' ///check later
