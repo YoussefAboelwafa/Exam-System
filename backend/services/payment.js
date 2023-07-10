@@ -53,7 +53,7 @@ module.exports.start_payment= async (user, exam_info) => {
             },
             data: JSON.stringify(data)
         }
-        
+        console.log(data);
         const res = await axios(axiosConfig);
         return res.data
     }catch(err){
