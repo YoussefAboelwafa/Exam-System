@@ -14,11 +14,12 @@ module.exports.start_payment= async (user, exam_info) => {
     try{       
         const {first_name, last_name, email, phone_namber, _id} = user;
         const current_time = Date.now().toString();
-        const merchantRefNum = JSON.stringify({
-            user_id: _id.toString(),
-            time: current_time,
-            exam_info: exam_info
-        })
+        // const merchantRefNum = JSON.stringify({
+        //     user_id: _id.toString(),
+        //     time: current_time,
+        //     exam_info: exam_info
+        // })
+        const merchantRefNum = '3545345345345345'
         const result = await User.updateOne({_id: _id}, {$set: {last_booking_time: current_time}})
         if(result.modifiedCount === 0){
             throw "Error setting last booking time, no money was taken yet"
@@ -35,7 +36,7 @@ module.exports.start_payment= async (user, exam_info) => {
                 {
                     itemId: exam_info.exam_id, /// check later
                     description: 'Product Description', /// change later
-                    price: 50.00, /// change later
+                    price: amount, /// change later
                     quantity: 1
                 }
             ],
