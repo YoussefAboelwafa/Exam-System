@@ -2,11 +2,11 @@ const axios = require('axios')
 const sha256 = require('js-sha256');
 const User = require('../models/User')
 
-const merchant_hash_key = process.env.merchant_hash_key
-const merchant_code = process.env.merchant_code
+const merchant_hash_key = process.env.merchant_hash_key.toString()
+const merchant_code = process.env.merchant_code.toString()
 const baseURL = 'https://atfawry.fawrystaging.com/fawrypay-api/api/'
 const amount = '50.00'
-const returnUrl = 'https://www.google.com/' ///check later
+const returnUrl = 'https://www.google.com' ///check later
 
 
 module.exports.start_payment= async (user, exam_info) => {
@@ -35,7 +35,7 @@ module.exports.start_payment= async (user, exam_info) => {
                 {
                     itemId: exam_info.exam_id, /// check later
                     description: 'Product Description', /// change later
-                    price: "50.00", /// change later
+                    price: '50.00', /// change later
                     quantity: 1
                 }
             ],
