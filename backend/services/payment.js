@@ -35,7 +35,7 @@ module.exports.start_payment= async (user, exam_info) => {
                 {
                     itemId: exam_info.exam_id, /// check later
                     description: 'Product Description', /// change later
-                    price: amount, /// change later
+                    price: 50.00, /// change later
                     quantity: 1
                 }
             ],
