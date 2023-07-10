@@ -55,7 +55,7 @@ module.exports.start_payment= async (user, exam_info) => {
         }
         
         const res = await axios(axiosConfig);
-        console.log(res.response.data);
+        console.log(res.response);
         return res
     }catch(err){
         console.log(err);
