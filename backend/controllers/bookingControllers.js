@@ -20,12 +20,11 @@ module.exports.startPayment = async (req, res) => {
                         if(!user){
                             throw "not a viable request, no money was taken yet"
                         }
-                        console.log(req.body);
                         const result = await payment.start_payment(user, req.body.exam);
                         if(!result){
                             throw 'an error occured while authing the money'
                         }
-                        res.json({success: true, token: result})  
+                        res.json({success: true, token: "helllo world"})  
                     }
                 }catch(err){
                     console.log(err);
