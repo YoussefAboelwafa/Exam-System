@@ -52,7 +52,7 @@ module.exports.start_payment= async (user, exam_info) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            data: JSON.stringify(data)
+            data: data
         }
         
         const res = await axios(axiosConfig);
