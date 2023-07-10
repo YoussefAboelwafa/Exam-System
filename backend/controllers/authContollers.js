@@ -7,7 +7,9 @@ const nodemailer = require('nodemailer');
 const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
       user: 'gammalexambooking@gmail.com',
       pass: 'djvjnulxvitpdzcb'
@@ -23,13 +25,16 @@ async function sendSMS(to, code) {
             text: `Your verification code is: ${code}\n
             The code expires after 10 minutes` 
           };
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-              console.log(error);
-            } else {
-              console.log('Email sent: ' + info.response);
-            }
-          });
+        await new Promise((resolve, reject) => {
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                    reject(error)
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    resolve('Email sent: ' + info.response);
+                }
+            });
+        })
     }catch(err){
         console.log(err);
     }
@@ -109,12 +114,14 @@ module.exports.signup_post = async (req, res) =>{
 
         const isUnique = await checkUniqueness(email, phone_namber);
         if(isUnique){
+            
             const code = generateOTP();
             console.log("code is: ", code);
-            const otp = await OTP.insert({phone_namber: phone_namber, code: code});
-
-            sendSMS(email, code);   /////remove comment later
-
+            await new Promise.all([
+                OTP.insert({phone_namber: phone_namber, code: code}),
+                sendSMS(email, code)
+            ])
+              /////remove comment later
             res.status(201).json({success: true});
         }else{
             res.status(201).json({success: false});
@@ -178,8 +185,6 @@ module.exports.verifyCode = async (req, res) => {
             res.status(201).json({success: false, created: false});
         }
     }catch(err){            
-          
-        const errors = errorHandler(err);
         console.log(err);
         res.status(201).json({success: true, created: false});
     }
@@ -194,9 +199,11 @@ module.exports.send_again = async (req, res) =>{
         // console.log(phone);
         const code = generateOTP();
          console.log(code);
-        const otp = await OTP.insert({phone_namber: phone_namber, code: code});
 
-        sendSMS(email, code);   /////remove comment later
+        await Promise.all([
+            await OTP.insert({phone_namber: phone_namber, code: code}),
+            sendSMS(email, code)
+        ])
 
         res.status(201).json({success: true});
         
@@ -204,7 +211,6 @@ module.exports.send_again = async (req, res) =>{
         // res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000})
 
     }catch(err){
-        const errors = errorHandler(err);
         res.status(201).json({success: false});
     }
 }
