@@ -63,14 +63,14 @@ module.exports.book_exam = async (req, res) => {
                         console.log(err.message);
                         throw "bad cookies"
                     }else{
-                        console.log(req.body);
+                        
+                        const payment_result = await payment.get_order(req.body.merchantRefNumber, req.body.signature);
+                        if(!payment_result){
+                            throw `and error occurred during payment capture, returning the money to user ...`
+                        }
                         user = await User.checkViability(req.body.exam, decodedToken._id);
                         if(!user){
                             throw "not a viable request, returning the money to user ..."
-                        }
-                        const payment_result = await payment.cowpay_capture(req.body.cowpay_reference_id, req.body.signature);
-                        if(!payment_result){
-                            throw `and error occurred during payment capture, returning the money to user ...`
                         }
                         const result = await User.bookExam(req.body.exam, decodedToken._id)
                         if(!result){
