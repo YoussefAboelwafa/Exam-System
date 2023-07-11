@@ -71,13 +71,13 @@ module.exports.get_order = async (merchantRefNumber, old_signature) => {
         let data = {
             merchantCode: merchant_code,
             merchantRefNumber: merchantRefNumber,
-            signature: sha256(merchant_code + merchantRefNumber + merchant_hash_key)
+            signature: sha256(merchant_code + merchantRefNumber + "TWERTWERTT")
         };
 
         console.log(data);
         
         let axiosConfig = {
-            method: 'get',
+            method: 'GET',
             baseURL: baseURL, 
             url: 'ECommerceWeb/Fawry/payments/status/v2',
             headers: {
