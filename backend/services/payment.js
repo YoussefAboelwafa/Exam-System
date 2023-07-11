@@ -67,13 +67,14 @@ module.exports.start_payment= async (user, exam_info) => {
 
 module.exports.get_order = async (merchantRefNumber, old_signature) => {
     try {
+        
         let data = {
             merchantCode: merchant_code,
             merchantRefNumber: merchantRefNumber,
             signature: sha256(merchant_code + merchantRefNumber + merchant_hash_key)
         };
 
-
+        console.log(data);
         
         let axiosConfig = {
             method: 'get',
