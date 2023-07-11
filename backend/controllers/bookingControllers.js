@@ -84,10 +84,11 @@ module.exports.book_exam = async (req, res) => {
                     ///de-auth the amount from user
                     if(!user){
                         res.json({success: false, error:"no money was taken"})
-                    }
-                    await payment.return_money({last_booking_time:user.last_booking_time, user_id:user._id});
+                    }else{
+                        // await payment.return_money({last_booking_time:user.last_booking_time, user_id:user._id});
 
-                    res.json({success: false, error: "error occurred but taken money was returned"})
+                        res.json({success: false, error: "error occurred but taken money was returned"})
+                    }
                 }
             })
 

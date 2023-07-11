@@ -71,7 +71,7 @@ module.exports.get_order = async (merchantRefNumber, old_signature) => {
         let data = {
             merchantCode: merchant_code,
             merchantRefNumber: merchantRefNumber,
-            signature: sha256(merchant_code + merchantRefNumber + "TWERTWERTT")
+            signature: sha256(merchant_code + merchantRefNumber + merchant_hash_key)
         };
 
         console.log(data);
@@ -83,11 +83,11 @@ module.exports.get_order = async (merchantRefNumber, old_signature) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            data: data
         }
         const res = await axios(axiosConfig);
         console.log(res);
-        return res.data
+        return res
     } catch (err) {
         console.log("hellooo world ---------------------------------------");
         console.log(err);
