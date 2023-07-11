@@ -3,15 +3,13 @@ const jwt = require('jsonwebtoken')
 const payment = require('../services/payment')
 
 
-const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
-
 module.exports.startPayment = async (req, res) => {
     try {
         const token = req.cookies.jwt;
 
         if(token){
 
-            jwt.verify(token, token_secrect, async (err, decodedToken)=>{
+            jwt.verify(token, process.env.token_secret, async (err, decodedToken)=>{
 
                 try{
                     if(err){
@@ -22,12 +20,12 @@ module.exports.startPayment = async (req, res) => {
                         if(!user){
                             throw "not a viable request, no money was taken yet"
                         }
-                        console.log(user);
-                        const result = await payment.cowpay_init_and_auth(user);
+                        const result = await payment.start_payment(user, req.body.exam);
                         if(!result){
                             throw 'an error occured while authing the money'
                         }
-                        res.json({success: true, token: result.data.token})  
+                        console.log(result);
+                        res.json({success: true, token: result})  
                     }
                 }catch(err){
                     console.log(err);
@@ -58,7 +56,7 @@ module.exports.book_exam = async (req, res) => {
 
         if(token){
 
-            jwt.verify(token, token_secrect, async (err, decodedToken)=>{
+            jwt.verify(token, process.env.token_secret, async (err, decodedToken)=>{
                 let user = null;
                 try{
                     if(err){
