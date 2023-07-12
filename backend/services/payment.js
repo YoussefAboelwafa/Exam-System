@@ -90,7 +90,6 @@ module.exports.get_order = async (merchantRefNumber, old_signature) => {
 
         const jsSHA = require('jssha');
         let merchantCode = merchant_code;
-        let merchantRefNumber = merchantRefNumber;
         let merchant_sec_key = merchant_hash_key.replace(/^-|-$|-/g, '');
         let signature_body = merchantCode.concat(merchantRefNumber,merchant_sec_key);
 
