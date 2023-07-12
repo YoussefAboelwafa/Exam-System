@@ -16,7 +16,7 @@ module.exports.start_payment= async (user, exam_info) => {
         const merchantRefNum = _id.toString() + "at" + current_time
         const result = await User.updateOne({_id: _id}, {$set: {last_booking_time: current_time}})
 
-        const unhashed_signature = merchant_code + merchantRefNum +  returnUrl + exam_info.exam_id.toString() + '1' + amount + merchant_hash_key;
+        const unhashed_signature = merchant_code + merchantRefNum +  returnUrl + JSON.stringify(exam_info) + '1' + amount + merchant_hash_key;
         if(result.modifiedCount === 0){
             throw "Error setting last booking time, no money was taken yet"
         }
