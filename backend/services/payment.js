@@ -87,9 +87,13 @@ module.exports.get_order = async (merchantRefNumber, old_signature) => {
             merchantRefNumber: merchantRefNumber,
             signature: sha256(merchant_code + merchantRefNumber + "adsfasdfasdfasdfasdfasfd")
         };
-        
-
-        console.log(data);
+    
+        let data4 = {
+            merchantCode: merchant_code,
+            merchantRefNumber: "asdfasdfasdfdfasd",
+            signature: sha256(merchant_code + "asdfasdfasdfdfasd" + merchant_hash_key)
+        };
+    
         
         let axiosConfig1 = {
             method: 'GET',
@@ -124,12 +128,25 @@ module.exports.get_order = async (merchantRefNumber, old_signature) => {
             body: JSON.stringify(data3)
         }
 
+        let axiosConfig4 = {
+            method: 'GET',
+            baseURL: baseURL, 
+            url: 'ECommerceWeb/Fawry/payments/status/v2',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(data4),
+            body: JSON.stringify(data4)
+        }
+
         const res1 = await axios(axiosConfig1);
         const res2 = await axios(axiosConfig2);
         const res3 = await axios(axiosConfig3);
+        const res4 = await axios(axiosConfig4);
         console.log("res1", res1);
         console.log("res2", res2);
         console.log("res3", res3);
+        console.log("res4", res4);
         return false
     } catch (err) {
         console.log("hellooo world ---------------------------------------");
