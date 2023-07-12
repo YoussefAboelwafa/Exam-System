@@ -5,9 +5,6 @@ const jwt = require('jsonwebtoken');
 const TimeAndSpace = require('../models/TimeAndSpace')
 
 
-const token_secrect = 'LVeKzFIE8WwhaBpKITdyMSDKbQMPFI4g'
-
-
 module.exports.getHome = async (req, res) => {
     try{
         let startTime = Date.now();
@@ -15,7 +12,7 @@ module.exports.getHome = async (req, res) => {
 
         if(token){
             let startTime = Date.now();
-            jwt.verify(token, token_secrect, async (err, decodedToken)=>{
+            jwt.verify(token, process.env.token_secret, async (err, decodedToken)=>{
 
                 if(err){
                     console.log(err.message);
@@ -119,7 +116,7 @@ module.exports.getOtherExams = async (req, res) => {
 
         if(token){
 
-            jwt.verify(token, token_secrect, async (err, decodedToken)=>{
+            jwt.verify(token, process.env.token_secret, async (err, decodedToken)=>{
 
                 if(err){
                     console.log(err.message);

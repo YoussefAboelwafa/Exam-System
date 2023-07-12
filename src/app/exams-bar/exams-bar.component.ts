@@ -212,8 +212,18 @@ export class ExamsBarComponent implements OnInit {
       snack: this.select_snacks,
       appointment: this.selectedappointment,
     };
+    console.log(book_exam);
     
   this.service.payment(book_exam).subscribe(
+// <<<<<<< main
+//           res=>{
+//             console.log(res);
+            
+//     })
+//     // cowpay_reference_id
+//     // signature
+
+// =======
           x=>{
             if(x.success==true) {
               window.location.href =x.token;
@@ -221,6 +231,7 @@ export class ExamsBarComponent implements OnInit {
     })
   
  
+// >>>>>>> main
     //service becouse i need Day of exam and Appointment then next step
     this.reset_order_exam();
     this.refresh_all();
