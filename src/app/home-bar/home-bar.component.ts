@@ -232,33 +232,14 @@ export class HomeBarComponent implements OnInit {
             if(x.success==true) {
               window.location.href =x.token;
             }
+            else{
+              this.popup.open_error_book(x.error);
+            }
     })
   
-    // cowpay_reference_id
-    // signature
+     
 
-    window.addEventListener('message', (e:any)=>{
-      if (e.data && e.data.message_source === 'cowpay') {
-          let paymentStatus = e.data.payment_status,
-          cowpayReferenceId = e.data.cowpay_reference_id,
-          signature = e.data.signature;
-          if(paymentStatus == "FAILED"){
-            this.popup.open_error_payment();
-                    }
-          this.service.book_exam(book_exam,cowpayReferenceId,signature).subscribe(
-            (y) => {
-            if(y.success==false){  
-              console.log(1)
-              this.popup.open_error_book(y.error);
-            }
-            else{
-            }
-          });
-          
-          // take an action based on the values
-      }
-
-  }, false);
+    
     this.reset_order_exam();
     //service becouse i need Day of exam and Appointment then next step
     this.clear_flag_book();
