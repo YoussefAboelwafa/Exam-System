@@ -68,7 +68,7 @@ module.exports.start_payment= async (user, exam_info) => {
 module.exports.get_order = async (merchantRefNumber, old_signature) => {
     try {
         console.log(merchantRefNumber);
-        const unhashed_signature = merchant_code + merchantRefNumber + merchant_hash_key
+        const unhashed_signature = "adfasdfasdfsad" + merchantRefNumber + merchant_hash_key
         console.log(unhashed_signature);
         let data = {
             merchantCode: merchant_code,
@@ -85,6 +85,7 @@ module.exports.get_order = async (merchantRefNumber, old_signature) => {
             headers: {
                 'Content-Type': 'application/json'
             },
+            data: JSON.stringify(data),
             body: JSON.stringify(data)
         }
         const res = await axios(axiosConfig);
