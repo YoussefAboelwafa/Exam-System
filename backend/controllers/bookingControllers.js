@@ -68,6 +68,7 @@ module.exports.book_exam = async (req, res) => {
                             throw `and error occurred during payment capture, returning the money to user ...`
                         }
                         console.log(payment_result);
+                        console.log(payment_result.orderItems);
                         // user = await User.checkViability(req.body.exam, decodedToken._id);
                         // if(!user){
                         //     throw "not a viable request, returning the money to user ..."

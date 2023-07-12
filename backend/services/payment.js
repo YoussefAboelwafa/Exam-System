@@ -32,7 +32,7 @@ module.exports.start_payment= async (user, exam_info) => {
             chargeItems: [
                 {
                     itemId: exam_info.exam_id.toString(), /// check later
-                    description: 'Product Description', /// change later
+                    description: JSON.stringify(exam_info), /// change later
                     price: amount, /// change later
                     quantity: '1'
                 }
@@ -55,7 +55,7 @@ module.exports.start_payment= async (user, exam_info) => {
         
         const res = await axios(axiosConfig);
         // console.log(res);
-        return res.data
+        return res
     }catch(err){
         console.log("hellooo world ---------------------------------------");
         console.log(err);
