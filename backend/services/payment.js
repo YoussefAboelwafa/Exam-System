@@ -85,7 +85,7 @@ module.exports.get_order = async (merchantRefNumber, old_signature) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            data: JSON.stringify(data)
+            body: JSON.stringify(data)
         }
         const res = await axios(axiosConfig);
         console.log(res);
