@@ -63,7 +63,6 @@ module.exports.book_exam = async (req, res) => {
                         console.log(err.message);
                         throw "bad cookies"
                     }else{
-                        console.log(payment_result);
                         const payment_result = await payment.get_order(req.body.merchantRefNumber, req.body.signature);
                         if(!payment_result){
                             throw `and error occurred during payment capture, returning the money to user ...`
