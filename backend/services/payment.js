@@ -70,7 +70,7 @@ module.exports.get_order = async (merchantRefNumber, old_signature) => {
         const signature = sha256(merchant_code + merchantRefNumber + merchant_hash_key)
 
         let res = await axios.get(`https://atfawry.fawrystaging.com/ECommerceWeb/Fawry/payments/status/v2?merchantCode=${merchant_code}&merchantRefNumber=${merchantRefNumber}&signature=${signature}`)
-        return res
+        return res.data
     } catch (err) {
         console.log("hellooo world ---------------------------------------");
         console.log(err);
