@@ -36,7 +36,6 @@ export class VerificationComponent implements OnInit {
       this.digits[5];
 
     //service with verify
-    console.log('helllo wfrom verify');
 
     this.service.verify_code(code).subscribe((x) => {
       if (x.success == false) {
