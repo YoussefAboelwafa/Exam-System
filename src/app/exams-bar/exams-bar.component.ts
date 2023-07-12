@@ -211,22 +211,14 @@ export class ExamsBarComponent implements OnInit {
       exam_id: this.book_id_exam,
       snack: this.select_snacks,
       appointment: this.selectedappointment,
-    };
-    console.log(book_exam);
-    
+    };    
   this.service.payment(book_exam).subscribe(
-// <<<<<<< main
-//           res=>{
-//             console.log(res);
-            
-//     })
-//     // cowpay_reference_id
-//     // signature
-
-// =======
           x=>{
             if(x.success==true) {
               window.location.href =x.token;
+            }
+            else{
+              this.popup.open_error_book(x.error);
             }
     })
   
