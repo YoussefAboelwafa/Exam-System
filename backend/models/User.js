@@ -108,7 +108,7 @@ userSchema.statics.checkViability = async (exam_data, userId) =>{
         return user
     } catch (error) {
         console.log(error);
-        return false
+        throw error
     }
         
     

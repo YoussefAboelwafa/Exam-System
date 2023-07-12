@@ -30,7 +30,7 @@ module.exports.startPayment = async (req, res) => {
                 }catch(err){
                     console.log(err);
                     ///check that no money was taken from the user
-                    res.json({success: false})
+                    res.json({success: false, error: err})
                 }
             }
             )
