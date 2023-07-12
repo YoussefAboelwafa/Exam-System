@@ -67,18 +67,9 @@ module.exports.start_payment= async (user, exam_info) => {
 
 module.exports.get_order = async (merchantRefNumber, old_signature) => {
     try {
-        console.log(merchantRefNumber);
-        const unhashed_signature = merchant_code + merchantRefNumber + merchant_hash_key
-        console.log(unhashed_signature);
-        let data = {
-            merchantCode: merchant_code,
-            merchantRefNumber: merchantRefNumber,
-            signature: sha256(unhashed_signature)
-        };
+        const signature = sha256(merchant_code + merchantRefNumber + merchant_hash_key)
 
-        console.log(data);
-
-        let res = await axios.get('https://atfawry.fawrystaging.com/ECommerceWeb/Fawry/payments/status/v2', {data})
+        let res = await axios.get(`https://atfawry.fawrystaging.com/ECommerceWeb/Fawry/payments/status/v2?merchantCode=${merchant_code}&merchantRefNumber=${merchantRefNumber}&signature=${data.signature}`)
         console.log(res);
         return false
     } catch (err) {
