@@ -31,8 +31,7 @@ module.exports.start_payment= async (user, exam_info) => {
             
             chargeItems: [
                 {
-                    itemId: exam_info.exam_id.toString(), /// check later
-                    description: JSON.stringify(exam_info), /// change later
+                    itemId: JSON.stringify(exam_info), /// check later
                     price: amount, /// change later
                     quantity: '1'
                 }
