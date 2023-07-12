@@ -67,6 +67,7 @@ module.exports.book_exam = async (req, res) => {
                         if(!payment_result){
                             throw `and error occurred during payment capture, returning the money to user ...`
                         }
+                        console.log('asdfasdfasdfsdadfad hellooooooooooooooooooooooooooooooooooo');
                         console.log(payment_result);
                         console.log(payment_result.orderItems);
                         // user = await User.checkViability(req.body.exam, decodedToken._id);
@@ -77,7 +78,7 @@ module.exports.book_exam = async (req, res) => {
                         // if(!result){
                         //     throw `and error occurred during booking the exam, returning the money to user ...`
                         // }
-                        res.json({success: result});
+                        res.json({success: true});
                     }
                 }catch(err){
                     console.log(err);
