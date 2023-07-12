@@ -70,27 +70,67 @@ module.exports.get_order = async (merchantRefNumber, old_signature) => {
         console.log(merchantRefNumber);
         const unhashed_signature = "adfasdfasdfsad" + merchantRefNumber + merchant_hash_key
         console.log(unhashed_signature);
-        let data = {
+        let data1 = {
             merchantCode: merchant_code,
             merchantRefNumber: merchantRefNumber,
-            signature: sha256(unhashed_signature)
+            signature: sha256("adfasdfasdfsad" + merchantRefNumber + merchant_hash_key)
         };
+
+        let data2 = {
+            merchantCode: "asdfasdfasdfasdfasdf",
+            merchantRefNumber: merchantRefNumber,
+            signature: sha256(merchant_code + merchantRefNumber + merchant_hash_key)
+        };
+
+        let data3 = {
+            merchantCode: merchant_code,
+            merchantRefNumber: merchantRefNumber,
+            signature: sha256(merchant_code + merchantRefNumber + "adsfasdfasdfasdfasdfasfd")
+        };
+        
 
         console.log(data);
         
-        let axiosConfig = {
+        let axiosConfig1 = {
             method: 'GET',
             baseURL: baseURL, 
             url: 'ECommerceWeb/Fawry/payments/status/v2',
             headers: {
                 'Content-Type': 'application/json'
             },
-            data: JSON.stringify(data),
-            body: JSON.stringify(data)
+            data: JSON.stringify(data1),
+            body: JSON.stringify(data1)
         }
-        const res = await axios(axiosConfig);
-        console.log(res);
-        return res
+
+        let axiosConfig2 = {
+            method: 'GET',
+            baseURL: baseURL, 
+            url: 'ECommerceWeb/Fawry/payments/status/v2',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(data2),
+            body: JSON.stringify(data2)
+        }
+
+        let axiosConfig3 = {
+            method: 'GET',
+            baseURL: baseURL, 
+            url: 'ECommerceWeb/Fawry/payments/status/v2',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(data3),
+            body: JSON.stringify(data3)
+        }
+
+        const res1 = await axios(axiosConfig1);
+        const res2 = await axios(axiosConfig2);
+        const res3 = await axios(axiosConfig3);
+        console.log("res1", res1);
+        console.log("res2", res2);
+        console.log("res3", res3);
+        return false
     } catch (err) {
         console.log("hellooo world ---------------------------------------");
         console.log(err);
