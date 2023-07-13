@@ -503,3 +503,86 @@ select {
     font-size: 10px;
   }
 }
+@media screen and (max-width: 700px) {
+
+  .container1{
+    flex-wrap: wrap;
+    overflow: unset;
+  }
+  .carousel {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .goodmorningwidgets,
+  .discoverexamswidgets {
+    width: 100%;
+    overflow: unset;
+  }
+
+  .card {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .card h5 {
+    font-size: 16px;
+  }
+
+  .card a {
+    font-size: 10px;
+  }
+
+  .upcoming h5,
+  .taken h5,
+  .rank h5 {
+    font-size: 18px;
+  }
+
+  .discoverexamslabel a {
+    right: auto;
+    left: 10%;
+    font-size: 12px;
+  }
+
+  .modal-title {
+    font-size: 24px;
+  }
+
+  .modal-footer button {
+    width: 100%;
+  }
+
+  .modal-body {
+    font-size: 14px;
+  }
+
+  .upcominginfo label,
+  .takeninfo label {
+    font-size: 10px;
+  }
+
+  .examlist li {
+    font-size: 8px;
+  }
+
+  .order,
+  h3 {
+    font-size: 10px;
+  }
+
+  #select,
+  #btn,
+  .circle {
+    width: 100%;
+  }
+
+  .discoversmallbox2 .discoverexamname1 {
+    font-size: 12px;
+  }
+
+  .discoversmallbox2 .discoverscore1 {
+    font-size: 48px;
+  }
+}
+
