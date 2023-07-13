@@ -490,3 +490,16 @@ select {
 .smalldiv {
   margin-bottom: 10px;
 }
+
+
+@media only screen and (max-width: 600px) {
+  select{
+    font-size: 12px;
+  }
+  option{
+    font-size: 12px;
+  }
+  .btn{
+    font-size: 10px;
+  }
+}

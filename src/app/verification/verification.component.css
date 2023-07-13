@@ -137,3 +137,32 @@ a {
   margin-right: 420px;
   margin-top: 20px;
 }
+
+@media only screen and (max-width: 800px) {
+  .form {
+    width: 90%;
+    max-width: 100%;
+    margin:20px;
+    order: 2; 
+  }
+  
+  .image {
+    width: 100%;
+    order: 1;
+  }
+
+  .container
+  {
+    overflow: scroll;
+    justify-content: center;
+    align-items: center;
+  }
+  input{
+    width: 100px;
+  }
+  .box input {
+    width: 10vw;
+    height: 8vw;
+   
+  }
+}

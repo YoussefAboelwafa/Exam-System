@@ -433,3 +433,33 @@ li.active button {
   font-size: x-large;
   margin-right: 5px;
 }
+
+@media only screen and (max-width: 700px) {
+  .section1 {
+    width: 100%;
+  }
+  .section2 {
+    width: 100%;
+  }
+  .section3 {
+    order: 2;
+    overflow-y: unset;
+    width: 100%;
+  }
+  
+  .section12 {
+    width: 100%;
+    order:1;
+  }
+  .container{
+    display: flex;
+    overflow-y: auto;
+    margin: 20px;
+    flex-direction: row;
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+  
+
+}
