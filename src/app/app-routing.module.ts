@@ -73,31 +73,9 @@ const routes: Routes = [
     ],
   },
 
-  // {
-  //   path: 'home/:name',
-  //   component: HomeComponent,
-  //   children:[
-  //     {
-  //       path: 'show/:mails',
-  //       component:ShowComponent
-
-  //     }
-
-  //   ]
-  // },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
-
-// this.route.paramMap.subscribe((x) => (
-//   this.email = x.get('name')
-// ));
-
-// this.router.navigate([`/home/${this.email}/show/inbox`]);
-// routerLink="show/inbox"
-// this.route.queryParamMap.subscribe(params => {
-//   this.user = params.get('user');
-// });

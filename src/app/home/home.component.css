@@ -45,7 +45,6 @@ div {
 .section3 {
   width: 70vw;
   height: 95vh;
-  order: 3;
   background: radial-gradient(
     circle at top left,
     rgba(255, 145, 76, 0.18),
@@ -435,4 +434,60 @@ li.active button {
   color: #008081;
   font-weight: bold;
   text-align: center;
+}
+
+/* @media screen and (max-width: 600px) {
+  .container{
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: scroll;
+    width: 100%;
+  }
+  .section1{
+    width: 100%;
+  }
+  .section2{
+    width: 100%;
+  }
+  .section3{
+    width: 100%;
+    order: 3;
+  }
+
+
+} */
+
+
+@media only screen and (max-width: 700px) {
+  .section1 {
+    width: 100%;
+  }
+  .section2 {
+    width: 100%;
+  }
+  .section3 {
+    order: 2;
+    overflow-y: unset;
+    width: 100%;
+  }
+  
+  .section12 {
+    width: 100%;
+    order:1;
+  }
+  .container{
+    display: flex;
+    overflow-y: auto;
+    margin: 20px;
+    flex-direction: row;
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+  
+
 }

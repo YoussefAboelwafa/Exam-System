@@ -115,3 +115,29 @@ a {
   margin-left: 2px;
   color: red;
 }
+
+@media only screen and (max-width: 1000px) {
+  .form {
+    width: 100%;
+    max-width: 100%;
+    margin:20px;
+    order: 3; 
+  }
+  
+  .image {
+    width: 100%;
+    order: 1;
+  }
+  .logo{
+    order:2;
+    justify-content: center;
+    align-items: center;
+  }
+  .container
+  {
+    overflow: scroll;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
