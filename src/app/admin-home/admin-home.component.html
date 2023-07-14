@@ -1,55 +1,57 @@
 <div class="container">
-  <div class="section section1">
-    <div class="name" *ngIf="current_user">
-      <input
-        type="file"
-        accept="image/*"
-        class="file-input"
-        (change)="onFileSelect($event)"
-      />
-      <div  class="image" id="img_home" ></div>
-      <div class="name2">
-        <label
-          >{{ current_user.first_name }} {{ current_user.last_name }}</label
-        >
-        <label id="id">#{{ current_user._id }}</label>
-      </div>
-    </div>
-  </div>
-  <!-- Side bar -->
-  <div class="section section2 sidebar">
-    <ul>
-      <li [routerLinkActive]="'active'">
-        <button routerLink="/admin_home/admin_analytics">
-          <i class="fa-solid fa-chart-line"></i> Analytics
-        </button>
-      </li>
-      <li [routerLinkActive]="'active'">
-        <button routerLink="/admin_home/admin_location">
-          <i class="fa-solid fa-location-dot"></i>
-          Location
-        </button>
-      </li>
-      <li [routerLinkActive]="'active'">
-        <button routerLink="/admin_home/admin_calendar">
-          <i class="fa-solid fa-calendar-days"></i>
-          Calendar
-        </button>
-      </li>
-      <li [routerLinkActive]="'active'">
-        <button routerLink="/admin_home/admin_exams">
-          <i class="fa-regular fa-file-lines"></i>
-          Exams
-        </button>
-      </li>
-      <li>
-        <button>
-          <i class="fa-solid fa-newspaper"></i>
-          News
-        </button>
-      </li>
-    </ul>
-  </div>
+ <div class="section12">
+   <div class="section section1">
+     <div class="name" *ngIf="current_user">
+       <input
+         type="file"
+         accept="image/*"
+         class="file-input"
+         (change)="onFileSelect($event)"
+       />
+       <div  class="image" id="img_home" ></div>
+       <div class="name2">
+         <label
+           >{{ current_user.first_name }} {{ current_user.last_name }}</label
+         >
+         <label id="id">#{{ current_user._id }}</label>
+       </div>
+     </div>
+   </div>
+   <!-- Side bar -->
+   <div class="section section2 sidebar">
+     <ul>
+       <li [routerLinkActive]="'active'">
+         <button routerLink="/admin_home/admin_analytics">
+           <i class="fa-solid fa-chart-line"></i> Analytics
+         </button>
+       </li>
+       <li [routerLinkActive]="'active'">
+         <button routerLink="/admin_home/admin_location">
+           <i class="fa-solid fa-location-dot"></i>
+           Location
+         </button>
+       </li>
+       <li [routerLinkActive]="'active'">
+         <button routerLink="/admin_home/admin_calendar">
+           <i class="fa-solid fa-calendar-days"></i>
+           Calendar
+         </button>
+       </li>
+       <li [routerLinkActive]="'active'">
+         <button routerLink="/admin_home/admin_exams">
+           <i class="fa-regular fa-file-lines"></i>
+           Exams
+         </button>
+       </li>
+       <li>
+         <button>
+           <i class="fa-solid fa-newspaper"></i>
+           News
+         </button>
+       </li>
+     </ul>
+   </div>
+ </div>
   <div class="section section3">
     <router-outlet></router-outlet>
 

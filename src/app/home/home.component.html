@@ -1,59 +1,61 @@
 <div class="container">
-  <div class="section section1">
-    <div class="name" *ngIf="current_user">
-      <input
-        type="file"
-        accept="image/*"
-        class="file-input"
-        (change)="onFileSelect($event)"
-      />
-      <div  class="image" id="img_home" ></div>
-      <div class="name2">
-        <label
-          >{{ current_user.first_name }} {{ current_user.last_name }}</label
-        >
-        <label id="id">#{{ current_user._id }}</label>
+  <nav class="section12">
+    <div class="section section1">
+      <div class="name" *ngIf="current_user">
+        <input
+          type="file"
+          accept="image/*"
+          class="file-input"
+          (change)="onFileSelect($event)"
+        />
+        <div class="image" id="img_home"></div>
+        <div class="name2">
+          <label
+            >{{ current_user.first_name }} {{ current_user.last_name }}</label
+          >
+          <label id="id">#{{ current_user._id }}</label>
+        </div>
+      </div>
+
+      <div class="btns1">
+        <button class="btn">Certificates</button>
+        <button class="btn">Past Exams</button>
       </div>
     </div>
-
-    <div class="btns1">
-      <button>Certificates</button>
-      <button>Past Exams</button>
+    <!-- Side bar -->
+    <div class="section section2 sidebar">
+      <ul>
+        <li [routerLinkActive]="'active'">
+          <button routerLink="/home/home_bar">
+            <img src="/assets/images/home.svg" alt="" />
+            Home
+          </button>
+        </li>
+        <li [routerLinkActive]="'active'">
+          <button routerLink="/home/exam_bar">
+            <img src="/assets/images/exams.svg" alt="" />
+            Exams
+          </button>
+        </li>
+        <li>
+          <button>
+            <img src="/assets/images/news.svg" alt="" />
+            News
+          </button>
+        </li>
+        <li [routerLinkActive]="'active'">
+          <button routerLink="/home/ranking_bar">
+            <img src="/assets/images/rank.svg" alt="" />
+            Ranking
+          </button>
+        </li>
+      </ul>
+      <div class="book">
+        <label>Book Your Next <br />Exam Now</label>
+        <button routerLink="/home/exam_bar">Book Now</button>
+      </div>
     </div>
-  </div>
-  <!-- Side bar -->
-  <div class="section section2 sidebar">
-    <ul>
-      <li [routerLinkActive]="'active'">
-        <button routerLink="/home/home_bar">
-          <img src="/assets/images/home.svg" alt="" />
-          Home
-        </button>
-      </li>
-      <li [routerLinkActive]="'active'">
-        <button routerLink="/home/exam_bar">
-          <img src="/assets/images/exams.svg" alt="" />
-          Exams
-        </button>
-      </li>
-      <li>
-        <button>
-          <img src="/assets/images/news.svg" alt="" />
-          News
-        </button>
-      </li>
-      <li [routerLinkActive]="'active'">
-        <button routerLink="/home/ranking_bar">
-          <img src="/assets/images/rank.svg" alt="" />
-          Ranking
-        </button>
-      </li>
-    </ul>
-    <div class="book">
-      <label>Book Your Next <br />Exam Now</label>
-      <button routerLink="/home/exam_bar">Book Now</button>
-    </div>
-  </div>
+  </nav>
   <div class="section section3">
     <router-outlet></router-outlet>
 

@@ -11,7 +11,7 @@ import { users } from "../objects/users";
 
 
 export class ServicService {
-  private apiServerUrl = 'http://localhost:8080';
+  private apiServerUrl = 'https://gold-elegant-pig.cyclic.app';
   user!: users;
   upcoming_ex!:any[];
   token_ex!:any[];
@@ -40,7 +40,7 @@ public verify_code(code:any):Observable<any>{
 public send_again():Observable<any>{
   console.log(this.user.get_phone_namber());
   
-  return this.http.post<any>(`${this.apiServerUrl}/send_agin`,{phone_namber:this.user.get_phone_namber()}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/send_agin`,{phone_namber:this.user.get_phone_namber(),email:this.user.get_email()}, { withCredentials: true });
 }
 // i will send this request if user go to sign up and i recive pair of array ,
 //one to all city ,other to all country. it can be not used and replace this request

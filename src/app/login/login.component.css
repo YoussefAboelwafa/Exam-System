@@ -121,3 +121,30 @@ a {
   margin-bottom: 10px;
   color: red;
 }
+
+@media only screen and (max-width: 700px) {
+  .form {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .image {
+    width: 100%;
+    height: 400px;
+    order: 2;
+  }
+  
+  .logo {
+    margin-bottom: 10%;
+    margin-top: 10%;
+  }
+}
+
+@media only screen and (max-height: 700px) {
+  .container {
+    overflow: scroll;
+  }
+}
+
