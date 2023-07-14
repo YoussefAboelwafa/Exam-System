@@ -16,7 +16,7 @@ module.exports.start_payment= async (user, exam_info) => {
         const merchantRefNum = _id.toString() + "at" + current_time
         const result = await User.updateOne({_id: _id}, {$set: {last_booking_time: current_time}})
 
-        const unhashed_signature = merchant_code + merchantRefNum +  returnUrl + exam_info.exam_id.toString() + '1' + amount + merchant_hash_key;
+        const unhashed_signature = merchant_code + merchantRefNum +  returnUrl + JSON.stringify(exam_info) + '1' + amount + merchant_hash_key;
         if(result.modifiedCount === 0){
             throw "Error setting last booking time, no money was taken yet"
         }
@@ -26,13 +26,12 @@ module.exports.start_payment= async (user, exam_info) => {
             merchantRefNum: merchantRefNum,
             customerMobile: phone_namber,
             customerEmail: email,
-            customerName: first_name,
+            customerName: first_name + " " + last_name,
             language : "en-gb",
             
             chargeItems: [
                 {
-                    itemId: exam_info.exam_id.toString(), /// check later
-                    description: 'Product Description', /// change later
+                    itemId: JSON.stringify(exam_info), /// check later
                     price: amount, /// change later
                     quantity: '1'
                 }
@@ -57,6 +56,21 @@ module.exports.start_payment= async (user, exam_info) => {
         // console.log(res);
         return res.data
     }catch(err){
+        console.log("hellooo world ---------------------------------------");
+        console.log(err);
+        return false
+    }
+}
+
+
+
+module.exports.get_order = async (merchantRefNumber, old_signature) => {
+    try {
+        const signature = sha256(merchant_code + merchantRefNumber + merchant_hash_key)
+
+        let res = await axios.get(`https://atfawry.fawrystaging.com/ECommerceWeb/Fawry/payments/status/v2?merchantCode=${merchant_code}&merchantRefNumber=${merchantRefNumber}&signature=${signature}`)
+        return res.data
+    } catch (err) {
         console.log("hellooo world ---------------------------------------");
         console.log(err);
         return false

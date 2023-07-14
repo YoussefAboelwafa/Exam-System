@@ -30,7 +30,7 @@ module.exports.startPayment = async (req, res) => {
                 }catch(err){
                     console.log(err);
                     ///check that no money was taken from the user
-                    res.json({success: false})
+                    res.json({success: false, error: err})
                 }
             }
             )
@@ -63,30 +63,32 @@ module.exports.book_exam = async (req, res) => {
                         console.log(err.message);
                         throw "bad cookies"
                     }else{
-                        console.log(req.body);
-                        user = await User.checkViability(req.body.exam, decodedToken._id);
-                        if(!user){
-                            throw "not a viable request, returning the money to user ..."
-                        }
-                        const payment_result = await payment.cowpay_capture(req.body.cowpay_reference_id, req.body.signature);
+                        const payment_result = await payment.get_order(req.body.merchantRefNumber, req.body.signature);
                         if(!payment_result){
                             throw `and error occurred during payment capture, returning the money to user ...`
                         }
-                        const result = await User.bookExam(req.body.exam, decodedToken._id)
+                        const exam_info = JSON.parse(payment_result.orderItems[0].itemCode)
+                        console.log(exam_info);
+                        user = await User.checkViability(exam_info, decodedToken._id);
+                        if(!user){
+                            throw "not a viable request, returning the money to user ..."
+                        }
+                        const result = await User.bookExam(exam_info, decodedToken._id)
                         if(!result){
                             throw `and error occurred during booking the exam, returning the money to user ...`
                         }
-                        res.json({success: result});
+                        res.json({success: true});
                     }
                 }catch(err){
                     console.log(err);
                     ///de-auth the amount from user
                     if(!user){
                         res.json({success: false, error:"no money was taken"})
-                    }
-                    await payment.return_money({last_booking_time:user.last_booking_time, user_id:user._id});
+                    }else{
+                        // await payment.return_money({last_booking_time:user.last_booking_time, user_id:user._id});
 
-                    res.json({success: false, error: "error occurred but taken money was returned"})
+                        res.json({success: false, error: "error occurred but taken money was returned"})
+                    }
                 }
             })
 
