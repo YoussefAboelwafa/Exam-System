@@ -99,14 +99,14 @@ export class AdminQuestionsComponent implements OnInit {
       {
         title:"q1",
         description:"asdedasd",
-        choices:"asdas",
+        choices:["asdas"],
         answer:"sdsad",
         _id:"1"
       },
       {
         title:"q2",
         description:"asdedasd",
-        choices:"asdas",
+        choices:["asdas"],
         answer:"sdsad",
         _id:"1"
       }

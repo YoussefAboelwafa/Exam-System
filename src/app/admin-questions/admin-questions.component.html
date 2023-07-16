@@ -106,11 +106,10 @@
   <div class="discoverexamswidgets">
     <div class="card-text upcomingbox">
       <!-- ng for -->
-      <div *ngFor="let exam of exam_topics" class="upcominginfo">
-        <label class="examname1">{{ exam.title }}</label>
-        <label class="smallbox">{{ exam.title }}</label>
-        <label class="smallbox">{{ exam.title }}</label>
-        <label class="smallbox">{{ exam.title }}</label>
+      <div *ngFor="let quest of selected_topic.mcq " class="upcominginfo">
+        <label class="examname1">{{ quest.title }}</label>
+        <label class="smallbox">{{ quest.description }}</label>
+         
       </div>
     </div>
   </div>
@@ -123,11 +122,11 @@
 
     <div class="card-text upcomingbox">
       <!-- ng for -->
-      <div *ngFor="let exam of exam_topics" class="upcominginfo">
-        <label class="examname1">{{ exam.title }}</label>
-        <label class="smallbox">{{ exam.title }}</label>
-        <label class="smallbox">{{ exam.title }}</label>
-        <label class="smallbox">{{ exam.title }}</label>
+      <div *ngFor="let quest of selected_topic.coding" class="upcominginfo">
+        <label class="examname1">{{ quest.title }}</label>
+        <label class="smallbox">{{ quest.title }}</label>
+        <label class="smallbox">{{ quest.title }}</label>
+        <label class="smallbox">{{ quest.title }}</label>
       </div>
     </div>
   </div>
