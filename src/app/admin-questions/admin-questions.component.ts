@@ -49,8 +49,23 @@ export class AdminQuestionsComponent implements OnInit {
     title:"printif",
     num_of_mcq:0,
     num_of_coding:0,
-    mcq:[],
-    coding:[],
+    mcq:[{
+      title:"q1",
+      description:"asdedasd",
+      choices:"asdas",
+      answer:"sdsad",
+      _id:"1"
+    },
+    {
+      title:"q2",
+      description:"asdedasd",
+      choices:"asdas",
+      answer:"sdsad",
+      _id:"1"
+    }],
+    coding:[{
+
+    }],
     _id:"2"
    },{
     title:"scanif",
@@ -82,7 +97,18 @@ export class AdminQuestionsComponent implements OnInit {
     num_of_coding:0,
     mcq:[
       {
-
+        title:"q1",
+        description:"asdedasd",
+        choices:"asdas",
+        answer:"sdsad",
+        _id:"1"
+      },
+      {
+        title:"q2",
+        description:"asdedasd",
+        choices:"asdas",
+        answer:"sdsad",
+        _id:"1"
       }
     ],
     coding:[{
@@ -96,8 +122,8 @@ export class AdminQuestionsComponent implements OnInit {
   edit_MCQ:number=0
   new_mcq:Q_MCQ=new Q_MCQ();
   new_coding:Q_Coding=new Q_Coding();
-  number_of_choise_mcq:string[]=[];
-  number_of_choice_size:any=0
+  number_of_choise_mcq:string[]=["",""];
+  number_of_choice_size:any=2
 
   constructor(private service: ServicService,private popup:ModalPopServiceService) {
     // this.nontoken_exam=this.service.non_token;
@@ -261,6 +287,16 @@ export class AdminQuestionsComponent implements OnInit {
     this.new_coding=new Q_Coding;
     console.log(this.exam_topics[this.index_selected_topic].coding)
    }
+
+
+
+
+
+
+
+
+
+
 
 
 

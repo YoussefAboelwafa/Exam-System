@@ -162,4 +162,8 @@ public add_mcq_to_topic(topic_id:any,exam_id:any,new_mcq:any):Observable<any>{
 public add_coding_to_topic(topic_id:any,exam_id:any,new_coding:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/add_coding`,{exam_id:exam_id,topic_id:topic_id,new_coding:new_coding}, { withCredentials: true });
 }
+public edit_mcq_in_topic(mcq_id:any,new_mcq:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/edit_mcq`,{mcq_id:mcq_id,new_mcq:new_mcq}, { withCredentials: true });
+}
+
 }
