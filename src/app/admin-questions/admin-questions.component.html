@@ -1,0 +1,575 @@
+<div *ngIf="flag_topic == true">
+  <div class="toolbar">
+    <!-- country -->
+    <div class="dropdown countrydiv">
+      <select
+        class="form-control"
+        id="examSelect"
+        class="btn dropdown-toggle"
+        (change)="onexams_select($event)"
+      >
+        <option selected>exams</option>
+        <option *ngFor="let exam of nontoken_exam">{{ exam.title }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="container">
+    <button data-toggle="modal" data-target="#add_topics" class="addtopicbtn">
+      Add Topic <i class="fa-solid fa-plus"></i>
+    </button>
+    <!-- ng for -->
+    <div
+      *ngFor="let Topic of exam_topics; let i = index"
+      [ngClass]="{
+        card: true,
+        'card-text': true,
+        box: true
+      }"
+    >
+      <div class="remove">
+        <button (click)="open_topics(Topic, i)">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button
+          data-toggle="modal"
+          data-target="#confirmation"
+          (click)="remove_topic(Topic, i)"
+        >
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
+      <div class="info">
+        <label class="topic_tiltle">{{ Topic.title }}</label>
+      </div>
+      <div class="smallbox">
+        <span>MCQ: {{ Topic.mcq.length }}</span>
+      </div>
+      <div class="smallbox">
+        <span>Written: {{ Topic.coding.length }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="flag_question == true">
+  <div class="discoverexamslabel">
+    <label><span>Exam: </span> {{ selected_exam.title }}</label>
+    <label style="margin-left: 20px"
+      ><span>Topic: </span> {{ selected_topic.title }}</label
+    >
+    <label style="margin-left: 50%">
+      <button (click)="close_topics()" class="btn_back">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+    </label>
+  </div>
+  <div class="btns">
+    <button
+      data-toggle="modal"
+      data-target="#add_MCQ"
+      class="discoverbtns btn_exam btn_add"
+      style="margin-bottom: 10px; margin-right: 6px"
+    >
+      Add MCQ <i class="fa-solid fa-plus"></i>
+    </button>
+    <button
+      data-toggle="modal"
+      data-target="#add_coding"
+      class="discoverbtns btn_exam btn_add"
+      style="margin-bottom: 10px; margin-right: 6px"
+    >
+      Add Written <i class="fa-solid fa-plus"></i>
+    </button>
+    <button
+      data-toggle="modal"
+      data-target="#edit_number_of_MCQ"
+      class="discoverbtns btn_exam btn_add"
+      style="margin-bottom: 10px; margin-right: 6px"
+    >
+      Edit number of MCQ <i class="fa-solid fa-pencil"></i>
+    </button>
+    <button
+      data-toggle="modal"
+      data-target="#edit_number_of_coding"
+      class="discoverbtns btn_exam btn_add"
+      style="margin-bottom: 10px; margin-right: 6px"
+    >
+      Edit number of coding <i class="fa-solid fa-pencil"></i>
+    </button>
+  </div>
+
+  <hr style="background-color: #008182; height: 2px" />
+  <br />
+    <!-- MCQ -->
+  <div class="titles">MCQ ({{ selected_topic.num_of_mcq }})</div>
+  <div class="discoverexamswidgets">
+    <div class="card-text upcomingbox">
+      <!-- ng for -->
+      <div *ngFor="let exam of exam_topics" class="upcominginfo">
+        <label class="examname1">{{ exam.title }}</label>
+        <label class="smallbox">{{ exam.title }}</label>
+        <label class="smallbox">{{ exam.title }}</label>
+        <label class="smallbox">{{ exam.title }}</label>
+      </div>
+    </div>
+  </div>
+  <hr style="background-color: #008182; height: 2px" />
+  <br />
+    <!-- coding -->
+  <div class="titles">Coding ({{ selected_topic.num_of_coding }})</div>
+  <div class="discoverexamswidgets">
+    <!-- ngfor ya kimoo -->
+
+    <div class="card-text upcomingbox">
+      <!-- ng for -->
+      <div *ngFor="let exam of exam_topics" class="upcominginfo">
+        <label class="examname1">{{ exam.title }}</label>
+        <label class="smallbox">{{ exam.title }}</label>
+        <label class="smallbox">{{ exam.title }}</label>
+        <label class="smallbox">{{ exam.title }}</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="add_topics"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="close()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput5">Topic:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput5"
+            #topic_title
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          id="addnewlocation"
+          (click)="add_topic(topic_title.value)"
+        >
+          Add <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="add_MCQ"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="close()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <h3>title</h3>
+          <input
+            [(ngModel)]="new_mcq.title"
+            #mcq_title
+            type="text"
+            class="input_edit"
+          />
+          <h3>description</h3>
+          <textarea
+            [(ngModel)]="new_mcq.description"
+            #mcq_about
+            class="input_edit"
+            id="t_area"
+          ></textarea>
+          <h3>number of choices</h3>
+          <input
+            (blur)="set_number_choices(number_choice_size.value)"
+            min="0"
+            [value]="number_of_choice_size"
+            #number_choice_size
+            type="number"
+            class="input_edit"
+          />
+          <h3 *ngIf="number_of_choise_mcq.length != 0">choices</h3>
+          <div *ngFor="let choice of number_of_choise_mcq; let i = index">
+            <input
+              #in
+              (blur)="set_chioce(in.value, i)"
+              [value]="number_of_choise_mcq[i]"
+              type="text"
+              class="input_edit"
+            />
+          </div>
+          <h3>answer</h3>
+          <input
+            [(ngModel)]="new_mcq.answer"
+            #mcq_answer
+            type="text"
+            class="input_edit"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="addnewlocation" (click)="add_mcq()">
+          Add <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="add_coding"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="close()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <h3>title</h3>
+          <input
+            [(ngModel)]="new_coding.title"
+            #mcq_title
+            type="text"
+            class="input_edit"
+          />
+          <h3>description</h3>
+          <textarea
+            [(ngModel)]="new_coding.description"
+            #mcq_about
+            class="input_edit"
+            id="t_area"
+          ></textarea>
+
+          <h3>Input Format</h3>
+          <textarea
+            [(ngModel)]="new_coding.input_format"
+            #mcq_about
+            class="input_edit"
+            id="t_area"
+          ></textarea>
+          <h3>Output Format</h3>
+          <textarea
+            [(ngModel)]="new_coding.output_format"
+            #mcq_about
+            class="input_edit"
+            id="t_area"
+          ></textarea>
+          <h3>constraints</h3>
+          <textarea
+            [(ngModel)]="new_coding.constraints"
+            #mcq_about
+            class="input_edit"
+            id="t_area"
+          ></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="addnewlocation" (click)="add_coding()">
+          Add <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="edit_MCQ"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="close()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput5">Topic:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput5"
+            #topic_title
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          id="addnewlocation"
+          (click)="add_topic(topic_title.value)"
+        >
+          Add <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="edit_coding"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="close()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput5">Topic:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput5"
+            #topic_title
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          id="addnewlocation"
+          (click)="add_topic(topic_title.value)"
+        >
+          Add <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="edit_number_of_MCQ"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="close()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput5">Number of MCQ:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleFormControlInput5"
+            #number_of_MCQ
+            [value]="selected_topic.num_of_mcq"
+            min="0"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          id="addnewlocation"
+          (click)="edit_number_of_MCQ(number_of_MCQ.value)"
+        >
+          Edit <i class="fa-solid fa-pencil"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="edit_number_of_coding"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="close()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput5">Number of coding:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleFormControlInput5"
+            #number_of_coding
+            [value]="selected_topic.num_of_coding"
+            min="0"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          id="addnewlocation"
+          (click)="edit_number_of_coding(number_of_coding.value)"
+        >
+          Edit <i class="fa-solid fa-pencil"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="confirmation"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          <p style="color: red">Confirmation Remove</p>
+        </h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body" style="color: red">
+        Are you sure you want to remove the
+        <span style="font-size: 25px">{{ rv_topic.title }}</span>
+        Topic ?
+      </div>
+      <div class="modal-footer">
+        <button (click)="totaly_remove()" class="discoverbtns btn_exam">
+          YES
+        </button>
+        <button
+          style="background-color: #ff0052"
+          class="discoverbtns btn_exam"
+          (click)="close()"
+        >
+          NO
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-pop-up></app-pop-up>

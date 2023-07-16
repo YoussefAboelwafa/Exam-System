@@ -138,5 +138,28 @@ public payment(exam:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/exam/get_token`,{exam:exam}, { withCredentials: true });
 }
 
+//new
+public get_topics(exam_id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/get_topics`,{exam_id:exam_id}, { withCredentials: true });
+}
 
+public remove_topic(topic_id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/topic_id`,{topic_id:topic_id}, { withCredentials: true });
+}
+public add_topic(topic_name:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/add_topic`,{topic_name:topic_name}, { withCredentials: true });
+}
+
+public edit_number_of_MCQ(topic_id:any,number_of_mcq:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/edit_num_mcq`,{number_of_mcq:number_of_mcq,topic_id:topic_id}, { withCredentials: true });
+}
+public edit_number_of_coding(topic_id:any,number_of_coding:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/edit_num_coding`,{number_of_coding:number_of_coding,topic_id:topic_id}, { withCredentials: true });
+}
+public add_mcq_to_topic(topic_id:any,exam_id:any,new_mcq:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/add_mcq`,{exam_id:exam_id,topic_id:topic_id,new_mcq:new_mcq}, { withCredentials: true });
+}
+public add_coding_to_topic(topic_id:any,exam_id:any,new_coding:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/add_coding`,{exam_id:exam_id,topic_id:topic_id,new_coding:new_coding}, { withCredentials: true });
+}
 }
