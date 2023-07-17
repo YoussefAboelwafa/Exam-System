@@ -1,7 +1,7 @@
 const User = require('../models/User')
 const Exam = require('../models/Exam')
 const TimeAndSpace = require('../models/TimeAndSpace')
-
+const Topic = require('../models/TopicAndQuestion')
 
 
 module.exports.add_place = async (req, res) => {
@@ -355,3 +355,91 @@ module.exports.set_exam_status = async (req, res) => {
     }
 }
 
+
+
+module.exports.add_topic = async (req, res) => {
+    try {
+        const result = await Exam.add_topic(req.body);
+        if(!result)
+            throw "a problem occurred while adding a topic"
+        res.json(result)
+    } catch (error) {
+        console.log(err);
+        res.json({success: false});
+    }
+}
+
+module.exports.get_topics = async (req, res) => {
+    try {
+        const result = await Exam.get_topics(req.body);
+        if(!result)
+            throw `a problem occurred while getting topics for exam: ${req.body.exam_id}`
+        res.json(result) 
+    } catch (error) {
+        console.log(err);
+        res.json({success: false});
+    }
+}
+
+
+module.exports.delete_topic = async (req, res) => {
+    try {
+        const result = await Exam.delete_topic(req.body);
+        if(!result)
+            throw "Error occurred when deleting topic"
+        res.json({success: true})
+    } catch (error) {
+        console.log(err);
+        res.json({success: false});
+    }
+}
+
+
+module.exports.edit_number_of_mcq = async (req, res) => {
+    try {
+        const topic_id = await Topic.edit_number_of_mcq(req.body);
+        if(!topic_id)
+            throw "Error occurred when editing number of mcq"
+        res.json({success: true, topic_id: topic_id})
+    } catch (error) {
+        console.log(err);
+        res.json({success: false});
+    }
+}
+
+module.exports.edit_number_of_coding = async (req, res) => {
+    try {
+        const topic_id = await Topic.edit_number_of_coding(req.body);
+        if(!topic_id)
+            throw "Error occurred when editing number of coding"
+        res.json({success: true, topic_id: topic_id})
+    } catch (error) {
+        console.log(err);
+        res.json({success: false});
+    }
+}
+
+module.exports.add_mcq = async (req, res) => {
+    try {
+        const mcq_id = await Topic.add_mcq(req.body);
+        if(!mcq_id)
+            throw "Error occurred when editing number of coding"
+        res.json({success: true, mcq_id: mcq_id})
+    } catch (error) {
+        console.log(err);
+        res.json({success: false});
+    }
+}
+
+
+module.exports.add_coding = async (req, res) => {
+    try {
+        const coding_id = await Topic.add_coding(req.body);
+        if(!coding_id)
+            throw "Error occurred when editing number of coding"
+        res.json({success: true, coding_id: coding_id})
+    } catch (error) {
+        console.log(err);
+        res.json({success: false});
+    }
+}
