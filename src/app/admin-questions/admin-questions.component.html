@@ -123,7 +123,7 @@
   >
     <div class="upcominginfo">
       <div class="head">
-        <p class="Qdescription">Question:{{ quest.description }}</p>
+        <p class="Qdescription">Question: {{ quest.description }}</p>
         <div>
           <button
             style="all: unset"
@@ -430,25 +430,25 @@
         <div class="form-group">
           <h3>description</h3>
           <textarea
-            [(ngModel)]="ed_mcq.description"
-            #ed_mcq_about
+            [value]="ed_mcq.description"
+            #ed_mcq_description
             class="input_edit"
             id="t_area"
           ></textarea>
           <h3 >choices</h3>
           <div *ngFor="let choice of ed_mcq.choices; let i = index">
             <input
-              #in
-              [(ngModel)]="ed_mcq.description"
-              [value]="choice"
+              #in1
+              [(ngModel)]="ed_mcq.choices[i]"
+              [value]="ed_mcq.choices[i]"
               type="text"
               class="input_edit"
             />
           </div>
           <h3>answer</h3>
           <input
-            [(ngModel)]="new_mcq.answer"
-            #mcq_answer
+            [value]="ed_mcq.answer"
+            #ed_mcq_answer
             type="text"
             class="input_edit"
           />
@@ -458,7 +458,7 @@
         <button
           type="button"
           id="addnewlocation"
-          (click)="(topic_title.value)"
+          (click)="final_edit_mcq(ed_mcq_description.value,ed_mcq_answer.value)">
         >
           Edit <i class="fa-solid fa-plus"></i>
         </button>
@@ -493,22 +493,54 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="exampleFormControlInput5">Topic:</label>
+          <h3>title</h3>
           <input
+            [value]="ed_coding.title"
             type="text"
-            class="form-control"
-            id="exampleFormControlInput5"
-            #topic_title
+            class="input_edit"
+            #ed_cod_title
           />
+          <h3>description</h3>
+          <textarea
+            [value]="ed_coding.description"
+            class="input_edit"
+            id="t_area"
+            #ed_cod_description
+
+          ></textarea>
+
+          <h3>Input Format</h3>
+          <textarea
+            [value]="ed_coding.input_format"
+            class="input_edit"
+            id="t_area"
+            #ed_cod_input_format
+
+          ></textarea>
+          <h3>Output Format</h3>
+          <textarea
+            [value]="ed_coding.output_format"
+            class="input_edit"
+            id="t_area"
+            #ed_cod_output_format
+
+          ></textarea>
+          <h3>constraints</h3>
+          <textarea
+            [value]="ed_coding.constraints"
+            class="input_edit"
+            id="t_area"
+            #ed_cod_constraints
+          ></textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button
           type="button"
           id="addnewlocation"
-          (click)="add_topic(topic_title.value)"
+          (click)="final_edit_coding(ed_cod_title.value,ed_cod_description.value,ed_cod_input_format.value,ed_cod_output_format.value,ed_cod_constraints.value)">
         >
-          Add <i class="fa-solid fa-plus"></i>
+          Edit <i class="fa-solid fa-plus"></i>
         </button>
       </div>
     </div>

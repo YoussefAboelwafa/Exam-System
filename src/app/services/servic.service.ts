@@ -11,7 +11,7 @@ import { users } from "../objects/users";
 
 
 export class ServicService {
-  private apiServerUrl = 'https://brick-red-swordfish-kit.cyclic.app';
+  private apiServerUrl = 'https://dark-ruby-slug.cyclic.app';
   user!: users;
   upcoming_ex!:any[];
   token_ex!:any[];
@@ -162,14 +162,16 @@ public add_mcq_to_topic(topic_id:any,exam_id:any,new_mcq:any):Observable<any>{
 public add_coding_to_topic(topic_id:any,exam_id:any,new_coding:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/add_coding`,{exam_id:exam_id,topic_id:topic_id,new_coding:new_coding}, { withCredentials: true });
 }
-public edit_mcq_in_topic(mcq_id:any,new_mcq:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/edit_mcq`,{mcq_id:mcq_id,new_mcq:new_mcq}, { withCredentials: true });
-}
 public delete_mcq_in_topic(mcq_id:any,topic_id:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/delete_mcq`,{mcq_id:mcq_id,topic_id:topic_id}, { withCredentials: true });
 }
 public delete_coding_in_topic(coding_id:any,topic_id:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/delete_coding`,{coding_id:coding_id,topic_id:topic_id}, { withCredentials: true });
 }
-
+public edit_coding_in_topic(coding_id:any,new_coding:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/edit_coding`,{coding_id:coding_id,new_coding:new_coding}, { withCredentials: true });
+}
+public edit_mcq_in_topic(mcq_id:any,new_mcq:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/edit_mcq`,{mcq_id:mcq_id,new_mcq:new_mcq}, { withCredentials: true });
+}
 }
