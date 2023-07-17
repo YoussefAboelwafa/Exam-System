@@ -144,7 +144,7 @@ public get_topics(exam_id:any):Observable<any>{
 }
 
 public remove_topic(topic_id:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/topic_id`,{topic_id:topic_id}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/admin/remove_topic`,{topic_id:topic_id}, { withCredentials: true });
 }
 public add_topic(topic_name:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/add_topic`,{topic_name:topic_name}, { withCredentials: true });
@@ -164,6 +164,12 @@ public add_coding_to_topic(topic_id:any,exam_id:any,new_coding:any):Observable<a
 }
 public edit_mcq_in_topic(mcq_id:any,new_mcq:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/edit_mcq`,{mcq_id:mcq_id,new_mcq:new_mcq}, { withCredentials: true });
+}
+public delete_mcq_in_topic(mcq_id:any,topic_id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/delete_mcq`,{mcq_id:mcq_id,topic_id:topic_id}, { withCredentials: true });
+}
+public delete_coding_in_topic(coding_id:any,topic_id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/delete_coding`,{coding_id:coding_id,topic_id:topic_id}, { withCredentials: true });
 }
 
 }

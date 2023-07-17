@@ -13,7 +13,7 @@ import { AdminCalendarComponent } from './admin-calendar/admin-calendar.componen
 import { AdminExamsComponent } from './admin-exams/admin-exams.component';
 import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.component';
 import { AdminLocationBarComponent } from './admin-location-bar/admin-location-bar.component';
-import { AdminQuestionsComponent } from './admin-questions/admin-questions.component';
+ import { AdminQuestionsComponent } from './admin-questions/admin-questions.component';
 
 const routes: Routes = [
   {

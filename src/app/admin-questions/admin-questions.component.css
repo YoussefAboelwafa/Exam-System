@@ -279,14 +279,6 @@
     justify-content: center;
     align-items: center;
   }
-
-
-  .addtopicbtn:hover {
-    background: #fff;
-    color: #008182;
-    border: 1px solid #008182;
-    transition: 0.5s;
-  }
   .discoverexamslabel {
     color: #006a6a;
     font-size: 28px;
