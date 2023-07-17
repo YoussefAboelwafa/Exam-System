@@ -204,7 +204,7 @@ export class AdminQuestionsComponent implements OnInit {
     this.service.add_topic(x).subscribe(
       y => {
 
-      this.exam_topics[this.exam_topics.length - 1]._id = y;
+      this.exam_topics[this.exam_topics.length - 1]._id = y._id;
 
       error: (error: HttpErrorResponse) => alert(error.message);
         })
@@ -219,7 +219,7 @@ export class AdminQuestionsComponent implements OnInit {
     this.flag_topic=false;
     this.service.get_topics(this.selected_exam._id).subscribe(
       x=>{
-        this.exam_topics=x;
+        this.exam_topics=x.topics;
     })
   }
 
@@ -228,7 +228,7 @@ export class AdminQuestionsComponent implements OnInit {
     this.flag_question = false;
     this.service.get_topics(this.selected_exam._id).subscribe(
       x=>{
-          this.exam_topics=x;
+          this.exam_topics=x.topics;
 
         error: (error: HttpErrorResponse) => alert(error.message);
       }
@@ -298,7 +298,7 @@ export class AdminQuestionsComponent implements OnInit {
     this.number_of_choise_mcq=[];
     this.close_popup()
     this.service.add_mcq_to_topic(this.selected_topic._id,this.selected_exam._id,this.new_mcq).subscribe(x=>{
-    this.exam_topics[this.index_selected_topic].mcq[this.exam_topics[this.index_selected_topic].mcq.length-1]=x;
+    this.exam_topics[this.index_selected_topic].mcq[this.exam_topics[this.index_selected_topic].mcq.length-1]=x._id;
       error: (error: HttpErrorResponse) => alert(error.message)
     })
     this.new_mcq=new Q_MCQ;
@@ -308,7 +308,7 @@ export class AdminQuestionsComponent implements OnInit {
     this.exam_topics[this.index_selected_topic].coding.push(this.new_coding);
      this.close_popup()
     this.service.add_coding_to_topic(this.selected_topic._id,this.selected_exam._id,this.new_coding).subscribe(x=>{
-      this.exam_topics[this.index_selected_topic].coding[this.exam_topics[this.index_selected_topic].coding.length-1]=x;
+      this.exam_topics[this.index_selected_topic].coding[this.exam_topics[this.index_selected_topic].coding.length-1]=x._id;
 
       error: (error: HttpErrorResponse) => alert(error.message)
     })
