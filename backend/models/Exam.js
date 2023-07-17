@@ -110,10 +110,12 @@ examSchema.statics.editExam = async (newExam) => {
     */
     try {
       const {exam_id} = data
+      console.log(exam_id);
       const title  = data.topic_name
       const topic = await Topic.create({title: title});
       console.log(topic);
       const result = await Exam.updateOne({_id: exam_id}, {$push:{topics:topic._id}})
+      console.log(result);
       return {success:true, topic_id: topic._id};
     } catch (error) {
       console.log(error);
