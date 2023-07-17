@@ -313,7 +313,7 @@ export class AdminQuestionsComponent implements OnInit {
       if(x.success==false){
         console.log("failed")
       }
-      else{
+      else{ 
         this.selected_topic.mcq[this.exam_topics[this.index_selected_topic].mcq.length-1]=x._id;
         console.log(this.selected_topic)
       }
