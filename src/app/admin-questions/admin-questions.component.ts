@@ -195,8 +195,9 @@ export class AdminQuestionsComponent implements OnInit {
   }
 
   add_topic(value: string) {
+    console.log(this.exam_topics)
     this.add_topic_title=value;
-    let x =new Topics;
+    let x =new Topics();
     x.title=value;
     console.log(this.exam_topics)
     this.exam_topics.push(x)
@@ -247,7 +248,7 @@ export class AdminQuestionsComponent implements OnInit {
 
     this.service.get_topics(this.selected_exam._id).subscribe(
       x=>{
-          this.exam_topics=x;
+          this.exam_topics=x.topics;
 
         error: (error: HttpErrorResponse) => alert(error.message);
       }
