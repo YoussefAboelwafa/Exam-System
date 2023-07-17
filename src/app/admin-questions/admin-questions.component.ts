@@ -305,7 +305,7 @@ export class AdminQuestionsComponent implements OnInit {
     this.new_mcq.choices=this.number_of_choise_mcq;
     this.number_of_choice_size=0
     this.number_of_choise_mcq=[];
-    console.log(this.selected_topic);
+    console.log(this.new_mcq);
     this.close_popup()
     this.service.add_mcq_to_topic(this.selected_topic._id,this.selected_exam._id,this.new_mcq).subscribe(x=>{
       console.log(x);
@@ -321,7 +321,6 @@ export class AdminQuestionsComponent implements OnInit {
       }
       error: (error: HttpErrorResponse) => alert(error.message)
     })
-    this.new_mcq=new Q_MCQ;
    }
 
    add_coding(){
