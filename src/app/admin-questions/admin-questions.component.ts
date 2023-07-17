@@ -19,9 +19,8 @@ declare const $: any;
 })
 export class AdminQuestionsComponent implements OnInit {
 
-  flag_student = false;
-  flag_topic = false;
-  flag_question = true;
+  flag_topic = true;
+  flag_question = false;
 
  
   nontoken_exam:any=[{
@@ -139,7 +138,7 @@ export class AdminQuestionsComponent implements OnInit {
 
   constructor(private service: ServicService,private popup:ModalPopServiceService) {
     this.nontoken_exam=this.service.non_token;
-    this.exam_topics=[];
+    // this.exam_topics=[];
   } 
  
   ngOnInit(): void {}
