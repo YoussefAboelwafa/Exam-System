@@ -19,8 +19,8 @@ declare const $: any;
 })
 export class AdminQuestionsComponent implements OnInit {
 
-  flag_topic = false;
-  flag_question = true;
+  flag_topic = true;
+  flag_question = false;
 
  
   nontoken_exam:any=[{
