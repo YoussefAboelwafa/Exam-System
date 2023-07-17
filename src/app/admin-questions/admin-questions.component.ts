@@ -314,8 +314,10 @@ export class AdminQuestionsComponent implements OnInit {
       }
       else{ 
         this.new_mcq._id=x._id;
-        this.selected_exam[this.index_selected_topic].mcq.push(this.new_mcq)
+        this.selected_topic.mcq.push(this.new_mcq)
+        console.log("aks")
         console.log(this.selected_topic)
+      
       }
       error: (error: HttpErrorResponse) => alert(error.message)
     })
