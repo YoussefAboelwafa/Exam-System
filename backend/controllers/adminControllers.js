@@ -1,7 +1,7 @@
 const User = require('../models/User')
 const Exam = require('../models/Exam')
 const TimeAndSpace = require('../models/TimeAndSpace')
-
+const Topic = require('../models/TopicAndQuestion')
 
 
 module.exports.add_place = async (req, res) => {
@@ -354,4 +354,39 @@ module.exports.set_exam_status = async (req, res) => {
         res.json({success: false});
     }
 }
+
+
+
+module.exports.add_topic = async (req, res) => {
+    try {
+        await Exam.add_topic(req.body);
+        res.json({success: true})
+    } catch (error) {
+        console.log(err);
+        res.json({success: false});
+    }
+}
+
+
+module.exports.delete_topic = async (req, res) => {
+    try {
+        await Exam.delete_topic(req.body);
+        res.json({success: true})
+    } catch (error) {
+        console.log(err);
+        res.json({success: false});
+    }
+}
+
+
+module.exports.edit_topics = async (req, res) => {
+    try {
+        await Topic.edit_topic(req.body);
+        res.json({success: true})
+    } catch (error) {
+        console.log(err);
+        res.json({success: false});
+    }
+}
+
 

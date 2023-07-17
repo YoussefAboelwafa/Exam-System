@@ -33,4 +33,10 @@ router.post('/set_percentage', adminControllers.set_percentage)
 
 router.post('/turn_on_off', adminControllers.set_exam_status)
 
+//topics
+router.post('/add_topic', adminControllers.add_topic)
+router.post('/delete_topic', adminControllers.delete_topic)
+router.post('/edit_topic', adminControllers.edit_topics)
+
+
 module.exports = router;

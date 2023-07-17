@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Topic = require('./TopicAndQuestion')
 
 const examSchema = new mongoose.Schema({
 
@@ -14,7 +14,9 @@ const examSchema = new mongoose.Schema({
     reserved_number: {type: Number, default: 0},
     deleted: {type: Boolean, default: false},
     /// ask to see if a new exams starts as available or not
-    status: {type: Boolean, default: true}
+    status: {type: Boolean, default: true},
+
+    topics: {type:[{type: mongoose.Schema.Types.ObjectId, ref: 'topic'}], default: []}
 });
 
 
@@ -96,6 +98,66 @@ examSchema.statics.editExam = async (newExam) => {
       console.log(error);
     }
   }
+
+
+  examSchema.statics.add_topic = async (data) => {
+    /*
+      title:{type: String},
+      num_of_mcq:{type: Number, default: 0},
+      num_of_coding:{type: Number, default: 0},
+      mcq:{type:[{ type: mongoose.Schema.Types.ObjectId, ref: 'mcq' }], default:[]},
+      coding:{type:[{ type: mongoose.Schema.Types.ObjectId, ref: 'coding' }], default:[]}
+    */
+    try {
+      const {exam_id, title} = data
+      const topic = await Topic.create({title: title});
+      console.log(topic);
+      const result = Exam.updateOne({_id: exam_id}, {$push:{topics:topic._id}})
+      return {success:true, topic_id: topic._id};
+    } catch (error) {
+      console.log(error);
+      return false
+    }
+  }
+
+
+  examSchema.statics.delete_topic = async (data) => {
+    /*
+      title:{type: String},
+      num_of_mcq:{type: Number, default: 0},
+      num_of_coding:{type: Number, default: 0},
+      mcq:{type:[{ type: mongoose.Schema.Types.ObjectId, ref: 'mcq' }], default:[]},
+      coding:{type:[{ type: mongoose.Schema.Types.ObjectId, ref: 'coding' }], default:[]}
+    */
+    try {
+      const {exam_id, topic_id} = data
+      const result = Exam.updateOne({_id: exam_id}, {$pull:{topics:topic_id}})
+      return {success:true};
+    } catch (error) {
+      console.log(error);
+      return false
+    }
+  }
+
+
+  // examSchema.statics.edit_topic = async (data) => {
+  //   /*
+  //     title:{type: String},
+  //     num_of_mcq:{type: Number, default: 0},
+  //     num_of_coding:{type: Number, default: 0},
+  //     mcq:{type:[{ type: mongoose.Schema.Types.ObjectId, ref: 'mcq' }], default:[]},
+  //     coding:{type:[{ type: mongoose.Schema.Types.ObjectId, ref: 'coding' }], default:[]}
+  //   */
+  //   try {
+  //     const {exam_id, topic_id} = data
+  //     const result = Exam.updateOne({_id: exam_id}, {$pull:{topics:topic_id}})
+  //     return {success:true};
+  //   } catch (error) {
+  //     console.log(error);
+  //     return false
+  //   }
+  // }
+
 
 
 const Exam = mongoose.model('exam', examSchema);
