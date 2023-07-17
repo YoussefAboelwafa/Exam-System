@@ -154,13 +154,12 @@ export class AdminQuestionsComponent implements OnInit {
   } 
  
   ngOnInit(): void {}
-
-
-
   
-  get_all_place() {
+  reset_add(){
+    this.new_mcq=new Q_MCQ();
+    this.new_coding=new Q_Coding();
+
   }
-  
   remove_topic(value:any,index:number) {
     this.rv_topic=value;
     this.index_remove_topic=index;
