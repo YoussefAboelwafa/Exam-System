@@ -398,7 +398,7 @@ module.exports.edit_number_of_mcq = async (req, res) => {
         const topic_id = await Topic.edit_number_of_mcq(req.body);
         if(!topic_id)
             throw "Error occurred when editing number of mcq"
-        res.json({success: true, topic_id: topic_id})
+        res.json({success: true, _id: topic_id})
     } catch (error) {
         console.log(error);
         res.json({success: false});
@@ -410,7 +410,7 @@ module.exports.edit_number_of_coding = async (req, res) => {
         const topic_id = await Topic.edit_number_of_coding(req.body);
         if(!topic_id)
             throw "Error occurred when editing number of coding"
-        res.json({success: true, topic_id: topic_id})
+        res.json({success: true, _id: topic_id})
     } catch (error) {
         console.log(error);
         res.json({success: false});
@@ -422,7 +422,7 @@ module.exports.add_mcq = async (req, res) => {
         const mcq_id = await Topic.add_mcq(req.body);
         if(!mcq_id)
             throw "Error occurred when editing number of coding"
-        res.json({success: true, mcq_id: mcq_id})
+        res.json({success: true, _id: mcq_id})
     } catch (error) {
         console.log(error);
         res.json({success: false});
@@ -435,7 +435,7 @@ module.exports.add_coding = async (req, res) => {
         const coding_id = await Topic.add_coding(req.body);
         if(!coding_id)
             throw "Error occurred when editing number of coding"
-        res.json({success: true, coding_id: coding_id})
+        res.json({success: true, _id: coding_id})
     } catch (error) {
         console.log(error);
         res.json({success: false});
