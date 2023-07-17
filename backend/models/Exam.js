@@ -111,6 +111,8 @@ examSchema.statics.editExam = async (newExam) => {
     try {
       const {exam_id} = data
       const title  = data.topic_name
+      if(!title)
+        throw "title is required"
       const topic = new Topic({title: title});
       const result = await Exam.updateOne({_id: exam_id}, {$push:{topics:topic._id}})
       if(result.modifiedCount === 0)
