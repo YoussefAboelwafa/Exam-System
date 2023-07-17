@@ -146,6 +146,20 @@ topicSchema.statics.delete_coding = async (data) => {
     }
 }
 
+// topicSchema.statics.edit_mcq = async (data) => {
+//     try {
+//         const {topic_id, coding_id} = data;
+
+//         const result = await MCQ.updateOne({_id: topic_id}, {
+//             $set: { num_of_coding: num_of_coding}
+//         });
+//         return true;
+//     } catch (error) {
+//         console.log(error);
+//         return false
+//     }
+// }
+
 
 
 
