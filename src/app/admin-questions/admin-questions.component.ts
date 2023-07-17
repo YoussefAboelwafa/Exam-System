@@ -43,7 +43,7 @@ export class AdminQuestionsComponent implements OnInit {
   }];
 
 
-  exam_topics:any[]=[
+  exam_topics:Topics[]=[
     {
     title:"printif",
     num_of_mcq:0,
@@ -138,7 +138,15 @@ export class AdminQuestionsComponent implements OnInit {
 
   constructor(private service: ServicService,private popup:ModalPopServiceService) {
     this.nontoken_exam=this.service.non_token;
-    // this.exam_topics=[];
+    this.exam_topics=[];
+    this.service.exam_bar_init_admin().subscribe((x) => {
+        
+      if(x.length==0){
+        x=[];
+      }
+      this.service.non_token = x;
+      this.nontoken_exam = this.service.non_token;
+    });
   } 
  
   ngOnInit(): void {}
@@ -190,6 +198,7 @@ export class AdminQuestionsComponent implements OnInit {
     this.add_topic_title=value;
     let x =new Topics;
     x.title=value;
+    console.log(this.exam_topics)
     this.exam_topics.push(x)
     this.service.add_topic(x).subscribe(
       y => {
