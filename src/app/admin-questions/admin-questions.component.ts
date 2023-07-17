@@ -303,12 +303,20 @@ export class AdminQuestionsComponent implements OnInit {
    }
    add_mcq(){
     this.new_mcq.choices=this.number_of_choise_mcq;
-    this.exam_topics[this.index_selected_topic].mcq.push(this.new_mcq)
+    this.selected_topic.mcq.push(this.new_mcq)
     this.number_of_choice_size=0
     this.number_of_choise_mcq=[];
+    console.log(this.selected_topic);
     this.close_popup()
     this.service.add_mcq_to_topic(this.selected_topic._id,this.selected_exam._id,this.new_mcq).subscribe(x=>{
-    this.exam_topics[this.index_selected_topic].mcq[this.exam_topics[this.index_selected_topic].mcq.length-1]=x._id;
+      console.log(x);
+      if(x.success==false){
+        console.log("failed")
+      }
+      else{
+        this.selected_topic.mcq[this.exam_topics[this.index_selected_topic].mcq.length-1]=x._id;
+        console.log(this.selected_topic)
+      }
       error: (error: HttpErrorResponse) => alert(error.message)
     })
     this.new_mcq=new Q_MCQ;
