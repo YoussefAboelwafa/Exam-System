@@ -30,7 +30,7 @@ div {
 }
 .section2 {
   width: 20vw;
-  height: 72.9vh;
+  height: 100vh;
   order: 2;
   background: radial-gradient(
     circle at top left,
@@ -44,13 +44,14 @@ div {
 }
 .section3 {
   width: 70vw;
-  height: 95vh;
+
   order: 3;
   background: radial-gradient(
     circle at top left,
     rgba(255, 145, 76, 0.18),
     rgba(0, 129, 130, 0.2)
   );
+ background-size: cover;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -399,16 +400,14 @@ li.active button {
   border-radius: 100px;
   opacity: 0;
 }
-#img_home{
+#img_home {
   background: url("../../assets/images/img5.svg");
   border-radius: 200px;
   width: 110px;
   height: 81px;
   margin-left: 10px;
   margin-top: 5px;
-
-
-} 
+}
 .contain {
   background: rgba(0, 0, 0, 0.082);
   backdrop-filter: blur(5px);
@@ -446,12 +445,12 @@ li.active button {
     overflow-y: unset;
     width: 100%;
   }
-  
+
   .section12 {
     width: 100%;
-    order:1;
+    order: 1;
   }
-  .container{
+  .container {
     display: flex;
     overflow-y: auto;
     margin: 20px;
@@ -460,6 +459,4 @@ li.active button {
     left: 0;
     top: 0;
   }
-  
-
 }

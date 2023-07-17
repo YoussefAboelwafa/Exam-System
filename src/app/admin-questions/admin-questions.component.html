@@ -101,474 +101,509 @@
 
   <hr style="background-color: #008182; height: 2px" />
   <br />
-    <!-- MCQ -->
+  <!-- MCQ -->
   <div class="titles">MCQ ({{ selected_topic.num_of_mcq }})</div>
-  <div class="discoverexamswidgets">
-    <div class="card-text upcomingbox">
-      <!-- ng for -->
-      <div *ngFor="let quest of selected_topic.mcq " class="upcominginfo">
-        <label class="examname1">{{ quest.title }}</label>
-        <label class="smallbox">{{ quest.description }}</label>
-         
-      </div>
-    </div>
-  </div>
-  <hr style="background-color: #008182; height: 2px" />
-  <br />
-    <!-- coding -->
-  <div class="titles">Coding ({{ selected_topic.num_of_coding }})</div>
-  <div class="discoverexamswidgets">
-    <!-- ngfor ya kimoo -->
-
-    <div class="card-text upcomingbox">
-      <!-- ng for -->
-      <div *ngFor="let quest of selected_topic.coding" class="upcominginfo">
-        <label class="examname1">{{ quest.title }}</label>
-        <label class="smallbox">{{ quest.title }}</label>
-        <label class="smallbox">{{ quest.title }}</label>
-        <label class="smallbox">{{ quest.title }}</label>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="modal fade"
-  id="add_topics"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-        <button class="outer_button" disabled>
-          <button
-            type="button"
-            class="close close1"
-            data-dismiss="modal"
-            aria-label="Close"
-            (click)="close()"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="exampleFormControlInput5">Topic:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="exampleFormControlInput5"
-            #topic_title
-          />
+  <!-- ng for -->
+  <div *ngFor="let quest of selected_topic.mcq" class="card-text upcomingbox">
+    <div class="upcominginfo">
+      <div class="head">
+        <p class="Qdescription">Question</p>
+        <div>
+          <i class="fa-solid fa-pen"></i>
+          <i class="fa-solid fa-trash"></i>
         </div>
       </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          id="addnewlocation"
-          (click)="add_topic(topic_title.value)"
-        >
-          Add <i class="fa-solid fa-plus"></i>
-        </button>
+
+      <div class="choices">
+        <label class="smallbox">choice1</label>
+        <label class="smallbox">choice2</label>
+        <label class="smallbox">choice3</label>
+        <label class="smallbox">choice4</label>
+      </div>
+      <label class="smallbox ans">
+        <i class="fa-solid fa-check"></i> Answer</label
+      >
+    </div>
+  </div>
+
+  <hr style="background-color: #008182; height: 2px" />
+  <br />
+  <!-- coding -->
+  <div class="titles">Coding ({{ selected_topic.num_of_coding }})</div>
+  <!-- ngfor -->
+
+  <div *ngFor="let quest of selected_topic.mcq" class="card-text upcomingbox">
+    <div class="upcominginfo">
+      <div class="head">
+        <div>
+          <label class="Qdescription">Title:</label>
+          <p>rgmmkgrkkkrkrkr</p>
+          <label class="Qdescription">Question:</label>
+          <p>tfnnknnfdkndnndfnnd</p>
+        </div>
+        <div>
+          <i class="fa-solid fa-pen"></i>
+          <i class="fa-solid fa-trash"></i>
+        </div>
+      </div>
+
+      <div class="choices">
+        <label class="smallbox Qcoding">Input Format</label>
+        <p>
+          The first line of the input contains two integers n and h
+          (1 ≤ n ≤ 1000, 1 ≤ h ≤ 1000) — the number of friends and the height of
+          the fence, respectively.
+        </p>
+        <label class="smallbox Qcoding">Output Format</label>
+        <p>
+          Print a single integer — the minimum possible valid width of the road.
+        </p>
+        <label class="smallbox Qcoding">Constraint</label>
+        <p>
+          2 <= nums.length <= 104 -109 <= nums[i] <= 109 -109 <= target <= 109
+        </p>
       </div>
     </div>
   </div>
-</div>
 
-<div
-  class="modal fade"
-  id="add_MCQ"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-        <button class="outer_button" disabled>
+  <div
+    class="modal fade"
+    id="add_topics"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button class="outer_button" disabled>
+            <button
+              type="button"
+              class="close close1"
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="close()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleFormControlInput5">Topic:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput5"
+              #topic_title
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
           <button
             type="button"
-            class="close close1"
-            data-dismiss="modal"
-            aria-label="Close"
-            (click)="close()"
+            id="addnewlocation"
+            (click)="add_topic(topic_title.value)"
           >
-            <span aria-hidden="true">&times;</span>
+            Add <i class="fa-solid fa-plus"></i>
           </button>
-        </button>
+        </div>
       </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <h3>title</h3>
-          <input
-            [(ngModel)]="new_mcq.title"
-            #mcq_title
-            type="text"
-            class="input_edit"
-          />
-          <h3>description</h3>
-          <textarea
-            [(ngModel)]="new_mcq.description"
-            #mcq_about
-            class="input_edit"
-            id="t_area"
-          ></textarea>
-          <h3>number of choices</h3>
-          <input
-            (blur)="set_number_choices(number_choice_size.value)"
-            min="2"
-            [value]="number_of_choice_size"
-            #number_choice_size
-            type="number"
-            class="input_edit"
-          />
-          <h3 *ngIf="number_of_choise_mcq.length != 0">choices</h3>
-          <div *ngFor="let choice of number_of_choise_mcq; let i = index">
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="add_MCQ"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button class="outer_button" disabled>
+            <button
+              type="button"
+              class="close close1"
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="close()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <h3>title</h3>
             <input
-              #in
-              (blur)="set_chioce(in.value, i)"
-              [value]="number_of_choise_mcq[i]"
+              [(ngModel)]="new_mcq.title"
+              #mcq_title
+              type="text"
+              class="input_edit"
+            />
+            <h3>description</h3>
+            <textarea
+              [(ngModel)]="new_mcq.description"
+              #mcq_about
+              class="input_edit"
+              id="t_area"
+            ></textarea>
+            <h3>number of choices</h3>
+            <input
+              (blur)="set_number_choices(number_choice_size.value)"
+              min="2"
+              [value]="number_of_choice_size"
+              #number_choice_size
+              type="number"
+              class="input_edit"
+            />
+            <h3 *ngIf="number_of_choise_mcq.length != 0">choices</h3>
+            <div *ngFor="let choice of number_of_choise_mcq; let i = index">
+              <input
+                #in
+                (blur)="set_chioce(in.value, i)"
+                [value]="number_of_choise_mcq[i]"
+                type="text"
+                class="input_edit"
+              />
+            </div>
+            <h3>answer</h3>
+            <input
+              [(ngModel)]="new_mcq.answer"
+              #mcq_answer
               type="text"
               class="input_edit"
             />
           </div>
-          <h3>answer</h3>
-          <input
-            [(ngModel)]="new_mcq.answer"
-            #mcq_answer
-            type="text"
-            class="input_edit"
-          />
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="addnewlocation" (click)="add_mcq()">
-          Add <i class="fa-solid fa-plus"></i>
-        </button>
+        <div class="modal-footer">
+          <button type="button" id="addnewlocation" (click)="add_mcq()">
+            Add <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div
-  class="modal fade"
-  id="add_coding"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-        <button class="outer_button" disabled>
+  <div
+    class="modal fade"
+    id="add_coding"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button class="outer_button" disabled>
+            <button
+              type="button"
+              class="close close1"
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="close()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <h3>title</h3>
+            <input
+              [(ngModel)]="new_coding.title"
+              #mcq_title
+              type="text"
+              class="input_edit"
+            />
+            <h3>description</h3>
+            <textarea
+              [(ngModel)]="new_coding.description"
+              #mcq_about
+              class="input_edit"
+              id="t_area"
+            ></textarea>
+
+            <h3>Input Format</h3>
+            <textarea
+              [(ngModel)]="new_coding.input_format"
+              #mcq_about
+              class="input_edit"
+              id="t_area"
+            ></textarea>
+            <h3>Output Format</h3>
+            <textarea
+              [(ngModel)]="new_coding.output_format"
+              #mcq_about
+              class="input_edit"
+              id="t_area"
+            ></textarea>
+            <h3>constraints</h3>
+            <textarea
+              [(ngModel)]="new_coding.constraints"
+              #mcq_about
+              class="input_edit"
+              id="t_area"
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="addnewlocation" (click)="add_coding()">
+            Add <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="edit_MCQ"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button class="outer_button" disabled>
+            <button
+              type="button"
+              class="close close1"
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="close()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleFormControlInput5">Topic:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput5"
+              #topic_title
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
           <button
             type="button"
-            class="close close1"
-            data-dismiss="modal"
-            aria-label="Close"
+            id="addnewlocation"
+            (click)="add_topic(topic_title.value)"
+          >
+            Add <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="edit_coding"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button class="outer_button" disabled>
+            <button
+              type="button"
+              class="close close1"
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="close()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleFormControlInput5">Topic:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput5"
+              #topic_title
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            id="addnewlocation"
+            (click)="add_topic(topic_title.value)"
+          >
+            Add <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="edit_number_of_MCQ"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button class="outer_button" disabled>
+            <button
+              type="button"
+              class="close close1"
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="close()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleFormControlInput5">Number of MCQ:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="exampleFormControlInput5"
+              #number_of_MCQ
+              [value]="selected_topic.num_of_mcq"
+              min="0"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            id="addnewlocation"
+            (click)="edit_number_of_MCQ(number_of_MCQ.value)"
+          >
+            Edit <i class="fa-solid fa-pencil"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="edit_number_of_coding"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button class="outer_button" disabled>
+            <button
+              type="button"
+              class="close close1"
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="close()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleFormControlInput5">Number of coding:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="exampleFormControlInput5"
+              #number_of_coding
+              [value]="selected_topic.num_of_coding"
+              min="0"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            id="addnewlocation"
+            (click)="edit_number_of_coding(number_of_coding.value)"
+          >
+            Edit <i class="fa-solid fa-pencil"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="confirmation"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">
+            <p style="color: red">Confirmation Remove</p>
+          </h5>
+          <button class="outer_button" disabled>
+            <button
+              type="button"
+              class="close close1"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </button>
+        </div>
+        <div class="modal-body" style="color: red">
+          Are you sure you want to remove the
+          <span style="font-size: 25px">{{ rv_topic.title }}</span>
+          Topic ?
+        </div>
+        <div class="modal-footer">
+          <button (click)="totaly_remove()" class="discoverbtns btn_exam">
+            YES
+          </button>
+          <button
+            style="background-color: #ff0052"
+            class="discoverbtns btn_exam"
             (click)="close()"
           >
-            <span aria-hidden="true">&times;</span>
+            NO
           </button>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <h3>title</h3>
-          <input
-            [(ngModel)]="new_coding.title"
-            #mcq_title
-            type="text"
-            class="input_edit"
-          />
-          <h3>description</h3>
-          <textarea
-            [(ngModel)]="new_coding.description"
-            #mcq_about
-            class="input_edit"
-            id="t_area"
-          ></textarea>
-
-          <h3>Input Format</h3>
-          <textarea
-            [(ngModel)]="new_coding.input_format"
-            #mcq_about
-            class="input_edit"
-            id="t_area"
-          ></textarea>
-          <h3>Output Format</h3>
-          <textarea
-            [(ngModel)]="new_coding.output_format"
-            #mcq_about
-            class="input_edit"
-            id="t_area"
-          ></textarea>
-          <h3>constraints</h3>
-          <textarea
-            [(ngModel)]="new_coding.constraints"
-            #mcq_about
-            class="input_edit"
-            id="t_area"
-          ></textarea>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" id="addnewlocation" (click)="add_coding()">
-          Add <i class="fa-solid fa-plus"></i>
-        </button>
-      </div>
     </div>
   </div>
+  <app-pop-up></app-pop-up>
 </div>
-
-<div
-  class="modal fade"
-  id="edit_MCQ"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-        <button class="outer_button" disabled>
-          <button
-            type="button"
-            class="close close1"
-            data-dismiss="modal"
-            aria-label="Close"
-            (click)="close()"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="exampleFormControlInput5">Topic:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="exampleFormControlInput5"
-            #topic_title
-          />
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          id="addnewlocation"
-          (click)="add_topic(topic_title.value)"
-        >
-          Add <i class="fa-solid fa-plus"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="modal fade"
-  id="edit_coding"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-        <button class="outer_button" disabled>
-          <button
-            type="button"
-            class="close close1"
-            data-dismiss="modal"
-            aria-label="Close"
-            (click)="close()"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="exampleFormControlInput5">Topic:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="exampleFormControlInput5"
-            #topic_title
-          />
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          id="addnewlocation"
-          (click)="add_topic(topic_title.value)"
-        >
-          Add <i class="fa-solid fa-plus"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="modal fade"
-  id="edit_number_of_MCQ"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-        <button class="outer_button" disabled>
-          <button
-            type="button"
-            class="close close1"
-            data-dismiss="modal"
-            aria-label="Close"
-            (click)="close()"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="exampleFormControlInput5">Number of MCQ:</label>
-          <input
-            type="number"
-            class="form-control"
-            id="exampleFormControlInput5"
-            #number_of_MCQ
-            [value]="selected_topic.num_of_mcq"
-            min="0"
-          />
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          id="addnewlocation"
-          (click)="edit_number_of_MCQ(number_of_MCQ.value)"
-        >
-          Edit <i class="fa-solid fa-pencil"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="modal fade"
-  id="edit_number_of_coding"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-        <button class="outer_button" disabled>
-          <button
-            type="button"
-            class="close close1"
-            data-dismiss="modal"
-            aria-label="Close"
-            (click)="close()"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="exampleFormControlInput5">Number of coding:</label>
-          <input
-            type="number"
-            class="form-control"
-            id="exampleFormControlInput5"
-            #number_of_coding
-            [value]="selected_topic.num_of_coding"
-            min="0"
-          />
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          id="addnewlocation"
-          (click)="edit_number_of_coding(number_of_coding.value)"
-        >
-          Edit <i class="fa-solid fa-pencil"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="modal fade"
-  id="confirmation"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">
-          <p style="color: red">Confirmation Remove</p>
-        </h5>
-        <button class="outer_button" disabled>
-          <button
-            type="button"
-            class="close close1"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </button>
-      </div>
-      <div class="modal-body" style="color: red">
-        Are you sure you want to remove the
-        <span style="font-size: 25px">{{ rv_topic.title }}</span>
-        Topic ?
-      </div>
-      <div class="modal-footer">
-        <button (click)="totaly_remove()" class="discoverbtns btn_exam">
-          YES
-        </button>
-        <button
-          style="background-color: #ff0052"
-          class="discoverbtns btn_exam"
-          (click)="close()"
-        >
-          NO
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-<app-pop-up></app-pop-up>
