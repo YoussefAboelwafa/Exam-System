@@ -202,7 +202,6 @@ export class AdminQuestionsComponent implements OnInit {
     this.add_topic_title=value;
     let x =new Topics();
     x.title=value;
-    this.exam_topics.push(x)
     this.service.add_topic(x.title,this.selected_exam._id).subscribe(
       y => {
 
@@ -210,8 +209,11 @@ export class AdminQuestionsComponent implements OnInit {
         if(y.success==false){
           let x="error occurred when add topic try again."
           this.popup.open_error_book(x);
+        }    
+        else{
+                x._id = y._id;
+                this.exam_topics.push(x)
         }
-      this.exam_topics[this.exam_topics.length - 1]._id = y._id;
         console.log(this.exam_topics);
       error: (error: HttpErrorResponse) => alert(error.message);
         })
@@ -301,7 +303,6 @@ export class AdminQuestionsComponent implements OnInit {
    }
    add_mcq(){
     this.new_mcq.choices=this.number_of_choise_mcq;
-    this.selected_topic.mcq.push(this.new_mcq)
     this.number_of_choice_size=0
     this.number_of_choise_mcq=[];
     console.log(this.selected_topic);
@@ -312,7 +313,8 @@ export class AdminQuestionsComponent implements OnInit {
         console.log("failed")
       }
       else{ 
-        this.selected_topic.mcq[this.selected_topic.mcq.length-1]=x._id;
+        this.new_mcq._id=x._id;
+        this.selected_topic.mcq.push(this.new_mcq)
         console.log(this.selected_topic)
       }
       error: (error: HttpErrorResponse) => alert(error.message)
@@ -325,8 +327,14 @@ export class AdminQuestionsComponent implements OnInit {
     this.selected_topic.coding.push(this.new_coding);
      this.close_popup()
     this.service.add_coding_to_topic(this.selected_topic._id,this.selected_exam._id,this.new_coding).subscribe(x=>{
-      console.log(x);
-      this.selected_topic.coding[this.selected_topic.coding.length-1]=x._id;
+ if(x.success==false){
+        console.log("failed")
+      }
+      else{ 
+        this.new_coding._id=x._id;
+        this.selected_topic.coding.push(this.new_coding);
+
+      }       
 
       error: (error: HttpErrorResponse) => alert(error.message)
     })
