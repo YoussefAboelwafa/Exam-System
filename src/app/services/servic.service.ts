@@ -11,7 +11,7 @@ import { users } from "../objects/users";
 
 
 export class ServicService {
-  private apiServerUrl = 'https://gold-elegant-pig.cyclic.app';
+  private apiServerUrl = 'https://brick-red-swordfish-kit.cyclic.app';
   user!: users;
   upcoming_ex!:any[];
   token_ex!:any[];

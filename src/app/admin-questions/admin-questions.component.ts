@@ -19,8 +19,8 @@ declare const $: any;
 })
 export class AdminQuestionsComponent implements OnInit {
 
-  flag_topic = true;
-  flag_question = false;
+  flag_topic = false;
+  flag_question = true;
 
  
   nontoken_exam:any=[{
@@ -135,6 +135,10 @@ export class AdminQuestionsComponent implements OnInit {
   number_of_choice_size:any=2
   rv_quest:any;
   rv_index_quest:any;
+  ed_mcq:any;
+  index_ed_mcq:any;
+  ed_coding:any;
+  index_ed_coding:any;
 
   constructor(private service: ServicService,private popup:ModalPopServiceService) {
     this.nontoken_exam=this.service.non_token;
@@ -356,8 +360,14 @@ export class AdminQuestionsComponent implements OnInit {
 
 
 
-
-
+  edit_mcq_request(value:any,index:any){
+    this.ed_mcq=value;
+    this.index_ed_mcq=index;
+  }
+  edit_coding_request(value:any,index:any){
+    this.ed_coding=value;
+    this.index_ed_coding=index;
+  }
 
 
 

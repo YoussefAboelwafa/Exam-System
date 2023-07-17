@@ -15,10 +15,20 @@
   </div>
 
   <div class="container">
-    <button disabled [hidden]="flag_select==true" style="background-color: gray;" class="addtopicbtn">
+    <button
+      disabled
+      [hidden]="flag_select == true"
+      style="background-color: gray"
+      class="addtopicbtn"
+    >
       Add Topic <i class="fa-solid fa-plus"></i>
     </button>
-    <button [hidden]="flag_select==false" data-toggle="modal" data-target="#add_topics" class="addtopicbtn">
+    <button
+      [hidden]="flag_select == false"
+      data-toggle="modal"
+      data-target="#add_topics"
+      class="addtopicbtn"
+    >
       Add Topic <i class="fa-solid fa-plus"></i>
     </button>
     <!-- ng for -->
@@ -107,15 +117,31 @@
   <!-- MCQ -->
   <div class="titles">MCQ ({{ selected_topic.num_of_mcq }})</div>
   <!-- ng for -->
-  <div *ngFor="let quest of selected_topic.mcq; let i=index;" class="card-text upcomingbox">
+  <div
+    *ngFor="let quest of selected_topic.mcq; let i = index"
+    class="card-text upcomingbox"
+  >
     <div class="upcominginfo">
       <div class="head">
         <p class="Qdescription">Question:{{ quest.description }}</p>
         <div>
-          <i class="fa-solid fa-pen"></i>
-          <button style="all: unset" data-toggle="modal" data-target="#confirmation_mcq" (click)="delete_MCQ(quest,i)">
+          <button
+            style="all: unset"
+            data-toggle="modal"
+            data-target="#edit_MCQ"
+            (click)="edit_mcq_request(quest, i)"
+          >
+            <i class="fa-solid fa-pen"></i>
+          </button>
+          <button
+            style="all: unset"
+            data-toggle="modal"
+            data-target="#confirmation_mcq"
+            (click)="delete_MCQ(quest, i)"
+          >
             <i class="fa-solid fa-trash"></i>
-          </button>        </div>
+          </button>
+        </div>
       </div>
 
       <div class="choices">
@@ -150,8 +176,20 @@
           <p>{{ quest.description }}</p>
         </div>
         <div>
-          <i class="fa-solid fa-pen"></i>
-          <button style="all: unset" data-toggle="modal" data-target="#confirmation_coding" (click)="delete_coding(quest,i)">
+          <button
+            style="all: unset"
+            data-toggle="modal"
+            data-target="#edit_coding"
+            (click)="edit_coding_request(quest, i)"
+          >
+            <i class="fa-solid fa-pen"></i>
+          </button>
+          <button
+            style="all: unset"
+            data-toggle="modal"
+            data-target="#confirmation_coding"
+            (click)="delete_coding(quest, i)"
+          >
             <i class="fa-solid fa-trash"></i>
           </button>
         </div>
@@ -390,12 +428,29 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="exampleFormControlInput5">Topic:</label>
+          <h3>description</h3>
+          <textarea
+            [(ngModel)]="ed_mcq.description"
+            #ed_mcq_about
+            class="input_edit"
+            id="t_area"
+          ></textarea>
+          <h3 >choices</h3>
+          <div *ngFor="let choice of ed_mcq.choices; let i = index">
+            <input
+              #in
+              [(ngModel)]="ed_mcq.description"
+              [value]="choice"
+              type="text"
+              class="input_edit"
+            />
+          </div>
+          <h3>answer</h3>
           <input
+            [(ngModel)]="new_mcq.answer"
+            #mcq_answer
             type="text"
-            class="form-control"
-            id="exampleFormControlInput5"
-            #topic_title
+            class="input_edit"
           />
         </div>
       </div>
@@ -403,9 +458,9 @@
         <button
           type="button"
           id="addnewlocation"
-          (click)="add_topic(topic_title.value)"
+          (click)="(topic_title.value)"
         >
-          Add <i class="fa-solid fa-plus"></i>
+          Edit <i class="fa-solid fa-plus"></i>
         </button>
       </div>
     </div>
