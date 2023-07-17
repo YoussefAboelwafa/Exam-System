@@ -195,17 +195,16 @@ export class AdminQuestionsComponent implements OnInit {
   }
 
   add_topic(value: string) {
-    console.log(this.exam_topics)
     this.add_topic_title=value;
     let x =new Topics();
     x.title=value;
-    console.log(this.exam_topics)
     this.exam_topics.push(x)
     this.service.add_topic(x).subscribe(
       y => {
 
+        console.log(y);
       this.exam_topics[this.exam_topics.length - 1]._id = y._id;
-
+        console.log(this.exam_topics);
       error: (error: HttpErrorResponse) => alert(error.message);
         })
     this.close_popup();
@@ -243,11 +242,14 @@ export class AdminQuestionsComponent implements OnInit {
       if(this.nontoken_exam[i].title==select_exam){
         this.selected_exam=this.nontoken_exam[i];
         this.flag_select=true;
+        console.log('ahooo exam ')
+        console.log(this.selected_exam);
       }
     }
 
     this.service.get_topics(this.selected_exam._id).subscribe(
       x=>{
+         console.log(x);
           this.exam_topics=x.topics;
 
         error: (error: HttpErrorResponse) => alert(error.message);
