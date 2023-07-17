@@ -40,8 +40,8 @@ router.post('/edit_num_mcq', adminControllers.edit_number_of_mcq)
 router.post('/edit_num_coding', adminControllers.edit_number_of_coding)
 router.post('/add_mcq', adminControllers.add_mcq)
 router.post('/add_coding', adminControllers.add_coding)
-router.post('/remove_topic', adminControllers.delete_topic)
-
+router.post('/remove_topic', adminControllers.delete_mcq)
+router.post('/delete_mcq', adminControllers.delete_coding)
 
 
 
