@@ -329,14 +329,19 @@ export class AdminQuestionsComponent implements OnInit {
    add_coding(){
     
     this.close_popup()
+    console.log(this.new_coding);
     this.service.add_coding_to_topic(this.selected_topic._id,this.selected_exam._id,this.new_coding).subscribe(x=>{
  if(x.success==false){
         console.log("failed")
       }
       else{ 
         this.new_coding._id=x._id;
+        console.log(this.new_coding);
+        console.log("akwww")
         let a = Object.assign({},this.new_coding);
         this.selected_topic.coding.push(a);
+        console.log(this.new_coding);
+
       }       
 
       error: (error: HttpErrorResponse) => alert(error.message)
