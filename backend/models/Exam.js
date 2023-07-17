@@ -129,11 +129,17 @@ examSchema.statics.editExam = async (newExam) => {
   examSchema.statics.get_topics = async (data) => {
     try {
       const {exam_id} = data
+      ///probebly will cause problems
       const topics = await Exam.findOne({_id: exam_id})
         .select('topics')
         .populate({
           path:'topics',
-          select: 'title num_of_mcq num_of_coding'
+          populate:{
+            path:'mcq',
+          },
+          populate:{
+            path:'coding'
+          }
         })
       return topics;
     } catch (error) {
