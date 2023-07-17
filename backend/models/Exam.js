@@ -113,7 +113,7 @@ examSchema.statics.editExam = async (newExam) => {
       const title  = data.topic_name
       const topic = await Topic.create({title: title});
       console.log(topic);
-      const result = Exam.updateOne({_id: exam_id}, {$push:{topics:topic._id}})
+      const result = await Exam.updateOne({_id: exam_id}, {$push:{topics:topic._id}})
       return {success:true, topic_id: topic._id};
     } catch (error) {
       console.log(error);
@@ -125,7 +125,7 @@ examSchema.statics.editExam = async (newExam) => {
   examSchema.statics.get_topics = async (data) => {
     try {
       const {exam_id} = data
-      const topics = await findOne({_id: exam_id})
+      const topics = await Exam.findOne({_id: exam_id})
         .select('topics')
         .populate({
           path:'topics',
@@ -143,7 +143,7 @@ examSchema.statics.editExam = async (newExam) => {
     ///not really deleting it add garbage collector later
     try {
       const {exam_id, topic_id} = data
-      const result = Exam.updateOne({_id: exam_id}, {$pull:{topics:topic_id}})
+      const result = await Exam.updateOne({_id: exam_id}, {$pull:{topics:topic_id}})
       return {success:true};
     } catch (error) {
       console.log(error);

@@ -52,6 +52,7 @@ topicSchema.statics.edit_number_of_mcq = async (data) => {
         const result = await Topic.updateOne({_id: topic_id}, {
             $set: { num_of_mcq: num_of_mcq}
         });
+        console.log(result);
         return topic_id;
     } catch (error) {
         console.log(error);
