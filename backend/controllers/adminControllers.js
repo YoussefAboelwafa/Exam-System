@@ -441,3 +441,29 @@ module.exports.add_coding = async (req, res) => {
         res.json({success: false});
     }
 }
+
+
+module.exports.delete_mcq = async (req, res) => {
+    try {
+        const result = await Topic.delete_mcq(req.body);
+        if(!result)
+            throw "Error occurred when editing number of coding"
+        res.json({success: true})
+    } catch (error) {
+        console.log(error);
+        res.json({success: false});
+    }
+}
+
+
+module.exports.delete_coding = async (req, res) => {
+    try {
+        const result = await Topic.delete_coding(req.body);
+        if(!result)
+            throw "Error occurred when editing number of coding"
+        res.json({success: true})
+    } catch (error) {
+        console.log(error);
+        res.json({success: false});
+    }
+}

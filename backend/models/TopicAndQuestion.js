@@ -115,19 +115,38 @@ topicSchema.statics.add_coding = async (data) => {
 }
 
 
-topicSchema.statics.delete_question = async (data) => {
+//// doesn't delete the question itself just derefrence it
+/// will need to add a garpage collector later using refrence counting
+
+topicSchema.statics.delete_mcq = async (data) => {
     try {
-        const {topic_id, mcq_id, coding_id} = data;
+        const {topic_id, mcq_id} = data;
 
         const result = await Topic.updateOne({_id: topic_id}, {
-            $pull:{ mcq:mcq_id, coding:coding_id }
+            $pull:{ mcq:mcq_id}
         });
-        return result;
+        return true;
     } catch (error) {
         console.log(error);
         return false
     }
 }
+
+topicSchema.statics.delete_coding = async (data) => {
+    try {
+        const {topic_id, coding_id} = data;
+
+        const result = await Topic.updateOne({_id: topic_id}, {
+            $pull:{ coding:coding_id }
+        });
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false
+    }
+}
+
+
 
 
 
