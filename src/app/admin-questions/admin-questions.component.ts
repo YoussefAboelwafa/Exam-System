@@ -305,7 +305,6 @@ export class AdminQuestionsComponent implements OnInit {
     this.new_mcq.choices=this.number_of_choise_mcq;
     this.number_of_choice_size=0
     this.number_of_choise_mcq=[];
-    console.log(this.selected_topic);
     this.close_popup()
     this.service.add_mcq_to_topic(this.selected_topic._id,this.selected_exam._id,this.new_mcq).subscribe(x=>{
       console.log(x);
@@ -323,9 +322,8 @@ export class AdminQuestionsComponent implements OnInit {
    }
 
    add_coding(){
-    
-    this.selected_topic.coding.push(this.new_coding);
-     this.close_popup()
+
+    this.close_popup()
     this.service.add_coding_to_topic(this.selected_topic._id,this.selected_exam._id,this.new_coding).subscribe(x=>{
  if(x.success==false){
         console.log("failed")
