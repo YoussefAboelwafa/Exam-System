@@ -23,6 +23,7 @@ import { AdminLocationBarComponent } from './admin-location-bar/admin-location-b
 import { AdminCalendarComponent } from './admin-calendar/admin-calendar.component';
 import { AdminExamsComponent } from './admin-exams/admin-exams.component';
 import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.component';
+import { AdminQuestionsComponent } from './admin-questions/admin-questions.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.compo
     AdminCalendarComponent,
     AdminExamsComponent,
     AdminAnalyticsComponent,
+    AdminQuestionsComponent,
   ],
   imports: [
     BrowserModule,

@@ -95,7 +95,7 @@ export class AdminExamsComponent implements OnInit {
     this.non_token_exam[this.edit_index].title = ed_title;
     this.non_token_exam[this.edit_index].about = ed_about;
     this.non_token_exam[this.edit_index].info = this.information;
-
+    this.service.non_token=this.non_token_exam;
     this.close_popup();
 
     //service to edit this exam
@@ -105,7 +105,6 @@ export class AdminExamsComponent implements OnInit {
         this.non_token_exam[this.edit_index]
       )
       .subscribe((x) => {
-        console.log(x);
         error: (error: HttpErrorResponse) => alert(error.message);
       });
   }
@@ -120,7 +119,7 @@ export class AdminExamsComponent implements OnInit {
 
     this.service.add_new_exam(x).subscribe((x) => {
       this.non_token_exam[this.non_token_exam.length - 1]._id = x;
-
+      this.service.non_token=this.non_token_exam;
       error: (error: HttpErrorResponse) => alert(error.message);
     });
 
