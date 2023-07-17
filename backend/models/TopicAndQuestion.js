@@ -12,8 +12,8 @@ const mcqSchema = new mongoose.Schema({
 const codingSchema = new mongoose.Schema({
     title: {type: String, required: true},
     description: {type: String, required: true},
-    input: {type: String, required: true},
-    output: {type: String, required: true},
+    input: {type: String, default: ''},
+    output: {type: String, default: ''},
     input_format: {type: String, required: true},
     output_format: {type: String, required: true},
     constraints: {type: String, required: true}
@@ -29,16 +29,84 @@ const topicSchema = new mongoose.Schema({
 })
 
 
-topicSchema.statics.edit_topic = async (data) => {
+// topicSchema.statics.edit_topic = async (data) => {
+//     try {
+//         const {topic_id, new_mcq, new_coding, num_of_mcq, num_of_coding} = data;
+//         const inserted_new_mcq = MCQ.insertMany(new_mcq);
+//         const inserted_new_coding = Coding.insertMany(new_coding);
+//         const result = await Topic.updateOne({_id: topic_id}, {
+//             $push:{ mcq:{$each: inserted_new_mcq._id}, coding:{$each: inserted_new_coding._id} },
+//             $set: { num_of_mcq: num_of_mcq, num_of_coding: num_of_coding}
+//         });
+//         return result;
+//     } catch (error) {
+//         console.log(error);
+//         return false
+//     }
+// }
+
+topicSchema.statics.edit_number_of_mcq = async (data) => {
     try {
-        const {topic_id, new_mcq, new_coding, num_of_mcq, num_of_coding} = data;
-        const inserted_new_mcq = MCQ.insertMany(new_mcq);
-        const inserted_new_coding = Coding.insertMany(new_coding);
+        const {topic_id} = data;
+        const num_of_mcq = data.number_of_mcq;
         const result = await Topic.updateOne({_id: topic_id}, {
-            $push:{ mcq:{$each: inserted_new_mcq._id}, coding:{$each: inserted_new_coding._id} },
-            $set: { num_of_mcq: num_of_mcq, num_of_coding: num_of_coding}
+            $set: { num_of_mcq: num_of_mcq}
         });
-        return result;
+        return topic_id;
+    } catch (error) {
+        console.log(error);
+        return false
+    }
+}
+
+topicSchema.statics.edit_number_of_coding = async (data) => {
+    try {
+        const {topic_id} = data;
+        const num_of_coding = data.number_of_coding;
+        const result = await Topic.updateOne({_id: topic_id}, {
+            $set: { num_of_coding: num_of_coding}
+        });
+        return topic_id;
+    } catch (error) {
+        console.log(error);
+        return false
+    }
+}
+
+topicSchema.statics.add_mcq = async (data) => {
+    try {
+        const {topic_id, new_mcq} = data;
+        const inserted_new_mcq = MCQ.create({
+            description: new_mcq.description,
+            choices: new_mcq.choices,
+            answer: new_mcq.answer
+        })
+        const result = await Topic.updateOne({_id: topic_id}, {
+            $push: { mcq: inserted_new_mcq._id}
+        });
+        return inserted_new_mcq._id;
+    } catch (error) {
+        console.log(error);
+        return false
+    }
+}
+
+topicSchema.statics.add_coding = async (data) => {
+    try {
+        const {topic_id, new_coding} = data;
+        const inserted_new_coding = Coding.create({
+            title: new_coding.title,
+            description: new_coding.description,
+            input: new_coding.input,
+            output: new_coding.output,
+            input_format: new_coding.input_format,
+            output_format: new_coding.output_format,
+            constraints: new_coding.constraints
+        })
+        const result = await Topic.updateOne({_id: topic_id}, {
+            $push: { coding: inserted_new_coding._id}
+        });
+        return inserted_new_coding._id;
     } catch (error) {
         console.log(error);
         return false

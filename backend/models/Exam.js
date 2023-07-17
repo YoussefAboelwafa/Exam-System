@@ -109,7 +109,8 @@ examSchema.statics.editExam = async (newExam) => {
       coding:{type:[{ type: mongoose.Schema.Types.ObjectId, ref: 'coding' }], default:[]}
     */
     try {
-      const {exam_id, title} = data
+      const {exam_id} = data
+      const title  = data.topic_name
       const topic = await Topic.create({title: title});
       console.log(topic);
       const result = Exam.updateOne({_id: exam_id}, {$push:{topics:topic._id}})
@@ -121,14 +122,25 @@ examSchema.statics.editExam = async (newExam) => {
   }
 
 
+  examSchema.statics.get_topics = async (data) => {
+    try {
+      const {exam_id} = data
+      const topics = await findOne({_id: exam_id})
+        .select('topics')
+        .populate({
+          path:'topics',
+          select: 'title num_of_mcq num_of_coding'
+        })
+      return topics;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+
   examSchema.statics.delete_topic = async (data) => {
-    /*
-      title:{type: String},
-      num_of_mcq:{type: Number, default: 0},
-      num_of_coding:{type: Number, default: 0},
-      mcq:{type:[{ type: mongoose.Schema.Types.ObjectId, ref: 'mcq' }], default:[]},
-      coding:{type:[{ type: mongoose.Schema.Types.ObjectId, ref: 'coding' }], default:[]}
-    */
+    ///not really deleting it add garbage collector later
     try {
       const {exam_id, topic_id} = data
       const result = Exam.updateOne({_id: exam_id}, {$pull:{topics:topic_id}})
