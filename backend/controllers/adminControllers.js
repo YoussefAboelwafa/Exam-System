@@ -336,8 +336,6 @@ module.exports.set_percentage = async (req, res) => {
 
         res.json(user);
     }catch(err){
-
-
         console.log(err);
         res.json({success: false});
     }
@@ -350,7 +348,7 @@ module.exports.set_exam_status = async (req, res) => {
         await Exam.setStatus(req.body)
         res.json({success: true})
     } catch (error) {
-        console.log(err);
+        console.log(error);
         res.json({success: false});
     }
 }
@@ -364,7 +362,7 @@ module.exports.add_topic = async (req, res) => {
             throw "a problem occurred while adding a topic"
         res.json(result)
     } catch (error) {
-        console.log(err);
+        console.log(error);
         res.json({success: false});
     }
 }
@@ -376,7 +374,7 @@ module.exports.get_topics = async (req, res) => {
             throw `a problem occurred while getting topics for exam: ${req.body.exam_id}`
         res.json(result) 
     } catch (error) {
-        console.log(err);
+        console.log(error);
         res.json({success: false});
     }
 }
@@ -389,7 +387,7 @@ module.exports.delete_topic = async (req, res) => {
             throw "Error occurred when deleting topic"
         res.json({success: true})
     } catch (error) {
-        console.log(err);
+        console.log(error);
         res.json({success: false});
     }
 }
@@ -402,7 +400,7 @@ module.exports.edit_number_of_mcq = async (req, res) => {
             throw "Error occurred when editing number of mcq"
         res.json({success: true, topic_id: topic_id})
     } catch (error) {
-        console.log(err);
+        console.log(error);
         res.json({success: false});
     }
 }
@@ -414,7 +412,7 @@ module.exports.edit_number_of_coding = async (req, res) => {
             throw "Error occurred when editing number of coding"
         res.json({success: true, topic_id: topic_id})
     } catch (error) {
-        console.log(err);
+        console.log(error);
         res.json({success: false});
     }
 }
@@ -426,7 +424,7 @@ module.exports.add_mcq = async (req, res) => {
             throw "Error occurred when editing number of coding"
         res.json({success: true, mcq_id: mcq_id})
     } catch (error) {
-        console.log(err);
+        console.log(error);
         res.json({success: false});
     }
 }
@@ -439,7 +437,7 @@ module.exports.add_coding = async (req, res) => {
             throw "Error occurred when editing number of coding"
         res.json({success: true, coding_id: coding_id})
     } catch (error) {
-        console.log(err);
+        console.log(error);
         res.json({success: false});
     }
 }
