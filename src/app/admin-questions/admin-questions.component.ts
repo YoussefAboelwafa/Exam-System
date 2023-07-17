@@ -314,16 +314,13 @@ export class AdminQuestionsComponent implements OnInit {
       }
       else{ 
         this.new_mcq._id=x._id;
-        let a = Object.assign({}, this.new_mcq);
-        this.selected_topic.mcq.push(a);
+        let xz = Object.assign({}, this.new_mcq);
+        this.selected_topic.mcq.push(xz);
         console.log("aks")
         console.log(this.selected_topic)
-      
       }
       error: (error: HttpErrorResponse) => alert(error.message)
     })
-
-    this.new_mcq=new Q_MCQ;
    }
 
    add_coding(){
@@ -337,11 +334,8 @@ export class AdminQuestionsComponent implements OnInit {
       else{ 
         this.new_coding._id=x._id;
         console.log(this.new_coding);
-        console.log("akwww")
         let a = Object.assign({},this.new_coding);
         this.selected_topic.coding.push(a);
-        console.log(this.new_coding);
-
       }       
 
       error: (error: HttpErrorResponse) => alert(error.message)
