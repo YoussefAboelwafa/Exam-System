@@ -245,12 +245,10 @@ export class AdminQuestionsComponent implements OnInit {
   onexams_select(event:any){
     const select_exam = (event.target as HTMLSelectElement).value;
     if(select_exam=='exams'){this.exam_topics=[]; this.flag_select=false; return}
-    console.log(select_exam);
     for(let i=0; i<this.nontoken_exam.length;i++){
       if(this.nontoken_exam[i].title==select_exam){
         this.selected_exam=this.nontoken_exam[i];
         this.flag_select=true;
-        console.log('ahooo exam ')
         console.log(this.selected_exam);
       }
     }
@@ -275,7 +273,7 @@ export class AdminQuestionsComponent implements OnInit {
       x=>{
 
 
-               error: (error: HttpErrorResponse) => alert(error.message);
+      error: (error: HttpErrorResponse) => alert(error.message);
 
     })
   }
@@ -314,7 +312,7 @@ export class AdminQuestionsComponent implements OnInit {
         console.log("failed")
       }
       else{ 
-        this.selected_topic.mcq[this.exam_topics[this.index_selected_topic].mcq.length-1]=x._id;
+        this.selected_topic.mcq[this.selected_topic.mcq.length-1]=x._id;
         console.log(this.selected_topic)
       }
       error: (error: HttpErrorResponse) => alert(error.message)
@@ -323,15 +321,17 @@ export class AdminQuestionsComponent implements OnInit {
    }
 
    add_coding(){
-    this.exam_topics[this.index_selected_topic].coding.push(this.new_coding);
+    
+    this.selected_topic.coding.push(this.new_coding);
      this.close_popup()
     this.service.add_coding_to_topic(this.selected_topic._id,this.selected_exam._id,this.new_coding).subscribe(x=>{
-      this.exam_topics[this.index_selected_topic].coding[this.exam_topics[this.index_selected_topic].coding.length-1]=x._id;
+      console.log(x);
+      this.selected_topic.coding[this.selected_topic.coding.length-1]=x._id;
 
       error: (error: HttpErrorResponse) => alert(error.message)
     })
     this.new_coding=new Q_Coding;
-    console.log(this.exam_topics[this.index_selected_topic].coding)
+    console.log(this.selected_topic.coding)
    }
 
 
