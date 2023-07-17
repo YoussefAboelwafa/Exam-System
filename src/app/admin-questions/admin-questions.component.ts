@@ -199,7 +199,7 @@ export class AdminQuestionsComponent implements OnInit {
     let x =new Topics();
     x.title=value;
     this.exam_topics.push(x)
-    this.service.add_topic(x,this.selected_exam._id).subscribe(
+    this.service.add_topic(x.title,this.selected_exam._id).subscribe(
       y => {
 
         console.log(y);
