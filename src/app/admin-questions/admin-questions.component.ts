@@ -303,7 +303,7 @@ export class AdminQuestionsComponent implements OnInit {
    }
    add_mcq(){
     this.new_mcq.choices=this.number_of_choise_mcq;
-    this.number_of_choice_size=0
+    this.number_of_choice_size=2
     this.number_of_choise_mcq=[];
     console.log(this.new_mcq);
     this.close_popup()
@@ -341,7 +341,6 @@ export class AdminQuestionsComponent implements OnInit {
 
       error: (error: HttpErrorResponse) => alert(error.message)
     })
-    this.new_coding=new Q_Coding;
     console.log(this.selected_topic.coding)
    }
 
