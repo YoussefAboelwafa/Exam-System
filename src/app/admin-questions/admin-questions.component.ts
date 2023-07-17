@@ -169,7 +169,7 @@ export class AdminQuestionsComponent implements OnInit {
     this.rv_topic = new Topics();
     this.index_remove_topic = '';
     console.log(x._id);
-    this.service.remove_topic(x._id).subscribe((x) => {
+    this.service.remove_topic(x._id,this.selected_exam._id).subscribe((x) => {
       if(x.success==false) {
         this.popup.open_error_delete_calender(); 
         return;      
@@ -199,10 +199,14 @@ export class AdminQuestionsComponent implements OnInit {
     let x =new Topics();
     x.title=value;
     this.exam_topics.push(x)
-    this.service.add_topic(x).subscribe(
+    this.service.add_topic(x,this.selected_exam._id).subscribe(
       y => {
 
         console.log(y);
+        if(y.success==false){
+          let x="error occurred when add topic try again."
+          this.popup.open_error_book(x);
+        }
       this.exam_topics[this.exam_topics.length - 1]._id = y._id;
         console.log(this.exam_topics);
       error: (error: HttpErrorResponse) => alert(error.message);

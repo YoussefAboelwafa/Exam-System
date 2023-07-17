@@ -143,11 +143,11 @@ public get_topics(exam_id:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/get_topics`,{exam_id:exam_id}, { withCredentials: true });
 }
 
-public remove_topic(topic_id:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/remove_topic`,{topic_id:topic_id}, { withCredentials: true });
+public remove_topic(topic_id:any,exam_id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/remove_topic`,{topic_id:topic_id,exam_id:exam_id}, { withCredentials: true });
 }
-public add_topic(topic_name:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/add_topic`,{topic_name:topic_name}, { withCredentials: true });
+public add_topic(topic_name:any,exam_id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/add_topic`,{topic_name:topic_name,exam_id:exam_id}, { withCredentials: true });
 }
 
 public edit_number_of_MCQ(topic_id:any,number_of_mcq:any):Observable<any>{
