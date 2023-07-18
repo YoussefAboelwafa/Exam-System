@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const {Location, Day} = require('./TimeAndSpace')
 const Exam = require('./Exam')
 const _ = require('lodash');
-
+const Topic = require('./TopicAndQuestion')
 
 const characterSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const idLength = 8;
@@ -216,11 +216,7 @@ userSchema.statics.getExam = async (data) => {
         const mcq = populated_exam.exam._id.topics.flatMap((topic) => _.sampleSize(topic.mcq, topic.num_of_mcq)) //////////////// stopped here continue from here 7/18 9:04pm
         const coding = populated_exam.exam._id.topics.flatMap((topic) => _.sampleSize(topic.coding, topic.num_of_coding))
 
-        
-        console.log(populated_exam);
-        console.log(mcq);
-        console.log(coding);
-        return populated_exam
+        return await Topic.get_mcq_and_coding({mcq_ids:mcq, coding_ids:coding})
     } catch (error) {
         console.log(error);
         throw error
