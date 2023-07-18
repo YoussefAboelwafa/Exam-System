@@ -199,7 +199,7 @@ userSchema.statics.bookExam = async function(exam_data, userId){
 userSchema.statics.getExam = async (data) => {
     try {
         const {code, user_id} = data;
-        const user = await User.findById(user_id);
+        const user = await User.findById(user_id, 'exams');
         if(!user)
             throw "User not found"
         
@@ -210,7 +210,7 @@ userSchema.statics.getExam = async (data) => {
         const populated_exam = await Exam.populate(exam, {
             path: 'exam._id',
             populate:{
-                path:'topics'
+                path:'_id.topics'
             }
         })
         
