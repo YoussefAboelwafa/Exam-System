@@ -41,10 +41,9 @@ router.post('/edit_num_coding', adminControllers.edit_number_of_coding)
 router.post('/add_mcq', adminControllers.add_mcq)
 router.post('/add_coding', adminControllers.add_coding)
 router.post('/remove_topic', adminControllers.delete_mcq)
-router.post('/delete_mcq', adminControllers.delete_coding)
 router.post('/edit_mcq', adminControllers.edit_mcq)
 router.post('/edit_coding', adminControllers.edit_coding)
-
-
+router.post('/delete_mcq', adminControllers.delete_mcq)
+router.post('/delete_coding', adminControllers.delete_coding)
 
 module.exports = router;
