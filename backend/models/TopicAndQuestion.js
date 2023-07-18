@@ -146,21 +146,53 @@ topicSchema.statics.delete_coding = async (data) => {
     }
 }
 
-// topicSchema.statics.edit_mcq = async (data) => {
-//     try {
-//         const {topic_id, coding_id} = data;
+topicSchema.statics.edit_mcq = async (data) => {
 
-//         const result = await MCQ.updateOne({_id: topic_id}, {
-//             $set: { num_of_coding: num_of_coding}
-//         });
-//         return true;
-//     } catch (error) {
-//         console.log(error);
-//         return false
-//     }
-// }
+    /*
+        assume that the user cannot see his past questions and answers
+        could be solved by adding a reference counter
 
+        assume that the admin won't change the question completely
+    */
+    try {
+        const {mcq_id, new_mcq} = data;
 
+        const result = await MCQ.updateOne({_id: mcq_id}, {
+            $set: { description: new_mcq.description,
+                    choices: new_mcq.choices,
+                    answer: new_mcq.answer}
+        });
+        return true;
+    } catch (error) {
+        throw `Error updating mcq`
+    }
+}
+
+topicSchema.statics.edit_coding = async (data) => {
+
+    /*
+        assume that the user cannot see his past questions and answers
+        could be solved by adding a reference counter
+
+        assume that the admin won't change the question completely
+    */
+    try {
+        const {coding_id, new_coding} = data;
+
+        const result = await Coding.updateOne({_id: coding_id}, {
+            $set: { title: new_coding.title,
+                    description: new_coding.description,
+                    input: new_coding.input,
+                    output: new_coding.output,
+                    input_format: new_coding.input_format,
+                    output_format: new_coding.output_format,
+                    constraints: new_coding.constraints}
+            });
+        return true;
+    } catch (error) {
+        throw `Error updating coding`
+    }
+}
 
 
 

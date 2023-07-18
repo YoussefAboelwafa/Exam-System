@@ -467,3 +467,27 @@ module.exports.delete_coding = async (req, res) => {
         res.json({success: false});
     }
 }
+
+module.exports.edit_mcq = async (req, res) => {
+    try {
+        const result = await Topic.edit_mcq(req.body);
+        if(!result)
+            throw "Error occurred when editing mcq"
+        res.json({success: true})
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, error: error});
+    }
+}
+
+module.exports.edit_coding = async (req, res) => {
+    try {
+        const result = await Topic.edit_coding(req.body);
+        if(!result)
+            throw "Error occurred when editing coding"
+        res.json({success: true})
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, error: error});
+    }
+}
