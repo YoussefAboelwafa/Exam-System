@@ -76,8 +76,8 @@ topicSchema.statics.edit_number_of_coding = async (data) => {
 
 topicSchema.statics.add_mcq = async (data) => {
     try {
-        const {topic_id, new_mcq} = data;
-        const inserted_new_mcq = MCQ.create({
+        const {topic_id, new_mcq, exam_id} = data;
+        const inserted_new_mcq = new MCQ({
             description: new_mcq.description,
             choices: new_mcq.choices,
             answer: new_mcq.answer
@@ -85,6 +85,7 @@ topicSchema.statics.add_mcq = async (data) => {
         const result = await Topic.updateOne({_id: topic_id}, {
             $push: { mcq: inserted_new_mcq._id}
         });
+        await inserted_new_mcq.save()
         return inserted_new_mcq._id;
     } catch (error) {
         console.log(error);
@@ -94,8 +95,8 @@ topicSchema.statics.add_mcq = async (data) => {
 
 topicSchema.statics.add_coding = async (data) => {
     try {
-        const {topic_id, new_coding} = data;
-        const inserted_new_coding = Coding.create({
+        const {topic_id, new_coding, exam_id} = data;
+        const inserted_new_coding = new Coding({
             title: new_coding.title,
             description: new_coding.description,
             input: new_coding.input,
@@ -107,6 +108,9 @@ topicSchema.statics.add_coding = async (data) => {
         const result = await Topic.updateOne({_id: topic_id}, {
             $push: { coding: inserted_new_coding._id}
         });
+        if(result.modifiedCount === 0)
+            throw "nothing modified"
+        await inserted_new_coding.save();
         return inserted_new_coding._id;
     } catch (error) {
         console.log(error);
