@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const {Location, Day} = require('./TimeAndSpace')
 const Exam = require('./Exam')
+const _ = require('lodash');
+
 
 const characterSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const idLength = 8;
@@ -47,7 +49,8 @@ const userSchema = new mongoose.Schema({
                     appointment: {type: String, required: true},
                     snack: {type: String, required: true},
                     percentage: {type: Number, required: true},
-                    bookedAt: {type:String, required: true}
+                    bookedAt: {type:String, required: true},
+                    code: {type: String, default:generateRandomCode}
                 }, required: true},
             }
         ],
@@ -193,6 +196,28 @@ userSchema.statics.bookExam = async function(exam_data, userId){
     
 }
 
+userSchema.statics.getExam = async (data) => {
+    try {
+        const {code, user_id} = data;
+        const user = await User.findById(user_id);
+        if(!user)
+            throw "User not found"
+        
+        const exam = user.exams.find((exam) => exam.exam.code === code);
+        if(!exam)
+            throw "The code provided doesn't match any of the user's exam"
+
+        const populated_exam = await Exam.populate(exam, {
+            path: 'topics'
+        })
+        
+        console.log(populated_exam);
+
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
 
 
 

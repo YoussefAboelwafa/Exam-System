@@ -4,6 +4,7 @@ const authRoutes = require('./routes/authRoutes');
 const examRoutes = require('./routes/examRoutes');
 const homeRoutes = require('./routes/homeRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const examinationRoutes = require('./routes/examinationRoutes');
 const {checkUser, checkAdmin} = require('./middleware/authMiddleware')
 const cors = require('cors');
 const User = require('./models/User')
@@ -56,6 +57,8 @@ app.use('/home', checkUser, homeRoutes); ////add requiredAuth after finishing te
 app.use('/exam', checkUser, examRoutes);
 app.use('/admin', checkAdmin, adminRoutes)
 
+
+app.use('/examination', checkUser, examinationRoutes)
 
 
 
