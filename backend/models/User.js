@@ -213,8 +213,10 @@ userSchema.statics.getExam = async (data) => {
                 path:'topics'
             }
         })
-        const mcq = populated_exam.exam._id.topics.flatMap((topic) => topic.mcq) //////////////// stopped here continue from here 7/18 9:04pm
-        const coding = populated_exam.exam._id.topics.flatMap((topic) => topic.coding) 
+        const mcq = populated_exam.exam._id.topics.flatMap((topic) => _.sampleSize(topic.mcq, topic.num_of_mcq)) //////////////// stopped here continue from here 7/18 9:04pm
+        const coding = populated_exam.exam._id.topics.flatMap((topic) => _.sampleSize(topic.coding, topic.num_of_coding))
+
+        
         console.log(populated_exam);
         console.log(mcq);
         console.log(coding);
