@@ -210,7 +210,7 @@ userSchema.statics.getExam = async (data) => {
         const populated_exam = await Exam.populate(exam, {
             path: 'exam._id',
             populate:{
-                path:'topics'
+                path:'exam._id.topics'
             }
         })
         
