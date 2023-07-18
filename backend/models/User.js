@@ -215,7 +215,7 @@ userSchema.statics.getExam = async (data) => {
         })
         
         console.log(populated_exam);
-
+        return populated_exam
     } catch (error) {
         console.log(error);
         throw error
