@@ -134,12 +134,10 @@ examSchema.statics.editExam = async (newExam) => {
         .select('topics')
         .populate({
           path:'topics',
-          populate:{
-            path:'mcq',
-          },
-          populate:{
-            path:'coding'
-          }
+          populate: [
+            { path: 'mcq' },
+            { path: 'coding' }
+          ]
         })
       return topics;
     } catch (error) {

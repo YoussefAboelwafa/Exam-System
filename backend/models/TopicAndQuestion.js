@@ -53,6 +53,8 @@ topicSchema.statics.edit_number_of_mcq = async (data) => {
             $set: { num_of_mcq: num_of_mcq}
         });
         console.log(result);
+        if(result.modifiedCount === 0)
+            throw "topic not found"
         return topic_id;
     } catch (error) {
         console.log(error);
@@ -67,6 +69,8 @@ topicSchema.statics.edit_number_of_coding = async (data) => {
         const result = await Topic.updateOne({_id: topic_id}, {
             $set: { num_of_coding: num_of_coding}
         });
+        if(result.modifiedCount === 0)
+            throw "topic not found"
         return topic_id;
     } catch (error) {
         console.log(error);
@@ -85,6 +89,8 @@ topicSchema.statics.add_mcq = async (data) => {
         const result = await Topic.updateOne({_id: topic_id}, {
             $push: { mcq: inserted_new_mcq._id}
         });
+        if(result.modifiedCount === 0)
+            throw "topic not found"
         await inserted_new_mcq.save()
         return inserted_new_mcq._id;
     } catch (error) {
@@ -109,7 +115,7 @@ topicSchema.statics.add_coding = async (data) => {
             $push: { coding: inserted_new_coding._id}
         });
         if(result.modifiedCount === 0)
-            throw "nothing modified"
+            throw "topic not found"
         await inserted_new_coding.save();
         return inserted_new_coding._id;
     } catch (error) {
@@ -129,6 +135,8 @@ topicSchema.statics.delete_mcq = async (data) => {
         const result = await Topic.updateOne({_id: topic_id}, {
             $pull:{ mcq:mcq_id}
         });
+        if(result.modifiedCount === 0)
+            throw "topic not found"
         return true;
     } catch (error) {
         console.log(error);
@@ -143,6 +151,8 @@ topicSchema.statics.delete_coding = async (data) => {
         const result = await Topic.updateOne({_id: topic_id}, {
             $pull:{ coding:coding_id }
         });
+        if(result.modifiedCount === 0)
+            throw "topic not found"
         return true;
     } catch (error) {
         console.log(error);
@@ -166,6 +176,8 @@ topicSchema.statics.edit_mcq = async (data) => {
                     choices: new_mcq.choices,
                     answer: new_mcq.answer}
         });
+        if(result.modifiedCount === 0)
+            throw "topic not found"
         return true;
     } catch (error) {
         throw `Error updating mcq`
@@ -192,6 +204,8 @@ topicSchema.statics.edit_coding = async (data) => {
                     output_format: new_coding.output_format,
                     constraints: new_coding.constraints}
             });
+        if(result.modifiedCount === 0)
+            throw "topic not found"
         return true;
     } catch (error) {
         throw `Error updating coding`
