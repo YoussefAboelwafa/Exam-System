@@ -118,7 +118,7 @@ examSchema.statics.editExam = async (newExam) => {
       if(result.modifiedCount === 0)
         throw "exam doesn't exist"
       await topic.save();
-      return {success:true, topic_id: topic._id};
+      return {success:true, _id: topic._id};
     } catch (error) {
       console.log(error);
       return false
