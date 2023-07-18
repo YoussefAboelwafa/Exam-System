@@ -206,9 +206,9 @@ userSchema.statics.getExam = async (data) => {
         const exam = user.exams.find((exam) => exam.exam.code === code);
         if(!exam)
             throw "The code provided doesn't match any of the user's exam"
-
+        console.log(exam);
         const populated_exam = await Exam.populate(exam, {
-            path: 'exam.exam._id',
+            path: 'exam._id',
             populate:{
                 path:'topics'
             }
