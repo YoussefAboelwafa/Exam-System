@@ -230,7 +230,7 @@ topicSchema.statics.get_mcq_and_coding = async (data) => {
             MCQ.find({_id:{$in: mcq_ids}}, '-answer -__v'),
             Coding.find({_id:{$in: coding_ids}}, '-input -output -__v')
         ])
-        return {mcq: mcq.map((mcq) => ({question:mcq, user_answer:''})), coding: coding};
+        return {mcq: mcq, coding: coding};
     } catch (error) {
         throw `Error updating coding`
     }

@@ -4,6 +4,7 @@ const {Location, Day} = require('./TimeAndSpace')
 const Exam = require('./Exam')
 const _ = require('lodash');
 const Topic = require('./TopicAndQuestion')
+const SavedExam = require('./SavedExam')
 
 const characterSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const idLength = 8;
@@ -203,8 +204,11 @@ const generateExam = async (exam_id) => {
 
         const mcq = exam.topics.flatMap((topic) => _.sampleSize(topic.mcq, topic.num_of_mcq)) //////////////// stopped here continue from here 7/18 9:04pm
         const coding = exam.topics.flatMap((topic) => _.sampleSize(topic.coding, topic.num_of_coding))
-
-        return await Topic.get_mcq_and_coding({mcq_ids:mcq, coding_ids:coding})
+        
+        // const populated_exam = await Topic.get_mcq_and_coding({mcq_ids:mcq, coding_ids:coding})
+        return {title: exam.title,
+            mcq: mcq.map((mcq) => ({question:mcq, user_answer:''})),
+            coding: coding.map((coding) => ({question:coding}))};
     } catch (error) {
         console.log(error);
         throw error
@@ -230,21 +234,27 @@ userSchema.statics.getExam = async (data) => {
                   }
                 }
               }
-            },
-            {
-            $project: {
-                exam: '$exams.exam'
-            }}
+            }
           ])
-        if(!user.exams)
+        if(!user)
             throw "User not found"
         
-
+        console.log(user.exams[0].exam);
+        let exam = null;
+        if(!user.exam[0].exam.saved_exam){
+            exam = generateExam(exam_id)
+            const saved_exam = await SavedExam.create(exam);
+            console.log(await User.updateOne({_id: user_id, 'exams.exam._id': exam_id},{
+                $set:{'exams.exam.saved_exam': saved_exam._id}}))
+            
+        }else{
+            exam = SavedExam.findById(user.exam[0].exam.saved_exam)
+        }
         // const saved_exam = user.exams.find((exam) => exam.exam._id === exam_id);
 
         // console.log(saved_exam);
-        
-        return user
+        console.log(exam);
+        return exam
     } catch (error) {
         console.log(error);
         throw error
