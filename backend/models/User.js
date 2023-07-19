@@ -240,7 +240,6 @@ userSchema.statics.getExam = async (data) => {
     	if(user[0].exams.length === 0)
 		  	throw "User doesn't have such an exam"
 
-        console.log(user[0].exams[0].exam);
         let exam = null;
         if(!user[0].exams[0].exam.saved_exam){
             exam = await generateExam(exam_id)
@@ -258,7 +257,9 @@ userSchema.statics.getExam = async (data) => {
 			])
 			exam.title = exam.title;
         }else{
+			console.log(user);
             exam = SavedExam.findById(user[0].exams[0].exam.saved_exam);
+			console.log(exam);
 			let mcq_ids = exam.mcq.map((mcq) => mcq.question);
 			let coding_ids = exam.coding.map((coding) => coding.question);
 			exam = await Topic.get_mcq_and_coding({mcq_ids:mcq_ids, coding_ids:coding_ids});
@@ -272,7 +273,7 @@ userSchema.statics.getExam = async (data) => {
         // const saved_exam = user.exams.find((exam) => exam.exam._id === exam_id);
 
         // console.log(saved_exam);
-        console.log(exam);
+        // console.log(exam);
         return exam
     } catch (error) {
         console.log(error);
