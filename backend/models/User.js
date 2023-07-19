@@ -206,9 +206,7 @@ const generateExam = async (exam_id) => {
         const coding = exam.topics.flatMap((topic) => _.sampleSize(topic.coding, topic.num_of_coding))
         
         // const populated_exam = await Topic.get_mcq_and_coding({mcq_ids:mcq, coding_ids:coding})
-        return {title: exam.title,
-            mcq: mcq.map((mcq) => ({question:mcq, user_answer:''})),
-            coding: coding.map((coding) => ({question:coding}))};
+        return {title:exam.title, mcq:mcq, coding:coding};
     } catch (error) {
         console.log(error);
         throw error
@@ -236,24 +234,31 @@ userSchema.statics.getExam = async (data) => {
               }
             }
           ])
-        if(!user)
-            throw "User not found"
+        if(!user.length === 0)
+			throw "User not found"
         
-        console.log(user);
-        // let exam = null;
-        // if(!user.exam[0].exam.saved_exam){
-        //     exam = generateExam(exam_id)
-        //     const saved_exam = await SavedExam.create(exam);
-        //     console.log(await User.updateOne({_id: user_id, 'exams.exam._id': exam_id},{
-        //         $set:{'exams.exam.saved_exam': saved_exam._id}}))
-            
-        // }else{
-        //     exam = SavedExam.findById(user.exam[0].exam.saved_exam)
-        // }
-        // // const saved_exam = user.exams.find((exam) => exam.exam._id === exam_id);
+    	if(user[0].exams.length === 0)
+		  	throw "User doesn't have such an exam"
 
-        // // console.log(saved_exam);
-        // console.log(exam);
+        console.log(user[0].exams[0].exam);
+        let exam = null;
+        if(!user[0].exams[0].exam.saved_exam){
+            exam = generateExam(exam_id)
+
+            const saved_exam = await SavedExam.create(
+				{title: exam.title,
+				mcq: exam.mcq.map((mcq) => ({question:mcq, user_answer:''})),
+				coding: exam.coding.map((coding) => ({question:coding}))});
+
+            console.log(await User.updateOne({_id: user_id, 'exams.exam._id': exam_id},{
+                $set:{'exams.exam.saved_exam': saved_exam._id}}))
+        }else{
+            exam = SavedExam.findById(user[0].exams[0].exam.saved_exam)
+        }
+        // const saved_exam = user.exams.find((exam) => exam.exam._id === exam_id);
+
+        // console.log(saved_exam);
+        console.log(exam);
         return user
     } catch (error) {
         console.log(error);
