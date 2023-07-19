@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const mcqSchema = new mongoose.Schema({
     description: {type: String, required: true},
     choices: {type: [String], required: true},
-    answer: {type: String, required: true}
+    answer: {type: String, required: true},
+    weight: {type: Number, required: true}
 })
 
 
@@ -16,7 +17,8 @@ const codingSchema = new mongoose.Schema({
     output: {type: String, default: ''},
     input_format: {type: String, required: true},
     output_format: {type: String, required: true},
-    constraints: {type: String, required: true}
+    constraints: {type: String, required: true},
+    weight: {type: Number, required: true}
 })
 
 
@@ -84,7 +86,8 @@ topicSchema.statics.add_mcq = async (data) => {
         const inserted_new_mcq = new MCQ({
             description: new_mcq.description,
             choices: new_mcq.choices,
-            answer: new_mcq.answer
+            answer: new_mcq.answer,
+            weight: new_mcq.weight
         })
         const result = await Topic.updateOne({_id: topic_id}, {
             $push: { mcq: inserted_new_mcq._id}
@@ -109,7 +112,8 @@ topicSchema.statics.add_coding = async (data) => {
             output: new_coding.output,
             input_format: new_coding.input_format,
             output_format: new_coding.output_format,
-            constraints: new_coding.constraints
+            constraints: new_coding.constraints,
+            weight: new_coding.weight
         })
         const result = await Topic.updateOne({_id: topic_id}, {
             $push: { coding: inserted_new_coding._id}
@@ -174,7 +178,9 @@ topicSchema.statics.edit_mcq = async (data) => {
         const result = await MCQ.updateOne({_id: mcq_id}, {
             $set: { description: new_mcq.description,
                     choices: new_mcq.choices,
-                    answer: new_mcq.answer}
+                    answer: new_mcq.answer,
+                    weight: new_mcq.weight
+                }
         });
         if(result.modifiedCount === 0)
             throw "topic not found"
@@ -202,7 +208,9 @@ topicSchema.statics.edit_coding = async (data) => {
                     output: new_coding.output,
                     input_format: new_coding.input_format,
                     output_format: new_coding.output_format,
-                    constraints: new_coding.constraints}
+                    constraints: new_coding.constraints,
+                    weight: new_coding.weight
+                }
             });
         if(result.modifiedCount === 0)
             throw "topic not found"
@@ -222,7 +230,7 @@ topicSchema.statics.get_mcq_and_coding = async (data) => {
             MCQ.find({_id:{$in: mcq_ids}}, '-answer -__v'),
             Coding.find({_id:{$in: coding_ids}}, '-input -output -__v')
         ])
-        return {mcq: mcq, coding: coding};
+        return {mcq: mcq.map((mcq) => ({question:mcq, user_answer:''})), coding: coding};
     } catch (error) {
         throw `Error updating coding`
     }

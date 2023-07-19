@@ -49,7 +49,8 @@ const userSchema = new mongoose.Schema({
                     appointment: {type: String, required: true},
                     snack: {type: String, required: true},
                     percentage: {type: Number, required: true},
-                    bookedAt: {type:String, required: true}
+                    bookedAt: {type:String, required: true},
+                    saved_exam: {type: mongoose.Schema.Types.ObjectId, ref: 'savedExam', default: null}
                 }, required: true},
             }
         ],
@@ -123,8 +124,6 @@ userSchema.statics.bookExam = async function(exam_data, userId){
     try{
         const {location_id, day_id, exam_id, snack, appointment} = exam_data
 
-        ////change to $inc for atomicity on the db side
-        
 
         const [location, day, user, exam] = await Promise.all([
             Location.findOne({ _id: location_id }),
@@ -181,8 +180,6 @@ userSchema.statics.bookExam = async function(exam_data, userId){
             )
         }
 
-
-
         await session.commitTransaction();
         session.endSession();
         return true;
@@ -195,19 +192,12 @@ userSchema.statics.bookExam = async function(exam_data, userId){
     
 }
 
-userSchema.statics.getExam = async (data) => {
+
+const generateExam = async (exam_id) => {
     try {
-        const {user_id, exam_id} = data;
-        const [user, exam] = await Promise.all([
-            User.findOne({_id:user_id, 'exams.exam._id': exam_id}, 'email'),
-            Exam.findById(exam_id, 'topics title').populate({
+        const exam = await Exam.findById(exam_id, 'topics title').populate({
                 path: 'topics'
             })
-        ])
-        console.log('heloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo');
-        console.log(user, exam);
-        if(!user)
-            throw "User not found"
         if(!exam)
             throw "The code provided doesn't match any of the user's exam"
 
@@ -215,6 +205,24 @@ userSchema.statics.getExam = async (data) => {
         const coding = exam.topics.flatMap((topic) => _.sampleSize(topic.coding, topic.num_of_coding))
 
         return await Topic.get_mcq_and_coding({mcq_ids:mcq, coding_ids:coding})
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
+userSchema.statics.getExam = async (data) => {
+    try {
+        const {user_id, exam_id} = data;
+        const user = await User.findOne({_id:user_id, 'exams.exam._id': exam_id}, 'email')
+        if(!user)
+            throw "User not found"
+        
+        const saved_exam = user.exams.find((exam) => exam.exam._id === exam_id);
+
+        console.log(saved_exam);
+        
+        return "hello world"
     } catch (error) {
         console.log(error);
         throw error
