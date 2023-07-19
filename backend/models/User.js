@@ -133,7 +133,7 @@ userSchema.statics.bookExam = async function(exam_data, userId){
             Exam.findOne({_id: exam_id, status: true, deleted: false})
           ]);
 
-        
+        console.log(location, day, user, exam);
         if(!user || !day || !location || !exam){
             throw "a problem occured"
         }

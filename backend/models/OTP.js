@@ -40,6 +40,7 @@ OTPschema.statics.verifyOTP = async function(phone_namber, code){
         throw Error("phone incorrect");
     let auth = await bcrypt.compare(code, otp.code);
     if(auth){
+        await this.deleteOne({phone_namber: phone_namber})
         return true;
     }
     return false;
@@ -54,6 +55,7 @@ OTPschema.statics.verifyExamCode = async function(user_id, code){
         throw Error("No OTP associated with the user was found");
     let auth = await bcrypt.compare(code, otp.code);
     if(auth){
+        await this.deleteOne({phone_namber: user_id})
         return otp.exam_id;
     }
     return false;
