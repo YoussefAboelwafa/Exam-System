@@ -51,7 +51,8 @@ div {
     rgba(255, 145, 76, 0.18),
     rgba(0, 129, 130, 0.2)
   );
- background-size: cover;
+  min-height: 100vh;
+  max-height: fit-content;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -124,6 +125,8 @@ div {
 }
 ul {
   margin-top: 5%;
+  padding-top: 5%;
+
 }
 .sidebar li {
   padding: 5px;

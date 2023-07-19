@@ -44,7 +44,8 @@ div {
 }
 .section3 {
   width: 70vw;
-  height: 95vh;
+  min-height: 100vh;
+  max-height: fit-content;
   background: radial-gradient(
     circle at top left,
     rgba(255, 145, 76, 0.18),

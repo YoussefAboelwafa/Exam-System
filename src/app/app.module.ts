@@ -24,6 +24,7 @@ import { AdminCalendarComponent } from './admin-calendar/admin-calendar.componen
 import { AdminExamsComponent } from './admin-exams/admin-exams.component';
 import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.component';
 import { AdminQuestionsComponent } from './admin-questions/admin-questions.component';
+import { AdminNewsComponent } from './admin-news/admin-news.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { AdminQuestionsComponent } from './admin-questions/admin-questions.compo
     AdminExamsComponent,
     AdminAnalyticsComponent,
     AdminQuestionsComponent,
+    AdminNewsComponent,
   ],
   imports: [
     BrowserModule,

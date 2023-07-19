@@ -14,6 +14,7 @@ import { AdminExamsComponent } from './admin-exams/admin-exams.component';
 import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.component';
 import { AdminLocationBarComponent } from './admin-location-bar/admin-location-bar.component';
  import { AdminQuestionsComponent } from './admin-questions/admin-questions.component';
+import { AdminNewsComponent } from './admin-news/admin-news.component';
 
 const routes: Routes = [
   {
@@ -33,7 +34,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [GuardServiceService],
+    // canActivate: [GuardServiceService],
 
     children: [
       {
@@ -53,7 +54,7 @@ const routes: Routes = [
   {
     path: 'admin_home',
     component: AdminHomeComponent,
-    canActivate: [GuardServiceService],
+    // canActivate: [GuardServiceService],
     children: [
       {
         path: 'admin_calendar',
@@ -74,6 +75,10 @@ const routes: Routes = [
       {
         path: 'admin_questions',
         component: AdminQuestionsComponent,
+      },
+      {
+        path: 'admin_news',
+        component: AdminNewsComponent,
       },
     ],
   },
