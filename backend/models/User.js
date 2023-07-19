@@ -200,7 +200,9 @@ userSchema.statics.getExam = async (data) => {
         const {user_id, exam_id} = data;
         const [user, exam] = await Promise.all([
             User.findOne({_id:user_id, 'exams.exam._id': exam_id}, 'email'),
-            Exam.findById(exam_id, 'topics title')
+            Exam.findById(exam_id, 'topics title').populate({
+                path: 'topics'
+            })
         ])
         console.log('heloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo');
         console.log(user, exam);
