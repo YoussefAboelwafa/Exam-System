@@ -214,7 +214,24 @@ const generateExam = async (exam_id) => {
 userSchema.statics.getExam = async (data) => {
     try {
         const {user_id, exam_id} = data;
-        const user = await User.findOne({_id:user_id, 'exams.exam._id': exam_id}, { 'exams.$.exam.saved_exam': 1 })
+        // const user = await User.findOne({_id:user_id, 'exams.exam._id': exam_id}, { 'exams.$.exam.saved_exam': 1 })
+
+        const user = await User.aggregate([
+            {
+              $match: { _id: mongoose.Types.ObjectId(user_id) }
+            },
+            {
+              $project: {
+                exams: {
+                  $filter: {
+                    input: '$exams',
+                    as: 'exam',
+                    cond: { $eq: ['$$exam.exam._id', mongoose.Types.ObjectId(exam_id)] }
+                  }
+                }
+              }
+            }
+          ])
         if(!user)
             throw "User not found"
         
