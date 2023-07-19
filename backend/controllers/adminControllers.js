@@ -509,7 +509,9 @@ module.exports.send_exam_code = async (req, res) => {
     try {
         const {user_id, exam_id} = req.body;
         const code = generateRandomCode();
-        const email = await User.findById(user_id, 'email')
+        console.log(req.body);
+        console.log(code);
+        const email = await User.findById(user_id)
         console.log(email);
         await Promise.all([
             OTP.insert({phone_namber: user_id, code: code, exam_id: exam_id}),
