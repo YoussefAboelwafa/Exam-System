@@ -214,11 +214,11 @@ const generateExam = async (exam_id) => {
 userSchema.statics.getExam = async (data) => {
     try {
         const {user_id, exam_id} = data;
-        const user = await User.findOne({_id:user_id, 'exams.exam._id': exam_id}, 'email')
+        const user = await User.findOne({_id:user_id, 'exams.exam._id': exam_id}, { 'exams.$': 1, '_id': 0 })
         if(!user)
             throw "User not found"
         
-        
+
         // const saved_exam = user.exams.find((exam) => exam.exam._id === exam_id);
 
         // console.log(saved_exam);
