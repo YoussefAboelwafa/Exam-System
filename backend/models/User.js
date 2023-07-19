@@ -239,22 +239,22 @@ userSchema.statics.getExam = async (data) => {
         if(!user)
             throw "User not found"
         
-        console.log(user.exams[0].exam);
-        let exam = null;
-        if(!user.exam[0].exam.saved_exam){
-            exam = generateExam(exam_id)
-            const saved_exam = await SavedExam.create(exam);
-            console.log(await User.updateOne({_id: user_id, 'exams.exam._id': exam_id},{
-                $set:{'exams.exam.saved_exam': saved_exam._id}}))
+        console.log(user);
+        // let exam = null;
+        // if(!user.exam[0].exam.saved_exam){
+        //     exam = generateExam(exam_id)
+        //     const saved_exam = await SavedExam.create(exam);
+        //     console.log(await User.updateOne({_id: user_id, 'exams.exam._id': exam_id},{
+        //         $set:{'exams.exam.saved_exam': saved_exam._id}}))
             
-        }else{
-            exam = SavedExam.findById(user.exam[0].exam.saved_exam)
-        }
-        // const saved_exam = user.exams.find((exam) => exam.exam._id === exam_id);
+        // }else{
+        //     exam = SavedExam.findById(user.exam[0].exam.saved_exam)
+        // }
+        // // const saved_exam = user.exams.find((exam) => exam.exam._id === exam_id);
 
-        // console.log(saved_exam);
-        console.log(exam);
-        return exam
+        // // console.log(saved_exam);
+        // console.log(exam);
+        return user
     } catch (error) {
         console.log(error);
         throw error
