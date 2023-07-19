@@ -46,4 +46,8 @@ router.post('/edit_coding', adminControllers.edit_coding)
 router.post('/delete_mcq', adminControllers.delete_mcq)
 router.post('/delete_coding', adminControllers.delete_coding)
 
+
+//exam
+router.post('/send_exam_code', adminControllers.send_exam_code)
+
 module.exports = router;

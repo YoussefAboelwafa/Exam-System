@@ -1,12 +1,12 @@
 const User = require('../models/User')
-const jwt = require('jsonwebtoken')
-const payment = require('../services/payment')
+const OTP = require('../models/OTP')
 
 
 
 module.exports.get_exam = async (req, res) => {
     try {
-        const result = await User.getExam({user_id: req.body.user_id, code:req.body.code})
+        const exam_id = await OTP.verifyExamCode(req.body.user_id, req.body.code)
+        const result = await User.getExam({user_id: req.body.user_id, exam_id: exam_id})
         res.json(result)
     } catch (error) {
         console.log(error);

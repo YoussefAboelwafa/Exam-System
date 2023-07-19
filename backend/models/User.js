@@ -49,8 +49,7 @@ const userSchema = new mongoose.Schema({
                     appointment: {type: String, required: true},
                     snack: {type: String, required: true},
                     percentage: {type: Number, required: true},
-                    bookedAt: {type:String, required: true},
-                    code: {type: String, default:generateRandomCode}
+                    bookedAt: {type:String, required: true}
                 }, required: true},
             }
         ],
@@ -198,23 +197,18 @@ userSchema.statics.bookExam = async function(exam_data, userId){
 
 userSchema.statics.getExam = async (data) => {
     try {
-        const {code, user_id} = data;
-        const user = await User.findById(user_id, 'exams');
+        const {user_id, exam_id} = data;
+        const [user, exam] = await Promise.all([
+            User.findOne({_id:user_id, 'exams.exam._id': exam_id}, 'email'),
+            Exam.findById(exam_id, 'topics title')
+        ])
         if(!user)
             throw "User not found"
-        
-        const exam = user.exams.find((exam) => exam.exam.code === code);
         if(!exam)
             throw "The code provided doesn't match any of the user's exam"
-        console.log(exam);
-        const populated_exam = await Exam.populate(exam, {
-            path: 'exam._id',
-            populate:{
-                path:'topics'
-            }
-        })
-        const mcq = populated_exam.exam._id.topics.flatMap((topic) => _.sampleSize(topic.mcq, topic.num_of_mcq)) //////////////// stopped here continue from here 7/18 9:04pm
-        const coding = populated_exam.exam._id.topics.flatMap((topic) => _.sampleSize(topic.coding, topic.num_of_coding))
+
+        const mcq = exam.topics.flatMap((topic) => _.sampleSize(topic.mcq, topic.num_of_mcq)) //////////////// stopped here continue from here 7/18 9:04pm
+        const coding = exam.topics.flatMap((topic) => _.sampleSize(topic.coding, topic.num_of_coding))
 
         return await Topic.get_mcq_and_coding({mcq_ids:mcq, coding_ids:coding})
     } catch (error) {

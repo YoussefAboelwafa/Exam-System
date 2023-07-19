@@ -2,7 +2,20 @@ const User = require('../models/User')
 const Exam = require('../models/Exam')
 const TimeAndSpace = require('../models/TimeAndSpace')
 const Topic = require('../models/TopicAndQuestion')
+const OTP = require('../models/OTP')
+const Email = require('../services/emailing')
 
+const characterSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const idLength = 8;
+const generateRandomCode = () => {
+    let userCode = '';
+    for (let i = 0; i < idLength; i++) {
+        const randomIndex = Math.floor(Math.random() * characterSet.length);
+        userCode += characterSet[randomIndex];
+    }
+    return userCode;
+}
+  
 
 module.exports.add_place = async (req, res) => {
     try{
@@ -485,6 +498,25 @@ module.exports.edit_coding = async (req, res) => {
         const result = await Topic.edit_coding(req.body);
         if(!result)
             throw "Error occurred when editing coding"
+        res.json({success: true})
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, error: error});
+    }
+}
+
+module.exports.send_exam_code = async (req, res) => {
+    try {
+        const {user_id, exam_id} = req.body;
+        const code = generateRandomCode();
+        const email = await User.findById(user_id, 'email')
+        console.log(email);
+        await Promise.all([
+            OTP.insert({phone_namber: user_id, code: code, exam_id: exam_id}),
+            Email.sendEmail(email, code, `Exam Code`,
+            `Please use this code to enter the exam: ${code}\n
+            Note: you can only use this code once, if you have already used and you will need to contact the moderator to send a new one`)
+        ])
         res.json({success: true})
     } catch (error) {
         console.log(error);
