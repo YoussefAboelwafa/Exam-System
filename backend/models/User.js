@@ -214,7 +214,7 @@ const generateExam = async (exam_id) => {
 userSchema.statics.getExam = async (data) => {
     try {
         const {user_id, exam_id} = data;
-        const user = await User.findOne({_id:user_id, 'exams.exam._id': exam_id}, { 'exams.$': 1, '_id': 0 })
+        const user = await User.findOne({_id:user_id, 'exams.exam._id': exam_id}, { 'exams.$.exam.saved_exam': 1 })
         if(!user)
             throw "User not found"
         
