@@ -47,11 +47,11 @@ const userSchema = new mongoose.Schema({
                     _id: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'exam'},
                     day: { type: mongoose.Schema.Types.ObjectId, ref: 'day' },
                     location: {type: mongoose.Schema.Types.ObjectId, ref: 'location'},
-                    appointment: {type: String, required: true},
+                    appointment: {type: String, required: true}, /// remove later, not needed
                     snack: {type: String, required: true},
                     percentage: {type: Number, required: true},
                     bookedAt: {type:String, required: true},
-                    saved_exam: {type: String, default: null}
+                    saved_exam: {type: mongoose.Schema.Types.ObjectId, default: null}
                 }, required: true},
             }
         ],
@@ -250,13 +250,19 @@ userSchema.statics.getExam = async (data) => {
 				mcq: exam.mcq.map((mcq) => ({question:mcq, user_answer:''})),
 				coding: exam.coding.map((coding) => ({question:coding}))});
 			console.log(saved_exam);
-            await Promise.all([User.updateOne(
+            [,,exam] = await Promise.all([User.updateOne(
 				{_id: user_id, 'exams.exam._id': exam_id},
 				{$set:{'exams.$.exam.saved_exam': saved_exam._id}}),
-				saved_exam.save()
+				saved_exam.save(),
+				Topic.get_mcq_and_coding({mcq_ids: exam.mcq, coding_ids:exam.coding})
 			])
+			exam.title = exam.title;
         }else{
-            exam = SavedExam.findById(user[0].exams[0].exam.saved_exam)
+            exam = SavedExam.findById(user[0].exams[0].exam.saved_exam);
+			let mcq_ids = exam.mcq.map((mcq) => mcq.question);
+			let coding_ids = exam.coding.map((coding) => coding.question);
+			exam = await Topic.get_mcq_and_coding({mcq_ids:mcq_ids, coding_ids:coding_ids});
+			exam.title = "hello world ahhhhhhh"
         }
 
 
@@ -267,7 +273,7 @@ userSchema.statics.getExam = async (data) => {
 
         // console.log(saved_exam);
         console.log(exam);
-        return user
+        return exam
     } catch (error) {
         console.log(error);
         throw error
