@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema({
                     snack: {type: String, required: true},
                     percentage: {type: Number, required: true},
                     bookedAt: {type:String, required: true},
-                    saved_exam: {type: mongoose.Schema.Types.ObjectId, ref: 'savedExam', default: null}
+                    saved_exam: {type: String, default: null}
                 }, required: true},
             }
         ],
