@@ -202,6 +202,8 @@ userSchema.statics.getExam = async (data) => {
             User.findOne({_id:user_id, 'exams.exam._id': exam_id}, 'email'),
             Exam.findById(exam_id, 'topics title')
         ])
+        console.log('heloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo');
+        console.log(user, exam);
         if(!user)
             throw "User not found"
         if(!exam)
