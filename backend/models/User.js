@@ -249,15 +249,20 @@ userSchema.statics.getExam = async (data) => {
 				{exam_id: exam_id,
 				mcq: exam.mcq.map((mcq) => ({question:mcq, user_answer:''})),
 				coding: exam.coding.map((coding) => ({question:coding}))});
-
+			console.log(saved_exam);
             await Promise.all([User.updateOne(
 				{_id: user_id, 'exams.exam._id': exam_id},
-				{$set:{'exams.exam.saved_exam': saved_exam._id}}),
+				{$set:{'exams.$.exam.saved_exam': saved_exam._id}}),
 				saved_exam.save()
 			])
         }else{
             exam = SavedExam.findById(user[0].exams[0].exam.saved_exam)
         }
+
+
+		///// populate exam before sending
+		///get_mcq_and_coding
+
         // const saved_exam = user.exams.find((exam) => exam.exam._id === exam_id);
 
         // console.log(saved_exam);
