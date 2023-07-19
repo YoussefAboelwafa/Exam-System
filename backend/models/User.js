@@ -218,7 +218,7 @@ userSchema.statics.getExam = async (data) => {
 
         const user = await User.aggregate([
             {
-              $match: { _id: mongoose.Types.ObjectId(user_id) }
+              $match: { _id: user_id }
             },
             {
               $project: {
@@ -226,7 +226,7 @@ userSchema.statics.getExam = async (data) => {
                   $filter: {
                     input: '$exams',
                     as: 'exam',
-                    cond: { $eq: ['$$exam.exam._id', mongoose.Types.ObjectId(exam_id)] }
+                    cond: { $eq: ['$$exam.exam._id', exam_id] }
                   }
                 }
               }
