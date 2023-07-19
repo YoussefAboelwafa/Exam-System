@@ -13,6 +13,7 @@ const transporter = nodemailer.createTransport({
 
 module.exports.sendEmail = async (to, subject, text) => {
     try{
+        console.log(to);
         const mailOptions = {
             from: 'gammalexambooking@gmail.com',
             to: to,
