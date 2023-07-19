@@ -218,10 +218,10 @@ userSchema.statics.getExam = async (data) => {
         if(!user)
             throw "User not found"
         
-
+        
         // const saved_exam = user.exams.find((exam) => exam.exam._id === exam_id);
 
-        console.log(saved_exam);
+        // console.log(saved_exam);
         
         return user
     } catch (error) {
