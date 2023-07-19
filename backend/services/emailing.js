@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
   });
 
 
-module.exports.sendEmail = async (to, code, subject, text) => {
+module.exports.sendEmail = async (to, subject, text) => {
     try{
         const mailOptions = {
             from: 'gammalexambooking@gmail.com',

@@ -59,7 +59,7 @@ module.exports.signup_post = async (req, res) =>{
             console.log("code is: ", code);
             await Promise.all([
                 OTP.insert({phone_namber: phone_namber, code: code}),
-                Email.sendEmail(email, code, 'Gammal Tech Verification Code',
+                Email.sendEmail(email, 'Gammal Tech Verification Code',
                  `Your verification code is: ${code}\n
                 The code expires after 10 minutes`)
             ])
@@ -144,7 +144,7 @@ module.exports.send_again = async (req, res) =>{
 
         await Promise.all([
             OTP.insert({phone_namber: phone_namber, code: code}),
-            Email.sendEmail(email, code, 'Gammal Tech Verification Code',
+            Email.sendEmail(email, 'Gammal Tech Verification Code',
                  `Your verification code is: ${code}\n
                 The code expires after 10 minutes`)
         ])

@@ -511,11 +511,11 @@ module.exports.send_exam_code = async (req, res) => {
         const code = generateRandomCode();
         console.log(req.body);
         console.log(code);
-        const email = await User.findById(user_id)
+        const email = await User.findById(user_id, 'email')
         console.log(email);
         await Promise.all([
             OTP.insert({phone_namber: user_id, code: code, exam_id: exam_id}),
-            Email.sendEmail(email, code, `Exam Code`,
+            Email.sendEmail(email, `Exam Code`,
             `Please use this code to enter the exam: ${code}\n
             Note: you can only use this code once, if you have already used and you will need to contact the moderator to send a new one`)
         ])
