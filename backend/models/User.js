@@ -228,10 +228,13 @@ userSchema.statics.getExam = async (data) => {
                     as: 'exam',
                     cond: { $eq: ['$$exam.exam._id', new mongoose.Types.ObjectId(exam_id)] }
                   }
-                },
-                exam: '$exams.exam'
+                }
               }
-            }
+            },
+            {
+            $project: {
+                exam: '$exams.exam'
+            }}
           ])
         if(!user.exams)
             throw "User not found"
