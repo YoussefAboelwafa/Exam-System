@@ -246,7 +246,7 @@ userSchema.statics.getExam = async (data) => {
             exam = await generateExam(exam_id)
 			console.log(exam);
             const saved_exam = new SavedExam(
-				{title: exam.title,
+				{exam_id: exam_id,
 				mcq: exam.mcq.map((mcq) => ({question:mcq, user_answer:''})),
 				coding: exam.coding.map((coding) => ({question:coding}))});
 
