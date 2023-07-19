@@ -258,7 +258,7 @@ userSchema.statics.getExam = async (data) => {
 			exam.title = exam.title;
         }else{
 			console.log(user);
-            exam = SavedExam.findById(user[0].exams[0].exam.saved_exam);
+            exam = await SavedExam.findById(user[0].exams[0].exam.saved_exam);
 			console.log(exam);
 			let mcq_ids = exam.mcq.map((mcq) => mcq.question);
 			let coding_ids = exam.coding.map((coding) => coding.question);
