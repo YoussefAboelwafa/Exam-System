@@ -9,17 +9,17 @@ module.exports.get_exam = async (req, res) => {
         ///change to using cockies
         const exam_id = await OTP.verifyExamCode(req.body.user_id, req.body.code)
         let exam = await User.getExam({user_id: req.body.user_id, exam_id: exam_id})
-        const totalMcqWeight = exam.mcq.reduce((accumulator, currentValue) => accumulator + currentValue.value, 0);
-        const totalCodingWeight = exam.coding.reduce((accumulator, currentValue) => accumulator + currentValue.value, 0);
+        const totalMcqWeight = exam.mcq.reduce((accumulator, currentValue) => accumulator + currentValue.question.weight, 0);
+        const totalCodingWeight = exam.coding.reduce((accumulator, currentValue) => accumulator + currentValue.question.weight, 0);
         const totalWeight = totalMcqWeight + totalCodingWeight;
         const ratio = desiredTotalWeight/totalWeight;
         
         exam.mcq.forEach(mcqItem => {
-            mcqItem.weight *= ratio;
+            mcqItem.question.weight *= ratio;
         });
           
         exam.coding.forEach(codingItem => {
-            codingItem.weight *= ratio;
+            codingItem.question.weight *= ratio;
         });
         console.log(exam.mcq);
         res.json(exam)
