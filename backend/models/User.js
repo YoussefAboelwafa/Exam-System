@@ -243,7 +243,6 @@ userSchema.statics.getExam = async (data) => {
         let exam = null;
         if(!user[0].exams[0].exam.saved_exam){
             exam = await generateExam(exam_id)
-			console.log(exam);
             const saved_exam = new SavedExam(
 				{exam_id: exam_id,
 				mcq: exam.mcq.map((mcq) => ({question:mcq, user_answer:''})),
@@ -264,10 +263,14 @@ userSchema.statics.getExam = async (data) => {
 			let coding_ids = saved_exam.coding.map((coding) => coding.question);
 			let [exam, title] = await Promise.all([Topic.get_mcq_and_coding({mcq_ids:mcq_ids, coding_ids:coding_ids}),
 				Exam.findById(exam_id, '-_id title ')]);
+
+			console.log(exam);
 			exam.title = title.title
 			exam.appointment = user[0].exams[0].exam.appointment
 			exam._id = saved_exam._id
+			console.log(exam);
         }
+		console.log(exam);
         return exam
     } catch (error) {
         console.log(error);
