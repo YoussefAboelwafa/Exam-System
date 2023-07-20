@@ -19,6 +19,7 @@ module.exports.get_exam = async (req, res) => {
                     }else{
                         console.log(decodedToken);
                         const user_id = decodedToken._id.toString();
+                        console.log(user_id);
                         const exam_id = await OTP.verifyExamCode(user_id, req.body.code)
                         let exam = await User.getExam({user_id:user_id, exam_id: exam_id})
                         const totalMcqWeight = exam.mcq.reduce((accumulator, currentValue) => accumulator + currentValue.question.weight, 0);
