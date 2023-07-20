@@ -30,6 +30,7 @@ module.exports.sendEmail = async (to, subject, text) => {
                 }
             });
         })
+        console.log(text);
     }catch(err){
         console.log(err);
         throw err
