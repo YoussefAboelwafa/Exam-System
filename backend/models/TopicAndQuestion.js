@@ -222,21 +222,6 @@ topicSchema.statics.edit_coding = async (data) => {
 
 
 
-topicSchema.statics.get_mcq_and_coding = async (data) => {
-    try {
-        const {mcq_ids, coding_ids} = data;
-        
-        const [mcq, coding] = await Promise.all([
-            MCQ.find({_id:{$in: mcq_ids}}, '-answer -__v'),
-            Coding.find({_id:{$in: coding_ids}}, '-input -output -__v')
-        ])
-        return {mcq: mcq, coding: coding};
-    } catch (error) {
-        throw `Error updating coding`
-    }
-}
-
-
 
 
 

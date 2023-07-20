@@ -217,7 +217,6 @@ userSchema.statics.getExam = async (data) => {
     try {
         const {user_id, exam_id} = data;
         // const user = await User.findOne({_id:user_id, 'exams.exam._id': exam_id}, { 'exams.$.exam.saved_exam': 1 })
-		console.log(data);
         const user = await User.aggregate([
             {
               $match: { _id: new mongoose.Types.ObjectId(user_id) }
@@ -246,6 +245,7 @@ userSchema.statics.getExam = async (data) => {
 				{exam_id: exam_id,
 				mcq: generated_exam.mcq.map((mcq) => ({question:mcq, user_answer:''})),
 				coding: generated_exam.coding.map((coding) => ({question:coding}))});
+
             let [,exam] = await Promise.all([
 				User.updateOne({_id: user_id, 'exams.exam._id': exam_id},
 				{$set:{'exams.$.exam.saved_exam': saved_exam._id}}),
@@ -272,15 +272,9 @@ userSchema.statics.getExam = async (data) => {
 			{path: 'coding.question', select:'-input -output -__v'}]),
 			Exam.findById(exam_id, '-_id title')
 		]);
-		// let mcq_ids = saved_exam.mcq.map((mcq) => mcq.question);
-		// let coding_ids = saved_exam.coding.map((coding) => coding.question);
-		// let [exam, title] = await Promise.all([Topic.get_mcq_and_coding({mcq_ids:mcq_ids, coding_ids:coding_ids}),
-		// 	Exam.findById(exam_id, '-_id title ')]);
-		// exam.mcq = exam.mcq.map((mcq) => ({question:mcq, user_answer:''}));
-		// exam.coding = exam.coding.map((coding) => ({question:coding}));
+
 		exam.title = title.title
 		exam.appointment = user[0].exams[0].exam.appointment
-		// exam._id = saved_exam._id
 		return {_id: exam._id, 
 			mcq: exam.mcq, 
 			coding: exam.coding,
