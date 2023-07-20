@@ -257,11 +257,13 @@ userSchema.statics.getExam = async (data) => {
 					]);
 				})
 			])
-			console.log(exam);
-			exam.appointment = user[0].exams[0].exam.appointment
-			exam.title = generated_exam.title
-			console.log(exam);
-			return exam
+
+			return {_id: exam._id, 
+					mcq: exam.mcq, 
+					coding: exam.coding,
+					title: generated_exam.title,
+					appointment: user[0].exams[0].exam.appointment
+				}
         }
 
 		console.log('hello world');
@@ -277,12 +279,15 @@ userSchema.statics.getExam = async (data) => {
 		// 	Exam.findById(exam_id, '-_id title ')]);
 		// exam.mcq = exam.mcq.map((mcq) => ({question:mcq, user_answer:''}));
 		// exam.coding = exam.coding.map((coding) => ({question:coding}));
-		console.log(title);
 		exam.title = title.title
 		exam.appointment = user[0].exams[0].exam.appointment
 		// exam._id = saved_exam._id
-		console.log(exam);
-		return exam
+		return {_id: exam._id, 
+			mcq: exam.mcq, 
+			coding: exam.coding,
+			title: title.title,
+			appointment: user[0].exams[0].exam.appointment
+		}
         
     } catch (error) {
         console.log(error);
