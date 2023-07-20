@@ -15,11 +15,11 @@ module.exports.get_exam = async (req, res) => {
         const ratio = desiredTotalWeight/totalWeight;
         
         exam.mcq.forEach(mcqItem => {
-            mcqItem.question.weight *= ratio;
+            mcqItem.question.weight = (mcqItem.question.weight*ratio).toFixed(2);
         });
           
         exam.coding.forEach(codingItem => {
-            codingItem.question.weight *= ratio;
+            codingItem.question.weight = (codingItem.question.weight*ratio).toFixed(2);
         });
         console.log(exam.mcq);
         res.json(exam)
