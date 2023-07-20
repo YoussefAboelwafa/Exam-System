@@ -250,14 +250,14 @@ userSchema.statics.getExam = async (data) => {
 				User.updateOne({_id: user_id, 'exams.exam._id': exam_id},
 				{$set:{'exams.$.exam.saved_exam': saved_exam._id}}),
 				saved_exam.save().then(async (savedExam) =>  {
-					return await SavedExam.populate(savedExam, [
+					return await SavedExam.select(savedExam, '-exam_id -mcq._id -coding._id -__v ')
+					.populate(savedExam, [
 					  { path: 'mcq.question', select: '-answer -__v' },
 					  { path: 'coding.question', select: '-input -output -__v' }
 					]);
 				})
 			])
 			console.log(exam);
-			exam._id = saved_exam._id;
 			exam.appointment = user[0].exams[0].exam.appointment
 			exam.title = generated_exam.title
 			console.log(exam);
