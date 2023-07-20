@@ -36,7 +36,7 @@ OTPschema.statics.insert = async function(elem){
 
 
 OTPschema.statics.verifyCode = async function(identifier, code, isExamCode = false) {
-    const otp = await this.findOne({ phone_number: identifier });
+    const otp = await this.findOne({ phone_namber: identifier });
     if (!otp) {
         throw new Error(isExamCode ? "No OTP associated with the user was found" : "Phone incorrect or OTP expired");
     }
