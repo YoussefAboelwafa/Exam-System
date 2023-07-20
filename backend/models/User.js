@@ -256,6 +256,7 @@ userSchema.statics.getExam = async (data) => {
 			exam.title = exam.title;
 			exam._id = saved_exam._id;
 			exam.appointment = user[0].exams[0].exam.appointment
+			console.log(exam);
 			return exam
         }
 
@@ -269,6 +270,7 @@ userSchema.statics.getExam = async (data) => {
 		exam.title = title.title
 		exam.appointment = user[0].exams[0].exam.appointment
 		exam._id = saved_exam._id
+		console.log(exam);
 		return exam
         
     } catch (error) {
