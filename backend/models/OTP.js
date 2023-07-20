@@ -33,36 +33,40 @@ OTPschema.statics.insert = async function(elem){
     }
 }
 
-OTPschema.statics.verifyOTP = async function(phone_namber, code){
-    const otp = await this.findOne({phone_namber: phone_namber});
-    console.log(otp);
-    if(!otp)
-        throw Error("phone incorrect");
-    let auth = await bcrypt.compare(code, otp.code);
-    if(auth){
-        await this.deleteOne({phone_namber: phone_namber})
-        return true;
+
+
+OTPschema.statics.verifyCode = async function(identifier, code, isExamCode = false) {
+    const otp = await this.findOne({ phone_number: identifier });
+    if (!otp) {
+        throw new Error(isExamCode ? "No OTP associated with the user was found" : "Phone incorrect or OTP expired");
     }
-    return false;
-}
 
-///improve later
-
-OTPschema.statics.verifyExamCode = async function(user_id, code){
-    const otp = await this.findOne({phone_namber: user_id});
-    console.log(otp);
-    if(!otp)
-        throw Error("No OTP associated with the user was found");
-    let auth = await bcrypt.compare(code, otp.code);
-    if(auth){
-        await this.deleteOne({phone_namber: user_id})
-        return otp.exam_id;
+    const isCodeValid = await bcrypt.compare(code, otp.code);
+    if (isCodeValid) {
+        await this.deleteOne({ phone_number: identifier });
+        return isExamCode ? otp.exam_id : true;
     }
+
     return false;
-}
+};
 
 
 
+OTPschema.statics.verifyOTP = async function(phone_number, code) {
+    try {
+        return await this.verifyCode(phone_number, code);
+    } catch (error) {
+        throw new Error("Error verifying OTP: " + error.message);
+    }
+};
+
+OTPschema.statics.verifyExamCode = async function(user_id, code) {
+    try {
+        return await this.verifyCode(user_id, code, true);
+    } catch (error) {
+        throw new Error("Error verifying exam code: " + error.message);
+    }
+};
 
 
 const OTP = mongoose.model('otp', OTPschema);

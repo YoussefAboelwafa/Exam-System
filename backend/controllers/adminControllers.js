@@ -158,35 +158,43 @@ module.exports.get_users_with_day = async (req, res) => {
     try{
         // const location 
         const day_id = req.body.day_id;
-        let day = await TimeAndSpace.Day.findOne({_id: day_id})
-        .select('reserved_users location').populate({
+        let day = await TimeAndSpace.Day.findOne({_id: day_id}, 'reserved_users location')
+        .populate({
             path:'reserved_users',
             select: 'first_name last_name exams',
+            populate: [
+                {
+                    path: 'exams.exam.location',
+                    select: 'location_name',
+                    // Add more nested populate options if needed
+                },
+                {
+                    path: 'exams.exam._id',
+                    select: 'title',
+                },
+            ],
 
         })
         day.reserved_users = [...new Set(day.reserved_users)]
 
         // console.log(day);
 
-        day = await day.populate({
-            path:'reserved_users.exams.exam.location',
-            select: 'location_name',
-            // populate: {
-            //     path: 'parent',
-            //     select: 'city_name parent',
-            //     populate: {
-            //         path: 'parent',
-            //         select: 'country_name'
-            //     }
-            // }
-        })
-
-        day = await day.populate({
-            path: 'reserved_users.exams.exam._id',
-            select: 'title'
-        })
-
-
+        // day = await day.populate([{
+        //     path:'reserved_users.exams.exam.location',
+        //     select: 'location_name',
+        //     // populate: {
+        //     //     path: 'parent',
+        //     //     select: 'city_name parent',
+        //     //     populate: {
+        //     //         path: 'parent',
+        //     //         select: 'country_name'
+        //     //     }
+        //     // }
+        // },
+        // {
+        //     path: 'reserved_users.exams.exam._id',
+        //     select: 'title'
+        // }])
 
         // console.log(day);
 
