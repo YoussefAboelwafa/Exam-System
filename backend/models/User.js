@@ -204,7 +204,7 @@ const generateExam = async (exam_id) => {
 
         const mcq = exam.topics.flatMap((topic) => _.sampleSize(topic.mcq, topic.num_of_mcq)) //////////////// stopped here continue from here 7/18 9:04pm
         const coding = exam.topics.flatMap((topic) => _.sampleSize(topic.coding, topic.num_of_coding))
-        
+        console.log(exam);
         // const populated_exam = await Topic.get_mcq_and_coding({mcq_ids:mcq, coding_ids:coding})
         return {title:exam.title, mcq:mcq, coding:coding};
     } catch (error) {
