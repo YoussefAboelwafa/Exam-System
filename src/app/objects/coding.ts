@@ -4,5 +4,6 @@ export class Q_Coding {
     input_format: any;
      _id: any;
     output_format: any;
-    constraints:any
+    constraints:any;
+    weight:any;
   }

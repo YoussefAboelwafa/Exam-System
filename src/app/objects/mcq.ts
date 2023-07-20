@@ -3,4 +3,5 @@ export class Q_MCQ {
     choices: any;
     answer: any;
     _id: any;
+    weight: any;
   }

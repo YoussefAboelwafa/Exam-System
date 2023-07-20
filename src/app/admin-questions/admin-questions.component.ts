@@ -386,9 +386,10 @@ export class AdminQuestionsComponent implements OnInit {
   }
 
 
-  final_edit_mcq(ed_mcq_description:any,ed_mcq_answer:any){
+  final_edit_mcq(ed_mcq_description:any,ed_mcq_answer:any,ed_mcq_weight:any){
   this.ed_mcq.description=ed_mcq_description;
   this.ed_mcq.answer=ed_mcq_answer;
+  this.ed_mcq.weight =ed_mcq_weight;
   this.selected_topic.mcq[this.index_ed_mcq]=this.ed_mcq;
   this.close_popup();
   this.service.edit_mcq_in_topic(this.ed_mcq._id,this.ed_mcq).subscribe(
@@ -401,13 +402,15 @@ export class AdminQuestionsComponent implements OnInit {
   }
 
 
-  final_edit_coding(ed_cod_title:any,ed_cod_description:any,ed_cod_input_format:any,ed_cod_output_format:any,ed_cod_constraints:any){
+  final_edit_coding(ed_cod_title:any,ed_cod_description:any,ed_cod_input_format:any,ed_cod_output_format:any,ed_cod_constraints:any,ed_cod_weight:any){
   
     this.selected_topic.coding[this.index_ed_coding].title=ed_cod_title;
     this.selected_topic.coding[this.index_ed_coding].description=ed_cod_description;
     this.selected_topic.coding[this.index_ed_coding].input_format=ed_cod_input_format;
     this.selected_topic.coding[this.index_ed_coding].output_format=ed_cod_output_format;
     this.selected_topic.coding[this.index_ed_coding].constraints=ed_cod_constraints;
+    this.selected_topic.coding[this.index_ed_coding].weight =ed_cod_weight;
+
     this.ed_coding=this.selected_topic.coding[this.index_ed_coding];
     this.close_popup();
     this.service.edit_coding_in_topic(this.ed_coding._id,this.ed_coding).subscribe(

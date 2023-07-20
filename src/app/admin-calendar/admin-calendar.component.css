@@ -82,7 +82,7 @@ close {
 }
 .card {
   width: 22vw;
-  height: 29vh;
+  height: 35vh;
   margin-right: 2%;
   margin-bottom: 15px;
 }
@@ -92,7 +92,7 @@ close {
 }
 #special_card {
   width: 40vw;
-  height: 45vh;
+  height: 50vh;
   font-weight: 100;
   font-size: medium;
 }
@@ -147,14 +147,28 @@ close {
 }
 .image {
   display: inline;
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
+  background: url("../../assets/images/img5.svg");
+  background-repeat: no-repeat;
+}
+.btn-icon{
+  all: unset;
+  position: absolute;
+  right: 4%;
+  top: 18%;
+}
+.btn-icon i {
+  font-size: 24px;
+  color: #008182;
+  cursor: pointer;
 }
 .name2 {
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: center;
+  position: relative;
 }
 .name1 {
   margin-left: 10px;

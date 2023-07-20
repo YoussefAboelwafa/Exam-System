@@ -320,6 +320,13 @@
             type="text"
             class="input_edit"
           />
+          <h3>Weight</h3>
+          <input
+            [(ngModel)]="new_mcq.weight"
+            #mcq_weight
+            type="text"
+            class="input_edit"
+          />
         </div>
       </div>
       <div class="modal-footer">
@@ -393,6 +400,13 @@
             class="input_edit"
             id="t_area"
           ></textarea>
+          <h3>Weight</h3>
+          <input
+          [(ngModel)]="new_coding.weight"
+           #ed_coding_weight
+            type="text"
+            class="input_edit"
+          />
         </div>
       </div>
       <div class="modal-footer">
@@ -454,13 +468,20 @@
             type="text"
             class="input_edit"
           />
+          <h3>Weight</h3>
+          <input
+            [value]="ed_mcq.weight"
+            #ed_mcq_weight
+            type="text"
+            class="input_edit"
+          />
         </div>
       </div>
       <div class="modal-footer">
         <button
           type="button"
           id="addnewlocation"
-          (click)="final_edit_mcq(ed_mcq_description.value,ed_mcq_answer.value)">
+          (click)="final_edit_mcq(ed_mcq_description.value,ed_mcq_answer.value,ed_mcq_weight.value)">
         >
           Edit <i class="fa-solid fa-plus"></i>
         </button>
@@ -534,13 +555,21 @@
             id="t_area"
             #ed_cod_constraints
           ></textarea>
+          <h3>Weight</h3>
+          <input
+            [value]="ed_coding.weight"
+            #ed_coding_weight
+            type="text"
+            class="input_edit"
+          />
+
         </div>
       </div>
       <div class="modal-footer">
         <button
           type="button"
           id="addnewlocation"
-          (click)="final_edit_coding(ed_cod_title.value,ed_cod_description.value,ed_cod_input_format.value,ed_cod_output_format.value,ed_cod_constraints.value)">
+          (click)="final_edit_coding(ed_cod_title.value,ed_cod_description.value,ed_cod_input_format.value,ed_cod_output_format.value,ed_cod_constraints.value,ed_coding_weight.value)">
         >
           Edit <i class="fa-solid fa-plus"></i>
         </button>

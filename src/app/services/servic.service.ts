@@ -123,6 +123,7 @@ public book_exam(merchantRefNumber:any,referenceNumber:any,signature:any):Observ
 }
 
 
+
 public get_allstudent_inoneday(id_day:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/get_users_with_day`,{day_id:id_day}, { withCredentials: true });
 }
@@ -173,6 +174,10 @@ public edit_coding_in_topic(coding_id:any,new_coding:any):Observable<any>{
 }
 public edit_mcq_in_topic(mcq_id:any,new_mcq:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/edit_mcq`,{mcq_id:mcq_id,new_mcq:new_mcq}, { withCredentials: true });
+}
+
+public send_mail_with_verify_code(user_id:any,exam_id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/send_exam_code`,{user_id:user_id,exam_id:exam_id}, { withCredentials: true });
 }
 
 }
