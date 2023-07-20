@@ -246,15 +246,14 @@ userSchema.statics.getExam = async (data) => {
 				{exam_id: exam_id,
 				mcq: generated_exam.mcq.map((mcq) => ({question:mcq, user_answer:''})),
 				coding: generated_exam.coding.map((coding) => ({question:coding}))});
-            let [,,exam] = await Promise.all([
+            let [,exam] = await Promise.all([
 				User.updateOne({_id: user_id, 'exams.exam._id': exam_id},
 				{$set:{'exams.$.exam.saved_exam': saved_exam._id}}),
-				saved_exam.save(),
-				// Topic.get_mcq_and_coding({mcq_ids: exam.mcq, coding_ids:exam.coding})
-				saved_exam.select('-exam_id -mcq._id -coding._id').populate([
+				saved_exam.save().populate([
 					{path: 'mcq.question', select: '-answer -__v'},
 					{path: 'coding.question', select:'-input -output -__v'}])
 			])
+			console.log(exam);
 			exam._id = saved_exam._id;
 			exam.appointment = user[0].exams[0].exam.appointment
 			exam.title = generated_exam.title
