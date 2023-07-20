@@ -13,6 +13,7 @@ module.exports.get_exam = async (req, res) => {
         const totalCodingWeight = exam.coding.reduce((accumulator, currentValue) => accumulator + currentValue.value, 0);
         const totalWeight = totalMcqWeight + totalCodingWeight;
         const ratio = desiredTotalWeight/totalCodingWeight;
+        console.log(exam);
         exam.mcq.forEach(mcqItem => {
             mcqItem.weight *= ratio;
         });

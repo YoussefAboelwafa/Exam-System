@@ -257,6 +257,7 @@ userSchema.statics.getExam = async (data) => {
 			])
 			exam.title = exam.title;
 			exam._id = saved_exam._id;
+			exam.appointment = user[0].exams[0].exam.appointment
         }else{
             const saved_exam = await SavedExam.findById(user[0].exams[0].exam.saved_exam);
 			let mcq_ids = saved_exam.mcq.map((mcq) => mcq.question);
