@@ -249,8 +249,8 @@ userSchema.statics.getExam = async (data) => {
             let [,exam] = await Promise.all([
 				User.updateOne({_id: user_id, 'exams.exam._id': exam_id},
 				{$set:{'exams.$.exam.saved_exam': saved_exam._id}}),
-				saved_exam.save().then(savedExam => {
-					return SavedExam.populate(savedExam, [
+				saved_exam.save().then(async (savedExam) =>  {
+					return await SavedExam.populate(savedExam, [
 					  { path: 'mcq.question', select: '-answer -__v' },
 					  { path: 'coding.question', select: '-input -output -__v' }
 					]);
