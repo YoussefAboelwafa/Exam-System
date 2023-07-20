@@ -111,10 +111,14 @@ examSchema.statics.editExam = async (newExam) => {
     try {
       const {exam_id} = data
       const title  = data.topic_name
-      const topic = await Topic.create({title: title});
-      console.log(topic);
-      const result = Exam.updateOne({_id: exam_id}, {$push:{topics:topic._id}})
-      return {success:true, topic_id: topic._id};
+      if(!title)
+        throw "title is required"
+      const topic = new Topic({title: title});
+      const result = await Exam.updateOne({_id: exam_id}, {$push:{topics:topic._id}})
+      if(result.modifiedCount === 0)
+        throw "exam doesn't exist"
+      await topic.save();
+      return {success:true, _id: topic._id};
     } catch (error) {
       console.log(error);
       return false
@@ -125,11 +129,14 @@ examSchema.statics.editExam = async (newExam) => {
   examSchema.statics.get_topics = async (data) => {
     try {
       const {exam_id} = data
-      const topics = await findOne({_id: exam_id})
-        .select('topics')
+      ///probebly will cause problems
+      const topics = await Exam.findOne({_id: exam_id}, 'topics')
         .populate({
           path:'topics',
-          select: 'title num_of_mcq num_of_coding'
+          populate: [
+            { path: 'mcq' },
+            { path: 'coding' }
+          ]
         })
       return topics;
     } catch (error) {
@@ -143,7 +150,7 @@ examSchema.statics.editExam = async (newExam) => {
     ///not really deleting it add garbage collector later
     try {
       const {exam_id, topic_id} = data
-      const result = Exam.updateOne({_id: exam_id}, {$pull:{topics:topic_id}})
+      const result = await Exam.updateOne({_id: exam_id}, {$pull:{topics:topic_id}})
       return {success:true};
     } catch (error) {
       console.log(error);
