@@ -263,7 +263,7 @@ userSchema.statics.getExam = async (data) => {
 		let [exam, title] = await Promise.all([SavedExam.findById(user[0].exams[0].exam.saved_exam).populate([
 			{path: 'mcq.question', select: '-answer -__v'},
 			{path: 'coding.question', select:'-input -output -__v'}]),
-			Exam.findById(exam_id, '-_id title -__v')
+			Exam.findById(exam_id, '-_id title')
 		]);
 		// let mcq_ids = saved_exam.mcq.map((mcq) => mcq.question);
 		// let coding_ids = saved_exam.coding.map((coding) => coding.question);
@@ -271,6 +271,7 @@ userSchema.statics.getExam = async (data) => {
 		// 	Exam.findById(exam_id, '-_id title ')]);
 		// exam.mcq = exam.mcq.map((mcq) => ({question:mcq, user_answer:''}));
 		// exam.coding = exam.coding.map((coding) => ({question:coding}));
+		console.log(title);
 		exam.title = title.title
 		exam.appointment = user[0].exams[0].exam.appointment
 		// exam._id = saved_exam._id
