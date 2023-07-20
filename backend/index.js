@@ -14,7 +14,7 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 app.use(cors({
-    origin: 'https://youssefaboelwafa.github.io', /// 
+    origin: '*', /// 
     credentials: true
 }));
 app.use(express.json());
