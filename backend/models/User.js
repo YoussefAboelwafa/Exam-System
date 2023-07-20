@@ -256,15 +256,16 @@ userSchema.statics.getExam = async (data) => {
 				Topic.get_mcq_and_coding({mcq_ids: exam.mcq, coding_ids:exam.coding})
 			])
 			exam.title = exam.title;
+			exam._id = saved_exam._id;
         }else{
-            exam = await SavedExam.findById(user[0].exams[0].exam.saved_exam);
-			let mcq_ids = exam.mcq.map((mcq) => mcq.question);
-			let coding_ids = exam.coding.map((coding) => coding.question);
-			let title = '';
-			[exam, title] = await Promise.all([Topic.get_mcq_and_coding({mcq_ids:mcq_ids, coding_ids:coding_ids}),
-				Exam.findById(exam_id, '-_id title')]);
-			console.log(title);
-			exam.title = title
+            const saved_exam = await SavedExam.findById(user[0].exams[0].exam.saved_exam);
+			let mcq_ids = saved_exam.mcq.map((mcq) => mcq.question);
+			let coding_ids = saved_exam.coding.map((coding) => coding.question);
+			let [exam, title] = await Promise.all([Topic.get_mcq_and_coding({mcq_ids:mcq_ids, coding_ids:coding_ids}),
+				Exam.findById(exam_id, '-_id title ')]);
+			exam.title = title.title
+			exam.appointment = user[0].exams[0].exam.appointment
+			exam._id = saved_exam._id
         }
         return exam
     } catch (error) {
