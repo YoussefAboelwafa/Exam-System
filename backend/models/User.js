@@ -261,7 +261,7 @@ userSchema.statics.getExam = async (data) => {
 
 		console.log('hello world');
 		let [exam, title] = await Promise.all([
-			SavedExam.findById(user[0].exams[0].exam.saved_exam, '-exam.exam_id -exam.mcq.$._id -exam.coding.$._id -__v').populate([
+			SavedExam.findById(user[0].exams[0].exam.saved_exam, '-exam.exam_id -exam.mcq._id -exam.coding._id -__v').populate([
 			{path: 'mcq.question', select: '-answer -__v'},
 			{path: 'coding.question', select:'-input -output -__v'}]),
 			Exam.findById(exam_id, '-_id title')
