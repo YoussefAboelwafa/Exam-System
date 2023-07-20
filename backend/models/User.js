@@ -240,9 +240,8 @@ userSchema.statics.getExam = async (data) => {
     	if(user[0].exams.length === 0)
 		  	throw "User doesn't have such an exam"
 
-        let exam = null;
         if(!user[0].exams[0].exam.saved_exam){
-            exam = await generateExam(exam_id)
+            let exam = await generateExam(exam_id)
             const saved_exam = new SavedExam(
 				{exam_id: exam_id,
 				mcq: exam.mcq.map((mcq) => ({question:mcq, user_answer:''})),
@@ -257,20 +256,21 @@ userSchema.statics.getExam = async (data) => {
 			exam.title = exam.title;
 			exam._id = saved_exam._id;
 			exam.appointment = user[0].exams[0].exam.appointment
-        }else{
-            const saved_exam = await SavedExam.findById(user[0].exams[0].exam.saved_exam);
-			let mcq_ids = saved_exam.mcq.map((mcq) => mcq.question);
-			let coding_ids = saved_exam.coding.map((coding) => coding.question);
-			let [exam, title] = await Promise.all([Topic.get_mcq_and_coding({mcq_ids:mcq_ids, coding_ids:coding_ids}),
-				Exam.findById(exam_id, '-_id title ')]);
-			exam.mcq = exam.mcq.map((mcq) => ({question:mcq, user_answer:''}));
-			exam.coding = exam.coding.map((coding) => ({question:coding}));
-			exam.title = title.title
-			exam.appointment = user[0].exams[0].exam.appointment
-			exam._id = saved_exam._id
+			return exam
         }
-		console.log(exam);
-        return exam
+		
+		const saved_exam = await SavedExam.findById(user[0].exams[0].exam.saved_exam);
+		let mcq_ids = saved_exam.mcq.map((mcq) => mcq.question);
+		let coding_ids = saved_exam.coding.map((coding) => coding.question);
+		let [exam, title] = await Promise.all([Topic.get_mcq_and_coding({mcq_ids:mcq_ids, coding_ids:coding_ids}),
+			Exam.findById(exam_id, '-_id title ')]);
+		exam.mcq = exam.mcq.map((mcq) => ({question:mcq, user_answer:''}));
+		exam.coding = exam.coding.map((coding) => ({question:coding}));
+		exam.title = title.title
+		exam.appointment = user[0].exams[0].exam.appointment
+		exam._id = saved_exam._id
+		return exam
+        
     } catch (error) {
         console.log(error);
         throw error
