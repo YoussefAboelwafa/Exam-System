@@ -241,21 +241,23 @@ userSchema.statics.getExam = async (data) => {
 		  	throw "User doesn't have such an exam"
 
         if(!user[0].exams[0].exam.saved_exam){
-            let exam = await generateExam(exam_id)
-			console.log(exam);
-            const saved_exam = new SavedExam(
+            let generated_exam = await generateExam(exam_id)
+            let saved_exam = new SavedExam(
 				{exam_id: exam_id,
-				mcq: exam.mcq.map((mcq) => ({question:mcq, user_answer:''})),
-				coding: exam.coding.map((coding) => ({question:coding}))});
-			console.log(saved_exam);
-            [,,exam] = await Promise.all([
+				mcq: generated_exam.mcq.map((mcq) => ({question:mcq, user_answer:''})),
+				coding: generated_exam.coding.map((coding) => ({question:coding}))});
+            let [,,exam] = await Promise.all([
 				User.updateOne({_id: user_id, 'exams.exam._id': exam_id},
 				{$set:{'exams.$.exam.saved_exam': saved_exam._id}}),
 				saved_exam.save(),
-				Topic.get_mcq_and_coding({mcq_ids: exam.mcq, coding_ids:exam.coding})
+				// Topic.get_mcq_and_coding({mcq_ids: exam.mcq, coding_ids:exam.coding})
+				saved_exam.select('-exam_id -mcq._id -coding._id').populate([
+					{path: 'mcq.question', select: '-answer -__v'},
+					{path: 'coding.question', select:'-input -output -__v'}])
 			])
 			exam._id = saved_exam._id;
 			exam.appointment = user[0].exams[0].exam.appointment
+			exam.title = generated_exam.title
 			console.log(exam);
 			return exam
         }

@@ -23,8 +23,8 @@ module.exports.get_exam = async (req, res) => {
                         const exam_id = await OTP.verifyExamCode(user_id, req.body.code)
                         let exam = await User.getExam({user_id:user_id, exam_id: exam_id})
                         console.log(exam);
-                        const totalMcqWeight = exam.mcq.reduce((accumulator, currentValue) => accumulator + currentValue.question.weight, 0);
-                        const totalCodingWeight = exam.coding.reduce((accumulator, currentValue) => accumulator + currentValue.question.weight, 0);
+                        const totalMcqWeight = exam.mcq.reduce((accumulator, mcq) => accumulator + mcq.question.weight, 0);
+                        const totalCodingWeight = exam.coding.reduce((accumulator, coding) => accumulator + coding.question.weight, 0);
                         const totalWeight = totalMcqWeight + totalCodingWeight;
                         const ratio = desiredTotalWeight/totalWeight;
                         
