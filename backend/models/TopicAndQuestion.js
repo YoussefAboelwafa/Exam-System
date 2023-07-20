@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const mcqSchema = new mongoose.Schema({
     description: {type: String, required: true},
     choices: {type: [String], required: true},
-    answer: {type: String, required: true}
+    answer: {type: String, required: true},
+    weight: {type: Number, required: true}
 })
 
 
@@ -16,7 +17,8 @@ const codingSchema = new mongoose.Schema({
     output: {type: String, default: ''},
     input_format: {type: String, required: true},
     output_format: {type: String, required: true},
-    constraints: {type: String, required: true}
+    constraints: {type: String, required: true},
+    weight: {type: Number, required: true}
 })
 
 
@@ -52,6 +54,9 @@ topicSchema.statics.edit_number_of_mcq = async (data) => {
         const result = await Topic.updateOne({_id: topic_id}, {
             $set: { num_of_mcq: num_of_mcq}
         });
+        console.log(result);
+        if(result.modifiedCount === 0)
+            throw "topic not found"
         return topic_id;
     } catch (error) {
         console.log(error);
@@ -66,6 +71,8 @@ topicSchema.statics.edit_number_of_coding = async (data) => {
         const result = await Topic.updateOne({_id: topic_id}, {
             $set: { num_of_coding: num_of_coding}
         });
+        if(result.modifiedCount === 0)
+            throw "topic not found"
         return topic_id;
     } catch (error) {
         console.log(error);
@@ -75,15 +82,19 @@ topicSchema.statics.edit_number_of_coding = async (data) => {
 
 topicSchema.statics.add_mcq = async (data) => {
     try {
-        const {topic_id, new_mcq} = data;
-        const inserted_new_mcq = MCQ.create({
+        const {topic_id, new_mcq, exam_id} = data;
+        const inserted_new_mcq = new MCQ({
             description: new_mcq.description,
             choices: new_mcq.choices,
-            answer: new_mcq.answer
+            answer: new_mcq.answer,
+            weight: new_mcq.weight
         })
         const result = await Topic.updateOne({_id: topic_id}, {
             $push: { mcq: inserted_new_mcq._id}
         });
+        if(result.modifiedCount === 0)
+            throw "topic not found"
+        await inserted_new_mcq.save()
         return inserted_new_mcq._id;
     } catch (error) {
         console.log(error);
@@ -93,19 +104,23 @@ topicSchema.statics.add_mcq = async (data) => {
 
 topicSchema.statics.add_coding = async (data) => {
     try {
-        const {topic_id, new_coding} = data;
-        const inserted_new_coding = Coding.create({
+        const {topic_id, new_coding, exam_id} = data;
+        const inserted_new_coding = new Coding({
             title: new_coding.title,
             description: new_coding.description,
             input: new_coding.input,
             output: new_coding.output,
             input_format: new_coding.input_format,
             output_format: new_coding.output_format,
-            constraints: new_coding.constraints
+            constraints: new_coding.constraints,
+            weight: new_coding.weight
         })
         const result = await Topic.updateOne({_id: topic_id}, {
             $push: { coding: inserted_new_coding._id}
         });
+        if(result.modifiedCount === 0)
+            throw "topic not found"
+        await inserted_new_coding.save();
         return inserted_new_coding._id;
     } catch (error) {
         console.log(error);
@@ -114,19 +129,97 @@ topicSchema.statics.add_coding = async (data) => {
 }
 
 
-topicSchema.statics.delete_question = async (data) => {
+//// doesn't delete the question itself just derefrence it
+/// will need to add a garpage collector later using refrence counting
+
+topicSchema.statics.delete_mcq = async (data) => {
     try {
-        const {topic_id, mcq_id, coding_id} = data;
+        const {topic_id, mcq_id} = data;
 
         const result = await Topic.updateOne({_id: topic_id}, {
-            $pull:{ mcq:mcq_id, coding:coding_id }
+            $pull:{ mcq:mcq_id}
         });
-        return result;
+        if(result.modifiedCount === 0)
+            throw "topic not found"
+        return true;
     } catch (error) {
         console.log(error);
         return false
     }
 }
+
+topicSchema.statics.delete_coding = async (data) => {
+    try {
+        const {topic_id, coding_id} = data;
+
+        const result = await Topic.updateOne({_id: topic_id}, {
+            $pull:{ coding:coding_id }
+        });
+        if(result.modifiedCount === 0)
+            throw "topic not found"
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false
+    }
+}
+
+topicSchema.statics.edit_mcq = async (data) => {
+
+    /*
+        assume that the user cannot see his past questions and answers
+        could be solved by adding a reference counter
+
+        assume that the admin won't change the question completely
+    */
+    try {
+        const {mcq_id, new_mcq} = data;
+
+        const result = await MCQ.updateOne({_id: mcq_id}, {
+            $set: { description: new_mcq.description,
+                    choices: new_mcq.choices,
+                    answer: new_mcq.answer,
+                    weight: new_mcq.weight
+                }
+        });
+        if(result.modifiedCount === 0)
+            throw "topic not found"
+        return true;
+    } catch (error) {
+        throw `Error updating mcq`
+    }
+}
+
+topicSchema.statics.edit_coding = async (data) => {
+
+    /*
+        assume that the user cannot see his past questions and answers
+        could be solved by adding a reference counter
+
+        assume that the admin won't change the question completely
+    */
+    try {
+        const {coding_id, new_coding} = data;
+
+        const result = await Coding.updateOne({_id: coding_id}, {
+            $set: { title: new_coding.title,
+                    description: new_coding.description,
+                    input: new_coding.input,
+                    output: new_coding.output,
+                    input_format: new_coding.input_format,
+                    output_format: new_coding.output_format,
+                    constraints: new_coding.constraints,
+                    weight: new_coding.weight
+                }
+            });
+        if(result.modifiedCount === 0)
+            throw "topic not found"
+        return true;
+    } catch (error) {
+        throw `Error updating coding`
+    }
+}
+
 
 
 

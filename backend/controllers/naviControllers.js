@@ -7,11 +7,8 @@ const TimeAndSpace = require('../models/TimeAndSpace')
 
 module.exports.getHome = async (req, res) => {
     try{
-        let startTime = Date.now();
         const token = req.cookies.jwt;
-
         if(token){
-            let startTime = Date.now();
             jwt.verify(token, process.env.token_secret, async (err, decodedToken)=>{
 
                 if(err){
@@ -36,29 +33,28 @@ module.exports.getHome = async (req, res) => {
                     // console.log(user.exams.exam);
                     console.log(exam_ids);
 
-                    const [token_exam_info, other_exam] = await Promise.all([
+                    const [token_exam_info, other_exam, populated_user] = await Promise.all([
                         Exam.find({ _id: { $in: exam_ids } }).select('title about'),
-                        Exam.findOne({ _id: { $nin: exam_ids }, deleted:false,status:true}).select('title info about status')
-                      ]);
-
-
-                    user = await user.populate({
-                        path:'exams.exam.day',
-                        select: 'day_number month_name'
-                    })
-
-                    user = await user.populate({
-                        path:'exams.exam.location',
-                        select: 'parent location_name',
-                        populate: {
-                            path: 'parent',
-                            select: 'city_name parent',
+                        Exam.findOne({ _id: { $nin: exam_ids }, deleted:false,status:true}).select('title info about status'),
+                        user.populate([{
+                            path:'exams.exam.day',
+                            select: 'day_number month_name'
+                        },
+                        {
+                            path:'exams.exam.location',
+                            select: 'parent location_name',
                             populate: {
                                 path: 'parent',
-                                select: 'country_name'
+                                select: 'city_name parent',
+                                populate: {
+                                    path: 'parent',
+                                    select: 'country_name'
+                                }
                             }
-                        }
-                    })
+                        }])
+                      ]);
+
+                    user = populated_user;
 
                     // console.log(user.exams[2].exam.day);
                     const result = user.exams.map((exam) => ({
@@ -128,7 +124,7 @@ module.exports.getOtherExams = async (req, res) => {
                     }else{
                         filter = { _id: { $nin: req.body.ids }, deleted: false, status: true}
                     }
-                    const exams = await Exam.find(filter).select('title info about status');
+                    const exams = await Exam.find(filter, 'title info about status');
 
                     const parsed_exams = exams.map((exam) => ({
                             _id: exam._id,
@@ -152,31 +148,11 @@ module.exports.getOtherExams = async (req, res) => {
 
 
 
-module.exports.populate_exams = async (req, res) =>{
-    try{
-        res.send('populate')
-        for (let i = 0; i < 5; i++) {
-            const entry = {
-                title: casual.title,
-                date: casual.date('YYYY-MM-DD'),
-                booked_users: [],
-                max_number: casual.integer(1, 100),
-                about: casual.sentences(3),
-                info: [casual.word, casual.word]
-            };
-            await Exam.create(entry)
-            console.log(entry);
-        }
-    }catch(err){
-        res.send('errrrrrrrrrrrrr')
-        console.log(err);
-    }
-}
-
 
 module.exports.get_places = async (req, res) => {
     try{
-        const places = await TimeAndSpace.Country.find({deleted: false}).select('country_name cities').populate({
+        const places = await TimeAndSpace.Country.find({deleted: false}, 'country_name cities')
+        .populate({
             path: 'cities',
             select: 'city_name locations',
             populate:{

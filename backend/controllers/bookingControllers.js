@@ -43,7 +43,10 @@ module.exports.startPayment = async (req, res) => {
     }
 }
 
-
+/////////////////////////////////////
+//DON'T FORGET TO RETURN THE MONEY TO USER IF ANY PROBLEMS OCCURRED DURING BOOKING////
+///MSH NAKSA FLOS 7RAM
+////////////////
 module.exports.book_exam = async (req, res) => {
     // assume that the user has paid for exam and is now registered in db
     // req should also contain the id, or any user identification
@@ -69,13 +72,9 @@ module.exports.book_exam = async (req, res) => {
                         }
                         const exam_info = JSON.parse(payment_result.orderItems[0].itemCode)
                         console.log(exam_info);
-                        user = await User.checkViability(exam_info, decodedToken._id);
-                        if(!user){
-                            throw "not a viable request, returning the money to user ..."
-                        }
                         const result = await User.bookExam(exam_info, decodedToken._id)
                         if(!result){
-                            throw `and error occurred during booking the exam, returning the money to user ...`
+                            throw `an error occurred during booking the exam, returning the money to user ...`
                         }
                         res.json({success: true});
                     }
