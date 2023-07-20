@@ -256,20 +256,23 @@ userSchema.statics.getExam = async (data) => {
 			exam.title = exam.title;
 			exam._id = saved_exam._id;
 			exam.appointment = user[0].exams[0].exam.appointment
-			console.log(exam);
 			return exam
         }
 
-		const saved_exam = await SavedExam.findById(user[0].exams[0].exam.saved_exam);
-		let mcq_ids = saved_exam.mcq.map((mcq) => mcq.question);
-		let coding_ids = saved_exam.coding.map((coding) => coding.question);
-		let [exam, title] = await Promise.all([Topic.get_mcq_and_coding({mcq_ids:mcq_ids, coding_ids:coding_ids}),
-			Exam.findById(exam_id, '-_id title ')]);
-		exam.mcq = exam.mcq.map((mcq) => ({question:mcq, user_answer:''}));
-		exam.coding = exam.coding.map((coding) => ({question:coding}));
+		console.log('hello world');
+		let exam = await SavedExam.findById(user[0].exams[0].exam.saved_exam).populate([
+			{path: 'mcq.question', select: '-answer -__v'},
+			{path: 'coding.question', select:'-input -output -__v'}
+		]);
+		// let mcq_ids = saved_exam.mcq.map((mcq) => mcq.question);
+		// let coding_ids = saved_exam.coding.map((coding) => coding.question);
+		// let [exam, title] = await Promise.all([Topic.get_mcq_and_coding({mcq_ids:mcq_ids, coding_ids:coding_ids}),
+		// 	Exam.findById(exam_id, '-_id title ')]);
+		// exam.mcq = exam.mcq.map((mcq) => ({question:mcq, user_answer:''}));
+		// exam.coding = exam.coding.map((coding) => ({question:coding}));
 		exam.title = title.title
 		exam.appointment = user[0].exams[0].exam.appointment
-		exam._id = saved_exam._id
+		// exam._id = saved_exam._id
 		console.log(exam);
 		return exam
         
