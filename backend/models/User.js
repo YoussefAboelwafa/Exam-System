@@ -263,7 +263,8 @@ userSchema.statics.getExam = async (data) => {
 			let coding_ids = saved_exam.coding.map((coding) => coding.question);
 			let [exam, title] = await Promise.all([Topic.get_mcq_and_coding({mcq_ids:mcq_ids, coding_ids:coding_ids}),
 				Exam.findById(exam_id, '-_id title ')]);
-
+			exam.mcq = exam.mcq.map((mcq) => ({question:mcq, user_answer:''}));
+			exam.coding = exam.coding.map((coding) => ({question:coding}));
 			exam.title = title.title
 			exam.appointment = user[0].exams[0].exam.appointment
 			exam._id = saved_exam._id
