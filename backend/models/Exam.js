@@ -130,8 +130,7 @@ examSchema.statics.editExam = async (newExam) => {
     try {
       const {exam_id} = data
       ///probebly will cause problems
-      const topics = await Exam.findOne({_id: exam_id})
-        .select('topics')
+      const topics = await Exam.findOne({_id: exam_id}, 'topics')
         .populate({
           path:'topics',
           populate: [
