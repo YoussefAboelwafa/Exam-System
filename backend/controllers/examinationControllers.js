@@ -17,6 +17,7 @@ module.exports.get_exam = async (req, res) => {
                         console.log(err.message);
                         res.json({signed_in: false});
                     }else{
+                        console.log(decodedToken);
                         const {user_id} = decodedToken._id;
                         const exam_id = await OTP.verifyExamCode(user_id, req.body.code)
                         let exam = await User.getExam({user_id:user_id, exam_id: exam_id})
