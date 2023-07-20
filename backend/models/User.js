@@ -264,11 +264,9 @@ userSchema.statics.getExam = async (data) => {
 			let [exam, title] = await Promise.all([Topic.get_mcq_and_coding({mcq_ids:mcq_ids, coding_ids:coding_ids}),
 				Exam.findById(exam_id, '-_id title ')]);
 
-			console.log(exam);
 			exam.title = title.title
 			exam.appointment = user[0].exams[0].exam.appointment
 			exam._id = saved_exam._id
-			console.log(exam);
         }
 		console.log(exam);
         return exam
