@@ -217,7 +217,7 @@ userSchema.statics.getExam = async (data) => {
     try {
         const {user_id, exam_id} = data;
         // const user = await User.findOne({_id:user_id, 'exams.exam._id': exam_id}, { 'exams.$.exam.saved_exam': 1 })
-
+		console.log(data);
         const user = await User.aggregate([
             {
               $match: { _id: new mongoose.Types.ObjectId(user_id) }
@@ -258,7 +258,7 @@ userSchema.statics.getExam = async (data) => {
 			exam.appointment = user[0].exams[0].exam.appointment
 			return exam
         }
-		
+
 		const saved_exam = await SavedExam.findById(user[0].exams[0].exam.saved_exam);
 		let mcq_ids = saved_exam.mcq.map((mcq) => mcq.question);
 		let coding_ids = saved_exam.coding.map((coding) => coding.question);
