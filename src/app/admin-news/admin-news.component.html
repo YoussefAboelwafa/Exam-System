@@ -1,29 +1,31 @@
 <div class="title">
-  <p>News</p>
+  <p>Add News</p>
 </div>
 
 <div class="input-group mb-3 add_div">
-  <input type="file" class="form-control" id="inputGroupFile02" />
-  <label class="input-group-text" for="inputGroupFile02"
-    >Add news<i class="fa-solid fa-plus"></i
-  ></label>
+  <input
+    type="file"
+    accept="image/*"
+    class="form-control"
+    id="inputGroupFile02"
+    (change)="appendUrl($event)"
+  />
+</div>
+<div class="input-group add_div">
+  <button class="input-group-text" (click)="addNews(manshet.value)">Add news</button>
+  <textarea class="form-control" #manshet aria-label="With textarea"></textarea>
 </div>
 
 <div class="title">
-  <p>Others</p>
+  <p>Current</p>
 </div>
 <div class="container">
-  <div class="image">
-    <i class="fa-solid fa-trash"></i>
-    <img src="../../assets/images/img4.jpg" alt="" />
+  <div class="manshet" *ngFor="let manshet of manshets;let i = index">
+    <i class="fa-solid fa-trash" (click)="deleteNews(i)"></i>
+    <p>{{ manshet }}</p>
   </div>
- 
-  <div class="image">
-    <i class="fa-solid fa-trash"></i>
-    <img src="../../assets/images/img6.svg" alt="" />
-  </div>
-  <div class="image">
-    <i class="fa-solid fa-trash"></i>
-    <img src="../../assets/images/img7.svg" alt="" />
+  <div class="image" *ngFor="let url of urls; let i = index">
+    <i class="fa-solid fa-trash" (click)="deleteUrl(i)"></i>
+    <img [src]="url" alt="" />
   </div>
 </div>

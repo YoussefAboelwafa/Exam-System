@@ -34,6 +34,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+
     canActivate: [GuardServiceService],
 
     children: [
@@ -54,7 +55,9 @@ const routes: Routes = [
   {
     path: 'admin_home',
     component: AdminHomeComponent,
+
     canActivate: [GuardServiceService],
+    
     children: [
       {
         path: 'admin_calendar',
