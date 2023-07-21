@@ -10,10 +10,16 @@ export class AdminNewsComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  manshets: string[] = [
+    'Now you can get your own website ',
+    'C++ advanced course is now available',
+    'New courses are available',
+  ];
+
   urls: string[] = [
-    '../../assets/images/img4.jpg',
     '../../assets/images/img6.svg',
-    '../../assets/images/img7.svg',
+    '../../assets/images/img6.svg',
+    '../../assets/images/img6.svg',
   ];
 
   appendUrl(event: any) {
@@ -40,7 +46,13 @@ export class AdminNewsComponent implements OnInit {
     // Read the file as a data URL
     reader.readAsDataURL(file);
   }
-  deleteNews(index: number) {
+  deleteUrl(index: number) {
     this.urls.splice(index, 1);
+  }
+  addNews(value: any) {
+    this.manshets.push(value);
+  }
+  deleteNews(index: number) {
+    this.manshets.splice(index, 1);
   }
 }

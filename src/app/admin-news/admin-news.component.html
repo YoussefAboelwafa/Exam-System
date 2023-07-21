@@ -1,5 +1,5 @@
 <div class="title">
-  <p>News</p>
+  <p>Add News</p>
 </div>
 
 <div class="input-group mb-3 add_div">
@@ -11,13 +11,21 @@
     (change)="appendUrl($event)"
   />
 </div>
+<div class="input-group add_div">
+  <button class="input-group-text" (click)="addNews(manshet.value)">Add news</button>
+  <textarea class="form-control" #manshet aria-label="With textarea"></textarea>
+</div>
 
 <div class="title">
-  <p>Others</p>
+  <p>Current</p>
 </div>
 <div class="container">
-  <div class="image" *ngFor="let url of urls; let i = index">
+  <div class="manshet" *ngFor="let manshet of manshets;let i = index">
     <i class="fa-solid fa-trash" (click)="deleteNews(i)"></i>
+    <p>{{ manshet }}</p>
+  </div>
+  <div class="image" *ngFor="let url of urls; let i = index">
+    <i class="fa-solid fa-trash" (click)="deleteUrl(i)"></i>
     <img [src]="url" alt="" />
   </div>
 </div>
