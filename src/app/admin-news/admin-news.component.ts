@@ -17,9 +17,9 @@ export class AdminNewsComponent implements OnInit {
   ];
 
   urls: string[] = [
-    '../../assets/images/img6.svg',
-    '../../assets/images/img6.svg',
-    '../../assets/images/img6.svg',
+    'https://placehold.co/1000x200',
+    'https://placehold.co/1000x200',
+    'https://placehold.co/1000x200',
   ];
 
   appendUrl(event: any) {
