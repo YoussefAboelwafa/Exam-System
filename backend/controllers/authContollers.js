@@ -2,80 +2,17 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken')
 const OTP = require('../models/OTP')
 const Admin = require('../models/Admin')
-const nodemailer = require('nodemailer');
-
-
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-      user: 'gammalexambooking@gmail.com',
-      pass: 'djvjnulxvitpdzcb'
-    }
-  });
-
-async function sendSMS(to, code) {
-    try{
-        const mailOptions = {
-            from: 'gammalexambooking@gmail.com',
-            to: to,
-            subject: 'Gammal Tech Verification Code',
-            text: `Your verification code is: ${code}\n
-            The code expires after 10 minutes` 
-          };
-        await new Promise((resolve, reject) => {
-            transporter.sendMail(mailOptions, function(error, info){
-                if (error) {
-                    reject(error)
-                } else {
-                    console.log('Email sent: ' + info.response);
-                    resolve('Email sent: ' + info.response);
-                }
-            });
-        })
-    }catch(err){
-        console.log(err);
-    }
-}
-
-function generateOTP() {
-    return Math.floor(100000 + Math.random() * 900000).toString();
-  }
-
-function errorHandler(err) {
-    console.log(err.message, err.code);
-    let errors = { email: [], password: [], first_name: [], last_name: [], country: [], city: [], phone_namber: [] }; /// add the rest later
-
-    if (err.message === 'Email incorrect') {
-        errors.email = 'Email not found';
-    }
-
-    if (err.message === 'Password incorrect') {
-        errors.email = 'Password incorrect';
-    }
-
-    if (err.code === 11000) {
-        errors.email = 'Email already exists';
-        return errors;
-    }
-
-    if (err.message.includes('user validation failed')) {
-        Object.values(err.errors).forEach(({ properties }) => {
-            console.log(properties.message);
-            errors[properties.path].push(properties.message);
-        });
-    }
-
-    return errors;
-}
-
+const Email = require('../services/emailing')
 
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = async (id) => {
     return jwt.sign({ _id:id, admin:!(await Admin.isAdmin(id) === null)}, process.env.token_secret , { 
         expiresIn : maxAge
     })
+}
+
+function generateOTP() {
+    return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
 const checkUniqueness = async (email, phone_namber) => {
@@ -122,7 +59,9 @@ module.exports.signup_post = async (req, res) =>{
             console.log("code is: ", code);
             await Promise.all([
                 OTP.insert({phone_namber: phone_namber, code: code}),
-                sendSMS(email, code)
+                Email.sendEmail(email, 'Gammal Tech Verification Code',
+                 `Your verification code is: ${code}\n
+                The code expires after 10 minutes`)
             ])
               /////remove comment later
             res.status(201).json({success: true});
@@ -204,8 +143,10 @@ module.exports.send_again = async (req, res) =>{
          console.log(code);
 
         await Promise.all([
-            await OTP.insert({phone_namber: phone_namber, code: code}),
-            sendSMS(email, code)
+            OTP.insert({phone_namber: phone_namber, code: code}),
+            Email.sendEmail(email, 'Gammal Tech Verification Code',
+                 `Your verification code is: ${code}\n
+                The code expires after 10 minutes`)
         ])
 
         res.status(201).json({success: true});

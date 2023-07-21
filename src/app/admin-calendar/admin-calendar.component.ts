@@ -402,4 +402,18 @@ export class AdminCalendarComponent implements OnInit {
       );
     }
   }
+
+
+  send_mail_exam(user_id:any,exam_id:any) {
+    this.service.send_mail_with_verify_code(user_id,exam_id).subscribe(
+      x=>{
+        if(x.success==true){
+          this.popup.open_error_book("Sent successfully.");
+        }else{
+          this.popup.open_error_book("Failed to send.");
+
+        }
+
+    })
+  }
 }

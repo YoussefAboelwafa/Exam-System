@@ -4,6 +4,7 @@ const authRoutes = require('./routes/authRoutes');
 const examRoutes = require('./routes/examRoutes');
 const homeRoutes = require('./routes/homeRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const examinationRoutes = require('./routes/examinationRoutes');
 const {checkUser, checkAdmin} = require('./middleware/authMiddleware')
 const cors = require('cors');
 const User = require('./models/User')
@@ -13,7 +14,8 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 app.use(cors({
-    origin: 'https://youssefaboelwafa.github.io', /// 
+    origin: ['https://youssefaboelwafa.github.io',
+                'http://localhost:4200'], /// 
     credentials: true
 }));
 app.use(express.json());
@@ -23,7 +25,7 @@ const dbURI = process.env.dp_uri; ///
 mongoose.connect(dbURI, 
     {useNewUrlParser: true, useUnifiedTopology: true,
         retryWrites: true})
-    .then((result) => app.listen(process.env.PORT || 8080))
+    .then((result) => app.listen(8080))
     .catch((err) => console.log(err));
 
 
@@ -56,6 +58,8 @@ app.use('/home', checkUser, homeRoutes); ////add requiredAuth after finishing te
 app.use('/exam', checkUser, examRoutes);
 app.use('/admin', checkAdmin, adminRoutes)
 
+
+app.use('/examination', checkUser, examinationRoutes)
 
 
 

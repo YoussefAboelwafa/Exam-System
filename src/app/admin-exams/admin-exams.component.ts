@@ -35,6 +35,7 @@ export class AdminExamsComponent implements OnInit {
   information: any[] = []; //numberof info used in ngfor
   title_add: any;
   about_add: any;
+  time_exam_add:any;
   non_token_exam: any[] = [];
 
   close_popup() {
@@ -114,6 +115,7 @@ export class AdminExamsComponent implements OnInit {
     x.title = this.title_add;
     x.about = this.about_add;
     x.info = this.information;
+    x.exam_time=this.time_exam_add;
     this.non_token_exam.push(x);
     this.close_popup();
 

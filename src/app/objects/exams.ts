@@ -12,6 +12,7 @@ export class exams{
     about:any;
     info:any;
     turn_on_off=1;
+    exam_time:any;
 
 
 }

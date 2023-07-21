@@ -251,10 +251,11 @@
         <input 
         [(ngModel)]="title_add"
         #ed_title type="text" [value]="" class="input_edit">
-        <h3>About of exam</h3>
-        <textarea        
-        [(ngModel)]="about_add"
-        #ed_about [value]="" class="input_edit" id="t_area"></textarea>
+        <h3>Total Time Of Exam</h3>
+        <input 
+        [(ngModel)]="time_exam_add"
+        #ed_title type="time" [value]="" class="input_edit">
+
         <h3>number of Information</h3>
         <input (blur)="set_number(number_info.value)" min="0"  #number_info type="number" [value]="" class="input_edit">
         <h3>Information of exam</h3>

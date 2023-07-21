@@ -20,7 +20,7 @@ declare const $: any;
 export class AdminQuestionsComponent implements OnInit {
 
   flag_topic = true;
-  flag_question = false;
+  flag_question =false;
 
  
   nontoken_exam:any=[{
@@ -91,7 +91,7 @@ export class AdminQuestionsComponent implements OnInit {
     _id:"",
   };
   flag_select=false;
-  selected_topic:any={
+  selected_topic:Topics={
     title:"scanif",
     num_of_mcq:0,
     num_of_coding:0,
@@ -100,13 +100,15 @@ export class AdminQuestionsComponent implements OnInit {
         description:"wwwwwwwwwwwwww www ww ww",
         choices:["asdas","aadw"],
         answer:"aadw",
-        _id:"1"
+        _id:"1",
+        weight:"8",
       },
       {
         description:"asdedasd",
         choices:["asdas","DSadsa","DSAdsada"],
         answer:"DSadsa",
-        _id:"1"
+        _id:"1",
+        weight:"8",
       }
     ],
     coding:[{
@@ -115,12 +117,18 @@ export class AdminQuestionsComponent implements OnInit {
       input_format:"The first line of the input contains two integers n and h(1≤ n ≤ 1000, 1 ≤ h ≤ 1000) — the number of friends and the height of the fence, respectively.",
       output_format:"Print a single integer — the minimum possible valid width of the road.",
       constraints:"2 <= nums.length <= 104 -109 <= nums[i] <= 109 -109 <= target <= 109",
+      input:"1 2 3 4",
+      output:"7 7 8",
+      weight:"8",
     },{
       title:"ahmed",
       description:"wda sdsa sdsa fwfa vxcsacsa xcssa",
       input_format:"The first line of the input contains two integers n and h(1≤ n ≤ 1000, 1 ≤ h ≤ 1000) — the number of friends and the height of the fence, respectively.",
       output_format:"Print a single integer — the minimum possible valid width of the road.",
       constraints:"2 <= nums.length <= 104 -109 <= nums[i] <= 109 -109 <= target <= 109",
+      input:"1 2 3 4",
+      output:"7 7 8",
+      weight:"8",
     }
   ],
     _id:"1"
@@ -386,9 +394,10 @@ export class AdminQuestionsComponent implements OnInit {
   }
 
 
-  final_edit_mcq(ed_mcq_description:any,ed_mcq_answer:any){
+  final_edit_mcq(ed_mcq_description:any,ed_mcq_answer:any,ed_mcq_weight:any){
   this.ed_mcq.description=ed_mcq_description;
   this.ed_mcq.answer=ed_mcq_answer;
+  this.ed_mcq.weight =ed_mcq_weight;
   this.selected_topic.mcq[this.index_ed_mcq]=this.ed_mcq;
   this.close_popup();
   this.service.edit_mcq_in_topic(this.ed_mcq._id,this.ed_mcq).subscribe(
@@ -401,13 +410,17 @@ export class AdminQuestionsComponent implements OnInit {
   }
 
 
-  final_edit_coding(ed_cod_title:any,ed_cod_description:any,ed_cod_input_format:any,ed_cod_output_format:any,ed_cod_constraints:any){
+  final_edit_coding(ed_cod_title:any,ed_cod_description:any,ed_cod_input_format:any,ed_cod_output_format:any,ed_cod_constraints:any,ed_cod_weight:any,ed_cod_output:any,ed_cod_input:any){
   
     this.selected_topic.coding[this.index_ed_coding].title=ed_cod_title;
     this.selected_topic.coding[this.index_ed_coding].description=ed_cod_description;
     this.selected_topic.coding[this.index_ed_coding].input_format=ed_cod_input_format;
     this.selected_topic.coding[this.index_ed_coding].output_format=ed_cod_output_format;
     this.selected_topic.coding[this.index_ed_coding].constraints=ed_cod_constraints;
+    this.selected_topic.coding[this.index_ed_coding].weight =ed_cod_weight;
+    this.selected_topic.coding[this.index_ed_coding].output =ed_cod_output;
+    this.selected_topic.coding[this.index_ed_coding].input =ed_cod_input;
+
     this.ed_coding=this.selected_topic.coding[this.index_ed_coding];
     this.close_popup();
     this.service.edit_coding_in_topic(this.ed_coding._id,this.ed_coding).subscribe(

@@ -152,11 +152,12 @@
           class="smallbox"
           >choice{{ i + 1 }}: {{ choice }}</label
         >
-      </div>
-      <label class="smallbox ans">
-        <i class="fa-solid fa-check"></i> Answer: {{ quest.answer }}</label
-      >
+      </div>    
+ <label class="smallbox ans">
+      <i class="fa-solid fa-check"></i> Answer: {{ quest.answer }}</label
+    ><label class="smallbox"> Weight: {{ quest.weight }}</label>
     </div>
+   
   </div>
 
   <hr style="background-color: #008182; height: 2px" />
@@ -208,6 +209,15 @@
         <p>
           {{ quest.constraints }}
         </p>
+        <label class="smallbox Qcoding">Test Input</label>
+        <p>
+          {{ quest.input }}
+        </p>
+        <label class="smallbox Qcoding">Test Output</label>
+        <p>
+          {{ quest.output }}
+        </p>
+        <label class="smallbox Qcoding">Weight: <label style="color: #008182; margin-left: 4px;"> {{ quest.weight }}</label></label>
       </div>
     </div>
   </div>
@@ -320,6 +330,13 @@
             type="text"
             class="input_edit"
           />
+          <h3>Weight</h3>
+          <input
+            [(ngModel)]="new_mcq.weight"
+            #mcq_weight
+            type="text"
+            class="input_edit"
+          />
         </div>
       </div>
       <div class="modal-footer">
@@ -360,14 +377,14 @@
           <h3>title</h3>
           <input
             [(ngModel)]="new_coding.title"
-            #mcq_title
+            #add_title
             type="text"
             class="input_edit"
           />
           <h3>description</h3>
           <textarea
             [(ngModel)]="new_coding.description"
-            #mcq_about
+            #add_description
             class="input_edit"
             id="t_area"
           ></textarea>
@@ -375,21 +392,42 @@
           <h3>Input Format</h3>
           <textarea
             [(ngModel)]="new_coding.input_format"
-            #mcq_about
+            #add_input_format
             class="input_edit"
             id="t_area"
           ></textarea>
           <h3>Output Format</h3>
           <textarea
             [(ngModel)]="new_coding.output_format"
-            #mcq_about
+            #add_output_format
             class="input_edit"
             id="t_area"
           ></textarea>
           <h3>constraints</h3>
           <textarea
             [(ngModel)]="new_coding.constraints"
-            #mcq_about
+            #add_constraint
+            class="input_edit"
+            id="t_area"
+          ></textarea>
+          <h3>Weight</h3>
+          <input
+            [(ngModel)]="new_coding.weight"
+            #add_coding_weight
+            type="text"
+            class="input_edit"
+          />
+          <h3>Test Inputs</h3>
+          <textarea
+            [(ngModel)]="new_coding.input"
+            #add_coding_input
+            class="input_edit"
+            id="t_area"
+          ></textarea>
+          <h3>Test Outputs</h3>
+          <textarea
+            [(ngModel)]="new_coding.output"
+            #add_coding_output
             class="input_edit"
             id="t_area"
           ></textarea>
@@ -437,7 +475,7 @@
             class="input_edit"
             id="t_area"
           ></textarea>
-          <h3 >choices</h3>
+          <h3>choices</h3>
           <div *ngFor="let choice of ed_mcq.choices; let i = index">
             <input
               #in1
@@ -454,15 +492,28 @@
             type="text"
             class="input_edit"
           />
+          <h3>Weight</h3>
+          <input
+            [value]="ed_mcq.weight"
+            #ed_mcq_weight
+            type="text"
+            class="input_edit"
+          />
         </div>
       </div>
       <div class="modal-footer">
         <button
           type="button"
           id="addnewlocation"
-          (click)="final_edit_mcq(ed_mcq_description.value,ed_mcq_answer.value)">
+          (click)="
+            final_edit_mcq(
+              ed_mcq_description.value,
+              ed_mcq_answer.value,
+              ed_mcq_weight.value
+            )
+          "
         >
-          Edit <i class="fa-solid fa-plus"></i>
+          > Edit <i class="fa-solid fa-plus"></i>
         </button>
       </div>
     </div>
@@ -508,7 +559,6 @@
             class="input_edit"
             id="t_area"
             #ed_cod_description
-
           ></textarea>
 
           <h3>Input Format</h3>
@@ -517,7 +567,6 @@
             class="input_edit"
             id="t_area"
             #ed_cod_input_format
-
           ></textarea>
           <h3>Output Format</h3>
           <textarea
@@ -525,7 +574,6 @@
             class="input_edit"
             id="t_area"
             #ed_cod_output_format
-
           ></textarea>
           <h3>constraints</h3>
           <textarea
@@ -534,15 +582,47 @@
             id="t_area"
             #ed_cod_constraints
           ></textarea>
+          <h3>Weight</h3>
+          <input
+            [value]="ed_coding.weight"
+            #ed_coding_weight
+            type="text"
+            class="input_edit"
+          />
+          <h3>test Inputs</h3>
+          <textarea
+            [value]="ed_coding.input"
+            class="input_edit"
+            id="t_area"
+            #ed_cod_input
+          ></textarea>
+          <h3>test Output</h3>
+          <textarea
+            [value]="ed_coding.output"
+            class="input_edit"
+            id="t_area"
+            #ed_cod_output
+          ></textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button
           type="button"
           id="addnewlocation"
-          (click)="final_edit_coding(ed_cod_title.value,ed_cod_description.value,ed_cod_input_format.value,ed_cod_output_format.value,ed_cod_constraints.value)">
+          (click)="
+            final_edit_coding(
+              ed_cod_title.value,
+              ed_cod_description.value,
+              ed_cod_input_format.value,
+              ed_cod_output_format.value,
+              ed_cod_constraints.value,
+              ed_coding_weight.value,
+              ed_coding.output.value,
+              ed_coding.input.value
+            )
+          "
         >
-          Edit <i class="fa-solid fa-plus"></i>
+          > Edit <i class="fa-solid fa-plus"></i>
         </button>
       </div>
     </div>

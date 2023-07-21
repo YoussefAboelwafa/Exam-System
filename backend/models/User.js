@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const {Location, Day} = require('./TimeAndSpace')
 const Exam = require('./Exam')
+const _ = require('lodash');
+const Topic = require('./TopicAndQuestion')
+const SavedExam = require('./SavedExam')
 
 const characterSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const idLength = 8;
@@ -44,10 +47,11 @@ const userSchema = new mongoose.Schema({
                     _id: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'exam'},
                     day: { type: mongoose.Schema.Types.ObjectId, ref: 'day' },
                     location: {type: mongoose.Schema.Types.ObjectId, ref: 'location'},
-                    appointment: {type: String, required: true},
+                    appointment: {type: String, required: true}, /// remove later, not needed
                     snack: {type: String, required: true},
                     percentage: {type: Number, required: true},
-                    bookedAt: {type:String, required: true}
+                    bookedAt: {type:String, required: true},
+                    saved_exam: {type: mongoose.Schema.Types.ObjectId, default: null}
                 }, required: true},
             }
         ],
@@ -121,8 +125,6 @@ userSchema.statics.bookExam = async function(exam_data, userId){
     try{
         const {location_id, day_id, exam_id, snack, appointment} = exam_data
 
-        ////change to $inc for atomicity on the db side
-        
 
         const [location, day, user, exam] = await Promise.all([
             Location.findOne({ _id: location_id }),
@@ -131,7 +133,7 @@ userSchema.statics.bookExam = async function(exam_data, userId){
             Exam.findOne({_id: exam_id, status: true, deleted: false})
           ]);
 
-        
+        console.log(location, day, user, exam);
         if(!user || !day || !location || !exam){
             throw "a problem occured"
         }
@@ -179,8 +181,6 @@ userSchema.statics.bookExam = async function(exam_data, userId){
             )
         }
 
-
-
         await session.commitTransaction();
         session.endSession();
         return true;
@@ -193,6 +193,100 @@ userSchema.statics.bookExam = async function(exam_data, userId){
     
 }
 
+
+const generateExam = async (exam_id) => {
+    try {
+        const exam = await Exam.findById(exam_id, 'topics title').populate({
+                path: 'topics'
+            })
+        if(!exam)
+            throw "The code provided doesn't match any of the user's exam"
+
+        const mcq = exam.topics.flatMap((topic) => _.sampleSize(topic.mcq, topic.num_of_mcq)) //////////////// stopped here continue from here 7/18 9:04pm
+        const coding = exam.topics.flatMap((topic) => _.sampleSize(topic.coding, topic.num_of_coding))
+        console.log(exam);
+        // const populated_exam = await Topic.get_mcq_and_coding({mcq_ids:mcq, coding_ids:coding})
+        return {title:exam.title, mcq:mcq, coding:coding};
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
+userSchema.statics.getExam = async (data) => {
+    try {
+        const {user_id, exam_id} = data;
+        // const user = await User.findOne({_id:user_id, 'exams.exam._id': exam_id}, { 'exams.$.exam.saved_exam': 1 })
+        const user = await User.aggregate([
+            {
+              $match: { _id: new mongoose.Types.ObjectId(user_id) }
+            },
+            {
+              $project: {
+                exams: {
+                  $filter: {
+                    input: '$exams',
+                    as: 'exam',
+                    cond: { $eq: ['$$exam.exam._id', new mongoose.Types.ObjectId(exam_id)] }
+                  }
+                }
+              }
+            }
+          ])
+        if(!user.length === 0)
+			throw "User not found"
+        
+    	if(user[0].exams.length === 0)
+		  	throw "User doesn't have such an exam"
+
+        if(!user[0].exams[0].exam.saved_exam){
+            let generated_exam = await generateExam(exam_id)
+            let saved_exam = new SavedExam(
+				{exam_id: exam_id,
+				mcq: generated_exam.mcq.map((mcq) => ({question:mcq, user_answer:''})),
+				coding: generated_exam.coding.map((coding) => ({question:coding}))});
+
+            let [,exam] = await Promise.all([
+				User.updateOne({_id: user_id, 'exams.exam._id': exam_id},
+				{$set:{'exams.$.exam.saved_exam': saved_exam._id}}),
+				saved_exam.save().then(async (savedExam) =>  {
+					return await SavedExam.populate(savedExam, [
+					  { path: 'mcq.question', select: '-answer -__v' },
+					  { path: 'coding.question', select: '-input -output -__v' }
+					]);
+				})
+			])
+
+			return {_id: exam._id, 
+					mcq: exam.mcq, 
+					coding: exam.coding,
+					title: generated_exam.title,
+					appointment: user[0].exams[0].exam.appointment
+				}
+        }
+
+		console.log('hello world');
+		let [exam, title] = await Promise.all([
+			SavedExam.findById(user[0].exams[0].exam.saved_exam, '-exam_id -mcq._id -coding._id -__v').populate([
+			{path: 'mcq.question', select: '-answer -__v'},
+			{path: 'coding.question', select:'-input -output -__v'}]),
+			Exam.findById(exam_id, '-_id title')
+		]);
+
+		exam.title = title.title
+		exam.appointment = user[0].exams[0].exam.appointment
+		return {_id: exam._id, 
+			mcq: exam.mcq, 
+			coding: exam.coding,
+			title: title.title,
+			appointment: user[0].exams[0].exam.appointment
+		}
+        
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
 
 
 
