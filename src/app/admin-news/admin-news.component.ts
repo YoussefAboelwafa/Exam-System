@@ -125,10 +125,10 @@ export class AdminNewsComponent implements OnInit {
           let imageSrc = URL.createObjectURL(photo_blob);
 
           const object = {
-            title: data.blogs.title,
+            title: data.blogs[i].title,
             url: imageSrc,
-            blog: data.blogs.description,
-            _id: data.blogs.description._id,
+            blog: data.blogs[i].description,
+            _id: data.blogs[i].description._id,
           };
         a.push(object);
         }
