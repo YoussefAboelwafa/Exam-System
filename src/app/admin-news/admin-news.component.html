@@ -11,7 +11,7 @@
 <div class="container">
   <div class="box" *ngFor="let news of News; let i = index">
     <i class="fa-solid fa-trash" (click)="deleteNews(i)"></i>
-    <h1>{{ news.title }}</h1>
+    <h1 class="title_blog"><u>{{ news.title }}</u></h1>
     <img [src]="news.url" alt="" />
     <p>{{ news.blog }}</p>
   </div>
@@ -58,6 +58,7 @@
             class="form-control"
             id="inputGroupFile02"
             #url
+            (change)="onFileSelected($event)" 
           />
         </div>
         <div class="form-group input-group add_div">
@@ -76,11 +77,25 @@
           type="button"
           data-dismiss="modal"
           id="addNews"
-          (click)="addNews(title.value, url.value, blog.value)"
+          (click)="addNews(title.value, blog.value)"
+          
         >
           Add <i class="fa-solid fa-plus"></i>
         </button>
       </div>
     </div>
   </div>
+  <div *ngIf="flag_type == true" class="contain">
+  <ngx-typed-js
+    [strings]="['Loading  photo ...']"
+    [loop]="true"
+    [typeSpeed]="200"
+    [backSpeed]="40"
+    [backDelay]="40"
+    [cursorChar]="' '"
+  >
+    <h1 class="typing"></h1>
+  </ngx-typed-js>
 </div>
+</div>
+

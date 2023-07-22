@@ -180,4 +180,18 @@ public send_mail_with_verify_code(user_id:any,exam_id:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/send_exam_code`,{user_id:user_id,exam_id:exam_id}, { withCredentials: true });
 }
 
+
+public add_blog(formData:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/blog/add_blog`,formData, { withCredentials: true });
+}
+public delete_blog(blog_id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/blog/delete_blog`,{blog_id:blog_id}, { withCredentials: true });
+}
+public get_blogs(number_of_blogs:any,page_number:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/blog/get_blogs`,{number_of_blogs:number_of_blogs,page_number:page_number}, { withCredentials: true });
+}
+
+
+
+
 }
