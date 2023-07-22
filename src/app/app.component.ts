@@ -10,12 +10,12 @@ export class AppComponent {
   title = 'Exam-System';
 
   constructor(private router: Router) {
-    // const previousUrl = localStorage.getItem('previousUrl');
-    // if (previousUrl) {
-    //   router.navigateByUrl(previousUrl);
-    //   localStorage.removeItem('previousUrl');
-    // }
-    this.router.navigate(['/home/news_bar']);
+    const previousUrl = localStorage.getItem('previousUrl');
+    if (previousUrl) {
+      router.navigateByUrl(previousUrl);
+      localStorage.removeItem('previousUrl');
+    }
+    
   
    }
 }
