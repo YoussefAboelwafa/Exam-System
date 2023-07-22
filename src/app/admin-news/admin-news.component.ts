@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicService } from '../services/servic.service';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-news',
@@ -7,7 +8,7 @@ import { ServicService } from '../services/servic.service';
   styleUrls: ['./admin-news.component.css'],
 })
 export class AdminNewsComponent implements OnInit {
-  constructor(private service: ServicService) {
+  constructor(private service: ServicService, private sanitizer:DomSanitizer) {
     this.get_blogs();
   }
 
@@ -16,7 +17,7 @@ export class AdminNewsComponent implements OnInit {
   my_add_event: any;
   current_url: any;
   flag_type = false;
-  News = [
+  News: any = [
     {
       title: 'New courses are available',
       url: 'https://placehold.co/800x200',
@@ -31,7 +32,7 @@ export class AdminNewsComponent implements OnInit {
     },
   ];
 
-  urls: string[] = [
+  urls: any = [
     'https://placehold.co/1000x200',
     'https://placehold.co/1000x200',
     'https://placehold.co/1000x200',
@@ -130,7 +131,7 @@ export class AdminNewsComponent implements OnInit {
             type: x.blogs[i].photo.ContentType,
           });
 
-          let imageSrc = URL.createObjectURL(photo_blob);
+          let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
           console.log('2');
           console.log(imageSrc);
           const object = {
