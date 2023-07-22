@@ -15,7 +15,7 @@ export class AppComponent {
     //   router.navigateByUrl(previousUrl);
     //   localStorage.removeItem('previousUrl');
     // }
-    this.router.navigate(['/admin_home/admin_news']);
+    this.router.navigate(['/home/news_bar']);
   
    }
 }
