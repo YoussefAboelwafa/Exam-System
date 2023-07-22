@@ -15,7 +15,7 @@ export class AppComponent {
       router.navigateByUrl(previousUrl);
       localStorage.removeItem('previousUrl');
     }
-
+    
   
    }
 }

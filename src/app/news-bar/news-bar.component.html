@@ -1,0 +1,21 @@
+<div class="title">
+  <p>News</p>
+</div>
+
+<div class="container">
+  <div class="container">
+    <div class="box" *ngFor="let news of News; let i = index">
+      <h1>{{ news.title }}</h1>
+      <img [src]="news.url" alt="" />
+      <p [hidden]="!showContent[i]">{{ news.blog }}</p>
+    <div class="seeMore">
+      <span class="see-more-icon" [hidden]="showContent[i]" (click)="toggleVisibility(i)">
+        <i class="fa fa-chevron-down"></i> See More
+      </span>
+      <span class="see-more-icon" [hidden]="!showContent[i]" (click)="toggleVisibility(i)">
+        <i class="fa fa-chevron-up"></i> See Less
+      </span>
+    </div>
+    </div>
+  </div>
+</div>

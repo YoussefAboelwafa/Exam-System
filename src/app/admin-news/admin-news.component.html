@@ -1,31 +1,86 @@
 <div class="title">
-  <p>Add News</p>
-</div>
-
-<div class="input-group mb-3 add_div">
-  <input
-    type="file"
-    accept="image/*"
-    class="form-control"
-    id="inputGroupFile02"
-    (change)="appendUrl($event)"
-  />
-</div>
-<div class="input-group add_div">
-  <button class="input-group-text" (click)="addNews(manshet.value)">Add news</button>
-  <textarea class="form-control" #manshet aria-label="With textarea"></textarea>
+  <p>News</p>
+  <button class="addBtn" data-toggle="modal" data-target="#addmodal">
+    Add News <i class="fa-solid fa-plus"></i>
+  </button>
 </div>
 
 <div class="title">
   <p>Current</p>
 </div>
 <div class="container">
-  <div class="manshet" *ngFor="let manshet of manshets;let i = index">
+  <div class="box" *ngFor="let news of News; let i = index">
     <i class="fa-solid fa-trash" (click)="deleteNews(i)"></i>
-    <p>{{ manshet }}</p>
+    <h1>{{ news.title }}</h1>
+    <img [src]="news.url" alt="" />
+    <p>{{ news.blog }}</p>
   </div>
-  <div class="image" *ngFor="let url of urls; let i = index">
-    <i class="fa-solid fa-trash" (click)="deleteUrl(i)"></i>
-    <img [src]="url" alt="" />
+</div>
+<div
+  class="modal fade"
+  id="addmodal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3 add_div">
+          <span class="input-group-text" id="basic-addon1">Title</span>
+          <input
+            type="text"
+            #title
+            class="form-control"
+            placeholder="Title"
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+          />
+        </div>
+        <div class="form-group input-group mb-3 add_div">
+          <input
+            type="file"
+            accept="image/*"
+            class="form-control"
+            id="inputGroupFile02"
+            #url
+          />
+        </div>
+        <div class="form-group input-group add_div">
+          <span class="input-group-text"> Blog </span>
+          <textarea
+            class="form-control"
+            #blog
+            placeholder="Blog"
+            aria-label="With textarea"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          data-dismiss="modal"
+          id="addNews"
+          (click)="addNews(title.value, url.value, blog.value)"
+        >
+          Add <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

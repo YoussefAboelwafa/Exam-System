@@ -1,6 +1,6 @@
 .title {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   color: #003f3d;
   font-size: 28px;
   font-family: "Montserrat";
@@ -8,6 +8,7 @@
   line-height: 150%;
   margin-left: 2%;
   margin-top: 2%;
+
 }
 .add_div {
   width: 80%;
@@ -56,12 +57,29 @@
 .manshet {
   position: relative;
 }
-.manshet p {
-  border: 5px solid #008182;
+.box{
+  position: relative;
+  margin: 2%;
+  padding: 2%;
+  border: 1px solid #008182;
+  border-radius: 5px;
+  box-shadow: 0px 0px 25px 10px rgba(0, 129, 130, 0.47);
+}
+.box h1{
+  font-family: 'Montserrat', sans-serif;
   border-radius: 20px;
   margin-top: 2%;
   padding: 2%;
-  font-size: 24px;
+  font-size: 28px;
+  color: #003f3d;
+  font-weight: 700;
+  line-height: 150%;
+}
+.box p {
+  border-radius: 20px;
+  margin-top: 2%;
+  padding: 2%;
+  font-size: 16px;
   color: #003f3d;
   font-weight: 600;
   width: 80%;
@@ -78,11 +96,11 @@
   font-size: 24px;
   cursor: pointer;
 }
-.manshet i {
+.box i {
   position: absolute;
   color: red;
   right: 10%;
-  top: 20%;
+  top: 10%;
   font-size: 24px;
   cursor: pointer;
 }
@@ -96,10 +114,91 @@ input[type="file"]::-webkit-file-upload-button {
   border: none;
   transition: 0.4s;
 }
-.input-group-text:hover {
-  background-color: #ffffff;
-  color: #008182;
+
+
+.outer_button {
   border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  width: 25px;
+  height: 25px;
+  margin-left: 3px;
+}
+.modal-title {
+  color: #006a6a;
+  font-size: 30px;
+  font-family: Montserrat;
+  font-weight: 700;
+  line-height: 100%;
+}
+.modal-content {
+  border-radius: 15px;
+  background: radial-gradient(
+      313.28% 209.98% at 99.43% 99.22%,
+      #dff 0%,
+      rgba(235, 247, 248, 0) 100%
+    ),
+    rgba(255, 255, 255, 0.75);
+  box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
+  backdrop-filter: blur(6.5px);
+}
+
+.modal-footer button {
+  background: #008182;
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  color: #fff;
+  width: 200px;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 8px 10px;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+}
+
+.modal-body {
+  color: #008182;
+  font-size: 16px;
+  font-family: Montserrat;
+  font-weight: 500;
+}
+.modal-body label {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 2%;
+}
+.modal-footer button:hover {
+  background: #fff;
+  color: #008182;
+  border: 1px solid #008182;
+  transition: 1s;
+}
+
+
+.addBtn {
+  font-weight: 500;
+  border-radius: 10px;
+  background: #008182;
+  color: #fff;
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  width: 70%;
+  padding: 10px 5px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border: none;
+}
+.addBtn:hover {
+  background: #fff;
+  color: #008182;
+  border: 1px solid #008182;
+  transition: 0.5s;
 }
 
 @media only screen and (max-width: 800px) {

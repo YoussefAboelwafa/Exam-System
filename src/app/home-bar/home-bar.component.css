@@ -2,8 +2,8 @@ div {
   font-family: "Montserrat", sans-serif;
 }
 .carousel {
-  width: 98%;
-  height: 22vh;
+  width: 1000px;
+  height: 200px;
   border-radius: 20px;
   margin-top: 1%;
   margin-left: 1%;
@@ -534,7 +534,8 @@ h3 {
     overflow: unset;
   }
   .carousel {
-    width: 100%;
+    width: 400px;
+    height: 100px;
     margin-left: 0;
   }
 

@@ -16,7 +16,6 @@ import { GuardServiceService } from './services/guard-service.service';
 import { HomeBarComponent } from './home-bar/home-bar.component';
 import { ExamsBarComponent } from './exams-bar/exams-bar.component';
 import { PopUpComponent } from './pop-up/pop-up.component';
-import { RankingBarComponent } from './ranking-bar/ranking-bar.component';
 import { NgxTypedJsModule } from 'ngx-typed-js';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminLocationBarComponent } from './admin-location-bar/admin-location-bar.component';
@@ -25,6 +24,7 @@ import { AdminExamsComponent } from './admin-exams/admin-exams.component';
 import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.component';
 import { AdminQuestionsComponent } from './admin-questions/admin-questions.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
+import { NewsBarComponent } from './news-bar/news-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +35,6 @@ import { AdminNewsComponent } from './admin-news/admin-news.component';
     HomeBarComponent,
     ExamsBarComponent,
     PopUpComponent,
-    RankingBarComponent,
     AdminHomeComponent,
     AdminLocationBarComponent,
     AdminCalendarComponent,
@@ -43,6 +42,7 @@ import { AdminNewsComponent } from './admin-news/admin-news.component';
     AdminAnalyticsComponent,
     AdminQuestionsComponent,
     AdminNewsComponent,
+    NewsBarComponent,
   ],
   imports: [
     BrowserModule,
