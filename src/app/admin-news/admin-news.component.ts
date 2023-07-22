@@ -24,6 +24,11 @@ export class AdminNewsComponent implements OnInit {
   ];
 
 
+  urls: string[] = [
+    'https://placehold.co/1000x200',
+    'https://placehold.co/1000x200',
+    'https://placehold.co/1000x200',
+  ];
   // appendUrl(event: any) {
   //   const file = event.target.files[0];
 
