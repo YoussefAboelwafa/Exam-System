@@ -41,7 +41,12 @@
   border: 1px solid #008182;
   border-radius: 5px;
   box-shadow: 0px 0px 25px 10px rgba(0, 129, 130, 0.47);
+  transition: 0.4s;
 }
+.seeMore{
+  margin-top: 2%;
+}
+
 .box h1 {
   font-family: "Montserrat", sans-serif;
   border-radius: 20px;
@@ -77,6 +82,12 @@ input[type="file"]::-webkit-file-upload-button {
   color: #008182;
   border: none;
 }
+
+.see-more-icon {
+  cursor: pointer;
+  color: #008182; /* Change the color to match your design */
+}
+
 
 @media only screen and (max-width: 800px) {
   img {

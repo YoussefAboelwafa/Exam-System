@@ -14,7 +14,7 @@ export class NewsBarComponent implements OnInit {
   News = [
     {
       title: 'New courses are available',
-      url: 'https://placehold.co/800x200',
+      url: 'https://placehold.co/800x300',
       blog: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla, libero at mattis scelerisque, dui nisl placerat justo, quis bibendum dui mauris faucibus felis. Nunc egestas fermentum sem, et blandit nibh feugiat vitae. Integer velit neque, laoreet nec nibh at, maximus vehicula nisi. Maecenas tempor nisi id diam finibus auctor. Etiam fermentum semper augue lacinia laoreet. Aliquam imperdiet tincidunt odio in mollis. Cras euismod et massa at eleifend. Phasellus fermentum eu nulla eget cursus',
     },
     {
@@ -23,5 +23,11 @@ export class NewsBarComponent implements OnInit {
       blog: 'This is a blog',
     },
   ];
+
+  showContent: boolean[] = new Array(this.News.length).fill(false);
+
+  toggleVisibility(index: number) {
+    this.showContent[index] = !this.showContent[index];
+  }
 
 }
