@@ -8,7 +8,6 @@ import { ServicService } from '../services/servic.service';
 })
 export class AdminNewsComponent implements OnInit {
   constructor(private service: ServicService) {
-
     this.get_blogs();
   }
 
@@ -89,9 +88,11 @@ export class AdminNewsComponent implements OnInit {
       formData.append('photo', this.add_url_to_service);
       formData.append('title', title);
       formData.append('description', blog);
+      console.log(formData);
 
       this.service.add_blog(formData).subscribe((x) => {
         if (x.success) {
+          console.log(x);
           object._id = x.id;
           this.News.push(object);
         } else {
@@ -104,6 +105,7 @@ export class AdminNewsComponent implements OnInit {
   deleteNews(index: number) {
     this.service.delete_blog(this.News[index]._id).subscribe((x) => {
       if (x.success == true) {
+        console.log(x);
         this.News.splice(index, 1);
       } else {
         //error message
@@ -113,38 +115,37 @@ export class AdminNewsComponent implements OnInit {
 
   get_blogs() {
     //update ya kimo
-    this.service.get_blogs(10, 1).subscribe((x) => {  
+    this.service.get_blogs(10, 1).subscribe((x) => {
       console.log(x);
       if (x.success == true) {
-        let a=[];
-        this.flag_type=true
+        let a = [];
+        this.flag_type = true;
         for (var i = 0; i < x.blogs.length; i++) {
-          console.log("1")
-          console.log(x.blogs[i])
-          console.log(x.blogs[i].photo)
-          console.log(x.blogs[i].photo.body)
-          console.log(x.blogs[i].photo.body.data)
-          const photo_blob = new Blob([x.blogs[i].photo.body.data], {
+          console.log('1');
+          console.log(x.blogs[i]);
+          console.log(x.blogs[i].photo);
+          console.log(x.blogs[i].photo.Body);
+          console.log(x.blogs[i].photo.Body.data);
+          const photo_blob = new Blob([x.blogs[i].photo.Body.data], {
             type: x.blogs[i].photo.ContentType,
           });
-        
+
           let imageSrc = URL.createObjectURL(photo_blob);
-           console.log("2")
-          console.log(imageSrc)
+          console.log('2');
+          console.log(imageSrc);
           const object = {
             title: x.blogs[i].title,
             url: imageSrc,
             blog: x.blogs[i].description,
             _id: x.blogs[i].description._id,
           };
-          console.log("3")
-          console.log(object)
-        a.push(object);
+          console.log('3');
+          console.log(object);
+          a.push(object);
         }
         this.News = a;
 
-        this.flag_type=false;
-
+        this.flag_type = false;
       } else {
         //error message
       }
