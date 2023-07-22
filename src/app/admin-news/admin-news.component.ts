@@ -117,7 +117,7 @@ export class AdminNewsComponent implements OnInit {
       if (data.success == true) {
         let a=[];
         this.flag_type=true
-        for (var i = 0; i < data.blog.length; i++) {
+        for (var i = 0; i < data.blogs.length; i++) {
 
           const photo_blob = new Blob([data.blogs[i].photo.body.data], {
             type: data.blogs[i].photo.ContentType,
