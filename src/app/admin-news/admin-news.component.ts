@@ -120,6 +120,9 @@ export class AdminNewsComponent implements OnInit {
         this.flag_type=true
         for (var i = 0; i < x.blogs.length; i++) {
           console.log("1")
+          console.log(x.blogs[i])
+          console.log(x.blogs[i].photo)
+          console.log(x.blogs[i].photo.body)
           console.log(x.blogs[i].photo.body.data)
           const photo_blob = new Blob([x.blogs[i].photo.body.data], {
             type: x.blogs[i].photo.ContentType,
