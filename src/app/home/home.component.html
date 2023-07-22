@@ -17,10 +17,6 @@
         </div>
       </div>
 
-      <div class="btns1">
-        <button class="btn">Certificates</button>
-        <button class="btn">Past Exams</button>
-      </div>
     </div>
     <!-- Side bar -->
     <div class="section section2 sidebar">
@@ -37,16 +33,10 @@
             Exams
           </button>
         </li>
-        <li>
-          <button>
+        <li [routerLinkActive]="'active'">
+          <button routerLink="/home/news_bar">
             <img src="/assets/images/news.svg" alt="" />
             News
-          </button>
-        </li>
-        <li [routerLinkActive]="'active'">
-          <button routerLink="/home/ranking_bar">
-            <img src="/assets/images/rank.svg" alt="" />
-            Ranking
           </button>
         </li>
       </ul>

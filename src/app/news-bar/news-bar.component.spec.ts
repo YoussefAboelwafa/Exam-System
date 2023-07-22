@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RankingBarComponent } from './ranking-bar.component';
+import { NewsBarComponent } from './news-bar.component';
 
-describe('RankingBarComponent', () => {
-  let component: RankingBarComponent;
-  let fixture: ComponentFixture<RankingBarComponent>;
+describe('NewsBarComponent', () => {
+  let component: NewsBarComponent;
+  let fixture: ComponentFixture<NewsBarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RankingBarComponent ]
+      declarations: [ NewsBarComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RankingBarComponent);
+    fixture = TestBed.createComponent(NewsBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

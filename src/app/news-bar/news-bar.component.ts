@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-admin-news',
-  templateUrl: './admin-news.component.html',
-  styleUrls: ['./admin-news.component.css'],
+  selector: 'app-news-bar',
+  templateUrl: './news-bar.component.html',
+  styleUrls: ['./news-bar.component.css']
 })
-export class AdminNewsComponent implements OnInit {
-  constructor() {}
+export class NewsBarComponent implements OnInit {
 
-  ngOnInit(): void {}
+  constructor() { }
 
+  ngOnInit(): void {
+  }
   manshets: string[] = [
     'Now you can get your own website ',
     'C++ advanced course is now available',
@@ -17,9 +18,9 @@ export class AdminNewsComponent implements OnInit {
   ];
 
   urls: string[] = [
-    '../../assets/images/img6.svg',
-    '../../assets/images/img6.svg',
-    '../../assets/images/img6.svg',
+    'https://placehold.co/1000x300',
+    'https://placehold.co/1000x200',
+    'https://placehold.co/1000x400',    
   ];
 
   appendUrl(event: any) {
@@ -55,5 +56,4 @@ export class AdminNewsComponent implements OnInit {
   deleteNews(index: number) {
     this.manshets.splice(index, 1);
   }
-  
 }

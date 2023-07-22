@@ -7,7 +7,6 @@ import { HomeComponent } from './home/home.component';
 import { GuardServiceService } from './services/guard-service.service';
 import { HomeBarComponent } from './home-bar/home-bar.component';
 import { ExamsBarComponent } from './exams-bar/exams-bar.component';
-import { RankingBarComponent } from './ranking-bar/ranking-bar.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminCalendarComponent } from './admin-calendar/admin-calendar.component';
 import { AdminExamsComponent } from './admin-exams/admin-exams.component';
@@ -15,6 +14,7 @@ import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.compo
 import { AdminLocationBarComponent } from './admin-location-bar/admin-location-bar.component';
  import { AdminQuestionsComponent } from './admin-questions/admin-questions.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
+import { NewsBarComponent } from './news-bar/news-bar.component';
 
 const routes: Routes = [
   {
@@ -35,7 +35,7 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
 
-    canActivate: [GuardServiceService],
+    //canActivate: [GuardServiceService],
 
     children: [
       {
@@ -47,8 +47,8 @@ const routes: Routes = [
         component: ExamsBarComponent,
       },
       {
-        path: 'ranking_bar',
-        component: RankingBarComponent,
+        path: 'news_bar',
+        component: NewsBarComponent,
       },
     ],
   },
@@ -56,7 +56,7 @@ const routes: Routes = [
     path: 'admin_home',
     component: AdminHomeComponent,
 
-    canActivate: [GuardServiceService],
+    //canActivate: [GuardServiceService],
     
     children: [
       {

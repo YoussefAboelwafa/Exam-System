@@ -1,0 +1,115 @@
+.title {
+    display: flex;
+    flex-direction: row;
+    color: #003f3d;
+    font-size: 28px;
+    font-family: "Montserrat";
+    font-weight: 700;
+    line-height: 150%;
+    margin-left: 2%;
+    margin-top: 2%;
+  }
+  .add_div {
+    width: 80%;
+    margin-left: 2%;
+  }
+  .add_div label {
+    background-color: #008182;
+    color: #fff;
+    font-weight: 500;
+    transition: 0.4s;
+  }
+  .add_div i {
+    margin-left: 5px;
+  }
+  .add_div label:hover {
+    background-color: #ffffff;
+    color: #008182;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .btn_exam {
+    border-radius: 16px;
+    background: #008182;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+    color: #fff;
+    font-weight: 500;
+    width: 100%;
+    padding: 5px;
+    font-size: 17px;
+    font-family: Montserrat;
+  }
+  .btn_add {
+    margin-bottom: 10px;
+    margin-right: 6px;
+  }
+  .container {
+    margin-bottom: 10%;
+  }
+  .container img {
+    border: 5px solid #008182;
+    border-radius: 20px;
+    margin-top: 2%;
+  }
+  .manshet {
+    position: relative;
+  }
+  .manshet p {
+    border: 5px solid #008182;
+    border-radius: 20px;
+    margin-top: 2%;
+    padding: 2%;
+    font-size: 24px;
+    color: #003f3d;
+    font-weight: 600;
+    width: 80%;
+    line-height: 150%;
+  }
+  .image {
+    position: relative;
+  }
+  .image i {
+    position: absolute;
+    color: red;
+    right: 10%;
+    top: 20%;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .manshet i {
+    position: absolute;
+    color: red;
+    right: 10%;
+    top: 20%;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  input[type="file"]::-webkit-file-upload-button {
+    background-color: #008182;
+    color: white;
+  }
+  .input-group-text {
+    background-color: #008182;
+    color: white;
+    border: none;
+    transition: 0.4s;
+  }
+  .input-group-text:hover {
+    background-color: #ffffff;
+    color: #008182;
+    border: none;
+  }
+  
+  @media only screen and (max-width: 800px) {
+    img {
+      width: 350px;
+      height: 100px;
+      order: 2;
+    }
+    .manshet p {
+      font-size: 18px;
+    }
+  }
+  
