@@ -12,7 +12,7 @@
   <div class="box" *ngFor="let news of News; let i = index">
     <i class="fa-solid fa-trash" (click)="deleteNews(i)"></i>
     <h1 class="title_blog"><u>{{ news.title }}</u></h1>
-    <img [src]="news.url" alt="" />
+    <img [attr.src]="news.url" alt="" />
     <p>{{ news.blog }}</p>
   </div>
 </div>
