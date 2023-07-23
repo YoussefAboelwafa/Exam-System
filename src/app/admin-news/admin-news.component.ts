@@ -138,14 +138,13 @@ export class AdminNewsComponent implements OnInit {
           console.log(photo_blob);
           
           let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
-          const object = {
+
+          this.News.push({
             title: blog.title,
             url: imageSrc,
             blog: blog.description,
             _id: blog._id,
-          };
-
-          this.News.push(object);;
+          });
 
           this.flag_type = false;  
         },
