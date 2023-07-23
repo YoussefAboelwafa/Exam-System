@@ -9,7 +9,10 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 })
 export class NewsBarComponent implements OnInit {
  
-  constructor(private service:ServicService, private sanitizer:DomSanitizer) { }
+  constructor(private service:ServicService, private sanitizer:DomSanitizer) { 
+
+    this.get_blogs();
+  }
 
   ngOnInit(): void {
   }
