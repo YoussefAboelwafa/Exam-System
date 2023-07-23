@@ -38,7 +38,7 @@ export class NewsBarComponent implements OnInit {
   get_blogs() {
     //update ya kimo
     this.News = [];
-    this.service.get_blogs(10, 1).subscribe({
+    this.service.get_blogs_user(10, 1).subscribe({
         next: (blog) => {
           console.log(blog);
           const photo_blob = new Blob([new Uint8Array(blog.photo.Body.data)], {
