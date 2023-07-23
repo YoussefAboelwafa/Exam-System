@@ -132,8 +132,8 @@ export class AdminNewsComponent implements OnInit {
           });
           let imageSrc =<string>this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob))
           ;
-
-          console.log('2');
+          imageSrc=imageSrc.toString() 
+          console.log('8');
           console.log(imageSrc);
           const object = {
             title: x.blogs[i].title,
