@@ -75,6 +75,8 @@ export class AdminNewsComponent implements OnInit {
       console.log(this.add_url_to_service);
     }
     this.appendUrl(this.my_add_event);
+    console.log(this.my_add_event);
+    
   }
   addNews(title: string, blog: string) {
     const object = {
@@ -83,6 +85,14 @@ export class AdminNewsComponent implements OnInit {
       blog: blog,
       _id: '',
     };
+
+    console.log('this isnt true');
+    
+
+    console.log(this.add_url_to_service);
+
+    
+    
 
     if (this.add_url_to_service) {
       const formData = new FormData();
@@ -122,27 +132,18 @@ export class AdminNewsComponent implements OnInit {
         let a = [];
         this.flag_type = true;
         for (var i = 0; i < x.blogs.length; i++) {
-          console.log('1');
-          console.log(x.blogs[i]);
-          console.log(x.blogs[i].photo);
-          console.log(x.blogs[i].photo.Body);
-          console.log(x.blogs[i].photo.Body.data);
-          const photo_blob = new Blob([x.blogs[i].photo.Body.data], {
+          const photo_blob = new Blob([new Uint8Array(x.blogs[i].photo.Body.data)], {
             type: x.blogs[i].photo.ContentType,
           });
           console.log(photo_blob);
           
           let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
-          console.log('2');
-          console.log(imageSrc);
           const object = {
             title: x.blogs[i].title,
             url: imageSrc,
             blog: x.blogs[i].description,
             _id: x.blogs[i].description._id,
           };
-          console.log('3');
-          console.log(object);
           a.push(object);
         }
         this.News = a;
