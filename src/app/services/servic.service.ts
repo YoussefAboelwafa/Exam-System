@@ -192,7 +192,7 @@ public get_blogs(number_of_blogs:any,page_number:any):Observable<any>{
 }
 
 public get_blogs_user(number_of_blogs:any,page_number:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/get_blogs`,{number_of_blogs:number_of_blogs,page_number:page_number}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/home/get_blogs`,{number_of_blogs:number_of_blogs,page_number:page_number}, { withCredentials: true });
 }
 
 
