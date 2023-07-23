@@ -86,8 +86,7 @@ export class AdminNewsComponent implements OnInit {
       _id: '',
     };
 
-    console.log('this isnt true');
-    
+     
 
     console.log(this.add_url_to_service);
 
@@ -99,8 +98,7 @@ export class AdminNewsComponent implements OnInit {
       formData.append('photo', this.add_url_to_service);
       formData.append('title', title);
       formData.append('description', blog);
-      console.log(formData);
-
+ 
       this.service.add_blog(formData).subscribe((x) => {
         if (x.success) {
           console.log(x);
@@ -115,12 +113,12 @@ export class AdminNewsComponent implements OnInit {
 
   deleteNews(index: number) {
     console.log(this.News)
-    console.log(this.News[index]._id)
+    console.log(this.News[index]._id)  
+    this.News.splice(index, 1);
+
     this.service.delete_blog(this.News[index]._id).subscribe((x) => {
       if (x.success == true) {
-        console.log(x);
-        this.News.splice(index, 1);
-      } else {
+       } else {
         //error message
       }
     });
@@ -129,8 +127,7 @@ export class AdminNewsComponent implements OnInit {
   get_blogs() {
     //update ya kimo
     this.service.get_blogs(10, 1).subscribe((x) => {
-      console.log(x);
-      if (x.success == true) {
+       if (x.success == true) {
         let a = [];
         this.flag_type = true;
         for (var i = 0; i < x.blogs.length; i++) {

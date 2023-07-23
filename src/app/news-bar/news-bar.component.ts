@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ServicService } from '../services/servic.service';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-news-bar',
@@ -6,12 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./news-bar.component.css']
 })
 export class NewsBarComponent implements OnInit {
-
-  constructor() { }
+ 
+  constructor(private service:ServicService, private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
   }
-  News = [
+  News:any = [
     {
       title: 'New courses are available',
       url: 'https://placehold.co/800x300',
@@ -28,6 +30,35 @@ export class NewsBarComponent implements OnInit {
 
   toggleVisibility(index: number) {
     this.showContent[index] = !this.showContent[index];
+  }
+
+  get_blogs() {
+    //update ya kimo
+    this.service.get_blogs(10, 1).subscribe((x) => {
+      console.log(x);
+      if (x.success == true) {
+        let a = [];
+         for (var i = 0; i < x.blogs.length; i++) {
+          const photo_blob = new Blob([new Uint8Array(x.blogs[i].photo.Body.data)], {
+            type: x.blogs[i].photo.ContentType,
+          });
+          console.log(photo_blob);
+          
+          let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
+          const object = {
+            title: x.blogs[i].title,
+            url: imageSrc,
+            blog: x.blogs[i].description,
+            _id: x.blogs[i]._id,
+          };
+          a.push(object);
+        }
+        this.News = a;
+
+       } else {
+        //error message
+      }
+    });
   }
 
 }
