@@ -134,7 +134,7 @@ export class AdminNewsComponent implements OnInit {
           ;
 
           // Extract the URL from the SafeUrl object
-      
+
           console.log('2');
           console.log(imageSrc);
           const object = {
