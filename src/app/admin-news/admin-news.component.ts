@@ -130,8 +130,11 @@ export class AdminNewsComponent implements OnInit {
           const photo_blob = new Blob([x.blogs[i].photo.Body.data], {
             type: x.blogs[i].photo.ContentType,
           });
+          let imageSrc =<string>this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob))
+          ;
 
-          let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
+          // Extract the URL from the SafeUrl object
+      
           console.log('2');
           console.log(imageSrc);
           const object = {
