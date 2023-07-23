@@ -128,7 +128,12 @@ export class AdminNewsComponent implements OnInit {
     //update ya kimo
     this.News = [];
     this.service.get_blogs(10, 1).subscribe({
-        next: (blog) => {
+        next: (unparsed_blog) => {
+          console.log(unparsed_blog);
+          
+          let blog = unparsed_blog.trim().split('\r\n');
+          
+          blog = JSON.parse(blog);
           console.log(blog);
           
           this.flag_type = true;
