@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core"
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { CommaExpr } from "@angular/compiler";
 import { users } from "../objects/users";
+import { map } from 'rxjs/operators';
 
 // import {class you made}
 @Injectable({
@@ -188,11 +189,13 @@ public delete_blog(blog_id:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/blog/delete_blog`,{blog_id:blog_id}, { withCredentials: true });
 }
 public get_blogs(number_of_blogs:any,page_number:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/blog/get_blogs`,{number_of_blogs:number_of_blogs,page_number:page_number}, { withCredentials: true });
+  return this.http.post(`${this.apiServerUrl}/admin/blog/get_blogs`,{number_of_blogs:number_of_blogs,page_number:page_number},
+   { withCredentials: true, responseType: 'text'});
 }
 
 public get_blogs_user(number_of_blogs:any,page_number:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/home/get_blogs`,{number_of_blogs:number_of_blogs,page_number:page_number}, { withCredentials: true });
+  return this.http.post(`${this.apiServerUrl}/home/get_blogs`,{number_of_blogs:number_of_blogs,page_number:page_number},
+   { withCredentials: true, responseType: 'text' });
 }
 
 

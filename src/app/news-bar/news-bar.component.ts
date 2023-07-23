@@ -39,14 +39,10 @@ export class NewsBarComponent implements OnInit {
     //update ya kimo
     this.News = [];
     this.service.get_blogs_user(10, 1).subscribe({
-        next: (unparsed_blog) => {
-          console.log(unparsed_blog);
-          
-          let blog = unparsed_blog.trim().split('\r\n');
-          
-          blog = JSON.parse(blog);
-          console.log(blog);
-          
+      next: (blog) => {
+        blog = blog.slice(0, -3)
+        blog.split('\n\r\n').forEach((blog: any) => {
+          blog = JSON.parse(blog)
           const photo_blob = new Blob([new Uint8Array(blog.photo.Body.data)], {
             type: blog.photo.ContentType,
           });
@@ -59,16 +55,17 @@ export class NewsBarComponent implements OnInit {
             url: imageSrc,
             blog: blog.description,
             _id: blog._id,
-          });;
+          });
 
-        },
-        complete: () => {
-          console.log('done');
-        },
-        error: (error) => {
-          console.log(error);
-        }
-    });
+        });
+      },
+      complete: () => {
+        console.log('done');
+      },
+      error: (error) => {
+        console.log(error);
+      }
+  });
   }
 
 }

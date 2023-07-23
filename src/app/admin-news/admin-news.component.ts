@@ -128,30 +128,27 @@ export class AdminNewsComponent implements OnInit {
     //update ya kimo
     this.News = [];
     this.service.get_blogs(10, 1).subscribe({
-        next: (unparsed_blog) => {
-          console.log(unparsed_blog);
-          
-          let blog = unparsed_blog.trim().split('\r\n');
-          
-          blog = JSON.parse(blog);
-          console.log(blog);
-          
-          this.flag_type = true;
-          const photo_blob = new Blob([new Uint8Array(blog.photo.Body.data)], {
-            type: blog.photo.ContentType,
+        next: (blog) => {
+          blog = blog.slice(0, -3)
+          blog.split('\n\r\n').forEach((blog: any) => {
+            blog = JSON.parse(blog)
+            this.flag_type = true;
+            const photo_blob = new Blob([new Uint8Array(blog.photo.Body.data)], {
+              type: blog.photo.ContentType,
+            });
+            console.log(photo_blob);
+            
+            let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
+  
+            this.News.push({
+              title: blog.title,
+              url: imageSrc,
+              blog: blog.description,
+              _id: blog._id,
+            });
+  
+            this.flag_type = false;  
           });
-          console.log(photo_blob);
-          
-          let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
-
-          this.News.push({
-            title: blog.title,
-            url: imageSrc,
-            blog: blog.description,
-            _id: blog._id,
-          });
-
-          this.flag_type = false;  
         },
         complete: () => {
           console.log('done');
