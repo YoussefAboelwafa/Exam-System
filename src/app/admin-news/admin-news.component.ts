@@ -114,6 +114,8 @@ export class AdminNewsComponent implements OnInit {
   }
 
   deleteNews(index: number) {
+    console.log(this.News)
+    console.log(this.News[index]._id)
     this.service.delete_blog(this.News[index]._id).subscribe((x) => {
       if (x.success == true) {
         console.log(x);
@@ -142,7 +144,7 @@ export class AdminNewsComponent implements OnInit {
             title: x.blogs[i].title,
             url: imageSrc,
             blog: x.blogs[i].description,
-            _id: x.blogs[i].description._id,
+            _id: x.blogs[i]._id,
           };
           a.push(object);
         }
