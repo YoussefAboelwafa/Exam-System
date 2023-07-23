@@ -133,8 +133,6 @@ export class AdminNewsComponent implements OnInit {
           let imageSrc =<string>this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob))
           ;
 
-          // Extract the URL from the SafeUrl object
-
           console.log('2');
           console.log(imageSrc);
           const object = {
