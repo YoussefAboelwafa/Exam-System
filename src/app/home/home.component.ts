@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { exams } from '../objects/exams';
 import { NgxTypedJsModule } from 'ngx-typed-js';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 declare const $: any;
 
 @Component({
@@ -38,7 +39,7 @@ export class HomeComponent implements OnInit {
     _id: '',
   };
   flag_type = false;
-  constructor(private service: ServicService, private router: Router) {
+  constructor(private service: ServicService, private router: Router, private sanitizer:DomSanitizer) {
     this.refresh();
   }
 
@@ -74,13 +75,12 @@ export class HomeComponent implements OnInit {
     }
     const inputElement = this.photo_event_service.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
-      this.photo_sendin_service = inputElement.files[0];
-    }
-
-    if (this.photo_sendin_service) {
       const formData = new FormData();
-      formData.append('photo', this.photo_sendin_service);
-
+      formData.append('photo', inputElement.files[0]);
+      console.log(formData);
+      console.log(inputElement.files);
+      
+      
       this.service.change_photo_user(formData).subscribe((x) => {
         if (x.success) {
           console.log(x);
@@ -96,8 +96,20 @@ export class HomeComponent implements OnInit {
 
 
   get_user_photo() {
+    if(!this.service.user.photo)
+      return;
 
-
+    this.service.get_photo().subscribe((photo) => {
+            const photo_blob = new Blob([new Uint8Array(photo.photo.Body.data)], {
+              type: photo.photo.ContentType,
+            });
+            console.log(photo_blob);
+            
+            let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
+            console.log(imageSrc);
+            
+        }
+    );
   }
 
   refresh() {
