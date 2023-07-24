@@ -25,8 +25,6 @@ import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.compo
 import { AdminQuestionsComponent } from './admin-questions/admin-questions.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { NewsBarComponent } from './news-bar/news-bar.component';
-import { NgApexchartsModule } from "ng-apexcharts";
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +52,6 @@ import { NgApexchartsModule } from "ng-apexcharts";
     FormsModule,
     CustomFormsModule,
     NgxTypedJsModule,
-    NgApexchartsModule,
   ],
   providers: [ServicService, users, GuardServiceService],
   bootstrap: [AppComponent],

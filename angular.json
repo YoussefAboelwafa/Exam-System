@@ -28,9 +28,7 @@
               "node_modules/intl-tel-input/build/css/intlTelInput.css"
 
             ],
-            "scripts": [
-              "node_modules/chart.js/dist/chart.min.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
