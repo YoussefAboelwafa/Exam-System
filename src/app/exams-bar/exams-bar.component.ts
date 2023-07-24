@@ -223,7 +223,6 @@ export class ExamsBarComponent implements OnInit {
     })
   
  
-// >>>>>>> main
     //service becouse i need Day of exam and Appointment then next step
     this.reset_order_exam();
     this.refresh_all();
@@ -235,6 +234,8 @@ export class ExamsBarComponent implements OnInit {
     this.book_title_course = name_exam;
     //becouse if the user click take exam from modal,hide pop up if it show
     this.book_id_exam = id_exam;
+    console.log(this.book_id_exam)
+
     $('#not_token_exam').modal('hide');
     $('#token_exam').modal('hide');
     this.flag_book = true;

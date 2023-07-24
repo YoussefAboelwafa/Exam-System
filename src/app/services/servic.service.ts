@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core"
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { CommaExpr } from "@angular/compiler";
 import { users } from "../objects/users";
+import { map } from 'rxjs/operators';
 
 // import {class you made}
 @Injectable({
@@ -55,8 +56,11 @@ public is_signin():Observable<any>{
 }
 
 // it take url of the new photo of the user and return no thing
-public change_photo(url:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/change_photo`,{url:url}, { withCredentials: true });
+public change_photo_user(formdata:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/change_photo`,{formdata:formdata}, { withCredentials: true });
+}
+public change_photo_admin(formdata:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/change_photo`,{formdata:formdata}, { withCredentials: true });
 }
 
 // when i enter home bar i send request and want to receive json that contains {user:user,non_taken_exam:any exam that the user does not take it yet}
@@ -178,6 +182,34 @@ public edit_mcq_in_topic(mcq_id:any,new_mcq:any):Observable<any>{
 
 public send_mail_with_verify_code(user_id:any,exam_id:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/send_exam_code`,{user_id:user_id,exam_id:exam_id}, { withCredentials: true });
+}
+
+
+public add_blog(formData:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/blog/add_blog`,formData, { withCredentials: true });
+}
+public delete_blog(blog_id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/blog/delete_blog`,{blog_id:blog_id}, { withCredentials: true });
+}
+public get_blogs(number_of_blogs:any,page_number:any):Observable<any>{
+  return this.http.post(`${this.apiServerUrl}/admin/blog/get_blogs`,{number_of_blogs:number_of_blogs,page_number:page_number},
+   { withCredentials: true, responseType: 'text'});
+}
+
+public get_blogs_user(number_of_blogs:any,page_number:any):Observable<any>{
+  return this.http.post(`${this.apiServerUrl}/home/get_blogs`,{number_of_blogs:number_of_blogs,page_number:page_number},
+   { withCredentials: true, responseType: 'text' });
+}
+
+public get_code_to_change_pass(email:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/home/get_code_change_pass`,{email:email}, { withCredentials: true });
+}
+public verify_code_to_change_pass(code:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/home/verify_code_change_pass`,{code:code}, { withCredentials: true });
+}
+
+public change_pass(new_pass:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/home/change_pass`,{new_pass:new_pass}, { withCredentials: true });
 }
 
 }

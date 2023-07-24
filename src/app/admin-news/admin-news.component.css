@@ -10,6 +10,7 @@
   margin-top: 2%;
 
 }
+
 .add_div {
   width: 80%;
   margin-left: 2%;
@@ -29,6 +30,7 @@
   font-weight: 500;
   cursor: pointer;
 }
+
 .btn_exam {
   border-radius: 16px;
   background: #008182;
@@ -199,6 +201,33 @@ input[type="file"]::-webkit-file-upload-button {
   color: #008182;
   border: 1px solid #008182;
   transition: 0.5s;
+}
+
+.title_blog{
+  text-align: center;
+}
+
+
+
+.contain {
+  background: rgba(0, 0, 0, 0.082);
+  backdrop-filter: blur(5px);
+  color: black;
+  font-size: 48px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  flex-wrap: wrap;
+  font-weight: 1400;
+  background: rgba(204, 255, 251, 0.111);
+  position: fixed;
+  left: 5%;
+  top: 2%;
+  height: 100vh;
+  width: 100vw;
 }
 
 @media only screen and (max-width: 800px) {

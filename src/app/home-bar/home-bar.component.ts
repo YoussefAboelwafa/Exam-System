@@ -7,7 +7,6 @@ import { address } from '../objects/loction_address';
 import { Router } from '@angular/router';
 import { ModalPopServiceService } from '../services/modal-pop-service.service';
 declare const $: any;
-declare let COWPAYOTPDIALOG: any;
 @Component({
   selector: 'app-home-bar',
   templateUrl: './home-bar.component.html',
@@ -252,12 +251,13 @@ export class HomeBarComponent implements OnInit {
     this.book_title_course = name_exam;
     //becouse if the user click take exam from modal,hide pop up if it show
     this.book_id_exam = id_exam; 
+    console.log(this.book_id_exam)
      this.reset_order_exam();
     $('#not_token_exam').modal('hide');
     $('#token_exam').modal('hide');
     this.flag_book = true;
   }
-
+ 
   close_book() {
     this.clear_flag_book();
     this.reset_order_exam();
