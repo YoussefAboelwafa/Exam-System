@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   upcoming_exam: any[] = [];
   token_exam: any[] = [];
   ids_exams: any[] = [];
-  photo_url: any;
+  photo_url: any=null;
   photo_event_service:any=null;
   photo_sendin_service: any;
   //take it from back
@@ -35,12 +35,13 @@ export class HomeComponent implements OnInit {
   current_user = {
     first_name: 'none',
     last_name: 'none',
-    photo: '../../assets/images/img5.svg',
+    photo:this.photo_url,
     _id: '',
   };
   flag_type = false;
   constructor(private service: ServicService, private router: Router, private sanitizer:DomSanitizer) {
     this.refresh();
+    this.get_user_photo();
   }
 
   ngOnInit(): void {}
@@ -96,9 +97,7 @@ export class HomeComponent implements OnInit {
 
 
   get_user_photo() {
-    if(!this.service.user.photo)
-      return;
-
+  
     this.service.get_photo().subscribe((photo) => {
             const photo_blob = new Blob([new Uint8Array(photo.photo.Body.data)], {
               type: photo.photo.ContentType,
@@ -107,7 +106,7 @@ export class HomeComponent implements OnInit {
             
             let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
             console.log(imageSrc);
-            
+            this.current_user.photo=imageSrc;
         }
     );
   }

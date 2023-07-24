@@ -7,7 +7,7 @@ export class users {
   phone_namber: any;
   password: any;
   _id: any;
-  photo: any;
+   photo: any;
   exams: any; //exam that contain the array of exam that user take it and the degree of each exam
 
   set_first_name(value: any) {
