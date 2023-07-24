@@ -213,7 +213,7 @@ public change_pass(new_pass:any):Observable<any>{
 }
 
 public get_photo():Observable<any>{
-  return this.http.get<any>(`${this.apiServerUrl}/home/change_pass`, { withCredentials: true });
+  return this.http.get<any>(`${this.apiServerUrl}/home/get_photo`, { withCredentials: true });
 }
 
 }
