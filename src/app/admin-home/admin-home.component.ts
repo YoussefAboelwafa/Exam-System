@@ -14,6 +14,10 @@ export class AdminHomeComponent implements OnInit {
     _id: '1256893',
   };
   flag_type = false;
+  photo_url: any;
+  photo_event_service:any=null;
+  photo_sendin_service: any;
+
   constructor(private service: ServicService) {
     this.service.home_bar_init().subscribe((x) => {
       this.service.user = x.user;
@@ -24,9 +28,11 @@ export class AdminHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-  onFileSelect(event: any) {
-    const file = event.target.files[0];
 
+
+    onFileSelect(event: any) {
+    const file = event.target.files[0];
+    this.photo_event_service = event;
     if (!(file instanceof Blob)) {
       console.error('Invalid file type');
       return;
@@ -37,21 +43,46 @@ export class AdminHomeComponent implements OnInit {
 
     // Set up an event listener for when the file is loaded
     reader.onload = (event: any) => {
-      // this.service.user.photo=event.target.result;
-      // console.log(this.service.user.photo)
-      this.current_user.photo = event.target.result;
+      // this.service.user.photo = event.target.result;
+      this.photo_url = event.target.result;
+      // this.current_user.photo=event.target.result;
       // Reset the input field
       event.target.value = '';
     };
     // Read the file as a data URL
     reader.readAsDataURL(file);
+  }
 
-    //service change photo
-    // this.service.change_photo(this.service.user.get_photo().subscribe(
-    //            (x)=> {
+  add_user_photo() {
 
-    //            error:(error: HttpErrorResponse) =>alert(error.message);
-    //             }
-    //          )
+    if(this.photo_event_service==null){
+      return;
+    }
+    const inputElement = this.photo_event_service.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      this.photo_sendin_service = inputElement.files[0];
+    }
+
+    if (this.photo_sendin_service) {
+      const formData = new FormData();
+      formData.append('photo', this.photo_sendin_service);
+
+      this.service.change_photo_admin(formData).subscribe((x) => {
+        if (x.success) {
+          console.log(x);
+          this.current_user.photo = this.photo_url;
+          this.service.user.photo = this.photo_url;
+          this.photo_event_service=null;
+        } else {
+          //error message
+        }
+      });
+    }
+  }
+
+
+  get_user_photo() {
+
+
   }
 }

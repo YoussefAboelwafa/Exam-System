@@ -19,7 +19,9 @@ export class HomeComponent implements OnInit {
   upcoming_exam: any[] = [];
   token_exam: any[] = [];
   ids_exams: any[] = [];
-
+  photo_url: any;
+  photo_event_service:any=null;
+  photo_sendin_service: any;
   //take it from back
   non_token_exam: any = {
     title: 'Algoritms',
@@ -38,36 +40,13 @@ export class HomeComponent implements OnInit {
   flag_type = false;
   constructor(private service: ServicService, private router: Router) {
     this.refresh();
-
-    // this.current_user = {
-    //   first_name: this.service.user.get_first_name(),
-    //   last_name: this.service.user.get_last_name(),
-    //   photo: this.service.user.get_photo(),
-    //   _id: this.service.user.get_id(),
-    // };
-    // this.service.is_signin().subscribe
-    //        (
-    //          (x)=> {
-    //           if(x.signed_in==true){
-    //           this.current_user._id=x.user.id;
-    //           this.current_user.first_name=x.user.first_name;
-    //          this.current_user.last_name=x.user.last_name;
-    //           this.current_user.photo=x.user.photo;
-    //           }
-    //           else{
-    //             this.router.navigate(['/login'])
-    //           }
-
-    //          error:(error: HttpErrorResponse) =>alert(error.message);
-    //           }
-    //        )
   }
 
   ngOnInit(): void {}
 
   onFileSelect(event: any) {
     const file = event.target.files[0];
-
+    this.photo_event_service = event;
     if (!(file instanceof Blob)) {
       console.error('Invalid file type');
       return;
@@ -78,21 +57,47 @@ export class HomeComponent implements OnInit {
 
     // Set up an event listener for when the file is loaded
     reader.onload = (event: any) => {
-      this.service.user.photo = event.target.result;
-
+      // this.service.user.photo = event.target.result;
+      this.photo_url = event.target.result;
+      // this.current_user.photo=event.target.result;
       // Reset the input field
       event.target.value = '';
     };
     // Read the file as a data URL
     reader.readAsDataURL(file);
+  }
 
-    //service change photo
-    // this.service.change_photo(this.service.user.get_photo().subscribe(
-    //            (x)=> {
+  add_user_photo() {
 
-    //            error:(error: HttpErrorResponse) =>alert(error.message);
-    //             }
-    //          )
+    if(this.photo_event_service==null){
+      return;
+    }
+    const inputElement = this.photo_event_service.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      this.photo_sendin_service = inputElement.files[0];
+    }
+
+    if (this.photo_sendin_service) {
+      const formData = new FormData();
+      formData.append('photo', this.photo_sendin_service);
+
+      this.service.change_photo_user(formData).subscribe((x) => {
+        if (x.success) {
+          console.log(x);
+          this.current_user.photo = this.photo_url;
+          this.service.user.photo = this.photo_url;
+          this.photo_event_service=null;
+        } else {
+          //error message
+        }
+      });
+    }
+  }
+
+
+  get_user_photo() {
+
+
   }
 
   refresh() {
@@ -149,8 +154,8 @@ export class HomeComponent implements OnInit {
       this.service.token_ex = z;
       this.token_exam = z;
       this.service.exam_bar_init().subscribe((x) => {
-        if(x.length==0){
-          x=[];
+        if (x.length == 0) {
+          x = [];
         }
         this.service.non_token = x;
       });

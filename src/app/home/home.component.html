@@ -2,13 +2,19 @@
   <nav class="section12">
     <div class="section section1">
       <div class="name" *ngIf="current_user">
-        <input
+        <!-- <input
           type="file"
           accept="image/*"
           class="file-input"
           (change)="onFileSelect($event)"
-        />
-        <div class="image" id="img_home"></div>
+        />  -->
+        <img
+          data-toggle="modal"
+          data-target="#edit_photo"
+          class="image"
+          id="img_home"
+          [src]="current_user.photo"
+        >
         <div class="name2">
           <label
             >{{ current_user.first_name }} {{ current_user.last_name }}</label
@@ -60,8 +66,59 @@
         <h1 class="typing"></h1>
       </ngx-typed-js>
     </div>
-    
   </div>
 </div>
+
 <!-- skipLocationChange="true"
   routerLink="home/exam"   -->
+
+<div
+  class="modal fade"
+  id="edit_photo"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group input-group mb-3">
+          <input
+            type="file"
+            accept="image/*"
+            class="form-control"
+            id="inputGroupFile02"
+            #url
+            (change)="onFileSelect($event)"
+          />
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          data-dismiss="modal"
+          id="addphoto"
+          (click)="add_user_photo()"
+          
+        >
+          Add <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

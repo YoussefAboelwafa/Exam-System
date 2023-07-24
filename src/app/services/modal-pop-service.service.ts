@@ -69,7 +69,7 @@ export class ModalPopServiceService {
   }
   public open_error_book(error:any) {
     this.error_message =error;
-    this.title = 'Book Error Message !';
+    this.title = 'Message !';
     const errorMessageElement = document.getElementById('error-message');
     if (errorMessageElement) {
       errorMessageElement.textContent = this.error_message;

@@ -31,7 +31,7 @@ export class AdminNewsComponent implements OnInit {
       _id: '',
     },
   ];
-
+ 
   urls: any = [
     'https://placehold.co/1000x200',
     'https://placehold.co/1000x200',
@@ -64,8 +64,8 @@ export class AdminNewsComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.flag_type = true;
-
     this.my_add_event = event;
+
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
       this.add_url_to_service = inputElement.files[0];
@@ -75,9 +75,11 @@ export class AdminNewsComponent implements OnInit {
       console.log(this.add_url_to_service);
     }
     this.appendUrl(this.my_add_event);
-    console.log(this.my_add_event);
-    
+     
   }
+
+
+  
   addNews(title: string, blog: string) {
     const object = {
       title: title,
@@ -88,8 +90,7 @@ export class AdminNewsComponent implements OnInit {
 
      
 
-    console.log(this.add_url_to_service);
-
+ 
     
     
 

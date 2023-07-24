@@ -56,8 +56,11 @@ public is_signin():Observable<any>{
 }
 
 // it take url of the new photo of the user and return no thing
-public change_photo(url:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/change_photo`,{url:url}, { withCredentials: true });
+public change_photo_user(formdata:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/change_photo`,{formdata:formdata}, { withCredentials: true });
+}
+public change_photo_admin(formdata:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/change_photo`,{formdata:formdata}, { withCredentials: true });
 }
 
 // when i enter home bar i send request and want to receive json that contains {user:user,non_taken_exam:any exam that the user does not take it yet}
@@ -198,6 +201,15 @@ public get_blogs_user(number_of_blogs:any,page_number:any):Observable<any>{
    { withCredentials: true, responseType: 'text' });
 }
 
+public get_code_to_change_pass(email:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/home/get_code_change_pass`,{email:email}, { withCredentials: true });
+}
+public verify_code_to_change_pass(code:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/home/verify_code_change_pass`,{code:code}, { withCredentials: true });
+}
 
+public change_pass(new_pass:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/home/change_pass`,{new_pass:new_pass}, { withCredentials: true });
+}
 
 }
