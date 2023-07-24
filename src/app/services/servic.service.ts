@@ -57,10 +57,10 @@ public is_signin():Observable<any>{
 
 // it take url of the new photo of the user and return no thing
 public change_photo_user(formdata:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/change_photo`,{formdata:formdata}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/home/change_photo`,formdata, { withCredentials: true });
 }
 public change_photo_admin(formdata:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/change_photo`,{formdata:formdata}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/home/change_photo`,formdata, { withCredentials: true });
 }
 
 // when i enter home bar i send request and want to receive json that contains {user:user,non_taken_exam:any exam that the user does not take it yet}
@@ -210,6 +210,10 @@ public verify_code_to_change_pass(code:any):Observable<any>{
 
 public change_pass(new_pass:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/home/change_pass`,{new_pass:new_pass}, { withCredentials: true });
+}
+
+public get_photo():Observable<any>{
+  return this.http.get<any>(`${this.apiServerUrl}/home/get_photo`, { withCredentials: true });
 }
 
 }
