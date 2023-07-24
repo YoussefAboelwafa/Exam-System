@@ -92,10 +92,12 @@ export class AdminExamsComponent implements OnInit {
     }
     this.close_popup();
   }
-  confirm_edit(ed_title: any, ed_about: any) {
+  confirm_edit(ed_title: any, ed_about: any,ed_time:any) {
     this.non_token_exam[this.edit_index].title = ed_title;
     this.non_token_exam[this.edit_index].about = ed_about;
     this.non_token_exam[this.edit_index].info = this.information;
+    this.non_token_exam[this.edit_index].exam_time = ed_time;
+
     this.service.non_token=this.non_token_exam;
     this.close_popup();
 
@@ -110,12 +112,25 @@ export class AdminExamsComponent implements OnInit {
       });
   }
 
-  add_exam() {
+  add_exam(hours:any, minutes:any) {
+    let time:string=''
+    if(hours<9){
+      time='0'+hours
+    }
+    else{
+      time=''+hours;
+    }
+    if(minutes<9){
+      time+=':0'+minutes;
+    }
+    else{
+      time+=':'+minutes;
+    }
     let x = new exams();
     x.title = this.title_add;
     x.about = this.about_add;
     x.info = this.information;
-    x.exam_time=this.time_exam_add;
+    x.exam_time=time;
     this.non_token_exam.push(x);
     this.close_popup();
 
