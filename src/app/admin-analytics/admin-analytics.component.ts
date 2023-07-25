@@ -10,35 +10,168 @@ import { registerables } from 'chart.js';
 export class AdminAnalyticsComponent implements OnInit {
   constructor() {}
 
-  ctx: any;
-  config: any;
-  chartData: number[] = [];
-  chartDatalabels: any[] = [];
+  bar_ctx: any;
+  bar_config: any;
+  bar_chartData: number[] = [];
+  bar_chartDatalabels: any[] = [];
+
+  pie_ctx: any;
+  pie_config: any;
+  pie_chartData: number[] = [];
+  pie_chartDatalabels: any[] = [];
+
+  ret_ctx: any;
+  ret_config: any;
+  ret_chartData: number[] = [];
+  ret_chartDatalabels: any[] = [];
 
   ngOnInit() {
-    this.chartData.push(3);
-    this.chartData.push(5);
+    this.barChartDemo();
+    this.retentionChartDemo();
+  }
 
-    this.chartDatalabels.push('C++');
-    this.chartDatalabels.push('Algorithm');
+  barChartDemo() {
+    this.bar_chartData.push(10);
+    this.bar_chartData.push(20);
+    this.bar_chartData.push(55);
+    this.bar_chartData.push(42);
+    this.bar_chartData.push(23);
+    this.bar_chartData.push(15);
+    this.bar_chartData.push(53);
+    this.bar_chartData.push(65);
+    this.bar_chartData.push(23);
+    this.bar_chartData.push(15);
+    this.bar_chartData.push(53);
+    this.bar_chartData.push(65);
 
-    this.ctx = document.getElementById('myChart');
-    this.config = {
+    this.bar_chartDatalabels.push('Feb');
+    this.bar_chartDatalabels.push('Jan');
+    this.bar_chartDatalabels.push('Mar');
+    this.bar_chartDatalabels.push('Apr');
+    this.bar_chartDatalabels.push('May');
+    this.bar_chartDatalabels.push('Jun');
+    this.bar_chartDatalabels.push('Jul');
+    this.bar_chartDatalabels.push('Aug');
+    this.bar_chartDatalabels.push('Sep');
+    this.bar_chartDatalabels.push('Oct');
+    this.bar_chartDatalabels.push('Nov');
+    this.bar_chartDatalabels.push('Dec');
+
+    this.bar_ctx = document.getElementById('barChart');
+    this.bar_config = {
       type: 'bar',
-      options: {},
+      options: {
+        transitions: {
+          easing: 'easeInOutCubic', // Use a custom easing function or one of the built-in options like 'linear', 'easeInQuad', 'easeOutCubic', etc.
+          duration: 2000, // Set the duration in milliseconds (2 seconds in this example)
+        },
+      },
       data: {
-        labels: this.chartDatalabels,
+        labels: this.bar_chartDatalabels,
         datasets: [
           {
-            label: 'Monthly Report',
-            data: this.chartData,
+            label: '2020 Monthly Report',
+            data: this.bar_chartData,
             borderWidth: 2,
-            borderColor: 'black',
-            backgroundColor: ['green', 'yellow', 'red'],
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
           },
         ],
       },
     };
-    const myChart = new Chart(this.ctx, this.config);
+    const myChart = new Chart(this.bar_ctx, this.bar_config);
+  }
+  pieChartDemo() {
+    this.pie_chartData.push(10);
+    this.pie_chartData.push(20);
+    this.pie_chartData.push(55);
+    this.pie_chartData.push(42);
+
+    this.pie_chartDatalabels.push('C++');
+    this.pie_chartDatalabels.push('Algorithms');
+    this.pie_chartDatalabels.push('Flutter');
+    this.pie_chartDatalabels.push('Data Structure');
+
+    this.pie_ctx = document.getElementById('myChart');
+    this.pie_config = {
+      type: 'pie',
+      options: {
+        transitions: {
+          easing: 'easeInOutCubic', // Use a custom easing function or one of the built-in options like 'linear', 'easeInQuad', 'easeOutCubic', etc.
+          duration: 2000, // Set the duration in milliseconds (2 seconds in this example)
+        },
+      },
+      data: {
+        labels: this.pie_chartDatalabels,
+        datasets: [
+          {
+            label: 'Report',
+            data: this.pie_chartData,
+            borderWidth: 3,
+            borderColor: 'black',
+            backgroundColor: [
+              'rgba(255, 99, 132)',
+              'rgba(54, 162, 235)',
+              'rgba(255, 206, 86)',
+              'rgba(75, 192, 192)',
+              'rgba(153, 102, 255)',
+              'rgba(255, 159, 64)',
+            ],
+          },
+        ],
+      },
+    };
+    const myChart = new Chart(this.pie_ctx, this.pie_config);
+  }
+  retentionChartDemo() {
+    this.ret_chartData.push(10);
+    this.ret_chartData.push(20);
+    this.ret_chartData.push(55);
+    this.ret_chartData.push(42);
+    this.ret_chartData.push(23);
+    this.ret_chartData.push(15);
+    this.ret_chartData.push(53);
+    this.ret_chartData.push(65);
+    this.ret_chartData.push(23);
+    this.ret_chartData.push(15);
+    this.ret_chartData.push(53);
+    this.ret_chartData.push(65);
+
+    this.ret_chartDatalabels.push('Jan');
+    this.ret_chartDatalabels.push('Feb');
+    this.ret_chartDatalabels.push('Mar');
+    this.ret_chartDatalabels.push('Apr');
+    this.ret_chartDatalabels.push('May');
+    this.ret_chartDatalabels.push('Jun');
+    this.ret_chartDatalabels.push('Jul');
+    this.ret_chartDatalabels.push('Aug');
+    this.ret_chartDatalabels.push('Sep');
+    this.ret_chartDatalabels.push('Oct');
+    this.ret_chartDatalabels.push('Nov');
+    this.ret_chartDatalabels.push('Dec');
+
+    this.ret_ctx = document.getElementById('barChart2');
+    this.ret_config = {
+      type: 'bar',
+      options: {
+        transitions: {
+          easing: 'easeInOutCubic', // Use a custom easing function or one of the built-in options like 'linear', 'easeInQuad', 'easeOutCubic', etc.
+          duration: 2000, // Set the duration in milliseconds (2 seconds in this example)
+        },
+      },
+      data: {
+        labels: this.ret_chartDatalabels,
+        datasets: [
+          {
+            label: '2020 Monthly retention Report',
+            data: this.ret_chartData,
+            borderWidth: 2,
+            borderColor: 'rgba(255, 145, 76,1)',
+            backgroundColor: 'rgba(255, 145, 76,0.2)',
+          },
+        ],
+      },
+    };
+    const myChart = new Chart(this.ret_ctx, this.ret_config);
   }
 }
