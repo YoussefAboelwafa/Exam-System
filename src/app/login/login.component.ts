@@ -47,44 +47,42 @@ export class LoginComponent implements OnInit {
   }
 
   forget_pass_first_step(email: any) {
-    // this.service.get_code_to_change_pass(email).subscribe(
-    //   x=>{
-    //     if(x.success==true){
-    //       $('#forget_pass_send_email').modal('hide');
-    //       $('#verify_email_to_change').modal('show');
-    //     }
-    //     else{
-    //       $('#forget_pass_send_email').modal('hide');
-    //       this.pop_service.open_error_book(x.error);
-    //     }
-    // })
+    this.service.email_change_pass = email;
+    this.service.get_code_to_change_pass(email).subscribe((x) => {
+      if (x.success == true) {
+        $('#forget_pass_send_email').modal('hide');
+        $('#verify_email_to_change').modal('show');
+      } else {
+        $('#forget_pass_send_email').modal('hide');
+        this.pop_service.open_error_book(x.error);
+      }
+    });
   }
 
   forget_pass_second_step(verify_code: any) {
-    // this.service.verify_code_to_change_pass(verify_code).subscribe(
-    //   x=>{
-    //     if(x.success==true){
-    //       $('#verify_email_to_change').modal('hide');
-    //       $('#change_pass').modal('show');
-    //     }
-    //     else{
-    //       $('#verify_email_to_change').modal('hide');
-    //       this.pop_service.open_error_book(x.error);
-    //     }
-    // })
+    this.service.verify_code_to_change_pass(verify_code).subscribe((x) => {
+      if (x.success == true) {
+        $('#verify_email_to_change').modal('hide');
+        $('#change_pass').modal('show');
+      } else {
+        $('#verify_email_to_change').modal('hide');
+        this.pop_service.open_error_book(x.error);
+      }
+    });
   }
 
   forget_pass_final_step(new_pass: any) {
-    // this.service.change_pass(new_pass).subscribe(
-    //   x=>{
-    //     if(x.success==true){
-    //       $('#change_pass').modal('hide');
-    //     }
-    //     else{
-    //       $('#change_pass').modal('hide');
-    //       this.pop_service.open_error_book(x.error);
-    //     }
-    // })
+    if (new_pass.length < 8) {
+      this.pop_service.open_error_book('New Password length  should be >= 8');
+      return;
+    }
+    this.service.change_pass(new_pass).subscribe((x) => {
+      if (x.success == true) {
+        $('#change_pass').modal('hide');
+      } else {
+        $('#change_pass').modal('hide');
+        this.pop_service.open_error_book(x.error);
+      }
+    });
   }
-
- }
+}

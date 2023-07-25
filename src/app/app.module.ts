@@ -29,6 +29,7 @@ import {Chart} from 'chart.js'
 import { registerables } from 'chart.js';
 Chart.register(...registerables)
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicService } from '../services/servic.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-home',
@@ -7,18 +8,18 @@ import { ServicService } from '../services/servic.service';
   styleUrls: ['./admin-home.component.css'],
 })
 export class AdminHomeComponent implements OnInit {
-  current_user = {
-    first_name: 'Ahmed',
-    last_name: 'Ali',
-    photo: '../../assets/images/img5.svg',
-    _id: '1256893',
-  };
+  
   flag_type = false;
-  photo_url: any;
+  photo_url: any=null;
   photo_event_service:any=null;
   photo_sendin_service: any;
-
-  constructor(private service: ServicService) {
+current_user = {
+    first_name: 'Ahmed',
+    last_name: 'Ali',
+    photo:this.photo_url,
+    _id: '1256893',
+  };
+  constructor(private service: ServicService, private sanitizer:DomSanitizer) {
     this.service.home_bar_init().subscribe((x) => {
       this.service.user = x.user;
       this.current_user.first_name = x.user.first_name;
@@ -67,7 +68,7 @@ export class AdminHomeComponent implements OnInit {
       const formData = new FormData();
       formData.append('photo', this.photo_sendin_service);
 
-      this.service.change_photo_admin(formData).subscribe((x) => {
+      this.service.change_photo_user(formData).subscribe((x) => {
         if (x.success) {
           console.log(x);
           this.current_user.photo = this.photo_url;
@@ -82,7 +83,22 @@ export class AdminHomeComponent implements OnInit {
 
 
   get_user_photo() {
-
-
+  
+  
+    this.service.get_photo().subscribe((photo) => {
+            if(photo.success==false){
+              this.service.user.photo='../../assets/images/img5.svg';
+              this.current_user.photo='../../assets/images/img5.svg';
+              return;
+            }
+            const photo_blob = new Blob([new Uint8Array(photo.photo.Body.data)], {
+              type: photo.photo.ContentType,
+            });
+            
+            let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
+            console.log(imageSrc);
+            this.current_user.photo=imageSrc;
+        }
+    );
   }
 }

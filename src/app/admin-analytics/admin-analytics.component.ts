@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { registerables } from 'chart.js';
 
+
 @Component({
   selector: 'app-admin-analytics',
   templateUrl: './admin-analytics.component.html',
