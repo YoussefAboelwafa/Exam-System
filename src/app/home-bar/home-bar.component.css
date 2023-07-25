@@ -419,7 +419,7 @@ li:is(:hover, .active) i {
 }
 .closebtn {
   border-radius: 50%;
-  margin-right: 140px;
+  top: 15%;
 }
 .order {
   font-size: 24px;

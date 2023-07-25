@@ -18,6 +18,7 @@ export class ServicService {
   token_ex!:any[];
   non_token!:any[];
   ids_ex!:any[];
+  email_change_pass:any;
   constructor(private http: HttpClient) { }
 
   
@@ -59,10 +60,6 @@ public is_signin():Observable<any>{
 public change_photo_user(formdata:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/home/change_photo`,formdata, { withCredentials: true });
 }
-public change_photo_admin(formdata:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/home/change_photo`,formdata, { withCredentials: true });
-}
-
 // when i enter home bar i send request and want to receive json that contains {user:user,non_taken_exam:any exam that the user does not take it yet}
 public home_bar_init():Observable<any>{
   return this.http.get<any>(`${this.apiServerUrl}/home/home_bar`, { withCredentials: true });
@@ -78,8 +75,7 @@ public exam_bar_init_admin():Observable<any>{
 
 //return id of the
 public add_new_exam(new_exam:any):Observable<any>{
-  console.log(new_exam)
-  return this.http.post<any>(`${this.apiServerUrl}/admin/add_exam`,{new_exam:new_exam}, { withCredentials: true });
+   return this.http.post<any>(`${this.apiServerUrl}/admin/add_exam`,{new_exam:new_exam}, { withCredentials: true });
 }
 
 public edit_exam(id:any,new_exam:any):Observable<any>{
@@ -92,8 +88,7 @@ public remove_exam(id:any):Observable<any>{
 
 
 public add_location(new_locate:any):Observable<any>{
-  console.log(new_locate)
-  return this.http.post<any>(`${this.apiServerUrl}/admin/add_location`,new_locate, { withCredentials: true });
+   return this.http.post<any>(`${this.apiServerUrl}/admin/add_location`,new_locate, { withCredentials: true });
 }
 
 // sooon.....
@@ -202,14 +197,14 @@ public get_blogs_user(number_of_blogs:any,page_number:any):Observable<any>{
 }
 
 public get_code_to_change_pass(email:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/home/get_code_change_pass`,{email:email}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/get_code_change_pass`,{email:email}, { withCredentials: true });
 }
 public verify_code_to_change_pass(code:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/home/verify_code_change_pass`,{code:code}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/verify_code_change_pass`,{code:code,email:this.email_change_pass}, { withCredentials: true });
 }
 
 public change_pass(new_pass:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/home/change_pass`,{new_pass:new_pass}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/change_pass`,{new_pass:new_pass,email:this.email_change_pass}, { withCredentials: true });
 }
 
 public get_photo():Observable<any>{
