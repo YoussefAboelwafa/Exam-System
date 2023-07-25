@@ -25,9 +25,15 @@ export class AdminAnalyticsComponent implements OnInit {
   ret_chartData: number[] = [];
   ret_chartDatalabels: any[] = [];
 
+  score_ctx: any;
+  score_config: any;
+  score_chartData: number[] = [];
+  score_chartDatalabels: any[] = [];
+
   ngOnInit() {
     this.barChartDemo();
     this.retentionChartDemo();
+    this.scoreChartDemo();
   }
 
   barChartDemo() {
@@ -173,5 +179,69 @@ export class AdminAnalyticsComponent implements OnInit {
       },
     };
     const myChart = new Chart(this.ret_ctx, this.ret_config);
+  }
+  scoreChartDemo() {
+    this.score_chartData.push(10);
+    this.score_chartData.push(20);
+    this.score_chartData.push(55);
+    this.score_chartData.push(40);
+    this.score_chartData.push(23);
+    this.score_chartData.push(10);
+    this.score_chartData.push(5);
+    this.score_chartData.push(10);
+    this.score_chartData.push(0);
+    this.score_chartData.push(0);
+
+    this.score_chartDatalabels.push('90-100');
+    this.score_chartDatalabels.push('80-90');
+    this.score_chartDatalabels.push('70-80');
+    this.score_chartDatalabels.push('60-70');
+    this.score_chartDatalabels.push('50-60');
+    this.score_chartDatalabels.push('40-50');
+    this.score_chartDatalabels.push('30-40');
+    this.score_chartDatalabels.push('20-30');
+    this.score_chartDatalabels.push('10-20');
+    this.score_chartDatalabels.push('0-10');
+
+    this.score_ctx = document.getElementById('pieChart2');
+    this.score_config = {
+      type: 'pie',
+      options: {
+        transitions: {
+          easing: 'easeInOutCubic', // Use a custom easing function or one of the built-in options like 'linear', 'easeInQuad', 'easeOutCubic', etc.
+          duration: 2000, // Set the duration in milliseconds (2 seconds in this example)
+        },
+      },
+      data: {
+        labels: this.score_chartDatalabels,
+        datasets: [
+          {
+            label: 'Report',
+            data: this.score_chartData,
+            borderWidth: 6,
+            borderColor: 'white',
+            backgroundColor: [
+              'rgba(0, 50, 55, 1)',
+
+              'rgba(0, 85, 84, 0.9)',
+
+              'rgba(0, 100, 100, 0.7)',
+
+              'rgba(0, 128, 129, 0.6)',
+
+              'rgba(155, 213, 212, 0.5)',
+
+              '	rgb(184,184,184)',
+              '	rgb(160,160,160)',
+              ' rgb(128,128,128)',
+              '	rgb(96,96,96)',
+              '	rgb(64,64,64)',
+              '	rgb(40,40,40)',
+            ],
+          },
+        ],
+      },
+    };
+    const myChart = new Chart(this.score_ctx, this.score_config);
   }
 }

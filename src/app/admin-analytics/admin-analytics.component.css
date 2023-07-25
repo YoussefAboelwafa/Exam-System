@@ -61,6 +61,13 @@
 #myChart {
   margin-top: 2%;
 }
+.pieChart2 {
+  width: 50%;
+  height: 50%;
+
+  text-align: center;
+  align-self: center;
+}
 h1 {
   font-family: "Montserrat", sans-serif;
   font-style: normal;
@@ -161,6 +168,9 @@ h1 {
   box-shadow: 10px 10px 10px 10px rgba(0, 129, 130, 0.16);
   padding: 20px;
   margin-bottom: 2%;
+
+  align-items: center;
+  justify-content: center;
 }
 
 @media only screen and (max-width: 600px) {

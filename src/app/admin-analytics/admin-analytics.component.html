@@ -2,14 +2,22 @@
   <div class="largeBox">
     <h1>Taken Exams Statistics</h1>
     <div class="selection">
-      <select class="form-select" aria-label="Default select example" id="years">
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        id="years"
+      >
         <option selected>Choose year</option>
         <option>2020</option>
         <option>2021</option>
         <option>2022</option>
         <option>2023</option>
       </select>
-      <select class="form-select" aria-label="Default select example" id="months">
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        id="months"
+      >
         <option selected>Choose month</option>
         <option>January</option>
         <option>February</option>
@@ -24,7 +32,14 @@
         <option>November</option>
         <option>December</option>
       </select>
-      <button class="showBtn" data-toggle="modal" data-target="#addmodal" (click)="pieChartDemo()">Show month statistics</button>
+      <button
+        class="showBtn"
+        data-toggle="modal"
+        data-target="#addmodal"
+        (click)="pieChartDemo()"
+      >
+        Show month statistics
+      </button>
     </div>
     <div class="barChart">
       <canvas id="barChart"></canvas>
@@ -34,7 +49,11 @@
   <div class="largeBox">
     <h1>Retention rate Statistics</h1>
     <div class="selection">
-      <select class="form-select" aria-label="Default select example" id="years">
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        id="years"
+      >
         <option selected>Choose year</option>
         <option>2020</option>
         <option>2021</option>
@@ -44,6 +63,22 @@
     </div>
     <div class="barChart">
       <canvas id="barChart2"></canvas>
+    </div>
+  </div>
+  <!-- Score Statistics -->
+  <div class="largeBox">
+    <h1>Scores Statistics</h1>
+    <div class="selection">
+      <select class="form-select" aria-label="Default select example" id="exam">
+        <option selected>Choose exam</option>
+        <option>C++</option>
+        <option>Algorithm</option>
+        <option>Flutter</option>
+        <option>Data Structure</option>
+      </select>
+    </div>
+    <div class="barChart pieChart2">
+      <canvas id="pieChart2"></canvas>
     </div>
   </div>
 </div>
@@ -72,7 +107,7 @@
         </button>
       </div>
       <div class="modal-body">
-       <canvas id = "myChart"></canvas>
+        <canvas id="myChart"></canvas>
       </div>
     </div>
   </div>
