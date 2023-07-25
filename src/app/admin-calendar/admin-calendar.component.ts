@@ -220,6 +220,8 @@ export class AdminCalendarComponent implements OnInit {
   goto_all_student(day: any, month: any, id: any) {
     this.day_all = day;
     this.month_all = month;
+    let ids:any[]=[];
+
     this.service.get_allstudent_inoneday(id).subscribe((x) => {
       this.user_exam = x;
       console.log(x);
@@ -227,10 +229,21 @@ export class AdminCalendarComponent implements OnInit {
         if (this.user_exam[i].percentage == -1) {
           this.user_exam[i].percentage = 0;
         }
+        ids.push(this.user_exam[i]._id_user);
       }
       this.flag_calender = false;
       this.flag_all_student = true;
     });
+
+    // //put urls in this.user_photo_user
+    // this.service.get_photos_in_one_day(ids).subscribe(
+    //   x=>{
+
+    // })
+
+
+
+
   }
 
   add_calendar(add_date: any, add_time: any) {

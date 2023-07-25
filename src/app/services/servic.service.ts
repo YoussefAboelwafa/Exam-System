@@ -211,4 +211,9 @@ public get_photo():Observable<any>{
   return this.http.get<any>(`${this.apiServerUrl}/home/get_photo`, { withCredentials: true });
 }
 
+public get_photos_in_one_day(ids:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/home/get_photos_day`,{ids:ids}, { withCredentials: true });
+}
+
+
 }
