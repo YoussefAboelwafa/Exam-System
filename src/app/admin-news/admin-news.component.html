@@ -11,12 +11,14 @@
 <div class="container">
   <div class="box" *ngFor="let news of News; let i = index">
     <i class="fa-solid fa-trash" (click)="deleteNews(i)"></i>
-    <h1 class="title_blog"><u>{{ news.title }}</u></h1>
+    <h1 class="title_blog">
+      <u>{{ news.title }}</u>
+    </h1>
     <img [attr.src]="news.url" alt="" />
     <p>{{ news.blog }}</p>
   </div>
 </div>
-<div 
+<div
   class="modal fade"
   id="addmodal"
   tabindex="-1"
@@ -58,7 +60,7 @@
             class="form-control"
             id="inputGroupFile02"
             #url
-            (change)="onFileSelected($event)" 
+            (change)="onFileSelected($event)"
           />
         </div>
         <div class="form-group input-group add_div">
@@ -78,7 +80,6 @@
           data-dismiss="modal"
           id="addNews"
           (click)="addNews(title.value, blog.value)"
-          
         >
           Add <i class="fa-solid fa-plus"></i>
         </button>
@@ -86,16 +87,15 @@
     </div>
   </div>
   <div *ngIf="flag_type == true" class="contain">
-  <ngx-typed-js
-    [strings]="['Loading  photo ...']"
-    [loop]="true"
-    [typeSpeed]="200"
-    [backSpeed]="40"
-    [backDelay]="40"
-    [cursorChar]="' '"
-  >
-    <h1 class="typing"></h1>
-  </ngx-typed-js>
+    <ngx-typed-js
+      [strings]="['Loading  photo ...']"
+      [loop]="true"
+      [typeSpeed]="200"
+      [backSpeed]="40"
+      [backDelay]="40"
+      [cursorChar]="' '"
+    >
+      <h1 class="typing"></h1>
+    </ngx-typed-js>
+  </div>
 </div>
-</div>
-

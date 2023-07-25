@@ -1,11 +1,114 @@
-<select id="mySelect"> 
-    <option>January</option> 
-    <option>February</option> 
-    <option>March</option> 
-    <option>April</option> 
-    <option>May</option> 
-    <option>June</option> 
-    <option>July</option> 
- </select> 
- <br> 
- <canvas id="canvas" height="300" width="600"></canvas>  
+<div class="container">
+  <div class="largeBox">
+    <h1>Taken Exams Statistics</h1>
+    <div class="selection">
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        id="years"
+      >
+        <option selected>Choose year</option>
+        <option>2020</option>
+        <option>2021</option>
+        <option>2022</option>
+        <option>2023</option>
+      </select>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        id="months"
+      >
+        <option selected>Choose month</option>
+        <option>January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+      </select>
+      <button
+        class="showBtn"
+        data-toggle="modal"
+        data-target="#addmodal"
+        (click)="pieChartDemo()"
+      >
+        Show month statistics
+      </button>
+    </div>
+    <div class="barChart">
+      <canvas id="barChart"></canvas>
+    </div>
+  </div>
+  <!-- Retation rate -->
+  <div class="largeBox">
+    <h1>Retention rate Statistics</h1>
+    <div class="selection">
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        id="years"
+      >
+        <option selected>Choose year</option>
+        <option>2020</option>
+        <option>2021</option>
+        <option>2022</option>
+        <option>2023</option>
+      </select>
+    </div>
+    <div class="barChart">
+      <canvas id="barChart2"></canvas>
+    </div>
+  </div>
+  <!-- Score Statistics -->
+  <div class="largeBox">
+    <h1>Scores Statistics</h1>
+    <div class="selection">
+      <select class="form-select" aria-label="Default select example" id="exam">
+        <option selected>Choose exam</option>
+        <option>C++</option>
+        <option>Algorithm</option>
+        <option>Flutter</option>
+        <option>Data Structure</option>
+      </select>
+    </div>
+    <div class="barChart pieChart2">
+      <canvas id="pieChart2"></canvas>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="addmodal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Jan 2020</h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
