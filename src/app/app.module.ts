@@ -25,6 +25,10 @@ import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.compo
 import { AdminQuestionsComponent } from './admin-questions/admin-questions.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { NewsBarComponent } from './news-bar/news-bar.component';
+import {Chart} from 'chart.js'
+import { registerables } from 'chart.js';
+
+Chart.register(...registerables)
 @NgModule({
   declarations: [
     AppComponent,

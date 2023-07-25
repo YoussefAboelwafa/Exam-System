@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { exams } from '../objects/exams';
 import { NgxTypedJsModule } from 'ngx-typed-js';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 declare const $: any;
 
 @Component({
@@ -20,8 +20,8 @@ export class HomeComponent implements OnInit {
   upcoming_exam: any[] = [];
   token_exam: any[] = [];
   ids_exams: any[] = [];
-  photo_url: any=null;
-  photo_event_service:any=null;
+  photo_url: any = null;
+  photo_event_service: any = null;
   photo_sendin_service: any;
   //take it from back
   non_token_exam: any = {
@@ -35,11 +35,15 @@ export class HomeComponent implements OnInit {
   current_user = {
     first_name: 'none',
     last_name: 'none',
-    photo:this.photo_url,
+    photo: this.photo_url,
     _id: '',
   };
   flag_type = false;
-  constructor(private service: ServicService, private router: Router, private sanitizer:DomSanitizer) {
+  constructor(
+    private service: ServicService,
+    private router: Router,
+    private sanitizer: DomSanitizer
+  ) {
     this.refresh();
     this.get_user_photo();
   }
@@ -70,8 +74,7 @@ export class HomeComponent implements OnInit {
   }
 
   add_user_photo() {
-
-    if(this.photo_event_service==null){
+    if (this.photo_event_service == null) {
       return;
     }
     const inputElement = this.photo_event_service.target as HTMLInputElement;
@@ -80,14 +83,14 @@ export class HomeComponent implements OnInit {
       formData.append('photo', inputElement.files[0]);
       console.log(formData);
       console.log(inputElement.files);
-      
-      
+
+      this.current_user.photo = this.photo_url;
+
       this.service.change_photo_user(formData).subscribe((x) => {
         if (x.success) {
           console.log(x);
-          this.current_user.photo = this.photo_url;
           this.service.user.photo = this.photo_url;
-          this.photo_event_service=null;
+          this.photo_event_service = null;
         } else {
           //error message
         }
@@ -95,20 +98,24 @@ export class HomeComponent implements OnInit {
     }
   }
 
-
   get_user_photo() {
-  
     this.service.get_photo().subscribe((photo) => {
-            const photo_blob = new Blob([new Uint8Array(photo.photo.Body.data)], {
-              type: photo.photo.ContentType,
-            });
-            console.log(photo_blob);
-            
-            let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
-            console.log(imageSrc);
-            this.current_user.photo=imageSrc;
-        }
-    );
+      if (photo.success == false) {
+        this.service.user.photo = '../../assets/images/img5.svg';
+        this.current_user.photo = '../../assets/images/img5.svg';
+        return;
+      }
+      const photo_blob = new Blob([new Uint8Array(photo.photo.Body.data)], {
+        type: photo.photo.ContentType,
+      });
+      console.log(photo_blob);
+
+      let imageSrc = this.sanitizer.bypassSecurityTrustUrl(
+        URL.createObjectURL(photo_blob)
+      );
+      console.log(imageSrc);
+      this.current_user.photo = imageSrc;
+    });
   }
 
   refresh() {
