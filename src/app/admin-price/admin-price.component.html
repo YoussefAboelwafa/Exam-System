@@ -1,0 +1,83 @@
+<div class="locations">
+  <button
+    data-toggle="modal"
+    data-target="#addlocationmodal"
+    class="addlocationbtn"
+  >
+    Add location <i class="fa-solid fa-plus"></i>
+  </button>
+  <!-- ng for -->
+  <div
+    *ngFor="let locate of address; let i = index"
+    class="card card-body taken"
+  >
+    <div class="remove_edit">
+      <!-- <button (click)="edit_address(locate,i)">
+          <i
+          class="fa-solid fa-pen"
+          data-toggle="modal"
+          data-target="#editlocationmodal"
+          ></i>
+        </button> -->
+      <button
+        (click)="remove_address(locate, i)"
+        data-toggle="modal"
+        data-target="#confirm_adress"
+      >
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    </div>
+    <table>
+        <tr>
+        <div class="card-text takenbox">
+          <td><label class="card-title">Currency</label></td>
+          <td>
+            <div class="takeninfo">
+              <label>{{ locate.country }}</label>
+            </div>
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <div class="card-text takenbox">
+          <td><label class="card-title">Country</label></td>
+          <td>
+            <div class="takeninfo">
+              <label>{{ locate.country }}</label>
+            </div>
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <div class="card-text takenbox">
+          <td><label class="card-title">Total Price</label></td>
+          <td>
+            <div class="takeninfo">
+              <label>{{ locate.city }}</label>
+            </div>
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <div class="card-text takenbox">
+          <td><label class="card-title">Discount For monthly Subs</label></td>
+          <td>
+            <div class="takeninfo">
+              <label>{{ locate.location }}</label>
+            </div>
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <div class="card-text takenbox">
+          <td><label class="card-title">Discount For Annual Subs</label></td>
+          <td>
+            <div class="takeninfo">
+              <label>{{ locate.capacity }}</label>
+            </div>
+          </td>
+        </div>
+      </tr>
+    </table>
+  </div>
+</div>

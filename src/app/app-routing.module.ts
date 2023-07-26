@@ -15,6 +15,7 @@ import { AdminLocationBarComponent } from './admin-location-bar/admin-location-b
 import { AdminQuestionsComponent } from './admin-questions/admin-questions.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { NewsBarComponent } from './news-bar/news-bar.component';
+import { AdminPriceComponent } from './admin-price/admin-price.component';
 
 
 const routes: Routes = [
@@ -36,7 +37,7 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
 
-    canActivate: [GuardServiceService],
+    // canActivate: [GuardServiceService],
 
     children: [
       {
@@ -57,7 +58,7 @@ const routes: Routes = [
     path: 'admin_home',
     component: AdminHomeComponent,
 
-    canActivate: [GuardServiceService],
+    // canActivate: [GuardServiceService],
     
     children: [
       {
@@ -83,6 +84,10 @@ const routes: Routes = [
       {
         path: 'admin_news',
         component: AdminNewsComponent,
+      },
+      {
+        path: 'admin_prices',
+        component: AdminPriceComponent,
       },
     ],
   },

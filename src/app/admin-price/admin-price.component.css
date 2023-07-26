@@ -1,0 +1,195 @@
+.locations {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+  gap: 2%;
+}
+.addlocationbtn {
+  font-size: larger;
+  font-weight: 400;
+  border-radius: 9px;
+  background: #008182;
+  color: #fff;
+  box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+  width: 100%;
+  padding: 12px 8px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border: none;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+.addlocationbtn:hover {
+  background: #fff;
+  color: #008182;
+  border: 1px solid #008182;
+  transition: 0.5s;
+}
+.remove_edit {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: flex-end;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+.remove_edit button {
+  all: unset;
+  font-size: 20px;
+  margin-right: 4%;
+  color: #008182;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.takenbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  text-align: center;
+  width: 20vw;
+  height: 8vh;
+}
+.takeninfo {
+  color: #008182;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 5px 5px 5px 5px rgba(0, 129, 130, 0.16);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5px;
+ }
+.card-title {
+  color: #008182;
+  font-size: 20px;
+  font-weight: 300;
+  margin-left: 2%;
+  margin-right: 4%;
+}
+.card {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .card h5 {
+    font-size: 16px;
+  }
+
+  .card a {
+    font-size: 10px;
+  }
+  
+.takeninfo label {
+  font-size: 22px;
+  font-weight: 700;
+}
+.taken {
+  border-radius: 10px;
+  background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
+  box-shadow: 0px 0px 25px 0px rgba(247, 144, 81, 0.15);
+  justify-content: left;
+  height: fit-content;
+  position: relative;
+  margin-bottom: 1%;
+}
+.taken h5 {
+  font-size: 18px;
+}
+.taken i:hover {
+  color: #ff0052;
+}
+td {
+    width: 80%;
+     margin-top: 2%;
+}
+ 
+
+  @media screen and (max-width: 700px) {
+    .container1 {
+      flex-wrap: wrap;
+      overflow: unset;
+    }
+    .carousel {
+      width: 100%;
+      margin-left: 0;
+    }
+  
+    .goodmorningwidgets,
+    .discoverexamswidgets {
+      width: 100%;
+      overflow: unset;
+    }
+  
+    .card {
+      width: 100%;
+      margin-right: 0;
+    }
+  
+    .card h5 {
+      font-size: 16px;
+    }
+  
+    .card a {
+      font-size: 10px;
+    }
+  
+    .upcoming h5,
+    .taken h5,
+    .rank h5 {
+      font-size: 18px;
+    }
+  
+    .discoverexamslabel a {
+      right: auto;
+      left: 10%;
+      font-size: 12px;
+    }
+  
+    .modal-title {
+      font-size: 24px;
+    }
+  
+    .modal-footer button {
+      width: 100%;
+    }
+  
+    .modal-body {
+      font-size: 14px;
+    }
+  
+    .upcominginfo label,
+    .takeninfo label {
+      font-size: 10px;
+    }
+  
+    .examlist li {
+      font-size: 8px;
+    }
+  
+    .order,
+    h3 {
+      font-size: 10px;
+    }
+  
+    #select,
+    #btn,
+    .circle {
+      width: 100%;
+    }
+  
+    .discoversmallbox2 .discoverexamname1 {
+      font-size: 12px;
+    }
+  
+    .discoversmallbox2 .discoverscore1 {
+      font-size: 48px;
+    }
+  }
