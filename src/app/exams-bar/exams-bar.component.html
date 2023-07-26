@@ -94,7 +94,7 @@
 <div class="discoverexamswidgets">
   <!-- ngfor ya kimoo -->
 
-  <div *ngFor="let non_token of non_token_exam"  class="card card-body upcoming">
+  <div *ngFor="let non_token of non_token_exam" class="card card-body upcoming">
     <h5 class="card-title">{{ non_token.title }}</h5>
     <div class="discoverbox1">
       <div class="discoversmallbox">
@@ -122,11 +122,9 @@
       </div>
     </div>
   </div>
-  <ng-container *ngIf="non_token_exam!=null&&non_token_exam.length == 0">
-    <div class="upcominginfo" style="font-weight: 600; font-size: 15px ">
-      <p >
-        Stay tuned .....
-      </p>
+  <ng-container *ngIf="non_token_exam != null && non_token_exam.length == 0">
+    <div class="upcominginfo" style="font-weight: 600; font-size: 15px">
+      <p>Stay tuned .....</p>
     </div>
   </ng-container>
 </div>
@@ -302,7 +300,8 @@
       >
         <option>Select a day</option>
         <option *ngFor="let appoint of calendar; let i = index">
-          {{ appoint.day_number }} : {{ appoint.day_name }} : {{appoint.month_name}}
+          {{ appoint.day_number }} : {{ appoint.day_name }} :
+          {{ appoint.month_name }}
         </option>
       </select>
 
@@ -327,7 +326,7 @@
         style="background-color: gray"
         type="submit"
       >
-      Pay Now
+        Show Reciept
       </button>
       <button
         *ngIf="
@@ -337,7 +336,7 @@
         id="btn"
         type="submit"
       >
-      Pay Now
+        Show Reciept
       </button>
       <div class="circle">
         <i class="fa-regular fa-circle"></i>
@@ -486,4 +485,64 @@
     </div>
   </div>
 </div>
+
+<div
+  class="modal fade"
+  id="reciept"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Payment Reciept</h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput1"
+            >Total: {{ reciept.total_amount }}</label
+          >
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput2"
+            >Discount: {{ reciept.discount }}</label
+          >
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3"
+            >Total After Discount:
+            {{ reciept.total_amount - reciept.discount }}</label
+          >
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="addnewprice" (click)="pay_now()">
+          Pay Naw <i class="fa-solid fa-plus"></i>
+        </button>
+        <button
+          (click)="close()"
+          type="button"
+          id="addnewprice"
+          style="background-color: #ff0052"
+        >
+          Cancel <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <app-pop-up></app-pop-up>

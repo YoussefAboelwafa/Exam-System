@@ -170,7 +170,7 @@
             Learn More
           </button>
           <button
-            (click)="take_exam(non_token_exam.title, non_token_exam.id)"
+            (click)="take_exam(non_token_exam.title, non_token_exam._id)"
             class="discoverbtns takeagain"
           >
             Take exam
@@ -376,7 +376,7 @@
         style="background-color: gray"
         type="submit"
       >
-        Pay Now
+        Show Reciept
       </button>
       <button
         *ngIf="
@@ -386,7 +386,7 @@
         id="btn"
         type="submit"
       >
-        Pay Now
+        Show Reciept
       </button>
       <div class="circle">
         <i class="fa-regular fa-circle"></i>
@@ -415,7 +415,7 @@
 <!-- mesage template -->
 
 <div
-  *ngIf="non_token_exam != undefined && non_token_exam.turn_on_off != 0"
+  *ngIf="non_token_exam.turn_on_off != 0"
   class="modal fade"
   id="not_token_exam"
   tabindex="-1"
@@ -529,4 +529,64 @@
     </div>
   </div>
 </div>
+
+<div
+  class="modal fade"
+  id="reciept"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Payment Reciept</h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput1"
+            >Total: {{ reciept.total_amount }}</label
+          >
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput2"
+            >Discount: {{ reciept.discount }}</label
+          >
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3"
+            >Total After Discount:
+            {{ reciept.total_amount - reciept.discount }}</label
+          >
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="addnewprice" (click)="pay_now()">
+          Pay Naw <i class="fa-solid fa-plus"></i>
+        </button>
+        <button
+          (click)="close()"
+          type="button"
+          id="addnewprice"
+          style="background-color: #ff0052"
+        >
+          Cancel <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <app-pop-up></app-pop-up>

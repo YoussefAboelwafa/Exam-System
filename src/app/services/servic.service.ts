@@ -215,5 +215,23 @@ public get_photos_in_one_day(ids:any):Observable<any>{
   return this.http.post(`${this.apiServerUrl}/admin/get_photos`,{user_ids:ids}, { withCredentials: true, responseType: 'text' });
 }
 
+public get_countries():Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/get_countries`, { withCredentials: true });
+}
+public get_prices():Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/get_prices`, { withCredentials: true });
+}
+public add_price(new_price:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/add_price`,{new_price:new_price}, { withCredentials: true });
+}
+public remove_price(_id_price:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/remove_price`,{_id_price:_id_price}, { withCredentials: true });
+}
+public get_payment_reciept():Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/get_reciept`, { withCredentials: true });
+}
+
+
+
 
 }

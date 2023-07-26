@@ -31,7 +31,7 @@ export class AdminAnalyticsComponent implements OnInit {
   score_chartData: number[] = [];
   score_chartDatalabels: any[] = [];
 
-  ngOnInit() {
+  ngOnInit() { 
     this.barChartDemo();
     this.retentionChartDemo();
     this.scoreChartDemo();
@@ -89,6 +89,7 @@ export class AdminAnalyticsComponent implements OnInit {
     const myChart = new Chart(this.bar_ctx, this.bar_config);
   }
   pieChartDemo() {
+  
     this.pie_chartData.push(10);
     this.pie_chartData.push(20);
     this.pie_chartData.push(55);
