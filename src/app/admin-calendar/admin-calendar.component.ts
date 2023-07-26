@@ -6,6 +6,7 @@ import { address } from '../objects/loction_address';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ModalPopServiceService } from '../services/modal-pop-service.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import { firstValueFrom, forkJoin } from 'rxjs';
 declare const $: any;
 
 @Component({
@@ -223,44 +224,35 @@ export class AdminCalendarComponent implements OnInit {
     this.month_all = month;
     let ids:any[]=[];
 
-    this.service.get_allstudent_inoneday(id).subscribe((x) => {
-      this.user_exam = x;
-      console.log(x);
-      for (var i = 0; i < this.user_exam.length; i++) {
-        if (this.user_exam[i].percentage == -1) {
-          this.user_exam[i].percentage = 0;
+    const getAllStudentPromise = firstValueFrom(this.service.get_allstudent_inoneday(id))
+    .then((x) => {
+        this.user_exam = x;
+        console.log(x);
+        for (var i = 0; i < this.user_exam.length; i++) {
+          if (this.user_exam[i].percentage == -1) {
+            this.user_exam[i].percentage = 0;
+          }
+          ids.push(this.user_exam[i]._id_user);
         }
-        ids.push(this.user_exam[i]._id_user);
-      }
-      this.flag_calender = false;
-      this.flag_all_student = true;
-    });
+        this.flag_calender = false;
+        this.flag_all_student = true;
+      })
 
     //put urls in this.user_photo_user
-    this.service.get_photos_in_one_day(ids).subscribe({
-      next: (photos) => {
-          photos = photos.slice(0, -3)
-          photos.split('\n\r\n').forEach((photo: any) => {
-            photo = JSON.parse(photo)
-            const photo_blob = new Blob([new Uint8Array(photo.Body.data)], {
-              type: photo.photo.ContentType,
-            });
-            console.log(photo_blob);
-            
-            let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
-                  
+    this.service.get_photos_in_one_day(id)
+    .subscribe(async (photos) => {
+        photos = photos.slice(0, -3)
+        await getAllStudentPromise;
+        ///put users in a map and then assign each photo to him
+        photos.split('\n\r\n').forEach((photo: any) => {
+          photo = JSON.parse(photo)
+          const photo_blob = new Blob([new Uint8Array(photo.Body.data)], {
+            type: photo.photo.ContentType,
           });
-        },
-        complete: () => {
-          console.log('done');
-        },
-        error: (error) => {
-          console.log(error);
-        }
-    })
-
-
-
+          console.log(photo_blob);
+          let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));   
+        });
+      })
 
   }
 
