@@ -10,13 +10,35 @@ import { ServicService } from '../services/servic.service';
   styleUrls: ['./admin-analytics.component.css'],
 })
 export class AdminAnalyticsComponent implements OnInit {
+  fullData: any = {}
+  monthData: { [key: string]: any } = {};
   constructor(private service: ServicService) {
+    this.service.get_analytics().subscribe((entries:any) => {
+      this.fullData = entries;
+      entries.forEach((entry: any) => {
+        const key = `${entry.year}-${entry.month}`;
 
-    this.service.get_analytics().subscribe((x:any) => {
-      console.log(x);
+        if (!this.monthData[key]) {
+          this.monthData[key] = {
+            bookingsCount: 0,
+            retentionRate: 0,
+            exams: {} as {[key: string]: any}
+          };
+        }
 
-       })
-    
+        this.monthData[key].bookingsCount += entry.bookingsCount;
+        this.monthData[key].retentionRate += entry.retentionRate / entries.length;
+
+        if(!this.monthData[key].exams[entry.exam]){
+          this.monthData[key].exams[entry.exam] = 0
+        }
+        this.monthData[key].exams[entry.exam] += entry.bookingsCount
+
+      });
+
+      console.log(this.monthData);
+      
+    })
   }
 
   bar_ctx: any;
