@@ -54,36 +54,49 @@ export class HomeBarComponent implements OnInit {
   token_exam: exams[] = [];
   ids_exams: any[] = [];
   //take it from back
-  non_token_exam: any = {};
+  non_token_exam = new exams();
   learn_dataof_nontoken = new exams();
   learn_dataof_token = new exams();
   // ranking_exam:any;
 
+  reciept: any = {
+    total_amount: 1000,
+    discount: 400,
+  };
+
   ngOnInit(): void {}
 
-  constructor(private service: ServicService, private router: Router,private popup: ModalPopServiceService) {
-  
+  constructor(
+    private service: ServicService,
+    private router: Router,
+    private popup: ModalPopServiceService
+  ) {
     const queryParams = new URLSearchParams(window.location.search);
     const paramsObj: any = {};
     for (const [name, value] of queryParams.entries()) {
       paramsObj[name] = value;
     }
-    if(paramsObj['type']!=undefined&&paramsObj['orderStatus']!=undefined&&paramsObj.length!=0){
-
-        if(paramsObj['statusCode']=="200"){
-
-          this.service.book_exam(paramsObj['merchantRefNumber'],paramsObj['signature'],paramsObj['referenceNumber']).subscribe(
-            x=>{
-              if(x.success==false){
-               this.popup.open_error_book(x.error);
-              }
-          })
-        }
-        this.router.navigate(['/home/home_bar']);
+    if (
+      paramsObj['type'] != undefined &&
+      paramsObj['orderStatus'] != undefined &&
+      paramsObj.length != 0
+    ) {
+      if (paramsObj['statusCode'] == '200') {
+        this.service
+          .book_exam(
+            paramsObj['merchantRefNumber'],
+            paramsObj['signature'],
+            paramsObj['referenceNumber']
+          )
+          .subscribe((x) => {
+            if (x.success == false) {
+              this.popup.open_error_book(x.error);
+            }
+          });
+      }
+      this.router.navigate(['/home/home_bar']);
     }
-    
 
-    
     this.refresh_all();
     this.upcoming_exam = this.service.upcoming_ex;
     this.token_exam = this.service.token_ex;
@@ -91,10 +104,7 @@ export class HomeBarComponent implements OnInit {
     if (this.service.non_token !== undefined) {
       this.non_token_exam = this.service.non_token[0];
     }
-
-
   }
-
 
   refresh_all() {
     this.service.get_places().subscribe((x) => {
@@ -218,53 +228,62 @@ export class HomeBarComponent implements OnInit {
     this.flag_time = true;
   }
   submit_time() {
-    let book_exam= {
+
+
+    this.service.get_payment_reciept().subscribe(x=>{
+      if(x.success==true){
+        this.reciept=x.reciept;
+
+      }
+      else{
+        this.popup.open_error_book(x.error)
+      }
+    })
+    $('#reciept').modal('show');
+
+
+    // this.reset_order_exam();
+    // //service becouse i need Day of exam and Appointment then next step
+    // this.clear_flag_book();
+  }
+
+  pay_now() {
+    let book_exam = {
       location_id: this.id_location,
       day_id: this.day_id,
       exam_id: this.book_id_exam,
       snack: this.select_snacks,
       appointment: this.selectedappointment,
     };
-    
-  this.service.payment(book_exam).subscribe(
-          x=>{
-            if(x.success==true) {
-              window.location.href =x.token;
-            }
-            else{
-              this.popup.open_error_book(x.error);
-            }
-    })
-  
-     
 
-    
-    this.reset_order_exam();
-    //service becouse i need Day of exam and Appointment then next step
-    this.clear_flag_book();
-
-    //send notification and reset order exam
-    this.router.navigate(['home/home_bar']);
+    this.service.payment(book_exam).subscribe((x) => {
+      if (x.success == true) {
+        window.location.href = x.token;
+      } else {
+        this.popup.open_error_book(x.error);
+      }
+    });
   }
 
   take_exam(name_exam: any, id_exam: any) {
     this.book_title_course = name_exam;
     //becouse if the user click take exam from modal,hide pop up if it show
-    this.book_id_exam = id_exam; 
-    console.log(this.book_id_exam)
-     this.reset_order_exam();
+    this.book_id_exam = id_exam;
+    console.log(this.book_id_exam);
+    this.reset_order_exam();
     $('#not_token_exam').modal('hide');
     $('#token_exam').modal('hide');
     this.flag_book = true;
   }
- 
+
   close_book() {
     this.clear_flag_book();
     this.reset_order_exam();
     this.refresh_all();
+  }
 
-    console.log(this.calendar);
-
+  close() {
+    $('#reciept').modal('hide');
   }
 
   learn_non_token(value_send_by_btn_learn: any) {
@@ -276,7 +295,6 @@ export class HomeBarComponent implements OnInit {
   }
 
   onCountrySelected(event: Event) {
-    
     this.selectedCountry = (event.target as HTMLSelectElement).value;
     // Call your function here with the selectedCountry value
     //flag==1 that meen filter
@@ -305,7 +323,7 @@ export class HomeBarComponent implements OnInit {
     this.citys = this.all_locations
       .map((cont: any) => cont.cities)
       [this.index_country].map((c: any) => c.city_name);
-      console.log(this.calendar);
+    console.log(this.calendar);
   }
 
   oncitySelected(event: Event) {
@@ -334,8 +352,7 @@ export class HomeBarComponent implements OnInit {
       .map((cont: any) => cont.cities)
       [this.index_country].map((c: any) => c.locations)
       [this.index_city].map((c: any) => c.location_name);
-      console.log(this.calendar);
-
+    console.log(this.calendar);
   }
 
   onlocationSelected(event: Event) {
@@ -366,9 +383,7 @@ export class HomeBarComponent implements OnInit {
       [this.index_country].map((c: any) => c.locations)
       [this.index_city].map((c: any) => c._id)[this.index_location];
 
-
-      console.log(this.calendar);
-
+    console.log(this.calendar);
   }
 
   onselectsnack(event: Event) {

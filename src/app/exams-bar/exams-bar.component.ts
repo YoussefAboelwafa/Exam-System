@@ -71,6 +71,10 @@ export class ExamsBarComponent implements OnInit {
   avilable_time: any;
   ids_exams: any[] = [];
 
+  reciept: any = {
+    total_amount: 1000,
+    discount: 400,
+  };
   constructor(private service: ServicService, private router: Router,private popup:ModalPopServiceService) {
     this.refresh_all();
     // this.upcoming_exam=this.service.upcoming_ex;
@@ -205,29 +209,41 @@ export class ExamsBarComponent implements OnInit {
     this.flag_time = true;
   }
   submit_time() {
-    let book_exam= {
+
+
+    this.service.get_payment_reciept().subscribe(x=>{
+      if(x.success==true){
+        this.reciept=x.reciept;
+
+      }
+      else{
+        this.popup.open_error_book(x.error)
+      }
+    })
+    $('#reciept').modal('show');
+
+
+    // this.reset_order_exam();
+    // //service becouse i need Day of exam and Appointment then next step
+    // this.clear_flag_book();
+  }
+
+  pay_now() {
+    let book_exam = {
       location_id: this.id_location,
       day_id: this.day_id,
       exam_id: this.book_id_exam,
       snack: this.select_snacks,
       appointment: this.selectedappointment,
-    };    
-  this.service.payment(book_exam).subscribe(
-          x=>{
-            if(x.success==true) {
-              window.location.href =x.token;
-            }
-            else{
-              this.popup.open_error_book(x.error);
-            }
-    })
-  
- 
-    //service becouse i need Day of exam and Appointment then next step
-    this.reset_order_exam();
-    this.refresh_all();
-    this.clear_flag_book();
-    //send notification and reset order exam
+    };
+
+    this.service.payment(book_exam).subscribe((x) => {
+      if (x.success == true) {
+        window.location.href = x.token;
+      } else {
+        this.popup.open_error_book(x.error);
+      }
+    });
   }
 
   take_exam(name_exam: any, id_exam: any) {
@@ -367,5 +383,9 @@ export class ExamsBarComponent implements OnInit {
 
   ontimeselect(event: Event) {
     this.selectedappointment = (event.target as HTMLSelectElement).value;
+  }
+
+  close() {
+    $('#reciept').modal('hide');
   }
 }

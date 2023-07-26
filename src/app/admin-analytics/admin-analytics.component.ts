@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { registerables } from 'chart.js';
+import { ServicService } from '../services/servic.service';
 
 
 @Component({
@@ -9,7 +10,14 @@ import { registerables } from 'chart.js';
   styleUrls: ['./admin-analytics.component.css'],
 })
 export class AdminAnalyticsComponent implements OnInit {
-  constructor() {}
+  constructor(private service: ServicService) {
+
+    this.service.get_analytics().subscribe((x:any) => {
+      console.log(x);
+
+       })
+    
+  }
 
   bar_ctx: any;
   bar_config: any;
@@ -31,7 +39,7 @@ export class AdminAnalyticsComponent implements OnInit {
   score_chartData: number[] = [];
   score_chartDatalabels: any[] = [];
 
-  ngOnInit() {
+  ngOnInit() { 
     this.barChartDemo();
     this.retentionChartDemo();
     this.scoreChartDemo();
@@ -89,6 +97,7 @@ export class AdminAnalyticsComponent implements OnInit {
     const myChart = new Chart(this.bar_ctx, this.bar_config);
   }
   pieChartDemo() {
+  
     this.pie_chartData.push(10);
     this.pie_chartData.push(20);
     this.pie_chartData.push(55);

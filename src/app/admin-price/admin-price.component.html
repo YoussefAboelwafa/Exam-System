@@ -1,14 +1,10 @@
 <div class="locations">
-  <button
-    data-toggle="modal"
-    data-target="#addlocationmodal"
-    class="addlocationbtn"
-  >
-    Add location <i class="fa-solid fa-plus"></i>
+  <button data-toggle="modal" data-target="#add_price" class="addlocationbtn">
+    Add Price <i class="fa-solid fa-plus"></i>
   </button>
   <!-- ng for -->
   <div
-    *ngFor="let locate of address; let i = index"
+    *ngFor="let price of curr_prices; let i = index"
     class="card card-body taken"
   >
     <div class="remove_edit">
@@ -20,30 +16,30 @@
           ></i>
         </button> -->
       <button
-        (click)="remove_address(locate, i)"
         data-toggle="modal"
-        data-target="#confirm_adress"
+        data-target="#confirm_rv"
+        (click)="remove(price,i)"
       >
         <i class="fa-solid fa-trash"></i>
       </button>
     </div>
     <table>
-        <tr>
+      <tr>
         <div class="card-text takenbox">
-          <td><label class="card-title">Currency</label></td>
+          <td><label class="card-title">Country</label></td>
           <td>
             <div class="takeninfo">
-              <label>{{ locate.country }}</label>
+              <label>{{ price.country }}</label>
             </div>
           </td>
         </div>
       </tr>
       <tr>
         <div class="card-text takenbox">
-          <td><label class="card-title">Country</label></td>
+          <td><label class="card-title">Currency</label></td>
           <td>
             <div class="takeninfo">
-              <label>{{ locate.country }}</label>
+              <label>{{ price.currency }}</label>
             </div>
           </td>
         </div>
@@ -53,7 +49,7 @@
           <td><label class="card-title">Total Price</label></td>
           <td>
             <div class="takeninfo">
-              <label>{{ locate.city }}</label>
+              <label>{{ price.total_amount }}</label>
             </div>
           </td>
         </div>
@@ -63,7 +59,7 @@
           <td><label class="card-title">Discount For monthly Subs</label></td>
           <td>
             <div class="takeninfo">
-              <label>{{ locate.location }}</label>
+              <label>{{ price.month_discount }} %</label>
             </div>
           </td>
         </div>
@@ -73,7 +69,7 @@
           <td><label class="card-title">Discount For Annual Subs</label></td>
           <td>
             <div class="takeninfo">
-              <label>{{ locate.capacity }}</label>
+              <label>{{ price.year_dicount }} %</label>
             </div>
           </td>
         </div>
@@ -81,3 +77,170 @@
     </table>
   </div>
 </div>
+
+<div
+  class="modal fade"
+  id="add_price"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Country:</label>
+          <div class="dropdown countrydiv">
+            <select
+              class="form-control"
+              id="countrySelect"
+              class="dropdown-toggle"
+              (change)="oncountryselect($event)"
+            >
+              <option selected>Country</option>
+              <option *ngFor="let country of countries">{{ country }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput2">Currency:</label>
+          <div class="dropdown countrydiv">
+            <select
+              class="form-control"
+              id="currencySelect"
+              class="dropdown-toggle"
+              (change)="oncurrencyselect($event)"
+            >
+              <option selected>Currency</option>
+              <option *ngFor="let Currency of currencies">
+                {{ Currency }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">Total Price:</label>
+          <input
+            type="number"
+            min="0"
+            class="form-control"
+            id="exampleFormControlInput3"
+            placeholder="Enter the total Amount of price"
+            value=""
+            #add_total
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput4"
+            >Discount For monthly Subs:</label
+          >
+          <input
+            type="number"
+            min="0"
+            max="100"
+            class="form-control"
+            id="exampleFormControlInput4"
+            placeholder="Enter the percentage of the monthly discount (%)"
+            value=""
+            #add_month_discount
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput4"
+            >Discount For Annual Subs:</label
+          >
+          <input
+            type="number"
+            min="0"
+            max="100"
+            value=""
+            class="form-control"
+            id="exampleFormControlInput4"
+            placeholder="Enter the percentage of the Annual discount (%)"
+            #add_year_discount
+          />
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button
+         type="button"
+          id="addnewprice"
+          (click)="add_price(add_total.value,add_month_discount.value,add_year_discount.value)">
+          Add <i class="fa-solid fa-plus"></i>
+        </button>
+        <button
+          (click)="close()"
+          type="button"
+          id="addnewprice"
+          style="background-color: #ff0052"
+        >
+          Cancel <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div
+  class="modal fade"
+  id="confirm_rv"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          <p style="color: red">Confirmation Remove</p>
+        </h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body" style="color: red">
+        Are you sure you want to remove this price?
+      </div>
+      <div class="modal-footer">
+        <button (click)="totaly_remove()" class="discoverbtns btn_exam">
+          YES
+        </button>
+        <button
+          style="background-color: #ff0052"
+          class="discoverbtns btn_exam"
+          (click)="close()"
+        >
+          NO
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-pop-up></app-pop-up>

@@ -31,6 +31,7 @@ export class AdminLocationBarComponent implements OnInit {
 
   constructor(private service: ServicService) {
     this.get_all_place();
+    
   }
 
   ngOnInit(): void {}
