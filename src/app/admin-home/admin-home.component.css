@@ -404,7 +404,6 @@ li.active button {
   opacity: 0;
 }
 #img_home {
-  background: url("../../assets/images/img5.svg");
   border-radius: 200px;
   width: 110px;
   height: 81px;

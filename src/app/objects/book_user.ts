@@ -3,7 +3,7 @@ export class book_user {
   last_name: any;
   _id_user: any;
   exam_id: any;
-  photo_user: any = '../../assets/images/img5.svg';
+  photo_user: any = 'https://cdn-icons-png.flaticon.com/512/1946/1946429.png';
   exam_title: any;
   location: any;
   appointment: any;

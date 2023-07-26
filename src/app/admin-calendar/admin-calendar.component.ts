@@ -239,20 +239,39 @@ export class AdminCalendarComponent implements OnInit {
       })
 
     //put urls in this.user_photo_user
+   
     this.service.get_photos_in_one_day(id)
     .subscribe(async (photos) => {
         photos = photos.slice(0, -3)
         await getAllStudentPromise;
+     const myMap = new Map<any, any>();
+    for (let i=0; i<this.user_exam.length; i++){
+      myMap.set(this.user_exam[i]._id_user, this.user_exam[i]);
+    }
         ///put users in a map and then assign each photo to him
         photos.split('\n\r\n').forEach((photo: any) => {
           photo = JSON.parse(photo)
-          const photo_blob = new Blob([new Uint8Array(photo.Body.data)], {
-            type: photo.photo.ContentType,
-          });
-          console.log(photo_blob);
-          let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));   
+          if(photo.contentLength === 0){
+            /// user doesn't have a photo
+            myMap.get(photo.user_id).photo_user="https://cdn-icons-png.flaticon.com/512/1946/1946429.png";
+          }else{
+            const photo_blob = new Blob([new Uint8Array(photo.Body.data)], {
+              type: photo.ContentType,
+            });
+            console.log(photo_blob);
+            let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
+            console.log(myMap)
+            console.log(photo.user_id)
+            myMap.get(photo.user_id).photo_user=imageSrc;
+            console.log(photo.user_id)
+            console.log(this.user_exam);
+
+          }
+
         });
+
       })
+
 
   }
 

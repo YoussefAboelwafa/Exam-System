@@ -82,7 +82,7 @@ close {
 }
 .card {
   width: 22vw;
-  height: 35vh;
+  height: 38vh;
   margin-right: 2%;
   margin-bottom: 15px;
 }
@@ -149,8 +149,8 @@ close {
   display: inline;
   width: 100px;
   height: 100px;
-  background: url("../../assets/images/img5.svg");
   background-repeat: no-repeat;
+  border-radius: 20px;
 }
 .btn-icon{
   all: unset;

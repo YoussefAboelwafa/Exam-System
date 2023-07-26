@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { address } from '../objects/loction_address';
-import { Prices } from '../objects/prices';
 import { ModalPopServiceService } from '../services/modal-pop-service.service';
 import { ServicService } from '../services/servic.service';
+import { Prices } from '../objects/prices';
 declare const $: any;
+
 
 @Component({
   selector: 'app-admin-price',

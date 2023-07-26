@@ -26,6 +26,7 @@ current_user = {
       this.current_user.last_name = x.user.last_name;
       this.current_user._id = x.user._id;
     });
+    this.get_user_photo();
   }
 
   ngOnInit(): void {}
@@ -87,8 +88,8 @@ current_user = {
   
     this.service.get_photo().subscribe((photo) => {
             if(photo.success==false){
-              this.service.user.photo='../../assets/images/img5.svg';
-              this.current_user.photo='../../assets/images/img5.svg';
+              this.service.user.photo='https://cdn-icons-png.flaticon.com/512/1946/1946429.png'
+              this.current_user.photo='https://cdn-icons-png.flaticon.com/512/1946/1946429.png'
               return;
             }
             const photo_blob = new Blob([new Uint8Array(photo.photo.Body.data)], {
