@@ -212,7 +212,7 @@ public get_photo():Observable<any>{
 }
 
 public get_photos_in_one_day(ids:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/home/get_photos_day`,{ids:ids}, { withCredentials: true });
+  return this.http.post(`${this.apiServerUrl}/admin/get_photos`,{user_ids:ids}, { withCredentials: true, responseType: 'text' });
 }
 
 
