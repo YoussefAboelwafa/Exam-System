@@ -15,6 +15,6 @@ export class AppComponent {
       router.navigateByUrl(previousUrl);
       localStorage.removeItem('previousUrl');
     }
-    //  this.router.navigate(['']);
+    //  this.router.navigate(['admin_home/admin_analytics']);
    }
 }

@@ -13,6 +13,7 @@ export class AdminAnalyticsComponent implements OnInit {
   fullData: any = {}
   monthData: { [key: string]: any } = {};
   constructor(private service: ServicService) {
+
     this.service.get_analytics().subscribe((entries:any) => {
       this.fullData = entries;
       entries.forEach((entry: any) => {
@@ -37,9 +38,17 @@ export class AdminAnalyticsComponent implements OnInit {
       });
 
       console.log(this.monthData);
-      
+          const allKeys = Object.keys(this.monthData['2023-7']);
+    console.log(allKeys);
     })
-  }
+    
+
+
+    }
+
+
+// Getting all keys using the keys() method
+
 
   bar_ctx: any;
   bar_config: any;
