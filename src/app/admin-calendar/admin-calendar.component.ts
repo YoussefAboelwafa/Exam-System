@@ -5,6 +5,7 @@ import { ServicService } from '../services/servic.service';
 import { address } from '../objects/loction_address';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ModalPopServiceService } from '../services/modal-pop-service.service';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 declare const $: any;
 
 @Component({
@@ -51,7 +52,7 @@ export class AdminCalendarComponent implements OnInit {
   temp_city_address: any;
   temp_location_address: any;
   temp_calender: any;
-  constructor(private service: ServicService,private popup:ModalPopServiceService) {
+  constructor(private service: ServicService,private popup:ModalPopServiceService, private sanitizer:DomSanitizer) {
     this.service.get_places().subscribe((x) => {
       this.all_locations = x;
       this.country = x.map((cont: any) => cont.country_name);
@@ -235,11 +236,28 @@ export class AdminCalendarComponent implements OnInit {
       this.flag_all_student = true;
     });
 
-    // //put urls in this.user_photo_user
-    // this.service.get_photos_in_one_day(ids).subscribe(
-    //   x=>{
-
-    // })
+    //put urls in this.user_photo_user
+    this.service.get_photos_in_one_day(ids).subscribe({
+      next: (photos) => {
+          photos = photos.slice(0, -3)
+          photos.split('\n\r\n').forEach((photo: any) => {
+            photo = JSON.parse(photo)
+            const photo_blob = new Blob([new Uint8Array(photo.Body.data)], {
+              type: photo.photo.ContentType,
+            });
+            console.log(photo_blob);
+            
+            let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
+                  
+          });
+        },
+        complete: () => {
+          console.log('done');
+        },
+        error: (error) => {
+          console.log(error);
+        }
+    })
 
 
 
