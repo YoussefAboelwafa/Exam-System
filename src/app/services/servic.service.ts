@@ -12,8 +12,8 @@ import { map } from 'rxjs/operators';
 
 
 export class ServicService {
-  private apiServerUrl = 'https://dark-ruby-slug.cyclic.app';
-  user!: users;
+  private apiServerUrl = 'https://vast-lime-bluefish-gear.cyclic.app';
+  user:any=new users();
   upcoming_ex!:any[];
   token_ex!:any[];
   non_token!:any[];
@@ -216,10 +216,10 @@ public get_photos_in_one_day(ids:any):Observable<any>{
 }
 
 public get_countries():Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/get_countries`, { withCredentials: true });
+  return this.http.get<any>(`${this.apiServerUrl}/admin/get_countries`, { withCredentials: true });
 }
 public get_prices():Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/get_prices`, { withCredentials: true });
+  return this.http.get<any>(`${this.apiServerUrl}/admin/get_prices`, { withCredentials: true });
 }
 public add_price(new_price:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/add_price`,{new_price:new_price}, { withCredentials: true });
@@ -228,10 +228,12 @@ public remove_price(_id_price:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/remove_price`,{_id_price:_id_price}, { withCredentials: true });
 }
 public get_payment_reciept():Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/get_reciept`, { withCredentials: true });
+  return this.http.get<any>(`${this.apiServerUrl}/admin/get_reciept`, { withCredentials: true });
 }
 
-
+public get_analytics():Observable<any>{
+  return this.http.get<any>(`${this.apiServerUrl}/admin/analytics`,{ withCredentials: true });
+}
 
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { registerables } from 'chart.js';
+import { ServicService } from '../services/servic.service';
 
 
 @Component({
@@ -9,7 +10,14 @@ import { registerables } from 'chart.js';
   styleUrls: ['./admin-analytics.component.css'],
 })
 export class AdminAnalyticsComponent implements OnInit {
-  constructor() {}
+  constructor(private service: ServicService) {
+
+    this.service.get_analytics().subscribe((x:any) => {
+      console.log(x);
+
+       })
+    
+  }
 
   bar_ctx: any;
   bar_config: any;
