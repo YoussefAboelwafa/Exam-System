@@ -15,6 +15,6 @@ export class AppComponent {
     //   router.navigateByUrl(previousUrl);
     //   localStorage.removeItem('previousUrl');
     // }
-     this.router.navigate(['home/home_bar']);
+     this.router.navigate(['home/exam_bar']);
    }
 }

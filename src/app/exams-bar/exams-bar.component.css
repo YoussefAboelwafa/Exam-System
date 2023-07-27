@@ -1,3 +1,6 @@
+.container{
+  padding: 2%;
+}
 .contain {
   background: rgba(0, 0, 0, 0.082);
   backdrop-filter: blur(5px);
@@ -113,7 +116,7 @@ div {
 }
 .goodmorningwidgets,
 .discoverexamswidgets {
-  width: 98%;
+  width: 90%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -506,9 +509,8 @@ li:is(:hover, .active) i {
 
 @media screen and (max-width: 700px) {
 
-  .container1{
-    flex-wrap: wrap;
-    overflow: unset;
+  .container{
+    padding: 5%;
   }
   .carousel {
     width: 100%;

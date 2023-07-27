@@ -1,3 +1,6 @@
+.container1{
+  padding:1%;
+}
 div {
   font-family: "Montserrat", sans-serif;
 }
@@ -616,7 +619,7 @@ h3 {
   .discoversmallbox2 .discoverscore1 {
     font-size: 48px;
   }
-  .seemore2{
+  .seemore2,.seemore3{
     display: none;
   }
 }

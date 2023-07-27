@@ -1,134 +1,136 @@
-<div class="goodmorninglabel">
-  <p>Upcoming exams</p>
-</div>
-<div class="goodmorningwidgets">
-  <!-- start div with class upcoming indicate to style of this card -->
-  <div *ngFor="let exam of upcoming_exam" class="card card-body upcoming">
-    <h5 class="card-title">{{ exam.title }}</h5>
-    <div class="card-text upcomingbox">
-      <!-- ng for -->
-      <div class="upcominginfo">
-        <label class="smallbox">{{ exam.location }}</label>
-        <label class="smallbox">{{ exam.city }}</label>
-        <label class="smallbox">{{ exam.country }}</label>
-      </div>
-      <div class="upcominginfo">
-        <label class="smallbox">{{ exam.day }}</label>
-        <!-- <label class="smallbox">Sunday</label> -->
-        <label class="smallbox">{{ exam.appointment }}</label>
-      </div>
-      <div class="upcominginfo">
-        <label class="smallbox">{{ exam.snack }}</label>
-      </div>
-    </div>
+<div class="container">
+  <div class="goodmorninglabel">
+    <p>Upcoming exams</p>
   </div>
-  <ng-container *ngIf="upcoming_exam.length == 0">
-    <div class="upcominginfo" style="font-weight: 600; font-size: 15px">
-      <p>
-        You have worked hard to get to where you are today, and you deserve to
-        be recognized for your skills and expertise. Taking the exam can help
-        you achieve the recognition and success you deserve. You have what it
-        takes to pass this exam and take your career to the next level. Believe
-        in yourself and take the leap – book your exam today and show the world
-        what you're capable of!
-      </p>
-    </div>
-  </ng-container>
-</div>
-<!-- taken exams section -->
-<div class="discoverexamslabel">
-  <p>Taken Exams</p>
-</div>
-<div class="discoverexamswidgets">
-  <!-- ngfor ya kimoo -->
-  <div *ngFor="let token of token_exam" class="card card-body upcoming">
-    <!-- Not taken again -->
-    <h5 class="card-title">{{ token.title }}</h5>
-    <div class="discoverbox1">
-      <div class="discoversmallbox">
-        <label class="discoverexamname">Your last mark</label>
-        <label class="discoverscore">{{ token.percentage }}%</label>
-      </div>
-      <div class="discoverinfo">
-        <button
-          (click)="learn_token(token)"
-          data-toggle="modal"
-          data-target="#token_exam"
-          class="discoverbtns learnmore"
-        >
-          Learn More
-        </button>
-        <button
-          *ngIf="token.percentage != 100"
-          (click)="take_exam(token.title, token._id)"
-          class="discoverbtns takeagain"
-        >
-          Take exam again
-        </button>
-        <button
-          disabled
-          *ngIf="token.percentage == 100"
-          id="disable_btn"
-          class="discoverbtns takeagain"
-        >
-          Take exam again
-        </button>
+  <div class="discoverexamswidgets">
+    <!-- start div with class upcoming indicate to style of this card -->
+    <div *ngFor="let exam of upcoming_exam" class="card card-body upcoming">
+      <h5 class="card-title">{{ exam.title }}</h5>
+      <div class="card-text upcomingbox">
+        <!-- ng for -->
+        <div class="upcominginfo">
+          <label class="smallbox">{{ exam.location }}</label>
+          <label class="smallbox">{{ exam.city }}</label>
+          <label class="smallbox">{{ exam.country }}</label>
+        </div>
+        <div class="upcominginfo">
+          <label class="smallbox">{{ exam.day }}</label>
+          <!-- <label class="smallbox">Sunday</label> -->
+          <label class="smallbox">{{ exam.appointment }}</label>
+        </div>
+        <div class="upcominginfo">
+          <label class="smallbox">{{ exam.snack }}</label>
+        </div>
       </div>
     </div>
+    <ng-container *ngIf="upcoming_exam.length == 0">
+      <div class="upcominginfo" style="font-weight: 600; font-size: 15px">
+        <p>
+          You have worked hard to get to where you are today, and you deserve to
+          be recognized for your skills and expertise. Taking the exam can help
+          you achieve the recognition and success you deserve. You have what it
+          takes to pass this exam and take your career to the next level. Believe
+          in yourself and take the leap – book your exam today and show the world
+          what you're capable of!
+        </p>
+      </div>
+    </ng-container>
   </div>
-
-  <ng-container *ngIf="token_exam.length == 0">
-    <div class="upcominginfo" style="font-weight: 600; font-size: 15px">
-      <p>
-        You have not taken the exam yet. You can now book the exam. What are you
-        waiting for?
-      </p>
-    </div>
-  </ng-container>
-</div>
-
-<!-- non_token_exam section -->
-<div class="discoverexamslabel">
-  <p>Other Exams</p>
-</div>
-<div class="discoverexamswidgets">
-  <!-- ngfor ya kimoo -->
-
-  <div *ngFor="let non_token of non_token_exam" class="card card-body upcoming">
-    <h5 class="card-title">{{ non_token.title }}</h5>
-    <div class="discoverbox1">
-      <div class="discoversmallbox">
-        <ul class="examlist">
-          <li *ngFor="let infomration of non_token.info">
-            {{ infomration }}
-          </li>
-        </ul>
-      </div>
-      <div class="discoverinfo">
-        <button
-          (click)="learn_non_token(non_token)"
-          data-toggle="modal"
-          data-target="#not_token_exam"
-          class="discoverbtns learnmore"
-        >
-          Learn More
-        </button>
-        <button
-          (click)="take_exam(non_token.title, non_token._id)"
-          class="discoverbtns takeagain"
-        >
-          Take exam
-        </button>
-      </div>
-    </div>
+  <!-- taken exams section -->
+  <div class="discoverexamslabel">
+    <p>Taken Exams</p>
   </div>
-  <ng-container *ngIf="non_token_exam != null && non_token_exam.length == 0">
-    <div class="upcominginfo" style="font-weight: 600; font-size: 15px">
-      <p>Stay tuned .....</p>
+  <div class="discoverexamswidgets">
+    <!-- ngfor ya kimoo -->
+    <div *ngFor="let token of token_exam" class="card card-body upcoming">
+      <!-- Not taken again -->
+      <h5 class="card-title">{{ token.title }}</h5>
+      <div class="discoverbox1">
+        <div class="discoversmallbox">
+          <label class="discoverexamname">Your last mark</label>
+          <label class="discoverscore">{{ token.percentage }}%</label>
+        </div>
+        <div class="discoverinfo">
+          <button
+            (click)="learn_token(token)"
+            data-toggle="modal"
+            data-target="#token_exam"
+            class="discoverbtns learnmore"
+          >
+            Learn More
+          </button>
+          <button
+            *ngIf="token.percentage != 100"
+            (click)="take_exam(token.title, token._id)"
+            class="discoverbtns takeagain"
+          >
+            Take exam again
+          </button>
+          <button
+            disabled
+            *ngIf="token.percentage == 100"
+            id="disable_btn"
+            class="discoverbtns takeagain"
+          >
+            Take exam again
+          </button>
+        </div>
+      </div>
     </div>
-  </ng-container>
+  
+    <ng-container *ngIf="token_exam.length == 0">
+      <div class="upcominginfo" style="font-weight: 600; font-size: 15px">
+        <p>
+          You have not taken the exam yet. You can now book the exam. What are you
+          waiting for?
+        </p>
+      </div>
+    </ng-container>
+  </div>
+  
+  <!-- non_token_exam section -->
+  <div class="discoverexamslabel">
+    <p>Other Exams</p>
+  </div>
+  <div class="discoverexamswidgets">
+    <!-- ngfor ya kimoo -->
+  
+    <div *ngFor="let non_token of non_token_exam" class="card card-body upcoming">
+      <h5 class="card-title">{{ non_token.title }}</h5>
+      <div class="discoverbox1">
+        <div class="discoversmallbox">
+          <ul class="examlist">
+            <li *ngFor="let infomration of non_token.info">
+              {{ infomration }}
+            </li>
+          </ul>
+        </div>
+        <div class="discoverinfo">
+          <button
+            (click)="learn_non_token(non_token)"
+            data-toggle="modal"
+            data-target="#not_token_exam"
+            class="discoverbtns learnmore"
+          >
+            Learn More
+          </button>
+          <button
+            (click)="take_exam(non_token.title, non_token._id)"
+            class="discoverbtns takeagain"
+          >
+            Take exam
+          </button>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="non_token_exam != null && non_token_exam.length == 0">
+      <div class="upcominginfo" style="font-weight: 600; font-size: 15px">
+        <p>Stay tuned .....</p>
+      </div>
+    </ng-container>
+  </div>
+  
 </div>
-
 <!-- booking exam -->
 
 <div *ngIf="flag_book == true" class="contain">
