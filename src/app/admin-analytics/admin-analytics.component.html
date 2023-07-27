@@ -6,38 +6,36 @@
         class="form-select"
         aria-label="Default select example"
         id="years"
+        (change)="change_year_chart1($event)"
       >
         <option selected>Choose year</option>
-        <option>2020</option>
-        <option>2021</option>
-        <option>2022</option>
-        <option>2023</option>
+        <option *ngFor="let year of distinctyears">{{year}}</option>
+
       </select>
       <select
         class="form-select"
         aria-label="Default select example"
         id="months"
+        (change)="change_month_chart1($event)"
+
       >
         <option selected>Choose month</option>
-        <option>January</option>
-        <option>February</option>
-        <option>March</option>
-        <option>April</option>
-        <option>May</option>
-        <option>June</option>
-        <option>July</option>
-        <option>August</option> 
-        <option>September</option>
-        <option>October</option>
-        <option>November</option>
-        <option>December</option>
+        <option *ngFor="let month of distinctmonth">{{month}}</option>
       </select>
       <button
         class="showBtn"
         data-toggle="modal"
-        data-target="#addmodal"
-        (click)="pieChartDemo()"
+        data-target="#open_piechart"
+        (click)="open_piechart()"
+        *ngIf="selectedmonth1!='Choose month'"
       >
+        Show month statistics
+      </button>
+      <button
+        class="showBtndis"
+        *ngIf="selectedmonth1=='Choose month'"
+        disabled
+        >
         Show month statistics
       </button>
     </div>
@@ -45,6 +43,8 @@
       <canvas id="barChart"></canvas>
     </div>
   </div>
+
+
   <!-- Retation rate -->
   <div class="largeBox">
     <h1>Retention rate Statistics</h1>
@@ -53,12 +53,10 @@
         class="form-select"
         aria-label="Default select example"
         id="years"
+        (change)="change_year_chart2($event)"
       >
-        <option selected>Choose year</option>
-        <option>2020</option>
-        <option>2021</option>
-        <option>2022</option>
-        <option>2023</option>
+      <option selected>Choose year</option>
+      <option *ngFor="let year of distinctyears">{{year}}</option>
       </select>
     </div>
     <div class="barChart">
@@ -86,7 +84,7 @@
 
 <div
   class="modal fade"
-  id="addmodal"
+  id="open_piechart"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalCenterTitle"
@@ -95,7 +93,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Jan 2020</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">{{months_name[selectedmonth1-1]}} {{selectedyear1}}</h5>
         <button class="outer_button" disabled>
           <button
             type="button"

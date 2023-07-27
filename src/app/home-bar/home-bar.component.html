@@ -556,16 +556,42 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="exampleFormControlInput1"
-            >Total: {{ reciept.total_amount }}</label
+            ><span style="color:black;">Exam Name:</span> {{ book_title_course }}</label
+          >
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1"
+            ><span style="color: black;">Location:</span> {{ selectedlocation }}</label
+          >
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1"
+            ><span style="color: black;">Day:</span> {{selectedday}}</label
+          >
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1"
+            ><span style="color: black;">Appointment:</span> {{selectedappointment}}</label
+          >
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1"
+            ><span style="color: black;">Snack:</span> {{ select_snacks }}</label
           >
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput2"
-            >Discount: {{ reciept.discount }}</label
+            ><span style="color: black;">Total Amount:</span> {{ reciept.total_amount }}</label
           >
         </div>
         <div class="form-group">
-          <label for="exampleFormControlInput3"
+          <label for="exampleFormControlInput2"
+            ><span style="color: black;">Discount:</span> {{ reciept.discount }}</label
+          >
+        </div>
+        <hr>
+        <div class="form-group">
+          <label for="exampleFormControlInput3" style="color: #FF914C;"
             >Total After Discount:
             {{ reciept.total_amount - reciept.discount }}</label
           >

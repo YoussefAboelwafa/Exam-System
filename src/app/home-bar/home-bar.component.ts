@@ -233,7 +233,6 @@ export class HomeBarComponent implements OnInit {
     this.service.get_payment_reciept().subscribe(x=>{
       if(x.success==true){
         this.reciept=x.reciept;
-
       }
       else{
         this.popup.open_error_book(x.error)
@@ -298,6 +297,8 @@ export class HomeBarComponent implements OnInit {
     this.selectedCountry = (event.target as HTMLSelectElement).value;
     // Call your function here with the selectedCountry value
     //flag==1 that meen filter
+    console.log(this.countries);
+
     console.log(this.calendar);
     this.citys = [];
     this.locations = [];

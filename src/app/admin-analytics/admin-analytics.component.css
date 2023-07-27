@@ -32,7 +32,19 @@
   margin-right: 2%;
   border: none;
 }
-.showBtn:hover {
+.showBtndis {
+  width: 25%;
+  border-radius: 8px;
+  background-color: gray;
+  color: #fff;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 150%;
+  margin-right: 2%;
+  border: none;
+}.showBtn:hover {
   background-color: #fff;
   color: #008182;
   border: 1px solid #008182;

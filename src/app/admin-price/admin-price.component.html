@@ -29,7 +29,7 @@
           <td><label class="card-title">Country</label></td>
           <td>
             <div class="takeninfo">
-              <label>{{ price.country }}</label>
+              <label>{{ price.country_name }}</label>
             </div>
           </td>
         </div>
@@ -69,7 +69,7 @@
           <td><label class="card-title">Discount For Annual Subs</label></td>
           <td>
             <div class="takeninfo">
-              <label>{{ price.year_dicount }} %</label>
+              <label>{{ price.year_discount }} %</label>
             </div>
           </td>
         </div>
@@ -112,7 +112,7 @@
               (change)="oncountryselect($event)"
             >
               <option selected>Country</option>
-              <option *ngFor="let country of countries">{{ country }}</option>
+              <option *ngFor="let country of curr_prices">{{ country.country_name }}</option>
             </select>
           </div>
         </div>

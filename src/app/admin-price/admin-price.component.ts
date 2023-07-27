@@ -16,40 +16,18 @@ export class AdminPriceComponent implements OnInit {
     private popup: ModalPopServiceService,
     private service: ServicService
   ) {
-    // this.service.get_prices().subscribe((x) => {
-    //   if (x.success == true) {
-    //     this.curr_prices = x.prices;
-    //   } else {
-    //     this.popup.open_error_book(x.error);
-    //   }
-    // });
-
-    // this.service.get_countries().subscribe((x) => {
-    //   if (x.success == true) {
-    //     this.countries = x.countries;
-    //   }
-    // });
+    this.service.get_countries_prices().subscribe((x) => {
+      console.log(x);
+      if (x.success == true) {
+        this.curr_prices = x.prices;
+      } else {
+        this.popup.open_error_book(x.error);
+      }
+    });
 
   }
 
-  curr_prices: Prices[] = [
-    {
-      country: 'any',
-      month_discount: 'any',
-      year_dicount: 'any',
-      total_amount: 'any',
-      currency: 'any',
-      _id: 'any',
-    },
-    {
-      country: 'any',
-      month_discount: 'any',
-      year_dicount: 'any',
-      total_amount: 'any',
-      currency: 'any',
-      _id: 'any',
-    },
-  ];
+  curr_prices: Prices[] = [];
 
   currencies: any[] = [
     'USD', // United States Dollar
@@ -95,26 +73,34 @@ export class AdminPriceComponent implements OnInit {
       );
       return;
     }
-
-    let x = new Prices();
-    x.country = this.selected_country;
+  let x = new Prices();
+    x.country_name = this.selected_country;
     x.currency = this.selected_currency;
     x.total_amount = add_total_amount;
     x.month_discount = add_month_dicount;
-    x.year_dicount = add_year_dicount;
-    this.curr_prices.push(x);
+    x.year_discount = add_year_dicount;
+    for (var i = 0; i <this.curr_prices.length;i++){
+      if (this.curr_prices[i].country_name==this.selected_country){
+          x._id=this.curr_prices[i]._id
+          this.curr_prices[i].currency = this.selected_currency;
+          this.curr_prices[i].total_amount = add_total_amount;
+          this.curr_prices[i].month_discount = add_month_dicount;
+          this.curr_prices[i].year_discount = add_year_dicount;
+      }
+    }
+  
     this.close_popup();
-    console.log(x);
-    //serviec add new address and recieve id and set it
+    // serviec add new address and recieve id and set it
 
-    // this.service.add_price(x).subscribe(y=>{
-    //   if(y.success==true){
-    //     this.curr_prices[this.curr_prices.length-1]._id=y._id;
-    //   }
-    //   else{
+    console.log(x)
+    this.service.edit_price(x).subscribe(y=>{
+      if(y.success==true){
 
-    //   }
-    // })
+      }
+      else{
+          this.popup.open_error_book(y.message)
+      }
+    })
   }
 
   remove(rv_price: any, index: any) {
@@ -122,13 +108,14 @@ export class AdminPriceComponent implements OnInit {
     this.index_remove_price = index;
   }
   totaly_remove() {
-    let rv = this.curr_prices[this.index_remove_price];
-    this.curr_prices.splice(this.index_remove_price, 1);
     //service remove
-    // this.service.remove_price(rv._id).subscribe(
-    //   x=>{
+    this.curr_prices[this.index_remove_price].total_amount=0;
+    this.curr_prices[this.index_remove_price].month_discount=0;
+    this.curr_prices[this.index_remove_price].year_discount=0;
+    this.service.edit_price(this.curr_prices[this.index_remove_price]).subscribe(
+      x=>{
 
-    // })
+    })
 
     this.close_popup();
   }

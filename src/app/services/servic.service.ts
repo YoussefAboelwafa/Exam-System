@@ -215,18 +215,17 @@ public get_photos_in_one_day(id:any):Observable<any>{
   return this.http.post(`${this.apiServerUrl}/admin/get_photos`,{day_id:id}, { withCredentials: true, responseType: 'text' });
 }
 
-public get_countries():Observable<any>{
+public get_countries_prices():Observable<any>{
   return this.http.get<any>(`${this.apiServerUrl}/admin/get_countries`, { withCredentials: true });
 }
-public get_prices():Observable<any>{
-  return this.http.get<any>(`${this.apiServerUrl}/admin/get_prices`, { withCredentials: true });
+// public get_prices():Observable<any>{
+//   return this.http.get<any>(`${this.apiServerUrl}/admin/get_prices`, { withCredentials: true });
+// }
+public edit_price(new_price:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/edit_price`,{country_id:new_price._id, new_price:new_price.total_amount, new_month_discount:new_price.month_discount, new_year_discount:new_price.year_discount, new_currency:new_price.currency}, { withCredentials: true });
 }
-public add_price(new_price:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/add_price`,{new_price:new_price}, { withCredentials: true });
-}
-public remove_price(_id_price:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/remove_price`,{_id_price:_id_price}, { withCredentials: true });
-}
+
+
 public get_payment_reciept():Observable<any>{
   return this.http.get<any>(`${this.apiServerUrl}/admin/get_reciept`, { withCredentials: true });
 }
