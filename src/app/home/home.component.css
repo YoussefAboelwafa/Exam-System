@@ -468,6 +468,8 @@ input[type="file"]::-webkit-file-upload-button {
     left: 0;
     top: 0;
     padding: 5%;
+    margin-left: 0%;
+    margin-top: 0%;
   }
   
 
