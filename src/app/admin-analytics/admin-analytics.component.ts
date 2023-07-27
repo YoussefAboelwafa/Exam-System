@@ -128,7 +128,8 @@ export class AdminAnalyticsComponent implements OnInit {
     const myChart = new Chart(this.bar_ctx, this.bar_config);
   }
   pieChartDemo() {
-  
+    this.pie_chartData = [];
+    this.pie_chartDatalabels = [];
     this.pie_chartData.push(10);
     this.pie_chartData.push(20);
     this.pie_chartData.push(55);
