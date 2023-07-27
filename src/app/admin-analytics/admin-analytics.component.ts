@@ -109,7 +109,7 @@ export class AdminAnalyticsComponent implements OnInit {
       options: {
         transitions: {
           easing: 'easeInOutCubic', // Use a custom easing function or one of the built-in options like 'linear', 'easeInQuad', 'easeOutCubic', etc.
-          duration: 2000, // Set the duration in milliseconds (2 seconds in this example)
+          duration: 1000, // Set the duration in milliseconds (2 seconds in this example)
         },
       },
       data: {
@@ -145,7 +145,7 @@ export class AdminAnalyticsComponent implements OnInit {
       options: {
         transitions: {
           easing: 'easeInOutCubic', // Use a custom easing function or one of the built-in options like 'linear', 'easeInQuad', 'easeOutCubic', etc.
-          duration: 2000, // Set the duration in milliseconds (2 seconds in this example)
+          duration: 1000, // Set the duration in milliseconds (2 seconds in this example)
         },
       },
       data: {
@@ -203,7 +203,7 @@ export class AdminAnalyticsComponent implements OnInit {
       options: {
         transitions: {
           easing: 'easeInOutCubic', // Use a custom easing function or one of the built-in options like 'linear', 'easeInQuad', 'easeOutCubic', etc.
-          duration: 2000, // Set the duration in milliseconds (2 seconds in this example)
+          duration: 1000, // Set the duration in milliseconds (2 seconds in this example)
         },
       },
       data: {
@@ -250,7 +250,7 @@ export class AdminAnalyticsComponent implements OnInit {
       options: {
         transitions: {
           easing: 'easeInOutCubic', // Use a custom easing function or one of the built-in options like 'linear', 'easeInQuad', 'easeOutCubic', etc.
-          duration: 2000, // Set the duration in milliseconds (2 seconds in this example)
+          duration: 1000, // Set the duration in milliseconds (2 seconds in this example)
         },
       },
       data: {

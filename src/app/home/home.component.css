@@ -452,6 +452,7 @@ input[type="file"]::-webkit-file-upload-button {
     order: 2;
     overflow-y: unset;
     width: 100%;
+  
   }
   
   .section12 {
@@ -461,11 +462,12 @@ input[type="file"]::-webkit-file-upload-button {
   .container{
     display: flex;
     overflow-y: auto;
-    margin: 20px;
+    margin: 2%;
     flex-direction: row;
     position: fixed;
     left: 0;
     top: 0;
+    padding: 5%;
   }
   
 

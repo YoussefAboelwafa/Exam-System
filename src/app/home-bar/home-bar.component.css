@@ -532,22 +532,29 @@ h3 {
   .container1{
     flex-wrap: wrap;
     overflow: unset;
+    padding: 5%;
   }
   .carousel {
-    width: 400px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
     margin-left: 0;
+  }
+  .carousel img{
+    width: 100%;
+    height: 100%;
   }
 
   .goodmorningwidgets,
   .discoverexamswidgets {
     width: 100%;
     overflow: unset;
+  
   }
 
   .card {
-    width: 100%;
-    margin-right: 0;
+    width: 80%;
+    margin: 2%;
+    padding:5% ;
   }
 
   .card h5 {
@@ -608,5 +615,8 @@ h3 {
 
   .discoversmallbox2 .discoverscore1 {
     font-size: 48px;
+  }
+  .seemore2{
+    display: none;
   }
 }
