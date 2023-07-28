@@ -2,20 +2,20 @@
   <nav class="section12">
     <div class="section section1">
       <div class="name" *ngIf="current_user">
-        <!-- <input
-          type="file"
-          accept="image/*"
-          class="file-input"
-          (change)="onFileSelect($event)"
-        />  -->
+        <i
+          routerLink="/"
+          title="Logout"
+          class="logoutIcon fa-solid fa-arrow-right-from-bracket"
+        ></i>
         <img
+          title="Change Photo"
           data-toggle="modal"
           data-target="#edit_photo"
           class="image"
           id="img_home"
           [src]="current_user.photo"
-          style="background-color:#008182;"
-        >
+          style="background-color: #008182"
+        />
         <div class="name2">
           <label
             >{{ current_user.first_name }} {{ current_user.last_name }}</label
@@ -29,20 +29,29 @@
       <ul>
         <li [routerLinkActive]="'active'">
           <button routerLink="/home/home_bar">
-            <i class="fa-solid fa-house" style="font-size:22px;margin-right: 2px;"></i>
-              Home
+            <i
+              class="fa-solid fa-house"
+              style="font-size: 22px; margin-right: 2px"
+            ></i>
+            Home
           </button>
         </li>
         <li [routerLinkActive]="'active'">
           <button routerLink="/home/exam_bar">
-            <i class="fa-regular fa-file-lines"  style="font-size:22px;margin-right: 2px;"></i>
+            <i
+              class="fa-regular fa-file-lines"
+              style="font-size: 22px; margin-right: 2px"
+            ></i>
             Exams
           </button>
         </li>
         <li [routerLinkActive]="'active'">
           <button routerLink="/home/news_bar">
-            <i class="fa-solid fa-newspaper" style="font-size:22px;margin-right: 2px;"></i> 
-               News
+            <i
+              class="fa-solid fa-newspaper"
+              style="font-size: 22px; margin-right: 2px"
+            ></i>
+            News
           </button>
         </li>
       </ul>
@@ -115,7 +124,6 @@
           data-dismiss="modal"
           id="addphoto"
           (click)="add_user_photo()"
-          
         >
           Add <i class="fa-solid fa-plus"></i>
         </button>

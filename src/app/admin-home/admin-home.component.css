@@ -68,6 +68,7 @@ div {
   font-size: 20px;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
+  position: relative;
 }
 .name2 {
   display: flex;
@@ -126,7 +127,6 @@ div {
 ul {
   margin-top: 5%;
   padding-top: 5%;
-
 }
 .sidebar li {
   padding: 5px;
@@ -390,6 +390,19 @@ li.active button {
   display: block;
   width: 300px;
   height: 200px;
+  cursor: pointer;
+}
+.logoutIcon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.logoutIcon:hover {
+  transform: scale(1.1);
+  color: #95562e;
 }
 
 .file-input {
