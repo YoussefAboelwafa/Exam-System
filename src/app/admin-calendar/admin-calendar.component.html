@@ -1,4 +1,4 @@
-<div *ngIf="flag_calender == true">
+<div class="m1" *ngIf="flag_calender == true">
   <div class="toolbar">
     <!-- country -->
     <div class="dropdown countrydiv">
@@ -36,7 +36,7 @@
         <option *ngFor="let locate of locations">{{ locate }}</option>
       </select>
     </div>
-    <div class="dropdown monthdiv">
+    <div class="dropdown countrydiv">
       <select
         (change)="onmonthSelected($event)"
         class="form-control"
@@ -286,11 +286,21 @@
       <!-- Not taken again -->
       <div class="name2">
         <!-- <img [src]="current_user.photo" alt="" class="image" /> -->
-        <img [src]="user.photo_user" class="image" style="background-color:#008182;"  >
-        <button class="btn-icon" (click)="send_mail_exam( user._id_user,user.exam_id)">
-          <i title="send verify code to student " class="fa-solid fa-paper-plane"></i>
+        <img
+          [src]="user.photo_user"
+          class="image"
+          style="background-color: #008182"
+        />
+        <button
+          class="btn-icon"
+          (click)="send_mail_exam(user._id_user, user.exam_id)"
+        >
+          <i
+            title="send verify code to student "
+            class="fa-solid fa-paper-plane"
+          ></i>
         </button>
-        <div class="name1" style="margin-top: 10px;">
+        <div class="name1" style="margin-top: 10px">
           <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
           <h5 class="card-title" id="id">#{{ user._id_user }}</h5>
         </div>
@@ -326,9 +336,15 @@
     <div class="card card-body upcoming" id="special_card">
       <!-- Not taken again -->
       <div class="name2">
-        <img alt="" [src]="change_user.photo_user" class="image">
-        <button class="btn-icon" (click)="send_mail_exam( change_user._id_user,change_user.exam_id)">
-          <i title="send verify code to student " class="fa-solid fa-paper-plane"></i>
+        <img alt="" [src]="change_user.photo_user" class="image" />
+        <button
+          class="btn-icon"
+          (click)="send_mail_exam(change_user._id_user, change_user.exam_id)"
+        >
+          <i
+            title="send verify code to student "
+            class="fa-solid fa-paper-plane"
+          ></i>
         </button>
 
         <div class="name1">

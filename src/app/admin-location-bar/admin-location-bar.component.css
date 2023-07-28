@@ -98,6 +98,7 @@
   margin-left: 2%;
   margin-right: 2%;
   gap: 2%;
+  padding-bottom: 5%;
 }
 .taken {
   border-radius: 10px;
@@ -117,18 +118,23 @@
   text-align: center;
   width: 20vw;
   height: 8vh;
+  padding: auto;
+}
+.takenbox label{
+  font-size: 18px;
+  font-weight: 400;
+  margin-left: 2%;
 }
 .takeninfo {
   color: #008182;
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 100;
   border-radius: 9px;
   background: rgba(255, 255, 255, 0.32);
   box-shadow: 5px 5px 5px 5px rgba(0, 129, 130, 0.16);
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 5px;
 }
 .card-title {
   color: #008182;
@@ -138,8 +144,9 @@
   margin-right: 4%;
 }
 .takeninfo label {
-  font-size: 22px;
+  font-size: 17px;
   font-weight: 700;
+  padding: 5%;
 }
 td {
   width: 50%;
@@ -186,22 +193,86 @@ td {
 .taken i:hover {
   color: #ff0052;
 }
-/* .card {
-  width: 20vw;
-  height: 4vh;
-  position: relative;
-  margin-right: 2%;
-  margin-bottom: 15px;
-} */
 
-@media screen and (max-width: 700px) {
-  .container1 {
-    flex-wrap: wrap;
-    overflow: unset;
-  }
-  .carousel {
+@media screen and (max-width: 1000px) {
+  .toolbar {
+    flex-direction: column;
+    gap: 2%;
     width: 100%;
-    margin-left: 0;
+  }
+  
+  select{
+    width: 100%;
+    margin-top: 3%;
+  }
+  .toolbar .btn {
+    width: 100%;
+  }
+  .locations {
+    flex-direction: column;
+    gap: 2%;
+    width: 100%;
+    padding-bottom: 5%;
+  }
+  .taken {
+    width: 100%;
+  }
+  .takenbox {
+    width: 100%;
+  }
+  .card-title {
+    font-size: 16px;
+  }
+  .takeninfo {
+    font-size: 18px;
+  }
+  .takeninfo label {
+    font-size: 16px;
+  }
+  .addlocationbtn {
+    font-size: 16px;
+  }
+  .remove_edit button {
+    font-size: 16px;
+  }
+  .card {
+    width: 100%;
+    margin-right: 0;
+  }
+  .card h5 {
+    font-size: 16px;
+  }
+  .card a {
+    font-size: 10px;
+  }
+  .upcoming h5,
+  .taken h5,
+  .rank h5 {
+    font-size: 18px;
+  }
+  .discoverexamslabel a {
+    right: auto;
+    left: 10%;
+    font-size: 12px;
+  }
+  .modal-title {
+    font-size: 24px;
+  }
+  .modal-footer button {
+    width: 100%;
+  }
+  .modal-body {
+    font-size: 14px;
+  }
+  .upcominginfo label,
+  .takeninfo label,
+  .rankinfo label {
+    font-size: 14px;
+  }
+  .upcominginfo,
+  .takeninfo,
+  .rankinfo {
+    padding: 5px;
   }
 
   .goodmorningwidgets,
@@ -249,7 +320,7 @@ td {
 
   .upcominginfo label,
   .takeninfo label {
-    font-size: 10px;
+    font-size: 15px;
   }
 
   .examlist li {

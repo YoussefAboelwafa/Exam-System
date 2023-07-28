@@ -245,6 +245,7 @@ close {
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 2%;
+  padding-bottom: 4%;
 }
 .box {
   color: #008182;
@@ -272,11 +273,6 @@ close {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-}
-.monthdiv {
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
 }
 
 .smallbox {
@@ -354,6 +350,7 @@ close {
   line-height: 150%;
   margin-left: 2%;
   margin-top: 2%;
+  margin-bottom: 2%;
 }
 .discoverexamslabel span {
   font-size: 60px;
@@ -505,29 +502,39 @@ select {
   margin-bottom: 10px;
 }
 
-
-@media only screen and (max-width: 600px) {
-  select{
-    font-size: 12px;
-  }
-  option{
-    font-size: 12px;
-  }
-  .btn{
-    font-size: 10px;
-  }
-}
-@media screen and (max-width: 700px) {
-
-  .container1{
-    flex-wrap: wrap;
-    overflow: unset;
-  }
-  .carousel {
+@media screen and (max-width: 1000px) {
+  .m1{
     width: 100%;
+  }
+  .container {
+    
     margin-left: 0;
   }
-
+  .toolbar{
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+  }
+  .dropdown{
+    font-size: 10px;
+    width: 200%;
+    margin: 2%;
+  }
+  .dropdown select{
+    font-size: 16px;
+  }
+  option{
+    font-size: 16px;
+  }
+  .countrydiv{
+    width: 100%;
+  }
+  button{
+   width: 100%;
+   margin: 2%;
+  }
+  
+  
   .goodmorningwidgets,
   .discoverexamswidgets {
     width: 100%;

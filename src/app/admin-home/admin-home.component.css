@@ -452,7 +452,7 @@ input[type="file"]::-webkit-file-upload-button {
   color: white;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 1000px) {
   .section1 {
     width: 100%;
   }
@@ -463,6 +463,7 @@ input[type="file"]::-webkit-file-upload-button {
     order: 2;
     overflow-y: unset;
     width: 100%;
+    padding-right: 4%;
   }
 
   .section12 {

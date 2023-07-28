@@ -9,33 +9,31 @@
         (change)="change_year_chart1($event)"
       >
         <option selected>Choose year</option>
-        <option *ngFor="let year of distinctyears">{{year}}</option>
-
+        <option *ngFor="let year of distinctyears">{{ year }}</option>
       </select>
       <select
         class="form-select"
         aria-label="Default select example"
         id="months"
         (change)="change_month_chart1($event)"
-
       >
         <option selected>Choose month</option>
-        <option *ngFor="let month of distinctmonth">{{month}}</option>
+        <option *ngFor="let month of distinctmonth">{{ month }}</option>
       </select>
       <button
         class="showBtn"
         data-toggle="modal"
         data-target="#open_piechart"
         (click)="open_piechart()"
-        *ngIf="selectedmonth1!='Choose month'"
+        *ngIf="selectedmonth1 != 'Choose month'"
       >
         Show month statistics
       </button>
       <button
         class="showBtndis"
-        *ngIf="selectedmonth1=='Choose month'"
+        *ngIf="selectedmonth1 == 'Choose month'"
         disabled
-        >
+      >
         Show month statistics
       </button>
     </div>
@@ -43,7 +41,6 @@
       <canvas id="barChart"></canvas>
     </div>
   </div>
-
 
   <!-- Retation rate -->
   <div class="largeBox">
@@ -55,8 +52,8 @@
         id="years"
         (change)="change_year_chart2($event)"
       >
-      <option selected>Choose year</option>
-      <option *ngFor="let year of distinctyears">{{year}}</option>
+        <option selected>Choose year</option>
+        <option *ngFor="let year of distinctyears">{{ year }}</option>
       </select>
     </div>
     <div class="barChart">
@@ -76,8 +73,7 @@
       </select>
     </div>
     <div class="barChart pieChart2">
-      <canvas id="pieChart2"
-      ></canvas>
+      <canvas id="pieChart2"></canvas>
     </div>
   </div>
 </div>
@@ -93,7 +89,9 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">{{months_name[selectedmonth1-1]}} {{selectedyear1}}</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          {{ months_name[selectedmonth1 - 1] }} {{ selectedyear1 }}
+        </h5>
         <button class="outer_button" disabled>
           <button
             type="button"
