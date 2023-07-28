@@ -18,7 +18,7 @@ export class GuardServiceService implements CanActivate {
   constructor(
     private service: ServicService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
   async canActivate(
     route: ActivatedRouteSnapshot,
@@ -28,9 +28,7 @@ export class GuardServiceService implements CanActivate {
       const observable = this.service.is_signin();
       const response: any = await observable.toPromise();
 
-      console.log(response.signed_in);
-      if (response.signed_in === false) {
-        alert('Email or phone is found in system');
+      if (response.signed_in ==false) {
         this.router.navigate(['']);
         return false;
       } else {

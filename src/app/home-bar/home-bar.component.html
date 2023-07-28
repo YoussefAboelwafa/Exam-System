@@ -561,6 +561,11 @@
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1"
+            ><span style="color:black;">Phone Number:</span> {{ phone_number }}</label
+          >
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1"
             ><span style="color: black;">Location:</span> {{ selectedlocation }}</label
           >
         </div>
@@ -584,23 +589,23 @@
             ><span style="color: black;">Total Amount:</span> {{ reciept.total_amount }}</label
           >
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="reciept.discount!='-1'">
           <label for="exampleFormControlInput2"
-            ><span style="color: black;">Discount:</span> {{ reciept.discount }}</label
+            ><span style="color: black;">Discount:</span> {{ (reciept.discount*reciept.total_amount)/100 }}</label
           >
         </div>
         <hr>
-        <div class="form-group">
+        <div class="form-group"*ngIf="reciept.discount!='-1'">
           <label for="exampleFormControlInput3" style="color: #FF914C;"
             >Total After Discount:
-            {{ reciept.total_amount - reciept.discount }}</label
+            {{ reciept.total_amount -((reciept.discount*reciept.total_amount)/100) }}</label
           >
         </div>
       </div>
 
       <div class="modal-footer">
         <button type="button" id="addnewprice" (click)="pay_now()">
-          Pay Naw <i class="fa-solid fa-plus"></i>
+          Pay Now <i class="fa-solid fa-dollar-sign"></i>
         </button>
         <button
           (click)="close()"
@@ -608,7 +613,7 @@
           id="addnewprice"
           style="background-color: #ff0052"
         >
-          Cancel <i class="fa-solid fa-plus"></i>
+          Cancel 
         </button>
       </div>
     </div>

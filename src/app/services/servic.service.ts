@@ -12,13 +12,14 @@ import { map } from 'rxjs/operators';
 
 
 export class ServicService {
-  private apiServerUrl = 'https://vast-lime-bluefish-gear.cyclic.app';
+  private apiServerUrl = 'https://lovely-cyan-hoodie.cyclic.app';
   user:any=new users();
   upcoming_ex!:any[];
   token_ex!:any[];
   non_token!:any[];
   ids_ex!:any[];
   email_change_pass:any;
+  phone:any;
   constructor(private http: HttpClient) { }
 
   
@@ -132,8 +133,8 @@ public turn_on_off(id_exam:any,turn_value:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/turn_on_off`,{exam_id:id_exam, turn:turn_value}, { withCredentials: true });
 }
 
-public payment(exam:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/exam/get_token`,{exam:exam}, { withCredentials: true });
+public payment(exam:any,reciept:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/exam/get_token`,{exam:exam,reciept:reciept}, { withCredentials: true });
 }
 
 //new
@@ -224,19 +225,17 @@ public edit_price(new_price:any):Observable<any>{
 }
 
 
-public get_payment_reciept():Observable<any>{
-  return this.http.get<any>(`${this.apiServerUrl}/admin/get_reciept`, { withCredentials: true });
+public get_payment_reciept(country_id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/exam/get_reciept`,{country_id:country_id},{ withCredentials: true });
 }
 
 public get_analytics():Observable<any>{
   return this.http.get<any>(`${this.apiServerUrl}/admin/analytics`,{ withCredentials: true });
 }
 
-public log_out_admin():Observable<any>{
-  return this.http.get<any>(`${this.apiServerUrl}/admin/logout`,{ withCredentials: true });
+public log_out():Observable<any>{
+  return this.http.get<any>(`${this.apiServerUrl}/logout`,{ withCredentials: true });
 }
-public log_out_user():Observable<any>{
-  return this.http.get<any>(`${this.apiServerUrl}/home/logout`,{ withCredentials: true });
-}
+
 
 }

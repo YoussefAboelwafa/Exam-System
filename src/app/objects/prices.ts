@@ -7,5 +7,4 @@ export class Prices {
     currency:any
     _id:any
 
-
 }

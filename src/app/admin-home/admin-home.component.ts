@@ -110,17 +110,17 @@ current_user = {
 
 
   logout(){
-    // this.service.log_out_admin().subscribe(
-    //   (x) => {
-    //     if(x.success==true){
-    //       this.router.navigate(['']);
-    //     }
-    //     else{
-    //       this.popup.open_error_book(x.error)
-    //     }
+    this.service.log_out().subscribe(
+      (x) => {
+        if(x.success==true){
+          this.router.navigate(['']);
+        }
+        else{
+          this.popup.open_error_book(x.error)
+        }
 
 
-    //   });
+      });
     
   }
 

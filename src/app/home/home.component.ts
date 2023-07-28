@@ -44,7 +44,8 @@ export class HomeComponent implements OnInit {
     private service: ServicService,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private popup:ModalPopServiceService
+    private popup:ModalPopServiceService,
+    
   ) {
     this.refresh();
     this.get_user_photo();
@@ -191,16 +192,16 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
-    // this.service.log_out_user().subscribe(
-    //   (x) => {
-    //     if(x.success==true){
-    //       this.router.navigate(['']);
-    //     }
-    //     else{
-    //       this.popup.open_error_book(x.error)
-    //     }
+    this.service.log_out().subscribe(
+      (x) => {
+        if(x.success==true){
+          this.router.navigate(['']);
+        }
+        else{
+          this.popup.open_error_book(x.error)
+        }
 
 
-    //   });
+      });
   }
 }

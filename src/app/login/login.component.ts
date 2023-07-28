@@ -25,6 +25,20 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.user_login = user;
+
+    this.service.is_signin().subscribe(
+      x=>{
+        if(x.signed_in==1){
+          this.router.navigate(['home/home_bar'])
+          
+        }
+        else if(x.signed_in==2){
+          this.router.navigate(['admin_home/admin_analytics'])
+        }
+
+    })
+
+
   }
 
   ngOnInit() {}

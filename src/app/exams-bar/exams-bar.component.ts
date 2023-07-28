@@ -6,6 +6,7 @@ import { calendar } from '../objects/calender';
 import { Router } from '@angular/router';
 import { exams } from '../objects/exams';
 import { ModalPopServiceService } from '../services/modal-pop-service.service';
+import { Reciept } from '../objects/reciept';
 declare const $: any;
 declare let COWPAYOTPDIALOG: any;
 @Component({
@@ -70,11 +71,10 @@ export class ExamsBarComponent implements OnInit {
   book_id_exam: any = '';
   avilable_time: any;
   ids_exams: any[] = [];
+  phone_number:any
+  temp_countries:any;
 
-  reciept: any = {
-    total_amount: 1000,
-    discount: 400,
-  };
+  reciept:Reciept =new Reciept();
   constructor(private service: ServicService, private router: Router,private popup:ModalPopServiceService) {
     this.refresh_all();
     // this.upcoming_exam=this.service.upcoming_ex;
@@ -123,7 +123,7 @@ export class ExamsBarComponent implements OnInit {
 
     this.service.home_bar_init().subscribe((x) => {
       this.service.user = x.user;
-      this.service.user = x.user;
+      this.phone_number=this.service.user.phone;
       this.non_token_exam = x.other_exam;
       let up = 0,
         token = 0,
@@ -209,18 +209,24 @@ export class ExamsBarComponent implements OnInit {
     this.flag_time = true;
   }
   submit_time() {
-
-
-    this.service.get_payment_reciept().subscribe(x=>{
+    let country_id
+    for (let i =0; i < this.temp_countries.length;i++) {
+      if(this.temp_countries[i].country_name==this.selectedCountry){
+          country_id=this.temp_countries[i]._id;
+          break;
+      }
+    }
+    this.service.get_payment_reciept(country_id).subscribe(x=>{
       if(x.success==true){
-        this.reciept=x.reciept;
+        this.reciept=x;
+        this.reciept.phone=this.service.user.phone;
+        $('#reciept').modal('show');
 
       }
       else{
         this.popup.open_error_book(x.error)
       }
     })
-    $('#reciept').modal('show');
 
 
     // this.reset_order_exam();
@@ -237,7 +243,7 @@ export class ExamsBarComponent implements OnInit {
       appointment: this.selectedappointment,
     };
 
-    this.service.payment(book_exam).subscribe((x) => {
+    this.service.payment(book_exam,this.reciept).subscribe((x) => {
       if (x.success == true) {
         window.location.href = x.token;
       } else {
