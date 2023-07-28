@@ -25,6 +25,7 @@ export class AdminAnalyticsComponent implements OnInit {
             bookingsCount: 0,
             retentionRate: 0,
             exams: {} as { [key: string]: any },
+            marks: {} as { [key: string]: any }
           };
         }
 
@@ -34,6 +35,7 @@ export class AdminAnalyticsComponent implements OnInit {
 
         if (!this.monthData[key].exams[entry.exam]) {
           this.monthData[key].exams[entry.exam] = 0;
+          this.monthData[key].marks[entry.exam] = entry.marks;
         }
         this.monthData[key].exams[entry.exam] += entry.bookingsCount;
       });
