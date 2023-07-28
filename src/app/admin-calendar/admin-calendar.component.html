@@ -1,4 +1,4 @@
-<div class="m1" *ngIf="flag_calender == true">
+<div *ngIf="flag_calender == true">
   <div class="toolbar">
     <!-- country -->
     <div class="dropdown countrydiv">
@@ -36,6 +36,7 @@
         <option *ngFor="let locate of locations">{{ locate }}</option>
       </select>
     </div>
+    <!-- Month -->
     <div class="dropdown countrydiv">
       <select
         (change)="onmonthSelected($event)"

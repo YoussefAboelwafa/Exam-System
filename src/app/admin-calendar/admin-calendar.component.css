@@ -503,11 +503,9 @@ select {
 }
 
 @media screen and (max-width: 1000px) {
-  .m1{
-    width: 100%;
-  }
+ 
   .container {
-    
+    width: 100%; 
     margin-left: 0;
   }
   .toolbar{
@@ -517,11 +515,10 @@ select {
   }
   .dropdown{
     font-size: 10px;
-    width: 200%;
     margin: 2%;
   }
   .dropdown select{
-    font-size: 16px;
+    font-size: 10px;
   }
   option{
     font-size: 16px;
@@ -551,7 +548,7 @@ select {
   }
 
   .card a {
-    font-size: 10px;
+    font-size: 16px;
   }
 
   .upcoming h5,
@@ -563,7 +560,7 @@ select {
   .discoverexamslabel a {
     right: auto;
     left: 10%;
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .modal-title {
@@ -603,7 +600,7 @@ select {
   }
 
   .discoversmallbox2 .discoverscore1 {
-    font-size: 48px;
+    font-size: 16px;
   }
 }
 
