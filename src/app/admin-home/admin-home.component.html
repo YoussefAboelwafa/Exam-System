@@ -2,11 +2,13 @@
   <div class="section12">
     <div class="section section1">
       <div class="name" *ngIf="current_user">
-        <i
-          routerLink="/"
-          title="Logout"
-          class="logoutIcon fa-solid fa-arrow-right-from-bracket"
-        ></i>
+        <button style="all: unset" (click)="logout()">
+          <i
+            title="Logout"
+            class="logoutIcon fa-solid fa-arrow-right-from-bracket"
+          ></i>
+        </button>
+
         <img
           title="Change Photo"
           data-toggle="modal"
@@ -17,10 +19,10 @@
           alt="user photo"
         />
         <div class="name2">
-          <label
+          <label 
             >{{ current_user.first_name }} {{ current_user.last_name }}</label
           >
-          <label id="id">#{{ current_user._id }}</label>
+          <label id="id" style="font-size: 13px;">#{{ current_user._id }}</label>
         </div>
       </div>
     </div>
@@ -139,3 +141,4 @@
     </div>
   </div>
 </div>
+<app-pop-up></app-pop-up>

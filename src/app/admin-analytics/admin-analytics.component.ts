@@ -14,6 +14,7 @@ export class AdminAnalyticsComponent implements OnInit {
   distinctyears: any[] = [];
   distinctmonth: any[] = [];
   year_month_key: any[] = [];
+  distinctmonth3:any[]=[]
   constructor(private service: ServicService) {
     this.service.get_analytics().subscribe((entries: any) => {
       this.fullData = entries;
@@ -120,7 +121,7 @@ export class AdminAnalyticsComponent implements OnInit {
   ngOnInit() {
     this.barChartDemo(0);
     this.retentionChartDemo(0);
-    this.scoreChartDemo();
+    this.scoreChartDemo(0);
   }
   //bookingsCount
 
@@ -133,8 +134,15 @@ export class AdminAnalyticsComponent implements OnInit {
 
   flag_pie_chart1 = 0; //to destroy if it equals 1
   selectedyear2: any;
+  selectedyear3: any;
+  selectedmonth3:any='Choose month';
   label1='';
   label2='';
+  chart3_choosen_keys:any[]=[]; //to destroy if it equals 
+  selectedexam3: any;
+  distinct_exam3: any;
+  chart3:any
+  first_map_key_chart3:any;
   change_year_chart1(event: any) {
     this.distinctmonth = [];
     this.show_char1 = [];
@@ -345,29 +353,71 @@ export class AdminAnalyticsComponent implements OnInit {
     this.bar_chart2 = new Chart(this.ret_ctx, this.ret_config);
   }
 
-  scoreChartDemo() {
-    this.score_chartData.push(10);
-    this.score_chartData.push(20);
-    this.score_chartData.push(55);
-    this.score_chartData.push(40);
-    this.score_chartData.push(23);
-    this.score_chartData.push(10);
-    this.score_chartData.push(5);
-    this.score_chartData.push(10);
-    this.score_chartData.push(0);
-    this.score_chartData.push(0);
+  change_year_chart3(event: Event){
+    this.selectedyear3 = (event.target as HTMLSelectElement).value;
+    this.chart3.destroy();
+    this.scoreChartDemo(0);
+    if (this.selectedyear3 == 'Choose year') {
+      this.distinctmonth3=[];
+      this.distinct_exam3=[];
+      this.selectedmonth3='Choose month'
+      this.selectedexam3='Choose exam'
+      return;
+    }
 
-    this.score_chartDatalabels.push('90-100');
-    this.score_chartDatalabels.push('80-90');
-    this.score_chartDatalabels.push('70-80');
-    this.score_chartDatalabels.push('60-70');
-    this.score_chartDatalabels.push('50-60');
-    this.score_chartDatalabels.push('40-50');
-    this.score_chartDatalabels.push('30-40');
-    this.score_chartDatalabels.push('20-30');
-    this.score_chartDatalabels.push('10-20');
-    this.score_chartDatalabels.push('0-10');
+    this.chart3_choosen_keys = this.get_data_year(
+      this.selectedyear3,
+      this.year_month_key
+    );
+    this.distinctmonth3 = Array.from(
+      new Set(this.chart3_choosen_keys.map((date) => date.split('-')[1]))
+    ).sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
 
+    
+
+  }
+  change_month_chart3(event: Event){
+    this.selectedmonth3 = (event.target as HTMLSelectElement).value;
+    this.chart3.destroy();
+    this.scoreChartDemo(0);
+    if(this.selectedmonth3=='Choose month'){
+      this.distinct_exam3=[];
+      this.selectedexam3='Choose exam'
+      return
+    }
+
+    this.first_map_key_chart3=this.selectedyear3+'-'+this.selectedmonth3
+    this.distinct_exam3 = Object.keys(this.monthData[this.first_map_key_chart3].marks);
+  }
+
+  change_exam_chart3(event:any){
+  this.selectedexam3 = (event.target as HTMLSelectElement).value;
+  this.chart3.destroy();
+  if(this.selectedexam3=='Choose exam'){
+    this.scoreChartDemo(0);
+    return
+  }
+
+  this.scoreChartDemo(1);
+  
+
+
+  }
+
+  scoreChartDemo(flag:any) {
+
+    this.score_chartData=[]
+    this.score_chartDatalabels=[]
+    if(flag==1){
+      let x =this.monthData[this.first_map_key_chart3].marks[this.selectedexam3]
+      console.log(1)
+      console.log(x)
+      for(let i = 0; i < x.length; i++){
+           this.score_chartData.push(x[i].count);
+    this.score_chartDatalabels.push(x[i].range);
+      }
+
+    }
     this.score_ctx = document.getElementById('pieChart2');
     this.score_config = {
       type: 'pie',
@@ -407,6 +457,6 @@ export class AdminAnalyticsComponent implements OnInit {
         ],
       },
     };
-    const myChart = new Chart(this.score_ctx, this.score_config);
+    this.chart3 = new Chart(this.score_ctx, this.score_config);
   }
 }

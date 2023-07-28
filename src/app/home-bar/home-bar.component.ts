@@ -231,6 +231,7 @@ export class HomeBarComponent implements OnInit {
 
 
     this.service.get_payment_reciept().subscribe(x=>{
+      console.log(x)
       if(x.success==true){
         this.reciept=x.reciept;
       }

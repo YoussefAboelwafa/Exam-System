@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicService } from '../services/servic.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ModalPopServiceService } from '../services/modal-pop-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-home',
@@ -19,7 +21,7 @@ current_user = {
     photo:this.photo_url,
     _id: '1256893',
   };
-  constructor(private service: ServicService, private sanitizer:DomSanitizer) {
+  constructor(private service: ServicService, private sanitizer:DomSanitizer,private router:Router,private popup :ModalPopServiceService) {
     this.service.home_bar_init().subscribe((x) => {
       this.service.user = x.user;
       this.current_user.first_name = x.user.first_name;
@@ -102,4 +104,24 @@ current_user = {
         }
     );
   }
+
+
+
+
+
+  logout(){
+    // this.service.log_out_admin().subscribe(
+    //   (x) => {
+    //     if(x.success==true){
+    //       this.router.navigate(['']);
+    //     }
+    //     else{
+    //       this.popup.open_error_book(x.error)
+    //     }
+
+
+    //   });
+    
+  }
+
 }

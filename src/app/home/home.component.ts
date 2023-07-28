@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { exams } from '../objects/exams';
 import { NgxTypedJsModule } from 'ngx-typed-js';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ModalPopServiceService } from '../services/modal-pop-service.service';
 declare const $: any;
 
 @Component({
@@ -42,7 +43,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private service: ServicService,
     private router: Router,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private popup:ModalPopServiceService
   ) {
     this.refresh();
     this.get_user_photo();
@@ -101,8 +103,10 @@ export class HomeComponent implements OnInit {
   get_user_photo() {
     this.service.get_photo().subscribe((photo) => {
       if (photo.success == false) {
-        this.service.user.photo = 'https://cdn-icons-png.flaticon.com/512/1946/1946429.png'
-        this.current_user.photo = 'https://cdn-icons-png.flaticon.com/512/1946/1946429.png'
+        this.service.user.photo =
+          'https://cdn-icons-png.flaticon.com/512/1946/1946429.png';
+        this.current_user.photo =
+          'https://cdn-icons-png.flaticon.com/512/1946/1946429.png';
 
         return;
       }
@@ -184,5 +188,19 @@ export class HomeComponent implements OnInit {
       error: (error: HttpErrorResponse) => alert(error.message);
     });
     // this.router.navigate(['home/home_bar'])
+  }
+
+  logout() {
+    // this.service.log_out_user().subscribe(
+    //   (x) => {
+    //     if(x.success==true){
+    //       this.router.navigate(['']);
+    //     }
+    //     else{
+    //       this.popup.open_error_book(x.error)
+    //     }
+
+
+    //   });
   }
 }

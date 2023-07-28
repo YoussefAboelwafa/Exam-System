@@ -64,12 +64,29 @@
   <div class="largeBox">
     <h1>Scores Statistics</h1>
     <div class="selection">
-      <select class="form-select" aria-label="Default select example" id="exam">
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        id="years"
+        (change)="change_year_chart3($event)"
+      >
+        <option selected>Choose year</option>
+        <option *ngFor="let year of distinctyears">{{ year }}</option>
+      </select>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        id="months"
+        (change)="change_month_chart3($event)"
+      >
+        <option selected>Choose month</option>
+        <option *ngFor="let month of distinctmonth3">{{ month }}</option>
+      </select>
+      <select class="form-select" aria-label="Default select example" id="exam"         (change)="change_exam_chart3($event)"
+      >
         <option selected>Choose exam</option>
-        <option>C++</option>
-        <option>Algorithm</option>
-        <option>Flutter</option>
-        <option>Data Structure</option>
+        <option *ngFor="let exam of distinct_exam3">{{exam}}</option>
+
       </select>
     </div>
     <div class="barChart pieChart2">

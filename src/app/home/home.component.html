@@ -2,11 +2,13 @@
   <nav class="section12">
     <div class="section section1">
       <div class="name" *ngIf="current_user">
-        <i
-          routerLink="/"
-          title="Logout"
-          class="logoutIcon fa-solid fa-arrow-right-from-bracket"
-        ></i>
+        <button style="all: unset" (click)="logout()">
+          <i
+            title="Logout"
+            class="logoutIcon fa-solid fa-arrow-right-from-bracket"
+          ></i>
+        </button>
+
         <img
           title="Change Photo"
           data-toggle="modal"
@@ -131,3 +133,4 @@
     </div>
   </div>
 </div>
+<app-pop-up></app-pop-up>

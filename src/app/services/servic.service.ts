@@ -39,9 +39,7 @@ public verify_code(code:any):Observable<any>{
 }
 
 // send another verification code again  
-public send_again():Observable<any>{
-  console.log(this.user.get_phone_namber());
-  
+public send_again():Observable<any>{  
   return this.http.post<any>(`${this.apiServerUrl}/send_agin`,{phone_namber:this.user.get_phone_namber(),email:this.user.get_email()}, { withCredentials: true });
 }
 // i will send this request if user go to sign up and i recive pair of array ,
@@ -234,5 +232,11 @@ public get_analytics():Observable<any>{
   return this.http.get<any>(`${this.apiServerUrl}/admin/analytics`,{ withCredentials: true });
 }
 
+public log_out_admin():Observable<any>{
+  return this.http.get<any>(`${this.apiServerUrl}/admin/logout`,{ withCredentials: true });
+}
+public log_out_user():Observable<any>{
+  return this.http.get<any>(`${this.apiServerUrl}/home/logout`,{ withCredentials: true });
+}
 
 }
