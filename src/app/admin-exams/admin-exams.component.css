@@ -276,6 +276,12 @@
 
 @media screen and (max-width: 700px) {
 
+  .discoverexamname1 {
+    font-size: 12px;
+  }
+  .discoverexamslabel{
+    padding-top: 5%;
+  }
   .container1{
     flex-wrap: wrap;
     overflow: unset;

@@ -1,69 +1,70 @@
-<div *ngIf="flag_topic == true">
-  <div class="toolbar">
-    <!-- country -->
-    <div class="dropdown countrydiv">
-      <select
-        class="form-control"
-        id="examSelect"
-        class="btn dropdown-toggle"
-        (change)="onexams_select($event)"
-      >
-        <option selected>exams</option>
-        <option *ngFor="let exam of nontoken_exam">{{ exam.title }}</option>
-      </select>
-    </div>
-  </div>
 
-  <div class="container">
-    <button
-      disabled
-      [hidden]="flag_select == true"
-      style="background-color: gray"
-      class="addtopicbtn"
-    >
-      Add Topic <i class="fa-solid fa-plus"></i>
-    </button>
-    <button
-      [hidden]="flag_select == false"
-      data-toggle="modal"
-      data-target="#add_topics"
-      class="addtopicbtn"
-    >
-      Add Topic <i class="fa-solid fa-plus"></i>
-    </button>
-    <!-- ng for -->
-    <div
-      *ngFor="let Topic of exam_topics; let i = index"
-      [ngClass]="{
-        card: true,
-        'card-text': true,
-        box: true
-      }"
-    >
-      <div class="remove">
-        <button (click)="open_topics(Topic, i)">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-        <button
-          data-toggle="modal"
-          data-target="#confirmation"
-          (click)="remove_topic(Topic, i)"
+  <div class="container1" *ngIf="flag_topic == true">
+    <div class="toolbar">
+      <!-- country -->
+      <div class="dropdown countrydiv">
+        <select
+          class="form-control"
+          id="examSelect"
+          class="btn dropdown-toggle"
+          (change)="onexams_select($event)"
         >
-          <i class="fa-solid fa-trash"></i>
-        </button>
+          <option selected>exams</option>
+          <option *ngFor="let exam of nontoken_exam">{{ exam.title }}</option>
+        </select>
       </div>
-      <div class="info">
-        <label class="topic_tiltle">{{ Topic.title }}</label>
-      </div>
-      <div class="smallbox">
-        <span>MCQ: {{ Topic.mcq.length }}</span>
-      </div>
-      <div class="smallbox">
-        <span>Written: {{ Topic.coding.length }}</span>
+    </div>
+  
+    <div class="container">
+      <button
+        disabled
+        [hidden]="flag_select == true"
+        style="background-color: gray"
+        class="addtopicbtn"
+      >
+        Add Topic <i class="fa-solid fa-plus"></i>
+      </button>
+      <button
+        [hidden]="flag_select == false"
+        data-toggle="modal"
+        data-target="#add_topics"
+        class="addtopicbtn"
+      >
+        Add Topic <i class="fa-solid fa-plus"></i>
+      </button>
+      <!-- ng for -->
+      <div
+        *ngFor="let Topic of exam_topics; let i = index"
+        [ngClass]="{
+          card: true,
+          'card-text': true,
+          box: true
+        }"
+      >
+        <div class="remove">
+          <button (click)="open_topics(Topic, i)">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <button
+            data-toggle="modal"
+            data-target="#confirmation"
+            (click)="remove_topic(Topic, i)"
+          >
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+        <div class="info">
+          <label class="topic_tiltle">{{ Topic.title }}</label>
+        </div>
+        <div class="smallbox">
+          <span>MCQ: {{ Topic.mcq.length }}</span>
+        </div>
+        <div class="smallbox">
+          <span>Written: {{ Topic.coding.length }}</span>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 <div *ngIf="flag_question == true">
   <div class="discoverexamslabel">

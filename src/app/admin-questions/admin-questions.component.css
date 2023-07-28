@@ -496,28 +496,42 @@
     width: 100%;
   }
   
-  @media only screen and (max-width: 600px) {
-    select{
-      font-size: 12px;
-    }
-    option{
-      font-size: 12px;
-    }
-    .btn{
-      font-size: 10px;
-    }
-  }
-  @media screen and (max-width: 700px) {
-  
+ 
+  @media screen and (max-width: 1000px) {
     .container1{
+      flex-direction: column;
+      width: 100%;
+    }
+    .container {
+      flex-direction: column;
+    }
+    .toolbar{
+      flex-direction: column;
+      width: 100%;
+    }
+    .dropdown{
+      width: 100%;
+    }
+    select{
+      width: 100%;
+      font-size: 12px;
+    }
+   
+    
+    .container{
       flex-wrap: wrap;
       overflow: unset;
     }
-    .carousel {
+    .form-control{
+      width: 100%;
+    }
+    .btn_exam{
       width: 100%;
       margin-left: 0;
     }
-  
+    .btn_back{
+      margin-left: 0;
+    }
     .goodmorningwidgets,
     .discoverexamswidgets {
       width: 100%;
