@@ -201,9 +201,10 @@ h1 {
     width: 100%;
     margin-bottom: 2%;
   }
-  .showBtn {
+  .showBtn,.showBtndis {
     width: 100%;
     margin-bottom: 2%;
+    padding: 5px;
   }
   .pieChart2 {
     width: 100%;
