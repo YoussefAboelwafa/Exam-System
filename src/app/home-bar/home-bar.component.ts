@@ -7,7 +7,8 @@ import { address } from '../objects/loction_address';
 import { Router } from '@angular/router';
 import { ModalPopServiceService } from '../services/modal-pop-service.service';
 import { Reciept } from '../objects/reciept';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Manchete } from '../objects/manchete';
 declare const $: any;
 @Component({
   selector: 'app-home-bar',
@@ -60,9 +61,9 @@ export class HomeBarComponent implements OnInit {
   learn_dataof_nontoken = new exams();
   learn_dataof_token = new exams();
   // ranking_exam:any;
-  temp_countries:any;
-  phone_number:any
-  reciept:Reciept = new Reciept();
+  temp_countries: any;
+  phone_number: any;
+  reciept: Reciept = new Reciept();
 
   ngOnInit(): void {}
 
@@ -70,7 +71,7 @@ export class HomeBarComponent implements OnInit {
     private service: ServicService,
     private router: Router,
     private popup: ModalPopServiceService,
-    private sanitizer:DomSanitizer
+    private sanitizer: DomSanitizer
   ) {
     const queryParams = new URLSearchParams(window.location.search);
     const paramsObj: any = {};
@@ -106,49 +107,50 @@ export class HomeBarComponent implements OnInit {
       this.non_token_exam = this.service.non_token[0];
     }
 
-
-    this.service.get_manshete(5).subscribe({
-        //i need title and imgurl
-        next: (news) => {
-          news = news.slice(0, -3)
-          news.split('\n\r\n').forEach((item: any) => {
-            item = JSON.parse(item)
-            const photo_blob = new Blob([new Uint8Array(item.manchete.Body.data)], {
-              type: item.photo.ContentType,
-            });
-            
-            let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
-            
-            let manchete = {
-              image:this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob)),
-              title:item.title,
-              _id:item._id
+    this.manchete=[];
+    this.service.get_manshete(2).subscribe({
+      //i need title and imgurl
+      next: (news) => {
+        news = news.slice(0, -3);
+        news.split('\n\r\n').forEach((item: any) => {
+          item = JSON.parse(item);
+          const photo_blob = new Blob(
+            [new Uint8Array(item.manchete.Body.data)],
+            {
+              type: item.manchete.ContentType,
             }
-            
-            ///do whatever you want with it
-          });
-        },
-        complete: () => {
-          console.log('done');
-        },
-        error: (error) => {
-          console.log(error);
-        }
-        
+          );
 
+          let imageSrc = this.sanitizer.bypassSecurityTrustUrl(
+            URL.createObjectURL(photo_blob)
+          );
 
-      })
-
-
-
-
-
-
+          let manchete = {
+            image: this.sanitizer.bypassSecurityTrustUrl(
+              URL.createObjectURL(photo_blob)
+            ),
+            title: item.title,
+            _id: item._id,
+          };
+          this.manchete.push(manchete);
+            console.log(manchete.image)
+          ///do whatever you want with it
+        });
+      },
+      complete: () => {
+        console.log('done');
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
+  manchete:Manchete[]=[] 
+
 
   refresh_all() {
     this.service.get_places().subscribe((x) => {
-      this.temp_countries=x;
+      this.temp_countries = x;
       this.all_locations = x;
       this.countrys = x.map((cont: any) => cont.country_name);
 
@@ -187,7 +189,7 @@ export class HomeBarComponent implements OnInit {
 
     this.service.home_bar_init().subscribe((x) => {
       this.service.user = x.user;
-      this.phone_number=this.service.user.phone;
+      this.phone_number = this.service.user.phone;
       this.non_token_exam = x.other_exam;
       let up = 0,
         token = 0,
@@ -269,27 +271,22 @@ export class HomeBarComponent implements OnInit {
     this.flag_time = true;
   }
   submit_time() {
-    let country_id
-    for (let i =0; i < this.temp_countries.length;i++) {
-      if(this.temp_countries[i].country_name==this.selectedCountry){
-          country_id=this.temp_countries[i]._id;
-          break;
+    let country_id;
+    for (let i = 0; i < this.temp_countries.length; i++) {
+      if (this.temp_countries[i].country_name == this.selectedCountry) {
+        country_id = this.temp_countries[i]._id;
+        break;
       }
     }
-    this.service.get_payment_reciept(country_id).subscribe(x=>{
-      if(x.success==true){
-        this.reciept=x;
-        this.reciept.phone=this.service.user.phone;  
+    this.service.get_payment_reciept(country_id).subscribe((x) => {
+      if (x.success == true) {
+        this.reciept = x;
+        this.reciept.phone = this.service.user.phone;
         $('#reciept').modal('show');
-
+      } else {
+        this.popup.open_error_book(x.error);
       }
-      else{
-        this.popup.open_error_book(x.error)
-      }
-    })
-
-
-  
+    });
   }
 
   pay_now() {
@@ -301,7 +298,7 @@ export class HomeBarComponent implements OnInit {
       appointment: this.selectedappointment,
     };
 
-    this.service.payment(book_exam,this.reciept).subscribe((x) => {
+    this.service.payment(book_exam, this.reciept).subscribe((x) => {
       if (x.success == true) {
         window.location.href = x.token;
       } else {

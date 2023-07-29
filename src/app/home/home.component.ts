@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
 
   get_user_photo() {
     this.service.get_photo().subscribe((photo) => {
-      if (photo.success == false) {
+      if (photo.success == false&& photo.ContentLength !== 0) {
         this.service.user.photo =
           'https://cdn-icons-png.flaticon.com/512/1946/1946429.png';
         this.current_user.photo =

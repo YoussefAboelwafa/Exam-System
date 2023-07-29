@@ -35,10 +35,11 @@ export class AdminLocationBarComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-
+temp_loction:any
   get_all_place() {
     this.service.get_places().subscribe((x) => {
       this.all_locations = x;
+      this.temp_loction=x;
       this.country = x.map((cont: any) => cont.country_name);
 
       let combinations: string[] = [];
@@ -112,17 +113,18 @@ export class AdminLocationBarComponent implements OnInit {
   totaly_edit(ed_capacity:any,ed_snacks:any){
     this.address[this.index_edit_address].capacity=ed_capacity;
     this.address[this.index_edit_address].snacks=ed_snacks;
+
     this.close_popup();
 
-    // this.service.edit_location(this.address[this.index_edit_address]._id,this.address[this.index_edit_address]).subscribe(
-    //   (x)=> {
+    this.service.edit_location(this.address[this.index_edit_address]._id,this.address[this.index_edit_address]).subscribe(
+      (x)=> {
 
-    //      error:(error: HttpErrorResponse) =>alert(error.message);
-    //    }
+         error:(error: HttpErrorResponse) =>alert(error.message);
+       }
 
-    // )
+    )
 
-    //service edit address
+    // service edit address
   }
 
   add_locate(

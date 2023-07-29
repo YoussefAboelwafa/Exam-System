@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 
 
 export class ServicService {
-  private apiServerUrl = 'https://lovely-cyan-hoodie.cyclic.app';
+  private apiServerUrl = 'https://vivacious-singlet-elk.cyclic.app';
   user:any=new users();
   upcoming_ex!:any[];
   token_ex!:any[];
@@ -92,7 +92,7 @@ public add_location(new_locate:any):Observable<any>{
 
 // sooon.....
 public edit_location(id:any,new_locate:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/admin/add_location`,{_id:id,capacity:new_locate.capacity,snakcs:new_locate.snacks}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/admin/edit_location`,{location_id:id,capacity:new_locate.capacity,snacks:new_locate.snacks.split(',')}, { withCredentials: true });
 }
 
 public remove_locate(id:any):Observable<any>{
@@ -190,8 +190,8 @@ public get_blogs(number_of_blogs:any,page_number:any):Observable<any>{
    { withCredentials: true, responseType: 'text'});
 }
 
-public get_manshete(number_of_manshete:any):Observable<any>{
-  return this.http.post(`${this.apiServerUrl}/home/get_manchetes`,{number_of_manshete:number_of_manshete},
+public get_manshete(number_of_manchete:any):Observable<any>{
+  return this.http.post(`${this.apiServerUrl}/home/get_manchetes`,{number_of_manchete:number_of_manchete},
    { withCredentials: true, responseType: 'text'});
 }
 public get_blogs_user(number_of_blogs:any,page_number:any):Observable<any>{
