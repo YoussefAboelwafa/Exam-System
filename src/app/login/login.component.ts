@@ -5,7 +5,6 @@ import { ServicService } from '../services/servic.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DOCUMENT } from '@angular/common';
 import { ModalPopServiceService } from '../services/modal-pop-service.service';
-
 declare const $: any;
 
 @Component({
@@ -17,6 +16,7 @@ export class LoginComponent implements OnInit {
   user_login: any;
   power = -1;
   pop_up: any;
+  flag_show_login=false;
   constructor(
     user: users,
     private service: ServicService,
@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.user_login = user;
+    this.flag_show_login=false;
 
     this.service.is_signin().subscribe(
       x=>{
@@ -34,6 +35,9 @@ export class LoginComponent implements OnInit {
         }
         else if(x.signed_in==2){
           this.router.navigate(['admin_home/admin_analytics'])
+        }
+        else{
+        this.flag_show_login=true
         }
 
     })
