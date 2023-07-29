@@ -56,6 +56,9 @@
             aria-describedby="basic-addon1"
           />
         </div>
+        <div class="form-group input-group mb-3 add_div hint">
+          <p>Add <u>blog</u> image:</p>
+        </div>
         <div class="form-group input-group mb-3 add_div">
           <input
             type="file"
@@ -66,10 +69,14 @@
             (change)="onFileSelected($event)"
           />
         </div>
+        <div class="form-group input-group mb-3 add_div hint">
+          <p>Add <u>manchet</u> image (<span style="font-weight:800;">jpg/jpeg</span> extension):</p>
+          <p>(<span style="font-weight:800;">1000x200</span>) Dimensions is prefered</p>
+        </div>
         <div class="form-group input-group mb-3 add_div">
           <input
             type="file"
-            accept="image/*"
+            accept="image/jpeg"
             class="form-control"
             id="inputGroupFile02"
             #url
