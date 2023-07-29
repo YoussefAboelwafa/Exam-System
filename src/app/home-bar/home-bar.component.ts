@@ -7,6 +7,7 @@ import { address } from '../objects/loction_address';
 import { Router } from '@angular/router';
 import { ModalPopServiceService } from '../services/modal-pop-service.service';
 import { Reciept } from '../objects/reciept';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 declare const $: any;
 @Component({
   selector: 'app-home-bar',
@@ -68,7 +69,8 @@ export class HomeBarComponent implements OnInit {
   constructor(
     private service: ServicService,
     private router: Router,
-    private popup: ModalPopServiceService
+    private popup: ModalPopServiceService,
+    private sanitizer:DomSanitizer
   ) {
     const queryParams = new URLSearchParams(window.location.search);
     const paramsObj: any = {};
@@ -105,11 +107,34 @@ export class HomeBarComponent implements OnInit {
     }
 
 
-    this.service.get_manshete(5).subscribe(
-      x=>{
-
+    this.service.get_manshete(5).subscribe({
         //i need title and imgurl
-
+        next: (news) => {
+          news = news.slice(0, -3)
+          news.split('\n\r\n').forEach((item: any) => {
+            item = JSON.parse(item)
+            const photo_blob = new Blob([new Uint8Array(item.manchete.Body.data)], {
+              type: item.photo.ContentType,
+            });
+            
+            let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
+            
+            let manchete = {
+              image:this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob)),
+              title:item.title,
+              _id:item._id
+            }
+            
+            ///do whatever you want with it
+          });
+        },
+        complete: () => {
+          console.log('done');
+        },
+        error: (error) => {
+          console.log(error);
+        }
+        
 
 
       })
