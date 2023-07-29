@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   power = -1;
   pop_up: any;
   flag_show_login=false;
+  flag_btn_login=true
   constructor(
     user: users,
     private service: ServicService,
@@ -49,6 +50,8 @@ export class LoginComponent implements OnInit {
 
   submit() {
     //  service with user_login
+    console.log(1);
+    this.flag_btn_login=false;
     this.service.login(this.user_login).subscribe((x) => {
       if (x.success == 2) {
         this.router.navigate(['/admin_home/admin_analytics']);
@@ -56,6 +59,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home/home_bar']);
       } else {
         this.pop_service.open_error_login();
+        this.flag_btn_login=true
       }
 
       error: (error: HttpErrorResponse) => {

@@ -103,6 +103,22 @@ export class HomeBarComponent implements OnInit {
     if (this.service.non_token !== undefined) {
       this.non_token_exam = this.service.non_token[0];
     }
+
+
+    this.service.get_manshete(5).subscribe(
+      x=>{
+
+        //i need title and imgurl
+
+
+
+      })
+
+
+
+
+
+
   }
 
   refresh_all() {
@@ -248,9 +264,7 @@ export class HomeBarComponent implements OnInit {
     })
 
 
-    // this.reset_order_exam();
-    // //service becouse i need Day of exam and Appointment then next step
-    // this.clear_flag_book();
+  
   }
 
   pay_now() {

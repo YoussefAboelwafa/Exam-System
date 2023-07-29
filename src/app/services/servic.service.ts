@@ -190,6 +190,10 @@ public get_blogs(number_of_blogs:any,page_number:any):Observable<any>{
    { withCredentials: true, responseType: 'text'});
 }
 
+public get_manshete(number_of_manshete:any):Observable<any>{
+  return this.http.post(`${this.apiServerUrl}/home/get_manchetes`,{number_of_manshete:number_of_manshete},
+   { withCredentials: true, responseType: 'text'});
+}
 public get_blogs_user(number_of_blogs:any,page_number:any):Observable<any>{
   return this.http.post(`${this.apiServerUrl}/home/get_blogs`,{number_of_blogs:number_of_blogs,page_number:page_number},
    { withCredentials: true, responseType: 'text' });
