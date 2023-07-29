@@ -22,12 +22,12 @@ export class AdminQuestionsComponent implements OnInit {
   flag_question = false;
   flag_type = true;
 
-  nontoken_exam: exams[]
+  nontoken_exam: exams[];
 
-  exam_topics: Topics[] 
+  exam_topics: Topics[];
 
   rv_topic = new Topics();
-  selected_exam: exams=new exams();
+  selected_exam: exams = new exams();
   flag_select = false;
   selected_topic: Topics = new Topics();
   index_remove_topic: any;
@@ -78,7 +78,6 @@ export class AdminQuestionsComponent implements OnInit {
     this.close_popup();
     this.rv_topic = new Topics();
     this.index_remove_topic = '';
-    console.log(x._id);
     this.service.remove_topic(x._id, this.selected_exam._id).subscribe((x) => {
       if (x.success == false) {
         this.popup.open_error_delete_calender();
@@ -107,7 +106,6 @@ export class AdminQuestionsComponent implements OnInit {
     let x = new Topics();
     x.title = value;
     this.service.add_topic(x.title, this.selected_exam._id).subscribe((y) => {
-      console.log(y);
       if (y.success == false) {
         let x = 'error occurred when add topic try again.';
         this.popup.open_error_book(x);
@@ -115,7 +113,6 @@ export class AdminQuestionsComponent implements OnInit {
         x._id = y._id;
         this.exam_topics.push(x);
       }
-      console.log(this.exam_topics);
       error: (error: HttpErrorResponse) => alert(error.message);
     });
     this.close_popup();
@@ -152,12 +149,10 @@ export class AdminQuestionsComponent implements OnInit {
       if (this.nontoken_exam[i].title == select_exam) {
         this.selected_exam = this.nontoken_exam[i];
         this.flag_select = true;
-        console.log(this.selected_exam);
       }
     }
 
     this.service.get_topics(this.selected_exam._id).subscribe((x) => {
-      console.log(x);
       this.exam_topics = x.topics;
 
       error: (error: HttpErrorResponse) => alert(error.message);
@@ -186,17 +181,14 @@ export class AdminQuestionsComponent implements OnInit {
   set_number_choices(value: string) {
     this.number_of_choice_size = value;
     this.number_of_choise_mcq = new Array(parseInt(value)).fill('');
-    console.log(this.number_of_choise_mcq);
   }
   set_chioce(value: any, index: number) {
     this.number_of_choise_mcq[index] = value;
-    console.log(index);
   }
   add_mcq() {
     this.new_mcq.choices = this.number_of_choise_mcq;
     this.number_of_choice_size = 2;
     this.number_of_choise_mcq = [];
-    console.log(this.new_mcq);
     this.close_popup();
     this.service
       .add_mcq_to_topic(
@@ -205,15 +197,11 @@ export class AdminQuestionsComponent implements OnInit {
         this.new_mcq
       )
       .subscribe((x) => {
-        console.log(x);
         if (x.success == false) {
-          console.log('failed');
         } else {
           this.new_mcq._id = x._id;
           let xz = Object.assign({}, this.new_mcq);
           this.selected_topic.mcq.push(xz);
-          console.log('aks');
-          console.log(this.selected_topic);
         }
         error: (error: HttpErrorResponse) => alert(error.message);
       });
@@ -221,7 +209,6 @@ export class AdminQuestionsComponent implements OnInit {
 
   add_coding() {
     this.close_popup();
-    console.log(this.new_coding);
     this.service
       .add_coding_to_topic(
         this.selected_topic._id,
@@ -230,17 +217,14 @@ export class AdminQuestionsComponent implements OnInit {
       )
       .subscribe((x) => {
         if (x.success == false) {
-          console.log('failed');
         } else {
           this.new_coding._id = x._id;
-          console.log(this.new_coding);
           let a = Object.assign({}, this.new_coding);
           this.selected_topic.coding.push(a);
         }
 
         error: (error: HttpErrorResponse) => alert(error.message);
       });
-    console.log(this.selected_topic.coding);
   }
 
   delete_MCQ(value: any, index: any) {

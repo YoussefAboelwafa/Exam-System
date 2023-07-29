@@ -25,12 +25,12 @@ export class HomeComponent implements OnInit {
   photo_event_service: any = null;
   photo_sendin_service: any;
   //take it from back
-  non_token_exam: exams=new exams()
+  non_token_exam: exams = new exams();
 
   current_user = {
     first_name: 'loading',
     last_name: '..',
-    photo:'',
+    photo: '',
     _id: '',
   };
   flag_type = false;
@@ -38,8 +38,7 @@ export class HomeComponent implements OnInit {
     private service: ServicService,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private popup:ModalPopServiceService,
-    
+    private popup: ModalPopServiceService
   ) {
     this.refresh();
     // this.get_user_photo();
@@ -78,7 +77,6 @@ export class HomeComponent implements OnInit {
     if (inputElement.files && inputElement.files.length > 0) {
       const formData = new FormData();
       formData.append('photo', inputElement.files[0]);
-    
 
       this.current_user.photo = this.photo_url;
 
@@ -93,18 +91,16 @@ export class HomeComponent implements OnInit {
     }
   }
 
- 
-
   refresh() {
     this.flag_type = true;
     this.service.home_bar_init().subscribe((x) => {
       this.service.user = x.user;
-      this.current_user=x.user;
-      if(x.user.photo!=null&&x.user.photo!=undefined){
-        this.current_user.photo='http://i.imgur.com/'+x.user.photo
-      }
-      else{
-        this.current_user.photo='https://cdn-icons-png.flaticon.com/512/1946/1946429.png'
+      this.current_user = x.user;
+      if (x.user.photo != null && x.user.photo != undefined) {
+        this.current_user.photo = 'http://i.imgur.com/' + x.user.photo;
+      } else {
+        this.current_user.photo =
+          'https://cdn-icons-png.flaticon.com/512/1946/1946429.png';
       }
       this.flag_type = false;
 
@@ -161,23 +157,18 @@ export class HomeComponent implements OnInit {
         this.service.non_token = x;
       });
 
-
       error: (error: HttpErrorResponse) => alert(error.message);
     });
     // this.router.navigate(['home/home_bar'])
   }
 
   logout() {
-    this.service.log_out().subscribe(
-      (x) => {
-        if(x.success==true){
-          this.router.navigate(['']);
-        }
-        else{
-          this.popup.open_error_book(x.error)
-        }
-
-
-      });
+    this.service.log_out().subscribe((x) => {
+      if (x.success == true) {
+        this.router.navigate(['']);
+      } else {
+        this.popup.open_error_book(x.error);
+      }
+    });
   }
 }

@@ -12,18 +12,20 @@ declare const $: any;
   styleUrls: ['./admin-exams.component.css'],
 })
 export class AdminExamsComponent implements OnInit {
-  constructor(private service: ServicService,private popup:ModalPopServiceService) {
+  constructor(
+    private service: ServicService,
+    private popup: ModalPopServiceService
+  ) {
     this.service.exam_bar_init_admin().subscribe((x) => {
-        
-      this.flag_type=false
-      if(x.length==0){
-        x=[];
+      this.flag_type = false;
+      if (x.length == 0) {
+        x = [];
       }
       this.service.non_token = x;
       this.non_token_exam = this.service.non_token;
     });
 
-     this.non_token_exam=this.service.non_token;
+    this.non_token_exam = this.service.non_token;
   }
 
   ngOnInit(): void {}
@@ -32,13 +34,13 @@ export class AdminExamsComponent implements OnInit {
   edit_ex: any = new exams();
   edit_index: any;
   turn_on_off: any; //to open and close exam
-  learn_dataof_nontoken=new exams
+  learn_dataof_nontoken = new exams();
   information: any[] = []; //numberof info used in ngfor
   title_add: any;
   about_add: any;
-  time_exam_add:any;
+  time_exam_add: any;
   non_token_exam: any[] = [];
-  flag_type=true
+  flag_type = true;
   close_popup() {
     $('#confirmation').modal('hide');
     $('#edit').modal('hide');
@@ -64,8 +66,8 @@ export class AdminExamsComponent implements OnInit {
     this.index_remove = '';
     this.service.remove_exam(x._id).subscribe((x) => {
       // if(x.success==false) {
-      //   this.popup.open_error_delete_exam(); 
-      //   return;      
+      //   this.popup.open_error_delete_exam();
+      //   return;
       // }
       error: (error: HttpErrorResponse) => alert(error.message);
     });
@@ -93,13 +95,13 @@ export class AdminExamsComponent implements OnInit {
     }
     this.close_popup();
   }
-  confirm_edit(ed_title: any, ed_about: any,ed_time:any) {
+  confirm_edit(ed_title: any, ed_about: any, ed_time: any) {
     this.non_token_exam[this.edit_index].title = ed_title;
     this.non_token_exam[this.edit_index].about = ed_about;
     this.non_token_exam[this.edit_index].info = this.information;
     this.non_token_exam[this.edit_index].exam_time = ed_time;
 
-    this.service.non_token=this.non_token_exam;
+    this.service.non_token = this.non_token_exam;
     this.close_popup();
 
     //service to edit this exam
@@ -113,31 +115,29 @@ export class AdminExamsComponent implements OnInit {
       });
   }
 
-  add_exam(hours:any, minutes:any) {
-    let time:string=''
-    if(hours<9){
-      time='0'+hours
+  add_exam(hours: any, minutes: any) {
+    let time: string = '';
+    if (hours < 9) {
+      time = '0' + hours;
+    } else {
+      time = '' + hours;
     }
-    else{
-      time=''+hours;
-    }
-    if(minutes<9){
-      time+=':0'+minutes;
-    }
-    else{
-      time+=':'+minutes;
+    if (minutes < 9) {
+      time += ':0' + minutes;
+    } else {
+      time += ':' + minutes;
     }
     let x = new exams();
     x.title = this.title_add;
     x.about = this.about_add;
     x.info = this.information;
-    x.exam_time=time;
+    x.exam_time = time;
     this.non_token_exam.push(x);
     this.close_popup();
 
     this.service.add_new_exam(x).subscribe((x) => {
       this.non_token_exam[this.non_token_exam.length - 1]._id = x;
-      this.service.non_token=this.non_token_exam;
+      this.service.non_token = this.non_token_exam;
       error: (error: HttpErrorResponse) => alert(error.message);
     });
 
@@ -156,8 +156,6 @@ export class AdminExamsComponent implements OnInit {
   }
 
   turn_off_on_exam(exam: any) {
-    console.log(exam.turn_on_off === '0');
-
     if (exam.turn_on_off === '0') {
       exam.turn_on_off = '1';
     } else {
@@ -165,7 +163,6 @@ export class AdminExamsComponent implements OnInit {
     }
 
     this.service.turn_on_off(exam._id, exam.turn_on_off).subscribe((x) => {
-      console.log(x);
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }

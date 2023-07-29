@@ -71,11 +71,15 @@ export class ExamsBarComponent implements OnInit {
   book_id_exam: any = '';
   avilable_time: any;
   ids_exams: any[] = [];
-  phone_number:any
-  temp_countries:any;
-  flag_type=true;
-  reciept:Reciept =new Reciept();
-  constructor(private service: ServicService, private router: Router,private popup:ModalPopServiceService) {
+  phone_number: any;
+  temp_countries: any;
+  flag_type = true;
+  reciept: Reciept = new Reciept();
+  constructor(
+    private service: ServicService,
+    private router: Router,
+    private popup: ModalPopServiceService
+  ) {
     this.refresh_all();
     // this.upcoming_exam=this.service.upcoming_ex;
     // this.token_exam=this.service.token_ex;
@@ -123,7 +127,7 @@ export class ExamsBarComponent implements OnInit {
 
     this.service.home_bar_init().subscribe((x) => {
       this.service.user = x.user;
-      this.phone_number=this.service.user.phone;
+      this.phone_number = this.service.user.phone;
       this.non_token_exam = x.other_exam;
       let up = 0,
         token = 0,
@@ -171,14 +175,14 @@ export class ExamsBarComponent implements OnInit {
       this.token_exam = z;
 
       this.service.exam_bar_init().subscribe((x) => {
-        if(x.length==0){
-          x=[];
+        if (x.length == 0) {
+          x = [];
         }
         this.service.non_token = x;
         this.non_token_exam = this.service.non_token;
       });
 
-      this.flag_type=false
+      this.flag_type = false;
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }
@@ -210,25 +214,22 @@ export class ExamsBarComponent implements OnInit {
     this.flag_time = true;
   }
   submit_time() {
-    let country_id
-    for (let i =0; i < this.temp_countries.length;i++) {
-      if(this.temp_countries[i].country_name==this.selectedCountry){
-          country_id=this.temp_countries[i]._id;
-          break;
+    let country_id;
+    for (let i = 0; i < this.temp_countries.length; i++) {
+      if (this.temp_countries[i].country_name == this.selectedCountry) {
+        country_id = this.temp_countries[i]._id;
+        break;
       }
     }
-    this.service.get_payment_reciept(country_id).subscribe(x=>{
-      if(x.success==true){
-        this.reciept=x;
-        this.reciept.phone=this.service.user.phone;
+    this.service.get_payment_reciept(country_id).subscribe((x) => {
+      if (x.success == true) {
+        this.reciept = x;
+        this.reciept.phone = this.service.user.phone;
         $('#reciept').modal('show');
-
+      } else {
+        this.popup.open_error_book(x.error);
       }
-      else{
-        this.popup.open_error_book(x.error)
-      }
-    })
-
+    });
 
     // this.reset_order_exam();
     // //service becouse i need Day of exam and Appointment then next step
@@ -244,7 +245,7 @@ export class ExamsBarComponent implements OnInit {
       appointment: this.selectedappointment,
     };
 
-    this.service.payment(book_exam,this.reciept).subscribe((x) => {
+    this.service.payment(book_exam, this.reciept).subscribe((x) => {
       if (x.success == true) {
         window.location.href = x.token;
       } else {
@@ -257,7 +258,6 @@ export class ExamsBarComponent implements OnInit {
     this.book_title_course = name_exam;
     //becouse if the user click take exam from modal,hide pop up if it show
     this.book_id_exam = id_exam;
-    console.log(this.book_id_exam)
 
     $('#not_token_exam').modal('hide');
     $('#token_exam').modal('hide');
@@ -337,7 +337,6 @@ export class ExamsBarComponent implements OnInit {
   }
 
   onlocationSelected(event: Event) {
-    console.log(this.calendar);
     this.selectedlocation = (event.target as HTMLSelectElement).value;
 
     if (this.temp_location_address != null) {
@@ -352,8 +351,6 @@ export class ExamsBarComponent implements OnInit {
     }
 
     for (let i = 0; i < this.locations.length; i++) {
-      console.log(this.locations[i]);
-      console.log(this.selectedlocation);
       if (this.locations[i] == this.selectedlocation) {
         this.index_location = i;
       }
@@ -374,7 +371,6 @@ export class ExamsBarComponent implements OnInit {
 
   ondayselect(event: Event) {
     this.selectedday = (event.target as HTMLSelectElement).value;
-    console.log(this.selectedday);
     for (var i = 0; i < this.calendar.length; i++) {
       if (this.calendar[i].day_number == this.selectedday.split(' : ')[0]) {
         this.avilable_time = this.calendar[i].time;

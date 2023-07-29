@@ -93,7 +93,6 @@ export class AdminCalendarComponent implements OnInit {
         this.address.push(x);
       }
 
-      console.log(combinations);
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }
@@ -128,7 +127,6 @@ export class AdminCalendarComponent implements OnInit {
         x.capacity = dateArr[3];
         x.snacks = dateArr[4];
         x._id = dateArr[5];
-        console.log(x);
         temp.push(x);
       }
       this.address = temp;
@@ -190,7 +188,6 @@ export class AdminCalendarComponent implements OnInit {
     this.close_popup();
     this.remove_calend = new calendar();
     this.index_calend = '';
-    console.log(x._id);
     this.service.remove_day(x._id).subscribe((x) => {
       if (x.success == false) {
         this.popup.open_error_delete_calender();
@@ -225,56 +222,25 @@ export class AdminCalendarComponent implements OnInit {
       this.service.get_allstudent_inoneday(id)
     ).then((x) => {
       this.user_exam = x;
-      console.log(x);
       for (var i = 0; i < this.user_exam.length; i++) {
         if (this.user_exam[i].percentage == -1) {
           this.user_exam[i].percentage = 0;
         }
         ids.push(this.user_exam[i]._id_user);
-        if(this.user_exam[i].photo_user!=null&&this.user_exam[i].photo_user!=undefined){
-          this.user_exam[i].photo_user='http://i.imgur.com/'+this.user_exam[i].photo_user
-        }
-        else{
-          this.user_exam[i].photo_user='https://cdn-icons-png.flaticon.com/512/1946/1946429.png';
+        if (
+          this.user_exam[i].photo_user != null &&
+          this.user_exam[i].photo_user != undefined
+        ) {
+          this.user_exam[i].photo_user =
+            'http://i.imgur.com/' + this.user_exam[i].photo_user;
+        } else {
+          this.user_exam[i].photo_user =
+            'https://cdn-icons-png.flaticon.com/512/1946/1946429.png';
         }
       }
       this.flag_calender = false;
       this.flag_all_student = true;
     });
-
-    //put urls in this.user_photo_user
-
-    // this.service.get_photos_in_one_day(id).subscribe(async (photos) => {
-      
-    //   photos = photos.slice(0, -3);
-    //   await getAllStudentPromise;
-    //   const myMap = new Map<any, any>();
-    //   for (let i = 0; i < this.user_exam.length; i++) {
-    //     myMap.set(this.user_exam[i]._id_user, this.user_exam[i]);
-    //   }
-    //   ///put users in a map and then assign each photo to him
-    //   photos.split('\n\r\n').forEach((photo: any) => {
-    //     photo = JSON.parse(photo);
-    //     if (photo.contentLength === 0) {
-    //       /// user doesn't have a photo
-    //       myMap.get(photo.user_id).photo_user =
-    //         'https://cdn-icons-png.flaticon.com/512/1946/1946429.png';
-    //     } else {
-    //       const photo_blob = new Blob([new Uint8Array(photo.Body.data)], {
-    //         type: photo.ContentType,
-    //       });
-    //       console.log(photo_blob);
-    //       let imageSrc = this.sanitizer.bypassSecurityTrustUrl(
-    //         URL.createObjectURL(photo_blob)
-    //       );
-    //       console.log(myMap);
-    //       console.log(photo.user_id);
-    //       myMap.get(photo.user_id).photo_user = imageSrc;
-    //       console.log(photo.user_id);
-    //       console.log(this.user_exam);
-    //     }
-    //   });
-    // });
   }
 
   add_calendar(add_date: any, add_time: any) {
@@ -339,7 +305,6 @@ export class AdminCalendarComponent implements OnInit {
   }
 
   onCountrySelected(event: Event, flag: any) {
-    console.log(flag);
     const selectedCountry = (event.target as HTMLSelectElement).value;
     // Call your function here with the selectedCountry value
     //flag==1 that meen filter
@@ -397,7 +362,6 @@ export class AdminCalendarComponent implements OnInit {
         this.index_city = i;
       }
     }
-    console.log(this.index_city);
     this.locations = this.all_locations
       .map((cont: any) => cont.cities)
       [this.index_country].map((c: any) => c.locations)

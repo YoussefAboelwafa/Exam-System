@@ -18,7 +18,7 @@ export class AdminLocationBarComponent implements OnInit {
   edit_ad = new address();
   index_remved_address: any;
   index_edit_address: any;
-  flag_type=true
+  flag_type = true;
   all_locations: any;
   country: any[] = [];
   city: any[] = [];
@@ -31,15 +31,14 @@ export class AdminLocationBarComponent implements OnInit {
 
   constructor(private service: ServicService) {
     this.get_all_place();
-    
   }
 
   ngOnInit(): void {}
-temp_loction:any
+  temp_loction: any;
   get_all_place() {
     this.service.get_places().subscribe((x) => {
       this.all_locations = x;
-      this.temp_loction=x;
+      this.temp_loction = x;
       this.country = x.map((cont: any) => cont.country_name);
 
       let combinations: string[] = [];
@@ -70,8 +69,7 @@ temp_loction:any
 
       this.address = temp;
 
-      console.log(combinations);
-      this.flag_type=false
+      this.flag_type = false;
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }
@@ -105,24 +103,25 @@ temp_loction:any
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }
-  edit_address(value:any,index:any) {
-    this.edit_ad=value;
-    this.index_edit_address=index;
+  edit_address(value: any, index: any) {
+    this.edit_ad = value;
+    this.index_edit_address = index;
   }
 
-  totaly_edit(ed_capacity:any,ed_snacks:any){
-    this.address[this.index_edit_address].capacity=ed_capacity;
-    this.address[this.index_edit_address].snacks=ed_snacks;
+  totaly_edit(ed_capacity: any, ed_snacks: any) {
+    this.address[this.index_edit_address].capacity = ed_capacity;
+    this.address[this.index_edit_address].snacks = ed_snacks;
 
     this.close_popup();
 
-    this.service.edit_location(this.address[this.index_edit_address]._id,this.address[this.index_edit_address]).subscribe(
-      (x)=> {
-
-         error:(error: HttpErrorResponse) =>alert(error.message);
-       }
-
-    )
+    this.service
+      .edit_location(
+        this.address[this.index_edit_address]._id,
+        this.address[this.index_edit_address]
+      )
+      .subscribe((x) => {
+        error: (error: HttpErrorResponse) => alert(error.message);
+      });
 
     // service edit address
   }
@@ -201,7 +200,6 @@ temp_loction:any
         this.index_city = i;
       }
     }
-    console.log(this.index_city);
     this.locations = this.all_locations
       .map((cont: any) => cont.cities)
       [this.index_country].map((c: any) => c.locations)

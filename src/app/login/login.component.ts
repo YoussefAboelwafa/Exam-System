@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
   user_login: any;
   power = -1;
   pop_up: any;
-  flag_show_login=false;
-  flag_btn_login=true
+  flag_show_login = false;
+  flag_btn_login = true;
   constructor(
     user: users,
     private service: ServicService,
@@ -26,32 +26,24 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.user_login = user;
-    this.flag_show_login=false;
+    this.flag_show_login = false;
 
-    this.service.is_signin().subscribe(
-      x=>{
-        if(x.signed_in==1){
-          this.router.navigate(['home/home_bar'])
-          
-        }
-        else if(x.signed_in==2){
-          this.router.navigate(['admin_home/admin_location'])
-        }
-        else{
-        this.flag_show_login=true
-        }
-
-    })
-
-
+    this.service.is_signin().subscribe((x) => {
+      if (x.signed_in == 1) {
+        this.router.navigate(['home/home_bar']);
+      } else if (x.signed_in == 2) {
+        this.router.navigate(['admin_home/admin_location']);
+      } else {
+        this.flag_show_login = true;
+      }
+    });
   }
 
   ngOnInit() {}
 
   submit() {
     //  service with user_login
-    console.log(1);
-    this.flag_btn_login=false;
+    this.flag_btn_login = false;
     this.service.login(this.user_login).subscribe((x) => {
       if (x.success == 2) {
         this.router.navigate(['/admin_home/admin_location']);
@@ -59,7 +51,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home/home_bar']);
       } else {
         this.pop_service.open_error_login();
-        this.flag_btn_login=true
+        this.flag_btn_login = true;
       }
 
       error: (error: HttpErrorResponse) => {

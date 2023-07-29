@@ -91,7 +91,6 @@ export class AdminAnalyticsComponent implements OnInit {
   first_map_key_chart3: any;
   flag_type = true;
 
-  
   constructor(private service: ServicService) {
     this.service.get_analytics().subscribe((entries: any) => {
       this.fullData = entries;
@@ -118,10 +117,8 @@ export class AdminAnalyticsComponent implements OnInit {
         this.monthData[key].exams[entry.exam] += entry.bookingsCount;
       });
 
-      console.log(this.monthData);
       // this is keys of data like 2023-7
       this.year_month_key = Object.keys(this.monthData);
-      console.log(this.year_month_key);
 
       //this is kyes after splits to only years 2023
       this.distinctyears = Array.from(
@@ -142,8 +139,6 @@ export class AdminAnalyticsComponent implements OnInit {
       return monthA - monthB;
     });
   }
-
-
 
   ngOnInit() {
     this.barChartDemo(0);
@@ -202,11 +197,6 @@ export class AdminAnalyticsComponent implements OnInit {
       // this is distinctmonth in selected year
       this.show_char1 = this.sortStringsByMonth(this.show_char1);
       this.label1 = this.selectedyear1;
-
-      console.log(8);
-
-      console.log(this.show_char1);
-      console.log(this.distinctmonth);
       let j = 0;
       for (let i = 1; i <= 12; i++) {
         this.bar_chartDatalabels.push(this.months_name[i - 1]);
@@ -417,8 +407,6 @@ export class AdminAnalyticsComponent implements OnInit {
     if (flag == 1) {
       let x =
         this.monthData[this.first_map_key_chart3].marks[this.selectedexam3];
-      console.log(1);
-      console.log(x);
       for (let i = 0; i < x.length; i++) {
         this.score_chartData.push(x[i].count);
         this.score_chartDatalabels.push(x[i].range);

@@ -10,37 +10,39 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin-home.component.css'],
 })
 export class AdminHomeComponent implements OnInit {
-  
   flag_type = false;
-  photo_url: any=null;
-  photo_event_service:any=null;
+  photo_url: any = null;
+  photo_event_service: any = null;
   photo_sendin_service: any;
-current_user = {
+  current_user = {
     first_name: 'Ahmed',
     last_name: 'Ali',
-    photo:'',
+    photo: '',
     _id: '1256893',
   };
-  constructor(private service: ServicService, private sanitizer:DomSanitizer,private router:Router,private popup :ModalPopServiceService) {
+  constructor(
+    private service: ServicService,
+    private sanitizer: DomSanitizer,
+    private router: Router,
+    private popup: ModalPopServiceService
+  ) {
     this.service.home_bar_init().subscribe((x) => {
       this.current_user = x.user;
-      
-      if(x.user.photo!=null&&x.user.photo!=undefined){
-        this.current_user.photo='http://i.imgur.com/'+x.user.photo
-      }
-      else{
-        this.current_user.photo='https://cdn-icons-png.flaticon.com/512/1946/1946429.png'
-      }   
-       this.service.user = x.user;
 
+      if (x.user.photo != null && x.user.photo != undefined) {
+        this.current_user.photo = 'http://i.imgur.com/' + x.user.photo;
+      } else {
+        this.current_user.photo =
+          'https://cdn-icons-png.flaticon.com/512/1946/1946429.png';
+      }
+      this.service.user = x.user;
     });
     // this.get_user_photo();
   }
 
   ngOnInit(): void {}
 
-
-    onFileSelect(event: any) {
+  onFileSelect(event: any) {
     const file = event.target.files[0];
     this.photo_event_service = event;
     if (!(file instanceof Blob)) {
@@ -64,8 +66,7 @@ current_user = {
   }
 
   add_user_photo() {
-
-    if(this.photo_event_service==null){
+    if (this.photo_event_service == null) {
       return;
     }
     const inputElement = this.photo_event_service.target as HTMLInputElement;
@@ -79,10 +80,9 @@ current_user = {
 
       this.service.change_photo_user(formData).subscribe((x) => {
         if (x.success) {
-          console.log(x);
           this.current_user.photo = this.photo_url;
           this.service.user.photo = this.photo_url;
-          this.photo_event_service=null;
+          this.photo_event_service = null;
         } else {
           //error message
         }
@@ -90,44 +90,13 @@ current_user = {
     }
   }
 
-
-  // get_user_photo() {
-  
-  
-  //   this.service.get_photo().subscribe((photo) => {
-  //           if(photo.success==false){
-  //             this.service.user.photo='https://cdn-icons-png.flaticon.com/512/1946/1946429.png'
-  //             this.current_user.photo='https://cdn-icons-png.flaticon.com/512/1946/1946429.png'
-  //             return;
-  //           }
-  //           const photo_blob = new Blob([new Uint8Array(photo.photo.Body.data)], {
-  //             type: photo.photo.ContentType,
-  //           });
-            
-  //           let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
-  //           console.log(imageSrc);
-  //           this.current_user.photo=imageSrc;
-  //       }
-  //   );
-  // }
-
-
-
-
-
-  logout(){
-    this.service.log_out().subscribe(
-      (x) => {
-        if(x.success==true){
-          this.router.navigate(['']);
-        }
-        else{
-          this.popup.open_error_book(x.error)
-        }
-
-
-      });
-    
+  logout() {
+    this.service.log_out().subscribe((x) => {
+      if (x.success == true) {
+        this.router.navigate(['']);
+      } else {
+        this.popup.open_error_book(x.error);
+      }
+    });
   }
-
 }

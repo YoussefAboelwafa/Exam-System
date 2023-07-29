@@ -113,9 +113,7 @@ export class HomeBarComponent implements OnInit {
     this.service.get_manshete(5).subscribe(
       x=>{
       //i need title and imgurl
-      console.log(x);
       this.start_manchete=x[0];
-      console.log(x);
       for(let i=0; i<x.length; i++){
         x[i].manchete='http://i.imgur.com/'+x[i].manchete
       } 
@@ -146,7 +144,6 @@ export class HomeBarComponent implements OnInit {
 
       this.service.get_calender().subscribe((x) => {
         this.calendar = x;
-        console.log(this.calendar);
       });
       this.address = [];
       for (let i = 0; i < combinations.length; i++) {
@@ -290,7 +287,6 @@ export class HomeBarComponent implements OnInit {
     this.book_title_course = name_exam;
     //becouse if the user click take exam from modal,hide pop up if it show
     this.book_id_exam = id_exam;
-    console.log(this.book_id_exam);
     this.reset_order_exam();
     $('#not_token_exam').modal('hide');
     $('#token_exam').modal('hide');
@@ -319,9 +315,7 @@ export class HomeBarComponent implements OnInit {
     this.selectedCountry = (event.target as HTMLSelectElement).value;
     // Call your function here with the selectedCountry value
     //flag==1 that meen filter
-    console.log(this.countries);
 
-    console.log(this.calendar);
     this.citys = [];
     this.locations = [];
     if (this.temp_country_address != null) {
@@ -346,7 +340,6 @@ export class HomeBarComponent implements OnInit {
     this.citys = this.all_locations
       .map((cont: any) => cont.cities)
       [this.index_country].map((c: any) => c.city_name);
-    console.log(this.calendar);
   }
 
   oncitySelected(event: Event) {
@@ -375,7 +368,6 @@ export class HomeBarComponent implements OnInit {
       .map((cont: any) => cont.cities)
       [this.index_country].map((c: any) => c.locations)
       [this.index_city].map((c: any) => c.location_name);
-    console.log(this.calendar);
   }
 
   onlocationSelected(event: Event) {
@@ -406,7 +398,6 @@ export class HomeBarComponent implements OnInit {
       [this.index_country].map((c: any) => c.locations)
       [this.index_city].map((c: any) => c._id)[this.index_location];
 
-    console.log(this.calendar);
   }
 
   onselectsnack(event: Event) {
@@ -415,7 +406,6 @@ export class HomeBarComponent implements OnInit {
 
   ondayselect(event: Event) {
     this.selectedday = (event.target as HTMLSelectElement).value;
-    console.log(this.selectedday);
     for (var i = 0; i < this.calendar.length; i++) {
       if (this.calendar[i].day_number == this.selectedday.split(' : ')[0]) {
         this.avilable_time = this.calendar[i].time;

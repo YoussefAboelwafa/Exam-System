@@ -5,7 +5,6 @@ import { ServicService } from '../services/servic.service';
 import { Prices } from '../objects/prices';
 declare const $: any;
 
-
 @Component({
   selector: 'app-admin-price',
   templateUrl: './admin-price.component.html',
@@ -17,20 +16,17 @@ export class AdminPriceComponent implements OnInit {
     private service: ServicService
   ) {
     this.service.get_countries_prices().subscribe((x) => {
-      console.log(x);
-      this.flag_type=false
+      this.flag_type = false;
       if (x.success == true) {
         this.curr_prices = x.prices;
       } else {
         this.popup.open_error_book(x.error);
       }
-
     });
-
   }
 
   curr_prices: Prices[] = [];
-  flag_type=true;
+  flag_type = true;
   currencies: any[] = [
     'USD', // United States Dollar
     'EUR', // Euro
@@ -75,34 +71,31 @@ export class AdminPriceComponent implements OnInit {
       );
       return;
     }
-  let x = new Prices();
+    let x = new Prices();
     x.country_name = this.selected_country;
     x.currency = this.selected_currency;
     x.total_amount = add_total_amount;
     x.month_discount = add_month_dicount;
     x.year_discount = add_year_dicount;
-    for (var i = 0; i <this.curr_prices.length;i++){
-      if (this.curr_prices[i].country_name==this.selected_country){
-          x._id=this.curr_prices[i]._id
-          this.curr_prices[i].currency = this.selected_currency;
-          this.curr_prices[i].total_amount = add_total_amount;
-          this.curr_prices[i].month_discount = add_month_dicount;
-          this.curr_prices[i].year_discount = add_year_dicount;
+    for (var i = 0; i < this.curr_prices.length; i++) {
+      if (this.curr_prices[i].country_name == this.selected_country) {
+        x._id = this.curr_prices[i]._id;
+        this.curr_prices[i].currency = this.selected_currency;
+        this.curr_prices[i].total_amount = add_total_amount;
+        this.curr_prices[i].month_discount = add_month_dicount;
+        this.curr_prices[i].year_discount = add_year_dicount;
       }
     }
-  
+
     this.close_popup();
     // serviec add new address and recieve id and set it
 
-    console.log(x)
-    this.service.edit_price(x).subscribe(y=>{
-      if(y.success==true){
-
+    this.service.edit_price(x).subscribe((y) => {
+      if (y.success == true) {
+      } else {
+        this.popup.open_error_book(y.message);
       }
-      else{
-          this.popup.open_error_book(y.message)
-      }
-    })
+    });
   }
 
   remove(rv_price: any, index: any) {
@@ -111,13 +104,12 @@ export class AdminPriceComponent implements OnInit {
   }
   totaly_remove() {
     //service remove
-    this.curr_prices[this.index_remove_price].total_amount=0;
-    this.curr_prices[this.index_remove_price].month_discount=0;
-    this.curr_prices[this.index_remove_price].year_discount=0;
-    this.service.edit_price(this.curr_prices[this.index_remove_price]).subscribe(
-      x=>{
-
-    })
+    this.curr_prices[this.index_remove_price].total_amount = 0;
+    this.curr_prices[this.index_remove_price].month_discount = 0;
+    this.curr_prices[this.index_remove_price].year_discount = 0;
+    this.service
+      .edit_price(this.curr_prices[this.index_remove_price])
+      .subscribe((x) => {});
 
     this.close_popup();
   }
@@ -131,11 +123,9 @@ export class AdminPriceComponent implements OnInit {
 
   oncurrencyselect(event: any) {
     this.selected_currency = (event.target as HTMLSelectElement).value;
-    console.log(this.selected_currency);
   }
 
   oncountryselect(event: any) {
     this.selected_country = (event.target as HTMLSelectElement).value;
-    console.log(this.selected_country);
   }
 }
