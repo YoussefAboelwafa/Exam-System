@@ -91,9 +91,9 @@ public add_location(new_locate:any):Observable<any>{
 }
 
 // sooon.....
-// public edit_location(id:any,new_locate:any):Observable<any>{
-//   return this.http.post<any>(`${this.apiServerUrl}/admin/add_location`,{_id:id,new_locate:new_locate}, { withCredentials: true });
-// }
+public edit_location(id:any,new_locate:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/add_location`,{_id:id,capacity:new_locate.capacity,snakcs:new_locate.snacks}, { withCredentials: true });
+}
 
 public remove_locate(id:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/remove_location`,{_id:id}, { withCredentials: true });

@@ -104,30 +104,26 @@ export class AdminLocationBarComponent implements OnInit {
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }
-  // edit_address(value:any,index:any) {
-  //   this.edit_ad=value;
-  //   this.index_edit_address=index;
-  // }
+  edit_address(value:any,index:any) {
+    this.edit_ad=value;
+    this.index_edit_address=index;
+  }
 
-  // totaly_edit(ed_country:any,ed_city:any,ed_location:any,ed_capacity:any,ed_snacks:any){
-  //   this.address[this.index_edit_address].country=ed_country;
-  //   this.address[this.index_edit_address].city=ed_city;
-  //   this.address[this.index_edit_address].location=ed_location;
-  //   this.address[this.index_edit_address].capacity=ed_capacity;
-  //   this.address[this.index_edit_address].snacks=ed_snacks;
+  totaly_edit(ed_capacity:any,ed_snacks:any){
+    this.address[this.index_edit_address].capacity=ed_capacity;
+    this.address[this.index_edit_address].snacks=ed_snacks;
+    this.close_popup();
 
-  //   this.close_popup();
+    // this.service.edit_location(this.address[this.index_edit_address]._id,this.address[this.index_edit_address]).subscribe(
+    //   (x)=> {
 
-  //   this.service.edit_location(this.address[this.index_edit_address]._id,this.address[this.index_edit_address]).subscribe(
-  //     (x)=> {
+    //      error:(error: HttpErrorResponse) =>alert(error.message);
+    //    }
 
-  //        error:(error: HttpErrorResponse) =>alert(error.message);
-  //      }
+    // )
 
-  //   )
-
-  //   //service edit address
-  // }
+    //service edit address
+  }
 
   add_locate(
     add_country: any,

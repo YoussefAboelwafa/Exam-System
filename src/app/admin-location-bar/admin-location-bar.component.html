@@ -52,6 +52,13 @@
   >
     <div class="remove_edit">
       <button
+        data-toggle="modal"
+        data-target="#editlocationmodal"
+        (click)="edit_address(locate, i)"
+      >
+        <i class="fa-solid fa-pen"></i>
+      </button>
+      <button
         (click)="remove_address(locate, i)"
         data-toggle="modal"
         data-target="#confirm_adress"
@@ -221,7 +228,7 @@
   </div>
 </div>
 
-<!-- <div
+<div
   class="modal fade"
   id="editlocationmodal"
   tabindex="-1"
@@ -246,37 +253,6 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="exampleFormControlInput1">Country:</label>
-          <input
-           [value]="edit_ad.country"
-            type="text"
-            class="form-control"
-            id="exampleFormControlInput1"
-            #ed_country
-          />
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlInput2">City:</label>
-          <input
-            [value]="edit_ad.city"
-            type="text"
-            class="form-control"
-            id="exampleFormControlInput2"
-            #ed_city
-          />
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlInput3">Location:</label>
-          <input
-            [value]="edit_ad.location"
-            type="text"
-            class="form-control"
-            id="exampleFormControlInput3"
-            #ed_location
-        
-          />
-        </div>
-        <div class="form-group">
           <label for="exampleFormControlInput4">Capacity:</label>
           <input
             [value]="edit_ad.capacity"
@@ -298,14 +274,14 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button (click)="totaly_edit(ed_country.value,ed_city.value,ed_location.value,ed_capacity.value,ed_snacks.value)" type="button" id="addnewlocation">
+        <button (click)="totaly_edit(ed_capacity.value,ed_snacks.value)" type="button" id="addnewlocation">
           Edit Address <i class="fa-solid fa-plus"></i>
         </button>
         <button (click)="close()" type="button" id="addnewlocation" style="background-color: #FF0052;" >Cancel Edit</button>
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 <div
   class="modal fade"

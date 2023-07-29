@@ -13,7 +13,8 @@ export class AdminNewsComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-  add_url_to_service: any;
+  add_url_to_service: any=null;
+  manchete_to_service: any=null;
   my_add_event: any;
   current_url: any;
   flag_type = false;
@@ -79,6 +80,16 @@ export class AdminNewsComponent implements OnInit {
   }
 
 
+  onFileSelected2(event:any){
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      this.manchete_to_service = inputElement.files[0];
+    }
+    if (this.manchete_to_service.size < 510000) {
+      console.log(this.manchete_to_service);
+    }    
+  }
+
   
   addNews(title: string, blog: string) {
     const object = {
@@ -97,9 +108,10 @@ export class AdminNewsComponent implements OnInit {
     if (this.add_url_to_service) {
       const formData = new FormData();
       formData.append('photo', this.add_url_to_service);
+      formData.append('manchete', this.manchete_to_service);
       formData.append('title', title);
       formData.append('description', blog);
- 
+
       this.service.add_blog(formData).subscribe((x) => {
         if (x.success) {
           console.log(x);
@@ -109,14 +121,18 @@ export class AdminNewsComponent implements OnInit {
           //error message
         }
       });
+      this.manchete_to_service=null
+      this.add_url_to_service=null
     }
   }
 
-  deleteNews(index: number) {
-    console.log(this.News)
-    console.log(this.News[index]._id)  
-    this.News.splice(index, 1);
+  close(){
+   this.manchete_to_service=null
+   this.add_url_to_service=null
+  }
 
+  deleteNews(index: number) {
+    this.News.splice(index, 1);
     this.service.delete_blog(this.News[index]._id).subscribe((x) => {
       if (x.success == true) {
        } else {

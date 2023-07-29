@@ -37,6 +37,7 @@ export class NewsBarComponent implements OnInit {
 
   get_blogs() {
     //update ya kimo
+    
     this.News = [];
     this.service.get_blogs_user(10, 1).subscribe({
       next: (blog) => {
@@ -50,6 +51,7 @@ export class NewsBarComponent implements OnInit {
           
           let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
 
+          //hene
           this.News.push({
             title: blog.title,
             url: imageSrc,
