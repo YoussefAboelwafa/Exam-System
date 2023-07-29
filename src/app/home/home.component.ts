@@ -84,14 +84,12 @@ export class HomeComponent implements OnInit {
     if (inputElement.files && inputElement.files.length > 0) {
       const formData = new FormData();
       formData.append('photo', inputElement.files[0]);
-      console.log(formData);
-      console.log(inputElement.files);
+    
 
       this.current_user.photo = this.photo_url;
 
       this.service.change_photo_user(formData).subscribe((x) => {
         if (x.success) {
-          console.log(x);
           this.service.user.photo = this.photo_url;
           this.photo_event_service = null;
         } else {
@@ -114,12 +112,10 @@ export class HomeComponent implements OnInit {
       const photo_blob = new Blob([new Uint8Array(photo.photo.Body.data)], {
         type: photo.photo.ContentType,
       });
-      console.log(photo_blob);
 
       let imageSrc = this.sanitizer.bypassSecurityTrustUrl(
         URL.createObjectURL(photo_blob)
       );
-      console.log(imageSrc);
       this.current_user.photo = imageSrc;
     });
   }

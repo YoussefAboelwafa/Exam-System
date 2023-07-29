@@ -65,19 +65,6 @@
   </nav>
   <div class="section section3">
     <router-outlet></router-outlet>
-
-    <div *ngIf="flag_type == true" class="contain">
-      <ngx-typed-js
-        [strings]="['Loading...']"
-        [loop]="true"
-        [typeSpeed]="20"
-        [backSpeed]="40"
-        [backDelay]="40"
-        [cursorChar]="' '"
-      >
-        <h1 class="typing"></h1>
-      </ngx-typed-js>
-    </div>
   </div>
 </div>
 

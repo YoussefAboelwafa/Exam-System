@@ -139,6 +139,7 @@
 
       <!-- active -->
       <button
+        [disabled]="flag_verify_btn == false"
         class="field"
         [hidden]="d1.errors?.['required']||d1.errors?.['digits']||d2.errors?.['required']||d2.errors?.['digits']||
         d3.errors?.['required']||d3.errors?.['digits']||d4.errors?.['required']||d4.errors?.['digits']||d5.errors?.['required']||d5.errors?.['digits']

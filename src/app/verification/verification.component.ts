@@ -12,6 +12,7 @@ import { ModalPopServiceService } from '../services/modal-pop-service.service';
 export class VerificationComponent implements OnInit {
   digits: any[] = [];
   user: any;
+  flag_verify_btn = true;
   constructor(
     private service: ServicService,
     private router: Router,
@@ -37,9 +38,11 @@ export class VerificationComponent implements OnInit {
 
     //service with verify
 
+    this.flag_verify_btn = false;
     this.service.verify_code(code).subscribe((x) => {
       if (x.success == false) {
         this.pop_service.open_error_verify_wrong();
+        this.flag_verify_btn = true;
       }
       //code correct but email is token now
       else if (x.success == true && x.created == false) {

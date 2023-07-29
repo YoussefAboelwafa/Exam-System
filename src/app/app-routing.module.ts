@@ -17,7 +17,6 @@ import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { NewsBarComponent } from './news-bar/news-bar.component';
 import { AdminPriceComponent } from './admin-price/admin-price.component';
 
-
 const routes: Routes = [
   {
     path: 'signup',
@@ -27,7 +26,6 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: LoginComponent,
-  
   },
   {
     path: 'verify',
@@ -37,7 +35,7 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
 
-   canActivate: [GuardServiceService],
+    canActivate: [GuardServiceService],
 
     children: [
       {
@@ -59,7 +57,7 @@ const routes: Routes = [
     component: AdminHomeComponent,
 
     canActivate: [GuardServiceService],
-    
+
     children: [
       {
         path: 'admin_calendar',
@@ -91,7 +89,6 @@ const routes: Routes = [
       },
     ],
   },
-
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

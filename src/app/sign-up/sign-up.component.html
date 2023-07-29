@@ -72,13 +72,6 @@
               </option>
             </select>
           </td>
-          <!-- <td>
-          <label for="city">City</label>
-          <select required #city id="city" name="city" (change)="select_city(city.value)">
-            <option >Select</option>
-             <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
-          </select>
-        </td> -->
         </tr>
         <tr>
           <td colspan="2">
@@ -122,7 +115,7 @@
               class="form-control"
               [class.is-invalid]="phone.invalid && phone.touched"
             />
-           
+
             <!-- handle errors -->
             <div
               class="error"
@@ -226,6 +219,7 @@
             <!-- active btn -->
             <button
               class="field"
+              [disabled]="flag_sign_up == false"
               [hidden]="email.errors?.['required']||email.errors?.['email']
           ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
           ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
