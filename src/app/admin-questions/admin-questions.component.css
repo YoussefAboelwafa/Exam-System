@@ -175,11 +175,9 @@
     height: 40px;
   }
   .toolbar {
-    display: flex;
-    flex-direction: row;
-    gap: 2%;
     margin-top: 2%;
     margin-left: 2%;
+    width: 100%;
   }
   
   .toolbar .btn {
@@ -193,6 +191,7 @@
     line-height: 150%;
     width: 14vw;
   }
+ 
   .dropdown-item {
     color: #008182;
     background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
@@ -514,15 +513,43 @@
     .toolbar{
       flex-direction: column;
       width: 100%;
+      justify-content: center;
+      align-items: center;
     }
     .dropdown{
       width: 100%;
     }
     select{
       width: 100%;
-      font-size: 12px;
+      font-size: 10px;
     }
-   
+    .toolbar .btn {
+      border-radius: 8px;
+      background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
+      color: #008182;
+      font-size: 20px;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 150%;
+      width: 90%;
+      margin: 5%;
+    }
+    .addtopicbtn {
+      font-size: larger;
+      font-weight: 400;
+      border-radius: 9px;
+      background: #008182;
+      color: #fff;
+      width: 100%;
+      box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+      padding: 12px 8px;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      border: none;
+      margin: 0% 2% 0% 2%;
+    }
     
     .container{
       flex-wrap: wrap;
