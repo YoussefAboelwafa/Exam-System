@@ -265,18 +265,21 @@ aria-hidden="true"
 
       <h3>Title of exam</h3>
       <input 
+      placeholder="Enter title of exam"
       [(ngModel)]="title_add"
       #ed_title type="text" [value]="" class="input_edit">
 
-      <h3>Number of hours in Exam Only</h3>
-      <input 
-      #add_hour type="number" [value]="" min="0" max="24" class="input_edit">
-      <h3>Number of Minute in Exam Only </h3>
-      <input 
-      #add_minute type="number" [value]="" min="0" max="60" class="input_edit">
-
-      <h3>About of exam</h3>
-      <textarea        
+      <h3>Duration of exam</h3>
+      <div class="duration">
+        <input 
+        #add_hour type="number" [value]="" min="0" max="23" class="input_edit time_input" placeholder="hours">
+        <input 
+        #add_minute type="number" [value]="" min="0" max="59" class="input_edit time_input" placeholder="minutes">
+      </div>
+     
+      <h3>About exam</h3>
+      <textarea
+      placeholder="Enter exam description"       
       [(ngModel)]="about_add"
       #ed_about [value]="" class="input_edit" id="t_area"></textarea>
 
@@ -295,14 +298,14 @@ aria-hidden="true"
           style="background-color:#008081;"
 
         >
-        Add Exam
+        Add Exam <i class="fa-solid fa-plus"></i>
       </button>
       <button 
           class="discoverbtns btn_exam"
           style="background-color: #FF0052;"
           (click)="close();"
         >
-        Cancel Add
+        Cancel
       </button>
     </div>
   </div>

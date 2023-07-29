@@ -261,7 +261,7 @@ export class AdminAnalyticsComponent implements OnInit {
       options: {
         transitions: {
           easing: 'easeInOutCubic', // Use a custom easing function or one of the built-in options like 'linear', 'easeInQuad', 'easeOutCubic', etc.
-          duration: 1000, // Set the duration in milliseconds (2 seconds in this example)
+          duration: 3000, // Set the duration in milliseconds (2 seconds in this example)
         },
       },
       data: {
@@ -279,6 +279,9 @@ export class AdminAnalyticsComponent implements OnInit {
               'rgba(75, 192, 192)',
               'rgba(153, 102, 255)',
               'rgba(255, 159, 64)',
+              'rgba(200, 199, 132)',
+              'rgba(200, 162, 235)',
+              'rgba(255, 206, 155)',
             ],
           },
         ],
@@ -427,7 +430,7 @@ export class AdminAnalyticsComponent implements OnInit {
       options: {
         transitions: {
           easing: 'easeInOutCubic', // Use a custom easing function or one of the built-in options like 'linear', 'easeInQuad', 'easeOutCubic', etc.
-          duration: 1000, // Set the duration in milliseconds (2 seconds in this example)
+          duration: 3000, // Set the duration in milliseconds (2 seconds in this example)
         },
       },
       data: {
