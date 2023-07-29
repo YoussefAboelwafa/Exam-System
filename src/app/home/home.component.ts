@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   current_user = {
     first_name: 'loading',
     last_name: '..',
-    photo: this.photo_url,
+    photo:'',
     _id: '',
   };
   flag_type = false;
@@ -93,34 +93,21 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  get_user_photo() {
-    this.service.get_photo().subscribe((photo) => {
-      if (photo.success == false&& photo.ContentLength !== 0) {
-        this.service.user.photo =
-          'https://cdn-icons-png.flaticon.com/512/1946/1946429.png';
-        this.current_user.photo =
-          'https://cdn-icons-png.flaticon.com/512/1946/1946429.png';
-
-        return;
-      }
-      const photo_blob = new Blob([new Uint8Array(photo.photo.Body.data)], {
-        type: photo.photo.ContentType,
-      });
-
-      let imageSrc = this.sanitizer.bypassSecurityTrustUrl(
-        URL.createObjectURL(photo_blob)
-      );
-      this.current_user.photo = imageSrc;
-    });
-  }
+ 
 
   refresh() {
     this.flag_type = true;
     this.service.home_bar_init().subscribe((x) => {
       this.service.user = x.user;
-      this.current_user.first_name = x.user.first_name;
-      this.current_user.last_name = x.user.last_name;
-      this.current_user._id = x.user._id;
+      this.current_user=x.user;
+      if(x.user.photo!=null&&x.user.photo!=undefined){
+        this.current_user.photo='http://i.imgur.com/'+x.user.photo
+      }
+      else{
+        this.current_user.photo='https://cdn-icons-png.flaticon.com/512/1946/1946429.png'
+      }
+      this.flag_type = false;
+
       this.service.user = x.user;
       this.non_token_exam = x.other_exam;
       let up = 0,
@@ -174,7 +161,6 @@ export class HomeComponent implements OnInit {
         this.service.non_token = x;
       });
 
-      this.flag_type = false;
 
       error: (error: HttpErrorResponse) => alert(error.message);
     });

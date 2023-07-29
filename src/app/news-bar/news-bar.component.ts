@@ -30,36 +30,13 @@ export class NewsBarComponent implements OnInit {
     //update ya kimo
     
     this.News = [];
-    this.service.get_blogs_user(10, 1).subscribe({
-      next: (blog) => {
-        blog = blog.slice(0, -3)
-        blog.split('\n\r\n').forEach((blog: any) => {
-          blog = JSON.parse(blog)
-          const photo_blob = new Blob([new Uint8Array(blog.photo.Body.data)], {
-            type: blog.photo.ContentType,
-          });
-          console.log(photo_blob);
-          
-          let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
-
-          //hene
-          this.News.push({
-            title: blog.title,
-            url: imageSrc,
-            blog: blog.description,
-            _id: blog._id,
-          });
-
-        });
-      },
-      complete: () => {
-        console.log('done');
-        this.flag_type=false;
-      },
-      error: (error) => {
-        console.log(error);
-      }
-  });
+    this.service.get_blogs_user(10, 1).subscribe(x=>{
+      console.log(x);
+      for(let i=0; i<x.length; i++){
+          x[i].photo='http://i.imgur.com/'+x[i].photo
+      } 
+      this.News=x;
+    })
   }
 
 }

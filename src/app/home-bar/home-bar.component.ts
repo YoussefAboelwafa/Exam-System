@@ -64,7 +64,7 @@ export class HomeBarComponent implements OnInit {
   temp_countries: any;
   phone_number: any;
   reciept: Reciept = new Reciept();
-
+  start_manchete:any;
   ngOnInit(): void {}
 
   constructor(
@@ -110,44 +110,20 @@ export class HomeBarComponent implements OnInit {
     }
 
     // this.manchete=[];
-  //   this.service.get_manshete(2).subscribe({
-  //     //i need title and imgurl
-  //     next: (news) => {
-  //       news = news.slice(0, -3);
-  //       news.split('\n\r\n').forEach((item: any) => {
-  //         item = JSON.parse(item);
-  //         const photo_blob = new Blob(
-  //           [new Uint8Array(item.manchete.Body.data)],
-  //           {
-  //             type: item.manchete.ContentType,
-  //           }
-  //         );
-
-  //         let imageSrc = this.sanitizer.bypassSecurityTrustUrl(
-  //           URL.createObjectURL(photo_blob)
-  //         );
-
-  //         let manchete = {
-  //           image: this.sanitizer.bypassSecurityTrustUrl(
-  //             URL.createObjectURL(photo_blob)
-  //           ),
-  //           title: item.title,
-  //           _id: item._id,
-  //         };
-  //         this.manchete.push(manchete);
-  //           console.log(manchete.image)
-  //         ///do whatever you want with it
-  //       });
-  //     },
-  //     complete: () => {
-  //       console.log('done');
-  //     },
-  //     error: (error) => {
-  //       console.log(error);
-  //     },
-  //   });
+    this.service.get_manshete(5).subscribe(
+      x=>{
+      //i need title and imgurl
+      console.log(x);
+      this.start_manchete=x[0];
+      console.log(x);
+      for(let i=0; i<x.length; i++){
+        x[i].manchete='http://i.imgur.com/'+x[i].manchete
+      } 
+      this.manchete=x;
+      this.manchete.splice(0,1)
+    });
    }
-  // manchete:Manchete[]=[] 
+   manchete:Manchete[]=[] 
 
   refresh_all() {
     this.flag_type=true;

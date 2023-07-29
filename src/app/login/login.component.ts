@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
           
         }
         else if(x.signed_in==2){
-          this.router.navigate(['admin_home/admin_analytics'])
+          this.router.navigate(['admin_home/admin_location'])
         }
         else{
         this.flag_show_login=true
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
     this.flag_btn_login=false;
     this.service.login(this.user_login).subscribe((x) => {
       if (x.success == 2) {
-        this.router.navigate(['/admin_home/admin_analytics']);
+        this.router.navigate(['/admin_home/admin_location']);
       } else if (x.success == 1) {
         this.router.navigate(['/home/home_bar']);
       } else {

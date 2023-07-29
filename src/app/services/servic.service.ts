@@ -187,16 +187,16 @@ public delete_blog(blog_id:any):Observable<any>{
 }
 public get_blogs(number_of_blogs:any,page_number:any):Observable<any>{
   return this.http.post(`${this.apiServerUrl}/admin/blog/get_blogs`,{number_of_blogs:number_of_blogs,page_number:page_number},
-   { withCredentials: true, responseType: 'text'});
+   { withCredentials: true});
 }
 
 public get_manshete(number_of_manchete:any):Observable<any>{
   return this.http.post(`${this.apiServerUrl}/home/get_manchetes`,{number_of_manchete:number_of_manchete},
-   { withCredentials: true, responseType: 'text'});
+   { withCredentials: true});
 }
 public get_blogs_user(number_of_blogs:any,page_number:any):Observable<any>{
   return this.http.post(`${this.apiServerUrl}/home/get_blogs`,{number_of_blogs:number_of_blogs,page_number:page_number},
-   { withCredentials: true, responseType: 'text' });
+   { withCredentials: true});
 }
 
 public get_code_to_change_pass(email:any):Observable<any>{

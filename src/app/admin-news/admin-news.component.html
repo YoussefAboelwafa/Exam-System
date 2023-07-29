@@ -5,10 +5,7 @@
   </button>
 </div>
 
-<div *ngIf="flag_type == true" class="contain">
-  
-  <!-- Good morning section -->
-</div>
+
 
 <div class="title">
   <p>Current</p>
@@ -19,8 +16,8 @@
     <h1 class="title_blog">
       <u>{{ news.title }}</u>
     </h1>
-    <img [attr.src]="news.url" alt="" />
-    <p>{{ news.blog }}</p>
+    <img [attr.src]="news.photo" alt="" />
+    <p>{{ news.description }}</p>
   </div>
 </div>
 <div
@@ -42,7 +39,7 @@
             data-dismiss="modal"
             aria-label="Close"
             (click)="close()">
-          >
+          
             <span aria-hidden="true">&times;</span>
           </button>
         </button>
@@ -102,16 +99,17 @@
       </div>
     </div>
   </div>
-  <div *ngIf="flag_type == true" class="contain">
-    <ngx-typed-js
-      [strings]="['Loading  photo ...']"
-      [loop]="true"
-      [typeSpeed]="200"
-      [backSpeed]="40"
-      [backDelay]="40"
-      [cursorChar]="' '"
-    >
-      <h1 class="typing"></h1>
-    </ngx-typed-js>
-  </div>
+</div>
+
+<div *ngIf="flag_type == true" class="contain">
+  <ngx-typed-js
+    [strings]="['loading ...']"
+    [loop]="false"
+    [typeSpeed]="20"
+    [shuffle]="true"
+  >
+    <h1 class="typing"></h1>
+  </ngx-typed-js>
+
+  <!-- Good morning section -->
 </div>

@@ -6,8 +6,8 @@
   <div class="container">
     <div class="box" *ngFor="let news of News; let i = index">
       <h1>{{ news.title }}</h1>
-      <img [src]="news.url" alt="" />
-      <p [hidden]="!showContent[i]">{{ news.blog }}</p>
+      <img [src]="news.photo" alt="" />
+      <p [hidden]="!showContent[i]">{{ news.description }}</p>
     <div class="seeMore">
       <span class="see-more-icon" [hidden]="showContent[i]" (click)="toggleVisibility(i)">
         <i class="fa fa-chevron-down"></i> See More

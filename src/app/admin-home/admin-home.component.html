@@ -31,11 +31,6 @@
     <div class="section section2 sidebar">
       <ul>
         <li [routerLinkActive]="'active'">
-          <button routerLink="/admin_home/admin_analytics">
-            <i class="fa-solid fa-chart-line"></i> Analytics
-          </button>
-        </li>
-        <li [routerLinkActive]="'active'">
           <button routerLink="/admin_home/admin_location">
             <i class="fa-solid fa-location-dot"></i>
             Location
@@ -66,11 +61,17 @@
           </button>
         </li>
         <li [routerLinkActive]="'active'">
+          <button routerLink="/admin_home/admin_analytics">
+            <i class="fa-solid fa-chart-line"></i> Analytics
+          </button>
+        </li>
+        <li [routerLinkActive]="'active'">
           <button routerLink="/admin_home/admin_news">
             <i class="fa-solid fa-newspaper"></i>
             News
           </button>
         </li>
+        
       </ul>
     </div>
   </div>
