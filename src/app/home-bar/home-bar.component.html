@@ -28,16 +28,14 @@
       </div>
     </div> -->
 
-    
-    <div class="carousel-inner">
-      <!-- *ngFor="let m of manchete;let i =index" -->
+    <!-- <div class="carousel-inner">
       <div class="carousel-item" class="carousel-item active" id="mc0" >
         <img
         [src]="manchete[0].image"
           alt="Slide 0"
         />
       </div>
-    </div>
+    </div> -->
     <a
       class="carousel-control-prev"
       href="#myCarousel"
@@ -291,7 +289,18 @@
     </div>
   </div>
 </div>
+<div *ngIf="flag_type == true" class="contain">
+  <ngx-typed-js
+    [strings]="['loading ...']"
+    [loop]="false"
+    [typeSpeed]="20"
+    [shuffle]="true"
+  >
+    <h1 class="typing"></h1>
+  </ngx-typed-js>
 
+  <!-- Good morning section -->
+</div>
 <div *ngIf="flag_snack == true" class="contain">
   <div class="close">
     <button (click)="close_book()" class="closebtn">
@@ -568,49 +577,58 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="exampleFormControlInput1"
-            ><span style="color:black;">Exam Name:</span> {{ book_title_course }}</label
+            ><span style="color: black">Exam Name:</span>
+            {{ book_title_course }}</label
           >
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1"
-            ><span style="color:black;">Phone Number:</span> {{ phone_number }}</label
+            ><span style="color: black">Phone Number:</span>
+            {{ phone_number }}</label
           >
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1"
-            ><span style="color: black;">Location:</span> {{ selectedlocation }}</label
+            ><span style="color: black">Location:</span>
+            {{ selectedlocation }}</label
           >
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1"
-            ><span style="color: black;">Day:</span> {{selectedday}}</label
+            ><span style="color: black">Day:</span> {{ selectedday }}</label
           >
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1"
-            ><span style="color: black;">Appointment:</span> {{selectedappointment}}</label
+            ><span style="color: black">Appointment:</span>
+            {{ selectedappointment }}</label
           >
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1"
-            ><span style="color: black;">Snack:</span> {{ select_snacks }}</label
+            ><span style="color: black">Snack:</span> {{ select_snacks }}</label
           >
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput2"
-            ><span style="color: black;">Total Amount:</span> {{ reciept.total_amount }}</label
+            ><span style="color: black">Total Amount:</span>
+            {{ reciept.total_amount }}</label
           >
         </div>
-        <div class="form-group" *ngIf="reciept.discount!='-1'">
+        <div class="form-group" *ngIf="reciept.discount != '-1'">
           <label for="exampleFormControlInput2"
-            ><span style="color: black;">Discount:</span> {{ (reciept.discount*reciept.total_amount)/100 }}</label
+            ><span style="color: black">Discount:</span>
+            {{ (reciept.discount * reciept.total_amount) / 100 }}</label
           >
         </div>
-        <hr>
-        <div class="form-group"*ngIf="reciept.discount!='-1'">
-          <label for="exampleFormControlInput3" style="color: #FF914C;"
+        <hr />
+        <div class="form-group" *ngIf="reciept.discount != '-1'">
+          <label for="exampleFormControlInput3" style="color: #ff914c"
             >Total After Discount:
-            {{ reciept.total_amount -((reciept.discount*reciept.total_amount)/100) }}</label
+            {{
+              reciept.total_amount -
+                (reciept.discount * reciept.total_amount) / 100
+            }}</label
           >
         </div>
       </div>
@@ -625,7 +643,7 @@
           id="addnewprice"
           style="background-color: #ff0052"
         >
-          Cancel 
+          Cancel
         </button>
       </div>
     </div>

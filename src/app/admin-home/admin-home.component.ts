@@ -28,7 +28,7 @@ current_user = {
       this.current_user.last_name = x.user.last_name;
       this.current_user._id = x.user._id;
     });
-    this.get_user_photo();
+    // this.get_user_photo();
   }
 
   ngOnInit(): void {}

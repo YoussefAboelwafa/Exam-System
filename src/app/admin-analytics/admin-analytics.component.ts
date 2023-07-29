@@ -14,56 +14,7 @@ export class AdminAnalyticsComponent implements OnInit {
   distinctyears: any[] = [];
   distinctmonth: any[] = [];
   year_month_key: any[] = [];
-  distinctmonth3:any[]=[]
-  constructor(private service: ServicService) {
-    this.service.get_analytics().subscribe((entries: any) => {
-      this.fullData = entries;
-      entries.forEach((entry: any) => {
-        const key = `${entry.year}-${entry.month}`;
-
-        if (!this.monthData[key]) {
-          this.monthData[key] = {
-            bookingsCount: 0,
-            retentionRate: 0,
-            exams: {} as { [key: string]: any },
-            marks: {} as { [key: string]: any }
-          };
-        }
-
-        this.monthData[key].bookingsCount += entry.bookingsCount;
-        this.monthData[key].retentionRate +=
-          entry.retentionRate / entries.length;
-
-        if (!this.monthData[key].exams[entry.exam]) {
-          this.monthData[key].exams[entry.exam] = 0;
-          this.monthData[key].marks[entry.exam] = entry.marks;
-        }
-        this.monthData[key].exams[entry.exam] += entry.bookingsCount;
-      });
-
-      console.log(this.monthData);
-      // this is keys of data like 2023-7
-      this.year_month_key = Object.keys(this.monthData);
-      console.log(this.year_month_key);
-
-      //this is kyes after splits to only years 2023
-      this.distinctyears = Array.from(
-        new Set(this.year_month_key.map((date) => date.split('-')[0]))
-      ).sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
-    });
-  }
-
-  get_data_year(year: string, datesArray: string[]): any {
-    return datesArray.filter((date) => date.includes(year));
-  }
-
-  sortStringsByMonth(strings: string[]): string[] {
-    return strings.sort((a, b) => {
-      const monthA = parseInt(a.split('-')[1], 10);
-      const monthB = parseInt(b.split('-')[1], 10);
-      return monthA - monthB;
-    });
-  }
+  distinctmonth3: any[] = [];
 
   months_name = [
     'Jan',
@@ -118,11 +69,6 @@ export class AdminAnalyticsComponent implements OnInit {
   score_chartData: number[] = [];
   score_chartDatalabels: any[] = [];
 
-  ngOnInit() {
-    this.barChartDemo(0);
-    this.retentionChartDemo(0);
-    this.scoreChartDemo(0);
-  }
   //bookingsCount
 
   myChart: any;
@@ -135,14 +81,76 @@ export class AdminAnalyticsComponent implements OnInit {
   flag_pie_chart1 = 0; //to destroy if it equals 1
   selectedyear2: any;
   selectedyear3: any;
-  selectedmonth3:any='Choose month';
-  label1='';
-  label2='';
-  chart3_choosen_keys:any[]=[]; //to destroy if it equals 
+  selectedmonth3: any = 'Choose month';
+  label1 = '';
+  label2 = '';
+  chart3_choosen_keys: any[] = []; //to destroy if it equals
   selectedexam3: any;
   distinct_exam3: any;
-  chart3:any
-  first_map_key_chart3:any;
+  chart3: any;
+  first_map_key_chart3: any;
+  flag_type = true;
+
+  
+  constructor(private service: ServicService) {
+    this.service.get_analytics().subscribe((entries: any) => {
+      this.fullData = entries;
+      entries.forEach((entry: any) => {
+        const key = `${entry.year}-${entry.month}`;
+
+        if (!this.monthData[key]) {
+          this.monthData[key] = {
+            bookingsCount: 0,
+            retentionRate: 0,
+            exams: {} as { [key: string]: any },
+            marks: {} as { [key: string]: any },
+          };
+        }
+
+        this.monthData[key].bookingsCount += entry.bookingsCount;
+        this.monthData[key].retentionRate +=
+          entry.retentionRate / entries.length;
+
+        if (!this.monthData[key].exams[entry.exam]) {
+          this.monthData[key].exams[entry.exam] = 0;
+          this.monthData[key].marks[entry.exam] = entry.marks;
+        }
+        this.monthData[key].exams[entry.exam] += entry.bookingsCount;
+      });
+
+      console.log(this.monthData);
+      // this is keys of data like 2023-7
+      this.year_month_key = Object.keys(this.monthData);
+      console.log(this.year_month_key);
+
+      //this is kyes after splits to only years 2023
+      this.distinctyears = Array.from(
+        new Set(this.year_month_key.map((date) => date.split('-')[0]))
+      ).sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
+      this.flag_type = false;
+    });
+  }
+
+  get_data_year(year: string, datesArray: string[]): any {
+    return datesArray.filter((date) => date.includes(year));
+  }
+
+  sortStringsByMonth(strings: string[]): string[] {
+    return strings.sort((a, b) => {
+      const monthA = parseInt(a.split('-')[1], 10);
+      const monthB = parseInt(b.split('-')[1], 10);
+      return monthA - monthB;
+    });
+  }
+
+
+
+  ngOnInit() {
+    this.barChartDemo(0);
+    this.retentionChartDemo(0);
+    this.scoreChartDemo(0);
+  }
+
   change_year_chart1(event: any) {
     this.distinctmonth = [];
     this.show_char1 = [];
@@ -189,7 +197,7 @@ export class AdminAnalyticsComponent implements OnInit {
   }
 
   barChartDemo(flag: number) {
-    this.label1='';
+    this.label1 = '';
     if (flag == 1) {
       // this is distinctmonth in selected year
       this.show_char1 = this.sortStringsByMonth(this.show_char1);
@@ -227,7 +235,7 @@ export class AdminAnalyticsComponent implements OnInit {
         labels: this.bar_chartDatalabels,
         datasets: [
           {
-            label: this.label1+' Monthly Report',
+            label: this.label1 + ' Monthly Report',
             data: this.bar_chartData,
             borderWidth: 2,
             borderColor: 'rgba(75, 192, 192, 1)',
@@ -285,7 +293,7 @@ export class AdminAnalyticsComponent implements OnInit {
     this.selectedyear2 = (event.target as HTMLSelectElement).value;
     this.ret_chartData = [];
     this.ret_chartDatalabels = [];
-    this.label2='';
+    this.label2 = '';
     this.bar_chart2.destroy();
     if (this.selectedyear2 == 'Choose year') {
       this.retentionChartDemo(0);
@@ -296,10 +304,10 @@ export class AdminAnalyticsComponent implements OnInit {
   }
 
   retentionChartDemo(flag: any) {
-    this.label2=''
+    this.label2 = '';
     if (flag == 1) {
       let keys_inthis_year: any[] = [];
-        this.label2 = this.selectedyear2;
+      this.label2 = this.selectedyear2;
 
       //get keys contain this year
       keys_inthis_year = this.get_data_year(
@@ -341,7 +349,7 @@ export class AdminAnalyticsComponent implements OnInit {
         labels: this.ret_chartDatalabels,
         datasets: [
           {
-            label: this.label2+' Monthly retention Report',
+            label: this.label2 + ' Monthly retention Report',
             data: this.ret_chartData,
             borderWidth: 2,
             borderColor: 'rgba(255, 145, 76,1)',
@@ -353,15 +361,15 @@ export class AdminAnalyticsComponent implements OnInit {
     this.bar_chart2 = new Chart(this.ret_ctx, this.ret_config);
   }
 
-  change_year_chart3(event: Event){
+  change_year_chart3(event: Event) {
     this.selectedyear3 = (event.target as HTMLSelectElement).value;
     this.chart3.destroy();
     this.scoreChartDemo(0);
     if (this.selectedyear3 == 'Choose year') {
-      this.distinctmonth3=[];
-      this.distinct_exam3=[];
-      this.selectedmonth3='Choose month'
-      this.selectedexam3='Choose exam'
+      this.distinctmonth3 = [];
+      this.distinct_exam3 = [];
+      this.selectedmonth3 = 'Choose month';
+      this.selectedexam3 = 'Choose exam';
       return;
     }
 
@@ -372,51 +380,46 @@ export class AdminAnalyticsComponent implements OnInit {
     this.distinctmonth3 = Array.from(
       new Set(this.chart3_choosen_keys.map((date) => date.split('-')[1]))
     ).sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
-
-    
-
   }
-  change_month_chart3(event: Event){
+  change_month_chart3(event: Event) {
     this.selectedmonth3 = (event.target as HTMLSelectElement).value;
     this.chart3.destroy();
     this.scoreChartDemo(0);
-    if(this.selectedmonth3=='Choose month'){
-      this.distinct_exam3=[];
-      this.selectedexam3='Choose exam'
-      return
+    if (this.selectedmonth3 == 'Choose month') {
+      this.distinct_exam3 = [];
+      this.selectedexam3 = 'Choose exam';
+      return;
     }
 
-    this.first_map_key_chart3=this.selectedyear3+'-'+this.selectedmonth3
-    this.distinct_exam3 = Object.keys(this.monthData[this.first_map_key_chart3].marks);
+    this.first_map_key_chart3 = this.selectedyear3 + '-' + this.selectedmonth3;
+    this.distinct_exam3 = Object.keys(
+      this.monthData[this.first_map_key_chart3].marks
+    );
   }
 
-  change_exam_chart3(event:any){
-  this.selectedexam3 = (event.target as HTMLSelectElement).value;
-  this.chart3.destroy();
-  if(this.selectedexam3=='Choose exam'){
-    this.scoreChartDemo(0);
-    return
+  change_exam_chart3(event: any) {
+    this.selectedexam3 = (event.target as HTMLSelectElement).value;
+    this.chart3.destroy();
+    if (this.selectedexam3 == 'Choose exam') {
+      this.scoreChartDemo(0);
+      return;
+    }
+
+    this.scoreChartDemo(1);
   }
 
-  this.scoreChartDemo(1);
-  
-
-
-  }
-
-  scoreChartDemo(flag:any) {
-
-    this.score_chartData=[]
-    this.score_chartDatalabels=[]
-    if(flag==1){
-      let x =this.monthData[this.first_map_key_chart3].marks[this.selectedexam3]
-      console.log(1)
-      console.log(x)
-      for(let i = 0; i < x.length; i++){
-           this.score_chartData.push(x[i].count);
-    this.score_chartDatalabels.push(x[i].range);
+  scoreChartDemo(flag: any) {
+    this.score_chartData = [];
+    this.score_chartDatalabels = [];
+    if (flag == 1) {
+      let x =
+        this.monthData[this.first_map_key_chart3].marks[this.selectedexam3];
+      console.log(1);
+      console.log(x);
+      for (let i = 0; i < x.length; i++) {
+        this.score_chartData.push(x[i].count);
+        this.score_chartDatalabels.push(x[i].range);
       }
-
     }
     this.score_ctx = document.getElementById('pieChart2');
     this.score_config = {

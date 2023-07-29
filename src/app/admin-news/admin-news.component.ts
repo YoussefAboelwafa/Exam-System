@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicService } from '../services/servic.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import { News } from '../objects/news';
 
 @Component({
   selector: 'app-admin-news',
@@ -9,6 +10,7 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 })
 export class AdminNewsComponent implements OnInit {
   constructor(private service: ServicService, private sanitizer:DomSanitizer) {
+  
     this.get_blogs();
   }
 
@@ -18,20 +20,7 @@ export class AdminNewsComponent implements OnInit {
   my_add_event: any;
   current_url: any;
   flag_type = false;
-  News: any = [
-    {
-      title: 'New courses are available',
-      url: 'https://placehold.co/800x200',
-      blog: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla, libero at mattis scelerisque, dui nisl placerat justo, quis bibendum dui mauris faucibus felis. Nunc egestas fermentum sem, et blandit nibh feugiat vitae. Integer velit neque, laoreet nec nibh at, maximus vehicula nisi. Maecenas tempor nisi id diam finibus auctor. Etiam fermentum semper augue lacinia laoreet. Aliquam imperdiet tincidunt odio in mollis. Cras euismod et massa at eleifend. Phasellus fermentum eu nulla eget cursus',
-      _id: '',
-    },
-    {
-      title: 'C++ advanced course is now available',
-      url: 'https://placehold.co/800x200',
-      blog: 'This is a blog',
-      _id: '',
-    },
-  ];
+  News: News[]=[]
  
   urls: any = [
     'https://placehold.co/1000x200',
@@ -56,7 +45,6 @@ export class AdminNewsComponent implements OnInit {
       this.current_url = event.target.result;
       // this.urls.push(this.current_url);
       // Reset the input field
-      this.flag_type = false;
     };
 
     // Read the file as a data URL

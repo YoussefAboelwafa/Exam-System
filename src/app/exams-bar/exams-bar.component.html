@@ -29,9 +29,9 @@
           You have worked hard to get to where you are today, and you deserve to
           be recognized for your skills and expertise. Taking the exam can help
           you achieve the recognition and success you deserve. You have what it
-          takes to pass this exam and take your career to the next level. Believe
-          in yourself and take the leap – book your exam today and show the world
-          what you're capable of!
+          takes to pass this exam and take your career to the next level.
+          Believe in yourself and take the leap – book your exam today and show
+          the world what you're capable of!
         </p>
       </div>
     </ng-container>
@@ -77,25 +77,28 @@
         </div>
       </div>
     </div>
-  
+
     <ng-container *ngIf="token_exam.length == 0">
       <div class="upcominginfo" style="font-weight: 600; font-size: 15px">
         <p>
-          You have not taken the exam yet. You can now book the exam. What are you
-          waiting for?
+          You have not taken the exam yet. You can now book the exam. What are
+          you waiting for?
         </p>
       </div>
     </ng-container>
   </div>
-  
+
   <!-- non_token_exam section -->
   <div class="discoverexamslabel">
     <p>Other Exams</p>
   </div>
   <div class="discoverexamswidgets">
     <!-- ngfor ya kimoo -->
-  
-    <div *ngFor="let non_token of non_token_exam" class="card card-body upcoming">
+
+    <div
+      *ngFor="let non_token of non_token_exam"
+      class="card card-body upcoming"
+    >
       <h5 class="card-title">{{ non_token.title }}</h5>
       <div class="discoverbox1">
         <div class="discoversmallbox">
@@ -129,9 +132,20 @@
       </div>
     </ng-container>
   </div>
-  
 </div>
 <!-- booking exam -->
+<div *ngIf="flag_type == true" class="contain">
+  <ngx-typed-js
+    [strings]="['loading ...']"
+    [loop]="false"
+    [typeSpeed]="20"
+    [shuffle]="true"
+  >
+    <h1 class="typing"></h1>
+  </ngx-typed-js>
+
+  <!-- Good morning section -->
+</div>
 
 <div *ngIf="flag_book == true" class="contain">
   <div class="close">
@@ -488,8 +502,6 @@
   </div>
 </div>
 
-
-
 <div
   class="modal fade"
   id="reciept"
@@ -516,49 +528,58 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="exampleFormControlInput1"
-            ><span style="color:black;">Exam Name:</span> {{ book_title_course }}</label
+            ><span style="color: black">Exam Name:</span>
+            {{ book_title_course }}</label
           >
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1"
-            ><span style="color:black;">Phone Number:</span> {{ phone_number }}</label
+            ><span style="color: black">Phone Number:</span>
+            {{ phone_number }}</label
           >
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1"
-            ><span style="color: black;">Location:</span> {{ selectedlocation }}</label
+            ><span style="color: black">Location:</span>
+            {{ selectedlocation }}</label
           >
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1"
-            ><span style="color: black;">Day:</span> {{selectedday}}</label
+            ><span style="color: black">Day:</span> {{ selectedday }}</label
           >
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1"
-            ><span style="color: black;">Appointment:</span> {{selectedappointment}}</label
+            ><span style="color: black">Appointment:</span>
+            {{ selectedappointment }}</label
           >
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1"
-            ><span style="color: black;">Snack:</span> {{ select_snacks }}</label
+            ><span style="color: black">Snack:</span> {{ select_snacks }}</label
           >
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput2"
-            ><span style="color: black;">Total Amount:</span> {{ reciept.total_amount }}</label
+            ><span style="color: black">Total Amount:</span>
+            {{ reciept.total_amount }}</label
           >
         </div>
-        <div class="form-group" *ngIf="reciept.discount!='-1'">
+        <div class="form-group" *ngIf="reciept.discount != '-1'">
           <label for="exampleFormControlInput2"
-            ><span style="color: black;">Discount:</span> {{ (reciept.discount*reciept.total_amount)/100 }}</label
+            ><span style="color: black">Discount:</span>
+            {{ (reciept.discount * reciept.total_amount) / 100 }}</label
           >
         </div>
-        <hr>
-        <div class="form-group"*ngIf="reciept.discount!='-1'">
-          <label for="exampleFormControlInput3" style="color: #FF914C;"
+        <hr />
+        <div class="form-group" *ngIf="reciept.discount != '-1'">
+          <label for="exampleFormControlInput3" style="color: #ff914c"
             >Total After Discount:
-            {{ reciept.total_amount -((reciept.discount*reciept.total_amount)/100) }}</label
+            {{
+              reciept.total_amount -
+                (reciept.discount * reciept.total_amount) / 100
+            }}</label
           >
         </div>
       </div>
@@ -573,12 +594,11 @@
           id="addnewprice"
           style="background-color: #ff0052"
         >
-          Cancel 
+          Cancel
         </button>
       </div>
     </div>
   </div>
 </div>
-
 
 <app-pop-up></app-pop-up>

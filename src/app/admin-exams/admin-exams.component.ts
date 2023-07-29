@@ -15,6 +15,7 @@ export class AdminExamsComponent implements OnInit {
   constructor(private service: ServicService,private popup:ModalPopServiceService) {
     this.service.exam_bar_init_admin().subscribe((x) => {
         
+      this.flag_type=false
       if(x.length==0){
         x=[];
       }
@@ -37,7 +38,7 @@ export class AdminExamsComponent implements OnInit {
   about_add: any;
   time_exam_add:any;
   non_token_exam: any[] = [];
-
+  flag_type=true
   close_popup() {
     $('#confirmation').modal('hide');
     $('#edit').modal('hide');

@@ -21,6 +21,12 @@
   height: 100vh;
   width: 100vw;
 }
+.typing {
+  all: unset;
+  color: #008081;
+  font-weight: bold;
+  text-align: center;
+}
 .close {
   position: fixed;
   right: 10%;

@@ -73,7 +73,7 @@ export class ExamsBarComponent implements OnInit {
   ids_exams: any[] = [];
   phone_number:any
   temp_countries:any;
-
+  flag_type=true;
   reciept:Reciept =new Reciept();
   constructor(private service: ServicService, private router: Router,private popup:ModalPopServiceService) {
     this.refresh_all();
@@ -178,6 +178,7 @@ export class ExamsBarComponent implements OnInit {
         this.non_token_exam = this.service.non_token;
       });
 
+      this.flag_type=false
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicService } from '../services/servic.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import { News } from '../objects/news';
 
 @Component({
   selector: 'app-news-bar',
@@ -9,6 +10,7 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 })
 export class NewsBarComponent implements OnInit {
  
+  flag_type=false
   constructor(private service:ServicService, private sanitizer:DomSanitizer) { 
 
     this.get_blogs();
@@ -16,18 +18,7 @@ export class NewsBarComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  News:any = [
-    {
-      title: 'New courses are available',
-      url: 'https://placehold.co/800x300',
-      blog: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla, libero at mattis scelerisque, dui nisl placerat justo, quis bibendum dui mauris faucibus felis. Nunc egestas fermentum sem, et blandit nibh feugiat vitae. Integer velit neque, laoreet nec nibh at, maximus vehicula nisi. Maecenas tempor nisi id diam finibus auctor. Etiam fermentum semper augue lacinia laoreet. Aliquam imperdiet tincidunt odio in mollis. Cras euismod et massa at eleifend. Phasellus fermentum eu nulla eget cursus',
-    },
-    {
-      title: 'C++ advanced course is now available',
-      url: 'https://placehold.co/800x200',
-      blog: 'This is a blog',
-    },
-  ];
+  News:News[] =[]
 
   showContent: boolean[] = new Array(this.News.length).fill(false);
 
@@ -63,6 +54,7 @@ export class NewsBarComponent implements OnInit {
       },
       complete: () => {
         console.log('done');
+        this.flag_type=false;
       },
       error: (error) => {
         console.log(error);

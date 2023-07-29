@@ -65,7 +65,18 @@
       </div>
     </div>
   </div>
-
+  <div *ngIf="flag_type == true" class="contain">
+    <ngx-typed-js
+      [strings]="['loading ...']"
+      [loop]="false"
+      [typeSpeed]="20"
+      [shuffle]="true"
+    >
+      <h1 class="typing"></h1>
+    </ngx-typed-js>
+  
+    <!-- Good morning section -->
+  </div>
 <div *ngIf="flag_question == true">
   <div class="discoverexamslabel">
     <label><span>Exam: </span> {{ selected_exam.title }}</label>

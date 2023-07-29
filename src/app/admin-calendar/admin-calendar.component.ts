@@ -5,7 +5,7 @@ import { ServicService } from '../services/servic.service';
 import { address } from '../objects/loction_address';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ModalPopServiceService } from '../services/modal-pop-service.service';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { firstValueFrom, forkJoin } from 'rxjs';
 declare const $: any;
 
@@ -24,7 +24,7 @@ export class AdminCalendarComponent implements OnInit {
   current_user = {
     first_name: 'karim',
     last_name: 'tarek',
-    photo: '../../assets/images/img5.svg',
+    photo: 'https://cdn-icons-png.flaticon.com/512/1946/1946429.png',
     _id: '1234567',
   };
 
@@ -47,13 +47,18 @@ export class AdminCalendarComponent implements OnInit {
   index_city: any;
   index_location: any;
   id_location: any;
-
+  flag_type = true;
   address: address[] = [];
   temp_country_address: any;
   temp_city_address: any;
   temp_location_address: any;
   temp_calender: any;
-  constructor(private service: ServicService,private popup:ModalPopServiceService, private sanitizer:DomSanitizer) {
+  constructor(
+    private service: ServicService,
+    private popup: ModalPopServiceService,
+    private sanitizer: DomSanitizer
+  ) {
+    7;
     this.service.get_places().subscribe((x) => {
       this.all_locations = x;
       this.country = x.map((cont: any) => cont.country_name);
@@ -72,6 +77,7 @@ export class AdminCalendarComponent implements OnInit {
 
       this.service.get_calender_admin().subscribe((x) => {
         this.calendar = x;
+        this.flag_type = false;
       });
 
       for (let i = 0; i < combinations.length; i++) {
@@ -89,16 +95,9 @@ export class AdminCalendarComponent implements OnInit {
       }
 
       console.log(combinations);
-
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }
-  //   this.service.get_calender().subscribe(
-  //     (x:any) => {
-  //       console.log(x);
-  //     }
-  //   )
-  //  }
 
   ngOnInit(): void {}
 
@@ -134,7 +133,6 @@ export class AdminCalendarComponent implements OnInit {
         temp.push(x);
       }
       this.address = temp;
-
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }
@@ -195,9 +193,9 @@ export class AdminCalendarComponent implements OnInit {
     this.index_calend = '';
     console.log(x._id);
     this.service.remove_day(x._id).subscribe((x) => {
-      if(x.success==false) {
-        this.popup.open_error_delete_calender(); 
-        return;      
+      if (x.success == false) {
+        this.popup.open_error_delete_calender();
+        return;
       }
       this.service.get_calender_admin().subscribe((x) => {
         this.calendar = x;
@@ -222,57 +220,55 @@ export class AdminCalendarComponent implements OnInit {
   goto_all_student(day: any, month: any, id: any) {
     this.day_all = day;
     this.month_all = month;
-    let ids:any[]=[];
+    let ids: any[] = [];
 
-    const getAllStudentPromise = firstValueFrom(this.service.get_allstudent_inoneday(id))
-    .then((x) => {
-        this.user_exam = x;
-        console.log(x);
-        for (var i = 0; i < this.user_exam.length; i++) {
-          if (this.user_exam[i].percentage == -1) {
-            this.user_exam[i].percentage = 0;
-          }
-          ids.push(this.user_exam[i]._id_user);
+    const getAllStudentPromise = firstValueFrom(
+      this.service.get_allstudent_inoneday(id)
+    ).then((x) => {
+      this.user_exam = x;
+      console.log(x);
+      for (var i = 0; i < this.user_exam.length; i++) {
+        if (this.user_exam[i].percentage == -1) {
+          this.user_exam[i].percentage = 0;
         }
-        this.flag_calender = false;
-        this.flag_all_student = true;
-      })
+        ids.push(this.user_exam[i]._id_user);
+      }
+      this.flag_calender = false;
+      this.flag_all_student = true;
+    });
 
     //put urls in this.user_photo_user
-   
-    this.service.get_photos_in_one_day(id)
-    .subscribe(async (photos) => {
-        photos = photos.slice(0, -3)
-        await getAllStudentPromise;
-     const myMap = new Map<any, any>();
-    for (let i=0; i<this.user_exam.length; i++){
-      myMap.set(this.user_exam[i]._id_user, this.user_exam[i]);
-    }
-        ///put users in a map and then assign each photo to him
-        photos.split('\n\r\n').forEach((photo: any) => {
-          photo = JSON.parse(photo)
-          if(photo.contentLength === 0){
-            /// user doesn't have a photo
-            myMap.get(photo.user_id).photo_user="https://cdn-icons-png.flaticon.com/512/1946/1946429.png";
-          }else{
-            const photo_blob = new Blob([new Uint8Array(photo.Body.data)], {
-              type: photo.ContentType,
-            });
-            console.log(photo_blob);
-            let imageSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(photo_blob));
-            console.log(myMap)
-            console.log(photo.user_id)
-            myMap.get(photo.user_id).photo_user=imageSrc;
-            console.log(photo.user_id)
-            console.log(this.user_exam);
 
-          }
-
-        });
-
-      })
-
-
+    this.service.get_photos_in_one_day(id).subscribe(async (photos) => {
+      photos = photos.slice(0, -3);
+      await getAllStudentPromise;
+      const myMap = new Map<any, any>();
+      for (let i = 0; i < this.user_exam.length; i++) {
+        myMap.set(this.user_exam[i]._id_user, this.user_exam[i]);
+      }
+      ///put users in a map and then assign each photo to him
+      photos.split('\n\r\n').forEach((photo: any) => {
+        photo = JSON.parse(photo);
+        if (photo.contentLength === 0) {
+          /// user doesn't have a photo
+          myMap.get(photo.user_id).photo_user =
+            'https://cdn-icons-png.flaticon.com/512/1946/1946429.png';
+        } else {
+          const photo_blob = new Blob([new Uint8Array(photo.Body.data)], {
+            type: photo.ContentType,
+          });
+          console.log(photo_blob);
+          let imageSrc = this.sanitizer.bypassSecurityTrustUrl(
+            URL.createObjectURL(photo_blob)
+          );
+          console.log(myMap);
+          console.log(photo.user_id);
+          myMap.get(photo.user_id).photo_user = imageSrc;
+          console.log(photo.user_id);
+          console.log(this.user_exam);
+        }
+      });
+    });
   }
 
   add_calendar(add_date: any, add_time: any) {
@@ -445,17 +441,13 @@ export class AdminCalendarComponent implements OnInit {
     }
   }
 
-
-  send_mail_exam(user_id:any,exam_id:any) {
-    this.service.send_mail_with_verify_code(user_id,exam_id).subscribe(
-      x=>{
-        if(x.success==true){
-          this.popup.open_error_book("Sent successfully.");
-        }else{
-          this.popup.open_error_book("Failed to send.");
-
-        }
-
-    })
+  send_mail_exam(user_id: any, exam_id: any) {
+    this.service.send_mail_with_verify_code(user_id, exam_id).subscribe((x) => {
+      if (x.success == true) {
+        this.popup.open_error_book('Sent successfully.');
+      } else {
+        this.popup.open_error_book('Failed to send.');
+      }
+    });
   }
 }

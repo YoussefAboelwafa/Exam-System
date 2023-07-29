@@ -18,17 +18,19 @@ export class AdminPriceComponent implements OnInit {
   ) {
     this.service.get_countries_prices().subscribe((x) => {
       console.log(x);
+      this.flag_type=false
       if (x.success == true) {
         this.curr_prices = x.prices;
       } else {
         this.popup.open_error_book(x.error);
       }
+
     });
 
   }
 
   curr_prices: Prices[] = [];
-
+  flag_type=true;
   currencies: any[] = [
     'USD', // United States Dollar
     'EUR', // Euro

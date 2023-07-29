@@ -16,6 +16,12 @@
   left: 5%;
   top: 2%;
 }
+.typing {
+  all: unset;
+  color: #008081;
+  font-weight: bold;
+  text-align: center;
+}
 close {
   color: #008182;
 }

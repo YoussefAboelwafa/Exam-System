@@ -25,17 +25,11 @@ export class HomeComponent implements OnInit {
   photo_event_service: any = null;
   photo_sendin_service: any;
   //take it from back
-  non_token_exam: any = {
-    title: 'Algoritms',
-    about:
-      'algorithms are a fundamental concept in computer science, and are essential for solving complex problems and developing efficient software systems.There are many different types of algorithms, including sorting algorithms, searching algorithms, graph algorithms, and optimization algorithms. ',
-    info: ['sorting', 'DAG', 'DFS algoritm'],
-    _id: '',
-  };
+  non_token_exam: exams=new exams()
 
   current_user = {
-    first_name: 'none',
-    last_name: 'none',
+    first_name: 'loading',
+    last_name: '..',
     photo: this.photo_url,
     _id: '',
   };
@@ -48,7 +42,7 @@ export class HomeComponent implements OnInit {
     
   ) {
     this.refresh();
-    this.get_user_photo();
+    // this.get_user_photo();
   }
 
   ngOnInit(): void {}
@@ -121,7 +115,7 @@ export class HomeComponent implements OnInit {
   }
 
   refresh() {
-    this.flag_type = false;
+    this.flag_type = true;
     this.service.home_bar_init().subscribe((x) => {
       this.service.user = x.user;
       this.current_user.first_name = x.user.first_name;

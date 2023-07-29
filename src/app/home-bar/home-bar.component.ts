@@ -48,7 +48,7 @@ export class HomeBarComponent implements OnInit {
   index_day: any;
   day_id: any = '';
   book_id_exam: any = '';
-
+  flag_type:any;
   avilable_time: any;
 
   //after you order exam you should clear it
@@ -73,6 +73,8 @@ export class HomeBarComponent implements OnInit {
     private popup: ModalPopServiceService,
     private sanitizer: DomSanitizer
   ) {
+
+    this.flag_type=true
     const queryParams = new URLSearchParams(window.location.search);
     const paramsObj: any = {};
     for (const [name, value] of queryParams.entries()) {
@@ -107,48 +109,48 @@ export class HomeBarComponent implements OnInit {
       this.non_token_exam = this.service.non_token[0];
     }
 
-    this.manchete=[];
-    this.service.get_manshete(2).subscribe({
-      //i need title and imgurl
-      next: (news) => {
-        news = news.slice(0, -3);
-        news.split('\n\r\n').forEach((item: any) => {
-          item = JSON.parse(item);
-          const photo_blob = new Blob(
-            [new Uint8Array(item.manchete.Body.data)],
-            {
-              type: item.manchete.ContentType,
-            }
-          );
+    // this.manchete=[];
+  //   this.service.get_manshete(2).subscribe({
+  //     //i need title and imgurl
+  //     next: (news) => {
+  //       news = news.slice(0, -3);
+  //       news.split('\n\r\n').forEach((item: any) => {
+  //         item = JSON.parse(item);
+  //         const photo_blob = new Blob(
+  //           [new Uint8Array(item.manchete.Body.data)],
+  //           {
+  //             type: item.manchete.ContentType,
+  //           }
+  //         );
 
-          let imageSrc = this.sanitizer.bypassSecurityTrustUrl(
-            URL.createObjectURL(photo_blob)
-          );
+  //         let imageSrc = this.sanitizer.bypassSecurityTrustUrl(
+  //           URL.createObjectURL(photo_blob)
+  //         );
 
-          let manchete = {
-            image: this.sanitizer.bypassSecurityTrustUrl(
-              URL.createObjectURL(photo_blob)
-            ),
-            title: item.title,
-            _id: item._id,
-          };
-          this.manchete.push(manchete);
-            console.log(manchete.image)
-          ///do whatever you want with it
-        });
-      },
-      complete: () => {
-        console.log('done');
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
-  }
-  manchete:Manchete[]=[] 
-
+  //         let manchete = {
+  //           image: this.sanitizer.bypassSecurityTrustUrl(
+  //             URL.createObjectURL(photo_blob)
+  //           ),
+  //           title: item.title,
+  //           _id: item._id,
+  //         };
+  //         this.manchete.push(manchete);
+  //           console.log(manchete.image)
+  //         ///do whatever you want with it
+  //       });
+  //     },
+  //     complete: () => {
+  //       console.log('done');
+  //     },
+  //     error: (error) => {
+  //       console.log(error);
+  //     },
+  //   });
+   }
+  // manchete:Manchete[]=[] 
 
   refresh_all() {
+    this.flag_type=true;
     this.service.get_places().subscribe((x) => {
       this.temp_countries = x;
       this.all_locations = x;
@@ -240,6 +242,7 @@ export class HomeBarComponent implements OnInit {
         this.service.non_token = x;
       });
 
+      this.flag_type=false;
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }

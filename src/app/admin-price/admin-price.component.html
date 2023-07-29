@@ -78,6 +78,18 @@
   </div>
 </div>
 
+<div *ngIf="flag_type == true" class="contain">
+  <ngx-typed-js
+    [strings]="['loading ...']"
+    [loop]="false"
+    [typeSpeed]="20"
+    [shuffle]="true"
+  >
+    <h1 class="typing"></h1>
+  </ngx-typed-js>
+
+  <!-- Good morning section -->
+</div>
 <div
   class="modal fade"
   id="add_price"

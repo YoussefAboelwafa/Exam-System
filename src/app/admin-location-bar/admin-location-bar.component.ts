@@ -18,7 +18,7 @@ export class AdminLocationBarComponent implements OnInit {
   edit_ad = new address();
   index_remved_address: any;
   index_edit_address: any;
-
+  flag_type=true
   all_locations: any;
   country: any[] = [];
   city: any[] = [];
@@ -71,7 +71,7 @@ temp_loction:any
       this.address = temp;
 
       console.log(combinations);
-
+      this.flag_type=false
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }
