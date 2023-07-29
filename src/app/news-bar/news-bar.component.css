@@ -114,12 +114,66 @@ input[type="file"]::-webkit-file-upload-button {
   color: #008182; /* Change the color to match your design */
 }
 
-
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
   img {
-    width: 350px;
-    height: 100px;
+    width: 300px;
     order: 2;
+  }
+  .manshet p {
+    font-size: 18px;
+  }
+  .manshet h1 {
+    font-size: 24px;
+  }
+  .box h1 {
+    font-size: 24px;
+  }
+  .box p {
+    font-size: 14px;
+  }
+  .box {
+    width: 100%;
+    padding: 5%;
+  }
+
+  .box i {
+    right: 5%;
+  }
+  .image i {
+    right: 5%;
+  }
+  .modal-title {
+    font-size: 24px;
+  }
+  .modal-body {
+    font-size: 14px;
+  }
+  .modal-footer button {
+    font-size: 14px;
+  }
+  .modal-footer button:hover {
+    transition: 0.5s;
+  }
+  .modal-content {
+    width: 90%;
+  }
+  .modal-footer button {
+    width: 90%;
+  }
+  .title{
+    font-size: 24px;
+  }
+  .addBtn {
+    width: 90%;
+    font-size: 16px;
+  }
+  .contain {
+    width: 90%;
+    left: 5%;
+    top: 2%;
+  }
+  .title_blog{
+    font-size: 24px;
   }
 
 }
