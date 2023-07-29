@@ -508,108 +508,6 @@ select {
   margin-bottom: 10px;
 }
 
-/* @media screen and (max-width: 1000px) {
- 
-  .container {
-    width: 100%; 
-    margin-left: 0;
-  }
-  .toolbar{
-   display: flex;
-   flex-direction: column;
-   width: 100%;
-  }
-  .dropdown{
-    font-size: 10px;
-    margin: 2%;
-  }
-  .dropdown select{
-    font-size: 10px;
-  }
-  option{
-    font-size: 16px;
-  }
-  .countrydiv{
-    width: 100%;
-  }
-  button{
-   width: 100%;
-   margin: 2%;
-  }
-  
-  
-  .goodmorningwidgets,
-  .discoverexamswidgets {
-    width: 100%;
-    overflow: unset;
-  }
-
-  .card {
-    width: 100%;
-    margin-right: 0;
-  }
-
-  .card h5 {
-    font-size: 16px;
-  }
-
-  .card a {
-    font-size: 16px;
-  }
-
-  .upcoming h5,
-  .taken h5,
-  .rank h5 {
-    font-size: 18px;
-  }
-
-  .discoverexamslabel a {
-    right: auto;
-    left: 10%;
-    font-size: 10px;
-  }
-
-  .modal-title {
-    font-size: 24px;
-  }
-
-  .modal-footer button {
-    width: 100%;
-  }
-
-  .modal-body {
-    font-size: 14px;
-  }
-
-  .upcominginfo label,
-  .takeninfo label {
-    font-size: 10px;
-  }
-
-  .examlist li {
-    font-size: 8px;
-  }
-
-  .order,
-  h3 {
-    font-size: 10px;
-  }
-
-  #select,
-  #btn,
-  .circle {
-    width: 100%;
-  }
-
-  .discoversmallbox2 .discoverexamname1 {
-    font-size: 12px;
-  }
-
-  .discoversmallbox2 .discoverscore1 {
-    font-size: 16px;
-  }
-}
- */
  @media screen and (max-width: 1000px){
     .container{
         width: 100%;
@@ -619,6 +517,8 @@ select {
         display: flex;
         flex-direction: column;
         width: 100%;
+        align-items: center;
+        justify-content: center;
     }
     .dropdown{
         font-size: 10px;
@@ -636,6 +536,18 @@ select {
     button{
         width: 100%;
         margin: 2%;
+    }
+
+    .toolbar .btn {
+      border-radius: 8px;
+      background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
+      color: #008182;
+      font-size: 20px;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 150%;
+      width: 90%;
     }
     .goodmorningwidgets, .discoverexamswidgets{
         width: 100%;
