@@ -55,7 +55,8 @@
 .container {
   margin-bottom: 10%;
 }
-.container img {
+img {
+  max-width:700px;
   border: 5px solid #008182;
   border-radius: 20px;
   margin-top: 2%;
