@@ -6,11 +6,10 @@
       <li data-target="#myCarousel" data-slide-to="2"></li>
       <li data-target="#myCarousel" data-slide-to="3"></li>
       <li data-target="#myCarousel" data-slide-to="4"></li>
-      
     </ol>
     <!-- IMAGES -->
 
-    <div class="carousel-inner" *ngIf="manchete.length==0">
+    <div class="carousel-inner" *ngIf="manchete.length == 0">
       <div class="carousel-item active" id="c1">
         <img
           src="https://via.placeholder.com/1000x200?text=youssef"
@@ -31,23 +30,31 @@
       </div>
     </div>
 
-    <div class="carousel-inner"*ngIf="manchete.length!=0">
-
-      <div  class="carousel-item active" id="mc0" >
+    <div class="carousel-inner" *ngIf="manchete.length != 0">
+      <div class="carousel-item active" id="mc0">
         <img
-        [src]="start_manchete.manchete"
+          (click)="navigate_to_news()"
+          title="Go to news"
+          [src]="start_manchete.manchete"
           alt="Slide 0"
+          style="width: 100%; object-fit: cover"
         />
+        <span class="image-text">{{start_manchete.title}}</span>
       </div>
-      <div class="carousel-item" *ngFor="let m of manchete;let i=index" [id]="'mc'+i+1" >
-        <img
-          [src]="m.manchete"
-          [alt]="'Slide '+i+1"
-          style="width: 100%;height: 100%;object-fit: cover;"
-        />
-        
+      <div
+        class="carousel-item"
+        *ngFor="let m of manchete; let i = index"
+        [id]="'mc' + i + 1"
+      >
+          <img
+            (click)="navigate_to_news()"
+            title="Go to news"
+            [src]="m.manchete"
+            [alt]="'Slide ' + i + 1"
+            style="width: 100%; object-fit: cover"
+          />
+          <span class="image-text">{{m.title}}</span>
       </div>
-
     </div>
     <a
       class="carousel-control-prev"
@@ -112,12 +119,16 @@
         <div class="rankinfo">
           <label class="rankname">Your Rank</label>
           <label class="examname2">C programming</label>
-          <label class="rankscore">#300th</label>
+          <label class="rankscore"
+            >#<span class="placeholder col-6"></span>th</label
+          >
         </div>
         <div class="rankinfo">
           <label class="rankname">City Rank</label>
           <label class="examname2">C programming</label>
-          <label class="rankscore">#240th</label>
+          <label class="rankscore"
+            >#<span class="placeholder col-6"></span>th</label
+          >
         </div>
       </div>
       <a class="btn seemore3" routerLink="/home/ranking_bar"> see more >></a>
@@ -202,104 +213,104 @@
       </div>
     </div>
   </div>
+</div>
 
-  <div *ngIf="flag_book == true" class="contain">
-    <div class="close">
-      <button (click)="close_book()" class="closebtn">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-    <div class="order">Book your exam ({{ book_title_course }})</div>
-    <div class="box">
-      <form #input_form="ngForm" (ngSubmit)="submit_book()">
-        <div>
-          <h3>Country</h3>
-          <select
-            class="sel"
-            required
-            #country
-            id="select"
-            name="country"
-            (change)="onCountrySelected($event)"
-          >
-            <option selected>Country</option>
-            <option *ngFor="let coun of countrys">{{ coun }}</option>
-          </select>
+<div *ngIf="flag_book == true" class="contain">
+  <div class="close">
+    <button (click)="close_book()" class="closebtn">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <div class="order">Book your exam ({{ book_title_course }})</div>
+  <div class="box">
+    <form #input_form="ngForm" (ngSubmit)="submit_book()">
+      <div>
+        <h3>Country</h3>
+        <select
+          class="sel"
+          required
+          #country
+          id="select"
+          name="country"
+          (change)="onCountrySelected($event)"
+        >
+          <option selected>Country</option>
+          <option *ngFor="let coun of countrys">{{ coun }}</option>
+        </select>
 
-          <h3>City</h3>
-          <select
-            class="sel"
-            required
-            #city
-            id="select"
-            name="city"
-            (change)="oncitySelected($event)"
-          >
-            <option selected>City</option>
-            <option *ngFor="let cit of citys">{{ cit }}</option>
-          </select>
-          <h3>Location</h3>
-          <select
-            class="sel"
-            required
-            #location
-            id="select"
-            name="location"
-            (change)="onlocationSelected($event)"
-          >
-            <option selected>Location</option>
-            <option *ngFor="let locate of locations">{{ locate }}</option>
-          </select>
+        <h3>City</h3>
+        <select
+          class="sel"
+          required
+          #city
+          id="select"
+          name="city"
+          (change)="oncitySelected($event)"
+        >
+          <option selected>City</option>
+          <option *ngFor="let cit of citys">{{ cit }}</option>
+        </select>
+        <h3>Location</h3>
+        <select
+          class="sel"
+          required
+          #location
+          id="select"
+          name="location"
+          (change)="onlocationSelected($event)"
+        >
+          <option selected>Location</option>
+          <option *ngFor="let locate of locations">{{ locate }}</option>
+        </select>
 
-          <button
-            disabled
-            *ngIf="
-              selectedCountry == 'country' ||
-              selectedCity == 'city' ||
-              selectedlocation == 'location'
-            "
-            id="btn"
-            style="background-color: gray"
-            type="submit"
-          >
-            Next
-          </button>
-          <button
-            *ngIf="
-              selectedCountry != 'country' &&
-              selectedCity != 'city' &&
-              selectedlocation != 'location'
-            "
-            id="btn"
-            type="submit"
-          >
-            Next
-          </button>
-        </div>
-        <div class="circle">
-          <i
-            *ngIf="
-              selectedCountry == 'country' ||
-              selectedCity == 'city' ||
-              selectedlocation == 'location'
-            "
-            class="fa-solid fa-circle"
-            style="color: red"
-          ></i>
-          <i
-            *ngIf="
-              selectedCountry != 'country' &&
-              selectedCity != 'city' &&
-              selectedlocation != 'location'
-            "
-            class="fa-solid fa-circle"
-            style="color: #008182"
-          ></i>
-          <i class="fa-regular fa-circle"></i>
-          <i class="fa-regular fa-circle"></i>
-        </div>
-      </form>
-    </div>
+        <button
+          disabled
+          *ngIf="
+            selectedCountry == 'country' ||
+            selectedCity == 'city' ||
+            selectedlocation == 'location'
+          "
+          id="btn"
+          style="background-color: gray"
+          type="submit"
+        >
+          Next
+        </button>
+        <button
+          *ngIf="
+            selectedCountry != 'country' &&
+            selectedCity != 'city' &&
+            selectedlocation != 'location'
+          "
+          id="btn"
+          type="submit"
+        >
+          Next
+        </button>
+      </div>
+      <div class="circle">
+        <i
+          *ngIf="
+            selectedCountry == 'country' ||
+            selectedCity == 'city' ||
+            selectedlocation == 'location'
+          "
+          class="fa-solid fa-circle"
+          style="color: red"
+        ></i>
+        <i
+          *ngIf="
+            selectedCountry != 'country' &&
+            selectedCity != 'city' &&
+            selectedlocation != 'location'
+          "
+          class="fa-solid fa-circle"
+          style="color: #008182"
+        ></i>
+        <i class="fa-regular fa-circle"></i>
+        <i class="fa-regular fa-circle"></i>
+      </div>
+    </form>
   </div>
 </div>
 <div *ngIf="flag_type == true" class="contain">
@@ -364,7 +375,6 @@
     </form>
   </div>
 </div>
-
 <div *ngIf="flag_time == true" class="contain">
   <div class="close">
     <button (click)="close_book()" class="closebtn">

@@ -123,6 +123,9 @@ export class HomeBarComponent implements OnInit {
    }
    manchete:Manchete[]=[] 
 
+  navigate_to_news(){
+    this.router.navigate(['/home/news_bar'])
+  }
   refresh_all() {
     this.flag_type=true;
     this.service.get_places().subscribe((x) => {

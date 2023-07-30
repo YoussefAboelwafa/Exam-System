@@ -512,6 +512,9 @@ li:is(:hover, .active) i {
   color: #fff;
   background-color: #008182;
 }
+#btn {
+  margin-top: 5%;
+}
 
 @media screen and (max-width: 700px) {
 
@@ -529,10 +532,16 @@ li:is(:hover, .active) i {
     overflow: unset;
   }
 
-  .card {
-    width: 100%;
-    margin-right: 0;
+  .box {
+    width: 75%;
+    overflow: unset;
   }
+  .card {
+    width: 80%;
+    margin: 2%;
+    padding: 5%;
+  }
+
 
   .card h5 {
     font-size: 16px;

@@ -158,7 +158,7 @@ close {
   background-repeat: no-repeat;
   border-radius: 20px;
 }
-.btn-icon{
+.btn-icon {
   all: unset;
   position: absolute;
   right: 4%;
@@ -508,163 +508,203 @@ select {
   margin-bottom: 10px;
 }
 
- @media screen and (max-width: 1000px){
-    .container{
-        width: 100%;
-        margin-left: 0;
-    }
-    .toolbar{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-    }
-    .dropdown{
-        font-size: 10px;
-        margin: 2%;
-    }
-    .dropdown select{
-        font-size: 10px;
-    }
-    option{
-        font-size: 16px;
-    }
-    .countrydiv{
-        width: 100%;
-    }
-    button{
-        width: 100%;
-        margin: 2%;
-    }
+@media screen and (max-width: 1000px) {
+  .container {
+    width: 100%;
+    margin-left: 0;
+  }
+  .toolbar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .dropdown {
+    font-size: 10px;
+    margin: 2%;
+  }
+  .dropdown select {
+    font-size: 10px;
+  }
+  option {
+    font-size: 16px;
+  }
+  .countrydiv {
+    width: 100%;
+  }
+  button {
+    width: 100%;
+    margin: 2%;
+  }
 
-    .toolbar .btn {
-      border-radius: 8px;
-      background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
-      color: #008182;
-      font-size: 20px;
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: 300;
-      line-height: 150%;
-      width: 90%;
-    }
-    .goodmorningwidgets, .discoverexamswidgets{
-        width: 100%;
-        overflow: unset;
-    }
-    .card{
-        width: 100%;
-        margin-right: 0;
-    }
-    .card h5{
-        font-size: 16px;
-    }
-    .card a{
-        font-size: 16px;
-    }
-    .upcoming h5, .taken h5, .rank h5{
-        font-size: 18px;
-    }
-    .discoverexamslabel a{
-        right: auto;
-        left: 10%;
-        font-size: 10px;
-    }
-    .modal-title{
-        font-size: 24px;
-    }
-    .modal-footer button{
-        width: 100%;
-    }
-    .modal-body{
-        font-size: 14px;
-    }
-    .upcominginfo label, .takeninfo label{
-        font-size: 10px;
-    }
-    .examlist li{
-        font-size: 8px;
-    }
-    .order, h3{
-        font-size: 10px;
-    }
-    #select, #btn, .circle{
-        width: 100%;
-    }
-    .discoversmallbox2 .discoverexamname1{
-        font-size: 12px;
-    }
-    .discoversmallbox2 .discoverscore1{
-        font-size: 16px;
-    }
-   
-    .one_card{
-        width: 100%;
-        justify-content:center ;
-        align-items: center;
+  .toolbar .btn {
+    border-radius: 8px;
+    background: linear-gradient(311deg, #dcfcfd 0%, #fff 100%);
+    color: #008182;
+    font-size: 20px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 150%;
+    width: 90%;
+  }
+  .goodmorningwidgets,
+  .discoverexamswidgets {
+    width: 100%;
+    overflow: unset;
+  }
+  .card {
+    width: 100%;
+    margin-right: 0;
+  }
+  .input_percentage {
+    border-radius: 5px;
+    color: #008182;
+    background-color: #fff;
+    width: 100%;
+    height: 30%;
+    font-size: 20px;
+    font-weight: 50px;
+    margin-top: 3%;
+    padding-left: 5px;
+  }
+  .fa-paper-plane {
+    padding: 2%;
+  }
+  .btn-icon {
+    padding-bottom: 10%;
+  }
+  .card h5 {
+    font-size: 16px;
+  }
+  .name1 h5 {
+    font-size: 10px;
+  }
+  .name2 h5 {
+    font-size: 14px;
+  }
+  .card a {
+    font-size: 16px;
+  }
+  .upcoming h5,
+  .taken h5,
+  .rank h5 {
+    font-size: 18px;
+  }
+  .discoverexamslabel a {
+    right: auto;
+    left: 10%;
+    font-size: 10px;
+  }
+  .modal-title {
+    font-size: 24px;
+  }
+  .modal-footer button {
+    width: 100%;
+  }
+  .modal-body {
+    font-size: 14px;
+  }
+  .upcominginfo label,
+  .takeninfo label {
+    font-size: 10px;
+  }
+  .examlist li {
+    font-size: 8px;
+  }
+  .order,
+  h3 {
+    font-size: 10px;
+  }
+  #select,
+  #btn,
+  .circle {
+    width: 100%;
+  }
+  .discoversmallbox2 .discoverexamname1 {
+    font-size: 12px;
+  }
+  .discoversmallbox2 .discoverscore1 {
+    font-size: 16px;
+  }
 
-    }
-    .contain{
-        width: 100%;
-    }
-    .one_card .card{
-        width: 100%;
-    }
-    .closebtn{
-        font-size: 18px;
-        font-weight: 500;
-        width: 40px;
-        height: 40px;
-    }
-    .one_card h5{
-        font-size: 16px;
-    }
-    .one_card a{
-        font-size: 16px;
-    }
-    .one_card .card-body{
-        padding: 0;
-    }
-    .one_card .card-body .row{
-        margin: 0;
-    }
-    .one_card .card-body .row .col-md-4{
-        padding: 0;
-    }
-    .one_card .card-body .row .col-md-4 img{
-        width: 100%;
-    }
-    .one_card .card-body .row .col-md-8{
-        padding: 0;
-    }
-    .one_card .card-body .row .col-md-8 h5{
-        font-size: 16px;
-    }
-    .one_card .card-body .row .col-md-8 a{
-        font-size: 16px;
-    }
-    .one_card .card-body .row .col-md-8 p{
-        font-size: 12px;
-    }
-    .one_card .card-body .row .col-md-8 .row{
-        margin: 0;
-    }
-    .one_card .card-body .row .col-md-8 .row .col-md-6{
-        padding: 0;
-    }
-    .one_card .card-body .row .col-md-8 .row .col-md-6 p{
-        font-size: 12px;
-    }
+  .one_card {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  #special_card {
+    width: 90%;
+    padding: 5%;
+  }
+  .card {
+    width: 100%;
+  }
+  .contain {
+    width: 100%;
+  }
+  .one_card .card {
+    width: 100%;
+  }
+  .card-body {
+    padding: 0;
+    width: 100%;
+  }
+  .closebtn {
+    font-size: 18px;
+    font-weight: 500;
+    width: 40px;
+    height: 40px;
+  }
+  .one_card h5 {
+    font-size: 12px;
+  }
+  .one_card a {
+    font-size: 10px;
+  }
+  .one_card .card-body {
+    padding: 0;
+  }
+  .one_card .card-body .row {
+    margin: 0;
+  }
+  .one_card .card-body .row .col-md-4 {
+    padding: 0;
+  }
+  .one_card .card-body .row .col-md-4 img {
+    width: 100%;
+  }
+  .one_card .card-body .row .col-md-8 {
+    padding: 0;
+  }
+  .one_card .card-body .row .col-md-8 h5 {
+    font-size: 12px;
+  }
+  .one_card .card-body .row .col-md-8 a {
+    font-size: 16px;
+  }
+  .one_card .card-body .row .col-md-8 p {
+    font-size: 12px;
+  }
+  .one_card .card-body .row .col-md-8 .row {
+    margin: 0;
+  }
+  .one_card .card-body .row .col-md-8 .row .col-md-6 {
+    padding: 0;
+  }
+  .one_card .card-body .row .col-md-8 .row .col-md-6 p {
+    font-size: 12px;
+  }
 
-    .one_card .card-body .row .col-md-8 .row .col-md-6 .row{
-        margin: 0;
-    }
-    .one_card .card-body .row .col-md-8 .row .col-md-6 .row .col-md-6{
-        padding: 0;
-    }
-    .close{
-        font-size: 24px;
-        width: 20px;
-    }
- }
+  .one_card .card-body .row .col-md-8 .row .col-md-6 .row {
+    margin: 0;
+  }
+  .one_card .card-body .row .col-md-8 .row .col-md-6 .row .col-md-6 {
+    padding: 0;
+  }
+  .close {
+    font-size: 24px;
+    width: 20px;
+  }
+}
