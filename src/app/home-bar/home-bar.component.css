@@ -549,7 +549,12 @@ h3 {
   position: absolute;
 }
 .carousel-item {
-  position: relative;
+  min-height: 150px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
 }
 
 .image-text {
@@ -565,7 +570,11 @@ h3 {
   padding: 20px;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1000px) {
+  .image-text{
+    font-size: 20px;
+    padding: 10px;
+  }
   .container1 {
     flex-wrap: wrap;
     overflow: unset;

@@ -516,7 +516,7 @@ li:is(:hover, .active) i {
   margin-top: 5%;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1000px) {
 
   .container{
     padding: 5%;

@@ -297,7 +297,6 @@ td {
     font-size: 14px;
   }
   .upcominginfo,
-  .takeninfo,
   .rankinfo {
     padding: 5px;
   }
@@ -371,5 +370,8 @@ td {
 
   .discoversmallbox2 .discoverscore1 {
     font-size: 48px;
+  }
+  .takeninfo label{
+    padding: 3%;
   }
 }
