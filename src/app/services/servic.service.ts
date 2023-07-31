@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 
 
 export class ServicService {
-  private apiServerUrl = 'https://vivacious-singlet-elk.cyclic.app';
+  private apiServerUrl = 'https://thoughtful-ox-baseball-cap.cyclic.cloud';
   user:any=new users();
   upcoming_ex!:any[];
   token_ex!:any[];
