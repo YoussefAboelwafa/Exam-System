@@ -30,7 +30,7 @@
     <div class="discoverbox1">
       <div class="discoversmallbox">
         <ul class="examlist">
-          <li *ngFor="let infomration of non_token.info">{{ infomration }}</li>
+          <li *ngFor="let infomration of non_token.info| slice : 0 : 3" >{{ infomration }}</li>
         </ul>
       </div>
       <div class="discoverinfo">

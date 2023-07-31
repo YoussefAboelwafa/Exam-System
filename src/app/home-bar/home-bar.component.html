@@ -188,7 +188,7 @@
       <div class="discoverbox1">
         <div class="discoversmallbox">
           <ul class="examlist">
-            <li *ngFor="let information of non_token_exam.info">
+            <li *ngFor="let information of non_token_exam.info | slice : 0 : 3">
               {{ information }}
             </li>
           </ul>
@@ -296,7 +296,7 @@
             selectedlocation == 'location'
           "
           class="fa-solid fa-circle"
-          style="color: red"
+          style="color: gray"
         ></i>
         <i
           *ngIf="
@@ -363,7 +363,7 @@
         <i
           *ngIf="select_snacks == 'Snack'"
           class="fa-solid fa-circle"
-          style="color: red"
+          style="color: gray"
         ></i>
         <i
           *ngIf="select_snacks != 'Snack'"
@@ -441,7 +441,7 @@
             selectedappointment == 'Select an Appointmen'
           "
           class="fa-solid fa-circle"
-          style="color: red"
+          style="color: gray"
         ></i>
         <i
           *ngIf="
@@ -451,7 +451,7 @@
           class="fa-solid fa-circle"
           style="color: #008182"
         ></i>
-      </div>
+      </div> 
     </form>
   </div>
 </div>
@@ -459,7 +459,7 @@
 <!-- mesage template -->
 
 <div
-  *ngIf="non_token_exam.turn_on_off != 0"
+  *ngIf="non_token_exam!=null&&non_token_exam.turn_on_off != 0"
   class="modal fade"
   id="not_token_exam"
   tabindex="-1"

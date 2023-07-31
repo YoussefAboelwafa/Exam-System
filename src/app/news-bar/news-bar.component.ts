@@ -25,9 +25,10 @@ export class NewsBarComponent implements OnInit {
 
   get_blogs() {
     //update ya kimo
-
+    this.flag_type=true
     this.News = [];
     this.service.get_blogs_user(10, 1).subscribe((x) => {
+      this.flag_type=false
       for (let i = 0; i < x.length; i++) {
         x[i].photo = 'http://i.imgur.com/' + x[i].photo;
       }

@@ -77,8 +77,7 @@ export class ExamsBarComponent implements OnInit {
   reciept: Reciept = new Reciept();
   constructor(
     private service: ServicService,
-    private router: Router,
-    private popup: ModalPopServiceService
+     private popup: ModalPopServiceService
   ) {
     this.refresh_all();
     // this.upcoming_exam=this.service.upcoming_ex;
@@ -90,6 +89,7 @@ export class ExamsBarComponent implements OnInit {
 
   refresh_all() {
     this.service.get_places().subscribe((x) => {
+      this.temp_countries = x;
       this.all_locations = x;
       this.countrys = x.map((cont: any) => cont.country_name);
 
@@ -221,6 +221,7 @@ export class ExamsBarComponent implements OnInit {
         break;
       }
     }
+    console.log(5)
     this.service.get_payment_reciept(country_id).subscribe((x) => {
       if (x.success == true) {
         this.reciept = x;

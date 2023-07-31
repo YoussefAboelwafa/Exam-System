@@ -65,6 +65,8 @@ export class HomeBarComponent implements OnInit {
   phone_number: any;
   reciept: Reciept = new Reciept();
   start_manchete:any;
+  manchete:Manchete[]=[] 
+
   ngOnInit(): void {}
 
   constructor(
@@ -110,9 +112,20 @@ export class HomeBarComponent implements OnInit {
     }
 
     // this.manchete=[];
+   
+   }
+
+  navigate_to_news(){
+    this.router.navigate(['/home/news_bar'])
+  }
+  refresh_all() {
+    this.flag_type=true;
     this.service.get_manshete(5).subscribe(
       x=>{
       //i need title and imgurl
+      console.log(x)
+      this.manchete=[];
+      this.start_manchete=null
       this.start_manchete=x[0];
       for(let i=0; i<x.length; i++){
         x[i].manchete='http://i.imgur.com/'+x[i].manchete
@@ -120,14 +133,6 @@ export class HomeBarComponent implements OnInit {
       this.manchete=x;
       this.manchete.splice(0,1)
     });
-   }
-   manchete:Manchete[]=[] 
-
-  navigate_to_news(){
-    this.router.navigate(['/home/news_bar'])
-  }
-  refresh_all() {
-    this.flag_type=true;
     this.service.get_places().subscribe((x) => {
       this.temp_countries = x;
       this.all_locations = x;
@@ -147,6 +152,7 @@ export class HomeBarComponent implements OnInit {
 
       this.service.get_calender().subscribe((x) => {
         this.calendar = x;
+        console.log(this.calendar);
       });
       this.address = [];
       for (let i = 0; i < combinations.length; i++) {
@@ -166,6 +172,7 @@ export class HomeBarComponent implements OnInit {
     });
 
     this.service.home_bar_init().subscribe((x) => {
+      console.log(x)
       this.service.user = x.user;
       this.phone_number = this.service.user.phone;
       this.non_token_exam = x.other_exam;
@@ -257,6 +264,7 @@ export class HomeBarComponent implements OnInit {
         break;
       }
     }
+    console.log(5)
     this.service.get_payment_reciept(country_id).subscribe((x) => {
       if (x.success == true) {
         this.reciept = x;
