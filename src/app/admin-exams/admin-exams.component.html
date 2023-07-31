@@ -202,9 +202,9 @@ aria-hidden="true"
 
       <h3>Title of exam</h3>
       <input  #ed_title type="text" [value]="edit_ex.title" class="input_edit">
-      <h3>Total time in Exam (in Same formate)</h3>
+      <h3>Total time in Exam (in Same formate HH:MM)</h3>
       <input 
-      #ed_time type="number" [value]="edit_ex.exam_time" min="0" max="24" class="input_edit">
+      #ed_time type="text" [value]="edit_ex.exam_time" class="input_edit">
       <h3>About of exam</h3>
       <textarea #ed_about [value]="edit_ex.about" class="input_edit" id="t_area"></textarea>
       <h3>number of Information</h3>
