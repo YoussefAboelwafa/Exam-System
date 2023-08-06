@@ -91,8 +91,8 @@ export class HomeBarComponent implements OnInit {
         this.service
           .book_exam(
             paramsObj['merchantRefNumber'],
-            paramsObj['signature'],
-            paramsObj['referenceNumber']
+            paramsObj['referenceNumber'],
+            paramsObj['signature']
           )
           .subscribe((x) => {
             if (x.success == false) {
