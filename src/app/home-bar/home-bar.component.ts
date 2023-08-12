@@ -90,9 +90,7 @@ export class HomeBarComponent implements OnInit {
       if (paramsObj['statusCode'] == '200') {
         this.service
           .book_exam(
-            paramsObj['merchantRefNumber'],
-            paramsObj['signature'],
-            paramsObj['referenceNumber']
+            paramsObj
           )
           .subscribe((x) => {
             if (x.success == false) {

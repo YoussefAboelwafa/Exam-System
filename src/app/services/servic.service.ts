@@ -116,8 +116,8 @@ public add_day(new_time:any):Observable<any>{
 public remove_day(id_day:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/delete_day`,{day_id:id_day}, { withCredentials: true });
 }
-public book_exam(merchantRefNumber:any,referenceNumber:any,signature:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/exam/book_exam`,{merchantRefNumber:merchantRefNumber,signature:signature,referenceNumber:referenceNumber}, { withCredentials: true });
+public book_exam(paymentResult: any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/exam/book_exam`,paymentResult , { withCredentials: true });
 }
 
 
