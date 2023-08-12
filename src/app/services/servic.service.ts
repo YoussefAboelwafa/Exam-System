@@ -20,6 +20,7 @@ export class ServicService {
   ids_ex!:any[];
   email_change_pass:any;
   phone:any;
+  location_seat_id:any;
   constructor(private http: HttpClient) { }
 
   

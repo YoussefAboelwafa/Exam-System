@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ServicService } from '../services/servic.service';
+import { Router } from '@angular/router';
 declare const $: any;
 
 @Component({
@@ -8,7 +10,11 @@ declare const $: any;
 })
 export class SeatsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service:ServicService,private router:Router) {
+    if(this.service.location_seat_id==undefined){
+      this.router.navigate(['admin_home/admin_location'])
+    }
+   }
 
   ngOnInit(): void {
 
@@ -47,12 +53,12 @@ export class SeatsComponent implements OnInit {
   }
 
 
-
+flag_on_off:any;
 grid:any[]=[["seat","seat","seat"],["seat","seat","seat"],["seat","seat","seat"],["seat","seat","seat"]]
 
 seat="seat";
 none="none";
-booked="booked";
+// booked="booked";
 
 set(i:any, j:any){
 

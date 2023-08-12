@@ -228,4 +228,9 @@ export class AdminLocationBarComponent implements OnInit {
     // this.snacks= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c.snacks)
     // this.capacity= this.all_locations.map((cont:any)=> cont.cities)[this.index_country].map((c:any)=> c.locations)[this.index_city].map((c:any)=> c.max_number)
   }
+
+
+  set_service_with_location_id(id:any){
+    this.service.location_seat_id=id;
+  }
 }

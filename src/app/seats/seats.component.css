@@ -143,6 +143,11 @@
     
   }
   
+  .btn_back {
+    all: unset;
+    cursor: pointer;
+    margin-left: 95%;
+  }
 /* body {
   background-color: #242333;
   display: flex;

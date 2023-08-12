@@ -3,13 +3,27 @@
     <h1>Seats</h1>
 </div>
 <div style="margin-top: 120px;margin-left: 60px;" id="container"></div> -->
+<div class="discoverexamslabel">
 
+  
+  <button routerLink="/admin_home/admin_location" class="btn_back">
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
+</div>
 <div class="discoverexamslabel">
   <button
+    *ngIf="true"
     data-toggle="modal"
     data-target="#new_grid"
     class="discoverbtns btn_exam btn_add"
     style="margin-bottom: 10px; margin-right: 6px"
+  >
+    New Grid <i class="fa-solid fa-plus"></i>
+  </button>
+  <button
+    *ngIf="false"
+     class="discoverbtns btn_exam btn_add"
+    style="margin-bottom: 10px; margin-right: 6px;  background-color:  gray;"
   >
     New Grid <i class="fa-solid fa-plus"></i>
   </button>
@@ -20,17 +34,18 @@
     <div class="seat"></div>
     <small>N/A</small>
   </li>
-
-  <li>
-    <div class="seat selected"></div>
-    <small>booked</small>
-  </li>
-
+  <button class="btn_remove" style="all:unset;    margin-right: 5px;"
+  *ngIf="true"><i style="color: red;font-size:40px;" title="open seats" class="fa-solid fa-toggle-off"></i>
+  </button>
+  <button class="btn_remove"  style=" all:unset;margin-right: 5px;"   
+  *ngIf="false"><i style="color:#008081; font-size:40px;"title="Close seats"class="fa-solid fa-toggle-on"></i>
+  </button> 
   <li>
     <div class="seat none"></div>
     <small>None</small>
   </li>
 </ul>
+
 
 <div class="container">
   <div class="screen"><span>Screen</span></div>
@@ -41,13 +56,13 @@
         style="all: unset"
         (click)="set(i, j)"
       >
-        <div [class]="y"><span>{{ i * grid[0].length + j + 1 }}</span></div>
+        <div [class]="y">
+          <span>{{ i * grid[0].length + j + 1 }}</span>
+        </div>
       </button>
     </div>
   </div>
 </div>
-
-
 
 <div
   class="modal fade"
