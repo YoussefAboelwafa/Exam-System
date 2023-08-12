@@ -28,7 +28,7 @@ export class AdminLocationBarComponent implements OnInit {
   index_country: any;
   index_city: any;
   index_location: any;
-
+  flag_show_location=true
   constructor(private service: ServicService) {
     this.get_all_place();
   }

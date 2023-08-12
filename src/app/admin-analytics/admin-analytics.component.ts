@@ -32,23 +32,7 @@ export class AdminAnalyticsComponent implements OnInit {
   ];
   year_name: any[] = [];
   // Getting all keys using the keys() method
-  a = [
-    '2032-7',
-    '2026-5',
-    '2026-4',
-    '2026-7',
-    '2026-2',
-    '2026-8',
-    '2026-9',
-    '2026-10',
-    '2022-5',
-    '2022-7',
-    '2022-1',
-    '2022-2',
-    '2022-8',
-    '2022-3',
-    '2022-6',
-  ];
+   
   bar_ctx: any;
   bar_config: any;
   bar_chartData: number[] = [];
@@ -94,6 +78,7 @@ export class AdminAnalyticsComponent implements OnInit {
   constructor(private service: ServicService) {
     this.service.get_analytics().subscribe((entries: any) => {
       this.fullData = entries;
+      console.log(entries);
       entries.forEach((entry: any) => {
         const key = `${entry.year}-${entry.month}`;
 

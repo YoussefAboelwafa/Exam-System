@@ -82,11 +82,14 @@
         <option selected>Choose month</option>
         <option *ngFor="let month of distinctmonth3">{{ month }}</option>
       </select>
-      <select class="form-select" aria-label="Default select example" id="exam"         (change)="change_exam_chart3($event)"
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        id="exam"
+        (change)="change_exam_chart3($event)"
       >
         <option selected>Choose exam</option>
-        <option *ngFor="let exam of distinct_exam3">{{exam}}</option>
-
+        <option *ngFor="let exam of distinct_exam3">{{ exam }}</option>
       </select>
     </div>
     <div class="barChart pieChart2">
@@ -94,7 +97,7 @@
     </div>
   </div>
 </div>
-
+<!-- 
 <div *ngIf="flag_type == true" class="contain">
   <ngx-typed-js
     [strings]="['loading ...']"
@@ -105,8 +108,8 @@
     <h1 class="typing"></h1>
   </ngx-typed-js>
 
-  <!-- Good morning section -->
-</div>
+ </div> -->
+
 <div
   class="modal fade"
   id="open_piechart"

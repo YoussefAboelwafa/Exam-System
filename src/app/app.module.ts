@@ -28,6 +28,7 @@ import { NewsBarComponent } from './news-bar/news-bar.component';
 import { Chart } from 'chart.js';
 import { registerables } from 'chart.js';
 import { AdminPriceComponent } from './admin-price/admin-price.component';
+import { SeatsComponent } from './seats/seats.component';
 Chart.register(...registerables);
 
 @NgModule({
@@ -49,6 +50,7 @@ Chart.register(...registerables);
     AdminNewsComponent,
     NewsBarComponent,
     AdminPriceComponent,
+    SeatsComponent,
   ],
   imports: [
     BrowserModule,

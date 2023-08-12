@@ -1,0 +1,114 @@
+<!-- 
+<div>
+    <h1>Seats</h1>
+</div>
+<div style="margin-top: 120px;margin-left: 60px;" id="container"></div> -->
+
+<div class="discoverexamslabel">
+  <button
+    data-toggle="modal"
+    data-target="#new_grid"
+    class="discoverbtns btn_exam btn_add"
+    style="margin-bottom: 10px; margin-right: 6px"
+  >
+    New Grid <i class="fa-solid fa-plus"></i>
+  </button>
+</div>
+
+<ul class="showcase">
+  <li>
+    <div class="seat"></div>
+    <small>N/A</small>
+  </li>
+
+  <li>
+    <div class="seat selected"></div>
+    <small>booked</small>
+  </li>
+
+  <li>
+    <div class="seat none"></div>
+    <small>None</small>
+  </li>
+</ul>
+
+<div class="container">
+  <div class="screen"><span>Screen</span></div>
+  <div class="seat_area">
+    <div *ngFor="let x of grid; let i = index" class="row">
+      <button
+        *ngFor="let y of x; let j = index"
+        style="all: unset"
+        (click)="set(i, j)"
+      >
+        <div [class]="y"><span>{{ i * grid[0].length + j + 1 }}</span></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<div
+  class="modal fade"
+  id="new_grid"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          <p>New Grid</p>
+        </h5>
+        <button class="outer_button" disabled>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="duration">
+          <input
+            #add_Rows
+            type="number"
+            min="0"
+            class="input_edit time_input"
+            placeholder="Rows"
+          />
+          <span>X</span>
+          <input
+            #add_Columns
+            type="number"
+            min="0"
+            class="input_edit time_input"
+            placeholder="Columns"
+          />
+        </div>
+        <div class="modal-footer">
+          <button
+            class="discoverbtns btn_exam"
+            style="background-color: #008081"
+            (click)="add_new_grid(add_Rows.value, add_Columns.value)"
+          >
+            Add Grid <i class="fa-solid fa-plus"></i>
+          </button>
+          <button
+            class="discoverbtns btn_exam"
+            style="background-color: #ff0052"
+            (click)="close()"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

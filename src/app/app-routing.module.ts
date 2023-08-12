@@ -16,6 +16,7 @@ import { AdminQuestionsComponent } from './admin-questions/admin-questions.compo
 import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { NewsBarComponent } from './news-bar/news-bar.component';
 import { AdminPriceComponent } from './admin-price/admin-price.component';
+import { SeatsComponent } from './seats/seats.component';
 
 const routes: Routes = [
   {
@@ -86,6 +87,9 @@ const routes: Routes = [
       {
         path: 'admin_prices',
         component: AdminPriceComponent,
+      },{
+        path: 'admin_seats',
+        component: SeatsComponent,
       },
     ],
   },

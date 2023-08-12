@@ -1,4 +1,4 @@
-<div class="toolbar">
+<div class="toolbar"  >
   <!-- country -->
   <div class="dropdown countrydiv">
     <select
@@ -63,6 +63,7 @@
     class="card card-body taken"
   >
     <div class="remove_edit">
+      <button routerLink="/admin_home/admin_seats"><i class="fa-solid fa-chair"></i></button>
       <button
         data-toggle="modal"
         data-target="#editlocationmodal"
@@ -286,10 +287,21 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button (click)="totaly_edit(ed_capacity.value,ed_snacks.value)" type="button" id="addnewlocation">
+        <button
+          (click)="totaly_edit(ed_capacity.value, ed_snacks.value)"
+          type="button"
+          id="addnewlocation"
+        >
           Edit Address <i class="fa-solid fa-plus"></i>
         </button>
-        <button (click)="close()" type="button" id="addnewlocation" style="background-color: #FF0052;" >Cancel Edit</button>
+        <button
+          (click)="close()"
+          type="button"
+          id="addnewlocation"
+          style="background-color: #ff0052"
+        >
+          Cancel Edit
+        </button>
       </div>
     </div>
   </div>
