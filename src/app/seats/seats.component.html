@@ -4,8 +4,6 @@
 </div>
 <div style="margin-top: 120px;margin-left: 60px;" id="container"></div> -->
 <div class="discoverexamslabel">
-
-  
   <button routerLink="/admin_home/admin_location" class="btn_back">
     <i class="fa-solid fa-arrow-left"></i>
   </button>
@@ -22,8 +20,8 @@
   </button>
   <button
     *ngIf="false"
-     class="discoverbtns btn_exam btn_add"
-    style="margin-bottom: 10px; margin-right: 6px;  background-color:  gray;"
+    class="discoverbtns btn_exam btn_add"
+    style="margin-bottom: 10px; margin-right: 6px; background-color: gray"
   >
     New Grid <i class="fa-solid fa-plus"></i>
   </button>
@@ -32,23 +30,41 @@
 <ul class="showcase">
   <li>
     <div class="seat"></div>
-    <small>N/A</small>
+    <small>Seat Number</small>
+    <div class="seat blank"></div>
+    <small>Blank</small>
   </li>
-  <button class="btn_remove" style="all:unset;    margin-right: 5px;"
-  *ngIf="true"><i style="color: red;font-size:40px;" title="open seats" class="fa-solid fa-toggle-off"></i>
+  <li></li>
+  <button class="btn_remove" style="all: unset; margin-right: 5px" *ngIf="true">
+    <i
+      style="color: red; font-size: 40px"
+      title="open seats"
+      class="fa-solid fa-toggle-off"
+    ></i>
   </button>
-  <button class="btn_remove"  style=" all:unset;margin-right: 5px;"   
-  *ngIf="false"><i style="color:#008081; font-size:40px;"title="Close seats"class="fa-solid fa-toggle-on"></i>
-  </button> 
-  <li>
-    <div class="seat none"></div>
-    <small>None</small>
-  </li>
+  <button
+    class="btn_remove"
+    style="all: unset; margin-right: 5px"
+    *ngIf="false"
+  >
+    <i
+      style="color: #008081; font-size: 40px"
+      title="Close seats"
+      class="fa-solid fa-toggle-on"
+    ></i>
+  </button>
 </ul>
-
+<div></div>
 
 <div class="container">
-  <div class="screen"><span>Screen</span></div>
+  <div class="screen">
+    <i class="fa-solid fa-angle-down"></i> Entrance
+    <i class="fa-solid fa-angle-down"></i>
+  </div>
+  <p class="hint">
+    <i class="fa-regular fa-lightbulb"></i>
+    Click on seats to toggle between available and unavailable
+  </p>
   <div class="seat_area">
     <div *ngFor="let x of grid; let i = index" class="row">
       <button
@@ -98,7 +114,8 @@
             class="input_edit time_input"
             placeholder="Rows"
           />
-          <span>X</span>
+
+          <i class="fa-brands fa-x-twitter"></i>
           <input
             #add_Columns
             type="number"
