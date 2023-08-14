@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicService } from '../services/servic.service';
 import { Router } from '@angular/router';
+import { ModalPopServiceService } from '../services/modal-pop-service.service';
 declare const $: any;
 
 @Component({
@@ -10,10 +11,26 @@ declare const $: any;
 })
 export class SeatsComponent implements OnInit {
 
-  constructor(private service:ServicService,private router:Router) {
+
+  state:boolean = false;
+  constructor(private service:ServicService,private router:Router,private popup:ModalPopServiceService) {
     if(this.service.location_seat_id==undefined){
       this.router.navigate(['admin_home/admin_location'])
     }
+    else{
+      this.service.get_layout(this.service.location_seat_id).subscribe(x=>{
+        console.log(x)
+        if(x.success==true){
+        this.grid=x.layout;
+        this.state=x.state;
+        }
+        else{
+          this.popup.open_error_book(x.error);
+        }
+      })
+    }
+
+    
    }
 
   ngOnInit(): void {
@@ -54,13 +71,15 @@ export class SeatsComponent implements OnInit {
 
 
 flag_on_off:any;
-grid:any[]=[["seat","seat","seat"],["seat","seat","seat"],["seat","seat","seat"],["seat","seat","seat"]]
+grid:any[]=[[]]
 
 seat="seat";
 none="none";
 // booked="booked";
 
 set(i:any, j:any){
+
+  if(this.state==false){
 
   if(this.grid[i][j]=="seat none")
   {
@@ -73,11 +92,27 @@ set(i:any, j:any){
   }
 
 }
+
+}
 close(){
   $('#new_grid').modal('hide');
 }
 
+change_state(new_state:any){
+  let temp =this.state;
+  this.state=new_state;
+  this.service.toggle_layout(this.service.location_seat_id,new_state,this.grid).subscribe(x=>{
+  
+    if(x.success==true){
+      this.state=new_state;
+    }
+    else{
+      this.state=temp;
+      this.popup.open_error_book(x.error);
+    }
+  })
 
+}
 add_new_grid(rows:any,columns:any){
 
   this.grid = [];

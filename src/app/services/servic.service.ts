@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 
 
 export class ServicService {
-  private apiServerUrl = 'https://thoughtful-ox-baseball-cap.cyclic.cloud';
+  private apiServerUrl = 'https://exam-system-457n.onrender.com';
   user:any=new users();
   upcoming_ex!:any[];
   token_ex!:any[];
@@ -241,6 +241,13 @@ public get_analytics():Observable<any>{
 public log_out():Observable<any>{
   return this.http.get<any>(`${this.apiServerUrl}/logout`,{ withCredentials: true });
 }
+public toggle_layout(location_id:string,state:boolean,layout:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/admin/toggle_layout`,{location_id:location_id,state:state,layout:layout},{ withCredentials: true });
+}
+public get_layout(location_id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/home/get_layout`,{location_id:location_id},{ withCredentials: true });
+}
+
 
 
 }

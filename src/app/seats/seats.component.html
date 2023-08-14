@@ -10,7 +10,7 @@
 </div>
 <div class="discoverexamslabel">
   <button
-    *ngIf="true"
+    *ngIf="state == false"
     data-toggle="modal"
     data-target="#new_grid"
     class="discoverbtns btn_exam btn_add"
@@ -19,9 +19,10 @@
     New Grid <i class="fa-solid fa-plus"></i>
   </button>
   <button
-    *ngIf="false"
+    *ngIf="state == true"
     class="discoverbtns btn_exam btn_add"
     style="margin-bottom: 10px; margin-right: 6px; background-color: gray"
+    disabled
   >
     New Grid <i class="fa-solid fa-plus"></i>
   </button>
@@ -35,7 +36,12 @@
     <small>Blank</small>
   </li>
   <li></li>
-  <button class="btn_remove" style="all: unset; margin-right: 5px" *ngIf="true">
+  <button
+    class="btn_remove"
+    style="all: unset; margin-right: 5px"
+    *ngIf="state == false"
+    (click)="change_state(true)"
+  >
     <i
       style="color: red; font-size: 40px"
       title="open seats"
@@ -45,7 +51,8 @@
   <button
     class="btn_remove"
     style="all: unset; margin-right: 5px"
-    *ngIf="false"
+    *ngIf="state == true"
+    (click)="change_state(false)"
   >
     <i
       style="color: #008081; font-size: 40px"
@@ -58,7 +65,7 @@
 
 <div class="container">
   <div class="screen">
-    <i class="fa-solid fa-angle-down"></i> Entrance
+    Entrance
     <i class="fa-solid fa-angle-down"></i>
   </div>
   <p class="hint">
