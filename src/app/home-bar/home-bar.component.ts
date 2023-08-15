@@ -19,7 +19,7 @@ export class HomeBarComponent implements OnInit {
   flag_snack = false;
   flag_book = false;
   flag_time = false;
-  flag_seat = true;
+  flag_seat = false;
   book_title_course = '';
 
   snacks = [];
