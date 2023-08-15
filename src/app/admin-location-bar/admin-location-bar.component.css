@@ -220,7 +220,10 @@ td {
 .taken i:hover {
   color: #ff0052;
 }
-
+button.active {
+  margin-left: 18px;
+  border: 3px solid #008182 !important ;
+}
 @media screen and (max-width: 1000px) {
   .toolbar {
     flex-direction: column;

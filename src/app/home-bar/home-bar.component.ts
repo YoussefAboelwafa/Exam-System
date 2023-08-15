@@ -19,6 +19,7 @@ export class HomeBarComponent implements OnInit {
   flag_snack = false;
   flag_book = false;
   flag_time = false;
+  flag_seat = true;
   book_title_course = '';
 
   snacks = [];
@@ -48,8 +49,9 @@ export class HomeBarComponent implements OnInit {
   index_day: any;
   day_id: any = '';
   book_id_exam: any = '';
-  flag_type:any;
+  flag_type: any;
   avilable_time: any;
+  grid: any[] = [["seat","seat","seat"],["seat","seat","seat"],["seat","seat","seat"]];
 
   //after you order exam you should clear it
 
@@ -64,8 +66,8 @@ export class HomeBarComponent implements OnInit {
   temp_countries: any;
   phone_number: any;
   reciept: Reciept = new Reciept();
-  start_manchete:any;
-  manchete:Manchete[]=[] 
+  start_manchete: any;
+  manchete: Manchete[] = [];
 
   ngOnInit(): void {}
 
@@ -75,8 +77,7 @@ export class HomeBarComponent implements OnInit {
     private popup: ModalPopServiceService,
     private sanitizer: DomSanitizer
   ) {
-
-    this.flag_type=true
+    this.flag_type = true;
     const queryParams = new URLSearchParams(window.location.search);
     const paramsObj: any = {};
     for (const [name, value] of queryParams.entries()) {
@@ -88,15 +89,11 @@ export class HomeBarComponent implements OnInit {
       paramsObj.length != 0
     ) {
       if (paramsObj['statusCode'] == '200') {
-        this.service
-          .book_exam(
-            paramsObj
-          )
-          .subscribe((x) => {
-            if (x.success == false) {
-              this.popup.open_error_book(x.error);
-            }
-          });
+        this.service.book_exam(paramsObj).subscribe((x) => {
+          if (x.success == false) {
+            this.popup.open_error_book(x.error);
+          }
+        });
       }
       this.router.navigate(['/home/home_bar']);
     }
@@ -110,26 +107,24 @@ export class HomeBarComponent implements OnInit {
     }
 
     // this.manchete=[];
-   
-   }
+  }
 
-  navigate_to_news(){
-    this.router.navigate(['/home/news_bar'])
+  navigate_to_news() {
+    this.router.navigate(['/home/news_bar']);
   }
   refresh_all() {
-    this.flag_type=true;
-    this.service.get_manshete(5).subscribe(
-      x=>{
+    this.flag_type = true;
+    this.service.get_manshete(5).subscribe((x) => {
       //i need title and imgurl
-      console.log(x)
-      this.manchete=[];
-      this.start_manchete=null
-      this.start_manchete=x[0];
-      for(let i=0; i<x.length; i++){
-        x[i].manchete='http://i.imgur.com/'+x[i].manchete
-      } 
-      this.manchete=x;
-      this.manchete.splice(0,1)
+      console.log(x);
+      this.manchete = [];
+      this.start_manchete = null;
+      this.start_manchete = x[0];
+      for (let i = 0; i < x.length; i++) {
+        x[i].manchete = 'http://i.imgur.com/' + x[i].manchete;
+      }
+      this.manchete = x;
+      this.manchete.splice(0, 1);
     });
     this.service.get_places().subscribe((x) => {
       this.temp_countries = x;
@@ -170,7 +165,7 @@ export class HomeBarComponent implements OnInit {
     });
 
     this.service.home_bar_init().subscribe((x) => {
-      console.log(x)
+      console.log(x);
       this.service.user = x.user;
       this.phone_number = this.service.user.phone;
       this.non_token_exam = x.other_exam;
@@ -223,7 +218,7 @@ export class HomeBarComponent implements OnInit {
         this.service.non_token = x;
       });
 
-      this.flag_type=false;
+      this.flag_type = false;
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }
@@ -262,7 +257,7 @@ export class HomeBarComponent implements OnInit {
         break;
       }
     }
-    console.log(5)
+    console.log(5);
     this.service.get_payment_reciept(country_id).subscribe((x) => {
       if (x.success == true) {
         this.reciept = x;
@@ -406,7 +401,6 @@ export class HomeBarComponent implements OnInit {
       .map((cont: any) => cont.cities)
       [this.index_country].map((c: any) => c.locations)
       [this.index_city].map((c: any) => c._id)[this.index_location];
-
   }
 
   onselectsnack(event: Event) {

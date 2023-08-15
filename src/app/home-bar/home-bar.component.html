@@ -39,21 +39,21 @@
           alt="Slide 0"
           style="width: 100%; object-fit: cover"
         />
-        <span class="image-text">{{start_manchete.title}}</span>
+        <span class="image-text">{{ start_manchete.title }}</span>
       </div>
       <div
         class="carousel-item"
         *ngFor="let m of manchete; let i = index"
         [id]="'mc' + i + 1"
       >
-          <img
-            (click)="navigate_to_news()"
-            title="Go to news"
-            [src]="m.manchete"
-            [alt]="'Slide ' + i + 1"
-            style="width: 100%; object-fit: cover"
-          />
-          <span class="image-text">{{m.title}}</span>
+        <img
+          (click)="navigate_to_news()"
+          title="Go to news"
+          [src]="m.manchete"
+          [alt]="'Slide ' + i + 1"
+          style="width: 100%; object-fit: cover"
+        />
+        <span class="image-text">{{ m.title }}</span>
       </div>
     </div>
     <a
@@ -309,22 +309,12 @@
         ></i>
         <i class="fa-regular fa-circle"></i>
         <i class="fa-regular fa-circle"></i>
+        <i class="fa-regular fa-circle"></i>
       </div>
     </form>
   </div>
 </div>
-<div *ngIf="flag_type == true" class="contain">
-  <ngx-typed-js
-    [strings]="['loading ...']"
-    [loop]="false"
-    [typeSpeed]="20"
-    [shuffle]="true"
-  >
-    <h1 class="typing"></h1>
-  </ngx-typed-js>
 
-  <!-- Good morning section -->
-</div>
 <div *ngIf="flag_snack == true" class="contain">
   <div class="close">
     <button (click)="close_book()" class="closebtn">
@@ -359,7 +349,7 @@
       </button>
 
       <div class="circle">
-        <i class="fa-regular fa-circle"></i>
+        <i class="fa-solid fa-circle" style="color: #008182"></i>
         <i
           *ngIf="select_snacks == 'Snack'"
           class="fa-solid fa-circle"
@@ -371,10 +361,12 @@
           style="color: #008182"
         ></i>
         <i class="fa-regular fa-circle"></i>
+        <i class="fa-regular fa-circle"></i>
       </div>
     </form>
   </div>
 </div>
+
 <div *ngIf="flag_time == true" class="contain">
   <div class="close">
     <button (click)="close_book()" class="closebtn">
@@ -420,7 +412,7 @@
         style="background-color: gray"
         type="submit"
       >
-        Show Reciept
+        Next
       </button>
       <button
         *ngIf="
@@ -430,11 +422,11 @@
         id="btn"
         type="submit"
       >
-        Show Reciept
+        Next
       </button>
       <div class="circle">
-        <i class="fa-regular fa-circle"></i>
-        <i class="fa-regular fa-circle"></i>
+        <i class="fa-solid fa-circle" style="color: #008182"></i>
+        <i class="fa-solid fa-circle" style="color: #008182"></i>
         <i
           *ngIf="
             selectedday == 'Select a day' ||
@@ -451,15 +443,78 @@
           class="fa-solid fa-circle"
           style="color: #008182"
         ></i>
-      </div> 
+        <i class="fa-regular fa-circle"></i>
+      </div>
     </form>
   </div>
 </div>
 
+<div *ngIf="flag_seat == true" class="contain">
+  <div class="close">
+    <button (click)="close_book()" class="closebtn">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <div class="order">Choose what you prefer!</div>
+  <div class="box">
+    <form #input_form="ngForm" (ngSubmit)="submit_snack()">
+      <h3>Select your snack</h3>
+      <div class="seat_area">
+        <div *ngFor="let x of grid; let i = index" class="row">
+          <button *ngFor="let y of x; let j = index" style="all: unset">
+            <div [class]="y">
+              <span>{{ i * grid[0].length + j + 1 }}</span>
+            </div>
+          </button>
+        </div>
+      </div>
+      <button
+        disabled
+        *ngIf="select_snacks == 'Snack'"
+        id="btn"
+        style="background-color: gray"
+        type="submit"
+      >
+        Show Reciept
+      </button>
+      <button *ngIf="select_snacks != 'Snack'" id="btn" type="submit">
+        Show Reciept
+      </button>
+
+      <div class="circle">
+        <i class="fa-regular fa-circle"></i>
+        <i
+          *ngIf="select_snacks == 'Snack'"
+          class="fa-solid fa-circle"
+          style="color: gray"
+        ></i>
+        <i
+          *ngIf="select_snacks != 'Snack'"
+          class="fa-solid fa-circle"
+          style="color: #008182"
+        ></i>
+        <i class="fa-regular fa-circle"></i>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="flag_type == true" class="contain">
+  <ngx-typed-js
+    [strings]="['loading ...']"
+    [loop]="false"
+    [typeSpeed]="20"
+    [shuffle]="true"
+  >
+    <h1 class="typing"></h1>
+  </ngx-typed-js>
+
+  <!-- Good morning section -->
+</div>
 <!-- mesage template -->
 
 <div
-  *ngIf="non_token_exam!=null&&non_token_exam.turn_on_off != 0"
+  *ngIf="non_token_exam != null && non_token_exam.turn_on_off != 0"
   class="modal fade"
   id="not_token_exam"
   tabindex="-1"
