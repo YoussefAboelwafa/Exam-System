@@ -569,6 +569,9 @@ h3 {
   border-radius: 15px;
   padding: 20px;
 }
+.seat{
+  font-size: 14px;
+}
 
 @media screen and (max-width: 1000px) {
   .image-text{

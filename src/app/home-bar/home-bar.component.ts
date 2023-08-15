@@ -13,7 +13,7 @@ declare const $: any;
 @Component({
   selector: 'app-home-bar',
   templateUrl: './home-bar.component.html',
-  styleUrls: ['./home-bar.component.css'],
+  styleUrls: ['./home-bar.component.css','../seats/seats.component.css'],
 })
 export class HomeBarComponent implements OnInit {
   flag_snack = false;
@@ -237,6 +237,7 @@ export class HomeBarComponent implements OnInit {
     this.flag_snack = false;
     this.flag_book = false;
     this.flag_time = false;
+    this.flag_seat = false;
   }
 
   submit_book() {
@@ -246,6 +247,11 @@ export class HomeBarComponent implements OnInit {
   }
   submit_snack() {
     //service becouse i need all kinds of snacks then next step
+    this.clear_flag_book();
+    this.flag_seat = true;
+  }
+  submit_seat() {
+    //service becouse i need all kinds of time then next step
     this.clear_flag_book();
     this.flag_time = true;
   }
