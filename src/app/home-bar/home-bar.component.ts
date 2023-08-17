@@ -13,7 +13,7 @@ declare const $: any;
 @Component({
   selector: 'app-home-bar',
   templateUrl: './home-bar.component.html',
-  styleUrls: ['./home-bar.component.css','../seats/seats.component.css'],
+  styleUrls: ['./home-bar.component.css', '../seats/seats.component.css'],
 })
 export class HomeBarComponent implements OnInit {
   flag_snack = false;
@@ -51,7 +51,10 @@ export class HomeBarComponent implements OnInit {
   book_id_exam: any = '';
   flag_type: any;
   avilable_time: any;
-  grid: any[] = [["seat","seat","seat"],["seat","seat","seat"],["seat","seat","seat"]];
+  grid: any[] = [];
+
+   selected_seat_i = -1;
+  selected_seat_j = -1;
 
   //after you order exam you should clear it
 
@@ -248,14 +251,10 @@ export class HomeBarComponent implements OnInit {
   submit_snack() {
     //service becouse i need all kinds of snacks then next step
     this.clear_flag_book();
-    this.flag_seat = true;
+    this.flag_time = true;
   }
   submit_seat() {
     //service becouse i need all kinds of time then next step
-    this.clear_flag_book();
-    this.flag_time = true;
-  }
-  submit_time() {
     let country_id;
     for (let i = 0; i < this.temp_countries.length; i++) {
       if (this.temp_countries[i].country_name == this.selectedCountry) {
@@ -263,7 +262,6 @@ export class HomeBarComponent implements OnInit {
         break;
       }
     }
-    console.log(5);
     this.service.get_payment_reciept(country_id).subscribe((x) => {
       if (x.success == true) {
         this.reciept = x;
@@ -274,6 +272,43 @@ export class HomeBarComponent implements OnInit {
       }
     });
   }
+  submit_time() {
+    this.service.get_layout(this.id_location, this.day_id).subscribe((x) => {
+      console.log(x);
+
+      if (x.success == true) {
+        for (let i = 0; i < x.booked.length; i++) {
+          x.layout[x.booked[i][0]][x.booked[i][1]] =
+            x.layout[x.booked[i][0]][x.booked[i][1]] + ' booked';
+        }
+        for (let i = 0; i < x.being_booked.length; i++) {
+          x.layout[x.being_booked[i][0]][x.being_booked[i][1]] =
+            x.layout[x.being_booked[i][0]][x.being_booked[i][1]] +
+            ' beingbooked';
+        }
+        this.grid = x.layout;
+      } else {
+        this.popup.open_error_book(x.error);
+      }
+    });
+    this.clear_flag_book();
+    this.flag_seat = true;
+  }
+
+  set_seat(i: number, j: number) {
+    if (this.grid[i][j] == 'seat') {
+      if (this.selected_seat_i == -1 || this.selected_seat_j == -1) {
+        this.grid[i][j] = 'seat select';
+        this.selected_seat_i = i;
+        this.selected_seat_j = j;
+      } else {
+        this.grid[this.selected_seat_i][this.selected_seat_j] = 'seat';
+        this.grid[i][j] = 'seat select';
+        this.selected_seat_i = i;
+        this.selected_seat_j = j;
+      }
+    }
+  }
 
   pay_now() {
     let book_exam = {
@@ -282,9 +317,11 @@ export class HomeBarComponent implements OnInit {
       exam_id: this.book_id_exam,
       snack: this.select_snacks,
       appointment: this.selectedappointment,
+      chair: { i: this.selected_seat_i, j: this.selected_seat_j },
     };
 
     this.service.payment(book_exam, this.reciept).subscribe((x) => {
+      console.log(x);
       if (x.success == true) {
         window.location.href = x.token;
       } else {
@@ -306,6 +343,8 @@ export class HomeBarComponent implements OnInit {
   close_book() {
     this.clear_flag_book();
     this.reset_order_exam();
+    this.selected_seat_j = -1;
+    this.selected_seat_i = -1;
     this.refresh_all();
   }
 

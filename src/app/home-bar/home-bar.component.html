@@ -367,56 +367,6 @@
   </div>
 </div>
 
-<div *ngIf="flag_seat == true" class="contain">
-  <div class="close">
-    <button (click)="close_book()" class="closebtn">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-  </div>
-  <div class="order">Choose your seat</div>
-  <div class="box">
-    <form #input_form="ngForm" (ngSubmit)="submit_seat()">
-      <div class="seat_area">
-        <div *ngFor="let x of grid; let i = index" class="row">
-          <button *ngFor="let y of x; let j = index" style="all: unset">
-            <div [class]="y">
-              <span>{{ i * grid[0].length + j + 1 }}</span>
-            </div>
-          </button>
-        </div>
-      </div>
-      <button
-        disabled
-        *ngIf="select_snacks == 'Snack'"
-        id="btn"
-        style="background-color: gray"
-        type="submit"
-      >
-        Next
-      </button>
-      <button *ngIf="select_snacks != 'Snack'" id="btn" type="submit">
-        Next
-      </button>
-
-      <div class="circle">
-        <i class="fa-solid fa-circle" style="color: #008182"></i>
-        <i class="fa-solid fa-circle" style="color: #008182"></i>
-        <i
-          *ngIf="select_snacks == 'Snack'"
-          class="fa-solid fa-circle"
-          style="color: gray"
-        ></i>
-        <i
-          *ngIf="select_snacks != 'Snack'"
-          class="fa-solid fa-circle"
-          style="color: #008182"
-        ></i>
-        <i class="fa-regular fa-circle"></i>
-      </div>
-    </form>
-  </div>
-</div>
-
 <div *ngIf="flag_time == true" class="contain">
   <div class="close">
     <button (click)="close_book()" class="closebtn">
@@ -462,7 +412,7 @@
         style="background-color: gray"
         type="submit"
       >
-        Show Reciept
+        Next
       </button>
       <button
         *ngIf="
@@ -472,13 +422,11 @@
         id="btn"
         type="submit"
       >
-        Show Reciept
+        Next
       </button>
       <div class="circle">
         <i class="fa-solid fa-circle" style="color: #008182"></i>
         <i class="fa-solid fa-circle" style="color: #008182"></i>
-        <i class="fa-solid fa-circle" style="color: #008182"></i>
-
         <i
           *ngIf="
             selectedday == 'Select a day' ||
@@ -492,6 +440,56 @@
             selectedday != 'Select a day' &&
             selectedappointment != 'Select an Appointmen'
           "
+          class="fa-solid fa-circle"
+          style="color: #008182"
+        ></i>
+        <i class="fa-regular fa-circle"></i>
+      </div>
+    </form>
+  </div>
+</div>
+<div *ngIf="flag_seat == true" class="contain">
+  <div class="close">
+    <button (click)="close_book()" class="closebtn">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <div class="order">Choose your seat</div>
+  <div class="box">
+    <form #input_form="ngForm">
+      <div class="seat_area">
+        <div *ngFor="let x of grid; let i = index" class="row">
+          <button *ngFor="let y of x; let j = index" style="all: unset" (click)="set_seat(i,j)">
+            <div [class]="y">
+              <span>{{ i * grid[0].length + j + 1 }}</span>
+            </div>
+          </button>
+        </div>
+      </div>
+      <button
+        disabled
+        *ngIf="selected_seat_i == -1"
+        id="btn"
+        style="background-color: gray"
+        type="submit"
+      >
+        Show Reciept
+      </button>
+      <button *ngIf="selected_seat_i != -1" id="btn" type="submit" (click)=" submit_seat();">
+        Show Reciept
+      </button>
+
+      <div class="circle">
+        <i class="fa-solid fa-circle" style="color: #008182"></i>
+        <i class="fa-solid fa-circle" style="color: #008182"></i>
+        <i class="fa-solid fa-circle" style="color: #008182"></i>
+        <i
+          *ngIf="selected_seat_i == -1"
+          class="fa-solid fa-circle"
+          style="color: gray"
+        ></i>
+        <i
+          *ngIf="selected_seat_i != -1"
           class="fa-solid fa-circle"
           style="color: #008182"
         ></i>

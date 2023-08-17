@@ -244,10 +244,10 @@ public log_out():Observable<any>{
 public toggle_layout(location_id:string,state:boolean,layout:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/admin/toggle_layout`,{location_id:location_id,state:state,layout:layout},{ withCredentials: true });
 }
-public get_layout(location_id:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/home/get_layout`,{location_id:location_id},{ withCredentials: true });
-}
 
+public get_layout(location_id:any,day_id:any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/home/get_layout`,{location_id:location_id,day_id:day_id},{ withCredentials: true });
+}
 
 
 }

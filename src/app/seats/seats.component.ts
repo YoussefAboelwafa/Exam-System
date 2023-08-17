@@ -19,7 +19,7 @@ export class SeatsComponent implements OnInit {
     if (this.service.location_seat_id == undefined) {
       this.router.navigate(['admin_home/admin_location']);
     } else {
-      this.service.get_layout(this.service.location_seat_id).subscribe((x) => {
+      this.service.get_layout(this.service.location_seat_id,null).subscribe((x) => {
         console.log(x);
         if (x.success == true) {
           this.grid = x.layout;

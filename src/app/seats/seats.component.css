@@ -176,8 +176,15 @@
   padding: 5px;
 }
 
-.seat.selected {
-  background-color: #6feaf6;
+.seat.select{
+  background-color: #008182;
+}
+
+.seat.booked{
+  background-color: #FF0052;
+}
+.seat.beingbooked{
+  background-color: yellow;
 }
 
 .seat.none {

@@ -8,17 +8,16 @@ import { exams } from '../objects/exams';
 import { ModalPopServiceService } from '../services/modal-pop-service.service';
 import { Reciept } from '../objects/reciept';
 declare const $: any;
-declare let COWPAYOTPDIALOG: any;
-@Component({
+ @Component({
   selector: 'app-exams-bar',
   templateUrl: './exams-bar.component.html',
-  styleUrls: ['./exams-bar.component.css'],
+  styleUrls: ['./exams-bar.component.css','../seats/seats.component.css'],
 })
 export class ExamsBarComponent implements OnInit {
   flag_snack = false;
   flag_book = false;
   flag_time = false;
-
+  flag_seat = false;
   book_title_course = '';
 
   //after you order exam you should clear it
@@ -75,6 +74,11 @@ export class ExamsBarComponent implements OnInit {
   temp_countries: any;
   flag_type = true;
   reciept: Reciept = new Reciept();
+
+  selected_seat_i = -1;
+  selected_seat_j = -1;
+  grid: any[] = [];
+
   constructor(
     private service: ServicService,
      private popup: ModalPopServiceService
@@ -197,10 +201,11 @@ export class ExamsBarComponent implements OnInit {
     this.snacks = [];
   }
 
-  clear_flag_book() {
+ clear_flag_book() {
     this.flag_snack = false;
     this.flag_book = false;
     this.flag_time = false;
+    this.flag_seat = false;
   }
 
   submit_book() {
@@ -213,7 +218,8 @@ export class ExamsBarComponent implements OnInit {
     this.clear_flag_book();
     this.flag_time = true;
   }
-  submit_time() {
+  submit_seat() {
+    //service becouse i need all kinds of time then next step
     let country_id;
     for (let i = 0; i < this.temp_countries.length; i++) {
       if (this.temp_countries[i].country_name == this.selectedCountry) {
@@ -221,7 +227,6 @@ export class ExamsBarComponent implements OnInit {
         break;
       }
     }
-    console.log(5)
     this.service.get_payment_reciept(country_id).subscribe((x) => {
       if (x.success == true) {
         this.reciept = x;
@@ -231,10 +236,43 @@ export class ExamsBarComponent implements OnInit {
         this.popup.open_error_book(x.error);
       }
     });
+  }
+  submit_time() {
+    this.service.get_layout(this.id_location, this.day_id).subscribe((x) => {
+      console.log(x);
 
-    // this.reset_order_exam();
-    // //service becouse i need Day of exam and Appointment then next step
-    // this.clear_flag_book();
+      if (x.success == true) {
+        for (let i = 0; i < x.booked.length; i++) {
+          x.layout[x.booked[i][0]][x.booked[i][1]] =
+            x.layout[x.booked[i][0]][x.booked[i][1]] + ' booked';
+        }
+        for (let i = 0; i < x.being_booked.length; i++) {
+          x.layout[x.being_booked[i][0]][x.being_booked[i][1]] =
+            x.layout[x.being_booked[i][0]][x.being_booked[i][1]] +
+            ' beingbooked';
+        }
+        this.grid = x.layout;
+      } else {
+        this.popup.open_error_book(x.error);
+      }
+    });
+    this.clear_flag_book();
+    this.flag_seat = true;
+  }
+
+  set_seat(i: number, j: number) {
+    if (this.grid[i][j] == 'seat') {
+      if (this.selected_seat_i == -1 || this.selected_seat_j == -1) {
+        this.grid[i][j] = 'seat select';
+        this.selected_seat_i = i;
+        this.selected_seat_j = j;
+      } else {
+        this.grid[this.selected_seat_i][this.selected_seat_j] = 'seat';
+        this.grid[i][j] = 'seat select';
+        this.selected_seat_i = i;
+        this.selected_seat_j = j;
+      }
+    }
   }
 
   pay_now() {
@@ -244,9 +282,11 @@ export class ExamsBarComponent implements OnInit {
       exam_id: this.book_id_exam,
       snack: this.select_snacks,
       appointment: this.selectedappointment,
+      chair: { i: this.selected_seat_i, j: this.selected_seat_j },
     };
 
     this.service.payment(book_exam, this.reciept).subscribe((x) => {
+      console.log(x);
       if (x.success == true) {
         window.location.href = x.token;
       } else {
@@ -254,7 +294,6 @@ export class ExamsBarComponent implements OnInit {
       }
     });
   }
-
   take_exam(name_exam: any, id_exam: any) {
     this.book_title_course = name_exam;
     //becouse if the user click take exam from modal,hide pop up if it show
