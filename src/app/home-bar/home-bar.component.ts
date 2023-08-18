@@ -317,7 +317,7 @@ export class HomeBarComponent implements OnInit {
       exam_id: this.book_id_exam,
       snack: this.select_snacks,
       appointment: this.selectedappointment,
-      chair: { i: this.selected_seat_i, j: this.selected_seat_j },
+      chair: { i: this.selected_seat_i, j: this.selected_seat_j,chair_number:this.selected_seat_i * this.grid[0].length + this.selected_seat_j + 1 },
     };
 
     this.service.payment(book_exam, this.reciept).subscribe((x) => {
