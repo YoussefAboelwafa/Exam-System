@@ -9,4 +9,5 @@ export class book_user {
   appointment: any;
   snack: any;
   percentage: any = '00';
+  chair:any;
 }

@@ -13,6 +13,6 @@ export class exams{
     info:any;
     turn_on_off=1;
     exam_time:any;
-
+    chair:any;
 
 }

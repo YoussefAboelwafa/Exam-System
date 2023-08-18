@@ -162,6 +162,7 @@ export class ExamsBarComponent implements OnInit {
           z[token].percentage = x.user.exams[i].exam.percentage;
           z[token].appointment = x.user.exams[i].exam.appointment;
           z[token]._id = x.user.exams[i].exam._id;
+          z[token].chair = x.user.exams[i].exam.chair;
           temp.push(x.user.exams[i].exam._id);
           z[token].title = x.token_exam_info[i].title;
           z[token].about = x.token_exam_info[i].about;

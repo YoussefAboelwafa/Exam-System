@@ -51,10 +51,12 @@ export class HomeBarComponent implements OnInit {
   book_id_exam: any = '';
   flag_type: any;
   avilable_time: any;
-  grid: any[] = [];
+  grid: any[] = [[]];
 
-   selected_seat_i = -1;
+  selected_seat_i = -1;
   selected_seat_j = -1;
+
+  show_seat=false;
 
   //after you order exam you should clear it
 
@@ -274,9 +276,13 @@ export class HomeBarComponent implements OnInit {
   }
   submit_time() {
     this.service.get_layout(this.id_location, this.day_id).subscribe((x) => {
-      console.log(x);
 
       if (x.success == true) {
+        if(x.state==false){
+          this.show_seat=false;
+        }else{
+          
+        this.show_seat=true;
         for (let i = 0; i < x.booked.length; i++) {
           x.layout[x.booked[i][0]][x.booked[i][1]] =
             x.layout[x.booked[i][0]][x.booked[i][1]] + ' booked';
@@ -287,12 +293,21 @@ export class HomeBarComponent implements OnInit {
             ' beingbooked';
         }
         this.grid = x.layout;
-      } else {
+      }
+    }
+      
+      else {
         this.popup.open_error_book(x.error);
       }
     });
+    if(this.show_seat==true){
     this.clear_flag_book();
     this.flag_seat = true;
+    }
+    else{
+      this.submit_seat();
+
+    }
   }
 
   set_seat(i: number, j: number) {
