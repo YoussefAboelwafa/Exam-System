@@ -148,6 +148,8 @@ export class ExamsBarComponent implements OnInit {
           y[up].snack = x.user.exams[i].exam.snack;
           y[up].percentage = x.user.exams[i].exam.percentage;
           y[up].appointment = x.user.exams[i].exam.appointment;
+          y[up].chair = x.user.exams[i].exam.chair;
+
           y[up].day = x.user.exams[i].exam.day;
           y[up]._id = x.user.exams[i].exam._id;
           y[up].title = x.token_exam_info[i].title;
@@ -219,25 +221,7 @@ export class ExamsBarComponent implements OnInit {
     this.clear_flag_book();
     this.flag_time = true;
   }
-  submit_seat() {
-    //service becouse i need all kinds of time then next step
-    let country_id;
-    for (let i = 0; i < this.temp_countries.length; i++) {
-      if (this.temp_countries[i].country_name == this.selectedCountry) {
-        country_id = this.temp_countries[i]._id;
-        break;
-      }
-    }
-    this.service.get_payment_reciept(country_id).subscribe((x) => {
-      if (x.success == true) {
-        this.reciept = x;
-        this.reciept.phone = this.service.user.phone;
-        $('#reciept').modal('show');
-      } else {
-        this.popup.open_error_book(x.error);
-      }
-    });
-  }
+
   submit_time() {
     this.service.get_layout(this.id_location, this.day_id).subscribe((x) => {
       if (x.success == true) {
@@ -256,18 +240,39 @@ export class ExamsBarComponent implements OnInit {
           }
           this.grid = x.layout;
         }
-      } else {
-        this.popup.open_error_book(x.error);
-      }
-      if (this.show_seat == true) {
+
+         if (this.show_seat == true) {
         this.clear_flag_book();
         this.flag_seat = true;
       } else {
         this.submit_seat();
       }
+      } else {
+        this.popup.open_error_book(x.error);
+      }
+      
+     
     });
   }
-
+submit_seat() {
+    //service becouse i need all kinds of time then next step
+    let country_id;
+    for (let i = 0; i < this.temp_countries.length; i++) {
+      if (this.temp_countries[i].country_name == this.selectedCountry) {
+        country_id = this.temp_countries[i]._id;
+        break;
+      }
+    }
+    this.service.get_payment_reciept(country_id).subscribe((x) => {
+      if (x.success == true) {
+        this.reciept = x;
+        this.reciept.phone = this.service.user.phone;
+        $('#reciept').modal('show');
+      } else {
+        this.popup.open_error_book(x.error);
+      }
+    });
+  }
   set_seat(i: number, j: number) {
     if (this.grid[i][j] == 'seat') {
       if (this.selected_seat_i == -1 || this.selected_seat_j == -1) {

@@ -237,7 +237,6 @@ export class HomeBarComponent implements OnInit {
     this.avilable_time = '';
     this.snacks = [];
   }
-
   clear_flag_book() {
     this.flag_snack = false;
     this.flag_book = false;
@@ -255,6 +254,7 @@ export class HomeBarComponent implements OnInit {
     this.clear_flag_book();
     this.flag_time = true;
   }
+  
   submit_seat() {
     //service becouse i need all kinds of time then next step
     let country_id;
@@ -292,15 +292,15 @@ export class HomeBarComponent implements OnInit {
           }
           this.grid = x.layout;
         }
+
+        if (this.show_seat == true) {
+          this.clear_flag_book();
+          this.flag_seat = true;
+        } else {
+          this.submit_seat();
+        }
       } else {
         this.popup.open_error_book(x.error);
-      }
-
-      if (this.show_seat == true) {
-        this.clear_flag_book();
-        this.flag_seat = true;
-      } else {
-        this.submit_seat();
       }
     });
   }

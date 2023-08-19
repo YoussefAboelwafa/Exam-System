@@ -21,7 +21,6 @@
         <div class="upcominginfo">
           <label class="smallbox">{{ exam.snack }}</label>
           <label class="smallbox"> chair {{ exam.chair }}</label>
-
         </div>
       </div>
     </div>
@@ -105,7 +104,7 @@
       <div class="discoverbox1">
         <div class="discoversmallbox">
           <ul class="examlist">
-            <li *ngFor="let infomration of non_token.info| slice : 0 : 3">
+            <li *ngFor="let infomration of non_token.info | slice : 0 : 3">
               {{ infomration }}
             </li>
           </ul>
@@ -393,7 +392,11 @@
     <form #input_form="ngForm">
       <div class="seat_area">
         <div *ngFor="let x of grid; let i = index" class="row">
-          <button *ngFor="let y of x; let j = index" style="all: unset" (click)="set_seat(i,j)">
+          <button
+            *ngFor="let y of x; let j = index"
+            style="all: unset"
+            (click)="set_seat(i, j)"
+          >
             <div [class]="y">
               <span>{{ i * grid[0].length + j + 1 }}</span>
             </div>
@@ -409,7 +412,12 @@
       >
         Show Reciept
       </button>
-      <button *ngIf="selected_seat_i != -1" id="btn" type="submit" (click)=" submit_seat();">
+      <button
+        *ngIf="selected_seat_i != -1"
+        id="btn"
+        type="submit"
+        (click)="submit_seat()"
+      >
         Show Reciept
       </button>
 
