@@ -9,7 +9,7 @@
     </ol>
     <!-- IMAGES -->
 
-    <div class="carousel-inner" *ngIf="manchete.length == 0">
+    <div class="carousel-inner" *ngIf="manchete.length == 0||start_manchete==null">
       <div class="carousel-item active" id="c1">
         <img
           src="https://via.placeholder.com/1000x200?text=youssef"
@@ -30,8 +30,8 @@
       </div>
     </div>
 
-    <div class="carousel-inner" *ngIf="manchete.length != 0">
-      <div class="carousel-item active" id="mc0">
+    <div class="carousel-inner" *ngIf="manchete.length != 0||start_manchete!=null">
+      <div class="carousel-item active" id="mc0" *ngIf="start_manchete!=null">
         <img
           (click)="navigate_to_news()"
           title="Go to news"

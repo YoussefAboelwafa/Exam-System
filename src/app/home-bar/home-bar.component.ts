@@ -121,10 +121,11 @@ export class HomeBarComponent implements OnInit {
     this.flag_type = true;
     this.service.get_manshete(5).subscribe((x) => {
       //i need title and imgurl
-      console.log(x);
       this.manchete = [];
       this.start_manchete = null;
-      this.start_manchete = x[0];
+      if(x.length!=0){
+          this.start_manchete = x[0];
+      }
       for (let i = 0; i < x.length; i++) {
         x[i].manchete = 'http://i.imgur.com/' + x[i].manchete;
       }
