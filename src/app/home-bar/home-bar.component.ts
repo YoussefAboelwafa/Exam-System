@@ -56,7 +56,7 @@ export class HomeBarComponent implements OnInit {
   selected_seat_i = -1;
   selected_seat_j = -1;
 
-  show_seat=false;
+  show_seat = false;
 
   //after you order exam you should clear it
 
@@ -276,38 +276,33 @@ export class HomeBarComponent implements OnInit {
   }
   submit_time() {
     this.service.get_layout(this.id_location, this.day_id).subscribe((x) => {
-
       if (x.success == true) {
-        if(x.state==false){
-          this.show_seat=false;
-        }else{
-          
-        this.show_seat=true;
-        for (let i = 0; i < x.booked.length; i++) {
-          x.layout[x.booked[i][0]][x.booked[i][1]] =
-            x.layout[x.booked[i][0]][x.booked[i][1]] + ' booked';
+        if (x.state == false) {
+          this.show_seat = false;
+        } else {
+          this.show_seat = true;
+          for (let i = 0; i < x.booked.length; i++) {
+            x.layout[x.booked[i][0]][x.booked[i][1]] =
+              x.layout[x.booked[i][0]][x.booked[i][1]] + ' booked';
+          }
+          for (let i = 0; i < x.being_booked.length; i++) {
+            x.layout[x.being_booked[i][0]][x.being_booked[i][1]] =
+              x.layout[x.being_booked[i][0]][x.being_booked[i][1]] +
+              ' beingbooked';
+          }
+          this.grid = x.layout;
         }
-        for (let i = 0; i < x.being_booked.length; i++) {
-          x.layout[x.being_booked[i][0]][x.being_booked[i][1]] =
-            x.layout[x.being_booked[i][0]][x.being_booked[i][1]] +
-            ' beingbooked';
-        }
-        this.grid = x.layout;
-      }
-    }
-      
-      else {
+      } else {
         this.popup.open_error_book(x.error);
       }
-    });
-    if(this.show_seat==true){
-    this.clear_flag_book();
-    this.flag_seat = true;
-    }
-    else{
-      this.submit_seat();
 
-    }
+      if (this.show_seat == true) {
+        this.clear_flag_book();
+        this.flag_seat = true;
+      } else {
+        this.submit_seat();
+      }
+    });
   }
 
   set_seat(i: number, j: number) {
@@ -332,7 +327,12 @@ export class HomeBarComponent implements OnInit {
       exam_id: this.book_id_exam,
       snack: this.select_snacks,
       appointment: this.selectedappointment,
-      chair: { i: this.selected_seat_i, j: this.selected_seat_j,chair_number:this.selected_seat_i * this.grid[0].length + this.selected_seat_j + 1 },
+      chair: {
+        i: this.selected_seat_i,
+        j: this.selected_seat_j,
+        chair_number:
+          this.selected_seat_i * this.grid[0].length + this.selected_seat_j + 1,
+      },
     };
 
     this.service.payment(book_exam, this.reciept).subscribe((x) => {

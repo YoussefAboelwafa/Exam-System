@@ -8,10 +8,10 @@ import { exams } from '../objects/exams';
 import { ModalPopServiceService } from '../services/modal-pop-service.service';
 import { Reciept } from '../objects/reciept';
 declare const $: any;
- @Component({
+@Component({
   selector: 'app-exams-bar',
   templateUrl: './exams-bar.component.html',
-  styleUrls: ['./exams-bar.component.css','../seats/seats.component.css'],
+  styleUrls: ['./exams-bar.component.css', '../seats/seats.component.css'],
 })
 export class ExamsBarComponent implements OnInit {
   flag_snack = false;
@@ -74,14 +74,14 @@ export class ExamsBarComponent implements OnInit {
   temp_countries: any;
   flag_type = true;
   reciept: Reciept = new Reciept();
-
+  show_seat = false;
   selected_seat_i = -1;
   selected_seat_j = -1;
   grid: any[] = [];
 
   constructor(
     private service: ServicService,
-     private popup: ModalPopServiceService
+    private popup: ModalPopServiceService
   ) {
     this.refresh_all();
     // this.upcoming_exam=this.service.upcoming_ex;
@@ -202,7 +202,7 @@ export class ExamsBarComponent implements OnInit {
     this.snacks = [];
   }
 
- clear_flag_book() {
+  clear_flag_book() {
     this.flag_snack = false;
     this.flag_book = false;
     this.flag_time = false;
@@ -240,25 +240,32 @@ export class ExamsBarComponent implements OnInit {
   }
   submit_time() {
     this.service.get_layout(this.id_location, this.day_id).subscribe((x) => {
-      console.log(x);
-
       if (x.success == true) {
-        for (let i = 0; i < x.booked.length; i++) {
-          x.layout[x.booked[i][0]][x.booked[i][1]] =
-            x.layout[x.booked[i][0]][x.booked[i][1]] + ' booked';
+        if (x.state == false) {
+          this.show_seat = false;
+        } else {
+          this.show_seat = true;
+          for (let i = 0; i < x.booked.length; i++) {
+            x.layout[x.booked[i][0]][x.booked[i][1]] =
+              x.layout[x.booked[i][0]][x.booked[i][1]] + ' booked';
+          }
+          for (let i = 0; i < x.being_booked.length; i++) {
+            x.layout[x.being_booked[i][0]][x.being_booked[i][1]] =
+              x.layout[x.being_booked[i][0]][x.being_booked[i][1]] +
+              ' beingbooked';
+          }
+          this.grid = x.layout;
         }
-        for (let i = 0; i < x.being_booked.length; i++) {
-          x.layout[x.being_booked[i][0]][x.being_booked[i][1]] =
-            x.layout[x.being_booked[i][0]][x.being_booked[i][1]] +
-            ' beingbooked';
-        }
-        this.grid = x.layout;
       } else {
         this.popup.open_error_book(x.error);
       }
+      if (this.show_seat == true) {
+        this.clear_flag_book();
+        this.flag_seat = true;
+      } else {
+        this.submit_seat();
+      }
     });
-    this.clear_flag_book();
-    this.flag_seat = true;
   }
 
   set_seat(i: number, j: number) {
@@ -283,7 +290,12 @@ export class ExamsBarComponent implements OnInit {
       exam_id: this.book_id_exam,
       snack: this.select_snacks,
       appointment: this.selectedappointment,
-      chair: { i: this.selected_seat_i, j: this.selected_seat_j },
+      chair: {
+        i: this.selected_seat_i,
+        j: this.selected_seat_j,
+        chair_number:
+          this.selected_seat_i * this.grid[0].length + this.selected_seat_j + 1,
+      },
     };
 
     this.service.payment(book_exam, this.reciept).subscribe((x) => {
@@ -295,6 +307,7 @@ export class ExamsBarComponent implements OnInit {
       }
     });
   }
+
   take_exam(name_exam: any, id_exam: any) {
     this.book_title_course = name_exam;
     //becouse if the user click take exam from modal,hide pop up if it show
