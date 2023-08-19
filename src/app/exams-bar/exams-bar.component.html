@@ -20,7 +20,7 @@
         </div>
         <div class="upcominginfo">
           <label class="smallbox">{{ exam.snack }}</label>
-          <label class="smallbox"> chair {{ exam.chair }}</label>
+          <label class="smallbox" *ngIf="exam.chair != '-1' "> chair {{ exam.chair }}</label>
         </div>
       </div>
     </div>
