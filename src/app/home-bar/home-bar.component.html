@@ -1,15 +1,18 @@
 <div class="container1">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
+    <!-- <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
       <li data-target="#myCarousel" data-slide-to="3"></li>
       <li data-target="#myCarousel" data-slide-to="4"></li>
-    </ol>
+    </ol> -->
     <!-- IMAGES -->
 
-    <div class="carousel-inner" *ngIf="manchete.length == 0||start_manchete==null">
+    <div
+      class="carousel-inner"
+      *ngIf="manchete.length == 0 || start_manchete == null"
+    >
       <div class="carousel-item active" id="c1">
         <img
           src="https://via.placeholder.com/1000x200?text=youssef"
@@ -30,8 +33,11 @@
       </div>
     </div>
 
-    <div class="carousel-inner" *ngIf="manchete.length != 0||start_manchete!=null">
-      <div class="carousel-item active" id="mc0" *ngIf="start_manchete!=null">
+    <div
+      class="carousel-inner"
+      *ngIf="manchete.length != 0 || start_manchete != null"
+    >
+      <div class="carousel-item active" id="mc0" *ngIf="start_manchete != null">
         <img
           (click)="navigate_to_news()"
           title="Go to news"
@@ -413,6 +419,7 @@
         type="submit"
       >
         Next
+       
       </button>
       <button
         *ngIf="
@@ -421,8 +428,10 @@
         "
         id="btn"
         type="submit"
+        [disabled]="flag_loading == true"
       >
-        Next
+        Next  <div *ngIf="flag_loading == true" class="spinner-border text-light" role="status">
+        </div>
       </button>
       <div class="circle">
         <i class="fa-solid fa-circle" style="color: #008182"></i>
@@ -454,12 +463,19 @@
       <i class="fa-solid fa-xmark"></i>
     </button>
   </div>
-  <div class="order">Choose your seat</div>
+  <div class="order">
+    Choose your seat <i class="fa-solid fa-angle-down"></i>
+  </div>
+
   <div class="box">
     <form #input_form="ngForm">
       <div class="seat_area">
         <div *ngFor="let x of grid; let i = index" class="row">
-          <button *ngFor="let y of x; let j = index" style="all: unset" (click)="set_seat(i,j)">
+          <button
+            *ngFor="let y of x; let j = index"
+            style="all: unset"
+            (click)="set_seat(i, j)"
+          >
             <div [class]="y">
               <span>{{ i * grid[0].length + j + 1 }}</span>
             </div>
@@ -473,10 +489,17 @@
         style="background-color: gray"
         type="submit"
       >
-        Show Reciept
+        Show Reciept 
       </button>
-      <button *ngIf="selected_seat_i != -1" id="btn" type="submit" (click)=" submit_seat();">
-        Show Reciept
+      <button
+        *ngIf="selected_seat_i != -1"
+        id="btn"
+        type="submit"
+        (click)="submit_seat()"
+        [disabled]="flag_loading == true"
+      >
+        Show Reciept <div *ngIf="flag_loading == true" class="spinner-border text-light" role="status">
+        </div>
       </button>
 
       <div class="circle">
@@ -646,6 +669,7 @@
             class="close close1"
             data-dismiss="modal"
             aria-label="Close"
+            (click)="close()"
           >
             <span aria-hidden="true">&times;</span>
           </button>

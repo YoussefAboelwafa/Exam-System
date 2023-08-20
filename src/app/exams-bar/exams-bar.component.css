@@ -514,7 +514,132 @@ li:is(:hover, .active) i {
 }
 #btn {
   margin-top: 5%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
 }
+
+.seat {
+  background-color: #55555b;
+  height: 31px;
+  width: 35px;
+  margin: 3px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 500;
+  transition: 0.4s;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.seat.select{
+  background-color: #008182;
+}
+
+.seat.booked{
+  background-color: #FF0052;
+}
+.seat.beingbooked{
+  background-color: yellow;
+}
+
+.seat.none {
+  background-color: rgba(255, 255, 255, 0);
+  cursor: none;
+}
+
+.seat.none span {
+  color: rgba(255, 255, 255, 0);
+}
+
+.seat:nth-of-type(2) {
+  margin-right: 18px;
+}
+
+.seat:nth-last-of-type(2) {
+  margin-left: 18px;
+}
+.seat.blank {
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-right: 0px;
+  margin-left: 30px;
+}
+.seat:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.showcase .seat:not(.none):hover {
+  cursor: default;
+  transform: scale(1);
+}
+.hint {
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 2%;
+}
+.fa-lightbulb {
+  font-size: 24px;
+}
+.showcase {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #777;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.showcase li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+}
+
+.showcase li small {
+  margin-left: 10px;
+  color: #000000;
+  font-size: 16 px;
+  font-weight: 600;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.row span {
+  color: #fff;
+  justify-content: center; /* Center horizontally */
+  align-items: center;
+}
+
+p.text {
+  margin: 5px 0;
+}
+
+p.text span {
+  color: #6feaf6;
+}
+button.active {
+  margin-left: 18px;
+  border: 3px solid #008182 !important ;
+}
+.spinner-border{
+  color: white;
+  font-size: 16px;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+
 
 @media screen and (max-width: 1000px) {
 
@@ -532,10 +657,6 @@ li:is(:hover, .active) i {
     overflow: unset;
   }
 
-  .box {
-    width: 75%;
-    overflow: unset;
-  }
   .card {
     width: 80%;
     margin: 2%;

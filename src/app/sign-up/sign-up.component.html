@@ -202,18 +202,18 @@
             <button
               class="field"
               [disabled]="email.errors?.['required']||email.errors?.['email']
-          ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
-          ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
-          ||phone.errors?.['required']||flag_choose_country==false"
+              ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
+              ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
+              ||phone.errors?.['required']||flag_choose_country==false"
               *ngIf="email.errors?.['required']||email.errors?.['email']
-          ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
-          ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
-          ||phone.errors?.['required']||flag_choose_country==false"
+              ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
+              ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
+              ||phone.errors?.['required']||flag_choose_country==false"
               style="background-color: gray"
               id="btn"
               type="submit"
             >
-              Sign in
+              Sign up
             </button>
 
             <!-- active btn -->
@@ -221,13 +221,18 @@
               class="field"
               [disabled]="flag_sign_up == false"
               [hidden]="email.errors?.['required']||email.errors?.['email']
-          ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
-          ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
-          ||phone.errors?.['required']||flag_choose_country==false"
+              ||password.errors?.['required']||password.errors?.['minlength']||password.value!=password2.value
+              ||first.errors?.['required']||first.errors?.['minlength']||last.errors?.['required']||last.errors?.['minlength']
+              ||phone.errors?.['required']||flag_choose_country==false"
               id="btn"
               type="submit"
             >
-              Sign in
+              Sign up
+              <div
+                *ngIf="flag_sign_up == false"
+                class="spinner-border text-light"
+                role="status"
+              ></div>
             </button>
             <p id="signup">
               Already a member?

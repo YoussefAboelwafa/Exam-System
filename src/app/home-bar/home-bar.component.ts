@@ -20,6 +20,7 @@ export class HomeBarComponent implements OnInit {
   flag_book = false;
   flag_time = false;
   flag_seat = false;
+  flag_loading = false;
   book_title_course = '';
 
   snacks = [];
@@ -123,8 +124,8 @@ export class HomeBarComponent implements OnInit {
       //i need title and imgurl
       this.manchete = [];
       this.start_manchete = null;
-      if(x.length!=0){
-          this.start_manchete = x[0];
+      if (x.length != 0) {
+        this.start_manchete = x[0];
       }
       for (let i = 0; i < x.length; i++) {
         x[i].manchete = 'http://i.imgur.com/' + x[i].manchete;
@@ -255,9 +256,10 @@ export class HomeBarComponent implements OnInit {
     this.clear_flag_book();
     this.flag_time = true;
   }
-  
+
   submit_seat() {
     //service becouse i need all kinds of time then next step
+    this.flag_loading = true;
     let country_id;
     for (let i = 0; i < this.temp_countries.length; i++) {
       if (this.temp_countries[i].country_name == this.selectedCountry) {
@@ -266,6 +268,7 @@ export class HomeBarComponent implements OnInit {
       }
     }
     this.service.get_payment_reciept(country_id).subscribe((x) => {
+      this.flag_loading = false;
       if (x.success == true) {
         this.reciept = x;
         this.reciept.phone = this.service.user.phone;

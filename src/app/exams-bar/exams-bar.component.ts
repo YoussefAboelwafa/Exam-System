@@ -11,13 +11,14 @@ declare const $: any;
 @Component({
   selector: 'app-exams-bar',
   templateUrl: './exams-bar.component.html',
-  styleUrls: ['./exams-bar.component.css', '../seats/seats.component.css'],
+  styleUrls: ['./exams-bar.component.css'],
 })
 export class ExamsBarComponent implements OnInit {
   flag_snack = false;
   flag_book = false;
   flag_time = false;
   flag_seat = false;
+  flag_loading = false;
   book_title_course = '';
 
   //after you order exam you should clear it
@@ -256,6 +257,7 @@ export class ExamsBarComponent implements OnInit {
   }
 submit_seat() {
     //service becouse i need all kinds of time then next step
+    this.flag_loading = true;
     let country_id;
     for (let i = 0; i < this.temp_countries.length; i++) {
       if (this.temp_countries[i].country_name == this.selectedCountry) {
@@ -264,6 +266,7 @@ submit_seat() {
       }
     }
     this.service.get_payment_reciept(country_id).subscribe((x) => {
+      this.flag_loading = false;
       if (x.success == true) {
         this.reciept = x;
         this.reciept.phone = this.service.user.phone;

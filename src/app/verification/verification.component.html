@@ -148,6 +148,11 @@
         type="submit"
       >
         Verify
+        <div
+          *ngIf="flag_verify_btn == false"
+          class="spinner-border text-light"
+          role="status"
+        ></div>
       </button>
     </form>
 

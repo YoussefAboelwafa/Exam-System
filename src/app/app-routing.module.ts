@@ -87,7 +87,8 @@ const routes: Routes = [
       {
         path: 'admin_prices',
         component: AdminPriceComponent,
-      },{
+      },
+      {
         path: 'admin_seats',
         component: SeatsComponent,
       },

@@ -345,7 +345,7 @@
         style="background-color: gray"
         type="submit"
       >
-        Next
+        Next 
       </button>
       <button
         *ngIf="
@@ -354,8 +354,10 @@
         "
         id="btn"
         type="submit"
+        [disabled]="flag_loading == true"
       >
-        Next
+        Next <div *ngIf="flag_loading == true" class="spinner-border text-light" role="status">
+        </div>
       </button>
       <div class="circle">
         <i class="fa-solid fa-circle" style="color: #008182"></i>
@@ -387,7 +389,7 @@
       <i class="fa-solid fa-xmark"></i>
     </button>
   </div>
-  <div class="order">Choose your seat</div>
+  <div class="order">Choose your seat <i class="fa-solid fa-angle-down"></i></div>
   <div class="box">
     <form #input_form="ngForm">
       <div class="seat_area">
@@ -410,15 +412,17 @@
         style="background-color: gray"
         type="submit"
       >
-        Show Reciept
+        Show Reciept 
       </button>
       <button
         *ngIf="selected_seat_i != -1"
         id="btn"
         type="submit"
         (click)="submit_seat()"
+        [disabled]="flag_loading == true"
       >
-        Show Reciept
+        Show Reciept <div *ngIf="flag_loading == true" class="spinner-border text-light" role="status">
+        </div>
       </button>
 
       <div class="circle">
@@ -582,6 +586,7 @@
             class="close close1"
             data-dismiss="modal"
             aria-label="Close"
+            (click)="close()"
           >
             <span aria-hidden="true">&times;</span>
           </button>

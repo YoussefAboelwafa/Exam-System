@@ -97,6 +97,8 @@ h3 {
   border: none;
   color: #fff;
   font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: row;
 }
 #signup {
   margin-top: 10px;
@@ -135,6 +137,13 @@ a {
   display: inline;
   margin-right: 420px;
   margin-top: 20px;
+}
+.spinner-border {
+  color: white;
+  font-size: 16px;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
 }
 
 @media only screen and (max-width: 1000px) {
