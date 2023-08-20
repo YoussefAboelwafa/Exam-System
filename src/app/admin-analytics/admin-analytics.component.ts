@@ -91,15 +91,17 @@ export class AdminAnalyticsComponent implements OnInit {
           };
         }
 
-        this.monthData[key].bookingsCount += entry.bookingsCount;
-        this.monthData[key].retentionRate +=
-          entry.retentionRate / entries.length;
+        entry.exams.forEach((exam: any) => {
+          this.monthData[key].bookingsCount += exam.booked_count;
+          
+          if (!this.monthData[key].exams[exam.title]) {
+            this.monthData[key].exams[exam.title] = exam.booked_count;
+            this.monthData[key].marks[exam.title] = exam.marks.map((mark:any) => ({range: `${mark.range*10}-${mark.range*10+9}`, count: mark.count}));
+          }
 
-        if (!this.monthData[key].exams[entry.exam]) {
-          this.monthData[key].exams[entry.exam] = 0;
-          this.monthData[key].marks[entry.exam] = entry.marks;
-        }
-        this.monthData[key].exams[entry.exam] += entry.bookingsCount;
+          // this.monthData[key].exams[entry.exam] = entry.bookingsCount
+        })
+        this.monthData[key].retentionRate = ((entry.repeat_bookings/this.monthData[key].bookingsCount)*100)
       });
 
       // this is keys of data like 2023-7
