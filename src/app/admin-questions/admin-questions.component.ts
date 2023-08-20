@@ -140,7 +140,7 @@ export class AdminQuestionsComponent implements OnInit {
 
   onexams_select(event: any) {
     const select_exam = (event.target as HTMLSelectElement).value;
-    if (select_exam == 'exams') {
+    if (select_exam == 'Exams') {
       this.exam_topics = [];
       this.flag_select = false;
       return;

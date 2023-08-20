@@ -328,7 +328,7 @@
             <li>{{ user.location }}</li>
             <li>{{ user.appointment }}</li>
             <li>{{ user.snack }}</li>
-            <li>{{ user.chair }}</li>
+            <li *ngIf="user.chair!='-1'">Chair {{ user.chair }}</li>
 
           </ul>
         </div>
@@ -384,6 +384,7 @@
             <li>{{ change_user.location }}</li>
             <li>{{ change_user.appointment }}</li>
             <li>{{ change_user.snack }}</li>
+            <li *ngIf="change_user.chair!='-1'">Chair {{ change_user.chair }}</li>
           </ul>
         </div>
         <div class="discoversmallbox" style="height: 20vh">

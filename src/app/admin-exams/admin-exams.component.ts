@@ -98,9 +98,7 @@ export class AdminExamsComponent implements OnInit {
   confirm_edit(ed_title: any, ed_about: any, ed_time: any) {
     this.non_token_exam[this.edit_index].title = ed_title;
     this.non_token_exam[this.edit_index].about = ed_about;
-    this.non_token_exam[this.edit_index].info = this.information;
-    this.non_token_exam[this.edit_index].exam_time = ed_time;
-
+     this.non_token_exam[this.edit_index].exam_time = ed_time;
     this.service.non_token = this.non_token_exam;
     this.close_popup();
 
