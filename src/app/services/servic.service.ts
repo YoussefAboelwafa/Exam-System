@@ -207,8 +207,8 @@ public verify_code_to_change_pass(code:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/verify_code_change_pass`,{code:code,email:this.email_change_pass}, { withCredentials: true });
 }
 
-public change_pass(new_pass:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/change_pass`,{new_pass:new_pass,email:this.email_change_pass}, { withCredentials: true });
+public change_pass(new_pass:any, signature: String, code: any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/change_pass`,{new_pass:new_pass,email:this.email_change_pass, signature: signature, code: code}, { withCredentials: true });
 }
 
 public get_photo():Observable<any>{

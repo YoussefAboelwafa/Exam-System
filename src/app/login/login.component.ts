@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   pop_up: any;
   flag_show_login = false;
   flag_btn_login = true;
+  signature: String = '';
+  code: any;
   constructor(
     user: users,
     private service: ServicService,
@@ -78,6 +80,8 @@ export class LoginComponent implements OnInit {
       if (x.success == true) {
         $('#verify_email_to_change').modal('hide');
         $('#change_pass').modal('show');
+        this.signature = x.signature;
+        this.code = verify_code;
       } else {
         $('#verify_email_to_change').modal('hide');
         this.pop_service.open_error_book(x.error);
@@ -90,7 +94,7 @@ export class LoginComponent implements OnInit {
       this.pop_service.open_error_book('New Password length  should be >= 8');
       return;
     }
-    this.service.change_pass(new_pass).subscribe((x) => {
+    this.service.change_pass(new_pass, this.signature, this.code).subscribe((x) => {
       if (x.success == true) {
         $('#change_pass').modal('hide');
       } else {
