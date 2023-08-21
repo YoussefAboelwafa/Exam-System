@@ -4,7 +4,7 @@ export class users {
   country: any;
   city: any;
   email: any;
-  phone_namber: any;
+  phone_number: any;
   password: any;
   _id: any;
   photo: any=null;
@@ -26,7 +26,7 @@ export class users {
     this.email = value;
   }
   set_phone_namber(value: any) {
-    this.phone_namber = value;
+    this.phone_number = value;
   }
   set_password(value: any) {
     this.password = value;
@@ -54,7 +54,7 @@ export class users {
     return this.email;
   }
   get_phone_namber() {
-    return this.phone_namber;
+    return this.phone_number;
   }
   get_password() {
     return this.password;

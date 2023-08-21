@@ -154,7 +154,7 @@ export class SignUpComponent implements OnInit {
       for (let i = 0; i < this.countries.length; i++) {
         if (this.countries[i] == value) {
           this.index_country = i;
-          this.signup_user.phone_namber = '+' + this.index_country;
+          this.signup_user.phone_number = '+' + this.index_country;
           break;
         }
       }
