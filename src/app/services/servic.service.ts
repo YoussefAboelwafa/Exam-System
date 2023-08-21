@@ -42,7 +42,7 @@ public verify_code(code:any):Observable<any>{
 
 // send another verification code again  
 public send_again():Observable<any>{  
-  return this.http.post<any>(`${this.apiServerUrl}/send_agin`,{phone_number:this.user.get_phone_namber(),email:this.user.get_email()}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/send_again`,{phone_number:this.user.get_phone_namber(),email:this.user.get_email()}, { withCredentials: true });
 }
 // i will send this request if user go to sign up and i recive pair of array ,
 //one to all city ,other to all country. it can be not used and replace this request
