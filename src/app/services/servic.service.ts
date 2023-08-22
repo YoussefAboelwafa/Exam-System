@@ -28,7 +28,7 @@ export class ServicService {
 //send user with all date ,recieve json="success=false" if the email or phone are found in system
 //else i recieve json="success=true"  backend active verification code and i will send to backend the verify 
 public sign_up(new_user:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/sign_up`,{email: new_user.get_email(),phone_namber: new_user.get_phone_namber()}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/sign_up`,{email: new_user.get_email(),phone_number: new_user.get_phone_namber()}, { withCredentials: true });
 }
 //send user with email and pass if the user not found recive json="success=false"else recive json="success=true ,user:user" with all data
 public login(user:any):Observable<any>{
@@ -42,7 +42,7 @@ public verify_code(code:any):Observable<any>{
 
 // send another verification code again  
 public send_again():Observable<any>{  
-  return this.http.post<any>(`${this.apiServerUrl}/send_agin`,{phone_namber:this.user.get_phone_namber(),email:this.user.get_email()}, { withCredentials: true });
+  return this.http.post<any>(`${this.apiServerUrl}/send_again`,{phone_number:this.user.get_phone_namber(),email:this.user.get_email()}, { withCredentials: true });
 }
 // i will send this request if user go to sign up and i recive pair of array ,
 //one to all city ,other to all country. it can be not used and replace this request
@@ -207,8 +207,8 @@ public verify_code_to_change_pass(code:any):Observable<any>{
   return this.http.post<any>(`${this.apiServerUrl}/verify_code_change_pass`,{code:code,email:this.email_change_pass}, { withCredentials: true });
 }
 
-public change_pass(new_pass:any):Observable<any>{
-  return this.http.post<any>(`${this.apiServerUrl}/change_pass`,{new_pass:new_pass,email:this.email_change_pass}, { withCredentials: true });
+public change_pass(new_pass:any, signature: String, code: any):Observable<any>{
+  return this.http.post<any>(`${this.apiServerUrl}/change_pass`,{new_pass:new_pass,email:this.email_change_pass, signature: signature, code: code}, { withCredentials: true });
 }
 
 public get_photo():Observable<any>{
