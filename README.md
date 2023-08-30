@@ -1,27 +1,18 @@
-# System
+# Examination System
+This is a part of my Summer Internship 2023 at <strong><em>Gammal Tech</em></strong></br>
+I was in the frontend team</br>
+We used Angular framework in our project</br>
+Our role was to design & Implement an examination system with user-friendly & respnsive web pages</br>
+## Some snapshots from our system
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.9.
+#### Sign-in Page
+![IMG_9145](https://github.com/YoussefAboelwafa/Exam-System/assets/96186143/cd82d050-38ac-4f07-ab21-4cff64f384fe)
 
-## Development server
+#### Sign-up Page
+![IMG_9146](https://github.com/YoussefAboelwafa/Exam-System/assets/96186143/ad35b6e8-0c1b-4e63-9c57-66e3954486ba)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+#### User Home Page
+![IMG_9208](https://github.com/YoussefAboelwafa/Exam-System/assets/96186143/d0c2df4a-0e0c-417b-b36a-eba887734533)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
