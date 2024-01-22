@@ -1,8 +1,7 @@
 # Examination System
 This is a part of my Summer Internship 2023 at <strong><em>Gammal Tech</em></strong></br>
-I was in the frontend team</br>
-We used Angular framework in our project</br>
-Our role was to design & Implement an examination system with user-friendly & respnsive web pages</br>
+This Project was developed using Angular and Node.js</br>
+Our role was to design & Implement an examination system with user-friendly & responsive web pages</br>
 ## Some snapshots from our system
 
 #### Sign-in Page
