@@ -13,7 +13,7 @@ Our role was to design & Implement an <strong>Examination System & Online Judge<
 #### User Home Page
 ![IMG_9208](https://github.com/YoussefAboelwafa/Exam-System/assets/96186143/d0c2df4a-0e0c-417b-b36a-eba887734533)
 
-### online Exam & Auto Grading with online Judge
+### Online Exam & Auto Grading with online Judge
 ![image_2023-07-19_04-49-49](https://github.com/YoussefAboelwafa/Exam-System/assets/96186143/31c68ef0-defb-4549-8799-3f156241e0be)
 
 
