@@ -1,7 +1,7 @@
 # Examination System & Online Judge
 This is a part of my Summer Internship 2023 at <strong><em>Gammal Tech</em></strong></br>
 This Project was developed using <strong>Angular</strong> & <strong>Node.js</strong> + <strong>MongoDB</strong></br>
-Our role was to design & Implement an <strong>Examination System & Online Judge</strong> with user-friendly & responsive web pages</br>
+Our role was to Design & Implement an <strong>Examination System & Online Judge</strong></br>
 ## Some Snapshots from our System
 
 #### Sign-in Page
